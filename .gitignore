@@ -37,3 +37,4 @@ commands.log
 .vscode/settings.json
 
 .pytest_cache/
+tox.log

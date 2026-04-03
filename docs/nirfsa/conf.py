@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 #
-# NI Switch Executive Python API documentation build configuration file, created by
+# NI-RFSA Python API documentation build configuration file, created by
 # sphinx-quickstart on Fri Jul 14 13:04:36 2017.
 #
 # This file is execfile()d with the current directory set to its
@@ -54,8 +54,8 @@ source_suffix = '.rst'
 master_doc = 'index'
 
 # General information about the project.
-project = 'NI Switch Executive Python API'
-copyright = '2018-2026, National Instruments Corporation'
+project = 'NI-RFSA Python API'
+copyright = '2026-2026, National Instruments Corporation'
 author = 'NI'
 
 # The version info for the project you're documenting, acts as replacement for
@@ -63,7 +63,7 @@ author = 'NI'
 # built documents.
 #
 # The full version, including alpha/beta/rc tags.
-release = '1.4.10.dev0'
+release = '1.0.2.dev0'
 # The short X.Y version.
 version = release[:3]
 
@@ -156,7 +156,7 @@ latex_elements = {
 # (source start file, target name, title,
 #  author, documentclass [howto, manual, or own class]).
 latex_documents = [
-    (master_doc, 'NISwitchExecutivePythonAPI.tex', 'NI Switch Executive Python API Documentation',
+    (master_doc, 'NIRFSAPythonAPI.tex', 'NI-RFSA Python API Documentation',
      'NI', 'manual'),
 ]
 
@@ -166,7 +166,7 @@ latex_documents = [
 # One entry per manual page. List of tuples
 # (source start file, name, description, authors, manual section).
 man_pages = [
-    (master_doc, 'niswitchexecutivepythonapi', 'NI Switch Executive Python API Documentation',
+    (master_doc, 'nirfsapythonapi', 'NI-RFSA Python API Documentation',
      [author], 1)
 ]
 
@@ -177,8 +177,8 @@ man_pages = [
 # (source start file, target name, title, author,
 #  dir menu entry, description, category)
 texinfo_documents = [
-    (master_doc, 'NISwitchExecutivePythonAPI', 'NI Switch Executive Python API Documentation',
-     author, 'NISwitchExecutivePythonAPI', 'One line description of project.',
+    (master_doc, 'NIRFSAPythonAPI', 'NI-RFSA Python API Documentation',
+     author, 'NIRFSAPythonAPI', 'One line description of project.',
      'Miscellaneous'),
 ]
 
@@ -190,9 +190,9 @@ intersphinx_mapping = {
     'nidmm': ('https://nidmm.readthedocs.io/en/latest/', None),
     'nifgen': ('https://nifgen.readthedocs.io/en/latest/', None),
     'nimodinst': ('https://nimodinst.readthedocs.io/en/latest/', None),
-    # 'nirfsa': ('https://nirfsa.readthedocs.io/en/latest/', None),
     'nirfsg': ('https://nirfsg.readthedocs.io/en/latest/', None),
     'niscope': ('https://niscope.readthedocs.io/en/latest/', None),
+    'nise': ('https://nise.readthedocs.io/en/latest/', None),
     'niswitch': ('https://niswitch.readthedocs.io/en/latest/', None),
     'nitclk': ('https://nitclk.readthedocs.io/en/latest/', None),
 }

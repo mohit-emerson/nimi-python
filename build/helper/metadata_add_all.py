@@ -488,6 +488,8 @@ def _add_python_name(a, attributes):
         n = attributes[a]['name'].lower()
         if attributes[a]['codegen_method'] == 'private':
             n = '_' + n
+        elif n[0].isdigit():
+            n = '_' + n
 
         attributes[a]['python_name'] = n
 
@@ -672,7 +674,7 @@ def _add_enum_value_python_name(enum_info, config):
     for v in enum_info['values']:
         assert v['python_name'], enum_info
         if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
-            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
+            v['python_name'] = '_' + v['python_name']
 
     return enum_info
 

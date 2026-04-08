@@ -7,8 +7,19 @@ __version__ = '1.0.2.dev0'
 from nirfsa.enums import *  # noqa: F403,F401,H303
 from nirfsa.errors import DriverWarning  # noqa: F401
 from nirfsa.errors import Error  # noqa: F401
-from nirfsa.grpc_session_options import *  # noqa: F403,F401,H303
 from nirfsa.session import Session  # noqa: F401
+
+from nirfsa.waveform_info import WaveformInfo  # noqa: F401
+
+from nirfsa.waveform_info import struct_niRFSA_wfmInfo  # noqa: F401
+
+from nirfsa.spectrum_info_type import SpectrumInfoT  # noqa: F401
+
+from nirfsa.spectrum_info_type import struct_niRFSA_spectrumInfo  # noqa: F401
+
+from nirfsa.coefficient_info_type import CoefficientInfo  # noqa: F401
+
+from nirfsa.coefficient_info_type import struct_niRFSA_coefficientInfo  # noqa: F401
 
 
 def get_diagnostic_information():

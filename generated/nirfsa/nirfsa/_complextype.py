@@ -14,7 +14,3 @@ class NIComplexNumberF32(ctypes.Structure):
 
 class NIComplexI16(ctypes.Structure):
     _fields_ = [("real", _visatype.ViInt16), ("imag", _visatype.ViInt16)]
-
-
-class niRFSA_coefficientInfo(ctypes.Structure):
-    _fields_ = [("offset", _visatype.ViReal64), ("gain", _visatype.ViReal64), ("reserved1", _visatype.ViReal64), ("reserved2", _visatype.ViReal64)]

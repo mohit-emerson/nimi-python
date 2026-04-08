@@ -11,12 +11,6 @@ config = {
     },
     'custom_types': [
         {
-            'ctypes_type': 'struct_NIComplexNumber',
-            'file_name': 'ni_complex_number',
-            'grpc_name': 'NiComplexNumber',
-            'python_name': 'NIComplexNumber'
-        },
-        {
             'ctypes_type': 'struct_niRFSA_wfmInfo',
             'file_name': 'waveform_info',
             'grpc_name': 'NiRfsaWfmInfo',
@@ -24,13 +18,13 @@ config = {
         },
         {
             'ctypes_type': 'struct_niRFSA_spectrumInfo',
-            'file_name': 'spectrum_info_t',
+            'file_name': 'spectrum_info_type',
             'grpc_name': 'NiRfsaSpectrumInfo',
             'python_name': 'SpectrumInfoT'
         },
         {
             'ctypes_type': 'struct_niRFSA_coefficientInfo',
-            'file_name': 'coefficient_info',
+            'file_name': 'coefficient_info_type',
             'grpc_name': 'NiRfsaCoefficientInfo',
             'python_name': 'CoefficientInfo'
         }

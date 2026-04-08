@@ -4,6 +4,4 @@ config_additional_config = {
     'development_status': '4 - Beta',
     'latest_runtime_version_tested_against': '2026 Q3 Patch 1',
     'initial_release_year': '2026',
-    'custom_types': [
-    ]
 }

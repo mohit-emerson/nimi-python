@@ -688,8 +688,9 @@ class SideEffectsHelper(object):
         # wfm_info
         if self._defaults['FetchIqMultiRecordComplexF32']['wfmInfo'] is None:
             raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF32", param='wfmInfo')
-        if wfm_info is not None:
-            wfm_info.contents.value = self._defaults['FetchIqMultiRecordComplexF32']['wfmInfo']
+        for field in self._defaults['FetchIqMultiRecordComplexF32']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF32']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexF32']['return']
 
     def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
@@ -703,8 +704,9 @@ class SideEffectsHelper(object):
         # wfm_info
         if self._defaults['FetchIqMultiRecordComplexF64']['wfmInfo'] is None:
             raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF64", param='wfmInfo')
-        if wfm_info is not None:
-            wfm_info.contents.value = self._defaults['FetchIqMultiRecordComplexF64']['wfmInfo']
+        for field in self._defaults['FetchIqMultiRecordComplexF64']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexF64']['return']
 
     def niRFSA_GetAttributeViBoolean(self, vi, channel_name, attribute_id, value):  # noqa: N802
@@ -777,9 +779,9 @@ class SideEffectsHelper(object):
         test_value = self._defaults['GetCalUserDefinedInfo']['info']
         if type(test_value) is str:
             test_value = test_value.encode('ascii')
-        assert len(info.contents) >= len(test_value)
+        assert len(info) >= len(test_value)
         for i in range(len(test_value)):
-            info.contents[i] = test_value[i]
+            info[i] = test_value[i]
         return self._defaults['GetCalUserDefinedInfo']['return']
 
     def niRFSA_GetCalUserDefinedInfoMaxSize(self, vi, info_size):  # noqa: N802
@@ -1126,8 +1128,9 @@ class SideEffectsHelper(object):
         # spectrum_info
         if self._defaults['GetSpectralInfoForSmt']['spectrumInfo'] is None:
             raise MockFunctionCallError("niRFSA_GetSpectralInfoForSmt", param='spectrumInfo')
-        if spectrum_info is not None:
-            spectrum_info.contents.value = self._defaults['GetSpectralInfoForSmt']['spectrumInfo']
+        for field in self._defaults['GetSpectralInfoForSmt']['spectrum_info']._fields_:
+            field_name = field[0]
+            setattr(spectrum_info.contents, field_name, getattr(self._defaults['GetSpectralInfoForSmt']['spectrum_info'], field_name))
         return self._defaults['GetSpectralInfoForSmt']['return']
 
     def niRFSA_GetStreamEndpointHandle(self, vi, stream_endpoint, writer_handle):  # noqa: N802
@@ -1278,8 +1281,9 @@ class SideEffectsHelper(object):
         # wfm_info
         if self._defaults['ReadIqSingleRecordComplexF64']['wfmInfo'] is None:
             raise MockFunctionCallError("niRFSA_ReadIqSingleRecordComplexF64", param='wfmInfo')
-        if wfm_info is not None:
-            wfm_info.contents.value = self._defaults['ReadIqSingleRecordComplexF64']['wfmInfo']
+        for field in self._defaults['ReadIqSingleRecordComplexF64']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['ReadIqSingleRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['ReadIqSingleRecordComplexF64']['return']
 
     def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
@@ -1299,8 +1303,9 @@ class SideEffectsHelper(object):
         # spectrum_info
         if self._defaults['ReadPowerSpectrumF32']['spectrumInfo'] is None:
             raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF32", param='spectrumInfo')
-        if spectrum_info is not None:
-            spectrum_info.contents.value = self._defaults['ReadPowerSpectrumF32']['spectrumInfo']
+        for field in self._defaults['ReadPowerSpectrumF32']['spectrum_info']._fields_:
+            field_name = field[0]
+            setattr(spectrum_info.contents, field_name, getattr(self._defaults['ReadPowerSpectrumF32']['spectrum_info'], field_name))
         return self._defaults['ReadPowerSpectrumF32']['return']
 
     def niRFSA_ReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
@@ -1320,8 +1325,9 @@ class SideEffectsHelper(object):
         # spectrum_info
         if self._defaults['ReadPowerSpectrumF64']['spectrumInfo'] is None:
             raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF64", param='spectrumInfo')
-        if spectrum_info is not None:
-            spectrum_info.contents.value = self._defaults['ReadPowerSpectrumF64']['spectrumInfo']
+        for field in self._defaults['ReadPowerSpectrumF64']['spectrum_info']._fields_:
+            field_name = field[0]
+            setattr(spectrum_info.contents, field_name, getattr(self._defaults['ReadPowerSpectrumF64']['spectrum_info'], field_name))
         return self._defaults['ReadPowerSpectrumF64']['return']
 
     def niRFSA_Reset(self, vi):  # noqa: N802
@@ -1358,18 +1364,18 @@ class SideEffectsHelper(object):
         test_value = self._defaults['RevisionQuery']['driverRev']
         if type(test_value) is str:
             test_value = test_value.encode('ascii')
-        assert len(driver_rev.contents) >= len(test_value)
+        assert len(driver_rev) >= len(test_value)
         for i in range(len(test_value)):
-            driver_rev.contents[i] = test_value[i]
+            driver_rev[i] = test_value[i]
         # instr_rev
         if self._defaults['RevisionQuery']['instrRev'] is None:
             raise MockFunctionCallError("niRFSA_RevisionQuery", param='instrRev')
         test_value = self._defaults['RevisionQuery']['instrRev']
         if type(test_value) is str:
             test_value = test_value.encode('ascii')
-        assert len(instr_rev.contents) >= len(test_value)
+        assert len(instr_rev) >= len(test_value)
         for i in range(len(test_value)):
-            instr_rev.contents[i] = test_value[i]
+            instr_rev[i] = test_value[i]
         return self._defaults['RevisionQuery']['return']
 
     def niRFSA_SaveConfigurationsToFile(self, vi, channel_name, file_path):  # noqa: N802
@@ -1406,9 +1412,9 @@ class SideEffectsHelper(object):
         test_value = self._defaults['SelfTest']['testMessage']
         if type(test_value) is str:
             test_value = test_value.encode('ascii')
-        assert len(test_message.contents) >= len(test_value)
+        assert len(test_message) >= len(test_value)
         for i in range(len(test_value)):
-            test_message.contents[i] = test_value[i]
+            test_message[i] = test_value[i]
         return self._defaults['SelfTest']['return']
 
     def niRFSA_SendSoftwareEdgeTrigger(self, vi, trigger, trigger_identifier):  # noqa: N802

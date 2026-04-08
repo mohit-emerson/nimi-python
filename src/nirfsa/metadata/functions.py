@@ -742,20 +742,13 @@ functions = {
         'use_session_lock': True
     },
     'Close': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Closes the session to the device.\n\n                If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'grpc_name': 'Close',
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -768,8 +761,9 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'python_name': '_close',
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'CloseCalibrationStep': {
         'codegen_method': 'public',
@@ -2930,7 +2924,7 @@ functions = {
                     'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
                 },
                 'name': 'data',
-                'type': 'ni complex number f32',
+                'type': 'NIComplexNumberF32',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2940,7 +2934,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES attribute changes per step during RF list mode.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3030,7 +3024,7 @@ functions = {
                     'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
                 },
                 'name': 'data',
-                'type': 'ni complex number f64',
+                'type': 'NIComplexNumber',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -3040,7 +3034,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES attribute changes per step during RF list mode.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3130,7 +3124,7 @@ functions = {
                     'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
                 },
                 'name': 'data',
-                'type': 'ni complex number i16',
+                'type': 'NIComplexI16',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -3140,7 +3134,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES attribute changes per step during RF list mode.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3220,7 +3214,7 @@ functions = {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
                 'name': 'data',
-                'type': 'ni complex number f32',
+                'type': 'NIComplexNumberF32',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -3230,7 +3224,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3310,7 +3304,7 @@ functions = {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
                 'name': 'data',
-                'type': 'ni complex number f64',
+                'type': 'NIComplexNumber',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -3320,7 +3314,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3400,7 +3394,7 @@ functions = {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
                 'name': 'data',
-                'type': 'ni complex number i16',
+                'type': 'NIComplexI16',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -3410,7 +3404,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3829,7 +3823,7 @@ functions = {
                     'value': 22
                 },
                 'type': 'ViChar[]',
-                'use_array': True,
+                'use_array': False,
                 'use_in_python_api': True
             }
         ],
@@ -4677,7 +4671,7 @@ functions = {
                     'value': 'bufferSize'
                 },
                 'type': 'ViChar[]',
-                'use_array': True,
+                'use_array': False,
                 'use_in_python_api': True
             },
             {
@@ -5004,7 +4998,7 @@ functions = {
                     'description': 'Returns returns properties of the computed spectrum such as spectrum type, spectrum scale (linear or logarithmic), the window type the function used to compute the spectrum, window size, and FFT size. Pass this parameter to subsequent functions that contain the **NIRFSA_ATTR_SPECTRUM_INFO** parameter.'
                 },
                 'name': 'spectrumInfo',
-                'type': 'SmtSpectrumInfo',
+                'type': 'struct niRFSA_spectrumInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -5129,7 +5123,7 @@ functions = {
                     'value': 'bufferSize'
                 },
                 'type': 'ViChar[]',
-                'use_array': True,
+                'use_array': False,
                 'use_in_python_api': True
             }
         ],
@@ -5516,20 +5510,12 @@ functions = {
         'use_session_lock': True
     },
     'Initiate': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Commits settings to hardware, waits for hardware settling, and starts an acquisition. \n                \n                You can use this function in conjunction with one of the niRFSA fetch I/Q functions to retrieve acquired I/Q data, or you can use the nirfsa_ReadIqSingleRecordComplexF64 function to both initiate the acquisition and retrieve I/Q data at one time.\n\n                ----\n                **Note**\n                If you are using external digitizer mode, this function commits settings and waits for settling, but it does not start an acquisition. Notice that using the nirfsa_Commit function on its own commits settings to hardware, but the device does not wait for hardware settling.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_\n\n                `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
         'parameters': [
             {
                 'direction': 'in',
@@ -5792,7 +5778,7 @@ functions = {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
                 'name': 'data',
-                'type': 'ni complex number f64',
+                'type': 'NIComplexNumber',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -5812,7 +5798,7 @@ functions = {
                     'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
                 'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
+                'type': 'struct niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -5896,7 +5882,7 @@ functions = {
                     'description': 'Returns additional information about the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the function returned.'
                 },
                 'name': 'spectrumInfo',
-                'type': 'niRFSA_spectrumInfo',
+                'type': 'struct niRFSA_spectrumInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -5980,7 +5966,7 @@ functions = {
                     'description': 'Returns additional information about the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the function returned.'
                 },
                 'name': 'spectrumInfo',
-                'type': 'niRFSA_spectrumInfo',
+                'type': 'struct niRFSA_spectrumInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -6202,7 +6188,7 @@ functions = {
                     'value': 256
                 },
                 'type': 'ViChar[]',
-                'use_array': True,
+                'use_array': False,
                 'use_in_python_api': True
             },
             {
@@ -6216,7 +6202,7 @@ functions = {
                     'value': 256
                 },
                 'type': 'ViChar[]',
-                'use_array': True,
+                'use_array': False,
                 'use_in_python_api': True
             }
         ],
@@ -6419,20 +6405,14 @@ functions = {
         'use_session_lock': True
     },
     'SelfTest': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Performs a self-test on the NI-RFSA device and returns the test result. \n                \n                This function performs a simple series of tests verifying that the NI-RFSA device is powered on and responding.\n\n                ----\n                **Note**\n                This function calls the nirfsa_Reset function, which resets the software state.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Running a Self-Test on an NI-RFSA Device <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_self_test.html>`_'
         },
+        'grpc_name': 'SelfTest',
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
+        'method_name_for_documentation': 'self_test',
         'parameters': [
             {
                 'direction': 'in',
@@ -6465,7 +6445,7 @@ functions = {
                     'value': 256
                 },
                 'type': 'ViChar[]',
-                'use_array': True,
+                'use_array': False,
                 'use_in_python_api': True
             }
         ],

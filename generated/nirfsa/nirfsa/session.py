@@ -10,7 +10,13 @@ import nirfsa._library_interpreter as _library_interpreter
 import nirfsa.enums as enums
 import nirfsa.errors as errors
 
-import hightime
+import nirfsa.waveform_info as waveform_info  # noqa: F401
+
+import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
+
+import nirfsa.coefficient_info_type as coefficient_info_type  # noqa: F401
+
+import hightime  # noqa: F401
 import nitclk
 
 # Used for __repr__
@@ -21,7 +27,7 @@ pp = pprint.PrettyPrinter(indent=4)
 class _Acquisition(object):
     def __init__(self, session):
         self._session = session
-        self._session.initiate()
+        self._session._initiate()
 
     def __enter__(self):
         return self
@@ -302,7 +308,7 @@ class _SessionBase(object):
 
     Configures the amplitude settling accuracy in decibels.
 
-    NI-RFSA waits until the RF power settles within the specified accuracy level after calling the initiate method.
+    NI-RFSA waits until the RF power settles within the specified accuracy level after calling the _initiate method.
 
     Any specified amplitude settling value that is above the acceptable minimum value is coerced down to the closest valid value.
 
@@ -595,7 +601,7 @@ class _SessionBase(object):
 
     Selects the LO signal path used during calibration.
 
-    				During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session.
+    During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session.
 
     **Defined Values:**
 
@@ -2956,7 +2962,7 @@ class _SessionBase(object):
     | NIRFSA_VAL_ENABLED | 50 kHz to 24 MHz | 50 kHz to 25 MHz | 50 kHz to 100 MHz | LO1: 8 Hz to 400 MHz<br>LO2: 4 kHz to 400 MHz | 1 nHz to 50 MHz |
     | NIRFSA_VAL_DISABLED | 4 MHz, 5 MHz, 6 MHz, 12 MHz, 24 MHz | 2 MHz, 5 MHz, 10 MHz, 25 MHz | 1 MHz, 5 MHz, 10 MHz, 25 MHz, 50 MHz, 100 MHz | LO1: --<br>LO2: -- | 1 nHz to 50 MHz |
 
-    \* Values up to 100 MHz are coerced to 50 MHz.
+    * Values up to 100 MHz are coerced to 50 MHz.
 
     ----
     **Note**
@@ -4939,7 +4945,7 @@ class _SessionBase(object):
 
     Indicates the minimum time between temperature sensor readings in seconds.
 
-    When you call the read_power_spectrum_f64 method, the read_iq_single_record_complex_f64 method, or the initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+    When you call the read_power_spectrum_f64 method, the read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
     ----
     **Note**
@@ -5075,7 +5081,7 @@ class _SessionBase(object):
 
         Specifies the calibration tone power during calibration tone amplitude calibration.
 
-                        You must call the initiate method before calling this method.
+                        You must call the _initiate method before calling this method.
 
                         **Supported Devices**: PXIe-5693
 
@@ -5744,9 +5750,9 @@ class _SessionBase(object):
 
 
         Returns:
-            data (ni_complex_number_f32): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
+            data (NIComplexNumberF32): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
 
-            wfm_info (niRFSA_wfmInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
 
                                         The following list provides more information about each of these properties:
 
@@ -5821,9 +5827,9 @@ class _SessionBase(object):
 
 
         Returns:
-            data (ni_complex_number_f64): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
+            data (NIComplexNumber): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
 
-            wfm_info (niRFSA_wfmInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
 
                                         The following list provides more information about each of these properties:
 
@@ -6362,9 +6368,9 @@ class _SessionBase(object):
 
 
         Returns:
-            data (ni_complex_number_f64): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the configure_number_of_samples method.
+            data (NIComplexNumber): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the configure_number_of_samples method.
 
-            wfm_info (niRFSA_wfmInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
                                         The following list provides more information about each of these properties:
 
@@ -6434,7 +6440,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            spectrum_info (niRFSA_spectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -6483,7 +6489,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            spectrum_info (niRFSA_spectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -6760,7 +6766,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-RFSA session to the NI-RFSA driver'''
 
-    def __init__(self, resource_name, id_query, reset, options={}, *, grpc_options=None):
+    def __init__(self, resource_name, id_query, reset, options={}):
         r'''An NI-RFSA session to the NI-RFSA driver
 
         Creates a new session for the device.
@@ -6838,18 +6844,12 @@ class Session(_SessionBase):
                 | driver_setup            | {}      |
                 +-------------------------+---------+
 
-            grpc_options (nirfsa.grpc_session_options.GrpcSessionOptions): MeasurementLink gRPC session options
-
 
         Returns:
             session (nirfsa.Session): A session object representing the device.
 
         '''
-        if grpc_options:
-            import nirfsa._grpc_stub_interpreter as _grpc_stub_interpreter
-            interpreter = _grpc_stub_interpreter.GrpcStubInterpreter(grpc_options)
-        else:
-            interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
+        interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
 
         # Initialize the superclass with default values first, populate them later
         super(Session, self).__init__(
@@ -6866,9 +6866,7 @@ class Session(_SessionBase):
         # with the actual session handle.
         self._interpreter.set_session_handle(self.init_with_options(resource_name, id_query, reset, options))
 
-        # NI-TClk does not work over NI gRPC Device Server
-        if not grpc_options:
-            self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
+        self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
         # Store the parameter list for later printing in __repr__
         param_list = []
@@ -6895,8 +6893,7 @@ class Session(_SessionBase):
         return self
 
     def __exit__(self, exc_type, exc_value, traceback):
-        if self._interpreter._close_on_exit:
-            self.close()
+        self.close()
 
     def initiate(self):
         '''initiate
@@ -6951,7 +6948,7 @@ class Session(_SessionBase):
     def abort(self):
         r'''abort
 
-        Stops an acquisition previously started with the initiate method or the read_power_spectrum_f64 method.
+        Stops an acquisition previously started with the _initiate method or the read_power_spectrum_f64 method.
 
                         You can also use the abort method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
 
@@ -7044,9 +7041,8 @@ class Session(_SessionBase):
         '''
         self._interpreter.clear_self_calibrate_range()
 
-    @ivi_synchronized
-    def close(self):
-        r'''close
+    def _close(self):
+        r'''_close
 
         Closes the session to the device.
 
@@ -7120,11 +7116,11 @@ class Session(_SessionBase):
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the initiate method, the read_iq_single_record_complex_f64 method, or the read_power_spectrum_f64 method.
+                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read_iq_single_record_complex_f64 method, or the read_power_spectrum_f64 method.
 
                         ----
                         **Note**
-                        This method does not wait for settling time, unlike the initiate method.
+                        This method does not wait for settling time, unlike the _initiate method.
 
                         ----
 
@@ -8244,7 +8240,7 @@ class Session(_SessionBase):
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Returns:
-            spectrum_info (SmtSpectrumInfo): Returns returns properties of the computed spectrum such as spectrum type, spectrum scale (linear or logarithmic), the window type the method used to compute the spectrum, window size, and FFT size. Pass this parameter to subsequent methods that contain the **SPECTRUM_INFO** parameter.
+            spectrum_info (SpectrumInfoT): Returns returns properties of the computed spectrum such as spectrum type, spectrum scale (linear or logarithmic), the window type the method used to compute the spectrum, window size, and FFT size. Pass this parameter to subsequent methods that contain the **SPECTRUM_INFO** parameter.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -8579,8 +8575,8 @@ class Session(_SessionBase):
         self._interpreter.initialize_external_alignment_step(external_alignment_step)
 
     @ivi_synchronized
-    def initiate(self):
-        r'''initiate
+    def _initiate(self):
+        r'''_initiate
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
@@ -8962,8 +8958,8 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_reference_level, max_reference_level)
 
     @ivi_synchronized
-    def self_test(self):
-        r'''self_test
+    def _self_test(self):
+        r'''_self_test
 
         Performs a self-test on the NI-RFSA device and returns the test result.
 
@@ -9004,7 +9000,7 @@ class Session(_SessionBase):
 
                         - You configure an invalid trigger.
                         - You set the **acquisitionType** to AcquisitionType.SPECTRUM using the configure_acquisition_type method.
-                        - You have not previously called the initiate method.
+                        - You have not previously called the _initiate method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 

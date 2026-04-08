@@ -10,6 +10,12 @@ import nirfsa._visatype as _visatype
 import nirfsa.enums as enums  # noqa: F401
 import nirfsa.errors as errors
 
+import nirfsa.waveform_info as waveform_info  # noqa: F401
+
+import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
+
+import nirfsa.coefficient_info_type as coefficient_info_type  # noqa: F401
+
 
 # Helper functions for creating ctypes needed for calling into the driver DLL
 def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
@@ -552,11 +558,11 @@ class LibraryInterpreter(object):
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
-        data_ctype = _visatype.ni_complex_number_f32()  # case S220
-        wfm_info_ctype = _visatype.niRFSA_wfmInfo()  # case S220
+        data_ctype = _visatype.NIComplexNumberF32()  # case S220
+        wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
         error_code = self._library.niRFSA_FetchIqMultiRecordComplexF32(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, None if data_ctype is None else (ctypes.pointer(data_ctype)), None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return ni_complex_number_f32(data_ctype.value), niRFSA_wfmInfo(wfm_info_ctype.value)
+        return _complextype.NIComplexNumberF32(data_ctype.value), waveform_info.WaveformInfo(wfm_info_ctype)
 
     def fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, number_of_samples, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -565,11 +571,11 @@ class LibraryInterpreter(object):
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
-        data_ctype = _visatype.ni_complex_number_f64()  # case S220
-        wfm_info_ctype = _visatype.niRFSA_wfmInfo()  # case S220
+        data_ctype = _visatype.NIComplexNumber()  # case S220
+        wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
         error_code = self._library.niRFSA_FetchIqMultiRecordComplexF64(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, None if data_ctype is None else (ctypes.pointer(data_ctype)), None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return ni_complex_number_f64(data_ctype.value), niRFSA_wfmInfo(wfm_info_ctype.value)
+        return _complextype.NIComplexNumber(data_ctype.value), waveform_info.WaveformInfo(wfm_info_ctype)
 
     def get_attribute_vi_boolean(self, channel_name, attribute_id):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -635,7 +641,7 @@ class LibraryInterpreter(object):
         info_ctype = (_visatype.ViChar * 22)()  # case C070
         error_code = self._library.niRFSA_GetCalUserDefinedInfo(vi_ctype, info_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return info_array
+        return info_ctype.value.decode(self._encoding)
 
     def get_cal_user_defined_info_max_size(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -791,7 +797,7 @@ class LibraryInterpreter(object):
         name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niRFSA_GetRelayName(vi_ctype, channel_list_ctype, index_ctype, name_ctype, buffer_size_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return name_array
+        return name_ctype.value.decode(self._encoding)
 
     def get_relay_operations_count(self, channel_list):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -847,10 +853,10 @@ class LibraryInterpreter(object):
 
     def get_spectral_info_for_smt(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        spectrum_info_ctype = _visatype.SmtSpectrumInfo()  # case S220
+        spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
         error_code = self._library.niRFSA_GetSpectralInfoForSmt(vi_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return SmtSpectrumInfo(spectrum_info_ctype.value)
+        return spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
 
     def get_stream_endpoint_handle(self, stream_endpoint):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -872,7 +878,7 @@ class LibraryInterpreter(object):
         terminal_name_ctype = (_visatype.ViChar * buffer_size_ctype.value)()  # case C060
         error_code = self._library.niRFSA_GetTerminalName(vi_ctype, signal_ctype, signal_identifier_ctype, buffer_size_ctype, terminal_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return terminal_name_array
+        return terminal_name_ctype.value.decode(self._encoding)
 
     def get_user_data(self, identifier, buffer_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -981,12 +987,12 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
-        data_ctype = _visatype.ni_complex_number_f64()  # case S220
+        data_ctype = _visatype.NIComplexNumber()  # case S220
         data_array_size_ctype = _visatype.ViInt64(data_array_size)  # case S150
-        wfm_info_ctype = _visatype.niRFSA_wfmInfo()  # case S220
+        wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
         error_code = self._library.niRFSA_ReadIqSingleRecordComplexF64(vi_ctype, channel_list_ctype, timeout_ctype, None if data_ctype is None else (ctypes.pointer(data_ctype)), data_array_size_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return ni_complex_number_f64(data_ctype.value), niRFSA_wfmInfo(wfm_info_ctype.value)
+        return _complextype.NIComplexNumber(data_ctype.value), waveform_info.WaveformInfo(wfm_info_ctype)
 
     def read_power_spectrum_f32(self, channel_list, timeout, data_array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -996,10 +1002,10 @@ class LibraryInterpreter(object):
         power_spectrum_data_array = array.array("f", [0]) * power_spectrum_data_size  # case B600
         power_spectrum_data_ctype = _get_ctypes_pointer_for_buffer(value=power_spectrum_data_array, library_type=_visatype.ViReal32)  # case B600
         data_array_size_ctype = _visatype.ViInt32(data_array_size)  # case S210
-        spectrum_info_ctype = _visatype.niRFSA_spectrumInfo()  # case S220
+        spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
         error_code = self._library.niRFSA_ReadPowerSpectrumF32(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return power_spectrum_data_array, niRFSA_spectrumInfo(spectrum_info_ctype.value)
+        return power_spectrum_data_array, spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
 
     def read_power_spectrum_f64(self, channel_list, timeout, data_array_size):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1009,10 +1015,10 @@ class LibraryInterpreter(object):
         power_spectrum_data_array = array.array("d", [0]) * power_spectrum_data_size  # case B600
         power_spectrum_data_ctype = _get_ctypes_pointer_for_buffer(value=power_spectrum_data_array, library_type=_visatype.ViReal64)  # case B600
         data_array_size_ctype = _visatype.ViInt32(data_array_size)  # case S210
-        spectrum_info_ctype = _visatype.niRFSA_spectrumInfo()  # case S220
+        spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
         error_code = self._library.niRFSA_ReadPowerSpectrumF64(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return power_spectrum_data_array, niRFSA_spectrumInfo(spectrum_info_ctype.value)
+        return power_spectrum_data_array, spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
 
     def reset(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1053,7 +1059,7 @@ class LibraryInterpreter(object):
         instr_rev_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niRFSA_RevisionQuery(vi_ctype, driver_rev_ctype, instr_rev_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return driver_rev_array, instr_rev_array
+        return driver_rev_ctype.value.decode(self._encoding), instr_rev_ctype.value.decode(self._encoding)
 
     def save_configurations_to_file(self, channel_name, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -1093,7 +1099,7 @@ class LibraryInterpreter(object):
         test_message_ctype = (_visatype.ViChar * 256)()  # case C070
         error_code = self._library.niRFSA_SelfTest(vi_ctype, None if test_result_ctype is None else (ctypes.pointer(test_result_ctype)), test_message_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(test_result_ctype.value), test_message_array
+        return int(test_result_ctype.value), test_message_ctype.value.decode(self._encoding)
 
     def send_software_edge_trigger(self, trigger, trigger_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

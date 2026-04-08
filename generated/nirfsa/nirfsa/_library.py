@@ -8,6 +8,12 @@ import threading
 from nirfsa._complextype import *  # noqa: F403
 from nirfsa._visatype import *  # noqa: F403,H303
 
+import nirfsa.waveform_info as waveform_info  # noqa: F401
+
+import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
+
+import nirfsa.coefficient_info_type as coefficient_info_type  # noqa: F401
+
 
 class Library(object):
     '''Library
@@ -611,7 +617,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_FetchIqMultiRecordComplexF32_cfunc is None:
                 self.niRFSA_FetchIqMultiRecordComplexF32_cfunc = self._get_library_function('niRFSA_FetchIqMultiRecordComplexF32')
-                self.niRFSA_FetchIqMultiRecordComplexF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(ni_complex_number_f32), ctypes.POINTER(niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqMultiRecordComplexF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexNumberF32), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
                 self.niRFSA_FetchIqMultiRecordComplexF32_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_FetchIqMultiRecordComplexF32_cfunc(vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info)
 
@@ -619,7 +625,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_FetchIqMultiRecordComplexF64_cfunc is None:
                 self.niRFSA_FetchIqMultiRecordComplexF64_cfunc = self._get_library_function('niRFSA_FetchIqMultiRecordComplexF64')
-                self.niRFSA_FetchIqMultiRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(ni_complex_number_f64), ctypes.POINTER(niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqMultiRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexNumber), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
                 self.niRFSA_FetchIqMultiRecordComplexF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_FetchIqMultiRecordComplexF64_cfunc(vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info)
 
@@ -763,7 +769,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_GetNormalizationCoefficients_cfunc is None:
                 self.niRFSA_GetNormalizationCoefficients_cfunc = self._get_library_function('niRFSA_GetNormalizationCoefficients')
-                self.niRFSA_GetNormalizationCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(niRFSA_coefficientInfo), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_GetNormalizationCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(coefficient_info_type.struct_niRFSA_coefficientInfo), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niRFSA_GetNormalizationCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetNormalizationCoefficients_cfunc(vi, channel_list, array_size, coefficient_info, number_of_coefficient_sets)
 
@@ -795,7 +801,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_GetScalingCoefficients_cfunc is None:
                 self.niRFSA_GetScalingCoefficients_cfunc = self._get_library_function('niRFSA_GetScalingCoefficients')
-                self.niRFSA_GetScalingCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(niRFSA_coefficientInfo), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_GetScalingCoefficients_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(coefficient_info_type.struct_niRFSA_coefficientInfo), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niRFSA_GetScalingCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetScalingCoefficients_cfunc(vi, channel_list, array_size, coefficient_info, number_of_coefficient_sets)
 
@@ -819,7 +825,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_GetSpectralInfoForSmt_cfunc is None:
                 self.niRFSA_GetSpectralInfoForSmt_cfunc = self._get_library_function('niRFSA_GetSpectralInfoForSmt')
-                self.niRFSA_GetSpectralInfoForSmt_cfunc.argtypes = [ViSession, ctypes.POINTER(SmtSpectrumInfo)]  # noqa: F405
+                self.niRFSA_GetSpectralInfoForSmt_cfunc.argtypes = [ViSession, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
                 self.niRFSA_GetSpectralInfoForSmt_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetSpectralInfoForSmt_cfunc(vi, spectrum_info)
 
@@ -947,7 +953,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_ReadIqSingleRecordComplexF64_cfunc is None:
                 self.niRFSA_ReadIqSingleRecordComplexF64_cfunc = self._get_library_function('niRFSA_ReadIqSingleRecordComplexF64')
-                self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ni_complex_number_f64), ViInt64, ctypes.POINTER(niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(NIComplexNumber), ViInt64, ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
                 self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ReadIqSingleRecordComplexF64_cfunc(vi, channel_list, timeout, data, data_array_size, wfm_info)
 
@@ -955,7 +961,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_ReadPowerSpectrumF32_cfunc is None:
                 self.niRFSA_ReadPowerSpectrumF32_cfunc = self._get_library_function('niRFSA_ReadPowerSpectrumF32')
-                self.niRFSA_ReadPowerSpectrumF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal32), ViInt32, ctypes.POINTER(niRFSA_spectrumInfo)]  # noqa: F405
+                self.niRFSA_ReadPowerSpectrumF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal32), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
                 self.niRFSA_ReadPowerSpectrumF32_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ReadPowerSpectrumF32_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
 
@@ -963,7 +969,7 @@ class Library(object):
         with self._func_lock:
             if self.niRFSA_ReadPowerSpectrumF64_cfunc is None:
                 self.niRFSA_ReadPowerSpectrumF64_cfunc = self._get_library_function('niRFSA_ReadPowerSpectrumF64')
-                self.niRFSA_ReadPowerSpectrumF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(niRFSA_spectrumInfo)]  # noqa: F405
+                self.niRFSA_ReadPowerSpectrumF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
                 self.niRFSA_ReadPowerSpectrumF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ReadPowerSpectrumF64_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
 

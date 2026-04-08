@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query, reset, options={}, *, grpc_options=None)
+.. py:class:: Session(self, resource_name, id_query, reset, options={})
 
     
 
@@ -115,16 +115,6 @@ Session
 
     :type options: str
 
-    :param grpc_options:
-        
-
-        MeasurementLink gRPC session options
-
-        
-
-
-    :type grpc_options: nirfsa.GrpcSessionOptions
-
 
 Methods
 =======
@@ -136,7 +126,7 @@ abort
 
     .. py:method:: abort()
 
-            Stops an acquisition previously started with the :py:meth:`nirfsa.Session.initiate` method or the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method.
+            Stops an acquisition previously started with the :py:meth:`nirfsa.Session._initiate` method or the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method.
 
                             You can also use the :py:meth:`nirfsa.Session.abort` method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
 
@@ -163,7 +153,7 @@ cal_adjust_cal_tone_power
 
             Specifies the calibration tone power during calibration tone amplitude calibration.
 
-                            You must call the :py:meth:`nirfsa.Session.initiate` method before calling this method.
+                            You must call the :py:meth:`nirfsa.Session._initiate` method before calling this method.
 
                             **Supported Devices**: PXIe-5693
 
@@ -875,11 +865,11 @@ commit
 
             Commits settings to hardware.
 
-                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session.initiate` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method.
+                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method.
 
                             ----
                             **Note**
-                            This method does not wait for settling time, unlike the :py:meth:`nirfsa.Session.initiate` method.
+                            This method does not wait for settling time, unlike the :py:meth:`nirfsa.Session._initiate` method.
 
                             ----
 
@@ -2698,7 +2688,7 @@ fetch_iq_multi_record_complex_f32
 
                 WHERE
 
-                data (ni_complex_number_f32): 
+                data (NIComplexNumberF32): 
 
 
                     Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **:py:attr:`nirfsa.Session.number_of_samples`** times **:py:attr:`nirfsa.Session.number_of_records`** for this parameter.
@@ -2706,7 +2696,7 @@ fetch_iq_multi_record_complex_f32
                     
 
 
-                wfm_info (niRFSA_wfmInfo): 
+                wfm_info (WaveformInfo): 
 
 
                     Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
@@ -2820,7 +2810,7 @@ fetch_iq_multi_record_complex_f64
 
                 WHERE
 
-                data (ni_complex_number_f64): 
+                data (NIComplexNumber): 
 
 
                     Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **:py:attr:`nirfsa.Session.number_of_samples`** times **:py:attr:`nirfsa.Session.number_of_records`** for this parameter.
@@ -2828,7 +2818,7 @@ fetch_iq_multi_record_complex_f64
                     
 
 
-                wfm_info (niRFSA_wfmInfo): 
+                wfm_info (WaveformInfo): 
 
 
                     Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
@@ -3871,7 +3861,7 @@ get_spectral_info_for_smt
 
 
 
-            :rtype: SmtSpectrumInfo
+            :rtype: SpectrumInfoT
             :return:
 
 
@@ -4677,7 +4667,7 @@ read_iq_single_record_complex_f64
 
                 WHERE
 
-                data (ni_complex_number_f64): 
+                data (NIComplexNumber): 
 
 
                     Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the :py:meth:`nirfsa.Session.configure_number_of_samples` method.
@@ -4685,7 +4675,7 @@ read_iq_single_record_complex_f64
                     
 
 
-                wfm_info (niRFSA_wfmInfo): 
+                wfm_info (WaveformInfo): 
 
 
                     Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
@@ -4784,7 +4774,7 @@ read_power_spectrum_f32
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                spectrum_info (niRFSA_spectrumInfo): 
+                spectrum_info (SpectrumInfoT): 
 
 
                     Returns additional information about the **:py:attr:`nirfsa.Session.POWER_SPECTRUM_DATA`** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
@@ -4861,7 +4851,7 @@ read_power_spectrum_f64
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                spectrum_info (niRFSA_spectrumInfo): 
+                spectrum_info (SpectrumInfoT): 
 
 
                     Returns additional information about the **:py:attr:`nirfsa.Session.POWER_SPECTRUM_DATA`** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
@@ -5322,7 +5312,7 @@ send_software_edge_trigger
 
                             - You configure an invalid trigger.
                             - You set the **acquisitionType** to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method.
-                            - You have not previously called the :py:meth:`nirfsa.Session.initiate` method.
+                            - You have not previously called the :py:meth:`nirfsa.Session._initiate` method.
 
                             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6156,7 +6146,7 @@ amplitude_settling
 
         Configures the amplitude settling accuracy in decibels.
 
-        NI-RFSA waits until the RF power settles within the specified accuracy level after calling the :py:meth:`nirfsa.Session.initiate` method.
+        NI-RFSA waits until the RF power settles within the specified accuracy level after calling the :py:meth:`nirfsa.Session._initiate` method.
 
         Any specified amplitude settling value that is above the acceptable minimum value is coerced down to the closest valid value.
 
@@ -6874,7 +6864,7 @@ cal_lo_path_selection
 
         Selects the LO signal path used during calibration.
 
-        				During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session.
+        During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session.
 
         **Defined Values:**
 
@@ -11496,7 +11486,7 @@ lo_frequency_step_size
         | :py:data:`~nirfsa.NIRFSA_VAL_ENABLED` | 50 kHz to 24 MHz | 50 kHz to 25 MHz | 50 kHz to 100 MHz | LO1: 8 Hz to 400 MHz<br>LO2: 4 kHz to 400 MHz | 1 nHz to 50 MHz |
         | :py:data:`~nirfsa.NIRFSA_VAL_DISABLED` | 4 MHz, 5 MHz, 6 MHz, 12 MHz, 24 MHz | 2 MHz, 5 MHz, 10 MHz, 25 MHz | 1 MHz, 5 MHz, 10 MHz, 25 MHz, 50 MHz, 100 MHz | LO1: --<br>LO2: -- | 1 nHz to 50 MHz |
 
-        \* Values up to 100 MHz are coerced to 50 MHz.
+        * Values up to 100 MHz are coerced to 50 MHz.
 
         ----
         **Note**
@@ -15625,7 +15615,7 @@ temperature_read_interval
 
         Indicates the minimum time between temperature sensor readings in seconds.
 
-        When you call the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+        When you call the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
         ----
         **Note**

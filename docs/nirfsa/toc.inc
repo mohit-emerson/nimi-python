@@ -8,5 +8,4 @@ API Reference
    enums
    errors
    examples
-   grpc_session_options
 

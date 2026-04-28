@@ -2,6 +2,7 @@
 # This file was generated
 
 from enum import Enum
+from enum import IntFlag
 
 
 class AcquisitionType(Enum):
@@ -26,7 +27,7 @@ class Action(Enum):
     '''
 
 
-class AdvanceTrigType(Enum):
+class AdvanceTriggerType(Enum):
     NONE = 600
     r'''
     No Advance Trigger is configured.
@@ -41,7 +42,7 @@ class AdvanceTrigType(Enum):
     '''
 
 
-class ArmRefTrigType(Enum):
+class ArmReferenceTriggerType(Enum):
     NONE = 600
     r'''
     No Arm Reference Trigger is configured.
@@ -132,7 +133,7 @@ class ConditioningCalToneMode(Enum):
     '''
 
 
-class DeembeddingTypeAttrVals(Enum):
+class DeembeddingType(Enum):
     NONE = 3900
     r'''
     De-embedding is not applied to the measurement.
@@ -145,9 +146,34 @@ class DeembeddingTypeAttrVals(Enum):
     r'''
     De-embeds the measurement using the gain term and the reflection term.
     '''
+    AMPLITUDE_FLATNESS = 3903
+    AMPLITUDE_AND_PHASE_FLATNESS = 3904
 
 
-class DigitizerSampClkExportedTerm(Enum):
+class DeviceResponseType(Enum):
+    DOWNCONVERTER_IF = 2800
+    r'''
+    Returns the IF response of the downconverter.
+    '''
+    DOWNCONVERTER_RF = 2801
+    r'''
+    Returns the RF response of the downconverter. This value is supported only for the PXIe-5603/5605/5665/5667/5693..
+    '''
+    DOWNCONVERTER_COMBINED = 2802
+    r'''
+    Returns the combined RF and IF response of the downconverter. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5603/5605/5665/5667.
+    '''
+    VSA_IF = 2803
+    r'''
+    Returns the IF response of the entire NI-RFSA device. This value is supported only for the PXIe-5665/5667.
+    '''
+    VSA_COMBINED = 2804
+    r'''
+    Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.
+    '''
+
+
+class DigitizerSampleClockExportedTerminal(Enum):
     NONE = 'None'
     r'''
     The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
@@ -158,7 +184,7 @@ class DigitizerSampClkExportedTerm(Enum):
     '''
 
 
-class DigitizerSampClkTimebaseSrc(Enum):
+class DigitizerSampleClockTimebaseSource(Enum):
     ONBOARD_CLOCK = 'OnboardClock'
     r'''
     The digitizer uses its onboard clock as the Sample Clock timebase.
@@ -271,7 +297,7 @@ class EnableUnspecifiedAttrVals(Enum):
     '''
 
 
-class ExportOutputTerm(Enum):
+class ExportOutputTerminal(Enum):
     DO_NOT_EXPORT = ''
     r'''
     The signal is not exported.
@@ -393,21 +419,6 @@ class FetchRelativeTo(Enum):
     '''
 
 
-class Format(Enum):
-    MAGNITUDE_AND_PHASE = 4001
-    r'''
-    Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.
-    '''
-    MAGNITUDE_DB_AND_PHASE = 4002
-    r'''
-    Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.
-    '''
-    REAL_AND_IMAGINARY = 4000
-    r'''
-    Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.
-    '''
-
-
 class FrequencySettlingUnits(Enum):
     PPM = 2000
     r'''
@@ -430,7 +441,7 @@ class IFattenTableSel(Enum):
     '''
     ACPR = 2901
     r'''
-    Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the cal_if_filter_selection property to IFfilterSel._1 or IFfilterSel._2.
+    Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the cal_if_filter_selection property to IFfilterSelection._1 or IFfilterSelection._2.
     '''
 
 
@@ -453,7 +464,7 @@ class IFfilter(Enum):
     '''
 
 
-class IFfilterSel(Enum):
+class IFfilterSelection(Enum):
     _1 = 2100
     r'''
     Specifies that the 5 MHz filter path is used during calibration.
@@ -507,7 +518,7 @@ class InputPort(Enum):
     '''
 
 
-class IqInPortTermCfg(Enum):
+class IqInPortTerminalConfiguration(Enum):
     DIFFERENTIAL = 2100
     r'''
     Sets the terminal configuration to differential.
@@ -515,6 +526,68 @@ class IqInPortTermCfg(Enum):
     SINGLE_ENDED = 2101
     r'''
     Sets the terminal configuration to single-ended.
+    '''
+
+
+class IsSelfCalValidValidSteps(IntFlag):
+    DIGITIZER_SELF_CAL = 8
+    r'''
+    Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
+    '''
+    PRESELECTOR_ALIGNMENT = 1
+    r'''
+    Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
+    '''
+    OMIT_NONE = 0
+    r'''
+    No calibration steps are omitted.
+    '''
+    GAIN_REFERENCE = 2
+    r'''
+    Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
+    '''
+    IF_FLATNESS = 4
+    r'''
+    Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
+    '''
+    LO_SELF_CAL = 10
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    AMPLITUDE_ACCURACY = 20
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    RESIDUAL_LO_POWER = 40
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    IMAGE_SUPPRESSION = 80
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    SYNTHESIZER_ALIGNMENT = 100
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    DC_OFFSET = 200
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+
+
+class LinearInterpolationFormat(Enum):
+    MAGNITUDE_AND_PHASE = 4001
+    r'''
+    Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.
+    '''
+    MAGNITUDE_DB_AND_PHASE = 4002
+    r'''
+    Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.
+    '''
+    REAL_AND_IMAGINARY = 4000
+    r'''
+    Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.
     '''
 
 
@@ -567,7 +640,7 @@ class LoPathSel(Enum):
     '''
 
 
-class LoSourceVals(Enum):
+class LoSource(Enum):
     NONE = 'None'
     r'''
     Specifies that no LO source is required to downconvert the RF input signal.
@@ -741,7 +814,34 @@ class OverflowErrorReporting(Enum):
     '''
 
 
-class PxiChassisClk10Src(Enum):
+class PowerSpectrumUnits(Enum):
+    DBM = 200
+    r'''
+    Units are dB with reference to 1 milliwatt.
+    '''
+    VOLTS_SQUARED = 201
+    r'''
+    Units are in volts squared.
+    '''
+    DBMV = 202
+    r'''
+    Units are dB with reference to 1 millivolt.
+    '''
+    DBUV = 203
+    r'''
+    Units are dB with reference to 1 microvolt.
+    '''
+    VOLTS = 204
+    r'''
+    Units are in volts.
+    '''
+    WATTS = 205
+    r'''
+    Units are in watts.
+    '''
+
+
+class PxiChassisClk10Source(Enum):
     NONE = 'None'
     r'''
     The device does not drive the PXI 10 MHz backplane Reference Clock.
@@ -756,7 +856,22 @@ class PxiChassisClk10Src(Enum):
     '''
 
 
-class RefClkExportedTerm(Enum):
+class ReferenceClockExportedRate(Enum):
+    _10MHZ = 10000000
+    r'''
+    Exports a 10 MHz Reference Clock.
+    '''
+    _100MHZ = 100000000
+    r'''
+    Exports a 100 MHz Reference Clock.
+    '''
+    _1GHZ = 1000000000.0
+    r'''
+    Exports a 1 GHz Reference Clock.
+    '''
+
+
+class ReferenceClockExportedTerminal(Enum):
     NONE = 'None'
     r'''
     The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
@@ -779,7 +894,7 @@ class RefClkExportedTerm(Enum):
     '''
 
 
-class RefClockSrc(Enum):
+class ReferenceClockSource(Enum):
     NONE = 'None'
     r'''
     No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.
@@ -810,7 +925,18 @@ class RefClockSrc(Enum):
     '''
 
 
-class RefTrigDigEdgeEdge(Enum):
+class ReferenceLevelDataType(Enum):
+    MECHANICAL_ATTENUATOR_DISABLED = 1801
+    r'''
+    The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations.
+    '''
+    DEFAULT = 1800
+    r'''
+    The data is the default configuration data.
+    '''
+
+
+class ReferenceTriggerDigitalEdgeEdge(Enum):
     RISING = 900
     r'''
     The trigger asserts on the rising edge of the signal.
@@ -821,7 +947,7 @@ class RefTrigDigEdgeEdge(Enum):
     '''
 
 
-class RefTrigIqPwrEdgeSlope(Enum):
+class ReferenceTriggerIqPowerEdgeSlope(Enum):
     RISING = 1000
     r'''
     The trigger asserts when the signal power is rising.
@@ -832,7 +958,7 @@ class RefTrigIqPwrEdgeSlope(Enum):
     '''
 
 
-class RefTrigType(Enum):
+class ReferenceTriggerType(Enum):
     NONE = 600
     r'''
     No Reference Trigger is configured.
@@ -855,55 +981,6 @@ class RefTrigType(Enum):
     '''
 
 
-class ReferenceClockExportedRate(Enum):
-    _10MHZ = 10000000
-    r'''
-    Exports a 10 MHz Reference Clock.
-    '''
-    _100MHZ = 100000000
-    r'''
-    Exports a 100 MHz Reference Clock.
-    '''
-    _1GHZ = 1000000000.0
-    r'''
-    Exports a 1 GHz Reference Clock.
-    '''
-
-
-class ReferenceLevelDataType(Enum):
-    MECHANICAL_ATTENUATOR_DISABLED = 1801
-    r'''
-    The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations.
-    '''
-    DEFAULT = 1800
-    r'''
-    The data is the default configuration data.
-    '''
-
-
-class ResponseType(Enum):
-    DOWNCONVERTER_IF = 2800
-    r'''
-    Returns the IF response of the downconverter.
-    '''
-    DOWNCONVERTER_RF = 2801
-    r'''
-    Returns the RF response of the downconverter. This value is supported only for the PXIe-5603/5605/5665/5667/5693..
-    '''
-    DOWNCONVERTER_COMBINED = 2802
-    r'''
-    Returns the combined RF and IF response of the downconverter. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5603/5605/5665/5667.
-    '''
-    VSA_IF = 2803
-    r'''
-    Returns the IF response of the entire NI-RFSA device. This value is supported only for the PXIe-5665/5667.
-    '''
-    VSA_COMBINED = 2804
-    r'''
-    Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.
-    '''
-
-
 class RfLbSigCondPathSel(Enum):
     _1 = 3700
     r'''
@@ -915,7 +992,7 @@ class RfLbSigCondPathSel(Enum):
     '''
 
 
-class RfPathSel(Enum):
+class RfPathSelection(Enum):
     _1 = 1700
     r'''
     The data is the default configuration data.
@@ -1006,6 +1083,53 @@ class RfPreselectorFilter(Enum):
     EXTERNAL_FILTER = 3317
     r'''
     Specifies that the 20 MHz to 3.04 GHz external filter filter path is used.
+    '''
+
+
+class SelfCalibrateRangeStepsToOmit(IntFlag):
+    DIGITIZER_SELF_CAL = 8
+    r'''
+    Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
+    '''
+    PRESELECTOR_ALIGNMENT = 1
+    r'''
+    Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
+    '''
+    OMIT_NONE = 0
+    r'''
+    No calibration steps are omitted.
+    '''
+    GAIN_REFERENCE = 2
+    r'''
+    Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
+    '''
+    IF_FLATNESS = 4
+    r'''
+    Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
+    '''
+    LO_SELF_CAL = 10
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    AMPLITUDE_ACCURACY = 20
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    RESIDUAL_LO_POWER = 40
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    IMAGE_SUPPRESSION = 80
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    SYNTHESIZER_ALIGNMENT = 100
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    DC_OFFSET = 200
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
 
 
@@ -1214,34 +1338,7 @@ class SpectrumResolutionBandwidthType(Enum):
     '''
 
 
-class SpectrumUnits(Enum):
-    DBM = 200
-    r'''
-    Units are dB with reference to 1 milliwatt.
-    '''
-    VOLTS_SQUARED = 201
-    r'''
-    Units are in volts squared.
-    '''
-    DBMV = 202
-    r'''
-    Units are dB with reference to 1 millivolt.
-    '''
-    DBUV = 203
-    r'''
-    Units are dB with reference to 1 microvolt.
-    '''
-    VOLTS = 204
-    r'''
-    Units are in volts.
-    '''
-    WATTS = 205
-    r'''
-    Units are in watts.
-    '''
-
-
-class StartTrigDigEdgeEdge(Enum):
+class StartTriggerDigitalEdgeEdge(Enum):
     RISING = 900
     r'''
     The trigger asserts on the rising edge of the signal.PXI-5661, PXIe-5663/5663E/5665/5668
@@ -1252,7 +1349,7 @@ class StartTrigDigEdgeEdge(Enum):
     '''
 
 
-class StartTrigType(Enum):
+class StartTriggerType(Enum):
     NONE = 600
     r'''
     No Start Trigger is configured.

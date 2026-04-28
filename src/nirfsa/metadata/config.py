@@ -11,22 +11,22 @@ config = {
     },
     'custom_types': [
         {
+            'ctypes_type': 'struct_NIComplexNumber',
+            'file_name': 'ni_complex_number',
+            'grpc_name': 'NiComplexNumber',
+            'python_name': 'NiComplexNumber'
+        },
+        {
             'ctypes_type': 'struct_niRFSA_wfmInfo',
-            'file_name': 'waveform_info',
+            'file_name': 'ni_rfsa_wfm_info',
             'grpc_name': 'NiRfsaWfmInfo',
-            'python_name': 'WaveformInfo'
+            'python_name': 'NiRfsaWfmInfo'
         },
         {
             'ctypes_type': 'struct_niRFSA_spectrumInfo',
-            'file_name': 'spectrum_info_type',
+            'file_name': 'ni_rfsa_spectrum_info',
             'grpc_name': 'NiRfsaSpectrumInfo',
-            'python_name': 'SpectrumInfoT'
-        },
-        {
-            'ctypes_type': 'struct_niRFSA_coefficientInfo',
-            'file_name': 'coefficient_info_type',
-            'grpc_name': 'NiRfsaCoefficientInfo',
-            'python_name': 'CoefficientInfo'
+            'python_name': 'NiRfsaSpectrumInfo'
         }
     ],
     'driver_name': 'NI-RFSA',
@@ -35,10 +35,6 @@ config = {
         'CLOCK_RATE_'
     ],
     'enum_whitelist_suffix': [
-        '_HERTZ',
-        '_KILOHERTZ',
-        '_MEGAHERTZ',
-        '_GIGAHERTZ',
         '_TOWARDS_DUT'
     ],
     'extra_errors_used': [
@@ -67,18 +63,6 @@ config = {
     },
     'module_name': 'nirfsa',
     'repeated_capabilities': [
-        {
-            'prefix': 'marker',
-            'python_name': 'markers'
-        },
-        {
-            'prefix': 'scripttrigger',
-            'python_name': 'script_triggers'
-        },
-        {
-            'prefix': 'waveform::',
-            'python_name': 'waveforms'
-        },
         {
             'prefix': '',
             'python_name': 'ports'

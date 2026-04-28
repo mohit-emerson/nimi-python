@@ -144,495 +144,6 @@ abort
 
 
 
-cal_adjust_cal_tone_power
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_cal_tone_power(measurement)
-
-            Specifies the calibration tone power during calibration tone amplitude calibration.
-
-                            You must call the :py:meth:`nirfsa.Session._initiate` method before calling this method.
-
-                            **Supported Devices**: PXIe-5693
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_cal_tone_power`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_cal_tone_power`
-
-
-            :param measurement:
-
-
-                Specifies the calibration tone power, in dBm, for the current device setting.
-
-                
-
-
-            :type measurement: float
-
-cal_adjust_device_gain
-----------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_device_gain(frequency, gain)
-
-            Records measured gain information that is gathered during the Reference Level Calibration step and IF Attenuation Calibration step.
-
-                            This method internally queries the properties you set, and you must commit all properties appropriate for your device calibration procedure prior to calling this method. Refer to ni.com/manuals for the most recent version of the calibration procedure for your device.
-
-                            Call this method immediately after a measurement is made and while the device under test (DUT) is still in the same state as it was during the measurement.
-
-                            **Supported Devices**: PXIe-5693/5694/5698
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_device_gain`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_device_gain`
-
-
-            :param frequency:
-
-
-                Specifies the RF frequency, in Hz, of the measurement taken.
-
-                
-
-
-            :type frequency: float
-            :param gain:
-
-
-                Specifies the gain measurement, in dB.
-
-                
-
-
-            :type gain: float
-
-cal_adjust_downconverter_gain
------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_downconverter_gain(frequency, gain)
-
-            Records measured gain information that is gathered during the Reference Level Calibration step and IF Attenuation Calibration step.
-
-                            This method internally queries the properties you set, and you must set and commit the following properties prior to calling this method.
-
-                            - :py:attr:`nirfsa.Session.cal_rf_electronic_attenuation_index` (This property is required only when the :py:attr:`nirfsa.Session.cal_rf_path_selection` property is set to :py:data:`~nirfsa.RfPathSel._1`.)
-                            - :py:attr:`nirfsa.Session.cal_rf_mechanical_attenuation_index`
-                            - :py:attr:`nirfsa.Session.cal_if_attenuation_table_selection`
-                            - :py:attr:`nirfsa.Session.cal_if_attenuation_index`
-                            - :py:attr:`nirfsa.Session.cal_if_filter_selection`
-                            - :py:attr:`nirfsa.Session.channel_coupling`
-                            - :py:attr:`nirfsa.Session.rf_preamp_enabled`
-
-                            Call this method immediately after a measurement is made and while the device under test (DUT) is still in the same state as it was during the measurement.
-
-                            **Supported Devices**: PXIe-5603/5605/5606
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_downconverter_gain`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_downconverter_gain`
-
-
-            :param frequency:
-
-
-                Specifies the RF frequency, in Hz, of the measurement taken.
-
-                
-
-
-            :type frequency: float
-            :param gain:
-
-
-                Specifies the gain measurement, in dB.
-
-                
-
-
-            :type gain: float
-
-cal_adjust_if_attenuation_calibration
--------------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_if_attenuation_calibration(if_filter, number_of_attenuators, measurement)
-
-            Specifies the IF attenuation settings.
-
-                            **Supported Devices**: PXIe-5601, PXIe-5694
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_if_attenuation_calibration`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_if_attenuation_calibration`
-
-
-            :param if_filter:
-
-
-                Specifies the IF filter used by the downconverter.
-
-                                        |Value                                     |Description                                             |
-                                        |:------------------------------------|:--------------------------------------------|
-                                        | :py:data:`~nirfsa.IFfilter._187_5_MHZ_NARROW` (1400)  | Uses the 187.5 MHz wide bandwidth filter.   |
-                                        | :py:data:`~nirfsa.IFfilter._187_5_MHZ_NARROW` (1401) | Uses the 187.5 MHz narrow bandwidth filter. |
-                                        | :py:data:`~nirfsa.IFfilter._53_MHZ` (1402)            | Uses the 53 MHz filter.                     |
-                                        | :py:data:`~nirfsa.IFfilter.BYPASS` (1403)            | Bypasses the IF filter.                     |
-
-                
-
-
-            :type if_filter: int
-            :param number_of_attenuators:
-
-
-                Specifies the number of attenuators to use during the IF attenuation adjustment.
-
-                
-
-
-            :type number_of_attenuators: int
-            :param measurement:
-
-
-                Specifies the relevant measurement taken for the current configuration.
-
-                
-
-
-            :type measurement: float
-
-            :rtype: float
-            :return:
-
-
-                    Specifies the IF attenuator settings for the measurement. The first element in the array corresponds with IF1, the next element corresponds to IF2, and so on.
-
-                    
-
-
-
-cal_adjust_if_response_calibration
-----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_if_response_calibration(if_filter, rf_frequency, band_width, number_of_measurements)
-
-            Specifies the IF response settings.
-
-                            **Supported Devices**: PXIe-5601, PXIe-5694
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_if_response_calibration`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_if_response_calibration`
-
-
-            :param if_filter:
-
-
-                Specifies the IF filter used by the downconverter.
-
-                                        |Value                                     |Description                                           |
-                                        |:------------------------------------|:------------------------------------------|
-                                        | :py:data:`~nirfsa.IFfilter._187_5_MHZ_NARROW` (1400)   | Uses the 187.5 MHz wide bandwidth path.   |
-                                        | :py:data:`~nirfsa.IFfilter._187_5_MHZ_NARROW` (1401) | Uses the 187.5 MHz narrow bandwidth path. |
-                                        | :py:data:`~nirfsa.IFfilter._53_MHZ` (1402)            | Uses the 53 MHz path.                     |
-                                        | :py:data:`~nirfsa.IFfilter.BYPASS` (1403)            | Bypasses the IF path.                     |
-
-                
-
-
-            :type if_filter: int
-            :param rf_frequency:
-
-
-                Specifies the RF frequency, in Hz, used during the IF response adjustment.
-
-                
-
-
-            :type rf_frequency: float
-            :param band_width:
-
-
-                Specifies the bandwidth, in Hz, to use for the IF response adjustment.
-
-                
-
-
-            :type band_width: float
-            :param number_of_measurements:
-
-
-                Specifies the number of measurements to make.
-
-                
-
-
-            :type number_of_measurements: int
-
-            :rtype: float
-            :return:
-
-
-                    Specifies the relevant measurements taken for each IF filter configuration, in dB.
-
-                    
-
-
-
-cal_adjust_lo_export_calibration
---------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_lo_export_calibration(lo_number, number_of_frequency_points)
-
-            LO export calibration measures the PXIe-5603/5605 LO output power level.
-
-                            The LO output power measurements are taken from the PXIe-5653 module. In MIMO applications, when the LO is exported from one PXIe-5603/5605 module to another subsequent PXIe-5603/5605, an output power signal of approximately +7 dBm is expected on each LO connector (LO1, LO2, and LO3). This method records the LO attenuation that results in an output power of +7 dBm (or greater) on the three LO output terminals.
-
-                            The PXIe-5665/5668 uses three LOs, but only LO1 is variable in frequency. This method accepts an array of frequencies and attenuations; however, for LO2 and LO3, this array must have only one element because these two LO sources operate only at one frequency. LO1 can have multiple values for specific frequencies.
-
-                            **Supported Devices**: PXIe-5603/5605/5606
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_lo_export_calibration`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_lo_export_calibration`
-
-
-            :param lo_number:
-
-
-                Specifies the LO source to use for the LO export calibration.
-
-                                        |Value                                   |Description                                                                    |
-                                        |:----------------------------------|:-------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.LoNumber.LO1`  (2200) | Selects LO1, which is the 3.2 GHz to 8.3 GHz variable signal path. |
-                                        | :py:data:`~nirfsa.LoNumber.LO2` (2201) | Selects LO2, which is the 4 GHz signal path.                       |
-                                        | :py:data:`~nirfsa.LoNumber.LO3`  (2202) | Selects LO3, which is the 800 MHz signal path.                     |
-
-                
-
-
-            :type lo_number: int
-            :param number_of_frequency_points:
-
-
-                Specifies the length of the **frequencies** and **:py:attr:`nirfsa.Session.LO_ATTENUATION`** arrays.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type number_of_frequency_points: int
-
-            :rtype: tuple (frequency_points, lo_attenuation)
-
-                WHERE
-
-                frequency_points (float): 
-
-
-                    Specifies frequencies for the LO output power measurement. The length of this array equals the **:py:attr:`nirfsa.Session.NUMBER_OF_FREQUENCY_POINTS`** parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-                lo_attenuation (float): 
-
-
-                    Specifies the attenuation value of the corresponding frequency point that results in a +7 dBm output signal on the respective LO OUT connector. The length of this array equals the **:py:attr:`nirfsa.Session.NUMBER_OF_FREQUENCY_POINTS`** parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-cal_adjust_ref_level_calibration
---------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_adjust_ref_level_calibration(reference_level_data_type, rf_band, attenuator_table_number, frequency, measurement)
-
-            Writes the reference level calibration data settings to the driver.
-
-                            **Supported Devices**: PXIe-5601
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_adjust_ref_level_calibration`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_adjust_ref_level_calibration`
-
-
-            :param reference_level_data_type:
-
-
-                Specifies whether the reference level calibration data being used is the default configuration data or the mechanical relay disabled configuration data.
-
-                                        |Value                                                          |Description                                                                                                                                                           |
-                                        |:---------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.ReferenceLevelDataType.DEFAULT` (1800)                        | The data is the default configuration data.                                                                                                               |
-                                        | :py:data:`~nirfsa.ReferenceLevelDataType.MECHANICAL_ATTENUATOR_DISABLED` (1801) | The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations. |
-
-                
-
-
-            :type reference_level_data_type: int
-            :param rf_band:
-
-
-                Specifies the RF band used during the reference level calibration.
-
-                                        |Value                      |Description                             |
-                                        |:---------------------|:----------------------------|
-                                        | :py:data:`~nirfsa.RfPathSel._1` | The RF band 1 path is used. |
-                                        | :py:data:`~nirfsa.RfPathSel._2`| The RF band 2 path is used. |
-                                        | :py:data:`~nirfsa.RfPathSel._3` | The RF band 3 path is used. |
-                                        | :py:data:`~nirfsa.RfPathSel._4` | The RF band 4 path is used. |
-
-                
-
-
-            :type rf_band: int
-            :param attenuator_table_number:
-
-
-                Specifies which attenuation table you are using. Valid values are 0 and 1.
-
-                
-
-
-            :type attenuator_table_number: int
-            :param frequency:
-
-
-                Specifies the frequency for the reference level adjustment.
-
-                
-
-
-            :type frequency: float
-            :param measurement:
-
-
-                Specifies the relevant measurement taken for the current configuration.
-
-                
-
-
-            :type measurement: float
-
-cal_set_temperature
--------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: cal_set_temperature(temperature)
-
-            Writes the calibration temperature to the driver.
-
-                            **Supported Devices**: PXIe-5601
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].cal_set_temperature`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.cal_set_temperature`
-
-
-            :param temperature:
-
-
-                Specifies the calibration temperature, in degrees Celsius.
-
-                
-
-
-            :type temperature: float
-
 change_ext_cal_password
 -----------------------
 
@@ -707,31 +218,6 @@ check_acquisition_status
 
 
 
-clear_error
------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: clear_error()
-
-            Clears the error information associated with the session.
-
-                            If you pass VI_NULL for the :py:attr:`nirfsa.Session.VI` parameter, this method clears the error information for the current execution thread.
-
-                            ----
-                            **Note**
-                            The :py:meth:`nirfsa.Session._get_error` method clears the error information after it is retrieved. A call to the :py:meth:`nirfsa.Session.clear_error` method is necessary only when a call to the :py:meth:`nirfsa.Session._get_error` method is not used to retrieve error information.
-
-                            ----
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
 clear_self_calibrate_range
 --------------------------
 
@@ -766,96 +252,6 @@ close
 
 
 
-close_calibration_step
-----------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: close_calibration_step()
-
-            Closes the current calibration step.
-
-                            **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698
-
-            
-
-
-
-close_ext_cal
--------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: close_ext_cal(action)
-
-            Closes an NI-RFSA external calibration session and, if specified, stores the new calibration constants and calibration data, such as time and temperature, in the onboard EEPROM.
-
-                            **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-
-            :param action:
-
-
-                Specifies how to use the calibration values from this session as the session is closed.
-
-                                        |Value                           |Description                                                                         |
-                                        |:--------------------------|:------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.Action.ABORT`  | The old calibration constants are kept, and the new ones are discarded. |
-                                        | :py:data:`~nirfsa.Action.COMMIT` | The new calibration constants are stored in the EEPROM.                 |
-
-                
-
-
-            :type action: int
-
-close_external_alignment
-------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: close_external_alignment(action)
-
-            Closes an NI-RFSA external alignment session and, if specified, stores the new calibration constants and calibration data, such as time and temperature, in the onboard EEPROM.
-
-                            **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-            
-
-
-
-            :param action:
-
-
-                Specifies how to use the alignment values from this session as the session is closed.
-
-                                        |Value                           |Description                                                                       |
-                                        |:--------------------------|:----------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.Action.ABORT`  | The old alignment constants are kept, and the new ones are discarded. |
-                                        |  :py:data:`~nirfsa.Action.COMMIT`| The new alignment constants are stored in the EEPROM.                 |
-
-                
-
-
-            :type action: int
-
-close_external_alignment_step
------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: close_external_alignment_step()
-
-            Closes an EEPROM-specific external alignment step.
-
-                            **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-            
-
-
-
 commit
 ------
 
@@ -865,7 +261,7 @@ commit
 
             Commits settings to hardware.
 
-                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method.
+                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session.ReadIqSingleRecordComplexF64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method.
 
                             ----
                             **Note**
@@ -882,40 +278,6 @@ commit
             
 
 
-
-configure_acquisition_type
---------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_acquisition_type(acquisition_type)
-
-            Configures whether the session acquires I/Q data or computes a power spectrum over the specified frequency range.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-            
-
-
-
-            :param acquisition_type:
-
-
-                Configures the type of acquisition.
-
-                                        | Value                    | Description                                                                       |
-                                        |:--------------------|:-----------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.AcquisitionType.IQ`       | Configures the driver for I/Q acquisitions. This value is the default. |
-                                        | :py:data:`~nirfsa.AcquisitionType.SPECTRUM` | Configures the driver for spectrum acquisitions.                       |
-
-                
-
-
-            :type acquisition_type: int
 
 configure_deembedding_table_interpolation_linear
 ------------------------------------------------
@@ -957,7 +319,7 @@ configure_deembedding_table_interpolation_linear
 
                 Specifies the format of parameters to interpolate.
 
-                                        %enum_table{format}
+                                        %enum_table{linear interpolation format}
 
                 
 
@@ -1049,7 +411,7 @@ configure_digital_edge_advance_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1134,7 +496,7 @@ configure_digital_edge_ref_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1228,7 +590,7 @@ configure_digital_edge_start_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1294,53 +656,6 @@ configure_digital_edge_start_trigger
 
             :type edge: int
 
-configure_iq_carrier_frequency
-------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_iq_carrier_frequency(carrier_frequency)
-
-            Configures the `carrier frequency <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/fund-carrierwave.html>`_ of the RF vector signal analyzer hardware for an I/Q acquisition.
-
-                            The carrier frequency is the center frequency of the I/Q acquisition.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `Carrier Wave <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/fund-carrierwave.html>`_
-
-                            `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].configure_iq_carrier_frequency`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.configure_iq_carrier_frequency`
-
-
-            :param carrier_frequency:
-
-
-                Specifies the carrier frequency, in hertz (Hz), of the RF signal to acquire.
-
-                                        The RF vector signal analyzer tunes to this frequency. NI-RFSA may coerce this value based on hardware settings and downconversion settings.
-
-                                        NI-RFSA sets the :py:attr:`nirfsa.Session.iq_carrier_frequency` property to this value. Refer to the specifications document that shipped with your device for allowable frequency settings.
-
-                
-
-
-            :type carrier_frequency: float
-
 configure_iq_power_edge_ref_trigger
 -----------------------------------
 
@@ -1356,7 +671,7 @@ configure_iq_power_edge_ref_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1391,12 +706,12 @@ configure_iq_power_edge_ref_trigger
             :param slope:
 
 
-                Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.RISING`.
+                Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`.
 
                                         | Value                                | Description                                                |
                                         |:--------------------------------|:-------------------------------------------------|
-                                        | :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.RISING` (1000)  | NI-RFSA detects a rising edge (positive slope).  |
-                                        | :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.FALLING` (1001) | NI-RFSA detects a falling edge (negative slope). |
+                                        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING` (1000)  | NI-RFSA detects a rising edge (positive slope).  |
+                                        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING` (1001) | NI-RFSA detects a falling edge (negative slope). |
 
                 
 
@@ -1411,219 +726,6 @@ configure_iq_power_edge_ref_trigger
 
 
             :type pretrigger_samples: int
-
-configure_iq_rate
------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_iq_rate(iq_rate)
-
-            Specifies the I/Q rate for the acquisition.
-
-                            The value is expressed in samples per second (S/s).
-
-                            For the PXIe-5663/5663E/5665/5667/5668, when you set the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property to :py:data:`~nirfsa.NIRFSA_VAL_ONBOARD_CLOCK_STR`, the digitizer bandwidth is greater than or equal to the coerced **:py:attr:`nirfsa.Session.iq_rate`** times 0.8. Actual signal bandwidth is limited for all supported devices by the anti-aliasing filter. Further device-specific limitations are as follows.
-
-                            ----
-                            **Note**
-                            For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the :py:attr:`nirfsa.Session.digitizer_dither_enabled` property for more information about dithering.
-
-                            ----
-
-                            - **PXI-5661** You should not need to configure an **:py:attr:`nirfsa.Session.iq_rate`** higher than 25 megasamples per second (MS/s) because the PXI-5600 RF downconverter bandwidth is 20 MHz. If you configure a higher I/Q rate, you may see aliasing effects at negative frequencies because the IF frequency of the PXI-5600 RF downconverter is 15 MHz.
-                            - **PXIe-5663/5663E** Maximum allowed instantaneous bandwidth depends on the I/Q carrier frequency you use. Refer to the `PXIe-5601 RF downconverter overview <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/overview.3.html>`_  for more information about instantaneous bandwidth.
-                            - **PXIe-5665** Actual signal bandwidth is limited by the preselector and the combination of the chosen IF filter and anti-aliasing filter. Maximum allowed instantaneous bandwidth is independent of the downconverter center frequency for frequencies less than 3.6 GHz. At frequencies greater than 3.6 GHz, if your device supports the preselector (YIG-tuned filter) and you have enabled it for your application, the maximum allowed instantaneous bandwidth is limited to the instantaneous bandwidth of the preselector. Refer to the *NI PXIe-5665 Specifications* for more information about instantaneous bandwidth limits.
-                            - **PXIe-5667** Actual signal bandwidth is limited by the preselector and the combination of the chosen IF filter and anti-aliasing filter. Maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the *NI PXIe-5667 Specifications* for more information about instantaneous bandwidth limits.
-                            - **PXIe-5668** Actual signal bandwidth is limited by the FPGA image that is downloaded upon opening the session to the PXIe-5624 digitizer. Maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the *PXIe-5668 Specifications* for more information about instantaneous bandwidth limits.
-                            - **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842** Maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the specifications document for your device for more information about instantaneous bandwidth limits.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-            
-
-            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].configure_iq_rate`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.configure_iq_rate`
-
-
-            :param iq_rate:
-
-
-                Specifies the I/Q rate for the acquisition. The value is expressed in samples per second (S/s).
-
-                
-
-
-            :type iq_rate: float
-
-configure_number_of_records
----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_number_of_records(number_of_records_is_finite, number_of_records)
-
-            Configures the number of records in a finite acquisition or configures the device to continuously acquire records.
-
-                            You can only configure the device to acquire multiple records if you set the **:py:attr:`nirfsa.Session.number_of_records_is_finite`** parameter to True.
-
-                            If you configure the device to continuously acquire samples, it continues acquiring data until you call the :py:meth:`nirfsa.Session.abort` method to abort the acquisition. The device stores data in onboard memory in a circular fashion. After the device fills the memory, it starts overwriting previously acquired data from the beginning of the memory buffer. Retrieve the samples as they are being acquired, using one of the niRFSA fetch I/Q methods, to avoid overwriting data before you retrieve it.
-
-                            To acquire more records than will fit into the device memory without continuously acquiring records, set the **:py:attr:`nirfsa.Session.number_of_records_is_finite`** parameter in this method to True and the :py:attr:`nirfsa.Session.allow_more_records_than_memory` property to True.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].configure_number_of_records`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.configure_number_of_records`
-
-
-            :param number_of_records_is_finite:
-
-
-                Specifies whether to configure the device to acquire a finite number of records or to acquire records continuously. The default is True.
-
-                                        | Value         | Description                                                                                                                                                                                                                |
-                                        |:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | True  | The device acquires a finite number of records.                                                                                                                                                                 |
-                                        | False | The NI-RFSA device acquires records continuously until you call the :py:meth:`nirfsa.Session.abort` method to abort the acquisition. |
-
-                
-
-
-            :type number_of_records_is_finite: bool
-            :param number_of_records:
-
-
-                Specifies the number of records to acquire if **:py:attr:`nirfsa.Session.number_of_records_is_finite`** is set to True.
-
-                
-
-
-            :type number_of_records: int
-
-configure_number_of_samples
----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_number_of_samples(number_of_samples_is_finite, samples_per_record)
-
-            Configures the number of samples in a finite acquisition or configures the device to continuously acquire samples.
-
-                            If you configure the device for finite acquisition, it acquires the specified number of samples and then stops the acquisition. You can configure the device to acquire multiple records using the :py:meth:`nirfsa.Session.configure_number_of_records` method. Each record contains the number of samples specified in this method.
-
-                            If you configure the device to continuously acquire samples, it continues acquiring data until you call the :py:meth:`nirfsa.Session.abort` method to abort the acquisition. The device stores data in onboard memory in a circular fashion. After the device fills the memory, it starts overwriting previously acquired data from the beginning of the memory buffer. Retrieve the samples as they are being acquired, using one of the niRFSA fetch I/Q methods, to avoid overwriting data before you retrieve it.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].configure_number_of_samples`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.configure_number_of_samples`
-
-
-            :param number_of_samples_is_finite:
-
-
-                Specifies whether to configure the device to acquire a finite number of samples or to acquire samples continuously. The default is True.
-
-                                        | Value         | Description                                                                                                                                                                                                        |
-                                        |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | True  | The device acquires a finite number of samples.                                                                                                                                                         |
-                                        | False | The device acquires samples continuously until you call the :py:meth:`nirfsa.Session.abort` method to abort the acquisition. |
-
-                
-
-
-            :type number_of_samples_is_finite: bool
-            :param samples_per_record:
-
-
-                Specifies the number of samples per record if **:py:attr:`nirfsa.Session.number_of_samples_is_finite`** is set to True.
-
-                
-
-
-            :type samples_per_record: int
-
-configure_pxi_chassis_clk10
----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_pxi_chassis_clk10(pxi_clk10_source)
-
-            Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane.
-
-                            This option can be configured only when the PXI-5600 is installed in the Star Trigger Controller Slot, also known as the System Timing Slot, of the PXI chassis.
-
-                            **Supported Devices**: PXI-5600 (external digitizer mode), PXI-5661
-
-                            **Related Topics**
-
-                            `System Reference Clock <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/system-reference-clock.html>`_
-
-            
-
-
-
-            :param pxi_clk10_source:
-
-
-                Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane. This option can only be configured when the PXI-5600 is in Slot 2 of the PXI chassis.
-
-                                        | Value                                              | Description                                                                                                                                                                                                                                                |
-                                        |:----------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_NONE_STR` ('None')                  | The device does not drive the PXI 10 MHz backplane Reference Clock.                                                                                                                                                                             |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_ONBOARD_CLOCK_STR` ('OnboardClock') | The device drives the PXI 10 MHz backplane Reference Clock with the PXI-5600 onboard clock. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_REF_IN_STR` ('RefIn')               | The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O on the PXI-5600 front panel to use this option. |
-
-                
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type pxi_clk10_source: str
 
 configure_ref_clock
 -------------------
@@ -1681,94 +783,6 @@ configure_ref_clock
 
             :type ref_clock_rate: float
 
-configure_reference_level
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_reference_level(reference_level)
-
-            Configures the reference level.
-
-                            The reference level represents the maximum expected power of an input RF signal.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `Improving Your Measurements <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/measurement_guidelines.html>`_
-
-                            `Programming Attenuation-Related Properties and Properties Using NI-RFSA <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/programming-attenuation.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].configure_reference_level`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.configure_reference_level`
-
-
-            :param reference_level:
-
-
-                Specifies the expected total power, in dBm, of the RF input signal.
-
-                
-
-
-            :type reference_level: float
-
-configure_resolution_bandwidth
-------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_resolution_bandwidth(resolution_bandwidth)
-
-            Configures the resolution bandwidth of a spectrum acquisition.
-
-                            The resolution bandwidth controls the width of the frequency bins in the power spectrum computed by NI-RFSA. A larger value for resolution bandwidth means the frequency bins are wider, so you get fewer bins, or spectral lines.
-
-                            By default, the resolution bandwidth value corresponds to the 3 decibels (dB) bandwidth of the window type NI-RFSA uses to compute the spectrum. To directly specify the frequency bin width, set the :py:attr:`nirfsa.Session.resolution_bandwidth_type` property to :py:data:`~nirfsa.SpectrumResolutionBandwidthType.BIN_WIDTH`
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `Resolution Bandwidth <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/resolution-bandwidth.html>`_
-
-                            `Improving Your Measurements <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/measurement_guidelines.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].configure_resolution_bandwidth`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.configure_resolution_bandwidth`
-
-
-            :param resolution_bandwidth:
-
-
-                Specifies the resolution bandwidth of a spectrum acquisition. The value is expressed in hertz (Hz). Configure the type of resolution bandwidth with the :py:attr:`nirfsa.Session.resolution_bandwidth_type` property.
-
-                
-
-
-            :type resolution_bandwidth: float
-
 configure_software_edge_advance_trigger
 ---------------------------------------
 
@@ -1782,7 +796,7 @@ configure_software_edge_advance_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1817,7 +831,7 @@ configure_software_edge_ref_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1862,7 +876,7 @@ configure_software_edge_start_trigger
 
                             ----
                             **Note**
-                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
+                             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
                             ----
 
@@ -1998,133 +1012,6 @@ configure_spectrum_frequency_start_stop
 
             :type stop_frequency: float
 
-create_configuration_list
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: create_configuration_list(list_name, number_of_list_attributes, set_as_active_list)
-
-            Creates an empty configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.
-
-                            After a configuration list is created, enable the list using the **setAsActiveList** parameter. Call the :py:meth:`nirfsa.Session.create_configuration_list_step` method to add steps to the active configuration list.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-                            **Related Topics**
-
-                            `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-            
-
-
-
-            :param list_name:
-
-
-                Specifies the name of the configuration list. This string may not contain spaces, special characters, or punctuation marks.
-
-                
-
-
-            :type list_name: str
-            :param number_of_list_attributes:
-
-
-                Specifies the number of configuration list properties to set.
-
-                
-
-
-            :type number_of_list_attributes: int
-            :param set_as_active_list:
-
-
-                Sets this list as the active configuration list when this parameter is set to True.
-
-                
-
-
-            :type set_as_active_list: bool
-
-            :rtype: int
-            :return:
-
-
-                    Specifies the properties that you intend to change between configuration list steps. Calling the :py:meth:`nirfsa.Session.create_configuration_list` method allocates space for each of the configuration list properties. When you use an NI-RFSG Set property method to set one of the properties in the configuration list, that property is set for one of the configuration list steps. Use the :py:attr:`nirfsa.Session.active_configuration_list_step` property to specify which configuration list step to configure.
-
-                                            You can include the following properties in your configuration list based on your device:
-
-                                            | Property                                                                                              | PXIe-5663E | PXIe-5665 | PXIe-5667 | PXIe-5644/5646 | PXIe-5645 | PXIe-5820 | PXIe-5830/5831/5832 | PXIe-5840/5841 | PXIe-5841 with PXIe-5655 | PXIe-5842 |
-                                            |:-------------------------------------------------------------------------------------------------------|:-----------|:----------|:----------|:----------------|:----------|:----------|:----------------------|:---------------|:--------------------------|:-----------|
-                                            | :py:attr:`nirfsa.Session.channel_coupling`                                                                           |            |           | Supported |                |           |           |                      |                |                            |            |
-                                            | :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`                                                             | Supported  | Supported | Supported |                |           | Supported |                      | Supported      |                            | Supported  |
-                                            | :py:attr:`nirfsa.Session.downconverter_center_frequency`                                                             |            |           |           |                | Supported | Supported |                      | Supported      | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.downconverter_frequency_offset`                                                      |            |           |           |                |           | Supported |                      |                |                            |            |
-                                            | :py:attr:`nirfsa.Session.downconverter_preselector_enabled`                                                        | Supported  | Supported |           |                |           |           |                      | Supported      | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.external_gain`                                                                              |            |           |           |                |           |           |                      | Supported      | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.frequency_settling`                                                                         | Supported  | Supported | Supported | Supported       | Supported | Supported | Supported            | Supported      |                            |            |
-                                            | :py:attr:`nirfsa.Session.if_filter_bandwidth`                                                                        |            |           | Supported | Supported       | Supported | Supported | Supported            |                |                            | Supported  |
-                                            | :py:attr:`nirfsa.Session.if_output_power_level`                                                                      |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                            | :py:attr:`nirfsa.Session.if_output_power_level_offset`                                                               |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                            | :py:attr:`nirfsa.Session.iq_carrier_frequency`                                                                       |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                            | :py:attr:`nirfsa.Session.iq_in_port_carrier_frequency`                                                               |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                            | :py:attr:`nirfsa.Session.iq_in_port_vertical_range`                                                                  |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_level`                                                            |            |           |           |                | Supported | Supported |                      |                |                            |            |
-                                            | :py:attr:`nirfsa.Session.lo_source`                                                                                  | Supported  | Supported | Supported | Supported       |           |           | Supported            | Supported      | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.if_output_power_level`                                                                                | Supported  | Supported | Supported |                | Supported | Supported | Supported            |                | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.low_frequency_bypass_enabled`                                                               |            |           |           |                |           |           | Supported            | Supported      | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.mechanical_attenuation`                                                                     |            |           |           |                | Supported | Supported | Supported            |                |                            |            |
-                                            | :py:attr:`nirfsa.Session.mechanical_attenuator_enabled`                                                              |            |           |           |                |           |           |                      |                | Supported                  |            |
-                                            | :py:attr:`nirfsa.Session.minimum_acpr`                                                                                  |            |           |           |                |           |           |                      |                | Supported                  |            |
-                                            | :py:attr:`nirfsa.Session.notch_filter_enabled`                                                                       |            |           |           |                |           |           |                      | Supported      |                            | Supported  |
-                                            | :py:attr:`nirfsa.Session.number_of_samples`                                                                          | Supported  | Supported | Supported |                | Supported | Supported | Supported            | Supported      | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.osp_data_scaling_factor`                                                                     | Supported  | Supported |           |                |           |           | Supported            |                |                            | Supported  |
-                                            | :py:attr:`nirfsa.Session.reference_level`                                                                            |            |           |           |                |           |           |                      |                |                            | Supported  |
-                                            | :py:attr:`nirfsa.Session.attenuation`                                                                                |            |           |           |                |           |           |                      |                |                            | Supported  |
-                                            | :py:attr:`nirfsa.Session.rf_out_lo_export_enabled`                                                                   |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.rf_preamp_enabled`                                                                          |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.rf_preselector_filter`                                                                      |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.selected_ports`                                                                              |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                            | :py:attr:`nirfsa.Session.timer_event_interval`                                                                       |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-
-                    
-
-
-
-create_configuration_list_step
-------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: create_configuration_list_step(set_as_active_step)
-
-            Creates a new configuration list step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ specified by the :py:attr:`nirfsa.Session.active_configuration_list` property.
-
-                            When you create a configuration list step, a new instance of each property specified by the configuration list properties is created. Configuration list properties are specified when a configuration list is created.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-                            **Related Topics**
-
-                            `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-            
-
-
-
-            :param set_as_active_step:
-
-
-                Sets this step as the active step for the active configuration list. The default value for this parameter is True.
-
-                                        If you set this parameter to False, you can select the active configuration list step using the :py:attr:`nirfsa.Session.active_configuration_list_step` property.
-
-                
-
-
-            :type set_as_active_step: bool
-
 create_deembedding_sparameter_table_s2p_file
 --------------------------------------------
 
@@ -2202,37 +1089,6 @@ delete_all_deembedding_tables
 
 
 
-delete_configuration_list
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: delete_configuration_list(list_name)
-
-            Deletes a previously created configuration list and all the configuration list steps in the `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ configuration list.
-
-                            When a configuration list step is deleted, all the instances of the properties associated with the configuration list step are also removed. When you delete the active configuration list, NI-RFSA automatically resets the :py:attr:`nirfsa.Session.active_configuration_list` property to "" (empty string), which indicates no list is active, and the :py:attr:`nirfsa.Session.active_configuration_list_step` property to 0.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-                            **Related Topics**
-
-                            `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-            
-
-
-
-            :param list_name:
-
-
-                Specifies the name of the configuration list. This string may not contain spaces, special characters, or punctuation marks.
-
-                
-
-
-            :type list_name: str
-
 delete_deembedding_table
 ------------------------
 
@@ -2266,19 +1122,6 @@ delete_deembedding_table
 
 
             :type table_name: str
-
-disable
--------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: disable()
-
-            TBD
-
-            
-
-
 
 disable_advance_trigger
 -----------------------
@@ -2388,7 +1231,7 @@ error_message
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: error_message(status_code, error_message)
+    .. py:method:: error_message(status_code)
 
             Converts a status code returned by an NI-RFSA method into a user-readable string.
 
@@ -2407,444 +1250,14 @@ error_message
 
 
             :type status_code: int
-            :param error_message:
 
+            :rtype: str
+            :return:
 
-                Returns the user-readable message string that corresponds to the status code you specify.
 
-                                        You must pass a ViChar array with at least 256 bytes to this parameter.
+                    Returns the user-readable message string that corresponds to the status code you specify.
 
-                
-
-
-            :type error_message: str
-
-error_query
------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: error_query()
-
-            Reads an error code and a message from the instrument error queue.
-
-            
-
-
-
-            :rtype: tuple (error_code, error_message)
-
-                WHERE
-
-                error_code (int): 
-
-
-                    Passes the **status** parameter that is returned from any NI-RFSA method.
-
-                    
-
-
-                error_message (str): 
-
-
-                    Returns the user-readable message string that corresponds to the error code.
-
-                                            You must pass a ViChar array with at least 256 bytes to this parameter.
-
-                    
-
-
-
-export_signal
--------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: export_signal(signal, signal_identifier, output_terminal)
-
-            Routes signals (triggers, clocks, and events) to the specified output terminal.
-
-                            If you export a signal with this method and [commit](rfsacref.chm/cvi:py:meth:`nirfsa.Session.commit`.html) the session, the signal is routed to the output terminal you specify. If you then reconfigure the signal to have a different output terminal, the previous output terminal is tri-stated when the session is next committed. If you set the **:py:attr:`nirfsa.Session.OUTPUT_TERMINAL`** parameter to :py:data:`~nirfsa.NIRFSA_VAL_DO_NOT_EXPORT_STR` and commit, the previous output terminal is tristated.
-
-                            Any signals, except for those exported over PXI trigger lines, that are exported within a session persist after the session closes to prevent signal glitches between sessions. PXI trigger lines are always set to tristate when a session is closed. If you wish to have the output terminal tristated when the session closes, change the **:py:attr:`nirfsa.Session.OUTPUT_TERMINAL`** for the exported signal to :py:data:`~nirfsa.NIRFSA_VAL_DO_NOT_EXPORT_STR`, and commit the session again before closing it.
-
-                            You can also tristate all PFI lines by setting the **resetDevice** parameter in the :py:meth:`nirfsa.Session.init` method to True or by using the :py:meth:`nirfsa.Session.reset` method.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-
-            :param signal:
-
-
-                Specifies the type of signal to route.
-
-                                        %enum_table{signal}
-
-                
-
-
-            :type signal: int
-            :param signal_identifier:
-
-
-                Specifies the user-defined signal to route. Specify the signal you have implemented using FPGA extensions.
-
-                
-
-
-            :type signal_identifier: str
-            :param output_terminal:
-
-
-                Specifies the terminal where the signal will be exported. You can also choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.
-
-                                        | Value                             | Description                                                                                                                                                                                                                                |
-                                        |:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DO_NOT_EXPORT_STR` | The signal is not exported.                                                                                                                                                                                                     |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_CLK_OUT_STR`       | The signal is exported to the CLK OUT connector on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                       |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_REF_OUT_STR`       | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5694, PXIe-5644/5645/5646, or PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_REF_OUT2_STR`          | The signal is exported to the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.                                                                                                                  |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR`          | The signal is exported to the PFI 0 connector.                                                                                                                                                                                  |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR`          | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                                                                                    |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR`     | The signal is exported to the PXI trigger line 0.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR`     | The signal is exported to the PXI trigger line 1.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR`     | The signal is exported to the PXI trigger line 2.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR`     | The signal is exported to the PXI trigger line 3.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR`     | The signal is exported to the PXI trigger line 4.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR`     | The signal is exported to the PXI trigger line 5.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR`     | The signal is exported to the PXI trigger line 6.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR`     | The signal is exported to the PXI trigger line 7.                                                                                                                                                                               |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR`      | The signal is exported to the PXI star trigger line.                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.ExportOutputTerm.PXIE_DSTARC`   | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI0') | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR` ('PFI1') | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI2') | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI3') | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI4') | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI5') | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI6') | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI7') | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                                           |
-
-                
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type output_terminal: str
-
-ext_cal_store_baseline_for_self_calibration
--------------------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: ext_cal_store_baseline_for_self_calibration(password, self_calibration_step)
-
-            Specifies the external calibration step to run and stores the associated constants in the device memory so that they can be compared with the computed constants at run time.
-
-                            A password is required to run the method.
-
-                            **Supported Devices**: PXIe-5603/5605/5606, PXIe-5665/5668
-
-            
-
-
-
-            :param password:
-
-
-                Specifies the password for the calibration session. The initial password is factory configured to NI. :py:attr:`nirfsa.Session.PASSWORD` can be a maximum of ten alphanumeric characters.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type password: str
-            :param self_calibration_step:
-
-
-                Specifies the step for which constants are computed.
-
-                                        %enum_table{self calibration step}
-
-                
-
-
-            :type self_calibration_step: int
-
-external_alignment_adjust_preselector
--------------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: external_alignment_adjust_preselector(coefficients)
-
-            Stores the preselector alignment coefficients that NI-RFSA uses to compute the preselector-tuning DAC value whenever the preselector is enabled.
-
-                            These coefficients are based on the desired center frequency for the preselector.
-
-                            **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-            
-
-
-
-            :param coefficients:
-
-
-                Specifies the coefficients in the polynomial used to map the preselector center frequency to a preselector-tuning DAC value. Enter the coefficients in the array in order of highest order coefficient first (index 0) down to lowest order coefficient last.
-
-                
-
-
-            :type coefficients: array.array("d")
-
-fetch_iq_multi_record_complex_f32
----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: fetch_iq_multi_record_complex_f32(starting_record, number_of_records, number_of_samples, timeout)
-
-            Fetches I/Q data from multiple records in an acquisition.
-
-                            A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-                            This method is not necessary if you use the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method because the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method performs the fetch as part of the method.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record_complex_f32`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.fetch_iq_multi_record_complex_f32`
-
-
-            :param starting_record:
-
-
-                Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-                
-
-
-            :type starting_record: int
-            :param number_of_records:
-
-
-                Specifies the number of records to fetch.
-
-                
-
-
-            :type number_of_records: int
-            :param number_of_samples:
-
-
-                Specifies the number of samples per record.
-
-                
-
-
-            :type number_of_samples: int
-            :param timeout:
-
-
-                **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                                        ----
-
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                                        ----
-
-                
-
-
-            :type timeout: float
-
-            :rtype: tuple (data, wfm_info)
-
-                WHERE
-
-                data (NIComplexNumberF32): 
-
-
-                    Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **:py:attr:`nirfsa.Session.number_of_samples`** times **:py:attr:`nirfsa.Session.number_of_records`** for this parameter.
-
-                    
-
-
-                wfm_info (WaveformInfo): 
-
-
-                    Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                                            The following list provides more information about each of these properties:
-
-                                            - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                            ----
-
-                                            The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
-
-                                            ----
-
-                                            - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                            ----
-
-                                            The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                            ----
-
-                                            - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                            - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                            - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                            - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-                    
-
-
-
-fetch_iq_multi_record_complex_f64
----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: fetch_iq_multi_record_complex_f64(starting_record, number_of_records, number_of_samples, timeout)
-
-            Fetches I/Q data from multiple records in an acquisition.
-
-                            A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-                            This method is not necessary if you use the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method because the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method performs the fetch as part of the method.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record_complex_f64`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.fetch_iq_multi_record_complex_f64`
-
-
-            :param starting_record:
-
-
-                Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-                
-
-
-            :type starting_record: int
-            :param number_of_records:
-
-
-                Specifies the number of records to fetch.
-
-                
-
-
-            :type number_of_records: int
-            :param number_of_samples:
-
-
-                Specifies the number of samples per record.
-
-                
-
-
-            :type number_of_samples: int
-            :param timeout:
-
-
-                **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                                        ----
-
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                                        ----
-
-                
-
-
-            :type timeout: float
-
-            :rtype: tuple (data, wfm_info)
-
-                WHERE
-
-                data (NIComplexNumber): 
-
-
-                    Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **:py:attr:`nirfsa.Session.number_of_samples`** times **:py:attr:`nirfsa.Session.number_of_records`** for this parameter.
-
-                    
-
-
-                wfm_info (WaveformInfo): 
-
-
-                    Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                                            The following list provides more information about each of these properties:
-
-                                            - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                            ----
-
-                                            The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
-
-                                            ----
-
-                                            - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                            ----
-
-                                            The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                            ----
-
-                                            - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                            - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                            - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                            - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                                            You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
 
                     
 
@@ -3142,219 +1555,6 @@ get_attribute_vi_string
 
 
 
-get_cal_user_defined_info
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_cal_user_defined_info()
-
-            Returns user-defined information from the onboard EEPROM.
-
-                            **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698
-
-            
-
-
-
-            :rtype: str
-            :return:
-
-
-                    Returns a string containing the user-defined information.
-
-                    
-
-
-
-get_cal_user_defined_info_max_size
-----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_cal_user_defined_info_max_size()
-
-            Returns the number of characters of user-defined information that can be stored in the device onboard EEPROM.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-            
-
-
-
-            :rtype: int
-            :return:
-
-
-                    Returns the number of characters of user-defined information that can be stored in the device onboard EEPROM. The maximum size of the user-defined information array is 21 characters.
-
-                    
-
-
-
-get_device_response
--------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_device_response(response_type, buffer_size)
-
-            Returns the requested response type, based on current NI-RFSA settings.
-
-                            The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects for the IF and RF response when you set the :py:attr:`nirfsa.Session.digital_if_equalization_enabled` property to True. If you are using external digitizer mode, you can use information returned from this method to correct your measurement.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].get_device_response`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.get_device_response`
-
-
-            :param response_type:
-
-
-                Specifies the IF, RF, or combined (IF and RF) response of the downconverter or NI-RFSA device that NI-RFSA returns. The default value is :py:data:`~nirfsa.ResponseType.DOWNCONVERTER_IF`.
-
-                                        %enum_table{response type}
-
-                
-
-
-            :type response_type: int
-            :param buffer_size:
-
-
-                Specifies the size of the array you specify for the :py:attr:`nirfsa.Session.FREQUENCIES`, **:py:attr:`nirfsa.Session.MAGNITUDE_RESPONSE`**, and **:py:attr:`nirfsa.Session.PHASE_RESPONSE`** parameters.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type buffer_size: int
-
-            :rtype: tuple (frequencies, magnitude_response, phase_response, number_of_frequencies)
-
-                WHERE
-
-                frequencies (array.array("d")): 
-
-
-                    Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
-
-                                            Pass VI_NULL if you do not want to use this parameter.
-
-                    
-
-
-                magnitude_response (array.array("d")): 
-
-
-                    Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
-
-                                            Pass VI_NULL if you do not want to use this parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-                phase_response (array.array("d")): 
-
-
-                    Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
-
-                                            Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-                number_of_frequencies (int): 
-
-
-                    Returns the required number of elements in the :py:attr:`nirfsa.Session.FREQUENCIES` array and the response arrays. If **:py:attr:`nirfsa.Session.BUFFER_SIZE`** is 0, this parameter returns the expected array size. The expected array size depends on which NI-RFSA device you use (PXI-5661, PXIe-5663/5663E/5665) and on the current settings (PXIe-5663/5663E/5665 only).
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-get_ext_cal_last_date_and_time
-------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_ext_cal_last_date_and_time()
-
-            Returns the date and time of the last successful external calibration.
-
-                            The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the :py:attr:`nirfsa.Session.HOUR` parameter, 30 for the :py:attr:`nirfsa.Session.MINUTE` parameter, 12 for the :py:attr:`nirfsa.Session.MONTH` parameter, 31 for the :py:attr:`nirfsa.Session.DAY` parameter, and 2010 for the :py:attr:`nirfsa.Session.YEAR` parameter.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-            :rtype: tuple (year, month, day, hour, minute)
-
-                WHERE
-
-                year (int): 
-
-
-                    Returns the year of the last external calibration.
-
-                    
-
-
-                month (int): 
-
-
-                    Returns the month of the last external calibration.
-
-                    
-
-
-                day (int): 
-
-
-                    Returns the day of the last external calibration.
-
-                    
-
-
-                hour (int): 
-
-
-                    Returns the hour of the last external calibration.
-
-                    
-
-
-                minute (int): 
-
-
-                    Returns the minute of the last external calibration.
-
-                    
-
-
-
 get_ext_cal_last_temp
 ---------------------
 
@@ -3397,7 +1597,7 @@ get_ext_cal_recommended_interval
 
 
 
-            :rtype: int
+            :rtype: hightime.timedelta, datetime.timedelta, or int in months
             :return:
 
 
@@ -3457,9 +1657,9 @@ get_frequency_response
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_frequency_response(buffer_size)
+    .. py:method:: get_frequency_response()
 
-            Returns the requested response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
+            Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
 
                             Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.
 
@@ -3479,19 +1679,7 @@ get_frequency_response
                 Example: :py:meth:`my_session.get_frequency_response`
 
 
-            :param buffer_size:
-
-
-                Specifies the size of the array you specify for the :py:attr:`nirfsa.Session.FREQUENCIES`, **:py:attr:`nirfsa.Session.MAGNITUDE_RESPONSE`**, and **:py:attr:`nirfsa.Session.PHASE_RESPONSE`** parameters.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type buffer_size: int
-
-            :rtype: tuple (frequencies, magnitude_response, phase_response, number_of_frequencies)
+            :rtype: tuple (frequencies, magnitude_response, phase_response)
 
                 WHERE
 
@@ -3529,23 +1717,13 @@ get_frequency_response
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                number_of_frequencies (int): 
-
-
-                    Returns the required number of elements in the :py:attr:`nirfsa.Session.FREQUENCIES` array and the response arrays. If **:py:attr:`nirfsa.Session.BUFFER_SIZE`** is 0, this parameter returns the expected array size. The expected array size depends on which NI-RFSA device you use (PXI-5661, PXIe-5663/5663E/5665) and on the current settings (PXIe-5663/5663E/5665 only).
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
 
 get_gain_reference_cal_baseline
 -------------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_gain_reference_cal_baseline(buffer_size)
+    .. py:method:: get_gain_reference_cal_baseline()
 
             Returns the gain reference calibration constants.
 
@@ -3555,163 +1733,13 @@ get_gain_reference_cal_baseline
 
 
 
-            :param buffer_size:
-
-
-                Specifies the buffer size.
-
-                
-
-
-            :type buffer_size: int
-
-            :rtype: tuple (gain_reference_cal_constants, number_of_gain_reference_cal_constants)
-
-                WHERE
-
-                gain_reference_cal_constants (array.array("d")): 
+            :rtype: array.array("d")
+            :return:
 
 
                     Returns the gain reference calibration constants.
 
                     
-
-
-                number_of_gain_reference_cal_constants (int): 
-
-
-                    Specifies the number of elements in the **:py:attr:`nirfsa.Session.GAIN_REFERENCE_CAL_CONSTANTS`** array.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-get_number_of_spectral_lines
-----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_number_of_spectral_lines()
-
-            Returns the number of spectral lines that NI-RFSA computes with the current power spectrum configuration.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].get_number_of_spectral_lines`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.get_number_of_spectral_lines`
-
-
-            :rtype: int
-            :return:
-
-
-                    Returns the value of the :py:attr:`nirfsa.Session.number_of_spectral_lines` property.
-
-                    
-
-
-
-get_relay_name
---------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_relay_name(index)
-
-            Returns the name of a relay for your device.
-
-                            When you call this method and pass a VI_NULL pointer to the :py:attr:`nirfsa.Session.NAME` parameter, **:py:attr:`nirfsa.Session.BUFFER_SIZE`** is populated with the size of name including the terminating NULL byte. When you call this method and specify a value for **:py:attr:`nirfsa.Session.BUFFER_SIZE`** that is greater than or equal to the name of relay, the :py:attr:`nirfsa.Session.NAME` parameter returns the appropriate value.
-
-                            **Supported Devices**: PXIe-5603/5605/5606.
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].get_relay_name`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.get_relay_name`
-
-
-            :param index:
-
-
-                Specifies the index of the relay.
-
-                
-
-
-            :type index: int
-
-            :rtype: str
-            :return:
-
-
-                    Specifies the relay name, when used as an input. You can select VI_NULL or a pointer to a ViInt32 array. VI_NULL is the default. When **:py:attr:`nirfsa.Session.BUFFER_SIZE`** is greater than or equal to the number of relays, :py:attr:`nirfsa.Session.NAME` returns the relay name.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-get_relay_operations_count
---------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_relay_operations_count()
-
-            Returns an array consisting of all the relay counts for your device.
-
-                            When you call this method and pass a VI_NULL pointer to the **:py:attr:`nirfsa.Session.OPERATIONS_COUNT`** parameter, **:py:attr:`nirfsa.Session.BUFFER_SIZE`** is populated with the number of relays on the device. When you call this method and specify a value for **:py:attr:`nirfsa.Session.BUFFER_SIZE`** that is greater than or equal to the number of relays, the **:py:attr:`nirfsa.Session.OPERATIONS_COUNT`** parameter returns the appropriate value.
-
-                            **Supported Devices**: PXIe-5603/5605/5606, PXIe-5698
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].get_relay_operations_count`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.get_relay_operations_count`
-
-
-            :rtype: array.array("l")
-            :return:
-
-
-                    Specifies the operations count array, when used as an input. You can select VI_NULL or a pointer to a ViInt32 array. VI_NULL is the default. When **:py:attr:`nirfsa.Session.BUFFER_SIZE`** is greater than or equal to the number of relays, **:py:attr:`nirfsa.Session.OPERATIONS_COUNT`** returns the number of relay operations.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
 
@@ -3728,7 +1756,7 @@ get_self_cal_last_date_and_time
 
                             ----
                             **Note**
-                            For the PXIe-5644/5645/5646, you must select :py:data:`~nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION` for the **:py:attr:`nirfsa.Session.SELF_CALIBRATION_STEP`** parameter.
+                            For the PXIe-5644/5645/5646, you must select :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION` for the **:py:attr:`nirfsa.Session.SELF_CALIBRATION_STEP`** parameter.
 
                             ----
 
@@ -3737,6 +1765,8 @@ get_self_cal_last_date_and_time
             
 
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
@@ -3797,24 +1827,26 @@ get_self_cal_last_date_and_time
 
 
 
-get_self_cal_last_temp
-----------------------
+get_self_cal_last_temperature
+-----------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_self_cal_last_temp(self_calibration_step)
+    .. py:method:: get_self_cal_last_temperature(self_calibration_step)
 
             Returns the temperature, in degrees Celsius, at the last successful self-calibration.
 
                             ----
                             **Note**
-                            For the PXIe-5644/5645/5646, you must select :py:data:`~nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION` for the **selfCalibrationStep** parameter.
+                            For the PXIe-5644/5645/5646, you must select :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION` for the **selfCalibrationStep** parameter.
 
                             ----
 
                             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
 
             
+
+            .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
@@ -3835,82 +1867,6 @@ get_self_cal_last_temp
 
 
                     Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
-
-                    
-
-
-
-get_spectral_info_for_smt
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_spectral_info_for_smt()
-
-            Returns information about the power spectrum NI-RFSA computes.
-
-                            ----
-                            **Note**
-                            The NI Spectral Measurements Toolkit (SMT) requires this information.
-
-                            ----
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-
-            :rtype: SpectrumInfoT
-            :return:
-
-
-                    Returns returns properties of the computed spectrum such as spectrum type, spectrum scale (linear or logarithmic), the window type the method used to compute the spectrum, window size, and FFT size. Pass this parameter to subsequent methods that contain the **:py:attr:`nirfsa.Session.SPECTRUM_INFO`** parameter.
-
-                    
-
-                    .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-get_stream_endpoint_handle
---------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_stream_endpoint_handle(stream_endpoint)
-
-            Returns a writer endpoint handle that you can use with NI-P2P to configure a peer-to-peer stream with the digitizer as an endpoint.
-
-                            **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `Configuring An Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-                            [Peer-to-Peer Streaming](nirfsa.chm/p2p-streaming.html)
-
-                            [Configuring a Peer-to-Peer Stream](nirfsa.chm/configuring-p2p-stream.html)
-
-            
-
-
-
-            :param stream_endpoint:
-
-
-                Specifies the name of the stream resources you want to use.
-
-                
-
-
-            :type stream_endpoint: str
-
-            :rtype: int
-            :return:
-
-
-                    Returns the writer endpoint handle which you use with NI-P2P to create a stream with the digitizer as an endpoint.
 
                     
 
@@ -3967,200 +1923,6 @@ get_terminal_name
 
 
                     Returns the fully qualified name of the signal being queried.
-
-                    
-
-
-
-get_user_data
--------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_user_data(identifier, buffer_size)
-
-            TBD
-
-            
-
-
-
-            :param identifier:
-
-
-                
-
-
-            :type identifier: str
-            :param buffer_size:
-
-
-                
-
-
-            :type buffer_size: int
-
-            :rtype: tuple (data, actual_data_size)
-
-                WHERE
-
-                data (array.array("b")): 
-
-
-                    
-
-
-                actual_data_size (int): 
-
-
-                    
-
-
-
-init
-----
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: init(resource_name, id_query, reset)
-
-            Creates a new session for the device. This method sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.
-
-                            To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.
-
-                            You can access the device session this method creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
-
-                            ----
-                            **Note**
-                            Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
-
-                            ----
-
-                            ----
-                            **Note**
-                            For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
-
-                            ----
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-
-            :param resource_name:
-
-
-                Specifies the resource name of the device to initialize.
-
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
-
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
-
-                
-
-
-            :type resource_name: str
-            :param id_query:
-
-
-                Specifies whether NI-RFSA performs an ID query. When you perform an ID query, NI-RFSA verifies the device you initialize is supported.
-
-                                        | Value              | Description                                                |
-                                        |:--------------|:------------------------------------------------|
-                                        | True (Yes) | Perform an ID query. This value is the default. |
-                                        | False (No) | Do not perform an ID query.                     |
-
-                
-
-
-            :type id_query: bool
-            :param reset:
-
-
-                Specifies whether the NI-RFSA device is reset during the initialization procedure.
-
-                                        | Value              | Description                                                    |
-                                        |:--------------|:----------------------------------------------------|
-                                        | True (Yes) | The device is reset.                                |
-                                        | False (No) | The device is not reset. This value is the default. |
-
-                
-
-
-            :type reset: bool
-
-            :rtype: int
-            :return:
-
-
-                    Identifies your instrument session.
-
-                    
-
-
-
-init_ext_cal
-------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: init_ext_cal(resource_name, password, option_string)
-
-            Creates and initializes a special NI-RFSA external calibration session.
-
-                            The ViSession returned is an NI-RFSA session that you can use to configure the device using normal properties and methods. However, NI-RFSA sets flags that allow you to program an external calibration procedure using the calibration properties and methods.
-
-                            **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-
-            :param resource_name:
-
-
-                Specifies the resource name of the device to initialize.
-
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI ** topic of the *Measurement & Automation Explorer Help*.
-
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
-
-                
-
-
-            :type resource_name: str
-            :param password:
-
-
-                Specifies the password for the calibration session. The initial password is factory configured to NI. :py:attr:`nirfsa.Session.PASSWORD` can have a maximum of ten alphanumeric characters.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type password: str
-            :param option_string:
-
-
-                Sets the initial value of certain options for the session.
-
-                                        The following options are used in this parameter.
-
-                                        - calAction:create Use this option when starting a calibration step for the first time.
-                                        - calAction:append Use this option when appending data to existing calibration data.
-
-                
-
-
-            :type option_string: str
-
-            :rtype: int
-            :return:
-
-
-                    Identifies your instrument session.
 
                     
 
@@ -4251,12 +2013,12 @@ init_with_options
 
                                         | Name             | Property                                                                                                                                  |
                                         |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | RangeCheck       | :py:attr:`nirfsa.Session.range_check`                         |
-                                        | QueryInstrStatus | :py:attr:`nirfsa.Session.query_instrument_status` |
-                                        | Cache            | :py:attr:`nirfsa.Session.cache`                                     |
-                                        | RecordCoercions  | :py:attr:`nirfsa.Session.record_coercions`               |
+                                        | RangeCheck       | :py:attr:`nirfsa.Session.RANGE_CHECK`                         |
+                                        | QueryInstrStatus | :py:attr:`nirfsa.Session.QUERY_INSTRUMENT_STATUS` |
+                                        | Cache            | :py:attr:`nirfsa.Session.CACHE`                                     |
+                                        | RecordCoercions  | :py:attr:`nirfsa.Session.RECORD_COERCIONS`               |
                                         | DriverSetup      | :py:attr:`nirfsa.Session.driver_setup`                       |
-                                        | Simulate         | :py:attr:`nirfsa.Session.simulate`                               |
+                                        | Simulate         | :py:attr:`nirfsa.Session.SIMULATE`                               |
 
                                         The format of this string is *AttributeName=Value*, where *AttributeName* is the name of the property and *Value* is the value to which the property will be set. For example, you can simulate the PXIe-5663 using the following strings:
 
@@ -4272,92 +2034,7 @@ init_with_options
 
                 
 
-
-            :type option_string: str
-
-            :rtype: int
-            :return:
-
-
-                    Identifies your instrument session.
-
-                    
-
-
-
-initialize_calibration_step
----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: initialize_calibration_step(calibration_step)
-
-            Initializes an EEPROM-specific calibration step.
-
-                            **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698
-
-            
-
-
-
-            :param calibration_step:
-
-
-                Specifies the calibration step to initialize.
-
-                                       %enum_table{self calibration step}
-
-                
-
-
-            :type calibration_step: int
-
-initialize_external_alignment
------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: initialize_external_alignment(resource_name, option_string)
-
-            Creates and initializes a special NI-RFSA external alignment session.
-
-                            The ViSession returned is an NI-RFSA session that you can use to configure the device using normal properties and methods. However, NI-RFSA sets flags that allow you to program an external alignment procedure using the external alignment properties and methods.
-
-                            **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-            
-
-
-
-            :param resource_name:
-
-
-                Specifies the resource name of the device to initialize.
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
-
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
-
-                
-
-
-            :type resource_name: str
-            :param option_string:
-
-
-                Sets the initial value of certain properties for the session. The properties shown in the following table are used in this parameter.
-
-                                        | Name             | Property                                                                                                                                        |
-                                        |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | RangeCheck       | :py:attr:`nirfsa.Session.range_check`                         |
-                                        | QueryInstrStatus | :py:attr:`nirfsa.Session.query_instrument_status` |
-                                        | Cache            | :py:attr:`nirfsa.Session.cache`                                     |
-                                        | RecordCoercions  | :py:attr:`nirfsa.Session.record_coercions`               |
-                                        | DriverSetup      | :py:attr:`nirfsa.Session.driver_setup`                       |
-                                        | Simulate         | :py:attr:`nirfsa.Session.simulate`                               |
-
-                                        The format of this string is "*AttributeName=Value*", where *AttributeName* is the name of the property and *Value* is the value to which the property will be set. To set multiple properties, separate their assignments with a comma.
-
-                
+                .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
             :type option_string: str
@@ -4371,35 +2048,6 @@ initialize_external_alignment
                     
 
 
-
-initialize_external_alignment_step
-----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: initialize_external_alignment_step(external_alignment_step)
-
-            Initializes an EEPROM-specific external alignment step.
-
-                            **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-            
-
-
-
-            :param external_alignment_step:
-
-
-                Specifies which external alignment step you want to initialize.
-
-                                        | Value                                     | Description                                                                                                                                            |
-                                        |:-------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | EXT ALIGNMENT PRESELECTOR | Initiates preselector alignment. This step generates coefficients to align the preselector across the frequency range of 3.6 GHz to 14 GHz. |
-
-                
-
-
-            :type external_alignment_step: int
 
 initiate
 --------
@@ -4410,7 +2058,7 @@ initiate
 
             Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                            You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method to both initiate the acquisition and retrieve I/Q data at one time.
+                            You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the :py:meth:`nirfsa.Session.ReadIqSingleRecordComplexF64` method to both initiate the acquisition and retrieve I/Q data at one time.
 
                             ----
                             **Note**
@@ -4431,19 +2079,6 @@ initiate
             
 
             .. note:: This method will return a Python context manager that will initiate on entering and abort on exit.
-
-
-
-invalidate_all_attributes
--------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: invalidate_all_attributes()
-
-            TBD
-
-            
 
 
 
@@ -4478,23 +2113,25 @@ is_self_cal_valid
                     
 
 
-                valid_steps (int): 
+                valid_steps (:py:data:`nirfsa.IsSelfCalValidValidSteps`): 
 
 
                     Returns valid steps.
 
                                             ----
-                                            If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both :py:data:`~nirfsa.SelfCalibrationStep.IF_FLATNESS` and :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL` steps are valid, NI-RFSA returns the following string:
+                                            If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both :py:data:`~nirfsa.IsSelfCalValidValidSteps.IF_FLATNESS` and :py:data:`~nirfsa.IsSelfCalValidValidSteps.LO_SELF_CAL` steps are valid, NI-RFSA returns the following string:
 
-                                            :py:data:`~nirfsa.SelfCalibrationStep.IF_FLATNESS` |
+                                            :py:data:`~nirfsa.IsSelfCalValidValidSteps.IF_FLATNESS` |
 
-                                            :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`
+                                            :py:data:`~nirfsa.IsSelfCalValidValidSteps.LO_SELF_CAL`
 
                                             ----
 
                                             %enum_table{self calibration step}
 
                     
+
+                    .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
 
@@ -4535,56 +2172,53 @@ load_configurations_from_file
 
             :type file_path: str
 
-lock_session
-------------
+lock
+----
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: lock_session()
+.. py:method:: lock()
 
-            Obtains a multithread lock on the instrument session.
+    Obtains a multithread lock on the device session. Before doing so, the
+    software waits until all other execution threads release their locks
+    on the device session.
 
-                            Before doing so, this method waits until all other execution threads have released their locks on the instrument session.
+    Other threads may have obtained a lock on this session for the
+    following reasons:
 
-                            Other threads might have obtained a lock on this session in the following ways:
+        -  The application called the :py:meth:`nirfsa.Session.lock` method.
+        -  A call to NI-RFSA locked the session.
+        -  After a call to the :py:meth:`nirfsa.Session.lock` method returns
+           successfully, no other threads can access the device session until
+           you call the :py:meth:`nirfsa.Session.unlock` method or exit out of the with block when using
+           lock context manager.
+        -  Use the :py:meth:`nirfsa.Session.lock` method and the
+           :py:meth:`nirfsa.Session.unlock` method around a sequence of calls to
+           instrument driver methods if you require that the device retain its
+           settings through the end of the sequence.
 
-                            - Your application already called this method.
-                            - A call to NI-RFSA locked the session.
+    You can safely make nested calls to the :py:meth:`nirfsa.Session.lock` method
+    within the same thread. To completely unlock the session, you must
+    balance each call to the :py:meth:`nirfsa.Session.lock` method with a call to
+    the :py:meth:`nirfsa.Session.unlock` method.
 
-                            After the call to this method returns successfully, no other threads can access the instrument session until you call the :py:meth:`nirfsa.Session.unlock_session` method. Use the :py:meth:`nirfsa.Session.lock_session` method and the :py:meth:`nirfsa.Session.unlock_session` method around a sequence of calls to NI-RFSA methods if you require that the NI-RFSA device retain its settings through the end of the sequence.
+    One method for ensuring there are the same number of unlock method calls as there is lock calls
+    is to use lock as a context manager
 
-                            You can safely make nested calls to the :py:meth:`nirfsa.Session.lock_session` method within the same thread. To completely unlock the session, balance each call to the :py:meth:`nirfsa.Session.lock_session` method with a call to the :py:meth:`nirfsa.Session.unlock_session` method. If, however, you use **:py:attr:`nirfsa.Session.CALLER_HAS_LOCK`** in all calls to the :py:meth:`nirfsa.Session.lock_session` method and the :py:meth:`nirfsa.Session.unlock_session` method within a method, the IVI Library locks the session only once within the method regardless of the number of calls you make to the :py:meth:`nirfsa.Session.lock_session` method. Locking the session only once allows you to call the :py:meth:`nirfsa.Session.unlock_session` method just once at the end of the method.
+        .. code:: python
 
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+            with nirfsa.Session('dev1') as session:
+                with session.lock():
+                    # Calls to session within a single lock context
 
-            
+        The first `with` block ensures the session is closed regardless of any exceptions raised
 
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+        The second `with` block ensures that unlock is called regardless of any exceptions raised
 
-
-
-            :rtype: bool
-            :return:
-
-
-                    Keeps track of whether you obtain a lock and therefore need to unlock the session in complex methods. Pass the address of a local ViBoolean variable. In the declaration of the local variable, initialize it to False. Pass the address of the same local variable to any other calls you make to this method or the :py:meth:`nirfsa.Session.unlock_session` method in the same method.
-
-                                            This parameter serves as a convenience. If you do not want to use this parameter, pass VI_NULL.
-
-                                            The :py:meth:`nirfsa.Session.lock_session` method and the :py:meth:`nirfsa.Session.unlock_session` method each inspect the current value and take the actions shown in the following table.
-
-                                            | Method             | Boolean Value | Action                                                                                               |
-                                            |:---------------------|:--------------|:-----------------------------------------------------------------------------------------------------|
-                                            | :py:meth:`nirfsa.Session.lock_session`   | True       | The :py:meth:`nirfsa.Session.lock_session` method does not lock the session again.                                     |
-                                            |                      | False      | The :py:meth:`nirfsa.Session.lock_session` method obtains the lock and sets the value of the parameter to True.     |
-                                            | :py:meth:`nirfsa.Session.unlock_session` | False      | The :py:meth:`nirfsa.Session.unlock_session` method does not attempt to unlock the session.                            |
-                                            |                      | True       | The :py:meth:`nirfsa.Session.unlock_session` method releases the lock and sets the value of the parameter to False. |
-
-                                            Thus, you can call the :py:meth:`nirfsa.Session.unlock_session` method at the end of your method regardless of whether you actually have the lock.
-
-                    
-
-
+    :rtype: context manager
+    :return:
+        When used in a `with` statement, :py:meth:`nirfsa.Session.lock` acts as
+        a context manager and unlock will be called when the `with` block is exited
 
 perform_thermal_correction
 --------------------------
@@ -4611,109 +2245,12 @@ perform_thermal_correction
 
 
 
-read_iq_single_record_complex_f64
----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: read_iq_single_record_complex_f64(timeout, data_array_size)
-
-            Initiates an acquisition and fetches a single I/Q data record.
-
-                            Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].read_iq_single_record_complex_f64`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.read_iq_single_record_complex_f64`
-
-
-            :param timeout:
-
-
-                Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
-
-                
-
-
-            :type timeout: float
-            :param data_array_size:
-
-
-                Specifies the size of the array for the :py:attr:`nirfsa.Session.DATA` parameter. The array needs to be at least as large as the number of samples configured in the :py:meth:`nirfsa.Session.configure_number_of_samples` method.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type data_array_size: int
-
-            :rtype: tuple (data, wfm_info)
-
-                WHERE
-
-                data (NIComplexNumber): 
-
-
-                    Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the :py:meth:`nirfsa.Session.configure_number_of_samples` method.
-
-                    
-
-
-                wfm_info (WaveformInfo): 
-
-
-                    Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                                            The following list provides more information about each of these properties:
-
-                                            - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                            ----
-
-                                            The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                                            ----
-
-                                            - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                            ----
-
-
-                                            The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                            ----
-
-                                            - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                            - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                            - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                            - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-                    
-
-
-
 read_power_spectrum_f32
 -----------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_power_spectrum_f32(timeout, data_array_size)
+    .. py:method:: read_power_spectrum_f32(timeout)
 
             Initiates a spectrum acquisition and returns power spectrum data.
 
@@ -4748,17 +2285,6 @@ read_power_spectrum_f32
 
 
             :type timeout: float
-            :param data_array_size:
-
-
-                Specifies the size of the array that is returned by the **:py:attr:`nirfsa.Session.POWER_SPECTRUM_DATA`** parameter. Use the :py:meth:`nirfsa.Session.get_number_of_spectral_lines` method to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type data_array_size: int
 
             :rtype: tuple (power_spectrum_data, spectrum_info)
 
@@ -4774,7 +2300,7 @@ read_power_spectrum_f32
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                spectrum_info (SpectrumInfoT): 
+                spectrum_info (NiRfsaSpectrumInfo): 
 
 
                     Returns additional information about the **:py:attr:`nirfsa.Session.POWER_SPECTRUM_DATA`** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
@@ -4790,7 +2316,7 @@ read_power_spectrum_f64
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_power_spectrum_f64(timeout, data_array_size)
+    .. py:method:: read_power_spectrum_f64(timeout)
 
             Initiates a spectrum acquisition and returns power spectrum data.
 
@@ -4825,17 +2351,6 @@ read_power_spectrum_f64
 
 
             :type timeout: float
-            :param data_array_size:
-
-
-                Specifies the size of the array that is returned by the **:py:attr:`nirfsa.Session.POWER_SPECTRUM_DATA`** parameter. Use the :py:meth:`nirfsa.Session.get_number_of_spectral_lines` method to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.
-
-                
-
-                .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-            :type data_array_size: int
 
             :rtype: tuple (power_spectrum_data, spectrum_info)
 
@@ -4851,7 +2366,7 @@ read_power_spectrum_f64
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                spectrum_info (SpectrumInfoT): 
+                spectrum_info (NiRfsaSpectrumInfo): 
 
 
                     Returns additional information about the **:py:attr:`nirfsa.Session.POWER_SPECTRUM_DATA`** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
@@ -4887,41 +2402,6 @@ reset
 
 
 
-reset_attribute
----------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: reset_attribute(attribute_id)
-
-            Resets the property to its default value.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
-
-                Example: :py:meth:`my_session.channels[ ... ].reset_attribute`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.reset_attribute`
-
-
-            :param attribute_id:
-
-
-                Pass the ID of a property.
-
-                
-
-
-            :type attribute_id: int
-
 reset_device
 ------------
 
@@ -4942,11 +2422,13 @@ reset_device
 
                             During a device reset, routes of signals between this and other devices are released, regardless of which device created the route. For example, a trigger signal exported to a PXI trigger line that is used by another device is no longer exported.
 
-                            On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the :py:meth:`nirfsa.Session.configure_pxi_chassis_clk10` method and set the **pxiClk10Source** parameter to :py:data:`~nirfsa.NIRFSA_VAL_NONE_STR` or set the :py:attr:`nirfsa.Session.pxi_chassis_clk10_source` property to :py:data:`~nirfsa.NIRFSA_VAL_NONE_STR`.
+                            On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the :py:meth:`nirfsa.Session.ConfigurePxiChassisClk10` method and set the **pxiClk10Source** parameter to :py:data:`~nirfsa.NIRFSA_VAL_NONE_STR` or set the :py:attr:`nirfsa.Session.PXI_CHASSIS_CLK10_SOURCE` property to :py:data:`~nirfsa.NIRFSA_VAL_NONE_STR`.
 
                             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
 
             
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
             .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -5014,46 +2496,6 @@ reset_with_options
 
             :type steps_to_omit: int
 
-revision_query
---------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: revision_query()
-
-            Returns the revision numbers of the NI-RFSA instrument driver.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-
-
-            :rtype: tuple (driver_rev, instr_rev)
-
-                WHERE
-
-                driver_rev (str): 
-
-
-                    Returns the instrument driver software revision numbers in the form of a string. The value of the :py:attr:`nirfsa.Session.specific_driver_revision` property is returned.
-
-                                            You must pass a ViChar array with 256 bytes or more to this parameter.
-
-                    
-
-
-                instr_rev (str): 
-
-
-                    Returns the instrument firmware revision numbers in the form of a string. The value of the :py:attr:`nirfsa.Session.instrument_firmware_revision` property is returned.
-
-                                            You must pass a ViChar array with 256 bytes or more to this parameter.
-
-                    
-
-
-
 save_configurations_to_file
 ---------------------------
 
@@ -5088,19 +2530,6 @@ save_configurations_to_file
 
 
             :type file_path: str
-
-self_cal
---------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: self_cal()
-
-            TBD
-
-            
-
-
 
 self_calibrate
 --------------
@@ -5156,25 +2585,27 @@ self_calibrate
 
                                         ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrationStep.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.self_calibrate` method: :py:data:`~nirfsa.SelfCalibrationStep.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`
+                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.self_calibrate` method: :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_LO_SELF_CAL`
 
                                         ----
 
                                         | Value                                          |  Description                                                                                                                                                                                                                     |
                                         |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                                         | :py:data:`~nirfsa.StepsToOmit.NONE`             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |:py:data:`~nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
+                                        |:py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
+                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
 
                 
+
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
             :type steps_to_omit: int
@@ -5225,28 +2656,30 @@ self_calibrate_range
 
                                         ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrationStep.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.self_calibrate` method: :py:data:`~nirfsa.SelfCalibrationStep.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`
+                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.self_calibrate` method: :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`
 
                                         ----
 
                                         | Value                                          |  Description                                                                                                                                                                                                                     |
                                         |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                                         | :py:data:`~nirfsa.StepsToOmit.NONE`             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |:py:data:`~nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | :py:data:`~nirfsa.SelfCalibrationStep.DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
+                                        |:py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
+                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
 
                 
 
+                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            :type steps_to_omit: int
+
+            :type steps_to_omit: :py:data:`nirfsa.SelfCalibrateRangeStepsToOmit`
             :param min_frequency:
 
 
@@ -5311,7 +2744,7 @@ send_software_edge_trigger
                             This method returns an error in the following situations:
 
                             - You configure an invalid trigger.
-                            - You set the **acquisitionType** to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method.
+                            - You set the **acquisitionType** to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
                             - You have not previously called the :py:meth:`nirfsa.Session._initiate` method.
 
                             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -5656,144 +3089,20 @@ set_attribute_vi_string
 
             :type value: str
 
-set_cal_user_defined_info
--------------------------
+unlock
+------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: set_cal_user_defined_info(info)
+.. py:method:: unlock()
 
-            Writes user-defined information into the onboard EEPROM.
-
-                            This should be called in its own session or else the data may be overwritten by a commit.
-
-                            **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698
-
-            
-
-
-
-            :param info:
-
-
-                Specifies a string containing the user-defined information. This string can be up to 21 characters long.
-
-                
-
-
-            :type info: str
-
-set_user_data
--------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: set_user_data(identifier, data)
-
-            TBD
-
-            
-
-
-
-            :param identifier:
-
-
-                
-
-
-            :type identifier: str
-            :param data:
-
-
-                
-
-
-            :type data: array.array("b")
-
-unlock_session
---------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: unlock_session()
-
-            Releases a lock obtained on an NI-RFSA device session by calling the :py:meth:`nirfsa.Session.lock_session` method.
-
-                            Refer to the :py:meth:`nirfsa.Session.lock_session` method for additional information on session locks.
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-            
-
-
-
-            :rtype: bool
-            :return:
-
-
-                    Keeps track of whether you obtain a lock and therefore need to unlock the session in complex methods. Pass the address of a local ViBoolean variable. In the declaration of the local variable, initialize it to False. Pass the address of the same local variable to any other calls you make to this method or the :py:meth:`nirfsa.Session.unlock_session` method in the same method.
-
-                                            This parameter serves as a convenience. If you do not want to use this parameter, pass VI_NULL.
-
-                                            The :py:meth:`nirfsa.Session.lock_session` method and the :py:meth:`nirfsa.Session.unlock_session` method each inspect the current value and take the actions shown in the following table.
-
-                                            | Method             | Boolean Value | Action                                                                                               |
-                                            |:---------------------|:--------------|:-----------------------------------------------------------------------------------------------------|
-                                            | :py:meth:`nirfsa.Session.lock_session`   | True       | The :py:meth:`nirfsa.Session.lock_session` method does not lock the session again.                                     |
-                                            |                      | False      | The :py:meth:`nirfsa.Session.lock_session` method obtains the lock and sets the value of the parameter to True.     |
-                                            | :py:meth:`nirfsa.Session.unlock_session` | False      | The :py:meth:`nirfsa.Session.unlock_session` method does not attempt to unlock the session.                            |
-                                            |                      | True       | The :py:meth:`nirfsa.Session.unlock_session` method releases the lock and sets the value of the parameter to False. |
-
-                                            Thus, you can call the :py:meth:`nirfsa.Session.unlock_session` method at the end of your method regardless of whether you actually have the lock.
-
-                    
-
-
+    Releases a lock that you acquired on an device session using
+    :py:meth:`nirfsa.Session.lock`. Refer to :py:meth:`nirfsa.Session.unlock` for additional
+    information on session locks.
 
 
 Properties
 ==========
-
-_5665_preselector_tuning_dac_value
-----------------------------------
-
-    .. py:attribute:: _5665_preselector_tuning_dac_value
-
-        Specifies the preselector tuning DAC value during the preselector external alignment step.
-
-        This value is valid only during a external alignment session.
-
-        **Valid Values:**
-
-        | Device    | Value       |
-        |:----------|:------------|
-        | PXIe-5605 | 0 to 16,383 |
-        | PXIe-5606 | 0 to 65,535 |
-
-        **Defined Values:** 0 to 15.5
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5605/5606 (external digitizer mode), PXIe-5665/5668
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **External Alignment:NI 5665/5668R:Preselector Tuning DAC Value**
-                - C Attribute: **NIRFSA_ATTR_5665_PRESELECTOR_TUNING_DAC_VALUE**
 
 absolute_delay
 --------------
@@ -5860,7 +3169,7 @@ acquisition_type
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_acquisition_type`
+        - :py:meth:`nirfsa.Session.ConfigureAcquisitionType`
 
         The following table lists the characteristics of this property.
 
@@ -5879,86 +3188,6 @@ acquisition_type
 
                 - LabVIEW Property: **Acquisition Type**
                 - C Attribute: **NIRFSA_ATTR_ACQUISITION_TYPE**
-
-active_configuration_list
--------------------------
-
-    .. py:attribute:: active_configuration_list
-
-        Specifies the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ to make active for configuration or initiation.
-
-        Activating a list makes all properties in the list reflect the value of the properties that correspond to the set specified by the :py:attr:`nirfsa.Session.active_configuration_list` and the :py:attr:`nirfsa.Session.active_configuration_list_step` properties.
-
-        Set this property to an empty string to disable RF list mode.
-
-        **Default Value**: "" (empty string) for devices that support RF list mode. For all other devices, the default value is N/A.
-
-        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-        **Related Topics**
-
-        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsa.Session.create_configuration_list`
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Active List**
-                - C Attribute: **NIRFSA_ATTR_ACTIVE_CONFIGURATION_LIST**
-
-active_configuration_list_step
-------------------------------
-
-    .. py:attribute:: active_configuration_list_step
-
-        Specifies the step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ to make active for configuration or initiation.
-
-        Activating a list makes all properties in the list reflect the value of the properties that correspond to the set specified by the :py:attr:`nirfsa.Session.active_configuration_list` and the :py:attr:`nirfsa.Session.active_configuration_list_step` properties.
-
-        **Default Value**: 0 for devices that support RF list mode. For all other devices, the default value is N/A.
-
-        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-        **Related Topics**
-
-        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsa.Session.create_configuration_list_step`
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Active Step**
-                - C Attribute: **NIRFSA_ATTR_ACTIVE_CONFIGURATION_LIST_STEP**
 
 advance_trigger_terminal_name
 -----------------------------
@@ -6014,15 +3243,15 @@ advance_trigger_type
 
         ----
         **Note**
-        Set this property to :py:data:`~nirfsa.AdvanceTrigType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method.
+        Set this property to :py:data:`~nirfsa.AdvanceTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
 
         ----
 
         **Defined Values:**
 
-        %enum_table{advance trig type}
+        %enum_table{advance trigger type}
 
-        **Default Value**: :py:data:`~nirfsa.AdvanceTrigType.NONE`
+        **Default Value**: :py:data:`~nirfsa.AdvanceTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6036,15 +3265,15 @@ advance_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------+
-            | Characteristic        | Value                 |
-            +=======================+=======================+
-            | Datatype              | enums.AdvanceTrigType |
-            +-----------------------+-----------------------+
-            | Permissions           | read-write            |
-            +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
+            +-----------------------+--------------------------+
+            | Characteristic        | Value                    |
+            +=======================+==========================+
+            | Datatype              | enums.AdvanceTriggerType |
+            +-----------------------+--------------------------+
+            | Permissions           | read-write               |
+            +-----------------------+--------------------------+
+            | Repeated Capabilities | None                     |
+            +-----------------------+--------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6183,21 +3412,21 @@ arm_ref_trigger_type
 
         ----
         **Note**
-        The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support :py:data:`~nirfsa.ArmRefTrigType.NONE`.
+        The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support :py:data:`~nirfsa.ArmReferenceTriggerType.NONE`.
 
         ----
 
         ----
         **Note**
-        Set this property to :py:data:`~nirfsa.ArmRefTrigType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.configure_acquisition_type` method.
+        Set this property to :py:data:`~nirfsa.ArmReferenceTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
 
         ----
 
         **Defined Values:**
 
-        %enum_table{arm ref trig type}
+        %enum_table{arm reference trigger type}
 
-        **Default Value**: :py:data:`~nirfsa.ArmRefTrigType.NONE`
+        **Default Value**: :py:data:`~nirfsa.ArmReferenceTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6207,15 +3436,15 @@ arm_ref_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.ArmRefTrigType |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.ArmReferenceTriggerType |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | None                          |
+            +-----------------------+-------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6346,246 +3575,6 @@ available_ports
                 - LabVIEW Property: **Signal Path:Advanced:Available Ports**
                 - C Attribute: **NIRFSA_ATTR_AVAILABLE_PORTS**
 
-cache
------
-
-    .. py:attribute:: cache
-
-        Specifies whether to cache the value of properties.
-
-        If you set this property to True, NI-RFSA tracks the current NI-RFSA device settings and avoids sending redundant commands to the device.
-
-        NI-RFSA can always cache or never cache particular properties, regardless of the setting of this property.
-
-        Use the :py:meth:`nirfsa.Session.init_with_options` method to override the default value.
-
-        **Defined Values:**
-
-        |Value          | Description                      |
-        |:---------|:---------------------|
-        | True  | Caching is enabled.  |
-        | False | Caching is disabled. |
-
-        **Default Value**: True
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Cache**
-                - C Attribute: **NIRFSA_ATTR_CACHE**
-
-calibration_correction_100_mhz_filter
--------------------------------------
-
-    .. py:attribute:: calibration_correction_100_mhz_filter
-
-        Specifies the internal gain self-calibration correction for the 100 MHz IF filter path.
-
-        The value you specify using this property overrides any previously-set value.
-
-        **Units**: dB
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Self Calibration:NI 5665/5668R:Calibration Correction for 100 MHz Filter**
-                - C Attribute: **NIRFSA_ATTR_CALIBRATION_CORRECTION_100_MHZ_FILTER**
-
-calibration_correction_300_khz_filter
--------------------------------------
-
-    .. py:attribute:: calibration_correction_300_khz_filter
-
-        Specifies the internal gain self-calibration correction for the 300 kHz IF filter path.
-
-        The value you specify using this property overrides any previously-set value.
-
-        **Units**: dB
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Self Calibration:NI 5665/5668R:Calibration Correction for 300 kHz Filter**
-                - C Attribute: **NIRFSA_ATTR_CALIBRATION_CORRECTION_300_KHZ_FILTER**
-
-calibration_correction_320_mhz_filter
--------------------------------------
-
-    .. py:attribute:: calibration_correction_320_mhz_filter
-
-        Specifies the internal gain self-calibration correction for the 320 MHz IF filter path.
-
-        The value you specify using this property overrides any previously-set value.
-
-        **Units**: dB
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Self Calibration:NI 5665/5668R:Calibration Correction for 320 MHz Filter**
-                - C Attribute: **NIRFSA_ATTR_CALIBRATION_CORRECTION_320_MHZ_FILTER**
-
-calibration_correction_5_mhz_filter
------------------------------------
-
-    .. py:attribute:: calibration_correction_5_mhz_filter
-
-        Specifies the internal gain self-calibration correction for the 5 MHz IF filter path.
-
-        The value you specify using this property overrides any previously-set value.
-
-        **Units**: dB
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Self Calibration:NI 5665/5668R:Calibration Correction for 5 MHz Filter**
-                - C Attribute: **NIRFSA_ATTR_CALIBRATION_CORRECTION_5_MHZ_FILTER**
-
-calibration_correction_765_mhz_filter
--------------------------------------
-
-    .. py:attribute:: calibration_correction_765_mhz_filter
-
-        Specifies the internal gain self-calibration correction for the 765 MHz IF filter path.
-
-        The value you specify using this property overrides any previously-set value.
-
-        **Units**: dB
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Self Calibration:NI 5665/5668R:Calibration Correction for 765 MHz Filter**
-                - C Attribute: **NIRFSA_ATTR_CALIBRATION_CORRECTION_765_MHZ_FILTER**
-
-calibration_correction_through_filter
--------------------------------------
-
-    .. py:attribute:: calibration_correction_through_filter
-
-        Specifies the internal gain self-calibration correction for the IF filter through path.
-
-        The value you specify using this property overrides any previously-set value.
-
-        **Units**: dB
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5603/5605
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Self Calibration:NI 5665/5668R:Calibration Correction for Through Filter**
-                - C Attribute: **NIRFSA_ATTR_CALIBRATION_CORRECTION_THROUGH_FILTER**
-
 cal_digitizer_id
 ----------------
 
@@ -6650,72 +3639,6 @@ cal_if_attenuation_index
                 - LabVIEW Property: **Factory Calibration:NI 5665/5668R:IF Attenuation Table Index**
                 - C Attribute: **NIRFSA_ATTR_CAL_IF_ATTENUATION_INDEX**
 
-cal_if_attenuation_table_selection
-----------------------------------
-
-    .. py:attribute:: cal_if_attenuation_table_selection
-
-        Specifies the IF attenuation table to be used for external calibration.
-
-        This property is valid only in a calibration session.
-
-        **Defined Values**:
-
-        %enum_table{i fatten table sel}
-
-        **Default Value**: :py:data:`~nirfsa.IFattenTableSel.STANDARD`
-
-        **Supported Devices**: PXIe-5603/5605
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------------------+
-            | Characteristic        | Value                 |
-            +=======================+=======================+
-            | Datatype              | enums.IFattenTableSel |
-            +-----------------------+-----------------------+
-            | Permissions           | read-write            |
-            +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:IF Attenuation Table Selection**
-                - C Attribute: **NIRFSA_ATTR_CAL_IF_ATTENUATION_TABLE_SELECTION**
-
-cal_if_attenuation_table_size
------------------------------
-
-    .. py:attribute:: cal_if_attenuation_table_size
-
-        Returns the size of the selected IF attenuation table.
-
-        **Valid Values**: 0-132
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:IF Attenuation Table Size**
-                - C Attribute: **NIRFSA_ATTR_CAL_IF_ATTENUATION_TABLE_SIZE**
-
 cal_if_filter_selection
 -----------------------
 
@@ -6727,271 +3650,29 @@ cal_if_filter_selection
 
         **Defined Values:**
 
-        %enum_table{i ffilter sel}
+        %enum_table{i ffilter selection}
 
-        **Default Value**: :py:data:`~nirfsa.IFfilterSel._4`
+        **Default Value**: :py:data:`~nirfsa.IFfilterSelection._4`
 
         **Supported Devices**: PXIe-5694
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------+
-            | Characteristic        | Value             |
-            +=======================+===================+
-            | Datatype              | enums.IFfilterSel |
-            +-----------------------+-------------------+
-            | Permissions           | read-write        |
-            +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
+            +-----------------------+-------------------------+
+            | Characteristic        | Value                   |
+            +=======================+=========================+
+            | Datatype              | enums.IFfilterSelection |
+            +-----------------------+-------------------------+
+            | Permissions           | read-write              |
+            +-----------------------+-------------------------+
+            | Repeated Capabilities | None                    |
+            +-----------------------+-------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - LabVIEW Property: **Factory Calibration:NI 5665/5668R:IF Filter Selection**
                 - C Attribute: **NIRFSA_ATTR_CAL_IF_FILTER_SELECTION**
-
-cal_lo1_attenuation
--------------------
-
-    .. py:attribute:: cal_lo1_attenuation
-
-        Specifies the LO1 attenuation, in dB, during a calibration session.
-
-        This property is valid only during a calibration session.
-
-        **Valid Values and Default Values**:
-
-        | Device         | Valid Values | Default Value |
-        |:---------------|:-------------|:--------------|
-        | PXIe-5603/5605 | 0 to 15.5    | 15.5          |
-        | PXIe-5606      | 0 to 31      | 31            |
-
-        **Supported Devices**: PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:LO1 Attenuation**
-                - C Attribute: **NIRFSA_ATTR_CAL_LO1_ATTENUATION**
-
-cal_lo2_attenuation
--------------------
-
-    .. py:attribute:: cal_lo2_attenuation
-
-        Specifies the LO2 attenuation, in dB, during a calibration session.
-
-        This property is valid only during a calibration session.
-
-        **Valid Values and Default Values**:
-
-        | Device         | Valid Values | Default Value |
-        |:---------------|:-------------|:--------------|
-        | PXIe-5603/5605 | 0 to 15.5    | 15.5          |
-        | PXIe-5606      | 0 to 31      | 31            |
-
-        **Supported Devices**: PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:LO2 Attenuation**
-                - C Attribute: **NIRFSA_ATTR_CAL_LO2_ATTENUATION**
-
-cal_lo3_attenuation
--------------------
-
-    .. py:attribute:: cal_lo3_attenuation
-
-        Specifies the LO3 attenuation, in dB, during a calibration session. This property is valid only during a calibration session.
-
-        **Valid Values and Default Values**:
-
-        | Device         | Valid Values | Default Value |
-        |:---------------|:-------------|:--------------|
-        | PXIe-5603/5605 | 0 to 15.5    | 15.5          |
-        | PXIe-5606      | 0 to 31      | 31            |
-
-        **Supported Devices**: PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:LO3 Attenuation**
-                - C Attribute: **NIRFSA_ATTR_CAL_LO3_ATTENUATION**
-
-cal_lo_path_selection
----------------------
-
-    .. py:attribute:: cal_lo_path_selection
-
-        Selects the LO signal path used during calibration.
-
-        During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session.
-
-        **Defined Values:**
-
-        %enum_table{lo path sel}
-
-        **Default Value**: :py:data:`~nirfsa.LoPathSel._1`
-
-        **Supported Devices**: PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------------+
-            | Characteristic        | Value           |
-            +=======================+=================+
-            | Datatype              | enums.LoPathSel |
-            +-----------------------+-----------------+
-            | Permissions           | read-write      |
-            +-----------------------+-----------------+
-            | Repeated Capabilities | None            |
-            +-----------------------+-----------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:LO Path Selection**
-                - C Attribute: **NIRFSA_ATTR_CAL_LO_PATH_SELECTION**
-
-cal_rf_electronic_attenuation_index
------------------------------------
-
-    .. py:attribute:: cal_rf_electronic_attenuation_index
-
-        Selects the value of RF electronic attenuation from a table of valid configurations.
-
-        This property is valid only during a calibration session and when you set the :py:attr:`nirfsa.Session.cal_rf_path_selection` property to :py:data:`~nirfsa.RfPathSel._1`.
-
-        **Default Value**: N/A
-
-        **Supported Devices:** PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:RF Electronic Attenuation Table Index**
-                - C Attribute: **NIRFSA_ATTR_CAL_RF_ELECTRONIC_ATTENUATION_INDEX**
-
-cal_rf_lowband_signal_conditioning_path_selection
--------------------------------------------------
-
-    .. py:attribute:: cal_rf_lowband_signal_conditioning_path_selection
-
-        Specifies the RF lowband signal conditioning path.
-
-        **Valid Values**:
-
-        :py:data:`~nirfsa.RfLbSigCondPathSel._1`
-
-        :py:data:`~nirfsa.RfLbSigCondPathSel._2`
-
-        **Default Value**: :py:data:`~nirfsa.RfLbSigCondPathSel._1`
-
-        **Supported Devices**: PXIe-5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.RfLbSigCondPathSel |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:RF Lowband Signal Conditioning Path Selection**
-                - C Attribute: **NIRFSA_ATTR_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_SELECTION**
-
-cal_rf_mechanical_attenuation_index
------------------------------------
-
-    .. py:attribute:: cal_rf_mechanical_attenuation_index
-
-        Selects the value of the RF mechanical attenuation configuration from a table of valid configurations.
-
-        This property is valid only during a calibration session.
-
-        **Default Values**:
-
-        **PXIe-5603/5605**: 3
-
-        **PXIe-5606**: 2
-
-        **Supported Devices:** PXIe-5603/5605/5606
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5665/5668R:RF Mechanical Attenuation Table Index**
-                - C Attribute: **NIRFSA_ATTR_CAL_RF_MECHANICAL_ATTENUATION_INDEX**
 
 cal_rf_path_selection
 ---------------------
@@ -7018,30 +3699,30 @@ cal_rf_path_selection
 
         | Value                                  | Description                 | Valid For                |
         |:---------------------------------------|:----------------------------|:-------------------------|
-        | :py:data:`~nirfsa.RfPathSel._1` (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |
-        | :py:data:`~nirfsa.RfPathSel._2` (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |
-        | :py:data:`~nirfsa.RfPathSel._3` (1702)    | Specifies to use RF band 3. | PXIe-5601                |
-        | :py:data:`~nirfsa.RfPathSel._4` (1703)    | Specifies to use RF band 4. | PXIe-5601                |
+        | :py:data:`~nirfsa.RfPathSelection._1` (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |
+        | :py:data:`~nirfsa.RfPathSelection._2` (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |
+        | :py:data:`~nirfsa.RfPathSelection._3` (1702)    | Specifies to use RF band 3. | PXIe-5601                |
+        | :py:data:`~nirfsa.RfPathSelection._4` (1703)    | Specifies to use RF band 4. | PXIe-5601                |
 
         **Default Values**:
 
-        **PXIe-5603/5605 (low band)/5606**: :py:data:`~nirfsa.RfPathSel._1`
+        **PXIe-5603/5605 (low band)/5606**: :py:data:`~nirfsa.RfPathSelection._1`
 
-        **PXIe-5601/5605 (high band)**: :py:data:`~nirfsa.RfPathSel._2`
+        **PXIe-5601/5605 (high band)**: :py:data:`~nirfsa.RfPathSelection._2`
 
         **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5698
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------+
-            | Characteristic        | Value           |
-            +=======================+=================+
-            | Datatype              | enums.RfPathSel |
-            +-----------------------+-----------------+
-            | Permissions           | read-write      |
-            +-----------------------+-----------------+
-            | Repeated Capabilities | None            |
-            +-----------------------+-----------------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | enums.RfPathSelection |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | None                  |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7252,72 +3933,6 @@ common_mode
                 - LabVIEW Property: **Device Specific:Vector Signal Transceiver:IQ In Port:Common Mode Level**
                 - C Attribute: **NIRFSA_ATTR_COMMON_MODE**
 
-configuration_list_step_in_progress
------------------------------------
-
-    .. py:attribute:: configuration_list_step_in_progress
-
-        Returns the configuration list step that is currently programmed to the hardware.
-
-        The list is zero-indexed. You can query this property only when a list is executed.
-
-        **PXIe-5663E/5665/5667**: This property can be read only when a configuration list is running.
-
-        **PXIe-5644/5645/5646**: This property always returns 0 when the configuration list is not running.
-
-        **PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters**: If a configuration list is not running, this property returns the last step of a configuration list that is programmed to the hardware. If the device was last initiated without an active configuration list, this property returns 0.
-
-        **Default Value**: N/A
-
-        **Supported Devices:**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-        **Related Topics**
-
-        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Step In Progress**
-                - C Attribute: **NIRFSA_ATTR_CONFIGURATION_LIST_STEP_IN_PROGRESS**
-
-contiguous_multirecord
-----------------------
-
-    .. py:attribute:: contiguous_multirecord
-
-        This property is not for customer use.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Acquisition:IQ:Advanced:Contiguous Multirecord**
-                - C Attribute: **NIRFSA_ATTR_CONTIGUOUS_MULTIRECORD**
-
 created_session_channel
 -----------------------
 
@@ -7341,76 +3956,6 @@ created_session_channel
             This property corresponds to the following LabVIEW Property or C Attribute:
 
                 - C Attribute: **NIRFSA_ATTR_CREATED_SESSION_CHANNEL**
-
-data_transfer_block_size
-------------------------
-
-    .. py:attribute:: data_transfer_block_size
-
-        Specifies the maximum number of samples to transfer at one time from the device to host memory.
-
-        Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may increase the amount of page-locked memory required from the system.
-
-        **Default Values**:
-
-        **PXIe-5668**: 0x2,000,000
-
-        **All Other Devices**: 0x400,000
-
-        **Supported Devices:**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Acquisition:Fetch:Data Transfer:Data Transfer Block Size**
-                - C Attribute: **NIRFSA_ATTR_DATA_TRANSFER_BLOCK_SIZE**
-
-data_transfer_maximum_bandwidth
--------------------------------
-
-    .. py:attribute:: data_transfer_maximum_bandwidth
-
-        Specifies the maximum bandwidth that the device can consume.
-
-        ----
-        **Note**
-        The NI device limits itself to transfer fewer bytes per second on the PCI Express bus than the value you specify for this property.
-
-        ----
-
-        **Default Value**: N/A
-
-        **Supported Devices:**: PXI-5661, PXIe-5663/5663E/5665
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Acquisition:Fetch:Data Transfer:Data Transfer Maximum Bandwidth**
-                - C Attribute: **NIRFSA_ATTR_DATA_TRANSFER_MAXIMUM_BANDWIDTH**
 
 ddc_ref_trigger_override
 ------------------------
@@ -7510,7 +4055,7 @@ deembedding_selected_table
 
         If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
-        Use the :py:meth:`nirfsa.Session._create_deembedding_sparameter_table_array` method to create tables.
+        Use the :py:meth:`nirfsa.Session.CreateDeembeddingSparameterTableArray` method to create tables.
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -7541,31 +4086,31 @@ deembedding_type
 
         To use this property, you must use the channelName parameter of the :py:meth:`nirfsa.Session.set_attribute_vi_int32` method to specify the name of the port to configure for de-embedding.
 
-        If you set this property to :py:data:`~nirfsa.DeembeddingTypeAttrVals.SCALAR` or :py:data:`~nirfsa.DeembeddingTypeAttrVals.VECTOR`, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+        If you set this property to :py:data:`~nirfsa.DeembeddingType.SCALAR` or :py:data:`~nirfsa.DeembeddingType.VECTOR`, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
         **Defined Values:**
 
-        %enum_table{deembedding type attr vals}
+        %enum_table{deembedding type}
 
-        **Default Value**: :py:data:`~nirfsa.DeembeddingTypeAttrVals.SCALAR`
+        **Default Value**: :py:data:`~nirfsa.DeembeddingType.SCALAR`
 
-        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsa.DeembeddingTypeAttrVals.SCALAR` or  :py:data:`~nirfsa.DeembeddingTypeAttrVals.NONE`
+        **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsa.DeembeddingType.SCALAR` or  :py:data:`~nirfsa.DeembeddingType.NONE`
 
-        **Valid Values for PXIe-5831:** :py:data:`~nirfsa.DeembeddingTypeAttrVals.VECTOR`, :py:data:`~nirfsa.DeembeddingTypeAttrVals.SCALAR`, or :py:data:`~nirfsa.DeembeddingTypeAttrVals.NONE`. :py:data:`~nirfsa.DeembeddingTypeAttrVals.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
+        **Valid Values for PXIe-5831:** :py:data:`~nirfsa.DeembeddingType.VECTOR`, :py:data:`~nirfsa.DeembeddingType.SCALAR`, or :py:data:`~nirfsa.DeembeddingType.NONE`. :py:data:`~nirfsa.DeembeddingType.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------------------+
-            | Characteristic        | Value                         |
-            +=======================+===============================+
-            | Datatype              | enums.DeembeddingTypeAttrVals |
-            +-----------------------+-------------------------------+
-            | Permissions           | read-write                    |
-            +-----------------------+-------------------------------+
-            | Repeated Capabilities | None                          |
-            +-----------------------+-------------------------------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | enums.DeembeddingType |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | None                  |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7859,33 +4404,6 @@ digital_edge_arm_ref_trigger_source
                 - LabVIEW Property: **Triggers:Arm Ref:Digital Edge:Source**
                 - C Attribute: **NIRFSA_ATTR_DIGITAL_EDGE_ARM_REF_TRIGGER_SOURCE**
 
-digital_edge_configuration_list_step_trigger_source
----------------------------------------------------
-
-    .. py:attribute:: digital_edge_configuration_list_step_trigger_source
-
-        Configures the list trigger source.
-
-        The default value is the :py:data:`~nirfsa.Signal.END_OF_RECORD_EVENT`. When the value is :py:data:`~nirfsa.Signal.END_OF_RECORD_EVENT`, this will signal the instrument to reconfigure from configuration N to configuration N + 1 after the End Of Record Event, and before the Ready For Advance Event. If you configure this property to any other value, the instrument reconfiguration will occur whenever the specified trigger is asserted, which may be decoupled from the acquisition state machine. Therefore, if you trigger a reconfiguration during a record acquisition, you may see transient data in the record, which should be discarded by the application. NI recommends you to use this property only in case of streaming.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Configuration List Step:Digital Edge:Source**
-                - C Attribute: **NIRFSA_ATTR_DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE**
-
 digital_edge_ref_trigger_edge
 -----------------------------
 
@@ -7897,9 +4415,9 @@ digital_edge_ref_trigger_edge
 
         **Defined Values:**
 
-        %enum_table{ref trig dig edge edge}
+        %enum_table{reference trigger digital edge edge}
 
-        **Default Value**: :py:data:`~nirfsa.RefTrigDigEdgeEdge.RISING`
+        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -7917,15 +4435,15 @@ digital_edge_ref_trigger_edge
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.RefTrigDigEdgeEdge |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
+            +-----------------------+---------------------------------------+
+            | Characteristic        | Value                                 |
+            +=======================+=======================================+
+            | Datatype              | enums.ReferenceTriggerDigitalEdgeEdge |
+            +-----------------------+---------------------------------------+
+            | Permissions           | read-write                            |
+            +-----------------------+---------------------------------------+
+            | Repeated Capabilities | None                                  |
+            +-----------------------+---------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7989,10 +4507,10 @@ digital_edge_start_trigger_edge
 
         | Value                         | Description                                           | Valid For                           |
         |:------------------------------|:------------------------------------------------------|:------------------------------------|
-        | :py:data:`~nirfsa.StartTrigDigEdgeEdge.RISING` (900)  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |
-        | :py:data:`~nirfsa.StartTrigDigEdgeEdge.FALLING` (901) | The trigger asserts on the falling edge of the signal | PXIe-5668                           |
+        | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING` (900)  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |
+        | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.FALLING` (901) | The trigger asserts on the falling edge of the signal | PXIe-5668                           |
 
-        **Default Value**: :py:data:`~nirfsa.StartTrigDigEdgeEdge.RISING`
+        **Default Value**: :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -8010,15 +4528,15 @@ digital_edge_start_trigger_edge
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------------+
-            | Characteristic        | Value                      |
-            +=======================+============================+
-            | Datatype              | enums.StartTrigDigEdgeEdge |
-            +-----------------------+----------------------------+
-            | Permissions           | read-write                 |
-            +-----------------------+----------------------------+
-            | Repeated Capabilities | None                       |
-            +-----------------------+----------------------------+
+            +-----------------------+-----------------------------------+
+            | Characteristic        | Value                             |
+            +=======================+===================================+
+            | Datatype              | enums.StartTriggerDigitalEdgeEdge |
+            +-----------------------+-----------------------------------+
+            | Permissions           | read-write                        |
+            +-----------------------+-----------------------------------+
+            | Repeated Capabilities | None                              |
+            +-----------------------+-----------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8125,7 +4643,7 @@ digital_if_equalization_enabled
 
         ----
         **Note**
-        For PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this property to True if the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property is set to :py:data:`~nirfsa.DigitizerSampClkTimebaseSrc.LO_REF_CLK`.
+        For PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this property to True if the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property is set to :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.LO_REF_CLK`.
 
         ----
 
@@ -8253,7 +4771,7 @@ digitizer_sample_clock_timebase_rate
 
     .. py:attribute:: digitizer_sample_clock_timebase_rate
 
-        Specifies the frequency, in hertz (Hz), of the external clock used as the timebase source if you set the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property to an external source, such as :py:data:`~nirfsa.NIRFSA_VAL_CLK_IN_STR`, :py:data:`~nirfsa.DigitizerSampClkTimebaseSrc.LO_REF_CLK`, or :py:data:`~nirfsa.DigitizerSampClkTimebaseSrc.DOWNCONVERTER_LO2_OUT`
+        Specifies the frequency, in hertz (Hz), of the external clock used as the timebase source if you set the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property to an external source, such as :py:data:`~nirfsa.NIRFSA_VAL_CLK_IN_STR`, :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.LO_REF_CLK`, or :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.DOWNCONVERTER_LO2_OUT`
 
         **PXI-5661**If this property is set to a value less than 60 MHz, signals at frequencies just above the 20 MHz passband of the downconverter may be aliased back into the passband. This aliasing occurs because the IF frequency of the downconverter is 15 MHz, and the upper end of the passband is 25 MHz. At sampling rates below 60 MHz, the Nyquist frequency is close to the end of the passband and creates aliases that are not filtered effectively by the downconverter.
 
@@ -8300,9 +4818,9 @@ digitizer_sample_clock_timebase_source
 
         **Defined Values:**
 
-        %enum_table{digitizer samp clk timebase src}
+        %enum_table{digitizer sample clock timebase source}
 
-        **Default Value**: :py:data:`~nirfsa.DigitizerSampClkTimebaseSrc.ONBOARD_CLOCK`
+        **Default Value**: :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.ONBOARD_CLOCK`
 
         **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
@@ -8312,15 +4830,15 @@ digitizer_sample_clock_timebase_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------------+
-            | Characteristic        | Value                             |
-            +=======================+===================================+
-            | Datatype              | enums.DigitizerSampClkTimebaseSrc |
-            +-----------------------+-----------------------------------+
-            | Permissions           | read-write                        |
-            +-----------------------+-----------------------------------+
-            | Repeated Capabilities | None                              |
-            +-----------------------+-----------------------------------+
+            +-----------------------+------------------------------------------+
+            | Characteristic        | Value                                    |
+            +=======================+==========================================+
+            | Datatype              | enums.DigitizerSampleClockTimebaseSource |
+            +-----------------------+------------------------------------------+
+            | Permissions           | read-write                               |
+            +-----------------------+------------------------------------------+
+            | Repeated Capabilities | None                                     |
+            +-----------------------+------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8923,7 +5441,7 @@ exported_advance_trigger_output_terminal
 
         **Defined Values:**
 
-        %enum_table{export output term}
+        %enum_table{export output terminal}
 
         **Default Value**: "" (empty string)
 
@@ -8931,19 +5449,19 @@ exported_advance_trigger_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8959,7 +5477,7 @@ exported_digitizer_sample_clock_output_terminal
         Specifies the terminal at which to export the Digitizer Sample Clock.
 
         **Valid Values**:
-        %enum_table{digitizer samp clk exported term}
+        %enum_table{digitizer sample clock exported terminal}
 
         **Default Value**: "" (empty string)
 
@@ -8967,15 +5485,15 @@ exported_digitizer_sample_clock_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------------------+
-            | Characteristic        | Value                              |
-            +=======================+====================================+
-            | Datatype              | enums.DigitizerSampClkExportedTerm |
-            +-----------------------+------------------------------------+
-            | Permissions           | read-write                         |
-            +-----------------------+------------------------------------+
-            | Repeated Capabilities | None                               |
-            +-----------------------+------------------------------------+
+            +-----------------------+--------------------------------------------+
+            | Characteristic        | Value                                      |
+            +=======================+============================================+
+            | Datatype              | enums.DigitizerSampleClockExportedTerminal |
+            +-----------------------+--------------------------------------------+
+            | Permissions           | read-write                                 |
+            +-----------------------+--------------------------------------------+
+            | Repeated Capabilities | None                                       |
+            +-----------------------+--------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8992,7 +5510,7 @@ exported_done_event_output_terminal
 
         **Defined Values:**
 
-        %enum_table{export output term}
+        %enum_table{export output terminal}
 
         **Default Value**: "" (empty string)
 
@@ -9000,19 +5518,19 @@ exported_done_event_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9029,7 +5547,7 @@ exported_end_of_record_event_output_terminal
 
         **Defined Values:**
 
-        %enum_table{export output term}
+        %enum_table{export output terminal}
 
         **Default Value**: "" (empty string)
 
@@ -9045,19 +5563,19 @@ exported_end_of_record_event_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9074,30 +5592,30 @@ exported_ready_for_advance_event_output_terminal
 
         | Value                                           | Description                                                                                                                                                                   |
         |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-        | :py:data:`~nirfsa.ExportOutputTerm.DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
-        | :py:data:`~nirfsa.ExportOutputTerm.CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-        | :py:data:`~nirfsa.ExportOutputTerm.REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
-        | :py:data:`~nirfsa.ExportOutputTerm.PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-        | :py:data:`~nirfsa.ExportOutputTerm.PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI0` ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI1`("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI2` ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI3` ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI4` ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI5` ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI6` ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI7` ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
+        | :py:data:`~nirfsa.ExportOutputTerminal.CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+        | :py:data:`~nirfsa.ExportOutputTerminal.REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI0` ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI1`("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI2` ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI3` ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI4` ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI5` ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI6` ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI7` ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
         **Default Value**: "" (empty string)
 
@@ -9105,7 +5623,7 @@ exported_ready_for_advance_event_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
 
 
@@ -9113,15 +5631,15 @@ exported_ready_for_advance_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9138,30 +5656,30 @@ exported_ready_for_ref_event_output_terminal
 
         | Value                                           | Description                                                                                                                                                                   |
         |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-        | :py:data:`~nirfsa.ExportOutputTerm.DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
-        | :py:data:`~nirfsa.ExportOutputTerm.CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-        | :py:data:`~nirfsa.ExportOutputTerm.REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
-        | :py:data:`~nirfsa.ExportOutputTerm.PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-        | :py:data:`~nirfsa.ExportOutputTerm.PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI0` ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI1`("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI2` ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI3` ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI4` ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI5` ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI6` ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI7` ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
+        | :py:data:`~nirfsa.ExportOutputTerminal.CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+        | :py:data:`~nirfsa.ExportOutputTerminal.REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI0` ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI1`("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI2` ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI3` ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI4` ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI5` ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI6` ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI7` ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
         **Default Value**: "" (empty string)
 
@@ -9169,7 +5687,7 @@ exported_ready_for_ref_event_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
 
 
@@ -9177,15 +5695,15 @@ exported_ready_for_ref_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9202,30 +5720,30 @@ exported_ready_for_start_event_output_terminal
 
         | Value                                           | Description                                                                                                                                                                   |
         |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-        | :py:data:`~nirfsa.ExportOutputTerm.DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
-        | :py:data:`~nirfsa.ExportOutputTerm.CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-        | :py:data:`~nirfsa.ExportOutputTerm.REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
-        | :py:data:`~nirfsa.ExportOutputTerm.PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-        | :py:data:`~nirfsa.ExportOutputTerm.PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-        | :py:data:`~nirfsa.ExportOutputTerm.PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI0` ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI1`("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI2` ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI3` ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI4` ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI5` ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI6` ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-        | :py:data:`~nirfsa.ExportOutputTerm.DIO_PFI7` ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
+        | :py:data:`~nirfsa.ExportOutputTerminal.CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+        | :py:data:`~nirfsa.ExportOutputTerminal.REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+        | :py:data:`~nirfsa.ExportOutputTerminal.PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI0` ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI1`("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI2` ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI3` ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI4` ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI5` ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI6` ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+        | :py:data:`~nirfsa.ExportOutputTerminal.DIO_PFI7` ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
         **Default Value**: "" (empty string)
 
@@ -9233,7 +5751,7 @@ exported_ready_for_start_event_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
 
 
@@ -9241,15 +5759,15 @@ exported_ready_for_start_event_output_terminal
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9266,7 +5784,7 @@ exported_ref_clock_output_terminal
 
         **Defined Values:**
 
-        %enum_table{ref clk exported term}
+        %enum_table{reference clock exported terminal}
 
         **Default Value**: "" (empty string)
 
@@ -9274,19 +5792,19 @@ exported_ref_clock_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.RefClkExportedTerm |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
+            +-----------------------+--------------------------------------+
+            | Characteristic        | Value                                |
+            +=======================+======================================+
+            | Datatype              | enums.ReferenceClockExportedTerminal |
+            +-----------------------+--------------------------------------+
+            | Permissions           | read-write                           |
+            +-----------------------+--------------------------------------+
+            | Repeated Capabilities | None                                 |
+            +-----------------------+--------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9340,7 +5858,7 @@ exported_ref_trigger_output_terminal
 
         **Defined Values:**
 
-        %enum_table{export output term}
+        %enum_table{export output terminal}
 
         **Default Value**: "" (empty string)
 
@@ -9348,19 +5866,19 @@ exported_ref_trigger_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9377,7 +5895,7 @@ exported_start_trigger_output_terminal
 
         **Defined Values:**
 
-        %enum_table{export output term}
+        %enum_table{export output terminal}
 
         **Default Value**: "" (empty string)
 
@@ -9385,19 +5903,19 @@ exported_start_trigger_output_terminal
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.export_signal`
+        - :py:meth:`nirfsa.Session.ExportSignal`
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------------------+
-            | Characteristic        | Value                  |
-            +=======================+========================+
-            | Datatype              | enums.ExportOutputTerm |
-            +-----------------------+------------------------+
-            | Permissions           | read-write             |
-            +-----------------------+------------------------+
-            | Repeated Capabilities | None                   |
-            +-----------------------+------------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ExportOutputTerminal |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9994,76 +6512,6 @@ host_dma_buffer_size
                 - LabVIEW Property: **Acquisition:Fetch:Data Transfer:Host DMA Buffer Size**
                 - C Attribute: **NIRFSA_ATTR_HOST_DMA_BUFFER_SIZE**
 
-if1_atten_value
----------------
-
-    .. py:attribute:: if1_atten_value
-
-        Specifies the IF1 attenuation, in dB. The device IF1 attenuator is set to this nominal value.
-
-        Use this property, along with the :py:attr:`nirfsa.Session.if2_atten_value` property, when you set the :py:attr:`nirfsa.Session.if_filter` property to :py:data:`~nirfsa.IFfilter.BYPASS`.
-
-        **Valid Values**: 0 to 15
-
-        **Units**: dB
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:NI 5663:IF1 Attenuation (dB)**
-                - C Attribute: **NIRFSA_ATTR_IF1_ATTEN_VALUE**
-
-if2_atten_value
----------------
-
-    .. py:attribute:: if2_atten_value
-
-        Specifies the IF2 attenuation, in dB. The device IF2 attenuator is set to this nominal value.
-
-        Use this property, along with the :py:attr:`nirfsa.Session.if1_atten_value` property, when you set the :py:attr:`nirfsa.Session.if_filter` property to :py:data:`~nirfsa.IFfilter.BYPASS`.
-
-        **Valid Values**: 0 to 15
-
-        **Units**: dB
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:NI 5663:IF2 Attenuation (dB)**
-                - C Attribute: **NIRFSA_ATTR_IF2_ATTEN_VALUE**
-
 if_attenuation
 --------------
 
@@ -10145,68 +6593,6 @@ if_conditioning_down_conversion_enabled
 
                 - LabVIEW Property: **Signal Path:Advanced:IF Conditioning Downconversion Enabled**
                 - C Attribute: **NIRFSA_ATTR_IF_CONDITIONING_DOWN_CONVERSION_ENABLED**
-
-if_conditioning_temperature
----------------------------
-
-    .. py:attribute:: if_conditioning_temperature
-
-        Returns the current temperature, in degrees Celsius, of the IF conditioning module associated with the NI-RFSA device.
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5667
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Characteristics:IF Conditioning Temperature (Degrees C)**
-                - C Attribute: **NIRFSA_ATTR_IF_CONDITIONING_TEMPERATURE**
-
-if_filter
----------
-
-    .. py:attribute:: if_filter
-
-        Specifies the desired IF filter path, regardless of the RF band chosen by NI-RFSA.
-
-        **Defined Values:**
-
-        %enum_table{i ffilter}
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5601
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+----------------+
-            | Characteristic        | Value          |
-            +=======================+================+
-            | Datatype              | enums.IFfilter |
-            +-----------------------+----------------+
-            | Permissions           | read-write     |
-            +-----------------------+----------------+
-            | Repeated Capabilities | None           |
-            +-----------------------+----------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:NI 5663:IF Filter**
-                - C Attribute: **NIRFSA_ATTR_IF_FILTER**
 
 if_filter_bandwidth
 -------------------
@@ -10586,48 +6972,6 @@ instrument_model
                 - LabVIEW Property: **Inherent IVI Attributes:Instrument Identification:Model**
                 - C Attribute: **NIRFSA_ATTR_INSTRUMENT_MODEL**
 
-interchange_check
------------------
-
-    .. py:attribute:: interchange_check
-
-        Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.
-
-        ----
-        **Note**
-        Interchangeability check is unsupported.
-
-        ----
-
-        **Defined Values:**
-
-        | Value         | Description                                                                           |
-        |:---------|:---------------------------------------------------------------------------|
-        | True  | NI-RFSA performs interchangeability-checking and retrieves warnings.       |
-        | False | NI-RFSA does not perform interchangeability-checking or retrieve warnings. |
-
-        **Default Value**: False
-
-        **Supported Devices**: None
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Interchange Check**
-                - C Attribute: **NIRFSA_ATTR_INTERCHANGE_CHECK**
-
 io_resource_descriptor
 ----------------------
 
@@ -10668,7 +7012,7 @@ iq_analog_edge_ref_trigger_hysteresis
 
         Specifies the size of the hysteresis window on either side of the trigger level.
 
-        The device triggers when the signal passes through the threshold you specify with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_level` property, has the slope you specify with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.RefTrigType.IQ_ANALOG_EDGE`.
+        The device triggers when the signal passes through the threshold you specify with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_level` property, has the slope you specify with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
 
         **Valid Values:** 0 to (Voltage Range/2 + Trigger Level) for Rising Slope. 0 to (Voltage Range/2 -Trigger Level) for Falling Slope. These values limit the hysteresis to the entire voltage range that is below the trigger level for Rising Slope or that is above the trigger level for Falling Slope.
 
@@ -10701,7 +7045,7 @@ iq_analog_edge_ref_trigger_level
 
         Specifies the analog level, in volts, at which the device triggers.
 
-        The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.RefTrigType.IQ_ANALOG_EDGE`.
+        The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
 
         **Default Value:** 0 V
 
@@ -10732,27 +7076,27 @@ iq_analog_edge_ref_trigger_slope
 
         Specifies whether the device asserts the trigger when the voltage level is rising or falling.
 
-        When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.RefTrigType.IQ_ANALOG_EDGE`, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.RefTrigType.IQ_ANALOG_EDGE`.
+        When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
 
         **Defined Values:**
 
-        %enum_table{ref trig iq pwr edge slope}
+        %enum_table{reference trigger iq power edge slope}
 
-        **Default Value**: :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.RISING`
+        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`
 
         **Supported Devices:** PXIe-5644/5645
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.RefTrigIqPwrEdgeSlope |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
+            +-----------------------+----------------------------------------+
+            | Characteristic        | Value                                  |
+            +=======================+========================================+
+            | Datatype              | enums.ReferenceTriggerIqPowerEdgeSlope |
+            +-----------------------+----------------------------------------+
+            | Permissions           | read-write                             |
+            +-----------------------+----------------------------------------+
+            | Repeated Capabilities | None                                   |
+            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10767,7 +7111,7 @@ iq_analog_edge_ref_trigger_source
 
         Specifies the channel from which the device monitors the trigger.
 
-        Use a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.RefTrigType.IQ_ANALOG_EDGE`.
+        Use a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
 
         **Valid Values:** "I", "Q", "I,Q", "Q,I"
 
@@ -10834,7 +7178,7 @@ iq_carrier_frequency
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_iq_carrier_frequency`
+        - :py:meth:`nirfsa.Session.ConfigureIqCarrierFrequency`
 
         The following table lists the characteristics of this property.
 
@@ -10941,27 +7285,27 @@ iq_in_port_terminal_configuration
 
         ----
 
-        **PXIe-5820**: The only valid value for this property is :py:data:`~nirfsa.IqInPortTermCfg.DIFFERENTIAL`.
+        **PXIe-5820**: The only valid value for this property is :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`.
 
         **Defined Values:**
 
-        %enum_table{iq in port term cfg}
+        %enum_table{iq in port terminal configuration}
 
-        **Default Value**: :py:data:`~nirfsa.IqInPortTermCfg.DIFFERENTIAL`
+        **Default Value**: :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`
 
         **Supported Devices:** PXIe-5645, PXIe-5820
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------+
-            | Characteristic        | Value                 |
-            +=======================+=======================+
-            | Datatype              | enums.IqInPortTermCfg |
-            +-----------------------+-----------------------+
-            | Permissions           | read-write            |
-            +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
+            +-----------------------+-------------------------------------+
+            | Characteristic        | Value                               |
+            +=======================+=====================================+
+            | Datatype              | enums.IqInPortTerminalConfiguration |
+            +-----------------------+-------------------------------------+
+            | Permissions           | read-write                          |
+            +-----------------------+-------------------------------------+
+            | Repeated Capabilities | None                                |
+            +-----------------------+-------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11060,13 +7404,13 @@ iq_power_edge_ref_trigger_slope
 
         Specifies whether the device asserts the trigger when the signal power is rising or falling.
 
-        When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.RefTrigType.IQ_POWER_EDGE`, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
+        When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE`, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
 
         **Defined Values:**
 
-        %enum_table{ref trig iq pwr edge slope}
+        %enum_table{reference trigger iq power edge slope}
 
-        **Default Value**: :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.RISING`
+        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -11080,15 +7424,15 @@ iq_power_edge_ref_trigger_slope
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------------+
-            | Characteristic        | Value                       |
-            +=======================+=============================+
-            | Datatype              | enums.RefTrigIqPwrEdgeSlope |
-            +-----------------------+-----------------------------+
-            | Permissions           | read-write                  |
-            +-----------------------+-----------------------------+
-            | Repeated Capabilities | None                        |
-            +-----------------------+-----------------------------+
+            +-----------------------+----------------------------------------+
+            | Characteristic        | Value                                  |
+            +=======================+========================================+
+            | Datatype              | enums.ReferenceTriggerIqPowerEdgeSlope |
+            +-----------------------+----------------------------------------+
+            | Permissions           | read-write                             |
+            +-----------------------+----------------------------------------+
+            | Repeated Capabilities | None                                   |
+            +-----------------------+----------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11180,7 +7524,7 @@ iq_rate
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_iq_rate`
+        - :py:meth:`nirfsa.Session.ConfigureIqRate`
 
 
 
@@ -11293,7 +7637,7 @@ logical_name
 
         Contains the logical name you specified when opening the current IVI session.
 
-        You may pass a logical name to the :py:meth:`nirfsa.Session.init` method or the :py:meth:`nirfsa.Session.init_with_options` method. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options.
+        You may pass a logical name to the :py:meth:`nirfsa.Session.Init` method or the :py:meth:`nirfsa.Session.init_with_options` method. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options.
 
         **Default Value**: N/A
 
@@ -11366,7 +7710,7 @@ lo_export_enabled
 
         **PXIe-5603/5605/5606**: If you want to daisy-chain multiple devices together using the same LO source, set this property to TRUE to export the LO input signals on the LO1 IN, LO2 IN, and LO3 IN terminals to LO1 OUT, LO2 OUT, and LO3 OUT, respectively.
 
-        **PXIe-5694**: You can enable this property only if you set the :py:attr:`nirfsa.Session.lo_source` property to :py:data:`~nirfsa.LoSourceVals.LO_IN`, or if you set the :py:attr:`nirfsa.Session.lo_source` property to :py:data:`~nirfsa.LoSourceVals.ONBOARD` and the :py:attr:`nirfsa.Session.if_conditioning_down_conversion_enabled` property to :py:data:`~nirfsa.NIRFSA_VAL_ENABLED`.
+        **PXIe-5694**: You can enable this property only if you set the :py:attr:`nirfsa.Session.lo_source` property to :py:data:`~nirfsa.LoSource.LO_IN`, or if you set the :py:attr:`nirfsa.Session.lo_source` property to :py:data:`~nirfsa.LoSource.ONBOARD` and the :py:attr:`nirfsa.Session.if_conditioning_down_conversion_enabled` property to :py:data:`~nirfsa.NIRFSA_VAL_ENABLED`.
 
         **PXIe-5830/5831**: To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsa.Session.set_attribute_vi_boolean` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
 
@@ -11589,7 +7933,7 @@ lo_in_power
 
     .. py:attribute:: lo_in_power
 
-        Returns the power level, in dBm, expected at the LO IN terminal when the :py:attr:`nirfsa.Session.lo_source` property is set to :py:data:`~nirfsa.LoSourceVals.LO_IN`.
+        Returns the power level, in dBm, expected at the LO IN terminal when the :py:attr:`nirfsa.Session.lo_source` property is set to :py:data:`~nirfsa.LoSource.LO_IN`.
 
         ----
         **Note**
@@ -11753,14 +8097,14 @@ lo_source
 
                         ----
                         **Note**
-                        For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to :py:data:`~nirfsa.LoSourceVals.LO_SOURCE_SG_SA_SHARED`.
+                        For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to :py:data:`~nirfsa.LoSource.LO_SOURCE_SG_SA_SHARED`.
 
                         ----
 
                         **Defined Values:**
-                        %enum_table{lo source vals}
+                        %enum_table{lo source}
 
-                        **Default Value**: :py:data:`~nirfsa.LoSourceVals.ONBOARD` ("Onboard")
+                        **Default Value**: :py:data:`~nirfsa.LoSource.ONBOARD` ("Onboard")
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5694, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -11770,15 +8114,15 @@ lo_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | enums.LoSourceVals |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+----------------+
+            | Characteristic        | Value          |
+            +=======================+================+
+            | Datatype              | enums.LoSource |
+            +-----------------------+----------------+
+            | Permissions           | read-write     |
+            +-----------------------+----------------+
+            | Repeated Capabilities | None           |
+            +-----------------------+----------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -12038,47 +8382,6 @@ mechanical_attenuation
                 - LabVIEW Property: **Vertical:Advanced:Mechanical Attenuation (dB)**
                 - C Attribute: **NIRFSA_ATTR_MECHANICAL_ATTENUATION**
 
-mechanical_attenuator_enabled
------------------------------
-
-    .. py:attribute:: mechanical_attenuator_enabled
-
-        Specifies whether the mechanical attenuator is enabled.
-
-        Set this property to :py:data:`~nirfsa.EnableAttrVals.ENABLED` to allow NI-RFSA to use the mechanical attenuator.
-
-        Disabling this attenuator can improve device performance. Refer to `PXIe-5663/5663E Programming Attenuation <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/programming-attenuation.html>`_ for more information about the attenuators.
-
-        **Defined Values:**
-
-        %enum_table{enable attr vals}
-
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.ENABLED`
-
-        **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Vertical:Advanced:NI 5663:Mechanical Attenuator Enabled**
-                - C Attribute: **NIRFSA_ATTR_MECHANICAL_ATTENUATOR_ENABLED**
-
 memory_size
 -----------
 
@@ -12156,31 +8459,6 @@ minimum_acpr
 
                 - LabVIEW Property: **Vertical:Advanced:Minimum Adjacent Channel Power Ratio (dB)**
                 - C Attribute: **NIRFSA_ATTR_MINIMUM_ACPR**
-
-minimum_reconfig_time
----------------------
-
-    .. py:attribute:: minimum_reconfig_time
-
-        This property is not for customer use.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Advanced:Minimum Reconfiguration Time**
-                - C Attribute: **NIRFSA_ATTR_MINIMUM_RECONFIG_TIME**
 
 min_fundamental_silo_frequency
 ------------------------------
@@ -12461,7 +8739,7 @@ number_of_records
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_number_of_records`
+        - :py:meth:`nirfsa.Session.ConfigureNumberOfRecords`
 
         The following table lists the characteristics of this property.
 
@@ -12505,7 +8783,7 @@ number_of_records_is_finite
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_number_of_records`
+        - :py:meth:`nirfsa.Session.ConfigureNumberOfRecords`
 
         The following table lists the characteristics of this property.
 
@@ -12544,7 +8822,7 @@ number_of_samples
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_number_of_samples`
+        - :py:meth:`nirfsa.Session.ConfigureNumberOfSamples`
 
         The following table lists the characteristics of this property.
 
@@ -12588,7 +8866,7 @@ number_of_samples_is_finite
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_number_of_samples`
+        - :py:meth:`nirfsa.Session.ConfigureNumberOfSamples`
 
         The following table lists the characteristics of this property.
 
@@ -12715,264 +8993,6 @@ overflow_error_reporting
                 - LabVIEW Property: **Vertical:Advanced:Overflow Error Reporting**
                 - C Attribute: **NIRFSA_ATTR_OVERFLOW_ERROR_REPORTING**
 
-p2p_enabled
------------
-
-    .. py:attribute:: p2p_enabled
-
-        Specifies whether peer-to-peer streaming is enabled for the active stream endpoint.
-
-        This property is `endpoint based <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/configuring-peer-to-peer-endpoint-ni-rfsa.html>`_.
-
-        **Defined Values:**
-
-        | Value                | Description                    |
-        |:----------------|:--------------------|
-        | True (1900)  | Enables streaming.  |
-        | False (1901) | Disables streaming. |
-
-        **Default Value**: False
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Enabled**
-                - C Attribute: **NIRFSA_ATTR_P2P_ENABLED**
-
-p2p_endpoint_overflow
----------------------
-
-    .. py:attribute:: p2p_endpoint_overflow
-
-        Indicates whether the endpoint has overflowed.
-
-        An overflow condition occurs when data is written to the endpoint faster than it can be streamed from it. During an overflow, data in the endpoint begins to be overwritten. Reset the device or close the session to reset the overflow condition.
-
-        **Defined Values:**
-
-        | Value         | Description                                               |
-        |:---------|:-----------------------------------------------|
-        | True  | The endpoint has overflowed.                   |
-        | False | You can write additional data to the endpoint. |
-
-        **Default Value**: False
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Endpoint Overflow**
-                - C Attribute: **NIRFSA_ATTR_P2P_ENDPOINT_OVERFLOW**
-
-p2p_endpoint_size
------------------
-
-    .. py:attribute:: p2p_endpoint_size
-
-        Returns the size, in samples, of the peer-to-peer endpoint.
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Endpoint Size**
-                - C Attribute: **NIRFSA_ATTR_P2P_ENDPOINT_SIZE**
-
-p2p_fifo_endpoint_count
------------------------
-
-    .. py:attribute:: p2p_fifo_endpoint_count
-
-        Returns the number of peer-to-peer streams supported by the device.
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:FIFO Endpoint Count**
-                - C Attribute: **NIRFSA_ATTR_P2P_FIFO_ENDPOINT_COUNT**
-
-p2p_most_samples_available_in_endpoint
---------------------------------------
-
-    .. py:attribute:: p2p_most_samples_available_in_endpoint
-
-        Returns the largest number of complex samples available in the peer-to-peer endpoint since this property was last read.
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Most Samples in P2P Endpoint**
-                - C Attribute: **NIRFSA_ATTR_P2P_MOST_SAMPLES_AVAILABLE_IN_ENDPOINT**
-
-p2p_onboard_memory_enabled
---------------------------
-
-    .. py:attribute:: p2p_onboard_memory_enabled
-
-        Specifies whether a limit is placed on the number of records and the size of the records by the size of the device onboard memory.
-
-        When a peer-to-peer stream is enabled and onboard memory is disabled, any fetch calls result in an error.
-
-        **Default Value**: False
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Onboard Memory Enabled**
-                - C Attribute: **NIRFSA_ATTR_P2P_ONBOARD_MEMORY_ENABLED**
-
-p2p_samples_available_in_endpoint
----------------------------------
-
-    .. py:attribute:: p2p_samples_available_in_endpoint
-
-        Returns the current number of complex samples available in the peer-to-peer endpoint.
-
-        ----
-        **Note**
-        The complex samples are composed of two 16-bit words with the I data as the LSB.
-
-        ----
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Samples in P2P Endpoint**
-                - C Attribute: **NIRFSA_ATTR_P2P_SAMPLES_AVAILABLE_IN_ENDPOINT**
-
-p2p_samples_transferred
------------------------
-
-    .. py:attribute:: p2p_samples_transferred
-
-        Returns the number of complex samples transferred through the peer-to-peer stream endpoint since the endpoint was last reset.
-
-        **Default Value**: 0
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Peer-to-Peer:Samples Transferred**
-                - C Attribute: **NIRFSA_ATTR_P2P_SAMPLES_TRANSFERRED**
-
 phase_offset
 ------------
 
@@ -13013,23 +9033,23 @@ power_spectrum_units
 
         **Defined Values:**
 
-        %enum_table{spectrum units}
+        %enum_table{power spectrum units}
 
-        **Default Value**: :py:data:`~nirfsa.SpectrumUnits.DBM`
+        **Default Value**: :py:data:`~nirfsa.PowerSpectrumUnits.DBM`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------+
-            | Characteristic        | Value               |
-            +=======================+=====================+
-            | Datatype              | enums.SpectrumUnits |
-            +-----------------------+---------------------+
-            | Permissions           | read-write          |
-            +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
+            +-----------------------+--------------------------+
+            | Characteristic        | Value                    |
+            +=======================+==========================+
+            | Datatype              | enums.PowerSpectrumUnits |
+            +-----------------------+--------------------------+
+            | Permissions           | read-write               |
+            +-----------------------+--------------------------+
+            | Repeated Capabilities | None                     |
+            +-----------------------+--------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -13072,139 +9092,6 @@ preselector_present
 
                 - LabVIEW Property: **Device Characteristics:Preselector Present**
                 - C Attribute: **NIRFSA_ATTR_PRESELECTOR_PRESENT**
-
-pxi_chassis_clk10_source
-------------------------
-
-    .. py:attribute:: pxi_chassis_clk10_source
-
-        Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane.
-
-        This option can be configured only when the PXI-5600 is installed in Slot 2 of the PXI chassis.
-
-        **Defined Values:**
-
-        %enum_table{pxi chassis clk10 src}
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXI-5600 (external digitizer mode), PXI-5661
-
-        **Related Topics**
-
-        [System Reference Clock](nirfsa.chm/system-reference-clock.html)
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsa.Session.configure_pxi_chassis_clk10`
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.PxiChassisClk10Src |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Clocking:PXI Chassis Clk10 Source**
-                - C Attribute: **NIRFSA_ATTR_PXI_CHASSIS_CLK10_SOURCE**
-
-query_instrument_status
------------------------
-
-    .. py:attribute:: query_instrument_status
-
-        Specifies whether NI-RFSA queries the NI-RFSA device status after each operation.
-
-        Querying the device status is useful for debugging. After you validate your program, you can set this property to False to disable status checking and maximize performance.
-
-        NI-RFSA can choose to ignore status checking for particular properties regardless of the setting of this property.
-
-        ----
-        **Note**
-        Use the :py:meth:`nirfsa.Session.init_with_options` method to override this value.
-
-        ----
-
-        **Defined Values:**
-
-        | Value         | Description                                                               |
-        |:---------|:---------------------------------------------------------------|
-        | True  | NI-RFSA queries the device status after each operation.        |
-        | False | NI-RFSA does not query the device status after each operation. |
-
-        **Default Value**: False
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Query Instrument Status**
-                - C Attribute: **NIRFSA_ATTR_QUERY_INSTRUMENT_STATUS**
-
-range_check
------------
-
-    .. py:attribute:: range_check
-
-        Specifies whether to validate property values and method parameters.
-
-        If enabled, NI-RFSA validates the parameter values that you pass to NI-RFSA methods. Range checking parameters is very useful for debugging. After you validate your program, you can set this property to False to disable range checking and maximize performance.
-
-        ----
-        **Note**
-        Use the :py:meth:`nirfsa.Session.init_with_options` method to override this value.
-
-        ----
-
-        **Defined Values:**
-
-        | Value         | Description                                                                    |
-        |:---------|:--------------------------------------------------------------------|
-        | True  | NI-RFSA validates property values and method parameters.         |
-        | False | NI-RFSA does not validate property values and method parameters. |
-
-        **Default Value**: True
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Range Check**
-                - C Attribute: **NIRFSA_ATTR_RANGE_CHECK**
 
 ready_for_advance_event_terminal_name
 -------------------------------------
@@ -13368,48 +9255,6 @@ records_done
                 - LabVIEW Property: **Acquisition:Fetch:Records Done**
                 - C Attribute: **NIRFSA_ATTR_RECORDS_DONE**
 
-record_coercions
-----------------
-
-    .. py:attribute:: record_coercions
-
-        Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties.
-
-        ----
-        **Note**
-        This property is currently not supported.
-
-        ----
-
-        **Defined Values:**
-
-        | Value         | Description                                                            |
-        |:---------|:------------------------------------------------------------|
-        | True  | The IVI engine keeps a list of the value coercions.         |
-        | False | The IVI engine does not keep a list of the value coercions. |
-
-        **Default Value**: False
-
-        **Supported Devices**: None
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Record Value Coercions**
-                - C Attribute: **NIRFSA_ATTR_RECORD_COERCIONS**
-
 reference_level
 ---------------
 
@@ -13439,7 +9284,7 @@ reference_level
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_reference_level`
+        - :py:meth:`nirfsa.Session.ConfigureReferenceLevel`
 
         The following table lists the characteristics of this property.
 
@@ -13505,7 +9350,7 @@ ref_clock_rate
 
         Specifies the Reference Clock rate, in Hz, of the signal present at the REF IN or CLK IN connector.
 
-        This property is only valid when the :py:attr:`nirfsa.Session.ref_clock_source` property is set to :py:data:`~nirfsa.NIRFSA_VAL_CLK_IN_STR`,:py:data:`~nirfsa.NIRFSA_VAL_REF_IN_STR` , or :py:data:`~nirfsa.RefClockSrc.REF_IN_2`.
+        This property is only valid when the :py:attr:`nirfsa.Session.ref_clock_source` property is set to :py:data:`~nirfsa.NIRFSA_VAL_CLK_IN_STR`,:py:data:`~nirfsa.NIRFSA_VAL_REF_IN_STR` , or :py:data:`~nirfsa.ReferenceClockSource.REF_IN_2`.
 
         **Valid Values**:
 
@@ -13556,19 +9401,19 @@ ref_clock_source
 
         ----
         **Note**
-        For the PXIe-5694, if your application requires an external LO source, set this property to :py:data:`~nirfsa.RefClockSrc.NONE`.
+        For the PXIe-5694, if your application requires an external LO source, set this property to :py:data:`~nirfsa.ReferenceClockSource.NONE`.
 
         ----
 
         **Defined Values:**
 
-        %enum_table{ref clock src}
+        %enum_table{reference clock source}
 
         **Default Values**:
 
-        **PXIe-5694**: :py:data:`~nirfsa.RefClockSrc.REF_IN`
+        **PXIe-5694**: :py:data:`~nirfsa.ReferenceClockSource.REF_IN`
 
-        **All other devices**: :py:data:`~nirfsa.RefClockSrc.ONBOARD_CLOCK`
+        **All other devices**: :py:data:`~nirfsa.ReferenceClockSource.ONBOARD_CLOCK`
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -13582,15 +9427,15 @@ ref_clock_source
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------+
-            | Characteristic        | Value             |
-            +=======================+===================+
-            | Datatype              | enums.RefClockSrc |
-            +-----------------------+-------------------+
-            | Permissions           | read-write        |
-            +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ReferenceClockSource |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -13671,7 +9516,7 @@ ref_trigger_minimum_quiet_time
 
         Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger.
 
-        The signal is quiet when it is below the trigger level if the trigger slope, specified by the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_slope` property, is set to :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.RISING` or when it is above the trigger level if the trigger slope is set to :py:data:`~nirfsa.RefTrigIqPwrEdgeSlope.FALLING`.
+        The signal is quiet when it is below the trigger level if the trigger slope, specified by the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_slope` property, is set to :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING` or when it is above the trigger level if the trigger slope is set to :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING`.
 
         By default, this value is set to 0, which means the device does not wait for a quiet time before arming the trigger. This property is useful to trigger the acquisition on signals containing repeated bursts, but for which each burst may have large changes in signal power within itself. By configuring the minimum quiet time to the time between bursts, you can ensure that the trigger occurs at the beginning of a burst rather than at the signal power change within a burst.
 
@@ -13711,7 +9556,7 @@ ref_trigger_osp_delay_enabled
         - All digitizers must be configured with the same I/Q rate.
         - All devices must use the same signal path.
 
-        **PXIe-5663/5663E**: Read the value of the :py:attr:`nirfsa.Session.if_filter` property to determine the IF filters used by the PXIe-5663/5663E.
+        **PXIe-5663/5663E**: Read the value of the :py:attr:`nirfsa.Session.IF_FILTER` property to determine the IF filters used by the PXIe-5663/5663E.
 
         **PXIe-5665/5667/5668**:Refer to the device-specific information in the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property to determine the IF filters used by the PXIe-5665/5667/5668. If you set the :py:attr:`nirfsa.Session.fft_width` property, refer to the device-specific information for this property and the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property to determine the IF filters used. For frequencies less than 3.6 GHz, set the :py:attr:`nirfsa.Session.rf_preamp_enabled` to the same value for all devices.
 
@@ -13747,6 +9592,8 @@ ref_trigger_osp_delay_enabled
         **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
 
 
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -13857,9 +9704,9 @@ ref_trigger_type
 
         **Defined Values:**
 
-        %enum_table{ref trig type}
+        %enum_table{reference trigger type}
 
-        **Default Value**: :py:data:`~nirfsa.RefTrigType.NONE`
+        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860
 
@@ -13873,15 +9720,15 @@ ref_trigger_type
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-------------------+
-            | Characteristic        | Value             |
-            +=======================+===================+
-            | Datatype              | enums.RefTrigType |
-            +-----------------------+-------------------+
-            | Permissions           | read-write        |
-            +-----------------------+-------------------+
-            | Repeated Capabilities | None              |
-            +-----------------------+-------------------+
+            +-----------------------+----------------------------+
+            | Characteristic        | Value                      |
+            +=======================+============================+
+            | Datatype              | enums.ReferenceTriggerType |
+            +-----------------------+----------------------------+
+            | Permissions           | read-write                 |
+            +-----------------------+----------------------------+
+            | Repeated Capabilities | None                       |
+            +-----------------------+----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -13906,7 +9753,7 @@ resolution_bandwidth
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_resolution_bandwidth`
+        - :py:meth:`nirfsa.Session.ConfigureResolutionBandwidth`
 
         The following table lists the characteristics of this property.
 
@@ -14067,37 +9914,6 @@ rf_attenuation_step_size
                 - LabVIEW Property: **Vertical:Advanced:RF Attenuation Step Size (dB)**
                 - C Attribute: **NIRFSA_ATTR_RF_ATTENUATION_STEP_SIZE**
 
-rf_attenuation_table
---------------------
-
-    .. py:attribute:: rf_attenuation_table
-
-        Specifies which RF attenuator table to use.
-
-        **Valid Values**: 0 to 1
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:NI 5663:RF Attenuation Table**
-                - C Attribute: **NIRFSA_ATTR_RF_ATTENUATION_TABLE**
-
 rf_conditioning_cal_tone_frequency
 ----------------------------------
 
@@ -14166,35 +9982,6 @@ rf_conditioning_cal_tone_mode
                 - LabVIEW Property: **Self Calibration:RF Conditioning Cal Tone Mode**
                 - C Attribute: **NIRFSA_ATTR_RF_CONDITIONING_CAL_TONE_MODE**
 
-rf_conditioning_temperature
----------------------------
-
-    .. py:attribute:: rf_conditioning_temperature
-
-        Returns the current temperature, in degrees Celsius, of the RF conditioning module associated with the NI-RFSA device.
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5667
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | float     |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Characteristics:RF Conditioning Temperature (Degrees C)**
-                - C Attribute: **NIRFSA_ATTR_RF_CONDITIONING_TEMPERATURE**
-
 rf_high_pass_filtering
 ----------------------
 
@@ -14239,7 +10026,7 @@ rf_out_lo_export_enabled
 
         Specifies whether to enable the RF OUT LO OUT terminal on the PXIe-5840/5841.
 
-        When this property is enabled, if the :py:attr:`nirfsa.Session.lo_source` property is set to :py:data:`~nirfsa.LoSourceVals.LO_IN` and you do not set the :py:attr:`nirfsa.Session.lo_frequency` or :py:attr:`nirfsa.Session.downconverter_center_frequency` properties, NI-RFSA rounds the LO frequency to approximately an LO step size as if the source was :py:data:`~nirfsa.LoSourceVals.ONBOARD`. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
+        When this property is enabled, if the :py:attr:`nirfsa.Session.lo_source` property is set to :py:data:`~nirfsa.LoSource.LO_IN` and you do not set the :py:attr:`nirfsa.Session.lo_frequency` or :py:attr:`nirfsa.Session.downconverter_center_frequency` properties, NI-RFSA rounds the LO frequency to approximately an LO step size as if the source was :py:data:`~nirfsa.LoSource.ONBOARD`. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
 
         **Defined Values:**
 
@@ -14603,48 +10390,6 @@ signal_conditioning_enabled
 
                 - LabVIEW Property: **Signal Path:Advanced:NI 5694:Signal Conditioning Enabled**
                 - C Attribute: **NIRFSA_ATTR_SIGNAL_CONDITIONING_ENABLED**
-
-simulate
---------
-
-    .. py:attribute:: simulate
-
-        Specifies whether NI-RFSA simulates I/O operations. This property is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the :py:meth:`nirfsa.Session.init_with_options` method to enable simulation.
-
-        ----
-        **Note**
-        PXI-5600/5661 support setting this property to False only.
-
-        ----
-
-        **Defined Values:**
-
-        | Value         | Description                                                           |
-        |:---------|:-----------------------------------------------------------|
-        | True  | NI-RFSA simulates NI-RFSA I/O operations.                  |
-        | False | NI-RFSA does not support simulated NI-RFSA I/O operations. |
-
-        **Default Value**: False
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode); PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | bool      |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Simulate**
-                - C Attribute: **NIRFSA_ATTR_SIMULATE**
 
 smooth_spectrum_enabled
 -----------------------
@@ -15086,15 +10831,15 @@ start_trigger_type
 
         ----
         **Note**
-        Set this property to :py:data:`~nirfsa.StartTrigType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the [cvi:py:meth:`nirfsa.Session.configure_acquisition_type`](cvi:py:meth:`nirfsa.Session.configure_acquisition_type`.html) method.
+        Set this property to :py:data:`~nirfsa.StartTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the [cvi:py:meth:`nirfsa.Session.ConfigureAcquisitionType`](cvi:py:meth:`nirfsa.Session.ConfigureAcquisitionType`.html) method.
 
         ----
 
         **Defined Values:**
 
-        %enum_table{start trig type}
+        %enum_table{start trigger type}
 
-        **Default Value**: :py:data:`~nirfsa.StartTrigType.NONE`
+        **Default Value**: :py:data:`~nirfsa.StartTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -15104,19 +10849,21 @@ start_trigger_type
 
 
 
+        .. note:: One or more of the referenced methods are not in the Python API for this driver.
+
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------+
-            | Characteristic        | Value               |
-            +=======================+=====================+
-            | Datatype              | enums.StartTrigType |
-            +-----------------------+---------------------+
-            | Permissions           | read-write          |
-            +-----------------------+---------------------+
-            | Repeated Capabilities | None                |
-            +-----------------------+---------------------+
+            +-----------------------+------------------------+
+            | Characteristic        | Value                  |
+            +=======================+========================+
+            | Datatype              | enums.StartTriggerType |
+            +-----------------------+------------------------+
+            | Permissions           | read-write             |
+            +-----------------------+------------------------+
+            | Repeated Capabilities | None                   |
+            +-----------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -15335,7 +11082,7 @@ sync_ref_trigger_delay_enabled
 
         Specifies whether the Reference Trigger is delayed with the data.
 
-        Set this property to :py:data:`~nirfsa.EnableAttrVals.DISABLED` when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.RefTrigType.IQ_POWER_EDGE` or :py:data:`~nirfsa.RefTrigType.IQ_ANALOG_EDGE`.
+        Set this property to :py:data:`~nirfsa.EnableAttrVals.DISABLED` when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE` or :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
 
         Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
 
@@ -15615,7 +11362,7 @@ temperature_read_interval
 
         Indicates the minimum time between temperature sensor readings in seconds.
 
-        When you call the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+        When you call the :py:meth:`nirfsa.Session.read_power_spectrum_f64` method, the :py:meth:`nirfsa.Session.ReadIqSingleRecordComplexF64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
         ----
         **Note**
@@ -15716,70 +11463,6 @@ thermal_correction_temperature_resolution
 
                 - LabVIEW Property: **Vertical:Advanced:Thermal Correction Temperature Resolution (Degrees C)**
                 - C Attribute: **NIRFSA_ATTR_THERMAL_CORRECTION_TEMPERATURE_RESOLUTION**
-
-timer_event_interval
---------------------
-
-    .. py:attribute:: timer_event_interval
-
-        Specifies the time, in seconds, that the timer counts before generating a Timer Event.
-
-        After the timer reaches zero, it automatically restarts.
-
-        ----
-        **Note**
-        For the PXIe-5820/5830/5831/5832/5840/5841/5842 and the PXIe-5842 with S-parameters, this property must be set for the timer to start. If you do not set this property, the timer is disabled.
-
-        ----
-
-        **Units**: seconds
-
-        **Default Value**: 0.01
-
-        **Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Timer Event Interval**
-                - C Attribute: **NIRFSA_ATTR_TIMER_EVENT_INTERVAL**
-
-timer_start_source
-------------------
-
-    .. py:attribute:: timer_start_source
-
-        This property is not for customer use.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Configuration List:Advanced:Timer Start Source**
-                - C Attribute: **NIRFSA_ATTR_TIMER_START_SOURCE**
 
 user_source_pulse_width
 -----------------------

@@ -1,56 +1,6 @@
 # -*- coding: utf-8 -*-
 # This file is generated from NI-RFSA API metadata version 26.5.0d9999
 attributes = {
-    1050002: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to validate attribute values and function parameters. \n\nIf enabled, NI-RFSA validates the parameter values that you pass to NI-RFSA functions. Range checking parameters is very useful for debugging. After you validate your program, you can set this attribute to VI_FALSE to disable range checking and maximize performance.\n\n----\n**Note**\nUse the nirfsa_InitWithOptions function to override this value.\n\n----\n\n**Defined Values:**\n\n| Value         | Description                                                                    |\n|:---------|:--------------------------------------------------------------------|\n| VI_TRUE  | NI-RFSA validates attribute values and function parameters.         |\n| VI_FALSE | NI-RFSA does not validate attribute values and function parameters. |\n\n**Default Value**: VI_TRUE\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Range Check',
-        'name': 'RANGE_CHECK',
-        'type': 'ViBoolean'
-    },
-    1050003: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether NI-RFSA queries the NI-RFSA device status after each operation. \n\nQuerying the device status is useful for debugging. After you validate your program, you can set this attribute to VI_FALSE to disable status checking and maximize performance.\n\nNI-RFSA can choose to ignore status checking for particular attributes regardless of the setting of this attribute.\n\n----\n**Note**\nUse the nirfsa_InitWithOptions function to override this value.\n\n----\n\n**Defined Values:**\n\n| Value         | Description                                                               |\n|:---------|:---------------------------------------------------------------|\n| VI_TRUE  | NI-RFSA queries the device status after each operation.        |\n| VI_FALSE | NI-RFSA does not query the device status after each operation. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Query Instrument Status',
-        'name': 'QUERY_INSTRUMENT_STATUS',
-        'type': 'ViBoolean'
-    },
-    1050004: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to cache the value of attributes.\n\nIf you set this attribute to VI_TRUE, NI-RFSA tracks the current NI-RFSA device settings and avoids sending redundant commands to the device.\n\nNI-RFSA can always cache or never cache particular attributes, regardless of the setting of this attribute.\n\nUse the nirfsa_InitWithOptions function to override the default value.\n\n**Defined Values:**\n\n|Value          | Description                      |\n|:---------|:---------------------|\n| VI_TRUE  | Caching is enabled.  |\n| VI_FALSE | Caching is disabled. |\n\n**Default Value**: VI_TRUE\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Cache',
-        'name': 'CACHE',
-        'type': 'ViBoolean'
-    },
-    1050005: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether NI-RFSA simulates I/O operations. This attribute is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the nirfsa_InitWithOptions function to enable simulation.\n\n----\n**Note**\nPXI-5600/5661 support setting this attribute to VI_FALSE only.\n\n----\n\n**Defined Values:**\n\n| Value         | Description                                                           |\n|:---------|:-----------------------------------------------------------|\n| VI_TRUE  | NI-RFSA simulates NI-RFSA I/O operations.                  |\n| VI_FALSE | NI-RFSA does not support simulated NI-RFSA I/O operations. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode); PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Simulate',
-        'name': 'SIMULATE',
-        'type': 'ViBoolean'
-    },
-    1050006: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type attributes.\n\n----\n**Note**\nThis attribute is currently not supported.\n\n----\n\n**Defined Values:**\n\n| Value         | Description                                                            |\n|:---------|:------------------------------------------------------------|\n| VI_TRUE  | The IVI engine keeps a list of the value coercions.         |\n| VI_FALSE | The IVI engine does not keep a list of the value coercions. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: None'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Record Value Coercions',
-        'name': 'RECORD_COERCIONS',
-        'type': 'ViBoolean'
-    },
     1050007: {
         'access': 'read only',
         'codegen_method': 'public',
@@ -60,16 +10,6 @@ attributes = {
         'lv_property': 'Inherent IVI Attributes:User Options:Driver Setup',
         'name': 'DRIVER_SETUP',
         'type': 'ViString'
-    },
-    1050021: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.\n\n----\n**Note**\nInterchangeability check is unsupported.\n\n----\n\n**Defined Values:**\n\n| Value         | Description                                                                           |\n|:---------|:---------------------------------------------------------------------------|\n| VI_TRUE  | NI-RFSA performs interchangeability-checking and retrieves warnings.       |\n| VI_FALSE | NI-RFSA does not perform interchangeability-checking or retrieve warnings. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: None'
-        },
-        'lv_property': 'Inherent IVI Attributes:User Options:Interchange Check',
-        'name': 'INTERCHANGE_CHECK',
-        'type': 'ViBoolean'
     },
     1050302: {
         'access': 'read only',
@@ -286,9 +226,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the units of the power spectrum.\n\n**Defined Values:**\n\n%enum_table{spectrum units}\n\n**Default Value**: NIRFSA_VAL_DBM\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Specifies the units of the power spectrum.\n\n**Defined Values:**\n\n%enum_table{power spectrum units}\n\n**Default Value**: NIRFSA_VAL_DBM\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
-        'enum': 'SpectrumUnits',
+        'enum': 'PowerSpectrumUnits',
         'lv_property': 'Acquisition:Spectrum:Power Spectrum Units',
         'name': 'POWER_SPECTRUM_UNITS',
         'type': 'ViInt32'
@@ -360,9 +300,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the Reference Clock source.\n\n----\n**Note**\nFor the PXIe-5694, if your application requires an external LO source, set this attribute to NIRFSA_VAL_NONE_STR.\n\n----\n\n**Defined Values:**\n\n%enum_table{ref clock src}\n\n**Default Values**:\n\n**PXIe-5694**: NIRFSA_VAL_REF_IN_STR\n\n**All other devices**: NIRFSA_VAL_ONBOARD_CLOCK_STR\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureRefClock'
+            'description': 'Specifies the Reference Clock source.\n\n----\n**Note**\nFor the PXIe-5694, if your application requires an external LO source, set this attribute to NIRFSA_VAL_NONE_STR.\n\n----\n\n**Defined Values:**\n\n%enum_table{reference clock source}\n\n**Default Values**:\n\n**PXIe-5694**: NIRFSA_VAL_REF_IN_STR\n\n**All other devices**: NIRFSA_VAL_ONBOARD_CLOCK_STR\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureRefClock'
         },
-        'enum': 'RefClockSrc',
+        'enum': 'ReferenceClockSource',
         'lv_property': 'Clocking:Ref Clock Source',
         'name': 'REF_CLOCK_SOURCE',
         'type': 'ViString'
@@ -381,9 +321,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the source of the Sample Clock timebase, which is the timebase used to control waveform sampling.\n\n**Defined Values:**\n\n%enum_table{digitizer samp clk timebase src}\n\n**Default Value**: NIRFSA_VAL_ONBOARD_CLOCK_STR\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668'
+            'description': 'Specifies the source of the Sample Clock timebase, which is the timebase used to control waveform sampling.\n\n**Defined Values:**\n\n%enum_table{digitizer sample clock timebase source}\n\n**Default Value**: NIRFSA_VAL_ONBOARD_CLOCK_STR\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668'
         },
-        'enum': 'DigitizerSampClkTimebaseSrc',
+        'enum': 'DigitizerSampleClockTimebaseSource',
         'lv_property': 'Clocking:Digitizer Sample Clock Timebase Source',
         'name': 'DIGITIZER_SAMPLE_CLOCK_TIMEBASE_SOURCE',
         'type': 'ViString'
@@ -398,24 +338,13 @@ attributes = {
         'name': 'DIGITIZER_SAMPLE_CLOCK_TIMEBASE_RATE',
         'type': 'ViReal64'
     },
-    1150023: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane. \n\nThis option can be configured only when the PXI-5600 is installed in Slot 2 of the PXI chassis.\n\n**Defined Values:**\n\n%enum_table{pxi chassis clk10 src}\n\n**Default Value**: N/A\n\n**Supported Devices**: PXI-5600 (external digitizer mode), PXI-5661\n\n**Related Topics**\n\n[System Reference Clock](nirfsa.chm/system-reference-clock.html)\n\n**High-Level Functions**:\n\n- nirfsa_ConfigurePxiChassisClk10'
-        },
-        'enum': 'PxiChassisClk10Src',
-        'lv_property': 'Clocking:PXI Chassis Clk10 Source',
-        'name': 'PXI_CHASSIS_CLK10_SOURCE',
-        'type': 'ViString'
-    },
     1150024: {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether you want the Start Trigger to be a digital edge or software trigger.\n\n----\n**Note**\nSet this attribute to NIRFSA_VAL_NONE if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM or if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the [cviniRFSA_ConfigureAcquisitionType](cviniRFSA_ConfigureAcquisitionType.html) function.\n\n----\n\n**Defined Values:**\n\n%enum_table{start trig type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Specifies whether you want the Start Trigger to be a digital edge or software trigger.\n\n----\n**Note**\nSet this attribute to NIRFSA_VAL_NONE if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM or if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the [cviniRFSA_ConfigureAcquisitionType](cviniRFSA_ConfigureAcquisitionType.html) function.\n\n----\n\n**Defined Values:**\n\n%enum_table{start trigger type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
-        'enum': 'StartTrigType',
+        'enum': 'StartTriggerType',
         'lv_property': 'Triggers:Start:Type',
         'name': 'START_TRIGGER_TYPE',
         'type': 'ViInt32'
@@ -436,7 +365,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the active edge for the Start Trigger.\n\nThis attribute is used only when the NIRFSA_ATTR_START_TRIGGER_TYPE attribute is set to NIRFSA_VAL_DIGITAL_EDGE.\n\n**Defined and Valid Values:**\n\n| Value                         | Description                                           | Valid For                           |\n|:------------------------------|:------------------------------------------------------|:------------------------------------|\n| NIRFSA_VAL_RISING_EDGE (900)  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |\n| NIRFSA_VAL_FALLING_EDGE (901) | The trigger asserts on the falling edge of the signal | PXIe-5668                           |\n\n**Default Value**: NIRFSA_VAL_RISING_EDGE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureDigitalEdgeStartTrigger'
         },
-        'enum': 'StartTrigDigEdgeEdge',
+        'enum': 'StartTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Start:Digital Edge:Edge',
         'name': 'DIGITAL_EDGE_START_TRIGGER_EDGE',
         'type': 'ViInt32'
@@ -445,9 +374,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for the exported Start Trigger.\n\n**Defined Values:**\n\n%enum_table{export output term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
+            'description': 'Specifies the destination terminal for the exported Start Trigger.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Start:Export:Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -456,9 +385,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether you want the Reference Trigger to be a digital edge, I/Q power edge, or software trigger.\n\n**Defined Values:**\n\n%enum_table{ref trig type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Specifies whether you want the Reference Trigger to be a digital edge, I/Q power edge, or software trigger.\n\n**Defined Values:**\n\n%enum_table{reference trigger type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
-        'enum': 'RefTrigType',
+        'enum': 'ReferenceTriggerType',
         'lv_property': 'Triggers:Ref:Type',
         'name': 'REF_TRIGGER_TYPE',
         'type': 'ViInt32'
@@ -477,9 +406,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the active edge for the Reference Trigger.\n\nThis attribute is used only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_DIGITAL_EDGE.\n\n**Defined Values:**\n\n%enum_table{ref trig dig edge edge}\n\n**Default Value**: NIRFSA_VAL_RISING_EDGE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureDigitalEdgeRefTrigger'
+            'description': 'Specifies the active edge for the Reference Trigger.\n\nThis attribute is used only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_DIGITAL_EDGE.\n\n**Defined Values:**\n\n%enum_table{reference trigger digital edge edge}\n\n**Default Value**: NIRFSA_VAL_RISING_EDGE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureDigitalEdgeRefTrigger'
         },
-        'enum': 'RefTrigDigEdgeEdge',
+        'enum': 'ReferenceTriggerDigitalEdgeEdge',
         'lv_property': 'Triggers:Ref:Digital Edge:Edge',
         'name': 'DIGITAL_EDGE_REF_TRIGGER_EDGE',
         'type': 'ViInt32'
@@ -488,9 +417,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for the exported Reference Trigger.\n\n**Defined Values:**\n\n%enum_table{export output term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
+            'description': 'Specifies the destination terminal for the exported Reference Trigger.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Ref:Export:Output Terminal',
         'name': 'EXPORTED_REF_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -529,9 +458,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether you want the Advance Trigger to be a digital edge or software trigger.\n\n----\n**Note**\nSet this attribute to NIRFSA_VAL_NONE if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM or if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function.\n\n----\n\n**Defined Values:**\n\n%enum_table{advance trig type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Specifies whether you want the Advance Trigger to be a digital edge or software trigger.\n\n----\n**Note**\nSet this attribute to NIRFSA_VAL_NONE if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM or if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function.\n\n----\n\n**Defined Values:**\n\n%enum_table{advance trigger type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
-        'enum': 'AdvanceTrigType',
+        'enum': 'AdvanceTriggerType',
         'lv_property': 'Triggers:Advance:Type',
         'name': 'ADVANCE_TRIGGER_TYPE',
         'type': 'ViInt32'
@@ -550,9 +479,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for the exported Advance Trigger.\n\n**Defined Values:**\n\n%enum_table{export output term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
+            'description': 'Specifies the destination terminal for the exported Advance Trigger.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Advance:Export:Output Terminal',
         'name': 'EXPORTED_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -561,9 +490,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether you want the Arm Reference Trigger to be a digital edge or software trigger.\n\n----\n**Note**\nThe PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support NIRFSA_VAL_NONE.\n\n----\n\n----\n**Note**\nSet this attribute to NIRFSA_VAL_NONE if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM or if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function.\n\n----\n\n**Defined Values:**\n\n%enum_table{arm ref trig type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Specifies whether you want the Arm Reference Trigger to be a digital edge or software trigger.\n\n----\n**Note**\nThe PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support NIRFSA_VAL_NONE.\n\n----\n\n----\n**Note**\nSet this attribute to NIRFSA_VAL_NONE if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM or if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function.\n\n----\n\n**Defined Values:**\n\n%enum_table{arm reference trigger type}\n\n**Default Value**: NIRFSA_VAL_NONE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
-        'enum': 'ArmRefTrigType',
+        'enum': 'ArmReferenceTriggerType',
         'lv_property': 'Triggers:Arm Ref:Type',
         'name': 'ARM_REF_TRIGGER_TYPE',
         'type': 'ViInt32'
@@ -584,7 +513,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Ready for Start Event.\n\n| Value                                           | Description                                                                                                                                                                   |\n|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |\n| NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |\n| NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |\n| NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |\n| NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |\n| NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |\n| NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |\n| NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |\n| NIRFSA_VAL_PXIE_DSTARC_STR ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |\n| NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Start:Output Terminal',
         'name': 'EXPORTED_READY_FOR_START_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -595,7 +524,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Ready for Advance Event.\n\n| Value                                           | Description                                                                                                                                                                   |\n|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |\n| NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |\n| NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |\n| NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |\n| NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |\n| NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |\n| NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |\n| NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |\n| NIRFSA_VAL_PXIE_DSTARC_STR ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |\n| NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Advance:Output Terminal',
         'name': 'EXPORTED_READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -606,7 +535,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Ready for Reference Event.\n\n| Value                                           | Description                                                                                                                                                                   |\n|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |\n| NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |\n| NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |\n| NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |\n| NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |\n| NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |\n| NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |\n| NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |\n| NIRFSA_VAL_PXIE_DSTARC_STR ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |\n| NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Ref:Output Terminal',
         'name': 'EXPORTED_READY_FOR_REF_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -615,9 +544,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for the End of Record Event.\n\n**Defined Values:**\n\n%enum_table{export output term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_\n\n`Signal Routing <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/signal-routing.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
+            'description': 'Specifies the destination terminal for the End of Record Event.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_\n\n`Signal Routing <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/signal-routing.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:End Of Record:Output Terminal',
         'name': 'EXPORTED_END_OF_RECORD_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -707,9 +636,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the destination terminal for the Done Event.\n\n**Defined Values:**\n\n%enum_table{export output term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
+            'description': 'Specifies the destination terminal for the Done Event.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerm',
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Done:Output Terminal',
         'name': 'EXPORTED_DONE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -738,9 +667,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether the device asserts the trigger when the signal power is rising or falling. \n\nWhen you set the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute to NIRFSA_VAL_IQ_POWER_EDGE, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.\n\n**Defined Values:**\n\n%enum_table{ref trig iq pwr edge slope}\n\n**Default Value**: NIRFSA_VAL_RISING_SLOPE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureIqPowerEdgeRefTrigger'
+            'description': 'Specifies whether the device asserts the trigger when the signal power is rising or falling. \n\nWhen you set the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute to NIRFSA_VAL_IQ_POWER_EDGE, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.\n\n**Defined Values:**\n\n%enum_table{reference trigger iq power edge slope}\n\n**Default Value**: NIRFSA_VAL_RISING_SLOPE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureIqPowerEdgeRefTrigger'
         },
-        'enum': 'RefTrigIqPwrEdgeSlope',
+        'enum': 'ReferenceTriggerIqPowerEdgeSlope',
         'lv_property': 'Triggers:Ref:IQ Power Edge:Slope',
         'name': 'IQ_POWER_EDGE_REF_TRIGGER_SLOPE',
         'type': 'ViInt32'
@@ -851,9 +780,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies a comma-separated list of the terminals at which to export the Reference Clock.\n\n**Defined Values:**\n\n%enum_table{ref clk exported term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
+            'description': 'Specifies a comma-separated list of the terminals at which to export the Reference Clock.\n\n**Defined Values:**\n\n%enum_table{reference clock exported terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'RefClkExportedTerm',
+        'enum': 'ReferenceClockExportedTerminal',
         'lv_property': 'Clocking:Ref Clock Exported Terminal',
         'name': 'EXPORTED_REF_CLOCK_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -868,17 +797,6 @@ attributes = {
         'name': 'IF_ATTENUATION',
         'type': 'ViReal64'
     },
-    1150075: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the desired IF filter path, regardless of the RF band chosen by NI-RFSA.\n\n**Defined Values:**\n\n%enum_table{i ffilter}\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5601'
-        },
-        'enum': 'IFfilter',
-        'lv_property': 'Signal Path:Advanced:NI 5663:IF Filter',
-        'name': 'IF_FILTER',
-        'type': 'ViInt32'
-    },
     1150076: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -889,36 +807,6 @@ attributes = {
         'name': 'RF_ATTENUATION_INDEX',
         'type': 'ViInt32'
     },
-    1150077: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies which RF attenuator table to use.\n\n**Valid Values**: 0 to 1\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E'
-        },
-        'lv_property': 'Signal Path:Advanced:NI 5663:RF Attenuation Table',
-        'name': 'RF_ATTENUATION_TABLE',
-        'type': 'ViInt32'
-    },
-    1150078: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the IF1 attenuation, in dB. The device IF1 attenuator is set to this nominal value. \n\nUse this attribute, along with the NIRFSA_ATTR_IF2_ATTEN_VALUE attribute, when you set the NIRFSA_ATTR_IF_FILTER attribute to NIRFSA_VAL_BYPASS.\n\n**Valid Values**: 0 to 15\n\n**Units**: dB\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E'
-        },
-        'lv_property': 'Signal Path:Advanced:NI 5663:IF1 Attenuation (dB)',
-        'name': 'IF1_ATTEN_VALUE',
-        'type': 'ViReal64'
-    },
-    1150079: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the IF2 attenuation, in dB. The device IF2 attenuator is set to this nominal value. \n\nUse this attribute, along with the NIRFSA_ATTR_IF1_ATTEN_VALUE attribute, when you set the NIRFSA_ATTR_IF_FILTER attribute to NIRFSA_VAL_BYPASS.\n\n**Valid Values**: 0 to 15\n\n**Units**: dB\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E'
-        },
-        'lv_property': 'Signal Path:Advanced:NI 5663:IF2 Attenuation (dB)',
-        'name': 'IF2_ATTEN_VALUE',
-        'type': 'ViReal64'
-    },
     1150080: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -928,17 +816,6 @@ attributes = {
         'enum': 'EnableAttrVals',
         'lv_property': 'Signal Path:Digitizer Dither Enabled',
         'name': 'DIGITIZER_DITHER_ENABLED',
-        'type': 'ViInt32'
-    },
-    1150081: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the mechanical attenuator is enabled. \n\nSet this attribute to NIRFSA_VAL_ENABLED to allow NI-RFSA to use the mechanical attenuator.\n\nDisabling this attenuator can improve device performance. Refer to `PXIe-5663/5663E Programming Attenuation <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/programming-attenuation.html>`_ for more information about the attenuators.\n\n**Defined Values:**\n\n%enum_table{enable attr vals}\n\n**Default Value**: NIRFSA_VAL_ENABLED\n\n**Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E'
-        },
-        'enum': 'EnableAttrVals',
-        'lv_property': 'Vertical:Advanced:NI 5663:Mechanical Attenuator Enabled',
-        'name': 'MECHANICAL_ATTENUATOR_ENABLED',
         'type': 'ViInt32'
     },
     1150082: {
@@ -957,7 +834,7 @@ attributes = {
         'documentation': {
             'description': 'Specifies the RF path to use during calibration.\n\nThis attribute is valid only during a calibration session. When you set this attribute, NI-RFSA does not select the RF path based on the downconverter center frequency.\n\nThe following table lists the RF bands used by the supported devices.\n\n| Device                                               | RF Band   | Frequency Range      |\n|:-----------------------------------------------------|:----------|:---------------------|\n| PXIe-5603                                            | RF band 1 | 20 Hz to 3.6 GHz     |\n| PXIe-5605 (low band signal path)                     | RF band 1 | 20 Hz to 3.6 GHz     |\n| PXIe-5605 (high band signal path)                    | RF band 2 | 3.6 GHz to 14 GHz    |\n| PXIe-5606 (low band signal path)                     | RF band 1 | 20 Hz to 3.6 GHz     |\n| PXIe-5606 (high band signal path)                    | RF band 2 | 3.6 GHz to 26.5 GHz  |\n| PXIe-5606 (low band signal path, 320 MHz IF filter)  | RF band 1 | 20 Hz to 3.41 GHz    |\n| PXIe-5606 (high band signal path, 320 MHz IF filter) | RF band 2 | 3.41 GHz to 26.5 GHz |\n\n**Defined and Valid Values:**\n\n| Value                                  | Description                 | Valid For                |\n|:---------------------------------------|:----------------------------|:-------------------------|\n| NIRFSA_VAL_EXT_CAL_RF_BAND_1 (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |\n| NIRFSA_VAL_EXT_CAL_RF_BAND_2 (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |\n| NIRFSA_VAL_EXT_CAL_RF_BAND_3 (1702)    | Specifies to use RF band 3. | PXIe-5601                |\n| NIRFSA_VAL_EXT_CAL_RF_BAND_4 (1703)    | Specifies to use RF band 4. | PXIe-5601                |\n\n**Default Values**:\n\n**PXIe-5603/5605 (low band)/5606**: NIRFSA_VAL_EXT_CAL_RF_BAND_1\n\n**PXIe-5601/5605 (high band)**: NIRFSA_VAL_EXT_CAL_RF_BAND_2\n\n**Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5698'
         },
-        'enum': 'RfPathSel',
+        'enum': 'RfPathSelection',
         'lv_property': 'Factory Calibration:NI 5665/5668R:RF Path Selection',
         'name': 'CAL_RF_PATH_SELECTION',
         'type': 'ViInt32'
@@ -1033,26 +910,6 @@ attributes = {
         'name': 'MODULE_REVISION',
         'type': 'ViString'
     },
-    1150092: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ to make active for configuration or initiation.\n\nActivating a list makes all attributes in the list reflect the value of the attributes that correspond to the set specified by the NIRFSA_ATTR_ACTIVE_CONFIGURATION_LIST and the NIRFSA_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attributes.\n\nSet this attribute to an empty string to disable RF list mode.\n\n**Default Value**: "" (empty string) for devices that support RF list mode. For all other devices, the default value is N/A.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters\n\n**Related Topics**\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_CreateConfigurationList'
-        },
-        'lv_property': 'Configuration List:Active List',
-        'name': 'ACTIVE_CONFIGURATION_LIST',
-        'type': 'ViString'
-    },
-    1150093: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ to make active for configuration or initiation.\n\nActivating a list makes all attributes in the list reflect the value of the attributes that correspond to the set specified by the NIRFSA_ATTR_ACTIVE_CONFIGURATION_LIST and the NIRFSA_ATTR_ACTIVE_CONFIGURATION_LIST_STEP attributes.\n\n**Default Value**: 0 for devices that support RF list mode. For all other devices, the default value is N/A.\n\n**Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters\n\n**Related Topics**\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_CreateConfigurationListStep'
-        },
-        'lv_property': 'Configuration List:Active Step',
-        'name': 'ACTIVE_CONFIGURATION_LIST_STEP',
-        'type': 'ViInt64'
-    },
     1150094: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1062,116 +919,6 @@ attributes = {
         'lv_property': 'Vertical:Advanced:External Gain (dB)',
         'name': 'EXTERNAL_GAIN',
         'type': 'ViReal64'
-    },
-    1150095: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Configures the list trigger source.\n\nThe default value is the NIRFSA_VAL_END_OF_RECORD_EVENT. When the value is NIRFSA_VAL_END_OF_RECORD_EVENT, this will signal the instrument to reconfigure from configuration N to configuration N + 1 after the End Of Record Event, and before the Ready For Advance Event. If you configure this attribute to any other value, the instrument reconfiguration will occur whenever the specified trigger is asserted, which may be decoupled from the acquisition state machine. Therefore, if you trigger a reconfiguration during a record acquisition, you may see transient data in the record, which should be discarded by the application. NI recommends you to use this attribute only in case of streaming.'
-        },
-        'lv_property': 'Triggers:Configuration List Step:Digital Edge:Source',
-        'name': 'DIGITAL_EDGE_CONFIGURATION_LIST_STEP_TRIGGER_SOURCE',
-        'type': 'ViString'
-    },
-    1150096: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the time, in seconds, that the timer counts before generating a Timer Event.\n\nAfter the timer reaches zero, it automatically restarts.\n\n----\n**Note**\nFor the PXIe-5820/5830/5831/5832/5840/5841/5842 and the PXIe-5842 with S-parameters, this attribute must be set for the timer to start. If you do not set this attribute, the timer is disabled.\n\n----\n\n**Units**: seconds\n\n**Default Value**: 0.01\n\n**Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters'
-        },
-        'lv_property': 'Configuration List:Timer Event Interval',
-        'name': 'TIMER_EVENT_INTERVAL',
-        'type': 'ViReal64'
-    },
-    1150097: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether peer-to-peer streaming is enabled for the active stream endpoint.\n\nThis attribute is `endpoint based <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/configuring-peer-to-peer-endpoint-ni-rfsa.html>`_.\n\n**Defined Values:**\n\n| Value                | Description                    |\n|:----------------|:--------------------|\n| VI_TRUE (1900)  | Enables streaming.  |\n| VI_FALSE (1901) | Disables streaming. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Enabled',
-        'name': 'P2P_ENABLED',
-        'type': 'ViBoolean'
-    },
-    1150098: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the number of peer-to-peer streams supported by the device.\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:FIFO Endpoint Count',
-        'name': 'P2P_FIFO_ENDPOINT_COUNT',
-        'type': 'ViInt64'
-    },
-    1150099: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the number of complex samples transferred through the peer-to-peer stream endpoint since the endpoint was last reset.\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5663/5663E/5665/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Samples Transferred',
-        'name': 'P2P_SAMPLES_TRANSFERRED',
-        'type': 'ViInt64'
-    },
-    1150100: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the current number of complex samples available in the peer-to-peer endpoint.\n\n----\n**Note**\nThe complex samples are composed of two 16-bit words with the I data as the LSB.\n\n----\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Samples in P2P Endpoint',
-        'name': 'P2P_SAMPLES_AVAILABLE_IN_ENDPOINT',
-        'type': 'ViInt64'
-    },
-    1150101: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the largest number of complex samples available in the peer-to-peer endpoint since this attribute was last read.\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Most Samples in P2P Endpoint',
-        'name': 'P2P_MOST_SAMPLES_AVAILABLE_IN_ENDPOINT',
-        'type': 'ViInt64'
-    },
-    1150102: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the size, in samples, of the peer-to-peer endpoint.\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Endpoint Size',
-        'name': 'P2P_ENDPOINT_SIZE',
-        'type': 'ViInt64'
-    },
-    1150103: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Indicates whether the endpoint has overflowed. \n\nAn overflow condition occurs when data is written to the endpoint faster than it can be streamed from it. During an overflow, data in the endpoint begins to be overwritten. Reset the device or close the session to reset the overflow condition.\n\n**Defined Values:**\n\n| Value         | Description                                               |\n|:---------|:-----------------------------------------------|\n| VI_TRUE  | The endpoint has overflowed.                   |\n| VI_FALSE | You can write additional data to the endpoint. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Endpoint Overflow',
-        'name': 'P2P_ENDPOINT_OVERFLOW',
-        'type': 'ViBoolean'
-    },
-    1150104: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the maximum bandwidth that the device can consume.\n\n----\n**Note**\nThe NI device limits itself to transfer fewer bytes per second on the PCI Express bus than the value you specify for this attribute.\n\n----\n\n**Default Value**: N/A\n\n**Supported Devices:**: PXI-5661, PXIe-5663/5663E/5665'
-        },
-        'lv_property': 'Acquisition:Fetch:Data Transfer:Data Transfer Maximum Bandwidth',
-        'name': 'DATA_TRANSFER_MAXIMUM_BANDWIDTH',
-        'type': 'ViReal64'
-    },
-    1150105: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the maximum number of samples to transfer at one time from the device to host memory.\n\nIncreasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may increase the amount of page-locked memory required from the system.\n\n**Default Values**:\n\n**PXIe-5668**: 0x2,000,000\n\n**All Other Devices**: 0x400,000\n\n**Supported Devices:**: PXI-5661, PXIe-5663/5663E/5665/5667/5668'
-        },
-        'lv_property': 'Acquisition:Fetch:Data Transfer:Data Transfer Block Size',
-        'name': 'DATA_TRANSFER_BLOCK_SIZE',
-        'type': 'ViInt32'
     },
     1150106: {
         'access': 'read-write',
@@ -1183,16 +930,6 @@ attributes = {
         'name': 'PHASE_OFFSET',
         'type': 'ViReal64'
     },
-    1150107: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether a limit is placed on the number of records and the size of the records by the size of the device onboard memory. \n\nWhen a peer-to-peer stream is enabled and onboard memory is disabled, any fetch calls result in an error.\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842'
-        },
-        'lv_property': 'Peer-to-Peer:Onboard Memory Enabled',
-        'name': 'P2P_ONBOARD_MEMORY_ENABLED',
-        'type': 'ViBoolean'
-    },
     1150109: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1203,77 +940,16 @@ attributes = {
         'name': 'CAL_IF_ATTENUATION_INDEX',
         'type': 'ViInt32'
     },
-    1150110: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Selects the value of RF electronic attenuation from a table of valid configurations.\n\nThis attribute is valid only during a calibration session and when you set the NIRFSA_ATTR_CAL_RF_PATH_SELECTION attribute to NIRFSA_VAL_EXT_CAL_RF_BAND_1.\n\n**Default Value**: N/A\n\n**Supported Devices:** PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:RF Electronic Attenuation Table Index',
-        'name': 'CAL_RF_ELECTRONIC_ATTENUATION_INDEX',
-        'type': 'ViInt32'
-    },
-    1150111: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Selects the value of the RF mechanical attenuation configuration from a table of valid configurations.\n\nThis attribute is valid only during a calibration session.\n\n**Default Values**:\n\n**PXIe-5603/5605**: 3\n\n**PXIe-5606**: 2\n\n**Supported Devices:** PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:RF Mechanical Attenuation Table Index',
-        'name': 'CAL_RF_MECHANICAL_ATTENUATION_INDEX',
-        'type': 'ViInt32'
-    },
     1150112: {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the IF filter path during calibration.\n\nThe attribute is valid only during a calibration session.\n\n**Defined Values:**\n\n%enum_table{i ffilter sel}\n\n**Default Value**: NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_4\n\n**Supported Devices**: PXIe-5694'
+            'description': 'Specifies the IF filter path during calibration.\n\nThe attribute is valid only during a calibration session.\n\n**Defined Values:**\n\n%enum_table{i ffilter selection}\n\n**Default Value**: NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_4\n\n**Supported Devices**: PXIe-5694'
         },
-        'enum': 'IFfilterSel',
+        'enum': 'IFfilterSelection',
         'lv_property': 'Factory Calibration:NI 5665/5668R:IF Filter Selection',
         'name': 'CAL_IF_FILTER_SELECTION',
         'type': 'ViInt32'
-    },
-    1150113: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Selects the LO signal path used during calibration.\n\nDuring noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This attribute is valid only during a calibration session.\n\n**Defined Values:**\n\n%enum_table{lo path sel}\n\n**Default Value**: NIRFSA_VAL_EXT_CAL_LO_PATH_1\n\n**Supported Devices**: PXIe-5603/5605/5606'
-        },
-        'enum': 'LoPathSel',
-        'lv_property': 'Factory Calibration:NI 5665/5668R:LO Path Selection',
-        'name': 'CAL_LO_PATH_SELECTION',
-        'type': 'ViInt32'
-    },
-    1150114: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the LO1 attenuation, in dB, during a calibration session.\n\nThis attribute is valid only during a calibration session.\n\n**Valid Values and Default Values**:\n\n| Device         | Valid Values | Default Value |\n|:---------------|:-------------|:--------------|\n| PXIe-5603/5605 | 0 to 15.5    | 15.5          |\n| PXIe-5606      | 0 to 31      | 31            |\n\n**Supported Devices**: PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:LO1 Attenuation',
-        'name': 'CAL_LO1_ATTENUATION',
-        'type': 'ViReal64'
-    },
-    1150115: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the LO2 attenuation, in dB, during a calibration session.\n\nThis attribute is valid only during a calibration session.\n\n**Valid Values and Default Values**:\n\n| Device         | Valid Values | Default Value |\n|:---------------|:-------------|:--------------|\n| PXIe-5603/5605 | 0 to 15.5    | 15.5          |\n| PXIe-5606      | 0 to 31      | 31            |\n\n**Supported Devices**: PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:LO2 Attenuation',
-        'name': 'CAL_LO2_ATTENUATION',
-        'type': 'ViReal64'
-    },
-    1150116: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the LO3 attenuation, in dB, during a calibration session. This attribute is valid only during a calibration session.\n\n**Valid Values and Default Values**:\n\n| Device         | Valid Values | Default Value |\n|:---------------|:-------------|:--------------|\n| PXIe-5603/5605 | 0 to 15.5    | 15.5          |\n| PXIe-5606      | 0 to 31      | 31            |\n\n**Supported Devices**: PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:LO3 Attenuation',
-        'name': 'CAL_LO3_ATTENUATION',
-        'type': 'ViReal64'
     },
     1150117: {
         'access': 'read only',
@@ -1364,16 +1040,6 @@ attributes = {
         'lv_property': 'Acquisition:Device Instantaneous Bandwidth (Hz)',
         'name': 'DEVICE_INSTANTANEOUS_BANDWIDTH',
         'type': 'ViReal64'
-    },
-    1150126: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the configuration list step that is currently programmed to the hardware.\n\nThe list is zero-indexed. You can query this attribute only when a list is executed.\n\n**PXIe-5663E/5665/5667**: This attribute can be read only when a configuration list is running.\n\n**PXIe-5644/5645/5646**: This attribute always returns 0 when the configuration list is not running.\n\n**PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters**: If a configuration list is not running, this attribute returns the last step of a configuration list that is programmed to the hardware. If the device was last initiated without an active configuration list, this attribute returns 0.\n\n**Default Value**: N/A\n\n**Supported Devices:**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters\n\n**Related Topics**\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_'
-        },
-        'lv_property': 'Configuration List:Step In Progress',
-        'name': 'CONFIGURATION_LIST_STEP_IN_PROGRESS',
-        'type': 'ViInt64'
     },
     1150127: {
         'access': 'read-write',
@@ -1499,17 +1165,6 @@ attributes = {
         'name': 'DOWNCONVERTER_CAL_TONE_FREQUENCY',
         'type': 'ViReal64'
     },
-    1150141: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the IF attenuation table to be used for external calibration.\n\nThis attribute is valid only in a calibration session.\n\n**Defined Values**:\n\n%enum_table{i fatten table sel}\n\n**Default Value**: NIRFSA_VAL_EXT_CAL_IF_ATTENUATION_TABLE_STANDARD\n\n**Supported Devices**: PXIe-5603/5605'
-        },
-        'enum': 'IFattenTableSel',
-        'lv_property': 'Factory Calibration:NI 5665/5668R:IF Attenuation Table Selection',
-        'name': 'CAL_IF_ATTENUATION_TABLE_SELECTION',
-        'type': 'ViInt32'
-    },
     1150142: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1528,36 +1183,6 @@ attributes = {
         },
         'lv_property': 'Acquisition:Spectrum:Spectrum OSP Sampling Ratio',
         'name': 'SPECTRUM_OSP_SAMPLING_RATIO',
-        'type': 'ViReal64'
-    },
-    1150146: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the internal gain self-calibration correction for the IF filter through path.\n\nThe value you specify using this attribute overrides any previously-set value.\n\n**Units**: dB\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5603/5605'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5668R:Calibration Correction for Through Filter',
-        'name': 'CALIBRATION_CORRECTION_THROUGH_FILTER',
-        'type': 'ViReal64'
-    },
-    1150147: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the internal gain self-calibration correction for the 300 kHz IF filter path.\n\nThe value you specify using this attribute overrides any previously-set value.\n\n**Units**: dB\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5668R:Calibration Correction for 300 kHz Filter',
-        'name': 'CALIBRATION_CORRECTION_300_KHZ_FILTER',
-        'type': 'ViReal64'
-    },
-    1150148: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the internal gain self-calibration correction for the 5 MHz IF filter path.\n\nThe value you specify using this attribute overrides any previously-set value.\n\n**Units**: dB\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5603/5605/5606'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5668R:Calibration Correction for 5 MHz Filter',
-        'name': 'CALIBRATION_CORRECTION_5_MHZ_FILTER',
         'type': 'ViReal64'
     },
     1150149: {
@@ -1612,16 +1237,6 @@ attributes = {
         'name': 'STEP_GAIN_ENABLED',
         'type': 'ViInt32'
     },
-    1150158: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the preselector tuning DAC value during the preselector external alignment step.\n\nThis value is valid only during a external alignment session.\n\n**Valid Values:**\n\n| Device    | Value       |\n|:----------|:------------|\n| PXIe-5605 | 0 to 16,383 |\n| PXIe-5606 | 0 to 65,535 |\n\n**Defined Values:** 0 to 15.5\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5605/5606 (external digitizer mode), PXIe-5665/5668'
-        },
-        'lv_property': 'External Alignment:NI 5665/5668R:Preselector Tuning DAC Value',
-        'name': '5665_PRESELECTOR_TUNING_DAC_VALUE',
-        'type': 'ViInt32'
-    },
     1150159: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1658,9 +1273,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the LO signal source used to downconvert the RF input signal.\n\n                If no signal downconversion is required, this attribute is ignored. If this attribute is set to "" (empty string), NI-RFSA uses the internal LO source.\n\n                To use this attribute for the PXIe-5830/5831/5832, you must use the channelName parameter of the nirfsa_SetAttributeViString function to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).\n\n                ----\n                **Note**\n                For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this attribute is set to NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED_STR.\n\n                ----\n\n                **Defined Values:**\n                %enum_table{lo source vals}\n\n                **Default Value**: NIRFSA_VAL_ONBOARD_STR ("Onboard")\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5694, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n                `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/lo-sharing-using-rfsa-rfsg.html>`_\n                `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/lo-sharing-using-rfsa-rfsg.html>`_'
+            'description': 'Specifies the LO signal source used to downconvert the RF input signal.\n\n                If no signal downconversion is required, this attribute is ignored. If this attribute is set to "" (empty string), NI-RFSA uses the internal LO source.\n\n                To use this attribute for the PXIe-5830/5831/5832, you must use the channelName parameter of the nirfsa_SetAttributeViString function to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).\n\n                ----\n                **Note**\n                For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this attribute is set to NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED_STR.\n\n                ----\n\n                **Defined Values:**\n                %enum_table{lo source}\n\n                **Default Value**: NIRFSA_VAL_ONBOARD_STR ("Onboard")\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5694, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n                `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/lo-sharing-using-rfsa-rfsg.html>`_\n                `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/lo-sharing-using-rfsa-rfsg.html>`_'
         },
-        'enum': 'LoSourceVals',
+        'enum': 'LoSource',
         'lv_property': 'Signal Path:LO Source',
         'name': 'LO_SOURCE',
         'type': 'ViString'
@@ -1684,16 +1299,6 @@ attributes = {
         'lv_property': 'Triggers:Advanced:DDC Reference Trigger Override',
         'name': 'DDC_REF_TRIGGER_OVERRIDE',
         'type': 'ViBoolean'
-    },
-    1150165: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'This attribute is not for customer use.'
-        },
-        'lv_property': 'Configuration List:Advanced:Minimum Reconfiguration Time',
-        'name': 'MINIMUM_RECONFIG_TIME',
-        'type': 'ViReal64'
     },
     1150166: {
         'access': 'read-write',
@@ -1747,26 +1352,6 @@ attributes = {
         'lv_property': 'Signal Path:Advanced:Input Isolation Enabled',
         'name': 'INPUT_ISOLATION_ENABLED',
         'type': 'ViInt32'
-    },
-    1150172: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'This attribute is not for customer use.'
-        },
-        'lv_property': 'Acquisition:IQ:Advanced:Contiguous Multirecord',
-        'name': 'CONTIGUOUS_MULTIRECORD',
-        'type': 'ViInt32'
-    },
-    1150173: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'This attribute is not for customer use.'
-        },
-        'lv_property': 'Configuration List:Advanced:Timer Start Source',
-        'name': 'TIMER_START_SOURCE',
-        'type': 'ViString'
     },
     1150174: {
         'access': 'read only',
@@ -1853,9 +1438,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the terminal configuration of the I/Q port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsa_SetAttributeViInt32 function to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).\n\n----\n**Note**\nFor the PXIe-5645, this attribute is ignored if you are using the RF ports.\n\n----\n\n**PXIe-5820**: The only valid value for this attribute is NIRFSA_VAL_DIFFERENTIAL.\n\n**Defined Values:**\n\n%enum_table{iq in port term cfg}\n\n**Default Value**: NIRFSA_VAL_DIFFERENTIAL\n\n**Supported Devices:** PXIe-5645, PXIe-5820'
+            'description': 'Configures the terminal configuration of the I/Q port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsa_SetAttributeViInt32 function to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).\n\n----\n**Note**\nFor the PXIe-5645, this attribute is ignored if you are using the RF ports.\n\n----\n\n**PXIe-5820**: The only valid value for this attribute is NIRFSA_VAL_DIFFERENTIAL.\n\n**Defined Values:**\n\n%enum_table{iq in port terminal configuration}\n\n**Default Value**: NIRFSA_VAL_DIFFERENTIAL\n\n**Supported Devices:** PXIe-5645, PXIe-5820'
         },
-        'enum': 'IqInPortTermCfg',
+        'enum': 'IqInPortTerminalConfiguration',
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ In Port:Terminal Configuration',
         'name': 'IQ_IN_PORT_TERMINAL_CONFIGURATION',
         'type': 'ViInt32'
@@ -1956,9 +1541,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies whether the device asserts the trigger when the voltage level is rising or falling. \n\nWhen you set the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute to NIRFSA_VAL_IQ_ANALOG_EDGE, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This attribute affects the device operation only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_ANALOG_EDGE.\n\n**Defined Values:**\n\n%enum_table{ref trig iq pwr edge slope}\n\n**Default Value**: NIRFSA_VAL_RISING_SLOPE\n\n**Supported Devices:** PXIe-5644/5645'
+            'description': 'Specifies whether the device asserts the trigger when the voltage level is rising or falling. \n\nWhen you set the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute to NIRFSA_VAL_IQ_ANALOG_EDGE, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This attribute affects the device operation only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_ANALOG_EDGE.\n\n**Defined Values:**\n\n%enum_table{reference trigger iq power edge slope}\n\n**Default Value**: NIRFSA_VAL_RISING_SLOPE\n\n**Supported Devices:** PXIe-5644/5645'
         },
-        'enum': 'RefTrigIqPwrEdgeSlope',
+        'enum': 'ReferenceTriggerIqPowerEdgeSlope',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Slope',
         'name': 'IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE',
         'type': 'ViInt32'
@@ -2066,47 +1651,6 @@ attributes = {
         'name': 'RF_CONDITIONING_CAL_TONE_FREQUENCY',
         'type': 'ViReal64'
     },
-    1150210: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the current temperature, in degrees Celsius, of the IF conditioning module associated with the NI-RFSA device.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5667'
-        },
-        'lv_property': 'Device Characteristics:IF Conditioning Temperature (Degrees C)',
-        'name': 'IF_CONDITIONING_TEMPERATURE',
-        'type': 'ViReal64'
-    },
-    1150211: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the current temperature, in degrees Celsius, of the RF conditioning module associated with the NI-RFSA device.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5667'
-        },
-        'lv_property': 'Device Characteristics:RF Conditioning Temperature (Degrees C)',
-        'name': 'RF_CONDITIONING_TEMPERATURE',
-        'type': 'ViReal64'
-    },
-    1150215: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the RF lowband signal conditioning path.\n\n**Valid Values**: \n\nNIRFSA_VAL_EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1\n\nNIRFSA_VAL_EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_2\n\n**Default Value**: NIRFSA_VAL_EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1\n\n**Supported Devices**: PXIe-5606'
-        },
-        'enum': 'RfLbSigCondPathSel',
-        'lv_property': 'Factory Calibration:NI 5665/5668R:RF Lowband Signal Conditioning Path Selection',
-        'name': 'CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_SELECTION',
-        'type': 'ViInt32'
-    },
-    1150216: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the size of the selected IF attenuation table.\n\n**Valid Values**: 0-132\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5606'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:IF Attenuation Table Size',
-        'name': 'CAL_IF_ATTENUATION_TABLE_SIZE',
-        'type': 'ViInt32'
-    },
     1150217: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -2169,36 +1713,6 @@ attributes = {
         'name': 'NOISE_SOURCE_POWER_ENABLED',
         'type': 'ViInt32'
     },
-    1150223: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the internal gain self-calibration correction for the 100 MHz IF filter path.\n\nThe value you specify using this attribute overrides any previously-set value.\n\n**Units**: dB\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5606'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5668R:Calibration Correction for 100 MHz Filter',
-        'name': 'CALIBRATION_CORRECTION_100_MHZ_FILTER',
-        'type': 'ViReal64'
-    },
-    1150224: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the internal gain self-calibration correction for the 320 MHz IF filter path.\n\nThe value you specify using this attribute overrides any previously-set value.\n\n**Units**: dB\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5606'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5668R:Calibration Correction for 320 MHz Filter',
-        'name': 'CALIBRATION_CORRECTION_320_MHZ_FILTER',
-        'type': 'ViReal64'
-    },
-    1150225: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the internal gain self-calibration correction for the 765 MHz IF filter path.\n\nThe value you specify using this attribute overrides any previously-set value.\n\n**Units**: dB\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5606'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5668R:Calibration Correction for 765 MHz Filter',
-        'name': 'CALIBRATION_CORRECTION_765_MHZ_FILTER',
-        'type': 'ViReal64'
-    },
     1150226: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -2223,9 +1737,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the terminal at which to export the Digitizer Sample Clock.\n\n**Valid Values**: \n%enum_table{digitizer samp clk exported term}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5668'
+            'description': 'Specifies the terminal at which to export the Digitizer Sample Clock.\n\n**Valid Values**: \n%enum_table{digitizer sample clock exported terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5668'
         },
-        'enum': 'DigitizerSampClkExportedTerm',
+        'enum': 'DigitizerSampleClockExportedTerminal',
         'lv_property': 'Clocking:Digitizer Sample Clock Exported Terminal',
         'name': 'EXPORTED_DIGITIZER_SAMPLE_CLOCK_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2450,9 +1964,9 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsa_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Defined Values:**\n\n%enum_table{deembedding type attr vals}\n\n**Default Value**: NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR or  NIRFSA_VAL_DEEMBEDDING_TYPE_NONE\n\n**Valid Values for PXIe-5831:** NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR, NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSA_VAL_DEEMBEDDING_TYPE_NONE. NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsa_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Defined Values:**\n\n%enum_table{deembedding type}\n\n**Default Value**: NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR or  NIRFSA_VAL_DEEMBEDDING_TYPE_NONE\n\n**Valid Values for PXIe-5831:** NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR, NIRFSA_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSA_VAL_DEEMBEDDING_TYPE_NONE. NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
-        'enum': 'DeembeddingTypeAttrVals',
+        'enum': 'DeembeddingType',
         'lv_property': 'De-embedding:Type',
         'name': 'DEEMBEDDING_TYPE',
         'type': 'ViInt32'

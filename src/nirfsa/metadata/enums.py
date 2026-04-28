@@ -39,7 +39,7 @@ enums = {
             }
         ]
     },
-    'AdvanceTrigType': {
+    'AdvanceTriggerType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -65,7 +65,7 @@ enums = {
             }
         ]
     },
-    'ArmRefTrigType': {
+    'ArmReferenceTriggerType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -223,7 +223,7 @@ enums = {
             }
         ]
     },
-    'DeembeddingTypeAttrVals': {
+    'DeembeddingType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -246,10 +246,58 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR',
                 'value': 3902
+            },
+            {
+                'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
+                'value': 3903
+            },
+            {
+                'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
+                'value': 3904
             }
         ]
     },
-    'DigitizerSampClkExportedTerm': {
+    'DeviceResponseType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Returns the IF response of the downconverter.'
+                },
+                'name': 'NIRFSA_VAL_DOWNCONVERTER_IF_RESPONSE',
+                'value': 2800
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the RF response of the downconverter. This value is supported only for the PXIe-5603/5605/5665/5667/5693..'
+                },
+                'name': 'NIRFSA_VAL_DOWNCONVERTER_RF_RESPONSE',
+                'value': 2801
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the combined RF and IF response of the downconverter. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5603/5605/5665/5667.'
+                },
+                'name': 'NIRFSA_VAL_DOWNCONVERTER_COMBINED_RESPONSE',
+                'value': 2802
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the IF response of the entire NI-RFSA device. This value is supported only for the PXIe-5665/5667.'
+                },
+                'name': 'NIRFSA_VAL_VSA_IF_RESPONSE',
+                'value': 2803
+            },
+            {
+                'documentation': {
+                    'description': 'Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.'
+                },
+                'name': 'NIRFSA_VAL_VSA_COMBINED_RESPONSE',
+                'value': 2804
+            }
+        ]
+    },
+    'DigitizerSampleClockExportedTerminal': {
         'codegen_method': 'public',
         'values': [
             {
@@ -268,7 +316,7 @@ enums = {
             }
         ]
     },
-    'DigitizerSampClkTimebaseSrc': {
+    'DigitizerSampleClockTimebaseSource': {
         'codegen_method': 'public',
         'values': [
             {
@@ -464,7 +512,7 @@ enums = {
             }
         ]
     },
-    'ExportOutputTerm': {
+    'ExportOutputTerminal': {
         'codegen_method': 'public',
         'values': [
             {
@@ -677,32 +725,6 @@ enums = {
             }
         ]
     },
-    'Format': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': ' Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.'
-                },
-                'name': 'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_AND_PHASE',
-                'value': 4001
-            },
-            {
-                'documentation': {
-                    'description': 'Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.'
-                },
-                'name': 'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_DB_AND_PHASE',
-                'value': 4002
-            },
-            {
-                'documentation': {
-                    'description': 'Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.'
-                },
-                'name': 'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_REAL_AND_IMAGINARY',
-                'value': 4000
-            }
-        ]
-    },
     'FrequencySettlingUnits': {
         'codegen_method': 'public',
         'values': [
@@ -784,7 +806,7 @@ enums = {
             }
         ]
     },
-    'IFfilterSel': {
+    'IFfilterSelection': {
         'codegen_method': 'public',
         'values': [
             {
@@ -878,7 +900,7 @@ enums = {
             }
         ]
     },
-    'IqInPortTermCfg': {
+    'IqInPortTerminalConfiguration': {
         'codegen_method': 'public',
         'values': [
             {
@@ -894,6 +916,114 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_SINGLE_ENDED',
                 'value': 2101
+            }
+        ]
+    },
+    'IsSelfCalValidValidSteps': {
+        'class': 'IntFlag',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'No calibration steps are omitted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
+                'value': 10
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
+                'value': 20
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
+                'value': 40
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
+                'value': 80
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
+                'value': 100
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
+                'value': 200
+            }
+        ]
+    },
+    'LinearInterpolationFormat': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': ' Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.'
+                },
+                'name': 'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_AND_PHASE',
+                'value': 4001
+            },
+            {
+                'documentation': {
+                    'description': 'Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.'
+                },
+                'name': 'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_DB_AND_PHASE',
+                'value': 4002
+            },
+            {
+                'documentation': {
+                    'description': 'Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.'
+                },
+                'name': 'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_REAL_AND_IMAGINARY',
+                'value': 4000
             }
         ]
     },
@@ -982,7 +1112,7 @@ enums = {
             }
         ]
     },
-    'LoSourceVals': {
+    'LoSource': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1284,7 +1414,54 @@ enums = {
             }
         ]
     },
-    'PxiChassisClk10Src': {
+    'PowerSpectrumUnits': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Units are dB with reference to 1 milliwatt.'
+                },
+                'name': 'NIRFSA_VAL_DBM',
+                'value': 200
+            },
+            {
+                'documentation': {
+                    'description': 'Units are in volts squared.'
+                },
+                'name': 'NIRFSA_VAL_VOLTS_SQUARED',
+                'value': 201
+            },
+            {
+                'documentation': {
+                    'description': 'Units are dB with reference to 1 millivolt.'
+                },
+                'name': 'NIRFSA_VAL_DBMV',
+                'value': 202
+            },
+            {
+                'documentation': {
+                    'description': 'Units are dB with reference to 1 microvolt.'
+                },
+                'name': 'NIRFSA_VAL_DBUV',
+                'value': 203
+            },
+            {
+                'documentation': {
+                    'description': 'Units are in volts.'
+                },
+                'name': 'NIRFSA_VAL_VOLTS',
+                'value': 204
+            },
+            {
+                'documentation': {
+                    'description': 'Units are in watts.'
+                },
+                'name': 'NIRFSA_VAL_WATTS',
+                'value': 205
+            }
+        ]
+    },
+    'PxiChassisClk10Source': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1310,7 +1487,33 @@ enums = {
             }
         ]
     },
-    'RefClkExportedTerm': {
+    'ReferenceClockExportedRate': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Exports a 10 MHz Reference Clock.'
+                },
+                'name': 'NIRFSA_VAL_10MHZ',
+                'value': 10000000
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a 100 MHz Reference Clock.'
+                },
+                'name': 'NIRFSA_VAL_100MHZ',
+                'value': 100000000
+            },
+            {
+                'documentation': {
+                    'description': 'Exports a 1 GHz Reference Clock.'
+                },
+                'name': 'NIRFSA_VAL_1GHZ',
+                'value': 1000000000.0
+            }
+        ]
+    },
+    'ReferenceClockExportedTerminal': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1350,7 +1553,7 @@ enums = {
             }
         ]
     },
-    'RefClockSrc': {
+    'ReferenceClockSource': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1404,7 +1607,26 @@ enums = {
             }
         ]
     },
-    'RefTrigDigEdgeEdge': {
+    'ReferenceLevelDataType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations.'
+                },
+                'name': 'NIRFSA_VAL_EXT_CAL_MECHANICAL_ATTENUATOR_DISABLED',
+                'value': 1801
+            },
+            {
+                'documentation': {
+                    'description': ' The data is the default configuration data.'
+                },
+                'name': 'NIRFSA_VAL_EXT_CAL_DEFAULT',
+                'value': 1800
+            }
+        ]
+    },
+    'ReferenceTriggerDigitalEdgeEdge': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1423,7 +1645,7 @@ enums = {
             }
         ]
     },
-    'RefTrigIqPwrEdgeSlope': {
+    'ReferenceTriggerIqPowerEdgeSlope': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1442,7 +1664,7 @@ enums = {
             }
         ]
     },
-    'RefTrigType': {
+    'ReferenceTriggerType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1482,91 +1704,6 @@ enums = {
             }
         ]
     },
-    'ReferenceClockExportedRate': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Exports a 10 MHz Reference Clock.'
-                },
-                'name': 'NIRFSA_VAL_10MHZ',
-                'value': 10000000
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a 100 MHz Reference Clock.'
-                },
-                'name': 'NIRFSA_VAL_100MHZ',
-                'value': 100000000
-            },
-            {
-                'documentation': {
-                    'description': 'Exports a 1 GHz Reference Clock.'
-                },
-                'name': 'NIRFSA_VAL_1GHZ',
-                'value': 1000000000.0
-            }
-        ]
-    },
-    'ReferenceLevelDataType': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations.'
-                },
-                'name': 'NIRFSA_VAL_EXT_CAL_MECHANICAL_ATTENUATOR_DISABLED',
-                'value': 1801
-            },
-            {
-                'documentation': {
-                    'description': ' The data is the default configuration data.'
-                },
-                'name': 'NIRFSA_VAL_EXT_CAL_DEFAULT',
-                'value': 1800
-            }
-        ]
-    },
-    'ResponseType': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Returns the IF response of the downconverter.'
-                },
-                'name': 'NIRFSA_VAL_DOWNCONVERTER_IF_RESPONSE',
-                'value': 2800
-            },
-            {
-                'documentation': {
-                    'description': 'Returns the RF response of the downconverter. This value is supported only for the PXIe-5603/5605/5665/5667/5693..'
-                },
-                'name': 'NIRFSA_VAL_DOWNCONVERTER_RF_RESPONSE',
-                'value': 2801
-            },
-            {
-                'documentation': {
-                    'description': 'Returns the combined RF and IF response of the downconverter. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5603/5605/5665/5667.'
-                },
-                'name': 'NIRFSA_VAL_DOWNCONVERTER_COMBINED_RESPONSE',
-                'value': 2802
-            },
-            {
-                'documentation': {
-                    'description': 'Returns the IF response of the entire NI-RFSA device. This value is supported only for the PXIe-5665/5667.'
-                },
-                'name': 'NIRFSA_VAL_VSA_IF_RESPONSE',
-                'value': 2803
-            },
-            {
-                'documentation': {
-                    'description': 'Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.'
-                },
-                'name': 'NIRFSA_VAL_VSA_COMBINED_RESPONSE',
-                'value': 2804
-            }
-        ]
-    },
     'RfLbSigCondPathSel': {
         'codegen_method': 'public',
         'values': [
@@ -1586,7 +1723,7 @@ enums = {
             }
         ]
     },
-    'RfPathSel': {
+    'RfPathSelection': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1822,6 +1959,88 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
                 'value': 512
+            }
+        ]
+    },
+    'SelfCalibrateRangeStepsToOmit': {
+        'class': 'IntFlag',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'No calibration steps are omitted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
+                'value': 10
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
+                'value': 20
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
+                'value': 40
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
+                'value': 80
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
+                'value': 100
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
+                'value': 200
             }
         ]
     },
@@ -2107,54 +2326,7 @@ enums = {
             }
         ]
     },
-    'SpectrumUnits': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Units are dB with reference to 1 milliwatt.'
-                },
-                'name': 'NIRFSA_VAL_DBM',
-                'value': 200
-            },
-            {
-                'documentation': {
-                    'description': 'Units are in volts squared.'
-                },
-                'name': 'NIRFSA_VAL_VOLTS_SQUARED',
-                'value': 201
-            },
-            {
-                'documentation': {
-                    'description': 'Units are dB with reference to 1 millivolt.'
-                },
-                'name': 'NIRFSA_VAL_DBMV',
-                'value': 202
-            },
-            {
-                'documentation': {
-                    'description': 'Units are dB with reference to 1 microvolt.'
-                },
-                'name': 'NIRFSA_VAL_DBUV',
-                'value': 203
-            },
-            {
-                'documentation': {
-                    'description': 'Units are in volts.'
-                },
-                'name': 'NIRFSA_VAL_VOLTS',
-                'value': 204
-            },
-            {
-                'documentation': {
-                    'description': 'Units are in watts.'
-                },
-                'name': 'NIRFSA_VAL_WATTS',
-                'value': 205
-            }
-        ]
-    },
-    'StartTrigDigEdgeEdge': {
+    'StartTriggerDigitalEdgeEdge': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2173,7 +2345,7 @@ enums = {
             }
         ]
     },
-    'StartTrigType': {
+    'StartTriggerType': {
         'codegen_method': 'public',
         'values': [
             {

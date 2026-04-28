@@ -33,7 +33,6 @@ setup(
     install_requires=[
         'hightime>=0.2.0',
         'nitclk',
-        'numpy',
     ],
     classifiers=[
         "Development Status :: 4 - Beta",

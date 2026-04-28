@@ -9,17 +9,17 @@ from nirfsa.errors import DriverWarning  # noqa: F401
 from nirfsa.errors import Error  # noqa: F401
 from nirfsa.session import Session  # noqa: F401
 
-from nirfsa.waveform_info import WaveformInfo  # noqa: F401
+from nirfsa.ni_complex_number import NiComplexNumber  # noqa: F401
 
-from nirfsa.waveform_info import struct_niRFSA_wfmInfo  # noqa: F401
+from nirfsa.ni_complex_number import struct_NIComplexNumber  # noqa: F401
 
-from nirfsa.spectrum_info_type import SpectrumInfoT  # noqa: F401
+from nirfsa.ni_rfsa_wfm_info import NiRfsaWfmInfo  # noqa: F401
 
-from nirfsa.spectrum_info_type import struct_niRFSA_spectrumInfo  # noqa: F401
+from nirfsa.ni_rfsa_wfm_info import struct_niRFSA_wfmInfo  # noqa: F401
 
-from nirfsa.coefficient_info_type import CoefficientInfo  # noqa: F401
+from nirfsa.ni_rfsa_spectrum_info import NiRfsaSpectrumInfo  # noqa: F401
 
-from nirfsa.coefficient_info_type import struct_niRFSA_coefficientInfo  # noqa: F401
+from nirfsa.ni_rfsa_spectrum_info import struct_niRFSA_spectrumInfo  # noqa: F401
 
 
 def get_diagnostic_information():

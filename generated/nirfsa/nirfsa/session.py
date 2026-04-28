@@ -10,11 +10,11 @@ import nirfsa._library_interpreter as _library_interpreter
 import nirfsa.enums as enums
 import nirfsa.errors as errors
 
-import nirfsa.waveform_info as waveform_info  # noqa: F401
+import nirfsa.ni_complex_number as ni_complex_number  # noqa: F401
 
-import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
+import nirfsa.ni_rfsa_wfm_info as ni_rfsa_wfm_info  # noqa: F401
 
-import nirfsa.coefficient_info_type as coefficient_info_type  # noqa: F401
+import nirfsa.ni_rfsa_spectrum_info as ni_rfsa_spectrum_info  # noqa: F401
 
 import hightime  # noqa: F401
 import nitclk
@@ -101,26 +101,6 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    _5665_preselector_tuning_dac_value = _attributes.AttributeViInt32(1150158)
-    '''Type: int
-
-    Specifies the preselector tuning DAC value during the preselector external alignment step.
-
-    This value is valid only during a external alignment session.
-
-    **Valid Values:**
-
-    | Device    | Value       |
-    |:----------|:------------|
-    | PXIe-5605 | 0 to 16,383 |
-    | PXIe-5606 | 0 to 65,535 |
-
-    **Defined Values:** 0 to 15.5
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5605/5606 (external digitizer mode), PXIe-5665/5668
-    '''
     absolute_delay = _attributes.AttributeViReal64(1150266)
     '''Type: float
 
@@ -164,47 +144,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_acquisition_type
-    '''
-    active_configuration_list = _attributes.AttributeViString(1150092)
-    '''Type: str
-
-    Specifies the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ to make active for configuration or initiation.
-
-    Activating a list makes all properties in the list reflect the value of the properties that correspond to the set specified by the active_configuration_list and the active_configuration_list_step properties.
-
-    Set this property to an empty string to disable RF list mode.
-
-    **Default Value**: "" (empty string) for devices that support RF list mode. For all other devices, the default value is N/A.
-
-    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-    **Related Topics**
-
-    `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-    **High-Level Methods**:
-
-    - create_configuration_list
-    '''
-    active_configuration_list_step = _attributes.AttributeViInt64(1150093)
-    '''Type: int
-
-    Specifies the step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ to make active for configuration or initiation.
-
-    Activating a list makes all properties in the list reflect the value of the properties that correspond to the set specified by the active_configuration_list and the active_configuration_list_step properties.
-
-    **Default Value**: 0 for devices that support RF list mode. For all other devices, the default value is N/A.
-
-    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-    **Related Topics**
-
-    `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-    **High-Level Methods**:
-
-    - create_configuration_list_step
+    - ConfigureAcquisitionType
     '''
     advance_trigger_terminal_name = _attributes.AttributeViString(1150124)
     '''Type: str
@@ -231,22 +171,22 @@ class _SessionBase(object):
 
     - get_terminal_name
     '''
-    advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AdvanceTrigType, 1150036)
-    '''Type: enums.AdvanceTrigType
+    advance_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AdvanceTriggerType, 1150036)
+    '''Type: enums.AdvanceTriggerType
 
     Specifies whether you want the Advance Trigger to be a digital edge or software trigger.
 
     ----
     **Note**
-    Set this property to AdvanceTrigType.NONE if you set the acquisition_type property to AcquisitionType.SPECTRUM or if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method.
+    Set this property to AdvanceTriggerType.NONE if you set the acquisition_type property to AcquisitionType.SPECTRUM or if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method.
 
     ----
 
     **Defined Values:**
 
-    %enum_table{advance trig type}
+    %enum_table{advance trigger type}
 
-    **Default Value**: AdvanceTrigType.NONE
+    **Default Value**: AdvanceTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -318,28 +258,28 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    arm_ref_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ArmRefTrigType, 1150039)
-    '''Type: enums.ArmRefTrigType
+    arm_ref_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ArmReferenceTriggerType, 1150039)
+    '''Type: enums.ArmReferenceTriggerType
 
     Specifies whether you want the Arm Reference Trigger to be a digital edge or software trigger.
 
     ----
     **Note**
-    The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support ArmRefTrigType.NONE.
+    The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support ArmReferenceTriggerType.NONE.
 
     ----
 
     ----
     **Note**
-    Set this property to ArmRefTrigType.NONE if you set the acquisition_type property to AcquisitionType.SPECTRUM or if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method.
+    Set this property to ArmReferenceTriggerType.NONE if you set the acquisition_type property to AcquisitionType.SPECTRUM or if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method.
 
     ----
 
     **Defined Values:**
 
-    %enum_table{arm ref trig type}
+    %enum_table{arm reference trigger type}
 
-    **Default Value**: ArmRefTrigType.NONE
+    **Default Value**: ArmReferenceTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -385,106 +325,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    cache = _attributes.AttributeViBoolean(1050004)
-    '''Type: bool
-
-    Specifies whether to cache the value of properties.
-
-    If you set this property to True, NI-RFSA tracks the current NI-RFSA device settings and avoids sending redundant commands to the device.
-
-    NI-RFSA can always cache or never cache particular properties, regardless of the setting of this property.
-
-    Use the init_with_options method to override the default value.
-
-    **Defined Values:**
-
-    |Value          | Description                      |
-    |:---------|:---------------------|
-    | True  | Caching is enabled.  |
-    | False | Caching is disabled. |
-
-    **Default Value**: True
-
-    **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    calibration_correction_100_mhz_filter = _attributes.AttributeViReal64(1150223)
-    '''Type: float
-
-    Specifies the internal gain self-calibration correction for the 100 MHz IF filter path.
-
-    The value you specify using this property overrides any previously-set value.
-
-    **Units**: dB
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5606
-    '''
-    calibration_correction_300_khz_filter = _attributes.AttributeViReal64(1150147)
-    '''Type: float
-
-    Specifies the internal gain self-calibration correction for the 300 kHz IF filter path.
-
-    The value you specify using this property overrides any previously-set value.
-
-    **Units**: dB
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5603/5605/5606
-    '''
-    calibration_correction_320_mhz_filter = _attributes.AttributeViReal64(1150224)
-    '''Type: float
-
-    Specifies the internal gain self-calibration correction for the 320 MHz IF filter path.
-
-    The value you specify using this property overrides any previously-set value.
-
-    **Units**: dB
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5606
-    '''
-    calibration_correction_5_mhz_filter = _attributes.AttributeViReal64(1150148)
-    '''Type: float
-
-    Specifies the internal gain self-calibration correction for the 5 MHz IF filter path.
-
-    The value you specify using this property overrides any previously-set value.
-
-    **Units**: dB
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5603/5605/5606
-    '''
-    calibration_correction_765_mhz_filter = _attributes.AttributeViReal64(1150225)
-    '''Type: float
-
-    Specifies the internal gain self-calibration correction for the 765 MHz IF filter path.
-
-    The value you specify using this property overrides any previously-set value.
-
-    **Units**: dB
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5606
-    '''
-    calibration_correction_through_filter = _attributes.AttributeViReal64(1150146)
-    '''Type: float
-
-    Specifies the internal gain self-calibration correction for the IF filter through path.
-
-    The value you specify using this property overrides any previously-set value.
-
-    **Units**: dB
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5603/5605
-    '''
     cal_digitizer_id = _attributes.AttributeViString(1150226)
     '''Type: str
 
@@ -509,34 +349,8 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5694
     '''
-    cal_if_attenuation_table_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IFattenTableSel, 1150141)
-    '''Type: enums.IFattenTableSel
-
-    Specifies the IF attenuation table to be used for external calibration.
-
-    This property is valid only in a calibration session.
-
-    **Defined Values**:
-
-    %enum_table{i fatten table sel}
-
-    **Default Value**: IFattenTableSel.STANDARD
-
-    **Supported Devices**: PXIe-5603/5605
-    '''
-    cal_if_attenuation_table_size = _attributes.AttributeViInt32(1150216)
-    '''Type: int
-
-    Returns the size of the selected IF attenuation table.
-
-    **Valid Values**: 0-132
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5606
-    '''
-    cal_if_filter_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IFfilterSel, 1150112)
-    '''Type: enums.IFfilterSel
+    cal_if_filter_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IFfilterSelection, 1150112)
+    '''Type: enums.IFfilterSelection
 
     Specifies the IF filter path during calibration.
 
@@ -544,116 +358,14 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    %enum_table{i ffilter sel}
+    %enum_table{i ffilter selection}
 
-    **Default Value**: IFfilterSel._4
+    **Default Value**: IFfilterSelection._4
 
     **Supported Devices**: PXIe-5694
     '''
-    cal_lo1_attenuation = _attributes.AttributeViReal64(1150114)
-    '''Type: float
-
-    Specifies the LO1 attenuation, in dB, during a calibration session.
-
-    This property is valid only during a calibration session.
-
-    **Valid Values and Default Values**:
-
-    | Device         | Valid Values | Default Value |
-    |:---------------|:-------------|:--------------|
-    | PXIe-5603/5605 | 0 to 15.5    | 15.5          |
-    | PXIe-5606      | 0 to 31      | 31            |
-
-    **Supported Devices**: PXIe-5603/5605/5606
-    '''
-    cal_lo2_attenuation = _attributes.AttributeViReal64(1150115)
-    '''Type: float
-
-    Specifies the LO2 attenuation, in dB, during a calibration session.
-
-    This property is valid only during a calibration session.
-
-    **Valid Values and Default Values**:
-
-    | Device         | Valid Values | Default Value |
-    |:---------------|:-------------|:--------------|
-    | PXIe-5603/5605 | 0 to 15.5    | 15.5          |
-    | PXIe-5606      | 0 to 31      | 31            |
-
-    **Supported Devices**: PXIe-5603/5605/5606
-    '''
-    cal_lo3_attenuation = _attributes.AttributeViReal64(1150116)
-    '''Type: float
-
-    Specifies the LO3 attenuation, in dB, during a calibration session. This property is valid only during a calibration session.
-
-    **Valid Values and Default Values**:
-
-    | Device         | Valid Values | Default Value |
-    |:---------------|:-------------|:--------------|
-    | PXIe-5603/5605 | 0 to 15.5    | 15.5          |
-    | PXIe-5606      | 0 to 31      | 31            |
-
-    **Supported Devices**: PXIe-5603/5605/5606
-    '''
-    cal_lo_path_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoPathSel, 1150113)
-    '''Type: enums.LoPathSel
-
-    Selects the LO signal path used during calibration.
-
-    During noncalibration sessions, NI-RFSA implicitly derives the LO signal path from the center frequency. During calibration sessions, you must explicitly specify the LO signal path. This property is valid only during a calibration session.
-
-    **Defined Values:**
-
-    %enum_table{lo path sel}
-
-    **Default Value**: LoPathSel._1
-
-    **Supported Devices**: PXIe-5603/5605/5606
-    '''
-    cal_rf_electronic_attenuation_index = _attributes.AttributeViInt32(1150110)
-    '''Type: int
-
-    Selects the value of RF electronic attenuation from a table of valid configurations.
-
-    This property is valid only during a calibration session and when you set the cal_rf_path_selection property to RfPathSel._1.
-
-    **Default Value**: N/A
-
-    **Supported Devices:** PXIe-5603/5605/5606
-    '''
-    cal_rf_lowband_signal_conditioning_path_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfLbSigCondPathSel, 1150215)
-    '''Type: enums.RfLbSigCondPathSel
-
-    Specifies the RF lowband signal conditioning path.
-
-    **Valid Values**:
-
-    RfLbSigCondPathSel._1
-
-    RfLbSigCondPathSel._2
-
-    **Default Value**: RfLbSigCondPathSel._1
-
-    **Supported Devices**: PXIe-5606
-    '''
-    cal_rf_mechanical_attenuation_index = _attributes.AttributeViInt32(1150111)
-    '''Type: int
-
-    Selects the value of the RF mechanical attenuation configuration from a table of valid configurations.
-
-    This property is valid only during a calibration session.
-
-    **Default Values**:
-
-    **PXIe-5603/5605**: 3
-
-    **PXIe-5606**: 2
-
-    **Supported Devices:** PXIe-5603/5605/5606
-    '''
-    cal_rf_path_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfPathSel, 1150083)
-    '''Type: enums.RfPathSel
+    cal_rf_path_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfPathSelection, 1150083)
+    '''Type: enums.RfPathSelection
 
     Specifies the RF path to use during calibration.
 
@@ -675,16 +387,16 @@ class _SessionBase(object):
 
     | Value                                  | Description                 | Valid For                |
     |:---------------------------------------|:----------------------------|:-------------------------|
-    | RfPathSel._1 (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |
-    | RfPathSel._2 (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |
-    | RfPathSel._3 (1702)    | Specifies to use RF band 3. | PXIe-5601                |
-    | RfPathSel._4 (1703)    | Specifies to use RF band 4. | PXIe-5601                |
+    | RfPathSelection._1 (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |
+    | RfPathSelection._2 (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |
+    | RfPathSelection._3 (1702)    | Specifies to use RF band 3. | PXIe-5601                |
+    | RfPathSelection._4 (1703)    | Specifies to use RF band 4. | PXIe-5601                |
 
     **Default Values**:
 
-    **PXIe-5603/5605 (low band)/5606**: RfPathSel._1
+    **PXIe-5603/5605 (low band)/5606**: RfPathSelection._1
 
-    **PXIe-5601/5605 (high band)**: RfPathSel._2
+    **PXIe-5601/5605 (high band)**: RfPathSelection._2
 
     **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5698
     '''
@@ -790,63 +502,7 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5820
     '''
-    configuration_list_step_in_progress = _attributes.AttributeViInt64(1150126)
-    '''Type: int
-
-    Returns the configuration list step that is currently programmed to the hardware.
-
-    The list is zero-indexed. You can query this property only when a list is executed.
-
-    **PXIe-5663E/5665/5667**: This property can be read only when a configuration list is running.
-
-    **PXIe-5644/5645/5646**: This property always returns 0 when the configuration list is not running.
-
-    **PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters**: If a configuration list is not running, this property returns the last step of a configuration list that is programmed to the hardware. If the device was last initiated without an active configuration list, this property returns 0.
-
-    **Default Value**: N/A
-
-    **Supported Devices:**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-    **Related Topics**
-
-    `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-    '''
-    contiguous_multirecord = _attributes.AttributeViInt32(1150172)
-    '''Type: int
-
-    This property is not for customer use.
-    '''
     created_session_channel = _attributes.AttributeViInt32(1150333)
-    data_transfer_block_size = _attributes.AttributeViInt32(1150105)
-    '''Type: int
-
-    Specifies the maximum number of samples to transfer at one time from the device to host memory.
-
-    Increasing this number should result in better fetching performance because the driver does not need to restart the transfers as often. However, increasing this number may increase the amount of page-locked memory required from the system.
-
-    **Default Values**:
-
-    **PXIe-5668**: 0x2,000,000
-
-    **All Other Devices**: 0x400,000
-
-    **Supported Devices:**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
-    '''
-    data_transfer_maximum_bandwidth = _attributes.AttributeViReal64(1150104)
-    '''Type: float
-
-    Specifies the maximum bandwidth that the device can consume.
-
-    ----
-    **Note**
-    The NI device limits itself to transfer fewer bytes per second on the PCI Express bus than the value you specify for this property.
-
-    ----
-
-    **Default Value**: N/A
-
-    **Supported Devices:**: PXI-5661, PXIe-5663/5663E/5665
-    '''
     ddc_ref_trigger_override = _attributes.AttributeViBoolean(1150164)
     '''Type: bool
 
@@ -883,28 +539,28 @@ class _SessionBase(object):
 
     If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
-    Use the _create_deembedding_sparameter_table_array method to create tables.
+    Use the CreateDeembeddingSparameterTableArray method to create tables.
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
     '''
-    deembedding_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DeembeddingTypeAttrVals, 1150307)
-    '''Type: enums.DeembeddingTypeAttrVals
+    deembedding_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DeembeddingType, 1150307)
+    '''Type: enums.DeembeddingType
 
     Specifies the type of de-embedding to apply to measurements on the specified port.
 
     To use this property, you must use the channelName parameter of the set_attribute_vi_int32 method to specify the name of the port to configure for de-embedding.
 
-    If you set this property to DeembeddingTypeAttrVals.SCALAR or DeembeddingTypeAttrVals.VECTOR, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
+    If you set this property to DeembeddingType.SCALAR or DeembeddingType.VECTOR, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
     **Defined Values:**
 
-    %enum_table{deembedding type attr vals}
+    %enum_table{deembedding type}
 
-    **Default Value**: DeembeddingTypeAttrVals.SCALAR
+    **Default Value**: DeembeddingType.SCALAR
 
-    **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : DeembeddingTypeAttrVals.SCALAR or  DeembeddingTypeAttrVals.NONE
+    **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : DeembeddingType.SCALAR or  DeembeddingType.NONE
 
-    **Valid Values for PXIe-5831:** DeembeddingTypeAttrVals.VECTOR, DeembeddingTypeAttrVals.SCALAR, or DeembeddingTypeAttrVals.NONE. DeembeddingTypeAttrVals.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
+    **Valid Values for PXIe-5831:** DeembeddingType.VECTOR, DeembeddingType.SCALAR, or DeembeddingType.NONE. DeembeddingType.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
     '''
@@ -1092,15 +748,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    digital_edge_configuration_list_step_trigger_source = _attributes.AttributeViString(1150095)
-    '''Type: str
-
-    Configures the list trigger source.
-
-    The default value is the Signal.END_OF_RECORD_EVENT. When the value is Signal.END_OF_RECORD_EVENT, this will signal the instrument to reconfigure from configuration N to configuration N + 1 after the End Of Record Event, and before the Ready For Advance Event. If you configure this property to any other value, the instrument reconfiguration will occur whenever the specified trigger is asserted, which may be decoupled from the acquisition state machine. Therefore, if you trigger a reconfiguration during a record acquisition, you may see transient data in the record, which should be discarded by the application. NI recommends you to use this property only in case of streaming.
-    '''
-    digital_edge_ref_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTrigDigEdgeEdge, 1150030)
-    '''Type: enums.RefTrigDigEdgeEdge
+    digital_edge_ref_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerDigitalEdgeEdge, 1150030)
+    '''Type: enums.ReferenceTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Reference Trigger.
 
@@ -1108,9 +757,9 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    %enum_table{ref trig dig edge edge}
+    %enum_table{reference trigger digital edge edge}
 
-    **Default Value**: RefTrigDigEdgeEdge.RISING
+    **Default Value**: ReferenceTriggerDigitalEdgeEdge.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1147,8 +796,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTrigDigEdgeEdge, 1150026)
-    '''Type: enums.StartTrigDigEdgeEdge
+    digital_edge_start_trigger_edge = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerDigitalEdgeEdge, 1150026)
+    '''Type: enums.StartTriggerDigitalEdgeEdge
 
     Specifies the active edge for the Start Trigger.
 
@@ -1158,10 +807,10 @@ class _SessionBase(object):
 
     | Value                         | Description                                           | Valid For                           |
     |:------------------------------|:------------------------------------------------------|:------------------------------------|
-    | StartTrigDigEdgeEdge.RISING (900)  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |
-    | StartTrigDigEdgeEdge.FALLING (901) | The trigger asserts on the falling edge of the signal | PXIe-5668                           |
+    | StartTriggerDigitalEdgeEdge.RISING (900)  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |
+    | StartTriggerDigitalEdgeEdge.FALLING (901) | The trigger asserts on the falling edge of the signal | PXIe-5668                           |
 
-    **Default Value**: StartTrigDigEdgeEdge.RISING
+    **Default Value**: StartTriggerDigitalEdgeEdge.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1232,7 +881,7 @@ class _SessionBase(object):
 
     ----
     **Note**
-    For PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this property to True if the digitizer_sample_clock_timebase_source property is set to DigitizerSampClkTimebaseSrc.LO_REF_CLK.
+    For PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this property to True if the digitizer_sample_clock_timebase_source property is set to DigitizerSampleClockTimebaseSource.LO_REF_CLK.
 
     ----
 
@@ -1299,7 +948,7 @@ class _SessionBase(object):
     digitizer_sample_clock_timebase_rate = _attributes.AttributeViReal64(1150022)
     '''Type: float
 
-    Specifies the frequency, in hertz (Hz), of the external clock used as the timebase source if you set the digitizer_sample_clock_timebase_source property to an external source, such as NIRFSA_VAL_CLK_IN_STR, DigitizerSampClkTimebaseSrc.LO_REF_CLK, or DigitizerSampClkTimebaseSrc.DOWNCONVERTER_LO2_OUT
+    Specifies the frequency, in hertz (Hz), of the external clock used as the timebase source if you set the digitizer_sample_clock_timebase_source property to an external source, such as NIRFSA_VAL_CLK_IN_STR, DigitizerSampleClockTimebaseSource.LO_REF_CLK, or DigitizerSampleClockTimebaseSource.DOWNCONVERTER_LO2_OUT
 
     **PXI-5661**If this property is set to a value less than 60 MHz, signals at frequencies just above the 20 MHz passband of the downconverter may be aliased back into the passband. This aliasing occurs because the IF frequency of the downconverter is 15 MHz, and the upper end of the passband is 25 MHz. At sampling rates below 60 MHz, the Nyquist frequency is close to the end of the passband and creates aliases that are not filtered effectively by the downconverter.
 
@@ -1318,16 +967,16 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    digitizer_sample_clock_timebase_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.DigitizerSampClkTimebaseSrc, 1150021)
-    '''Type: enums.DigitizerSampClkTimebaseSrc
+    digitizer_sample_clock_timebase_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.DigitizerSampleClockTimebaseSource, 1150021)
+    '''Type: enums.DigitizerSampleClockTimebaseSource
 
     Specifies the source of the Sample Clock timebase, which is the timebase used to control waveform sampling.
 
     **Defined Values:**
 
-    %enum_table{digitizer samp clk timebase src}
+    %enum_table{digitizer sample clock timebase source}
 
-    **Default Value**: DigitizerSampClkTimebaseSrc.ONBOARD_CLOCK
+    **Default Value**: DigitizerSampleClockTimebaseSource.ONBOARD_CLOCK
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
@@ -1638,14 +1287,14 @@ class _SessionBase(object):
 
     - get_terminal_name
     '''
-    exported_advance_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150038)
-    '''Type: enums.ExportOutputTerm
+    exported_advance_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150038)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the exported Advance Trigger.
 
     **Defined Values:**
 
-    %enum_table{export output term}
+    %enum_table{export output terminal}
 
     **Default Value**: "" (empty string)
 
@@ -1653,28 +1302,28 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
     '''
-    exported_digitizer_sample_clock_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.DigitizerSampClkExportedTerm, 1150229)
-    '''Type: enums.DigitizerSampClkExportedTerm
+    exported_digitizer_sample_clock_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.DigitizerSampleClockExportedTerminal, 1150229)
+    '''Type: enums.DigitizerSampleClockExportedTerminal
 
     Specifies the terminal at which to export the Digitizer Sample Clock.
 
     **Valid Values**:
-    %enum_table{digitizer samp clk exported term}
+    %enum_table{digitizer sample clock exported terminal}
 
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5668
     '''
-    exported_done_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150054)
-    '''Type: enums.ExportOutputTerm
+    exported_done_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150054)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the Done Event.
 
     **Defined Values:**
 
-    %enum_table{export output term}
+    %enum_table{export output terminal}
 
     **Default Value**: "" (empty string)
 
@@ -1682,16 +1331,16 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
     '''
-    exported_end_of_record_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150044)
-    '''Type: enums.ExportOutputTerm
+    exported_end_of_record_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150044)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the End of Record Event.
 
     **Defined Values:**
 
-    %enum_table{export output term}
+    %enum_table{export output terminal}
 
     **Default Value**: "" (empty string)
 
@@ -1707,39 +1356,39 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
     '''
-    exported_ready_for_advance_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150042)
-    '''Type: enums.ExportOutputTerm
+    exported_ready_for_advance_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150042)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the Ready for Advance Event.
 
     | Value                                           | Description                                                                                                                                                                   |
     |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | ExportOutputTerm.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
-    | ExportOutputTerm.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-    | ExportOutputTerm.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-    | ExportOutputTerm.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
-    | ExportOutputTerm.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-    | ExportOutputTerm.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-    | ExportOutputTerm.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-    | ExportOutputTerm.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-    | ExportOutputTerm.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-    | ExportOutputTerm.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
+    | ExportOutputTerminal.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+    | ExportOutputTerminal.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+    | ExportOutputTerminal.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
+    | ExportOutputTerminal.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+    | ExportOutputTerminal.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+    | ExportOutputTerminal.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+    | ExportOutputTerminal.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+    | ExportOutputTerminal.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
+    | ExportOutputTerminal.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
     **Default Value**: "" (empty string)
 
@@ -1747,42 +1396,42 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    exported_ready_for_ref_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150043)
-    '''Type: enums.ExportOutputTerm
+    exported_ready_for_ref_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150043)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the Ready for Reference Event.
 
     | Value                                           | Description                                                                                                                                                                   |
     |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | ExportOutputTerm.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
-    | ExportOutputTerm.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-    | ExportOutputTerm.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-    | ExportOutputTerm.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
-    | ExportOutputTerm.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-    | ExportOutputTerm.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-    | ExportOutputTerm.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-    | ExportOutputTerm.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-    | ExportOutputTerm.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-    | ExportOutputTerm.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
+    | ExportOutputTerminal.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+    | ExportOutputTerminal.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+    | ExportOutputTerminal.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
+    | ExportOutputTerminal.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+    | ExportOutputTerminal.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+    | ExportOutputTerminal.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+    | ExportOutputTerminal.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+    | ExportOutputTerminal.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
+    | ExportOutputTerminal.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
     **Default Value**: "" (empty string)
 
@@ -1790,42 +1439,42 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    exported_ready_for_start_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150041)
-    '''Type: enums.ExportOutputTerm
+    exported_ready_for_start_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150041)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the Ready for Start Event.
 
     | Value                                           | Description                                                                                                                                                                   |
     |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | ExportOutputTerm.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
-    | ExportOutputTerm.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-    | ExportOutputTerm.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-    | ExportOutputTerm.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
-    | ExportOutputTerm.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-    | ExportOutputTerm.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-    | ExportOutputTerm.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-    | ExportOutputTerm.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-    | ExportOutputTerm.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-    | ExportOutputTerm.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-    | ExportOutputTerm.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerm.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
+    | ExportOutputTerminal.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+    | ExportOutputTerminal.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+    | ExportOutputTerminal.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
+    | ExportOutputTerminal.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+    | ExportOutputTerminal.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+    | ExportOutputTerminal.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+    | ExportOutputTerminal.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+    | ExportOutputTerminal.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+    | ExportOutputTerminal.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
+    | ExportOutputTerminal.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+    | ExportOutputTerminal.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
     **Default Value**: "" (empty string)
 
@@ -1833,19 +1482,19 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    exported_ref_clock_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.RefClkExportedTerm, 1150072)
-    '''Type: enums.RefClkExportedTerm
+    exported_ref_clock_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockExportedTerminal, 1150072)
+    '''Type: enums.ReferenceClockExportedTerminal
 
     Specifies a comma-separated list of the terminals at which to export the Reference Clock.
 
     **Defined Values:**
 
-    %enum_table{ref clk exported term}
+    %enum_table{reference clock exported terminal}
 
     **Default Value**: "" (empty string)
 
@@ -1853,7 +1502,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
     '''
     exported_ref_clock_rate = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.ReferenceClockExportedRate, 1150326)
     '''Type: enums.ReferenceClockExportedRate
@@ -1872,14 +1521,14 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    exported_ref_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150032)
-    '''Type: enums.ExportOutputTerm
+    exported_ref_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150032)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the exported Reference Trigger.
 
     **Defined Values:**
 
-    %enum_table{export output term}
+    %enum_table{export output terminal}
 
     **Default Value**: "" (empty string)
 
@@ -1887,16 +1536,16 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
     '''
-    exported_start_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerm, 1150027)
-    '''Type: enums.ExportOutputTerm
+    exported_start_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150027)
+    '''Type: enums.ExportOutputTerminal
 
     Specifies the destination terminal for the exported Start Trigger.
 
     **Defined Values:**
 
-    %enum_table{export output term}
+    %enum_table{export output terminal}
 
     **Default Value**: "" (empty string)
 
@@ -1904,7 +1553,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - export_signal
+    - ExportSignal
     '''
     external_gain = _attributes.AttributeViReal64(1150094)
     '''Type: float
@@ -2195,36 +1844,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5820/5830/5831/5840/5841/5842/5860
     '''
-    if1_atten_value = _attributes.AttributeViReal64(1150078)
-    '''Type: float
-
-    Specifies the IF1 attenuation, in dB. The device IF1 attenuator is set to this nominal value.
-
-    Use this property, along with the if2_atten_value property, when you set the if_filter property to IFfilter.BYPASS.
-
-    **Valid Values**: 0 to 15
-
-    **Units**: dB
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-    '''
-    if2_atten_value = _attributes.AttributeViReal64(1150079)
-    '''Type: float
-
-    Specifies the IF2 attenuation, in dB. The device IF2 attenuator is set to this nominal value.
-
-    Use this property, along with the if1_atten_value property, when you set the if_filter property to IFfilter.BYPASS.
-
-    **Valid Values**: 0 to 15
-
-    **Units**: dB
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-    '''
     if_attenuation = _attributes.AttributeViReal64(1150074)
     '''Type: float
 
@@ -2265,28 +1884,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    if_conditioning_temperature = _attributes.AttributeViReal64(1150210)
-    '''Type: float
-
-    Returns the current temperature, in degrees Celsius, of the IF conditioning module associated with the NI-RFSA device.
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5667
-    '''
-    if_filter = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IFfilter, 1150075)
-    '''Type: enums.IFfilter
-
-    Specifies the desired IF filter path, regardless of the RF band chosen by NI-RFSA.
-
-    **Defined Values:**
-
-    %enum_table{i ffilter}
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5601
     '''
     if_filter_bandwidth = _attributes.AttributeViReal64(1150205)
     '''Type: float
@@ -2485,28 +2082,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    interchange_check = _attributes.AttributeViBoolean(1050021)
-    '''Type: bool
-
-    Specifies whether to perform interchangeability checking and retrieve interchangeability warnings.
-
-    ----
-    **Note**
-    Interchangeability check is unsupported.
-
-    ----
-
-    **Defined Values:**
-
-    | Value         | Description                                                                           |
-    |:---------|:---------------------------------------------------------------------------|
-    | True  | NI-RFSA performs interchangeability-checking and retrieves warnings.       |
-    | False | NI-RFSA does not perform interchangeability-checking or retrieve warnings. |
-
-    **Default Value**: False
-
-    **Supported Devices**: None
-    '''
     io_resource_descriptor = _attributes.AttributeViString(1050304)
     '''Type: str
 
@@ -2525,7 +2100,7 @@ class _SessionBase(object):
 
     Specifies the size of the hysteresis window on either side of the trigger level.
 
-    The device triggers when the signal passes through the threshold you specify with the iq_analog_edge_ref_trigger_level property, has the slope you specify with the iq_analog_edge_ref_trigger_slope property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the ref_trigger_type property is set to RefTrigType.IQ_ANALOG_EDGE.
+    The device triggers when the signal passes through the threshold you specify with the iq_analog_edge_ref_trigger_level property, has the slope you specify with the iq_analog_edge_ref_trigger_slope property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
 
     **Valid Values:** 0 to (Voltage Range/2 + Trigger Level) for Rising Slope. 0 to (Voltage Range/2 -Trigger Level) for Falling Slope. These values limit the hysteresis to the entire voltage range that is below the trigger level for Rising Slope or that is above the trigger level for Falling Slope.
 
@@ -2538,24 +2113,24 @@ class _SessionBase(object):
 
     Specifies the analog level, in volts, at which the device triggers.
 
-    The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the ref_trigger_type property is set to RefTrigType.IQ_ANALOG_EDGE.
+    The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
 
     **Default Value:** 0 V
 
     **Supported Devices:** PXIe-5644/5645
     '''
-    iq_analog_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTrigIqPwrEdgeSlope, 1150193)
-    '''Type: enums.RefTrigIqPwrEdgeSlope
+    iq_analog_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerIqPowerEdgeSlope, 1150193)
+    '''Type: enums.ReferenceTriggerIqPowerEdgeSlope
 
     Specifies whether the device asserts the trigger when the voltage level is rising or falling.
 
-    When you set the ref_trigger_type property to RefTrigType.IQ_ANALOG_EDGE, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the ref_trigger_type property is set to RefTrigType.IQ_ANALOG_EDGE.
+    When you set the ref_trigger_type property to ReferenceTriggerType.IQ_ANALOG_EDGE, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
 
     **Defined Values:**
 
-    %enum_table{ref trig iq pwr edge slope}
+    %enum_table{reference trigger iq power edge slope}
 
-    **Default Value**: RefTrigIqPwrEdgeSlope.RISING
+    **Default Value**: ReferenceTriggerIqPowerEdgeSlope.RISING
 
     **Supported Devices:** PXIe-5644/5645
     '''
@@ -2564,7 +2139,7 @@ class _SessionBase(object):
 
     Specifies the channel from which the device monitors the trigger.
 
-    Use a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This property affects the device operation only when the ref_trigger_type property is set to RefTrigType.IQ_ANALOG_EDGE.
+    Use a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
 
     **Valid Values:** "I", "Q", "I,Q", "Q,I"
 
@@ -2611,7 +2186,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_iq_carrier_frequency
+    - ConfigureIqCarrierFrequency
     '''
     iq_in_port_carrier_frequency = _attributes.AttributeViReal64(1150181)
     '''Type: float
@@ -2645,8 +2220,8 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5645, PXIe-5820
     '''
-    iq_in_port_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IqInPortTermCfg, 1150182)
-    '''Type: enums.IqInPortTermCfg
+    iq_in_port_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IqInPortTerminalConfiguration, 1150182)
+    '''Type: enums.IqInPortTerminalConfiguration
 
     Configures the terminal configuration of the I/Q port.
 
@@ -2658,13 +2233,13 @@ class _SessionBase(object):
 
     ----
 
-    **PXIe-5820**: The only valid value for this property is IqInPortTermCfg.DIFFERENTIAL.
+    **PXIe-5820**: The only valid value for this property is IqInPortTerminalConfiguration.DIFFERENTIAL.
 
     **Defined Values:**
 
-    %enum_table{iq in port term cfg}
+    %enum_table{iq in port terminal configuration}
 
-    **Default Value**: IqInPortTermCfg.DIFFERENTIAL
+    **Default Value**: IqInPortTerminalConfiguration.DIFFERENTIAL
 
     **Supported Devices:** PXIe-5645, PXIe-5820
     '''
@@ -2712,18 +2287,18 @@ class _SessionBase(object):
 
     - configure_iq_power_edge_ref_trigger
     '''
-    iq_power_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTrigIqPwrEdgeSlope, 1150057)
-    '''Type: enums.RefTrigIqPwrEdgeSlope
+    iq_power_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerIqPowerEdgeSlope, 1150057)
+    '''Type: enums.ReferenceTriggerIqPowerEdgeSlope
 
     Specifies whether the device asserts the trigger when the signal power is rising or falling.
 
-    When you set the ref_trigger_type property to RefTrigType.IQ_POWER_EDGE, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
+    When you set the ref_trigger_type property to ReferenceTriggerType.IQ_POWER_EDGE, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
 
     **Defined Values:**
 
-    %enum_table{ref trig iq pwr edge slope}
+    %enum_table{reference trigger iq power edge slope}
 
-    **Default Value**: RefTrigIqPwrEdgeSlope.RISING
+    **Default Value**: ReferenceTriggerIqPowerEdgeSlope.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -2797,7 +2372,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_iq_rate
+    - ConfigureIqRate
 
     Note:
     One or more of the referenced properties are not in the Python API for this driver.
@@ -2851,7 +2426,7 @@ class _SessionBase(object):
 
     Contains the logical name you specified when opening the current IVI session.
 
-    You may pass a logical name to the init method or the init_with_options method. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options.
+    You may pass a logical name to the Init method or the init_with_options method. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options.
 
     **Default Value**: N/A
 
@@ -2883,7 +2458,7 @@ class _SessionBase(object):
 
     **PXIe-5603/5605/5606**: If you want to daisy-chain multiple devices together using the same LO source, set this property to TRUE to export the LO input signals on the LO1 IN, LO2 IN, and LO3 IN terminals to LO1 OUT, LO2 OUT, and LO3 OUT, respectively.
 
-    **PXIe-5694**: You can enable this property only if you set the lo_source property to LoSourceVals.LO_IN, or if you set the lo_source property to LoSourceVals.ONBOARD and the if_conditioning_down_conversion_enabled property to NIRFSA_VAL_ENABLED.
+    **PXIe-5694**: You can enable this property only if you set the lo_source property to LoSource.LO_IN, or if you set the lo_source property to LoSource.ONBOARD and the if_conditioning_down_conversion_enabled property to NIRFSA_VAL_ENABLED.
 
     **PXIe-5830/5831**: To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_boolean method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
 
@@ -3024,7 +2599,7 @@ class _SessionBase(object):
     lo_in_power = _attributes.AttributeViReal64(1150186)
     '''Type: float
 
-    Returns the power level, in dBm, expected at the LO IN terminal when the lo_source property is set to LoSourceVals.LO_IN.
+    Returns the power level, in dBm, expected at the LO IN terminal when the lo_source property is set to LoSource.LO_IN.
 
     ----
     **Note**
@@ -3095,8 +2670,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    lo_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.LoSourceVals, 1150162)
-    '''Type: enums.LoSourceVals
+    lo_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.LoSource, 1150162)
+    '''Type: enums.LoSource
 
     Specifies the LO signal source used to downconvert the RF input signal.
 
@@ -3106,14 +2681,14 @@ class _SessionBase(object):
 
                     ----
                     **Note**
-                    For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to LoSourceVals.LO_SOURCE_SG_SA_SHARED.
+                    For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to LoSource.LO_SOURCE_SG_SA_SHARED.
 
                     ----
 
                     **Defined Values:**
-                    %enum_table{lo source vals}
+                    %enum_table{lo source}
 
-                    **Default Value**: LoSourceVals.ONBOARD ("Onboard")
+                    **Default Value**: LoSource.ONBOARD ("Onboard")
 
                     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5694, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -3229,26 +2804,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    mechanical_attenuator_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150081)
-    '''Type: enums.EnableAttrVals
-
-    Specifies whether the mechanical attenuator is enabled.
-
-    Set this property to EnableAttrVals.ENABLED to allow NI-RFSA to use the mechanical attenuator.
-
-    Disabling this attenuator can improve device performance. Refer to `PXIe-5663/5663E Programming Attenuation <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/programming-attenuation.html>`_ for more information about the attenuators.
-
-    **Defined Values:**
-
-    %enum_table{enable attr vals}
-
-    **Default Value**: EnableAttrVals.ENABLED
-
-    **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
     memory_size = _attributes.AttributeViInt64(1150085)
     '''Type: int
 
@@ -3286,11 +2841,6 @@ class _SessionBase(object):
     **Default Value**: 0
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
-    '''
-    minimum_reconfig_time = _attributes.AttributeViReal64(1150165)
-    '''Type: float
-
-    This property is not for customer use.
     '''
     min_fundamental_silo_frequency = _attributes.AttributeViReal64(1150334)
     mixer_level = _attributes.AttributeViReal64(1150006)
@@ -3423,7 +2973,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_number_of_records
+    - ConfigureNumberOfRecords
     '''
     number_of_records_is_finite = _attributes.AttributeViBoolean(1150010)
     '''Type: bool
@@ -3447,7 +2997,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_number_of_records
+    - ConfigureNumberOfRecords
     '''
     number_of_samples = _attributes.AttributeViInt64(1150009)
     '''Type: int
@@ -3466,7 +3016,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_number_of_samples
+    - ConfigureNumberOfSamples
     '''
     number_of_samples_is_finite = _attributes.AttributeViBoolean(1150008)
     '''Type: bool
@@ -3490,7 +3040,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_number_of_samples
+    - ConfigureNumberOfSamples
     '''
     number_of_spectral_lines = _attributes.AttributeViInt32(1150018)
     '''Type: int
@@ -3539,104 +3089,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    p2p_enabled = _attributes.AttributeViBoolean(1150097)
-    '''Type: bool
-
-    Specifies whether peer-to-peer streaming is enabled for the active stream endpoint.
-
-    This property is `endpoint based <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/configuring-peer-to-peer-endpoint-ni-rfsa.html>`_.
-
-    **Defined Values:**
-
-    | Value                | Description                    |
-    |:----------------|:--------------------|
-    | True (1900)  | Enables streaming.  |
-    | False (1901) | Disables streaming. |
-
-    **Default Value**: False
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_endpoint_overflow = _attributes.AttributeViBoolean(1150103)
-    '''Type: bool
-
-    Indicates whether the endpoint has overflowed.
-
-    An overflow condition occurs when data is written to the endpoint faster than it can be streamed from it. During an overflow, data in the endpoint begins to be overwritten. Reset the device or close the session to reset the overflow condition.
-
-    **Defined Values:**
-
-    | Value         | Description                                               |
-    |:---------|:-----------------------------------------------|
-    | True  | The endpoint has overflowed.                   |
-    | False | You can write additional data to the endpoint. |
-
-    **Default Value**: False
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_endpoint_size = _attributes.AttributeViInt64(1150102)
-    '''Type: int
-
-    Returns the size, in samples, of the peer-to-peer endpoint.
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_fifo_endpoint_count = _attributes.AttributeViInt64(1150098)
-    '''Type: int
-
-    Returns the number of peer-to-peer streams supported by the device.
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_most_samples_available_in_endpoint = _attributes.AttributeViInt64(1150101)
-    '''Type: int
-
-    Returns the largest number of complex samples available in the peer-to-peer endpoint since this property was last read.
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_onboard_memory_enabled = _attributes.AttributeViBoolean(1150107)
-    '''Type: bool
-
-    Specifies whether a limit is placed on the number of records and the size of the records by the size of the device onboard memory.
-
-    When a peer-to-peer stream is enabled and onboard memory is disabled, any fetch calls result in an error.
-
-    **Default Value**: False
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_samples_available_in_endpoint = _attributes.AttributeViInt64(1150100)
-    '''Type: int
-
-    Returns the current number of complex samples available in the peer-to-peer endpoint.
-
-    ----
-    **Note**
-    The complex samples are composed of two 16-bit words with the I data as the LSB.
-
-    ----
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    p2p_samples_transferred = _attributes.AttributeViInt64(1150099)
-    '''Type: int
-
-    Returns the number of complex samples transferred through the peer-to-peer stream endpoint since the endpoint was last reset.
-
-    **Default Value**: 0
-
-    **Supported Devices**: PXIe-5663/5663E/5665/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
     phase_offset = _attributes.AttributeViReal64(1150106)
     '''Type: float
 
@@ -3648,16 +3100,16 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
     '''
-    power_spectrum_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SpectrumUnits, 1150012)
-    '''Type: enums.SpectrumUnits
+    power_spectrum_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.PowerSpectrumUnits, 1150012)
+    '''Type: enums.PowerSpectrumUnits
 
     Specifies the units of the power spectrum.
 
     **Defined Values:**
 
-    %enum_table{spectrum units}
+    %enum_table{power spectrum units}
 
-    **Default Value**: SpectrumUnits.DBM
+    **Default Value**: PowerSpectrumUnits.DBM
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -3676,79 +3128,6 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842
-    '''
-    pxi_chassis_clk10_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.PxiChassisClk10Src, 1150023)
-    '''Type: enums.PxiChassisClk10Src
-
-    Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane.
-
-    This option can be configured only when the PXI-5600 is installed in Slot 2 of the PXI chassis.
-
-    **Defined Values:**
-
-    %enum_table{pxi chassis clk10 src}
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXI-5600 (external digitizer mode), PXI-5661
-
-    **Related Topics**
-
-    [System Reference Clock](nirfsa.chm/system-reference-clock.html)
-
-    **High-Level Methods**:
-
-    - configure_pxi_chassis_clk10
-    '''
-    query_instrument_status = _attributes.AttributeViBoolean(1050003)
-    '''Type: bool
-
-    Specifies whether NI-RFSA queries the NI-RFSA device status after each operation.
-
-    Querying the device status is useful for debugging. After you validate your program, you can set this property to False to disable status checking and maximize performance.
-
-    NI-RFSA can choose to ignore status checking for particular properties regardless of the setting of this property.
-
-    ----
-    **Note**
-    Use the init_with_options method to override this value.
-
-    ----
-
-    **Defined Values:**
-
-    | Value         | Description                                                               |
-    |:---------|:---------------------------------------------------------------|
-    | True  | NI-RFSA queries the device status after each operation.        |
-    | False | NI-RFSA does not query the device status after each operation. |
-
-    **Default Value**: False
-
-    **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    range_check = _attributes.AttributeViBoolean(1050002)
-    '''Type: bool
-
-    Specifies whether to validate property values and method parameters.
-
-    If enabled, NI-RFSA validates the parameter values that you pass to NI-RFSA methods. Range checking parameters is very useful for debugging. After you validate your program, you can set this property to False to disable range checking and maximize performance.
-
-    ----
-    **Note**
-    Use the init_with_options method to override this value.
-
-    ----
-
-    **Defined Values:**
-
-    | Value         | Description                                                                    |
-    |:---------|:--------------------------------------------------------------------|
-    | True  | NI-RFSA validates property values and method parameters.         |
-    | False | NI-RFSA does not validate property values and method parameters. |
-
-    **Default Value**: True
-
-    **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
     ready_for_advance_event_terminal_name = _attributes.AttributeViString(1150118)
     '''Type: str
@@ -3832,28 +3211,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    record_coercions = _attributes.AttributeViBoolean(1050006)
-    '''Type: bool
-
-    Specifies whether the IVI engine keeps a list of the value coercions it makes for integer and real type properties.
-
-    ----
-    **Note**
-    This property is currently not supported.
-
-    ----
-
-    **Defined Values:**
-
-    | Value         | Description                                                            |
-    |:---------|:------------------------------------------------------------|
-    | True  | The IVI engine keeps a list of the value coercions.         |
-    | False | The IVI engine does not keep a list of the value coercions. |
-
-    **Default Value**: False
-
-    **Supported Devices**: None
-    '''
     reference_level = _attributes.AttributeViReal64(1150004)
     '''Type: float
 
@@ -3881,7 +3238,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_reference_level
+    - ConfigureReferenceLevel
     '''
     reference_level_headroom = _attributes.AttributeViReal64(1150309)
     '''Type: float
@@ -3907,7 +3264,7 @@ class _SessionBase(object):
 
     Specifies the Reference Clock rate, in Hz, of the signal present at the REF IN or CLK IN connector.
 
-    This property is only valid when the ref_clock_source property is set to NIRFSA_VAL_CLK_IN_STR,NIRFSA_VAL_REF_IN_STR , or RefClockSrc.REF_IN_2.
+    This property is only valid when the ref_clock_source property is set to NIRFSA_VAL_CLK_IN_STR,NIRFSA_VAL_REF_IN_STR , or ReferenceClockSource.REF_IN_2.
 
     **Valid Values**:
 
@@ -3930,26 +3287,26 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    ref_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.RefClockSrc, 1150019)
-    '''Type: enums.RefClockSrc
+    ref_clock_source = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ReferenceClockSource, 1150019)
+    '''Type: enums.ReferenceClockSource
 
     Specifies the Reference Clock source.
 
     ----
     **Note**
-    For the PXIe-5694, if your application requires an external LO source, set this property to RefClockSrc.NONE.
+    For the PXIe-5694, if your application requires an external LO source, set this property to ReferenceClockSource.NONE.
 
     ----
 
     **Defined Values:**
 
-    %enum_table{ref clock src}
+    %enum_table{reference clock source}
 
     **Default Values**:
 
-    **PXIe-5694**: RefClockSrc.REF_IN
+    **PXIe-5694**: ReferenceClockSource.REF_IN
 
-    **All other devices**: RefClockSrc.ONBOARD_CLOCK
+    **All other devices**: ReferenceClockSource.ONBOARD_CLOCK
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -3991,7 +3348,7 @@ class _SessionBase(object):
 
     Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger.
 
-    The signal is quiet when it is below the trigger level if the trigger slope, specified by the iq_power_edge_ref_trigger_slope property, is set to RefTrigIqPwrEdgeSlope.RISING or when it is above the trigger level if the trigger slope is set to RefTrigIqPwrEdgeSlope.FALLING.
+    The signal is quiet when it is below the trigger level if the trigger slope, specified by the iq_power_edge_ref_trigger_slope property, is set to ReferenceTriggerIqPowerEdgeSlope.RISING or when it is above the trigger level if the trigger slope is set to ReferenceTriggerIqPowerEdgeSlope.FALLING.
 
     By default, this value is set to 0, which means the device does not wait for a quiet time before arming the trigger. This property is useful to trigger the acquisition on signals containing repeated bursts, but for which each burst may have large changes in signal power within itself. By configuring the minimum quiet time to the time between bursts, you can ensure that the trigger occurs at the beginning of a burst rather than at the signal power change within a burst.
 
@@ -4011,7 +3368,7 @@ class _SessionBase(object):
     - All digitizers must be configured with the same I/Q rate.
     - All devices must use the same signal path.
 
-    **PXIe-5663/5663E**: Read the value of the if_filter property to determine the IF filters used by the PXIe-5663/5663E.
+    **PXIe-5663/5663E**: Read the value of the IF_FILTER property to determine the IF filters used by the PXIe-5663/5663E.
 
     **PXIe-5665/5667/5668**:Refer to the device-specific information in the device_instantaneous_bandwidth property to determine the IF filters used by the PXIe-5665/5667/5668. If you set the fft_width property, refer to the device-specific information for this property and the device_instantaneous_bandwidth property to determine the IF filters used. For frequencies less than 3.6 GHz, set the rf_preamp_enabled to the same value for all devices.
 
@@ -4045,6 +3402,9 @@ class _SessionBase(object):
     **Default Value**: EnableAttrVals.ENABLED
 
     **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4089,16 +3449,16 @@ class _SessionBase(object):
 
     - get_terminal_name
     '''
-    ref_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTrigType, 1150028)
-    '''Type: enums.RefTrigType
+    ref_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerType, 1150028)
+    '''Type: enums.ReferenceTriggerType
 
     Specifies whether you want the Reference Trigger to be a digital edge, I/Q power edge, or software trigger.
 
     **Defined Values:**
 
-    %enum_table{ref trig type}
+    %enum_table{reference trigger type}
 
-    **Default Value**: RefTrigType.NONE
+    **Default Value**: ReferenceTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860
 
@@ -4124,7 +3484,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_resolution_bandwidth
+    - ConfigureResolutionBandwidth
     '''
     resolution_bandwidth_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SpectrumResolutionBandwidthType, 1150014)
     '''Type: enums.SpectrumResolutionBandwidthType
@@ -4206,17 +3566,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
     '''
-    rf_attenuation_table = _attributes.AttributeViInt32(1150077)
-    '''Type: int
-
-    Specifies which RF attenuator table to use.
-
-    **Valid Values**: 0 to 1
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5601 (external digitizer mode), PXIe-5663/5663E
-    '''
     rf_conditioning_cal_tone_frequency = _attributes.AttributeViReal64(1150209)
     '''Type: float
 
@@ -4244,15 +3593,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    rf_conditioning_temperature = _attributes.AttributeViReal64(1150211)
-    '''Type: float
-
-    Returns the current temperature, in degrees Celsius, of the RF conditioning module associated with the NI-RFSA device.
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5667
-    '''
     rf_high_pass_filtering = _attributes.AttributeViReal64(1150220)
     '''Type: float
 
@@ -4275,7 +3615,7 @@ class _SessionBase(object):
 
     Specifies whether to enable the RF OUT LO OUT terminal on the PXIe-5840/5841.
 
-    When this property is enabled, if the lo_source property is set to LoSourceVals.LO_IN and you do not set the lo_frequency or downconverter_center_frequency properties, NI-RFSA rounds the LO frequency to approximately an LO step size as if the source was LoSourceVals.ONBOARD. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
+    When this property is enabled, if the lo_source property is set to LoSource.LO_IN and you do not set the lo_frequency or downconverter_center_frequency properties, NI-RFSA rounds the LO frequency to approximately an LO step size as if the source was LoSource.ONBOARD. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
 
     **Defined Values:**
 
@@ -4461,28 +3801,6 @@ class _SessionBase(object):
     **Default Value**: SignalConditioningEnabled.ENABLED
 
     **Supported Devices**: PXIe-5694
-    '''
-    simulate = _attributes.AttributeViBoolean(1050005)
-    '''Type: bool
-
-    Specifies whether NI-RFSA simulates I/O operations. This property is useful for debugging applications without using hardware. After a session is opened, you cannot change the simulation state. Use the init_with_options method to enable simulation.
-
-    ----
-    **Note**
-    PXI-5600/5661 support setting this property to False only.
-
-    ----
-
-    **Defined Values:**
-
-    | Value         | Description                                                           |
-    |:---------|:-----------------------------------------------------------|
-    | True  | NI-RFSA simulates NI-RFSA I/O operations.                  |
-    | False | NI-RFSA does not support simulated NI-RFSA I/O operations. |
-
-    **Default Value**: False
-
-    **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode); PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
     smooth_spectrum_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150219)
     '''Type: enums.EnableAttrVals
@@ -4674,28 +3992,31 @@ class _SessionBase(object):
 
     - get_terminal_name
     '''
-    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTrigType, 1150024)
-    '''Type: enums.StartTrigType
+    start_trigger_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StartTriggerType, 1150024)
+    '''Type: enums.StartTriggerType
 
     Specifies whether you want the Start Trigger to be a digital edge or software trigger.
 
     ----
     **Note**
-    Set this property to StartTrigType.NONE if you set the acquisition_type property to AcquisitionType.SPECTRUM or if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the [cviconfigure_acquisition_type](cviconfigure_acquisition_type.html) method.
+    Set this property to StartTriggerType.NONE if you set the acquisition_type property to AcquisitionType.SPECTRUM or if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the [cviConfigureAcquisitionType](cviConfigureAcquisitionType.html) method.
 
     ----
 
     **Defined Values:**
 
-    %enum_table{start trig type}
+    %enum_table{start trigger type}
 
-    **Default Value**: StartTrigType.NONE
+    **Default Value**: StartTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
     **Related Topics**
 
     `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+    Note:
+    One or more of the referenced methods are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4808,7 +4129,7 @@ class _SessionBase(object):
 
     Specifies whether the Reference Trigger is delayed with the data.
 
-    Set this property to EnableAttrVals.DISABLED when the ref_trigger_type property is set to RefTrigType.IQ_POWER_EDGE or RefTrigType.IQ_ANALOG_EDGE.
+    Set this property to EnableAttrVals.DISABLED when the ref_trigger_type property is set to ReferenceTriggerType.IQ_POWER_EDGE or ReferenceTriggerType.IQ_ANALOG_EDGE.
 
     Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
 
@@ -4945,7 +4266,7 @@ class _SessionBase(object):
 
     Indicates the minimum time between temperature sensor readings in seconds.
 
-    When you call the read_power_spectrum_f64 method, the read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+    When you call the read_power_spectrum_f64 method, the ReadIqSingleRecordComplexF64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
     ----
     **Note**
@@ -4989,30 +4310,6 @@ class _SessionBase(object):
 
     **PXIe-5840/5841**: 1.0
     '''
-    timer_event_interval = _attributes.AttributeViReal64(1150096)
-    '''Type: float
-
-    Specifies the time, in seconds, that the timer counts before generating a Timer Event.
-
-    After the timer reaches zero, it automatically restarts.
-
-    ----
-    **Note**
-    For the PXIe-5820/5830/5831/5832/5840/5841/5842 and the PXIe-5842 with S-parameters, this property must be set for the timer to start. If you do not set this property, the timer is disabled.
-
-    ----
-
-    **Units**: seconds
-
-    **Default Value**: 0.01
-
-    **Supported Devices:** PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-    '''
-    timer_start_source = _attributes.AttributeViString(1150173)
-    '''Type: str
-
-    This property is not for customer use.
-    '''
     user_source_pulse_width = _attributes.AttributeViReal64(1150322)
     '''Type: float
 
@@ -5053,9 +4350,6 @@ class _SessionBase(object):
         self._param_list = ', '.join(param_list)
 
         # Instantiate any repeated capability objects
-        self.markers = _RepeatedCapabilities(self, 'marker', repeated_capability_list)
-        self.script_triggers = _RepeatedCapabilities(self, 'scripttrigger', repeated_capability_list)
-        self.waveforms = _RepeatedCapabilities(self, 'waveform::', repeated_capability_list)
         self.ports = _RepeatedCapabilities(self, '', repeated_capability_list)
         self.los = _RepeatedCapabilities(self, 'LO', repeated_capability_list)
         self.device_temperatures = _RepeatedCapabilities(self, '', repeated_capability_list)
@@ -5074,546 +4368,6 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     ''' These are code-generated '''
-
-    @ivi_synchronized
-    def cal_adjust_cal_tone_power(self, measurement):
-        r'''cal_adjust_cal_tone_power
-
-        Specifies the calibration tone power during calibration tone amplitude calibration.
-
-                        You must call the _initiate method before calling this method.
-
-                        **Supported Devices**: PXIe-5693
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_cal_tone_power`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_cal_tone_power`
-
-        Args:
-            measurement (float): Specifies the calibration tone power, in dBm, for the current device setting.
-
-        '''
-        self._interpreter.cal_adjust_cal_tone_power(self._repeated_capability, measurement)
-
-    @ivi_synchronized
-    def cal_adjust_device_gain(self, frequency, gain):
-        r'''cal_adjust_device_gain
-
-        Records measured gain information that is gathered during the Reference Level Calibration step and IF Attenuation Calibration step.
-
-                        This method internally queries the properties you set, and you must commit all properties appropriate for your device calibration procedure prior to calling this method. Refer to ni.com/manuals for the most recent version of the calibration procedure for your device.
-
-                        Call this method immediately after a measurement is made and while the device under test (DUT) is still in the same state as it was during the measurement.
-
-                        **Supported Devices**: PXIe-5693/5694/5698
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_device_gain`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_device_gain`
-
-        Args:
-            frequency (float): Specifies the RF frequency, in Hz, of the measurement taken.
-
-            gain (float): Specifies the gain measurement, in dB.
-
-        '''
-        self._interpreter.cal_adjust_device_gain(self._repeated_capability, frequency, gain)
-
-    @ivi_synchronized
-    def cal_adjust_downconverter_gain(self, frequency, gain):
-        r'''cal_adjust_downconverter_gain
-
-        Records measured gain information that is gathered during the Reference Level Calibration step and IF Attenuation Calibration step.
-
-                        This method internally queries the properties you set, and you must set and commit the following properties prior to calling this method.
-
-                        - cal_rf_electronic_attenuation_index (This property is required only when the cal_rf_path_selection property is set to RfPathSel._1.)
-                        - cal_rf_mechanical_attenuation_index
-                        - cal_if_attenuation_table_selection
-                        - cal_if_attenuation_index
-                        - cal_if_filter_selection
-                        - channel_coupling
-                        - rf_preamp_enabled
-
-                        Call this method immediately after a measurement is made and while the device under test (DUT) is still in the same state as it was during the measurement.
-
-                        **Supported Devices**: PXIe-5603/5605/5606
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_downconverter_gain`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_downconverter_gain`
-
-        Args:
-            frequency (float): Specifies the RF frequency, in Hz, of the measurement taken.
-
-            gain (float): Specifies the gain measurement, in dB.
-
-        '''
-        self._interpreter.cal_adjust_downconverter_gain(self._repeated_capability, frequency, gain)
-
-    @ivi_synchronized
-    def cal_adjust_if_attenuation_calibration(self, if_filter, number_of_attenuators, measurement):
-        r'''cal_adjust_if_attenuation_calibration
-
-        Specifies the IF attenuation settings.
-
-                        **Supported Devices**: PXIe-5601, PXIe-5694
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_if_attenuation_calibration`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_if_attenuation_calibration`
-
-        Args:
-            if_filter (int): Specifies the IF filter used by the downconverter.
-
-                                        |Value                                     |Description                                             |
-                                        |:------------------------------------|:--------------------------------------------|
-                                        | IFfilter._187_5_MHZ_NARROW (1400)  | Uses the 187.5 MHz wide bandwidth filter.   |
-                                        | IFfilter._187_5_MHZ_NARROW (1401) | Uses the 187.5 MHz narrow bandwidth filter. |
-                                        | IFfilter._53_MHZ (1402)            | Uses the 53 MHz filter.                     |
-                                        | IFfilter.BYPASS (1403)            | Bypasses the IF filter.                     |
-
-            number_of_attenuators (int): Specifies the number of attenuators to use during the IF attenuation adjustment.
-
-            measurement (float): Specifies the relevant measurement taken for the current configuration.
-
-
-        Returns:
-            attenuator_settings (float): Specifies the IF attenuator settings for the measurement. The first element in the array corresponds with IF1, the next element corresponds to IF2, and so on.
-
-        '''
-        attenuator_settings = self._interpreter.cal_adjust_if_attenuation_calibration(self._repeated_capability, if_filter, number_of_attenuators, measurement)
-        return attenuator_settings
-
-    @ivi_synchronized
-    def cal_adjust_if_response_calibration(self, if_filter, rf_frequency, band_width, number_of_measurements):
-        r'''cal_adjust_if_response_calibration
-
-        Specifies the IF response settings.
-
-                        **Supported Devices**: PXIe-5601, PXIe-5694
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_if_response_calibration`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_if_response_calibration`
-
-        Args:
-            if_filter (int): Specifies the IF filter used by the downconverter.
-
-                                        |Value                                     |Description                                           |
-                                        |:------------------------------------|:------------------------------------------|
-                                        | IFfilter._187_5_MHZ_NARROW (1400)   | Uses the 187.5 MHz wide bandwidth path.   |
-                                        | IFfilter._187_5_MHZ_NARROW (1401) | Uses the 187.5 MHz narrow bandwidth path. |
-                                        | IFfilter._53_MHZ (1402)            | Uses the 53 MHz path.                     |
-                                        | IFfilter.BYPASS (1403)            | Bypasses the IF path.                     |
-
-            rf_frequency (float): Specifies the RF frequency, in Hz, used during the IF response adjustment.
-
-            band_width (float): Specifies the bandwidth, in Hz, to use for the IF response adjustment.
-
-            number_of_measurements (int): Specifies the number of measurements to make.
-
-
-        Returns:
-            measurements (float): Specifies the relevant measurements taken for each IF filter configuration, in dB.
-
-        '''
-        measurements = self._interpreter.cal_adjust_if_response_calibration(self._repeated_capability, if_filter, rf_frequency, band_width, number_of_measurements)
-        return measurements
-
-    @ivi_synchronized
-    def cal_adjust_lo_export_calibration(self, lo_number, number_of_frequency_points):
-        r'''cal_adjust_lo_export_calibration
-
-        LO export calibration measures the PXIe-5603/5605 LO output power level.
-
-                        The LO output power measurements are taken from the PXIe-5653 module. In MIMO applications, when the LO is exported from one PXIe-5603/5605 module to another subsequent PXIe-5603/5605, an output power signal of approximately +7 dBm is expected on each LO connector (LO1, LO2, and LO3). This method records the LO attenuation that results in an output power of +7 dBm (or greater) on the three LO output terminals.
-
-                        The PXIe-5665/5668 uses three LOs, but only LO1 is variable in frequency. This method accepts an array of frequencies and attenuations; however, for LO2 and LO3, this array must have only one element because these two LO sources operate only at one frequency. LO1 can have multiple values for specific frequencies.
-
-                        **Supported Devices**: PXIe-5603/5605/5606
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_lo_export_calibration`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_lo_export_calibration`
-
-        Args:
-            lo_number (int): Specifies the LO source to use for the LO export calibration.
-
-                                        |Value                                   |Description                                                                    |
-                                        |:----------------------------------|:-------------------------------------------------------------------|
-                                        | LoNumber.LO1  (2200) | Selects LO1, which is the 3.2 GHz to 8.3 GHz variable signal path. |
-                                        | LoNumber.LO2 (2201) | Selects LO2, which is the 4 GHz signal path.                       |
-                                        | LoNumber.LO3  (2202) | Selects LO3, which is the 800 MHz signal path.                     |
-
-            number_of_frequency_points (int): Specifies the length of the **frequencies** and **LO_ATTENUATION** arrays.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-
-        Returns:
-            frequency_points (float): Specifies frequencies for the LO output power measurement. The length of this array equals the **NUMBER_OF_FREQUENCY_POINTS** parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            lo_attenuation (float): Specifies the attenuation value of the corresponding frequency point that results in a +7 dBm output signal on the respective LO OUT connector. The length of this array equals the **NUMBER_OF_FREQUENCY_POINTS** parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        frequency_points, lo_attenuation = self._interpreter.cal_adjust_lo_export_calibration(self._repeated_capability, lo_number, number_of_frequency_points)
-        return frequency_points, lo_attenuation
-
-    @ivi_synchronized
-    def cal_adjust_ref_level_calibration(self, reference_level_data_type, rf_band, attenuator_table_number, frequency, measurement):
-        r'''cal_adjust_ref_level_calibration
-
-        Writes the reference level calibration data settings to the driver.
-
-                        **Supported Devices**: PXIe-5601
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_adjust_ref_level_calibration`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_adjust_ref_level_calibration`
-
-        Args:
-            reference_level_data_type (int): Specifies whether the reference level calibration data being used is the default configuration data or the mechanical relay disabled configuration data.
-
-                                        |Value                                                          |Description                                                                                                                                                           |
-                                        |:---------------------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | ReferenceLevelDataType.DEFAULT (1800)                        | The data is the default configuration data.                                                                                                               |
-                                        | ReferenceLevelDataType.MECHANICAL_ATTENUATOR_DISABLED (1801) | The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations. |
-
-            rf_band (int): Specifies the RF band used during the reference level calibration.
-
-                                        |Value                      |Description                             |
-                                        |:---------------------|:----------------------------|
-                                        | RfPathSel._1 | The RF band 1 path is used. |
-                                        | RfPathSel._2| The RF band 2 path is used. |
-                                        | RfPathSel._3 | The RF band 3 path is used. |
-                                        | RfPathSel._4 | The RF band 4 path is used. |
-
-            attenuator_table_number (int): Specifies which attenuation table you are using. Valid values are 0 and 1.
-
-            frequency (float): Specifies the frequency for the reference level adjustment.
-
-            measurement (float): Specifies the relevant measurement taken for the current configuration.
-
-        '''
-        self._interpreter.cal_adjust_ref_level_calibration(self._repeated_capability, reference_level_data_type, rf_band, attenuator_table_number, frequency, measurement)
-
-    @ivi_synchronized
-    def cal_set_temperature(self, temperature):
-        r'''cal_set_temperature
-
-        Writes the calibration temperature to the driver.
-
-                        **Supported Devices**: PXIe-5601
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].cal_set_temperature`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.cal_set_temperature`
-
-        Args:
-            temperature (float): Specifies the calibration temperature, in degrees Celsius.
-
-        '''
-        self._interpreter.cal_set_temperature(self._repeated_capability, temperature)
-
-    @ivi_synchronized
-    def configure_iq_carrier_frequency(self, carrier_frequency):
-        r'''configure_iq_carrier_frequency
-
-        Configures the `carrier frequency <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/fund-carrierwave.html>`_ of the RF vector signal analyzer hardware for an I/Q acquisition.
-
-                        The carrier frequency is the center frequency of the I/Q acquisition.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Carrier Wave <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/fund-carrierwave.html>`_
-
-                        `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_iq_carrier_frequency`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.configure_iq_carrier_frequency`
-
-        Args:
-            carrier_frequency (float): Specifies the carrier frequency, in hertz (Hz), of the RF signal to acquire.
-
-                                        The RF vector signal analyzer tunes to this frequency. NI-RFSA may coerce this value based on hardware settings and downconversion settings.
-
-                                        NI-RFSA sets the iq_carrier_frequency property to this value. Refer to the specifications document that shipped with your device for allowable frequency settings.
-
-        '''
-        self._interpreter.configure_iq_carrier_frequency(self._repeated_capability, carrier_frequency)
-
-    @ivi_synchronized
-    def configure_iq_rate(self, iq_rate):
-        r'''configure_iq_rate
-
-        Specifies the I/Q rate for the acquisition.
-
-                        The value is expressed in samples per second (S/s).
-
-                        For the PXIe-5663/5663E/5665/5667/5668, when you set the digitizer_sample_clock_timebase_source property to NIRFSA_VAL_ONBOARD_CLOCK_STR, the digitizer bandwidth is greater than or equal to the coerced **iq_rate** times 0.8. Actual signal bandwidth is limited for all supported devices by the anti-aliasing filter. Further device-specific limitations are as follows.
-
-                        ----
-                        **Note**
-                        For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the digitizer_dither_enabled property for more information about dithering.
-
-                        ----
-
-                        - **PXI-5661** You should not need to configure an **iq_rate** higher than 25 megasamples per second (MS/s) because the PXI-5600 RF downconverter bandwidth is 20 MHz. If you configure a higher I/Q rate, you may see aliasing effects at negative frequencies because the IF frequency of the PXI-5600 RF downconverter is 15 MHz.
-                        - **PXIe-5663/5663E** Maximum allowed instantaneous bandwidth depends on the I/Q carrier frequency you use. Refer to the `PXIe-5601 RF downconverter overview <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/overview.3.html>`_  for more information about instantaneous bandwidth.
-                        - **PXIe-5665** Actual signal bandwidth is limited by the preselector and the combination of the chosen IF filter and anti-aliasing filter. Maximum allowed instantaneous bandwidth is independent of the downconverter center frequency for frequencies less than 3.6 GHz. At frequencies greater than 3.6 GHz, if your device supports the preselector (YIG-tuned filter) and you have enabled it for your application, the maximum allowed instantaneous bandwidth is limited to the instantaneous bandwidth of the preselector. Refer to the *NI PXIe-5665 Specifications* for more information about instantaneous bandwidth limits.
-                        - **PXIe-5667** Actual signal bandwidth is limited by the preselector and the combination of the chosen IF filter and anti-aliasing filter. Maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the *NI PXIe-5667 Specifications* for more information about instantaneous bandwidth limits.
-                        - **PXIe-5668** Actual signal bandwidth is limited by the FPGA image that is downloaded upon opening the session to the PXIe-5624 digitizer. Maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the *PXIe-5668 Specifications* for more information about instantaneous bandwidth limits.
-                        - **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842** Maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the specifications document for your device for more information about instantaneous bandwidth limits.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_iq_rate`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.configure_iq_rate`
-
-        Args:
-            iq_rate (float): Specifies the I/Q rate for the acquisition. The value is expressed in samples per second (S/s).
-
-        '''
-        self._interpreter.configure_iq_rate(self._repeated_capability, iq_rate)
-
-    @ivi_synchronized
-    def configure_number_of_records(self, number_of_records_is_finite, number_of_records):
-        r'''configure_number_of_records
-
-        Configures the number of records in a finite acquisition or configures the device to continuously acquire records.
-
-                        You can only configure the device to acquire multiple records if you set the **number_of_records_is_finite** parameter to True.
-
-                        If you configure the device to continuously acquire samples, it continues acquiring data until you call the abort method to abort the acquisition. The device stores data in onboard memory in a circular fashion. After the device fills the memory, it starts overwriting previously acquired data from the beginning of the memory buffer. Retrieve the samples as they are being acquired, using one of the niRFSA fetch I/Q methods, to avoid overwriting data before you retrieve it.
-
-                        To acquire more records than will fit into the device memory without continuously acquiring records, set the **number_of_records_is_finite** parameter in this method to True and the allow_more_records_than_memory property to True.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_number_of_records`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.configure_number_of_records`
-
-        Args:
-            number_of_records_is_finite (bool): Specifies whether to configure the device to acquire a finite number of records or to acquire records continuously. The default is True.
-
-                                        | Value         | Description                                                                                                                                                                                                                |
-                                        |:---------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | True  | The device acquires a finite number of records.                                                                                                                                                                 |
-                                        | False | The NI-RFSA device acquires records continuously until you call the abort method to abort the acquisition. |
-
-            number_of_records (int): Specifies the number of records to acquire if **number_of_records_is_finite** is set to True.
-
-        '''
-        self._interpreter.configure_number_of_records(self._repeated_capability, number_of_records_is_finite, number_of_records)
-
-    @ivi_synchronized
-    def configure_number_of_samples(self, number_of_samples_is_finite, samples_per_record):
-        r'''configure_number_of_samples
-
-        Configures the number of samples in a finite acquisition or configures the device to continuously acquire samples.
-
-                        If you configure the device for finite acquisition, it acquires the specified number of samples and then stops the acquisition. You can configure the device to acquire multiple records using the configure_number_of_records method. Each record contains the number of samples specified in this method.
-
-                        If you configure the device to continuously acquire samples, it continues acquiring data until you call the abort method to abort the acquisition. The device stores data in onboard memory in a circular fashion. After the device fills the memory, it starts overwriting previously acquired data from the beginning of the memory buffer. Retrieve the samples as they are being acquired, using one of the niRFSA fetch I/Q methods, to avoid overwriting data before you retrieve it.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_number_of_samples`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.configure_number_of_samples`
-
-        Args:
-            number_of_samples_is_finite (bool): Specifies whether to configure the device to acquire a finite number of samples or to acquire samples continuously. The default is True.
-
-                                        | Value         | Description                                                                                                                                                                                                        |
-                                        |:---------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | True  | The device acquires a finite number of samples.                                                                                                                                                         |
-                                        | False | The device acquires samples continuously until you call the abort method to abort the acquisition. |
-
-            samples_per_record (int): Specifies the number of samples per record if **number_of_samples_is_finite** is set to True.
-
-        '''
-        self._interpreter.configure_number_of_samples(self._repeated_capability, number_of_samples_is_finite, samples_per_record)
-
-    @ivi_synchronized
-    def configure_reference_level(self, reference_level):
-        r'''configure_reference_level
-
-        Configures the reference level.
-
-                        The reference level represents the maximum expected power of an input RF signal.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Improving Your Measurements <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/measurement_guidelines.html>`_
-
-                        `Programming Attenuation-Related Properties and Properties Using NI-RFSA <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/programming-attenuation.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_reference_level`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.configure_reference_level`
-
-        Args:
-            reference_level (float): Specifies the expected total power, in dBm, of the RF input signal.
-
-        '''
-        self._interpreter.configure_reference_level(self._repeated_capability, reference_level)
-
-    @ivi_synchronized
-    def configure_resolution_bandwidth(self, resolution_bandwidth):
-        r'''configure_resolution_bandwidth
-
-        Configures the resolution bandwidth of a spectrum acquisition.
-
-                        The resolution bandwidth controls the width of the frequency bins in the power spectrum computed by NI-RFSA. A larger value for resolution bandwidth means the frequency bins are wider, so you get fewer bins, or spectral lines.
-
-                        By default, the resolution bandwidth value corresponds to the 3 decibels (dB) bandwidth of the window type NI-RFSA uses to compute the spectrum. To directly specify the frequency bin width, set the resolution_bandwidth_type property to SpectrumResolutionBandwidthType.BIN_WIDTH
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Resolution Bandwidth <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/resolution-bandwidth.html>`_
-
-                        `Improving Your Measurements <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/measurement_guidelines.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].configure_resolution_bandwidth`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.configure_resolution_bandwidth`
-
-        Args:
-            resolution_bandwidth (float): Specifies the resolution bandwidth of a spectrum acquisition. The value is expressed in hertz (Hz). Configure the type of resolution bandwidth with the resolution_bandwidth_type property.
-
-        '''
-        self._interpreter.configure_resolution_bandwidth(self._repeated_capability, resolution_bandwidth)
 
     @ivi_synchronized
     def configure_spectrum_frequency_center_span(self, center_frequency, span):
@@ -5703,160 +4457,6 @@ class _SessionBase(object):
 
         '''
         self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
-
-    @ivi_synchronized
-    def fetch_iq_multi_record_complex_f32(self, starting_record, number_of_records, number_of_samples, timeout):
-        r'''fetch_iq_multi_record_complex_f32
-
-        Fetches I/Q data from multiple records in an acquisition.
-
-                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record_complex_f32`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.fetch_iq_multi_record_complex_f32`
-
-        Args:
-            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-            number_of_records (int): Specifies the number of records to fetch.
-
-            number_of_samples (int): Specifies the number of samples per record.
-
-            timeout (float): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                                        ----
-
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                                        ----
-
-
-        Returns:
-            data (NIComplexNumberF32): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
-
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                                        The following list provides more information about each of these properties:
-
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                        ----
-
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
-
-                                        ----
-
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                        ----
-
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                        ----
-
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        data, wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, number_of_samples, timeout)
-        return data, wfm_info
-
-    @ivi_synchronized
-    def fetch_iq_multi_record_complex_f64(self, starting_record, number_of_records, number_of_samples, timeout):
-        r'''fetch_iq_multi_record_complex_f64
-
-        Fetches I/Q data from multiple records in an acquisition.
-
-                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record_complex_f64`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.fetch_iq_multi_record_complex_f64`
-
-        Args:
-            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-            number_of_records (int): Specifies the number of records to fetch.
-
-            number_of_samples (int): Specifies the number of samples per record.
-
-            timeout (float): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                                        ----
-
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                                        ----
-
-
-        Returns:
-            data (NIComplexNumber): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
-
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                                        The following list provides more information about each of these properties:
-
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                        ----
-
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
-
-                                        ----
-
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                        ----
-
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                        ----
-
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        data, wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, number_of_samples, timeout)
-        return data, wfm_info
 
     @ivi_synchronized
     def get_attribute_vi_boolean(self, attribute_id):
@@ -6063,66 +4663,6 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def get_device_response(self, response_type, buffer_size):
-        r'''get_device_response
-
-        Returns the requested response type, based on current NI-RFSA settings.
-
-                        The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects for the IF and RF response when you set the digital_if_equalization_enabled property to True. If you are using external digitizer mode, you can use information returned from this method to correct your measurement.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].get_device_response`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.get_device_response`
-
-        Args:
-            response_type (int): Specifies the IF, RF, or combined (IF and RF) response of the downconverter or NI-RFSA device that NI-RFSA returns. The default value is ResponseType.DOWNCONVERTER_IF.
-
-                                        %enum_table{response type}
-
-            buffer_size (int): Specifies the size of the array you specify for the FREQUENCIES, **MAGNITUDE_RESPONSE**, and **PHASE_RESPONSE** parameters.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-
-        Returns:
-            frequencies (array.array("d")): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
-
-                                        Pass VI_NULL if you do not want to use this parameter.
-
-            magnitude_response (array.array("d")): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
-
-                                        Pass VI_NULL if you do not want to use this parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            phase_response (array.array("d")): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
-
-                                        Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            number_of_frequencies (int): Returns the required number of elements in the FREQUENCIES array and the response arrays. If **BUFFER_SIZE** is 0, this parameter returns the expected array size. The expected array size depends on which NI-RFSA device you use (PXI-5661, PXIe-5663/5663E/5665) and on the current settings (PXIe-5663/5663E/5665 only).
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        frequencies, magnitude_response, phase_response, number_of_frequencies = self._interpreter.get_device_response(self._repeated_capability, response_type, buffer_size)
-        return frequencies, magnitude_response, phase_response, number_of_frequencies
-
-    @ivi_synchronized
     def get_fetch_backlog(self, record_number):
         r'''get_fetch_backlog
 
@@ -6153,10 +4693,10 @@ class _SessionBase(object):
         return backlog
 
     @ivi_synchronized
-    def get_frequency_response(self, buffer_size):
+    def get_frequency_response(self):
         r'''get_frequency_response
 
-        Returns the requested response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
+        Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
 
                         Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.
 
@@ -6172,13 +4712,6 @@ class _SessionBase(object):
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
         Example: :py:meth:`my_session.get_frequency_response`
-
-        Args:
-            buffer_size (int): Specifies the size of the array you specify for the FREQUENCIES, **MAGNITUDE_RESPONSE**, and **PHASE_RESPONSE** parameters.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
 
         Returns:
             frequencies (array.array("d")): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
@@ -6199,112 +4732,9 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            number_of_frequencies (int): Returns the required number of elements in the FREQUENCIES array and the response arrays. If **BUFFER_SIZE** is 0, this parameter returns the expected array size. The expected array size depends on which NI-RFSA device you use (PXI-5661, PXIe-5663/5663E/5665) and on the current settings (PXIe-5663/5663E/5665 only).
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
         '''
-        frequencies, magnitude_response, phase_response, number_of_frequencies = self._interpreter.get_frequency_response(self._repeated_capability, buffer_size)
-        return frequencies, magnitude_response, phase_response, number_of_frequencies
-
-    @ivi_synchronized
-    def get_number_of_spectral_lines(self):
-        r'''get_number_of_spectral_lines
-
-        Returns the number of spectral lines that NI-RFSA computes with the current power spectrum configuration.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].get_number_of_spectral_lines`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.get_number_of_spectral_lines`
-
-        Returns:
-            number_of_spectral_lines (int): Returns the value of the number_of_spectral_lines property.
-
-        '''
-        number_of_spectral_lines = self._interpreter.get_number_of_spectral_lines(self._repeated_capability)
-        return number_of_spectral_lines
-
-    @ivi_synchronized
-    def get_relay_name(self, index):
-        r'''get_relay_name
-
-        Returns the name of a relay for your device.
-
-                        When you call this method and pass a VI_NULL pointer to the NAME parameter, **BUFFER_SIZE** is populated with the size of name including the terminating NULL byte. When you call this method and specify a value for **BUFFER_SIZE** that is greater than or equal to the name of relay, the NAME parameter returns the appropriate value.
-
-                        **Supported Devices**: PXIe-5603/5605/5606.
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].get_relay_name`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.get_relay_name`
-
-        Args:
-            index (int): Specifies the index of the relay.
-
-
-        Returns:
-            name (str): Specifies the relay name, when used as an input. You can select VI_NULL or a pointer to a ViInt32 array. VI_NULL is the default. When **BUFFER_SIZE** is greater than or equal to the number of relays, NAME returns the relay name.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        name = self._interpreter.get_relay_name(self._repeated_capability, index)
-        return name
-
-    @ivi_synchronized
-    def get_relay_operations_count(self):
-        r'''get_relay_operations_count
-
-        Returns an array consisting of all the relay counts for your device.
-
-                        When you call this method and pass a VI_NULL pointer to the **OPERATIONS_COUNT** parameter, **BUFFER_SIZE** is populated with the number of relays on the device. When you call this method and specify a value for **BUFFER_SIZE** that is greater than or equal to the number of relays, the **OPERATIONS_COUNT** parameter returns the appropriate value.
-
-                        **Supported Devices**: PXIe-5603/5605/5606, PXIe-5698
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].get_relay_operations_count`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.get_relay_operations_count`
-
-        Returns:
-            operations_count (array.array("l")): Specifies the operations count array, when used as an input. You can select VI_NULL or a pointer to a ViInt32 array. VI_NULL is the default. When **BUFFER_SIZE** is greater than or equal to the number of relays, **OPERATIONS_COUNT** returns the number of relay operations.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        operations_count = self._interpreter.get_relay_operations_count(self._repeated_capability)
-        return operations_count
+        frequencies, magnitude_response, phase_response = self._interpreter.get_frequency_response(self._repeated_capability)
+        return frequencies, magnitude_response, phase_response
 
     @ivi_synchronized
     def load_configurations_from_file(self, file_path):
@@ -6333,75 +4763,43 @@ class _SessionBase(object):
         '''
         self._interpreter.load_configurations_from_file(self._repeated_capability, file_path)
 
-    @ivi_synchronized
-    def read_iq_single_record_complex_f64(self, timeout, data_array_size):
-        r'''read_iq_single_record_complex_f64
+    def lock(self):
+        '''lock
 
-        Initiates an acquisition and fetches a single I/Q data record.
+        Obtains a multithread lock on the device session. Before doing so, the
+        software waits until all other execution threads release their locks
+        on the device session.
 
-                        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
+        Other threads may have obtained a lock on this session for the
+        following reasons:
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+            -  The application called the lock method.
+            -  A call to NI-RFSA locked the session.
+            -  After a call to the lock method returns
+               successfully, no other threads can access the device session until
+               you call the unlock method or exit out of the with block when using
+               lock context manager.
+            -  Use the lock method and the
+               unlock method around a sequence of calls to
+               instrument driver methods if you require that the device retain its
+               settings through the end of the sequence.
 
-                        **Related Topics**
-
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].read_iq_single_record_complex_f64`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.read_iq_single_record_complex_f64`
-
-        Args:
-            timeout (float): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
-
-            data_array_size (int): Specifies the size of the array for the DATA parameter. The array needs to be at least as large as the number of samples configured in the configure_number_of_samples method.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
+        You can safely make nested calls to the lock method
+        within the same thread. To completely unlock the session, you must
+        balance each call to the lock method with a call to
+        the unlock method.
 
         Returns:
-            data (NIComplexNumber): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the configure_number_of_samples method.
-
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                                        The following list provides more information about each of these properties:
-
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                        ----
-
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                                        ----
-
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                        ----
-
-
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                        ----
-
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
+            lock (context manager): When used in a with statement, nirfsa.Session.lock acts as
+            a context manager and unlock will be called when the with block is exited
         '''
-        data, wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, timeout, data_array_size)
-        return data, wfm_info
+        self._interpreter.lock()  # We do not call this in the context manager so that this function can
+        # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
+        # that will handle the unlock for them
+        return _Lock(self)
 
     @ivi_synchronized
-    def read_power_spectrum_f32(self, timeout, data_array_size):
+    def read_power_spectrum_f32(self, timeout):
         r'''read_power_spectrum_f32
 
         Initiates a spectrum acquisition and returns power spectrum data.
@@ -6428,11 +4826,6 @@ class _SessionBase(object):
         Args:
             timeout (float): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
 
-            data_array_size (int): Specifies the size of the array that is returned by the **POWER_SPECTRUM_DATA** parameter. Use the get_number_of_spectral_lines method to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
 
         Returns:
             power_spectrum_data (array.array("f")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
@@ -6440,17 +4833,17 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+            spectrum_info (NiRfsaSpectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
         '''
-        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout, data_array_size)
+        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout)
         return power_spectrum_data, spectrum_info
 
     @ivi_synchronized
-    def read_power_spectrum_f64(self, timeout, data_array_size):
+    def read_power_spectrum_f64(self, timeout):
         r'''read_power_spectrum_f64
 
         Initiates a spectrum acquisition and returns power spectrum data.
@@ -6477,11 +4870,6 @@ class _SessionBase(object):
         Args:
             timeout (float): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
 
-            data_array_size (int): Specifies the size of the array that is returned by the **POWER_SPECTRUM_DATA** parameter. Use the get_number_of_spectral_lines method to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
 
         Returns:
             power_spectrum_data (array.array("d")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
@@ -6489,39 +4877,14 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+            spectrum_info (NiRfsaSpectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
         '''
-        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout, data_array_size)
+        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout)
         return power_spectrum_data, spectrum_info
-
-    @ivi_synchronized
-    def reset_attribute(self, attribute_id):
-        r'''reset_attribute
-
-        Resets the property to its default value.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].reset_attribute`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.reset_attribute`
-
-        Args:
-            attribute_id (int): Pass the ID of a property.
-
-        '''
-        self._interpreter.reset_attribute(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
     def save_configurations_to_file(self, file_path):
@@ -6762,6 +5125,16 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
+    @ivi_synchronized
+    def unlock(self):
+        '''unlock
+
+        Releases a lock that you acquired on an device session using
+        lock. Refer to lock for additional
+        information on session locks.
+        '''
+        self._interpreter.unlock()
+
 
 class Session(_SessionBase):
     '''An NI-RFSA session to the NI-RFSA driver'''
@@ -6900,7 +5273,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the ReadIqSingleRecordComplexF64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -7011,27 +5384,6 @@ class Session(_SessionBase):
         return is_done
 
     @ivi_synchronized
-    def clear_error(self):
-        r'''clear_error
-
-        Clears the error information associated with the session.
-
-                        If you pass VI_NULL for the VI parameter, this method clears the error information for the current execution thread.
-
-                        ----
-                        **Note**
-                        The _get_error method clears the error information after it is retrieved. A call to the clear_error method is necessary only when a call to the _get_error method is not used to retrieve error information.
-
-                        ----
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-        '''
-        self._interpreter.clear_error()
-
-    @ivi_synchronized
     def clear_self_calibrate_range(self):
         r'''clear_self_calibrate_range
 
@@ -7053,70 +5405,12 @@ class Session(_SessionBase):
         self._interpreter.close()
 
     @ivi_synchronized
-    def close_calibration_step(self):
-        r'''close_calibration_step
-
-        Closes the current calibration step.
-
-                        **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698
-        '''
-        self._interpreter.close_calibration_step()
-
-    @ivi_synchronized
-    def close_ext_cal(self, action):
-        r'''close_ext_cal
-
-        Closes an NI-RFSA external calibration session and, if specified, stores the new calibration constants and calibration data, such as time and temperature, in the onboard EEPROM.
-
-                        **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            action (int): Specifies how to use the calibration values from this session as the session is closed.
-
-                                        |Value                           |Description                                                                         |
-                                        |:--------------------------|:------------------------------------------------------------------------|
-                                        | Action.ABORT  | The old calibration constants are kept, and the new ones are discarded. |
-                                        | Action.COMMIT | The new calibration constants are stored in the EEPROM.                 |
-
-        '''
-        self._interpreter.close_ext_cal(action)
-
-    @ivi_synchronized
-    def close_external_alignment(self, action):
-        r'''close_external_alignment
-
-        Closes an NI-RFSA external alignment session and, if specified, stores the new calibration constants and calibration data, such as time and temperature, in the onboard EEPROM.
-
-                        **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-        Args:
-            action (int): Specifies how to use the alignment values from this session as the session is closed.
-
-                                        |Value                           |Description                                                                       |
-                                        |:--------------------------|:----------------------------------------------------------------------|
-                                        | Action.ABORT  | The old alignment constants are kept, and the new ones are discarded. |
-                                        |  Action.COMMIT| The new alignment constants are stored in the EEPROM.                 |
-
-        '''
-        self._interpreter.close_external_alignment(action)
-
-    @ivi_synchronized
-    def close_external_alignment_step(self):
-        r'''close_external_alignment_step
-
-        Closes an EEPROM-specific external alignment step.
-
-                        **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-        '''
-        self._interpreter.close_external_alignment_step()
-
-    @ivi_synchronized
     def commit(self):
         r'''commit
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read_iq_single_record_complex_f64 method, or the read_power_spectrum_f64 method.
+                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the ReadIqSingleRecordComplexF64 method, or the read_power_spectrum_f64 method.
 
                         ----
                         **Note**
@@ -7131,29 +5425,6 @@ class Session(_SessionBase):
                         `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_
         '''
         self._interpreter.commit()
-
-    @ivi_synchronized
-    def configure_acquisition_type(self, acquisition_type):
-        r'''configure_acquisition_type
-
-        Configures whether the session acquires I/Q data or computes a power spectrum over the specified frequency range.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `I/Q Modulation <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/iq-modulation.html>`_
-
-        Args:
-            acquisition_type (int): Configures the type of acquisition.
-
-                                        | Value                    | Description                                                                       |
-                                        |:--------------------|:-----------------------------------------------------------------------|
-                                        | AcquisitionType.IQ       | Configures the driver for I/Q acquisitions. This value is the default. |
-                                        | AcquisitionType.SPECTRUM | Configures the driver for spectrum acquisitions.                       |
-
-        '''
-        self._interpreter.configure_acquisition_type(acquisition_type)
 
     @ivi_synchronized
     def configure_deembedding_table_interpolation_linear(self, port, table_name, format):
@@ -7172,7 +5443,7 @@ class Session(_SessionBase):
 
             format (int): Specifies the format of parameters to interpolate.
 
-                                        %enum_table{format}
+                                        %enum_table{linear interpolation format}
 
         '''
         self._interpreter.configure_deembedding_table_interpolation_linear(port, table_name, format)
@@ -7223,7 +5494,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7292,7 +5563,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7363,7 +5634,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7428,7 +5699,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7443,46 +5714,17 @@ class Session(_SessionBase):
 
             level (float): Specifies the threshold, in dBm, above or below which the device triggers.
 
-            slope (int): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is RefTrigIqPwrEdgeSlope.RISING.
+            slope (int): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is ReferenceTriggerIqPowerEdgeSlope.RISING.
 
                                         | Value                                | Description                                                |
                                         |:--------------------------------|:-------------------------------------------------|
-                                        | RefTrigIqPwrEdgeSlope.RISING (1000)  | NI-RFSA detects a rising edge (positive slope).  |
-                                        | RefTrigIqPwrEdgeSlope.FALLING (1001) | NI-RFSA detects a falling edge (negative slope). |
+                                        | ReferenceTriggerIqPowerEdgeSlope.RISING (1000)  | NI-RFSA detects a rising edge (positive slope).  |
+                                        | ReferenceTriggerIqPowerEdgeSlope.FALLING (1001) | NI-RFSA detects a falling edge (negative slope). |
 
             pretrigger_samples (int): Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.
 
         '''
         self._interpreter.configure_iq_power_edge_ref_trigger(source, level, slope, pretrigger_samples)
-
-    @ivi_synchronized
-    def configure_pxi_chassis_clk10(self, pxi_clk10_source):
-        r'''configure_pxi_chassis_clk10
-
-        Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane.
-
-                        This option can be configured only when the PXI-5600 is installed in the Star Trigger Controller Slot, also known as the System Timing Slot, of the PXI chassis.
-
-                        **Supported Devices**: PXI-5600 (external digitizer mode), PXI-5661
-
-                        **Related Topics**
-
-                        `System Reference Clock <https://www.ni.com/docs/en-US/bundle/ni-rfsg/page/system-reference-clock.html>`_
-
-        Args:
-            pxi_clk10_source (str): Specifies the signal to drive the 10 MHz Reference Clock on the PXI backplane. This option can only be configured when the PXI-5600 is in Slot 2 of the PXI chassis.
-
-                                        | Value                                              | Description                                                                                                                                                                                                                                                |
-                                        |:----------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_NONE_STR ('None')                  | The device does not drive the PXI 10 MHz backplane Reference Clock.                                                                                                                                                                             |
-                                        | NIRFSA_VAL_ONBOARD_CLOCK_STR ('OnboardClock') | The device drives the PXI 10 MHz backplane Reference Clock with the PXI-5600 onboard clock. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.                           |
-                                        | NIRFSA_VAL_REF_IN_STR ('RefIn')               | The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O on the PXI-5600 front panel to use this option. |
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        self._interpreter.configure_pxi_chassis_clk10(pxi_clk10_source)
 
     @ivi_synchronized
     def configure_ref_clock(self, clock_source, ref_clock_rate):
@@ -7532,7 +5774,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7562,7 +5804,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7596,7 +5838,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the configure_acquisition_type method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
                         ----
 
@@ -7607,145 +5849,6 @@ class Session(_SessionBase):
                         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
         '''
         self._interpreter.configure_software_edge_start_trigger()
-
-    @ivi_synchronized
-    def create_configuration_list(self, list_name, number_of_list_attributes, set_as_active_list):
-        r'''create_configuration_list
-
-        Creates an empty configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.
-
-                        After a configuration list is created, enable the list using the **setAsActiveList** parameter. Call the create_configuration_list_step method to add steps to the active configuration list.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-        Args:
-            list_name (str): Specifies the name of the configuration list. This string may not contain spaces, special characters, or punctuation marks.
-
-            number_of_list_attributes (int): Specifies the number of configuration list properties to set.
-
-            set_as_active_list (bool): Sets this list as the active configuration list when this parameter is set to True.
-
-
-        Returns:
-            list_attribute_i_ds (int): Specifies the properties that you intend to change between configuration list steps. Calling the create_configuration_list method allocates space for each of the configuration list properties. When you use an NI-RFSG Set property method to set one of the properties in the configuration list, that property is set for one of the configuration list steps. Use the active_configuration_list_step property to specify which configuration list step to configure.
-
-                                        You can include the following properties in your configuration list based on your device:
-
-                                        | Property                                                                                              | PXIe-5663E | PXIe-5665 | PXIe-5667 | PXIe-5644/5646 | PXIe-5645 | PXIe-5820 | PXIe-5830/5831/5832 | PXIe-5840/5841 | PXIe-5841 with PXIe-5655 | PXIe-5842 |
-                                        |:-------------------------------------------------------------------------------------------------------|:-----------|:----------|:----------|:----------------|:----------|:----------|:----------------------|:---------------|:--------------------------|:-----------|
-                                        | channel_coupling                                                                           |            |           | Supported |                |           |           |                      |                |                            |            |
-                                        | device_instantaneous_bandwidth                                                             | Supported  | Supported | Supported |                |           | Supported |                      | Supported      |                            | Supported  |
-                                        | downconverter_center_frequency                                                             |            |           |           |                | Supported | Supported |                      | Supported      | Supported                  | Supported  |
-                                        | downconverter_frequency_offset                                                      |            |           |           |                |           | Supported |                      |                |                            |            |
-                                        | downconverter_preselector_enabled                                                        | Supported  | Supported |           |                |           |           |                      | Supported      | Supported                  | Supported  |
-                                        | external_gain                                                                              |            |           |           |                |           |           |                      | Supported      | Supported                  | Supported  |
-                                        | frequency_settling                                                                         | Supported  | Supported | Supported | Supported       | Supported | Supported | Supported            | Supported      |                            |            |
-                                        | if_filter_bandwidth                                                                        |            |           | Supported | Supported       | Supported | Supported | Supported            |                |                            | Supported  |
-                                        | if_output_power_level                                                                      |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                        | if_output_power_level_offset                                                               |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                        | iq_carrier_frequency                                                                       |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                        | iq_in_port_carrier_frequency                                                               |            | Supported |           |                |           |           |                      | Supported      |                            |            |
-                                        | iq_in_port_vertical_range                                                                  |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                        | iq_power_edge_ref_trigger_level                                                            |            |           |           |                | Supported | Supported |                      |                |                            |            |
-                                        | lo_source                                                                                  | Supported  | Supported | Supported | Supported       |           |           | Supported            | Supported      | Supported                  | Supported  |
-                                        | if_output_power_level                                                                                | Supported  | Supported | Supported |                | Supported | Supported | Supported            |                | Supported                  | Supported  |
-                                        | low_frequency_bypass_enabled                                                               |            |           |           |                |           |           | Supported            | Supported      | Supported                  | Supported  |
-                                        | mechanical_attenuation                                                                     |            |           |           |                | Supported | Supported | Supported            |                |                            |            |
-                                        | mechanical_attenuator_enabled                                                              |            |           |           |                |           |           |                      |                | Supported                  |            |
-                                        | minimum_acpr                                                                                  |            |           |           |                |           |           |                      |                | Supported                  |            |
-                                        | notch_filter_enabled                                                                       |            |           |           |                |           |           |                      | Supported      |                            | Supported  |
-                                        | number_of_samples                                                                          | Supported  | Supported | Supported |                | Supported | Supported | Supported            | Supported      | Supported                  | Supported  |
-                                        | osp_data_scaling_factor                                                                     | Supported  | Supported |           |                |           |           | Supported            |                |                            | Supported  |
-                                        | reference_level                                                                            |            |           |           |                |           |           |                      |                |                            | Supported  |
-                                        | attenuation                                                                                |            |           |           |                |           |           |                      |                |                            | Supported  |
-                                        | rf_out_lo_export_enabled                                                                   |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                        | rf_preamp_enabled                                                                          |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                        | rf_preselector_filter                                                                      |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                        | selected_ports                                                                              |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-                                        | timer_event_interval                                                                       |            |           |           |                |           |           |                      |                | Supported                  | Supported  |
-
-        '''
-        list_attribute_i_ds = self._interpreter.create_configuration_list(list_name, number_of_list_attributes, set_as_active_list)
-        return list_attribute_i_ds
-
-    @ivi_synchronized
-    def create_configuration_list_step(self, set_as_active_step):
-        r'''create_configuration_list_step
-
-        Creates a new configuration list step in the configuration list for `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ specified by the active_configuration_list property.
-
-                        When you create a configuration list step, a new instance of each property specified by the configuration list properties is created. Configuration list properties are specified when a configuration list is created.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-        Args:
-            set_as_active_step (bool): Sets this step as the active step for the active configuration list. The default value for this parameter is True.
-
-                                        If you set this parameter to False, you can select the active configuration list step using the active_configuration_list_step property.
-
-        '''
-        self._interpreter.create_configuration_list_step(set_as_active_step)
-
-    @ivi_synchronized
-    def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):
-        r'''_create_deembedding_sparameter_table_array
-
-        Creates an s-parameter de-embedding table for the port from the input data.
-
-                        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
-
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
-
-                        `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_
-
-        Args:
-            port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
-
-            table_name (str): Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
-
-            frequencies (numpy.array(dtype=numpy.float64)): Specifies the frequencies for the SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
-
-            sparameter_orientation (int): Specifies the orientation of the data in the S2P file relative to the port on the DUT port.
-
-                                        %enum_table{sparameter orientation}
-
-        '''
-        import numpy
-
-        if type(frequencies) is not numpy.ndarray:
-            raise TypeError('frequencies must be {0}, is {1}'.format(numpy.ndarray, type(frequencies)))
-        if numpy.isfortran(frequencies) is True:
-            raise TypeError('frequencies must be in C-order')
-        if frequencies.dtype is not numpy.dtype('float64'):
-            raise TypeError('frequencies must be numpy.ndarray of dtype=float64, is ' + str(frequencies.dtype))
-        if frequencies.ndim != 1:
-            raise TypeError('frequencies must be numpy.ndarray of dimension=1, is ' + str(frequencies.ndim))
-        if type(sparameter_table) is not numpy.ndarray:
-            raise TypeError('sparameter_table must be {0}, is {1}'.format(numpy.ndarray, type(sparameter_table)))
-        if numpy.isfortran(sparameter_table) is True:
-            raise TypeError('sparameter_table must be in C-order')
-        if sparameter_table.dtype is not numpy.dtype('complex128'):
-            raise TypeError('sparameter_table must be numpy.ndarray of dtype=complex128, is ' + str(sparameter_table.dtype))
-        if sparameter_table.ndim != 3:
-            raise TypeError('sparameter_table must be numpy.ndarray of dimension=3, is ' + str(sparameter_table.ndim))
-        self._interpreter.create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation)
 
     @ivi_synchronized
     def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
@@ -7788,26 +5891,6 @@ class Session(_SessionBase):
         self._interpreter.delete_all_deembedding_tables()
 
     @ivi_synchronized
-    def delete_configuration_list(self, list_name):
-        r'''delete_configuration_list
-
-        Deletes a previously created configuration list and all the configuration list steps in the `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_ configuration list.
-
-                        When a configuration list step is deleted, all the instances of the properties associated with the configuration list step are also removed. When you delete the active configuration list, NI-RFSA automatically resets the active_configuration_list property to "" (empty string), which indicates no list is active, and the active_configuration_list_step property to 0.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842, PXIe-5842 with S-parameters
-
-                        **Related Topics**
-
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
-
-        Args:
-            list_name (str): Specifies the name of the configuration list. This string may not contain spaces, special characters, or punctuation marks.
-
-        '''
-        self._interpreter.delete_configuration_list(list_name)
-
-    @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):
         r'''delete_deembedding_table
 
@@ -7822,14 +5905,6 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.delete_deembedding_table(port, table_name)
-
-    @ivi_synchronized
-    def disable(self):
-        r'''disable
-
-        TBD
-        '''
-        self._interpreter.disable()
 
     @ivi_synchronized
     def disable_advance_trigger(self):
@@ -7909,7 +5984,7 @@ class Session(_SessionBase):
         self._interpreter.enable_session_access(enable)
 
     @ivi_synchronized
-    def error_message(self, status_code, error_message):
+    def error_message(self, status_code):
         r'''error_message
 
         Converts a status code returned by an NI-RFSA method into a user-readable string.
@@ -7919,188 +5994,15 @@ class Session(_SessionBase):
         Args:
             status_code (int): Passes the **status** parameter that is returned from any NI-RFSA method.
 
+
+        Returns:
             error_message (str): Returns the user-readable message string that corresponds to the status code you specify.
 
-                                        You must pass a ViChar array with at least 256 bytes to this parameter.
+                                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
 
         '''
-        self._interpreter.error_message(status_code, error_message)
-
-    @ivi_synchronized
-    def error_query(self):
-        r'''error_query
-
-        Reads an error code and a message from the instrument error queue.
-
-        Returns:
-            error_code (int): Passes the **status** parameter that is returned from any NI-RFSA method.
-
-            error_message (str): Returns the user-readable message string that corresponds to the error code.
-
-                                        You must pass a ViChar array with at least 256 bytes to this parameter.
-
-        '''
-        error_code, error_message = self._interpreter.error_query()
-        return error_code, error_message
-
-    @ivi_synchronized
-    def export_signal(self, signal, signal_identifier, output_terminal):
-        r'''export_signal
-
-        Routes signals (triggers, clocks, and events) to the specified output terminal.
-
-                        If you export a signal with this method and [commit](rfsacref.chm/cvicommit.html) the session, the signal is routed to the output terminal you specify. If you then reconfigure the signal to have a different output terminal, the previous output terminal is tri-stated when the session is next committed. If you set the **OUTPUT_TERMINAL** parameter to NIRFSA_VAL_DO_NOT_EXPORT_STR and commit, the previous output terminal is tristated.
-
-                        Any signals, except for those exported over PXI trigger lines, that are exported within a session persist after the session closes to prevent signal glitches between sessions. PXI trigger lines are always set to tristate when a session is closed. If you wish to have the output terminal tristated when the session closes, change the **OUTPUT_TERMINAL** for the exported signal to NIRFSA_VAL_DO_NOT_EXPORT_STR, and commit the session again before closing it.
-
-                        You can also tristate all PFI lines by setting the **resetDevice** parameter in the init method to True or by using the reset method.
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        Args:
-            signal (int): Specifies the type of signal to route.
-
-                                        %enum_table{signal}
-
-            signal_identifier (str): Specifies the user-defined signal to route. Specify the signal you have implemented using FPGA extensions.
-
-            output_terminal (str): Specifies the terminal where the signal will be exported. You can also choose not to export any signal. For the PXIe-5841 with PXIe-5655, the signal is exported to the terminal on the PXIe-5841.
-
-                                        | Value                             | Description                                                                                                                                                                                                                                |
-                                        |:-----------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_DO_NOT_EXPORT_STR | The signal is not exported.                                                                                                                                                                                                     |
-                                        | NIRFSA_VAL_CLK_OUT_STR       | The signal is exported to the CLK OUT connector on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                       |
-                                        | NIRFSA_VAL_REF_OUT_STR       | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5694, PXIe-5644/5645/5646, or PXIe-5820/5830/5831/5832/5840/5841/5842/5860. |
-                                        | NIRFSA_VAL_REF_OUT2_STR          | The signal is exported to the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.                                                                                                                  |
-                                        | NIRFSA_VAL_PFI0_STR          | The signal is exported to the PFI 0 connector.                                                                                                                                                                                  |
-                                        | NIRFSA_VAL_PFI1_STR          | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                                                                                    |
-                                        | NIRFSA_VAL_PXI_TRIG0_STR     | The signal is exported to the PXI trigger line 0.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG1_STR     | The signal is exported to the PXI trigger line 1.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG2_STR     | The signal is exported to the PXI trigger line 2.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG3_STR     | The signal is exported to the PXI trigger line 3.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG4_STR     | The signal is exported to the PXI trigger line 4.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG5_STR     | The signal is exported to the PXI trigger line 5.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG6_STR     | The signal is exported to the PXI trigger line 6.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_TRIG7_STR     | The signal is exported to the PXI trigger line 7.                                                                                                                                                                               |
-                                        | NIRFSA_VAL_PXI_STAR_STR      | The signal is exported to the PXI star trigger line.                                                                                                                                                                            |
-                                        | ExportOutputTerm.PXIE_DSTARC   | The signal is exported to the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI0') | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI1_STR ('PFI1') | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI2') | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI3') | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI4') | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI5') | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI6') | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI7') | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                                           |
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        self._interpreter.export_signal(signal, signal_identifier, output_terminal)
-
-    @ivi_synchronized
-    def ext_cal_store_baseline_for_self_calibration(self, password, self_calibration_step):
-        r'''ext_cal_store_baseline_for_self_calibration
-
-        Specifies the external calibration step to run and stores the associated constants in the device memory so that they can be compared with the computed constants at run time.
-
-                        A password is required to run the method.
-
-                        **Supported Devices**: PXIe-5603/5605/5606, PXIe-5665/5668
-
-        Args:
-            password (str): Specifies the password for the calibration session. The initial password is factory configured to NI. PASSWORD can be a maximum of ten alphanumeric characters.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            self_calibration_step (int): Specifies the step for which constants are computed.
-
-                                        %enum_table{self calibration step}
-
-        '''
-        self._interpreter.ext_cal_store_baseline_for_self_calibration(password, self_calibration_step)
-
-    @ivi_synchronized
-    def external_alignment_adjust_preselector(self, coefficients):
-        r'''external_alignment_adjust_preselector
-
-        Stores the preselector alignment coefficients that NI-RFSA uses to compute the preselector-tuning DAC value whenever the preselector is enabled.
-
-                        These coefficients are based on the desired center frequency for the preselector.
-
-                        **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-        Args:
-            coefficients (array.array("d")): Specifies the coefficients in the polynomial used to map the preselector center frequency to a preselector-tuning DAC value. Enter the coefficients in the array in order of highest order coefficient first (index 0) down to lowest order coefficient last.
-
-        '''
-        self._interpreter.external_alignment_adjust_preselector(coefficients)
-
-    @ivi_synchronized
-    def get_cal_user_defined_info(self):
-        r'''get_cal_user_defined_info
-
-        Returns user-defined information from the onboard EEPROM.
-
-                        **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698
-
-        Returns:
-            info (str): Returns a string containing the user-defined information.
-
-        '''
-        info = self._interpreter.get_cal_user_defined_info()
-        return info
-
-    @ivi_synchronized
-    def get_cal_user_defined_info_max_size(self):
-        r'''get_cal_user_defined_info_max_size
-
-        Returns the number of characters of user-defined information that can be stored in the device onboard EEPROM.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-        Returns:
-            info_size (int): Returns the number of characters of user-defined information that can be stored in the device onboard EEPROM. The maximum size of the user-defined information array is 21 characters.
-
-        '''
-        info_size = self._interpreter.get_cal_user_defined_info_max_size()
-        return info_size
-
-    @ivi_synchronized
-    def get_ext_cal_last_date_and_time(self):
-        r'''get_ext_cal_last_date_and_time
-
-        Returns the date and time of the last successful external calibration.
-
-                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Returns:
-            year (int): Returns the year of the last external calibration.
-
-            month (int): Returns the month of the last external calibration.
-
-            day (int): Returns the day of the last external calibration.
-
-            hour (int): Returns the hour of the last external calibration.
-
-            minute (int): Returns the minute of the last external calibration.
-
-        '''
-        year, month, day, hour, minute = self._interpreter.get_ext_cal_last_date_and_time()
-        return year, month, day, hour, minute
+        error_message = self._interpreter.error_message(status_code)
+        return error_message
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -8128,35 +6030,56 @@ class Session(_SessionBase):
                         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Returns:
-            months (int): Returns the recommended maximum interval between external calibrations, in months.
+            months (hightime.timedelta, datetime.timedelta, or int in months): Returns the recommended maximum interval between external calibrations, in months.
 
         '''
         months = self._interpreter.get_ext_cal_recommended_interval()
-        return months
+        return _converters.convert_timedelta_to_months_int32(months)
 
     @ivi_synchronized
-    def get_gain_reference_cal_baseline(self, buffer_size):
+    def _get_external_calibration_last_date_and_time(self):
+        r'''_get_external_calibration_last_date_and_time
+
+        Returns the date and time of the last successful external calibration.
+
+                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Returns:
+            year (int): Returns the year of the last external calibration.
+
+            month (int): Returns the month of the last external calibration.
+
+            day (int): Returns the day of the last external calibration.
+
+            hour (int): Returns the hour of the last external calibration.
+
+            minute (int): Returns the minute of the last external calibration.
+
+            second (int): Returns the second of the last successful calibration.
+
+        '''
+        year, month, day, hour, minute, second = self._interpreter.get_external_calibration_last_date_and_time()
+        return year, month, day, hour, minute, second
+
+    @ivi_synchronized
+    def get_gain_reference_cal_baseline(self):
         r'''get_gain_reference_cal_baseline
 
         Returns the gain reference calibration constants.
 
                         **Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668
 
-        Args:
-            buffer_size (int): Specifies the buffer size.
-
-
         Returns:
             gain_reference_cal_constants (array.array("d")): Returns the gain reference calibration constants.
 
-            number_of_gain_reference_cal_constants (int): Specifies the number of elements in the **GAIN_REFERENCE_CAL_CONSTANTS** array.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
         '''
-        gain_reference_cal_constants, number_of_gain_reference_cal_constants = self._interpreter.get_gain_reference_cal_baseline(buffer_size)
-        return gain_reference_cal_constants, number_of_gain_reference_cal_constants
+        gain_reference_cal_constants = self._interpreter.get_gain_reference_cal_baseline()
+        return gain_reference_cal_constants
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self, self_calibration_step):
@@ -8168,7 +6091,7 @@ class Session(_SessionBase):
 
                         ----
                         **Note**
-                        For the PXIe-5644/5645/5646, you must select SelfCalibrationStep.IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
+                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
 
                         ----
 
@@ -8176,6 +6099,9 @@ class Session(_SessionBase):
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Args:
             self_calibration_step (int): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
@@ -8199,18 +6125,21 @@ class Session(_SessionBase):
         return year, month, day, hour, minute
 
     @ivi_synchronized
-    def get_self_cal_last_temp(self, self_calibration_step):
-        r'''get_self_cal_last_temp
+    def get_self_cal_last_temperature(self, self_calibration_step):
+        r'''get_self_cal_last_temperature
 
         Returns the temperature, in degrees Celsius, at the last successful self-calibration.
 
                         ----
                         **Note**
-                        For the PXIe-5644/5645/5646, you must select SelfCalibrationStep.IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.
+                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.
 
                         ----
 
                         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Args:
             self_calibration_step (int): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
@@ -8222,59 +6151,8 @@ class Session(_SessionBase):
             temp (float): Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
         '''
-        temp = self._interpreter.get_self_cal_last_temp(self_calibration_step)
+        temp = self._interpreter.get_self_cal_last_temperature(self_calibration_step)
         return temp
-
-    @ivi_synchronized
-    def get_spectral_info_for_smt(self):
-        r'''get_spectral_info_for_smt
-
-        Returns information about the power spectrum NI-RFSA computes.
-
-                        ----
-                        **Note**
-                        The NI Spectral Measurements Toolkit (SMT) requires this information.
-
-                        ----
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Returns:
-            spectrum_info (SpectrumInfoT): Returns returns properties of the computed spectrum such as spectrum type, spectrum scale (linear or logarithmic), the window type the method used to compute the spectrum, window size, and FFT size. Pass this parameter to subsequent methods that contain the **SPECTRUM_INFO** parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        spectrum_info = self._interpreter.get_spectral_info_for_smt()
-        return spectrum_info
-
-    @ivi_synchronized
-    def get_stream_endpoint_handle(self, stream_endpoint):
-        r'''get_stream_endpoint_handle
-
-        Returns a writer endpoint handle that you can use with NI-P2P to configure a peer-to-peer stream with the digitizer as an endpoint.
-
-                        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Configuring An Endpoint <https://www.ni.com/docs/en-US/bundle/rfsg/page/rfsg/p2p_configuring_an_endpoint.html>`_
-
-                        [Peer-to-Peer Streaming](nirfsa.chm/p2p-streaming.html)
-
-                        [Configuring a Peer-to-Peer Stream](nirfsa.chm/configuring-p2p-stream.html)
-
-        Args:
-            stream_endpoint (str): Specifies the name of the stream resources you want to use.
-
-
-        Returns:
-            writer_handle (int): Returns the writer endpoint handle which you use with NI-P2P to create a stream with the digitizer as an endpoint.
-
-        '''
-        writer_handle = self._interpreter.get_stream_endpoint_handle(stream_endpoint)
-        return writer_handle
 
     @ivi_synchronized
     def get_terminal_name(self, signal, signal_identifier):
@@ -8309,117 +6187,6 @@ class Session(_SessionBase):
         '''
         terminal_name = self._interpreter.get_terminal_name(signal, signal_identifier)
         return terminal_name
-
-    @ivi_synchronized
-    def get_user_data(self, identifier, buffer_size):
-        r'''get_user_data
-
-        TBD
-
-        Args:
-            identifier (str):
-
-            buffer_size (int):
-
-
-        Returns:
-            data (array.array("b")):
-
-            actual_data_size (int):
-
-        '''
-        data, actual_data_size = self._interpreter.get_user_data(identifier, buffer_size)
-        return data, actual_data_size
-
-    @ivi_synchronized
-    def init(self, resource_name, id_query, reset):
-        r'''init
-
-        Creates a new session for the device. This method sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.
-
-                        To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.
-
-                        You can access the device session this method creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
-
-                        ----
-                        **Note**
-                        Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
-
-                        ----
-
-                        ----
-                        **Note**
-                        For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
-
-                        ----
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            resource_name (str): Specifies the resource name of the device to initialize.
-
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
-
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
-
-            id_query (bool): Specifies whether NI-RFSA performs an ID query. When you perform an ID query, NI-RFSA verifies the device you initialize is supported.
-
-                                        | Value              | Description                                                |
-                                        |:--------------|:------------------------------------------------|
-                                        | True (Yes) | Perform an ID query. This value is the default. |
-                                        | False (No) | Do not perform an ID query.                     |
-
-            reset (bool): Specifies whether the NI-RFSA device is reset during the initialization procedure.
-
-                                        | Value              | Description                                                    |
-                                        |:--------------|:----------------------------------------------------|
-                                        | True (Yes) | The device is reset.                                |
-                                        | False (No) | The device is not reset. This value is the default. |
-
-
-        Returns:
-            vi (int): Identifies your instrument session.
-
-        '''
-        vi = self._interpreter.init(resource_name, id_query, reset)
-        return vi
-
-    @ivi_synchronized
-    def init_ext_cal(self, resource_name, password, option_string):
-        r'''init_ext_cal
-
-        Creates and initializes a special NI-RFSA external calibration session.
-
-                        The ViSession returned is an NI-RFSA session that you can use to configure the device using normal properties and methods. However, NI-RFSA sets flags that allow you to program an external calibration procedure using the calibration properties and methods.
-
-                        **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            resource_name (str): Specifies the resource name of the device to initialize.
-
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI ** topic of the *Measurement & Automation Explorer Help*.
-
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
-
-            password (str): Specifies the password for the calibration session. The initial password is factory configured to NI. PASSWORD can have a maximum of ten alphanumeric characters.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            option_string (str): Sets the initial value of certain options for the session.
-
-                                        The following options are used in this parameter.
-
-                                        - calAction:create Use this option when starting a calibration step for the first time.
-                                        - calAction:append Use this option when appending data to existing calibration data.
-
-
-        Returns:
-            vi (int): Identifies your instrument session.
-
-        '''
-        vi = self._interpreter.init_ext_cal(resource_name, password, option_string)
-        return vi
 
     @ivi_synchronized
     def init_with_options(self, resource_name, id_query, reset, option_string):
@@ -8476,12 +6243,12 @@ class Session(_SessionBase):
 
                                         | Name             | Property                                                                                                                                  |
                                         |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | RangeCheck       | range_check                         |
-                                        | QueryInstrStatus | query_instrument_status |
-                                        | Cache            | cache                                     |
-                                        | RecordCoercions  | record_coercions               |
+                                        | RangeCheck       | RANGE_CHECK                         |
+                                        | QueryInstrStatus | QUERY_INSTRUMENT_STATUS |
+                                        | Cache            | CACHE                                     |
+                                        | RecordCoercions  | RECORD_COERCIONS               |
                                         | DriverSetup      | driver_setup                       |
-                                        | Simulate         | simulate                               |
+                                        | Simulate         | SIMULATE                               |
 
                                         The format of this string is *AttributeName=Value*, where *AttributeName* is the name of the property and *Value* is the value to which the property will be set. For example, you can simulate the PXIe-5663 using the following strings:
 
@@ -8495,6 +6262,9 @@ class Session(_SessionBase):
 
                                         Note: To simulate a device using the PXIe-5622 25 MHz digitizer, set the *Digitizer* field to 5622_25MHz_DDC and the *Simulate* field to 1. You can set the *Digitizer* field to 5622_25MHz_DDC only when using the PXIe-5665.
 
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
 
         Returns:
             vi (int): Identifies your instrument session.
@@ -8504,83 +6274,12 @@ class Session(_SessionBase):
         return vi
 
     @ivi_synchronized
-    def initialize_calibration_step(self, calibration_step):
-        r'''initialize_calibration_step
-
-        Initializes an EEPROM-specific calibration step.
-
-                        **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698
-
-        Args:
-            calibration_step (int): Specifies the calibration step to initialize.
-
-                                       %enum_table{self calibration step}
-
-        '''
-        self._interpreter.initialize_calibration_step(calibration_step)
-
-    @ivi_synchronized
-    def initialize_external_alignment(self, resource_name, option_string):
-        r'''initialize_external_alignment
-
-        Creates and initializes a special NI-RFSA external alignment session.
-
-                        The ViSession returned is an NI-RFSA session that you can use to configure the device using normal properties and methods. However, NI-RFSA sets flags that allow you to program an external alignment procedure using the external alignment properties and methods.
-
-                        **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-        Args:
-            resource_name (str): Specifies the resource name of the device to initialize.
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
-
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
-
-            option_string (str): Sets the initial value of certain properties for the session. The properties shown in the following table are used in this parameter.
-
-                                        | Name             | Property                                                                                                                                        |
-                                        |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | RangeCheck       | range_check                         |
-                                        | QueryInstrStatus | query_instrument_status |
-                                        | Cache            | cache                                     |
-                                        | RecordCoercions  | record_coercions               |
-                                        | DriverSetup      | driver_setup                       |
-                                        | Simulate         | simulate                               |
-
-                                        The format of this string is "*AttributeName=Value*", where *AttributeName* is the name of the property and *Value* is the value to which the property will be set. To set multiple properties, separate their assignments with a comma.
-
-
-        Returns:
-            vi (int): Identifies your instrument session.
-
-        '''
-        vi = self._interpreter.initialize_external_alignment(resource_name, option_string)
-        return vi
-
-    @ivi_synchronized
-    def initialize_external_alignment_step(self, external_alignment_step):
-        r'''initialize_external_alignment_step
-
-        Initializes an EEPROM-specific external alignment step.
-
-                        **Supported Devices**: PXIe-5605 (PXIe-5665 only), PXIe-5606 (PXIe-5668 only)
-
-        Args:
-            external_alignment_step (int): Specifies which external alignment step you want to initialize.
-
-                                        | Value                                     | Description                                                                                                                                            |
-                                        |:-------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | EXT ALIGNMENT PRESELECTOR | Initiates preselector alignment. This step generates coefficients to align the preselector across the frequency range of 3.6 GHz to 14 GHz. |
-
-        '''
-        self._interpreter.initialize_external_alignment_step(external_alignment_step)
-
-    @ivi_synchronized
     def _initiate(self):
         r'''_initiate
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the ReadIqSingleRecordComplexF64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -8601,14 +6300,6 @@ class Session(_SessionBase):
         self._interpreter.initiate()
 
     @ivi_synchronized
-    def invalidate_all_attributes(self):
-        r'''invalidate_all_attributes
-
-        TBD
-        '''
-        self._interpreter.invalidate_all_attributes()
-
-    @ivi_synchronized
     def is_self_cal_valid(self):
         r'''is_self_cal_valid
 
@@ -8624,64 +6315,25 @@ class Session(_SessionBase):
         Returns:
             self_cal_valid (bool): Returns True if all the calibration data is valid and False if any of the calibration data is invalid.
 
-            valid_steps (int): Returns valid steps.
+            valid_steps (Bitwise combination of enums.IsSelfCalValidValidSteps flags): Returns valid steps.
 
                                         ----
-                                        If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both SelfCalibrationStep.IF_FLATNESS and SelfCalibrationStep.LO_SELF_CAL steps are valid, NI-RFSA returns the following string:
+                                        If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both IsSelfCalValidValidSteps.IF_FLATNESS and IsSelfCalValidValidSteps.LO_SELF_CAL steps are valid, NI-RFSA returns the following string:
 
-                                        SelfCalibrationStep.IF_FLATNESS |
+                                        IsSelfCalValidValidSteps.IF_FLATNESS |
 
-                                        SelfCalibrationStep.LO_SELF_CAL
+                                        IsSelfCalValidValidSteps.LO_SELF_CAL
 
                                         ----
 
                                         %enum_table{self calibration step}
 
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         '''
         self_cal_valid, valid_steps = self._interpreter.is_self_cal_valid()
         return self_cal_valid, valid_steps
-
-    @ivi_synchronized
-    def lock_session(self):
-        r'''lock_session
-
-        Obtains a multithread lock on the instrument session.
-
-                        Before doing so, this method waits until all other execution threads have released their locks on the instrument session.
-
-                        Other threads might have obtained a lock on this session in the following ways:
-
-                        - Your application already called this method.
-                        - A call to NI-RFSA locked the session.
-
-                        After the call to this method returns successfully, no other threads can access the instrument session until you call the unlock_session method. Use the lock_session method and the unlock_session method around a sequence of calls to NI-RFSA methods if you require that the NI-RFSA device retain its settings through the end of the sequence.
-
-                        You can safely make nested calls to the lock_session method within the same thread. To completely unlock the session, balance each call to the lock_session method with a call to the unlock_session method. If, however, you use **CALLER_HAS_LOCK** in all calls to the lock_session method and the unlock_session method within a method, the IVI Library locks the session only once within the method regardless of the number of calls you make to the lock_session method. Locking the session only once allows you to call the unlock_session method just once at the end of the method.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Returns:
-            caller_has_lock (bool): Keeps track of whether you obtain a lock and therefore need to unlock the session in complex methods. Pass the address of a local ViBoolean variable. In the declaration of the local variable, initialize it to False. Pass the address of the same local variable to any other calls you make to this method or the unlock_session method in the same method.
-
-                                        This parameter serves as a convenience. If you do not want to use this parameter, pass VI_NULL.
-
-                                        The lock_session method and the unlock_session method each inspect the current value and take the actions shown in the following table.
-
-                                        | Method             | Boolean Value | Action                                                                                               |
-                                        |:---------------------|:--------------|:-----------------------------------------------------------------------------------------------------|
-                                        | lock_session   | True       | The lock_session method does not lock the session again.                                     |
-                                        |                      | False      | The lock_session method obtains the lock and sets the value of the parameter to True.     |
-                                        | unlock_session | False      | The unlock_session method does not attempt to unlock the session.                            |
-                                        |                      | True       | The unlock_session method releases the lock and sets the value of the parameter to False. |
-
-                                        Thus, you can call the unlock_session method at the end of your method regardless of whether you actually have the lock.
-
-        '''
-        caller_has_lock = self._interpreter.lock_session()
-        return caller_has_lock
 
     @ivi_synchronized
     def perform_thermal_correction(self):
@@ -8740,9 +6392,12 @@ class Session(_SessionBase):
 
                         During a device reset, routes of signals between this and other devices are released, regardless of which device created the route. For example, a trigger signal exported to a PXI trigger line that is used by another device is no longer exported.
 
-                        On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the configure_pxi_chassis_clk10 method and set the **pxiClk10Source** parameter to NIRFSA_VAL_NONE_STR or set the pxi_chassis_clk10_source property to NIRFSA_VAL_NONE_STR.
+                        On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the ConfigurePxiChassisClk10 method and set the **pxiClk10Source** parameter to NIRFSA_VAL_NONE_STR or set the PXI_CHASSIS_CLK10_SOURCE property to NIRFSA_VAL_NONE_STR.
 
                         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -8797,35 +6452,6 @@ class Session(_SessionBase):
         self._interpreter.reset_with_options(steps_to_omit)
 
     @ivi_synchronized
-    def revision_query(self):
-        r'''revision_query
-
-        Returns the revision numbers of the NI-RFSA instrument driver.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Returns:
-            driver_rev (str): Returns the instrument driver software revision numbers in the form of a string. The value of the specific_driver_revision property is returned.
-
-                                        You must pass a ViChar array with 256 bytes or more to this parameter.
-
-            instr_rev (str): Returns the instrument firmware revision numbers in the form of a string. The value of the instrument_firmware_revision property is returned.
-
-                                        You must pass a ViChar array with 256 bytes or more to this parameter.
-
-        '''
-        driver_rev, instr_rev = self._interpreter.revision_query()
-        return driver_rev, instr_rev
-
-    @ivi_synchronized
-    def self_cal(self):
-        r'''self_cal
-
-        TBD
-        '''
-        self._interpreter.self_cal()
-
-    @ivi_synchronized
     def self_calibrate(self, steps_to_omit):
         r'''self_calibrate
 
@@ -8870,23 +6496,26 @@ class Session(_SessionBase):
 
                                         ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrationStep.AMPLITUDE_ACCURACY and SelfCalibrationStep.LO_SELF_CAL, you would pass the following string to the self_calibrate method: SelfCalibrationStep.AMPLITUDE_ACCURACY | SelfCalibrationStep.LO_SELF_CAL
+                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY and NIRFSA_VAL_SELF_CAL_LO_SELF_CAL, you would pass the following string to the self_calibrate method: NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY | NIRFSA_VAL_SELF_CAL_LO_SELF_CAL
 
                                         ----
 
                                         | Value                                          |  Description                                                                                                                                                                                                                     |
                                         |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                                         | StepsToOmit.NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | SelfCalibrationStep.PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | SelfCalibrationStep.AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | SelfCalibrationStep.RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |SelfCalibrationStep.IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | SelfCalibrationStep.SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | SelfCalibrationStep.DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+                                        | NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
+                                        | NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
+                                        | NIRFSA_VAL_SELF_CAL_IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
+                                        | NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
+                                        | NIRFSA_VAL_SELF_CAL_LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
+                                        | NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
+                                        | NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
+                                        |NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
+                                        | NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
+                                        | NIRFSA_VAL_SELF_CAL_DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
         self._interpreter.self_calibrate(steps_to_omit)
@@ -8924,27 +6553,30 @@ class Session(_SessionBase):
                         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Args:
-            steps_to_omit (int): Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
+            steps_to_omit (Bitwise combination of enums.SelfCalibrateRangeStepsToOmit flags): Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
 
                                         ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrationStep.AMPLITUDE_ACCURACY and SelfCalibrationStep.LO_SELF_CAL, you would pass the following string to the self_calibrate method: SelfCalibrationStep.AMPLITUDE_ACCURACY | SelfCalibrationStep.LO_SELF_CAL
+                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY and SelfCalibrateRangeStepsToOmit.LO_SELF_CAL, you would pass the following string to the self_calibrate method: SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
 
                                         ----
 
                                         | Value                                          |  Description                                                                                                                                                                                                                     |
                                         |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
                                         | StepsToOmit.NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | SelfCalibrationStep.PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrationStep.LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | SelfCalibrationStep.AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | SelfCalibrationStep.RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |SelfCalibrationStep.IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | SelfCalibrationStep.SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | SelfCalibrationStep.DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+                                        | SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
+                                        | SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
+                                        | SelfCalibrateRangeStepsToOmit.IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
+                                        | SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
+                                        | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
+                                        | SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
+                                        | SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
+                                        |SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
+                                        | SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
+                                        | SelfCalibrateRangeStepsToOmit.DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             min_frequency (float): Specifies the minimum RF frequency in Hz.
 
@@ -8955,38 +6587,9 @@ class Session(_SessionBase):
             max_reference_level (float): Specifies the maximum reference level in dBm.
 
         '''
+        if type(steps_to_omit) is not enums.SelfCalibrateRangeStepsToOmit:
+            raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRangeStepsToOmit))
         self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_reference_level, max_reference_level)
-
-    @ivi_synchronized
-    def _self_test(self):
-        r'''_self_test
-
-        Performs a self-test on the NI-RFSA device and returns the test result.
-
-                        This method performs a simple series of tests verifying that the NI-RFSA device is powered on and responding.
-
-                        ----
-                        **Note**
-                        This method calls the reset method, which resets the software state.
-
-                        ----
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Running a Self-Test on an NI-RFSA Device <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_self_test.html>`_
-
-        Returns:
-            test_result (int): Returns the value from the device self-test. A value of 0 means success. All other values indicate failure.
-
-                                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
-
-            test_message (str): Returns the self-test response string from the NI-RFSA device.
-
-        '''
-        test_result, test_message = self._interpreter.self_test()
-        return test_result, test_message
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_identifier):
@@ -8999,7 +6602,7 @@ class Session(_SessionBase):
                         This method returns an error in the following situations:
 
                         - You configure an invalid trigger.
-                        - You set the **acquisitionType** to AcquisitionType.SPECTRUM using the configure_acquisition_type method.
+                        - You set the **acquisitionType** to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method.
                         - You have not previously called the _initiate method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -9019,66 +6622,6 @@ class Session(_SessionBase):
 
         '''
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
-
-    @ivi_synchronized
-    def set_cal_user_defined_info(self, info):
-        r'''set_cal_user_defined_info
-
-        Writes user-defined information into the onboard EEPROM.
-
-                        This should be called in its own session or else the data may be overwritten by a commit.
-
-                        **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698
-
-        Args:
-            info (str): Specifies a string containing the user-defined information. This string can be up to 21 characters long.
-
-        '''
-        self._interpreter.set_cal_user_defined_info(info)
-
-    @ivi_synchronized
-    def set_user_data(self, identifier, data):
-        r'''set_user_data
-
-        TBD
-
-        Args:
-            identifier (str):
-
-            data (array.array("b")):
-
-        '''
-        self._interpreter.set_user_data(identifier, data)
-
-    @ivi_synchronized
-    def unlock_session(self):
-        r'''unlock_session
-
-        Releases a lock obtained on an NI-RFSA device session by calling the lock_session method.
-
-                        Refer to the lock_session method for additional information on session locks.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-        Returns:
-            caller_has_lock (bool): Keeps track of whether you obtain a lock and therefore need to unlock the session in complex methods. Pass the address of a local ViBoolean variable. In the declaration of the local variable, initialize it to False. Pass the address of the same local variable to any other calls you make to this method or the unlock_session method in the same method.
-
-                                        This parameter serves as a convenience. If you do not want to use this parameter, pass VI_NULL.
-
-                                        The lock_session method and the unlock_session method each inspect the current value and take the actions shown in the following table.
-
-                                        | Method             | Boolean Value | Action                                                                                               |
-                                        |:---------------------|:--------------|:-----------------------------------------------------------------------------------------------------|
-                                        | lock_session   | True       | The lock_session method does not lock the session again.                                     |
-                                        |                      | False      | The lock_session method obtains the lock and sets the value of the parameter to True.     |
-                                        | unlock_session | False      | The unlock_session method does not attempt to unlock the session.                            |
-                                        |                      | True       | The unlock_session method releases the lock and sets the value of the parameter to False. |
-
-                                        Thus, you can call the unlock_session method at the end of your method regardless of whether you actually have the lock.
-
-        '''
-        caller_has_lock = self._interpreter.unlock_session()
-        return caller_has_lock
 
     @ivi_synchronized
     def self_test(self):

@@ -56,12 +56,12 @@ Action
 
 
 
-AdvanceTrigType
----------------
+AdvanceTriggerType
+------------------
 
-.. py:class:: AdvanceTrigType
+.. py:class:: AdvanceTriggerType
 
-    .. py:attribute:: AdvanceTrigType.NONE
+    .. py:attribute:: AdvanceTriggerType.NONE
 
 
 
@@ -71,7 +71,7 @@ AdvanceTrigType
 
 
 
-    .. py:attribute:: AdvanceTrigType.DIGITAL_EDGE
+    .. py:attribute:: AdvanceTriggerType.DIGITAL_EDGE
 
 
 
@@ -81,7 +81,7 @@ AdvanceTrigType
 
 
 
-    .. py:attribute:: AdvanceTrigType.SOFTWARE_EDGE
+    .. py:attribute:: AdvanceTriggerType.SOFTWARE_EDGE
 
 
 
@@ -91,12 +91,12 @@ AdvanceTrigType
 
 
 
-ArmRefTrigType
---------------
+ArmReferenceTriggerType
+-----------------------
 
-.. py:class:: ArmRefTrigType
+.. py:class:: ArmReferenceTriggerType
 
-    .. py:attribute:: ArmRefTrigType.NONE
+    .. py:attribute:: ArmReferenceTriggerType.NONE
 
 
 
@@ -106,7 +106,7 @@ ArmRefTrigType
 
 
 
-    .. py:attribute:: ArmRefTrigType.DIGITAL_EDGE
+    .. py:attribute:: ArmReferenceTriggerType.DIGITAL_EDGE
 
 
 
@@ -116,7 +116,7 @@ ArmRefTrigType
 
 
 
-    .. py:attribute:: ArmRefTrigType.SOFTWARE_EDGE
+    .. py:attribute:: ArmReferenceTriggerType.SOFTWARE_EDGE
 
 
 
@@ -306,12 +306,12 @@ ConditioningCalToneMode
 
 
 
-DeembeddingTypeAttrVals
------------------------
+DeembeddingType
+---------------
 
-.. py:class:: DeembeddingTypeAttrVals
+.. py:class:: DeembeddingType
 
-    .. py:attribute:: DeembeddingTypeAttrVals.NONE
+    .. py:attribute:: DeembeddingType.NONE
 
 
 
@@ -321,7 +321,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.SCALAR
+    .. py:attribute:: DeembeddingType.SCALAR
 
 
 
@@ -331,7 +331,7 @@ DeembeddingTypeAttrVals
 
 
 
-    .. py:attribute:: DeembeddingTypeAttrVals.VECTOR
+    .. py:attribute:: DeembeddingType.VECTOR
 
 
 
@@ -341,12 +341,75 @@ DeembeddingTypeAttrVals
 
 
 
-DigitizerSampClkExportedTerm
-----------------------------
+    .. py:attribute:: DeembeddingType.AMPLITUDE_FLATNESS
 
-.. py:class:: DigitizerSampClkExportedTerm
 
-    .. py:attribute:: DigitizerSampClkExportedTerm.NONE
+
+    .. py:attribute:: DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS
+
+
+
+DeviceResponseType
+------------------
+
+.. py:class:: DeviceResponseType
+
+    .. py:attribute:: DeviceResponseType.DOWNCONVERTER_IF
+
+
+
+        Returns the IF response of the downconverter.
+
+        
+
+
+
+    .. py:attribute:: DeviceResponseType.DOWNCONVERTER_RF
+
+
+
+        Returns the RF response of the downconverter. This value is supported only for the PXIe-5603/5605/5665/5667/5693..
+
+        
+
+
+
+    .. py:attribute:: DeviceResponseType.DOWNCONVERTER_COMBINED
+
+
+
+        Returns the combined RF and IF response of the downconverter. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5603/5605/5665/5667.
+
+        
+
+
+
+    .. py:attribute:: DeviceResponseType.VSA_IF
+
+
+
+        Returns the IF response of the entire NI-RFSA device. This value is supported only for the PXIe-5665/5667.
+
+        
+
+
+
+    .. py:attribute:: DeviceResponseType.VSA_COMBINED
+
+
+
+        Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.
+
+        
+
+
+
+DigitizerSampleClockExportedTerminal
+------------------------------------
+
+.. py:class:: DigitizerSampleClockExportedTerminal
+
+    .. py:attribute:: DigitizerSampleClockExportedTerminal.NONE
 
 
 
@@ -356,7 +419,7 @@ DigitizerSampClkExportedTerm
 
 
 
-    .. py:attribute:: DigitizerSampClkExportedTerm.CLK_OUT
+    .. py:attribute:: DigitizerSampleClockExportedTerminal.CLK_OUT
 
 
 
@@ -366,12 +429,12 @@ DigitizerSampClkExportedTerm
 
 
 
-DigitizerSampClkTimebaseSrc
----------------------------
+DigitizerSampleClockTimebaseSource
+----------------------------------
 
-.. py:class:: DigitizerSampClkTimebaseSrc
+.. py:class:: DigitizerSampleClockTimebaseSource
 
-    .. py:attribute:: DigitizerSampClkTimebaseSrc.ONBOARD_CLOCK
+    .. py:attribute:: DigitizerSampleClockTimebaseSource.ONBOARD_CLOCK
 
 
 
@@ -381,7 +444,7 @@ DigitizerSampClkTimebaseSrc
 
 
 
-    .. py:attribute:: DigitizerSampClkTimebaseSrc.CLK_IN
+    .. py:attribute:: DigitizerSampleClockTimebaseSource.CLK_IN
 
 
 
@@ -391,7 +454,7 @@ DigitizerSampClkTimebaseSrc
 
 
 
-    .. py:attribute:: DigitizerSampClkTimebaseSrc.LO_REF_CLK
+    .. py:attribute:: DigitizerSampleClockTimebaseSource.LO_REF_CLK
 
 
 
@@ -401,7 +464,7 @@ DigitizerSampClkTimebaseSrc
 
 
 
-    .. py:attribute:: DigitizerSampClkTimebaseSrc.PXI_STAR
+    .. py:attribute:: DigitizerSampleClockTimebaseSource.PXI_STAR
 
 
 
@@ -411,7 +474,7 @@ DigitizerSampClkTimebaseSrc
 
 
 
-    .. py:attribute:: DigitizerSampClkTimebaseSrc.DOWNCONVERTER_LO2_OUT
+    .. py:attribute:: DigitizerSampleClockTimebaseSource.DOWNCONVERTER_LO2_OUT
 
 
 
@@ -631,12 +694,12 @@ EnableUnspecifiedAttrVals
 
 
 
-ExportOutputTerm
-----------------
+ExportOutputTerminal
+--------------------
 
-.. py:class:: ExportOutputTerm
+.. py:class:: ExportOutputTerminal
 
-    .. py:attribute:: ExportOutputTerm.DO_NOT_EXPORT
+    .. py:attribute:: ExportOutputTerminal.DO_NOT_EXPORT
 
 
 
@@ -646,7 +709,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.CLK_OUT
+    .. py:attribute:: ExportOutputTerminal.CLK_OUT
 
 
 
@@ -656,7 +719,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.REF_OUT
+    .. py:attribute:: ExportOutputTerminal.REF_OUT
 
 
 
@@ -666,7 +729,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.REF_OUT2
+    .. py:attribute:: ExportOutputTerminal.REF_OUT2
 
 
 
@@ -676,7 +739,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PFI0
+    .. py:attribute:: ExportOutputTerminal.PFI0
 
 
 
@@ -686,7 +749,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PFI1
+    .. py:attribute:: ExportOutputTerminal.PFI1
 
 
 
@@ -696,7 +759,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG0
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG0
 
 
 
@@ -706,7 +769,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG1
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG1
 
 
 
@@ -716,7 +779,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG2
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG2
 
 
 
@@ -726,7 +789,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG3
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG3
 
 
 
@@ -736,7 +799,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG4
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG4
 
 
 
@@ -746,7 +809,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG5
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG5
 
 
 
@@ -756,7 +819,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG6
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG6
 
 
 
@@ -766,7 +829,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_TRIG7
+    .. py:attribute:: ExportOutputTerminal.PXI_TRIG7
 
 
 
@@ -776,7 +839,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXI_STAR
+    .. py:attribute:: ExportOutputTerminal.PXI_STAR
 
 
 
@@ -786,7 +849,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.PXIE_DSTARC
+    .. py:attribute:: ExportOutputTerminal.PXIE_DSTARC
 
 
 
@@ -796,7 +859,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI0
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI0
 
 
 
@@ -806,7 +869,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI1
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI1
 
 
 
@@ -816,7 +879,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI2
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI2
 
 
 
@@ -826,7 +889,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI3
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI3
 
 
 
@@ -836,7 +899,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI4
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI4
 
 
 
@@ -846,7 +909,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI5
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI5
 
 
 
@@ -856,7 +919,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI6
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI6
 
 
 
@@ -866,7 +929,7 @@ ExportOutputTerm
 
 
 
-    .. py:attribute:: ExportOutputTerm.DIO_PFI7
+    .. py:attribute:: ExportOutputTerminal.DIO_PFI7
 
 
 
@@ -931,41 +994,6 @@ FetchRelativeTo
 
 
 
-Format
-------
-
-.. py:class:: Format
-
-    .. py:attribute:: Format.MAGNITUDE_AND_PHASE
-
-
-
-        Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.
-
-        
-
-
-
-    .. py:attribute:: Format.MAGNITUDE_DB_AND_PHASE
-
-
-
-        Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.
-
-        
-
-
-
-    .. py:attribute:: Format.REAL_AND_IMAGINARY
-
-
-
-        Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.
-
-        
-
-
-
 FrequencySettlingUnits
 ----------------------
 
@@ -1020,7 +1048,7 @@ IFattenTableSel
 
 
 
-        Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the :py:attr:`nirfsa.Session.cal_if_filter_selection` property to :py:data:`~nirfsa.IFfilterSel._1` or :py:data:`~nirfsa.IFfilterSel._2`.
+        Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the :py:attr:`nirfsa.Session.cal_if_filter_selection` property to :py:data:`~nirfsa.IFfilterSelection._1` or :py:data:`~nirfsa.IFfilterSelection._2`.
 
         
 
@@ -1071,12 +1099,12 @@ IFfilter
 
 
 
-IFfilterSel
------------
+IFfilterSelection
+-----------------
 
-.. py:class:: IFfilterSel
+.. py:class:: IFfilterSelection
 
-    .. py:attribute:: IFfilterSel._1
+    .. py:attribute:: IFfilterSelection._1
 
 
 
@@ -1086,7 +1114,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._2
+    .. py:attribute:: IFfilterSelection._2
 
 
 
@@ -1096,7 +1124,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._3
+    .. py:attribute:: IFfilterSelection._3
 
 
 
@@ -1106,7 +1134,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._4
+    .. py:attribute:: IFfilterSelection._4
 
 
 
@@ -1116,7 +1144,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._5
+    .. py:attribute:: IFfilterSelection._5
 
 
 
@@ -1126,7 +1154,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._6
+    .. py:attribute:: IFfilterSelection._6
 
 
 
@@ -1136,7 +1164,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._7
+    .. py:attribute:: IFfilterSelection._7
 
 
 
@@ -1146,7 +1174,7 @@ IFfilterSel
 
 
 
-    .. py:attribute:: IFfilterSel._8
+    .. py:attribute:: IFfilterSelection._8
 
 
 
@@ -1201,12 +1229,12 @@ InputPort
 
 
 
-IqInPortTermCfg
----------------
+IqInPortTerminalConfiguration
+-----------------------------
 
-.. py:class:: IqInPortTermCfg
+.. py:class:: IqInPortTerminalConfiguration
 
-    .. py:attribute:: IqInPortTermCfg.DIFFERENTIAL
+    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
 
 
 
@@ -1216,11 +1244,161 @@ IqInPortTermCfg
 
 
 
-    .. py:attribute:: IqInPortTermCfg.SINGLE_ENDED
+    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
 
 
 
         Sets the terminal configuration to single-ended.
+
+        
+
+
+
+IsSelfCalValidValidSteps
+------------------------
+
+.. py:class:: IsSelfCalValidValidSteps
+
+    .. py:attribute:: IsSelfCalValidValidSteps.DIGITIZER_SELF_CAL
+
+
+
+        Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.PRESELECTOR_ALIGNMENT
+
+
+
+        Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.OMIT_NONE
+
+
+
+        No calibration steps are omitted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.GAIN_REFERENCE
+
+
+
+        Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.IF_FLATNESS
+
+
+
+        Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.LO_SELF_CAL
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.AMPLITUDE_ACCURACY
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.RESIDUAL_LO_POWER
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.IMAGE_SUPPRESSION
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.SYNTHESIZER_ALIGNMENT
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: IsSelfCalValidValidSteps.DC_OFFSET
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+LinearInterpolationFormat
+-------------------------
+
+.. py:class:: LinearInterpolationFormat
+
+    .. py:attribute:: LinearInterpolationFormat.MAGNITUDE_AND_PHASE
+
+
+
+        Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.
+
+        
+
+
+
+    .. py:attribute:: LinearInterpolationFormat.MAGNITUDE_DB_AND_PHASE
+
+
+
+        Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.
+
+        
+
+
+
+    .. py:attribute:: LinearInterpolationFormat.REAL_AND_IMAGINARY
+
+
+
+        Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.
 
         
 
@@ -1341,12 +1519,12 @@ LoPathSel
 
 
 
-LoSourceVals
-------------
+LoSource
+--------
 
-.. py:class:: LoSourceVals
+.. py:class:: LoSource
 
-    .. py:attribute:: LoSourceVals.NONE
+    .. py:attribute:: LoSource.NONE
 
 
 
@@ -1356,7 +1534,7 @@ LoSourceVals
 
 
 
-    .. py:attribute:: LoSourceVals.ONBOARD
+    .. py:attribute:: LoSource.ONBOARD
 
 
 
@@ -1366,7 +1544,7 @@ LoSourceVals
 
 
 
-    .. py:attribute:: LoSourceVals.LO_IN
+    .. py:attribute:: LoSource.LO_IN
 
 
 
@@ -1376,7 +1554,7 @@ LoSourceVals
 
 
 
-    .. py:attribute:: LoSourceVals.LO_SOURCE_SECONDARY
+    .. py:attribute:: LoSource.LO_SOURCE_SECONDARY
 
 
 
@@ -1386,7 +1564,7 @@ LoSourceVals
 
 
 
-    .. py:attribute:: LoSourceVals.LO_SOURCE_SG_SA_SHARED
+    .. py:attribute:: LoSource.LO_SOURCE_SG_SA_SHARED
 
 
 
@@ -1761,12 +1939,77 @@ OverflowErrorReporting
 
 
 
-PxiChassisClk10Src
+PowerSpectrumUnits
 ------------------
 
-.. py:class:: PxiChassisClk10Src
+.. py:class:: PowerSpectrumUnits
 
-    .. py:attribute:: PxiChassisClk10Src.NONE
+    .. py:attribute:: PowerSpectrumUnits.DBM
+
+
+
+        Units are dB with reference to 1 milliwatt.
+
+        
+
+
+
+    .. py:attribute:: PowerSpectrumUnits.VOLTS_SQUARED
+
+
+
+        Units are in volts squared.
+
+        
+
+
+
+    .. py:attribute:: PowerSpectrumUnits.DBMV
+
+
+
+        Units are dB with reference to 1 millivolt.
+
+        
+
+
+
+    .. py:attribute:: PowerSpectrumUnits.DBUV
+
+
+
+        Units are dB with reference to 1 microvolt.
+
+        
+
+
+
+    .. py:attribute:: PowerSpectrumUnits.VOLTS
+
+
+
+        Units are in volts.
+
+        
+
+
+
+    .. py:attribute:: PowerSpectrumUnits.WATTS
+
+
+
+        Units are in watts.
+
+        
+
+
+
+PxiChassisClk10Source
+---------------------
+
+.. py:class:: PxiChassisClk10Source
+
+    .. py:attribute:: PxiChassisClk10Source.NONE
 
 
 
@@ -1776,7 +2019,7 @@ PxiChassisClk10Src
 
 
 
-    .. py:attribute:: PxiChassisClk10Src.ONBOARD_CLOCK
+    .. py:attribute:: PxiChassisClk10Source.ONBOARD_CLOCK
 
 
 
@@ -1786,246 +2029,11 @@ PxiChassisClk10Src
 
 
 
-    .. py:attribute:: PxiChassisClk10Src.REF_IN
+    .. py:attribute:: PxiChassisClk10Source.REF_IN
 
 
 
         The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 FREQ REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.
-
-        
-
-
-
-RefClkExportedTerm
-------------------
-
-.. py:class:: RefClkExportedTerm
-
-    .. py:attribute:: RefClkExportedTerm.NONE
-
-
-
-        The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
-
-        
-
-
-
-    .. py:attribute:: RefClkExportedTerm.REF_OUT
-
-
-
-        Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.
-
-        
-
-
-
-    .. py:attribute:: RefClkExportedTerm.REF_OUT2
-
-
-
-        Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.
-
-        
-
-
-
-    .. py:attribute:: RefClkExportedTerm.CLK_OUT
-
-
-
-        Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.
-
-        
-
-
-
-    .. py:attribute:: RefClkExportedTerm.IF_COND_REF_OUT
-
-
-
-        Export the clock on the REF OUT terminal on the PXIe-5694. This value is valid only for the PXIe-5667.
-
-        
-
-
-
-RefClockSrc
------------
-
-.. py:class:: RefClockSrc
-
-    .. py:attribute:: RefClockSrc.NONE
-
-
-
-        No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.
-
-        
-
-
-
-    .. py:attribute:: RefClockSrc.ONBOARD_CLOCK
-
-
-
-        **PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI-5600 RF downconverter onboard clock.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to the PXI/PXIe-5652 LO source onboard clock. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, connect the REF IN/OUT connector on the PXI/PXIe-5652 to the CLK IN terminal on the PXI5622.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694.**PXIe-5668 **Lock the PXIe-5668 to the PXIe-5653 LO SOURCE onboard clock. Connect the LO2 OUT connector on the PXIe-5606 to the CLK IN connector on the PXIe-5624.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to its onboard clock.**PXIe-5841 with PXIe-5655 **Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.**PXIe-5842 **Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the User Manual for the instrument.**PXIe-5860 **Lock to the PXIe-5860 onboard clock.
-
-        
-
-
-
-    .. py:attribute:: RefClockSrc.REF_IN
-
-
-
-        **PXI-5661 **NI-RFSA locks the NI-RFSA device to the signal at the external FREQ REF IN connector on the PXI-5600**PXIe-5663/5663E **Connect the external signal to the PXI/PXIe-5652 REF IN/OUT connector. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, this configuration can only be used in external digitizer mode.**PXIe-5665 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the :py:attr:`nirfsa.Session.ref_clock_rate` property according to the frequency of your external clock signal.**PXIe-5667 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. If your external clock signal frequency is set to a frequency other than 10 MHz, set the :py:attr:`nirfsa.Session.ref_clock_rate` property according to the frequency of your external clock signal.**PXIe-5668 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the LO2 OUT on the PXIe-5606 to the CLK IN connector on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the **clock rate** parameter according to the frequency of your external clock signal.**PXIe-5694 **Connect the Reference Clock signal to the REF/LO IN connector on the PXIe-5694 front panel.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to the signal at the external REF IN connector.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.**PXIe-5841 with PXIe-5655 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector. **PXIe-5842 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the User Manual for the instrument. PXIe-5860 Lock to the signal at the REF IN connector on the PXIe-5860.
-
-        
-
-
-
-    .. py:attribute:: RefClockSrc.PXI_CLK
-
-
-
-        **PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI backplane clock using the PXI-5600. You must connect the PXI 10 MHz connector to the REF IN connector on the PXI-5600 front panel to use this option. **PXIe-5668 **Lock the PXIe-5653 to the PXI backplane clock. Connect the PXIe-5606 LO2 OUT to the LO2 IN connector on the PXIe-5624.**PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667, PXIe-5694, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **Lock the device to the PXI backplane clock.
-
-        
-
-
-
-    .. py:attribute:: RefClockSrc.CLK_IN
-
-
-
-        **PXI-5661 **This configuration does not apply to the PXI-5661.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to an external 10 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the FREQ REF IN connector on the PXI/PXIe-5652.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the :py:attr:`nirfsa.Session.ref_clock_rate` property to 100 MHz.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. Set the :py:attr:`nirfsa.Session.ref_clock_rate` property to 100 MHz.**PXIe-5668 **Lock the PXIe-5668 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5624, and connect the PXIe-5624 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the **clock rate** parameter to 100 MHz.**PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **This configuration does not apply.
-
-        
-
-
-
-    .. py:attribute:: RefClockSrc.PXI_CLK_MASTER
-
-
-
-        **PXIe-5831/5832 with PXIe-5653 **NI-RFSA configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.**PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5840/5841/5841 with PXIe-5655 /5842/5860**This configuration does not apply.
-
-        
-
-
-
-    .. py:attribute:: RefClockSrc.REF_IN_2
-
-
-
-        **PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655 **This configuration does not apply.
-
-        
-
-
-
-RefTrigDigEdgeEdge
-------------------
-
-.. py:class:: RefTrigDigEdgeEdge
-
-    .. py:attribute:: RefTrigDigEdgeEdge.RISING
-
-
-
-        The trigger asserts on the rising edge of the signal.
-
-        
-
-
-
-    .. py:attribute:: RefTrigDigEdgeEdge.FALLING
-
-
-
-        The trigger asserts on the falling edge of the signal
-
-        
-
-
-
-RefTrigIqPwrEdgeSlope
----------------------
-
-.. py:class:: RefTrigIqPwrEdgeSlope
-
-    .. py:attribute:: RefTrigIqPwrEdgeSlope.RISING
-
-
-
-        The trigger asserts when the signal power is rising.
-
-        
-
-
-
-    .. py:attribute:: RefTrigIqPwrEdgeSlope.FALLING
-
-
-
-        The trigger asserts when the signal power is falling.
-
-        
-
-
-
-RefTrigType
------------
-
-.. py:class:: RefTrigType
-
-    .. py:attribute:: RefTrigType.NONE
-
-
-
-        No Reference Trigger is configured.
-
-        
-
-
-
-    .. py:attribute:: RefTrigType.DIGITAL_EDGE
-
-
-
-        The Reference Trigger is not asserted until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsa.Session.digital_edge_ref_trigger_source` property.
-
-        
-
-
-
-    .. py:attribute:: RefTrigType.IQ_POWER_EDGE
-
-
-
-        The Reference Trigger is asserted when the signal is changing past the level specified with the slope (rising or falling) configured with the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_slope` property.
-
-        
-
-
-
-    .. py:attribute:: RefTrigType.SOFTWARE_EDGE
-
-
-
-        The Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the :py:meth:`nirfsa.Session.send_software_edge_trigger` method and selecting :py:data:`~nirfsa.NIRFSA_VAL_REF_TRIGGER` as the **trigger** parameter.
-
-        
-
-
-
-    .. py:attribute:: RefTrigType.IQ_ANALOG_EDGE
-
-
-
-        The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property. This value is valid only for PXIe-5644/5645 devices.
 
         
 
@@ -2066,6 +2074,136 @@ ReferenceClockExportedRate
 
 
 
+ReferenceClockExportedTerminal
+------------------------------
+
+.. py:class:: ReferenceClockExportedTerminal
+
+    .. py:attribute:: ReferenceClockExportedTerminal.NONE
+
+
+
+        The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportedTerminal.REF_OUT
+
+
+
+        Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportedTerminal.REF_OUT2
+
+
+
+        Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportedTerminal.CLK_OUT
+
+
+
+        Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockExportedTerminal.IF_COND_REF_OUT
+
+
+
+        Export the clock on the REF OUT terminal on the PXIe-5694. This value is valid only for the PXIe-5667.
+
+        
+
+
+
+ReferenceClockSource
+--------------------
+
+.. py:class:: ReferenceClockSource
+
+    .. py:attribute:: ReferenceClockSource.NONE
+
+
+
+        No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.ONBOARD_CLOCK
+
+
+
+        **PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI-5600 RF downconverter onboard clock.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to the PXI/PXIe-5652 LO source onboard clock. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, connect the REF IN/OUT connector on the PXI/PXIe-5652 to the CLK IN terminal on the PXI5622.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694.**PXIe-5668 **Lock the PXIe-5668 to the PXIe-5653 LO SOURCE onboard clock. Connect the LO2 OUT connector on the PXIe-5606 to the CLK IN connector on the PXIe-5624.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to its onboard clock.**PXIe-5841 with PXIe-5655 **Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.**PXIe-5842 **Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the User Manual for the instrument.**PXIe-5860 **Lock to the PXIe-5860 onboard clock.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.REF_IN
+
+
+
+        **PXI-5661 **NI-RFSA locks the NI-RFSA device to the signal at the external FREQ REF IN connector on the PXI-5600**PXIe-5663/5663E **Connect the external signal to the PXI/PXIe-5652 REF IN/OUT connector. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, this configuration can only be used in external digitizer mode.**PXIe-5665 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the :py:attr:`nirfsa.Session.ref_clock_rate` property according to the frequency of your external clock signal.**PXIe-5667 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. If your external clock signal frequency is set to a frequency other than 10 MHz, set the :py:attr:`nirfsa.Session.ref_clock_rate` property according to the frequency of your external clock signal.**PXIe-5668 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the LO2 OUT on the PXIe-5606 to the CLK IN connector on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the **clock rate** parameter according to the frequency of your external clock signal.**PXIe-5694 **Connect the Reference Clock signal to the REF/LO IN connector on the PXIe-5694 front panel.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to the signal at the external REF IN connector.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.**PXIe-5841 with PXIe-5655 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector. **PXIe-5842 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the User Manual for the instrument. PXIe-5860 Lock to the signal at the REF IN connector on the PXIe-5860.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.PXI_CLK
+
+
+
+        **PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI backplane clock using the PXI-5600. You must connect the PXI 10 MHz connector to the REF IN connector on the PXI-5600 front panel to use this option. **PXIe-5668 **Lock the PXIe-5653 to the PXI backplane clock. Connect the PXIe-5606 LO2 OUT to the LO2 IN connector on the PXIe-5624.**PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667, PXIe-5694, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **Lock the device to the PXI backplane clock.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.CLK_IN
+
+
+
+        **PXI-5661 **This configuration does not apply to the PXI-5661.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to an external 10 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the FREQ REF IN connector on the PXI/PXIe-5652.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the :py:attr:`nirfsa.Session.ref_clock_rate` property to 100 MHz.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. Set the :py:attr:`nirfsa.Session.ref_clock_rate` property to 100 MHz.**PXIe-5668 **Lock the PXIe-5668 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5624, and connect the PXIe-5624 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the **clock rate** parameter to 100 MHz.**PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **This configuration does not apply.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.PXI_CLK_MASTER
+
+
+
+        **PXIe-5831/5832 with PXIe-5653 **NI-RFSA configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.**PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5840/5841/5841 with PXIe-5655 /5842/5860**This configuration does not apply.
+
+        
+
+
+
+    .. py:attribute:: ReferenceClockSource.REF_IN_2
+
+
+
+        **PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655 **This configuration does not apply.
+
+        
+
+
+
 ReferenceLevelDataType
 ----------------------
 
@@ -2091,56 +2229,106 @@ ReferenceLevelDataType
 
 
 
-ResponseType
-------------
+ReferenceTriggerDigitalEdgeEdge
+-------------------------------
 
-.. py:class:: ResponseType
+.. py:class:: ReferenceTriggerDigitalEdgeEdge
 
-    .. py:attribute:: ResponseType.DOWNCONVERTER_IF
-
-
-
-        Returns the IF response of the downconverter.
-
-        
+    .. py:attribute:: ReferenceTriggerDigitalEdgeEdge.RISING
 
 
 
-    .. py:attribute:: ResponseType.DOWNCONVERTER_RF
-
-
-
-        Returns the RF response of the downconverter. This value is supported only for the PXIe-5603/5605/5665/5667/5693..
+        The trigger asserts on the rising edge of the signal.
 
         
 
 
 
-    .. py:attribute:: ResponseType.DOWNCONVERTER_COMBINED
+    .. py:attribute:: ReferenceTriggerDigitalEdgeEdge.FALLING
 
 
 
-        Returns the combined RF and IF response of the downconverter. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5603/5605/5665/5667.
-
-        
-
-
-
-    .. py:attribute:: ResponseType.VSA_IF
-
-
-
-        Returns the IF response of the entire NI-RFSA device. This value is supported only for the PXIe-5665/5667.
+        The trigger asserts on the falling edge of the signal
 
         
 
 
 
-    .. py:attribute:: ResponseType.VSA_COMBINED
+ReferenceTriggerIqPowerEdgeSlope
+--------------------------------
+
+.. py:class:: ReferenceTriggerIqPowerEdgeSlope
+
+    .. py:attribute:: ReferenceTriggerIqPowerEdgeSlope.RISING
 
 
 
-        Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.
+        The trigger asserts when the signal power is rising.
+
+        
+
+
+
+    .. py:attribute:: ReferenceTriggerIqPowerEdgeSlope.FALLING
+
+
+
+        The trigger asserts when the signal power is falling.
+
+        
+
+
+
+ReferenceTriggerType
+--------------------
+
+.. py:class:: ReferenceTriggerType
+
+    .. py:attribute:: ReferenceTriggerType.NONE
+
+
+
+        No Reference Trigger is configured.
+
+        
+
+
+
+    .. py:attribute:: ReferenceTriggerType.DIGITAL_EDGE
+
+
+
+        The Reference Trigger is not asserted until a digital edge is detected. The source of the digital edge is specified with the :py:attr:`nirfsa.Session.digital_edge_ref_trigger_source` property.
+
+        
+
+
+
+    .. py:attribute:: ReferenceTriggerType.IQ_POWER_EDGE
+
+
+
+        The Reference Trigger is asserted when the signal is changing past the level specified with the slope (rising or falling) configured with the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_slope` property.
+
+        
+
+
+
+    .. py:attribute:: ReferenceTriggerType.SOFTWARE_EDGE
+
+
+
+        The Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the :py:meth:`nirfsa.Session.send_software_edge_trigger` method and selecting :py:data:`~nirfsa.NIRFSA_VAL_REF_TRIGGER` as the **trigger** parameter.
+
+        
+
+
+
+    .. py:attribute:: ReferenceTriggerType.IQ_ANALOG_EDGE
+
+
+
+        The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property. This value is valid only for PXIe-5644/5645 devices.
 
         
 
@@ -2171,12 +2359,12 @@ RfLbSigCondPathSel
 
 
 
-RfPathSel
----------
+RfPathSelection
+---------------
 
-.. py:class:: RfPathSel
+.. py:class:: RfPathSelection
 
-    .. py:attribute:: RfPathSel._1
+    .. py:attribute:: RfPathSelection._1
 
 
 
@@ -2186,7 +2374,7 @@ RfPathSel
 
 
 
-    .. py:attribute:: RfPathSel._2
+    .. py:attribute:: RfPathSelection._2
 
 
 
@@ -2196,7 +2384,7 @@ RfPathSel
 
 
 
-    .. py:attribute:: RfPathSel._3
+    .. py:attribute:: RfPathSelection._3
 
 
 
@@ -2206,7 +2394,7 @@ RfPathSel
 
 
 
-    .. py:attribute:: RfPathSel._4
+    .. py:attribute:: RfPathSelection._4
 
 
 
@@ -2396,6 +2584,121 @@ RfPreselectorFilter
 
 
         Specifies that the 20 MHz to 3.04 GHz external filter filter path is used.
+
+        
+
+
+
+SelfCalibrateRangeStepsToOmit
+-----------------------------
+
+.. py:class:: SelfCalibrateRangeStepsToOmit
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL
+
+
+
+        Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT
+
+
+
+        Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.OMIT_NONE
+
+
+
+        No calibration steps are omitted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE
+
+
+
+        Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.IF_FLATNESS
+
+
+
+        Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalibrateRangeStepsToOmit.DC_OFFSET
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
 
         
 
@@ -2896,77 +3199,12 @@ SpectrumResolutionBandwidthType
 
 
 
-SpectrumUnits
--------------
+StartTriggerDigitalEdgeEdge
+---------------------------
 
-.. py:class:: SpectrumUnits
+.. py:class:: StartTriggerDigitalEdgeEdge
 
-    .. py:attribute:: SpectrumUnits.DBM
-
-
-
-        Units are dB with reference to 1 milliwatt.
-
-        
-
-
-
-    .. py:attribute:: SpectrumUnits.VOLTS_SQUARED
-
-
-
-        Units are in volts squared.
-
-        
-
-
-
-    .. py:attribute:: SpectrumUnits.DBMV
-
-
-
-        Units are dB with reference to 1 millivolt.
-
-        
-
-
-
-    .. py:attribute:: SpectrumUnits.DBUV
-
-
-
-        Units are dB with reference to 1 microvolt.
-
-        
-
-
-
-    .. py:attribute:: SpectrumUnits.VOLTS
-
-
-
-        Units are in volts.
-
-        
-
-
-
-    .. py:attribute:: SpectrumUnits.WATTS
-
-
-
-        Units are in watts.
-
-        
-
-
-
-StartTrigDigEdgeEdge
---------------------
-
-.. py:class:: StartTrigDigEdgeEdge
-
-    .. py:attribute:: StartTrigDigEdgeEdge.RISING
+    .. py:attribute:: StartTriggerDigitalEdgeEdge.RISING
 
 
 
@@ -2976,7 +3214,7 @@ StartTrigDigEdgeEdge
 
 
 
-    .. py:attribute:: StartTrigDigEdgeEdge.FALLING
+    .. py:attribute:: StartTriggerDigitalEdgeEdge.FALLING
 
 
 
@@ -2986,12 +3224,12 @@ StartTrigDigEdgeEdge
 
 
 
-StartTrigType
--------------
+StartTriggerType
+----------------
 
-.. py:class:: StartTrigType
+.. py:class:: StartTriggerType
 
-    .. py:attribute:: StartTrigType.NONE
+    .. py:attribute:: StartTriggerType.NONE
 
 
 
@@ -3001,7 +3239,7 @@ StartTrigType
 
 
 
-    .. py:attribute:: StartTrigType.DIGITAL_EDGE
+    .. py:attribute:: StartTriggerType.DIGITAL_EDGE
 
 
 
@@ -3011,7 +3249,7 @@ StartTrigType
 
 
 
-    .. py:attribute:: StartTrigType.SOFTWARE_EDGE
+    .. py:attribute:: StartTriggerType.SOFTWARE_EDGE
 
 
 

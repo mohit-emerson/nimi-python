@@ -2334,6 +2334,41 @@ ReferenceTriggerType
 
 
 
+ResetWithOptionsStepsToOmit
+---------------------------
+
+.. py:class:: ResetWithOptionsStepsToOmit
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES
+
+
+
+        Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
+
+        
+
+
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.NONE
+
+
+
+        No step is omitted during reset.
+
+        
+
+
+
+    .. py:attribute:: ResetWithOptionsStepsToOmit.ROUTES
+
+
+
+        Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
+
+        
+
+
+
 RfLbSigCondPathSel
 ------------------
 

@@ -157,6 +157,7 @@ functions = {
             'description': 'Closes the session to the device.\n\n                If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
+        'grpc_name': 'Close',
         'is_error_handling': False,
         'parameters': [
             {
@@ -170,6 +171,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'python_name': '_close',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -252,8 +254,31 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the format of parameters to interpolate.\n\n                        %enum_table{linear interpolation format}'
+                    'description': 'Specifies the format of parameters to interpolate. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_REAL_AND_IMAGINARY',
+                            '4001 (0xFA1)',
+                            'Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.'
+                        ],
+                        [
+                            'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_AND_PHASE',
+                            '4002 (0xFA2)',
+                            'Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.'
+                        ],
+                        [
+                            'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_DB_AND_PHASE',
+                            '4000 (0xFA0)',
+                            'Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'LinearInterpolationFormat',
                 'name': 'format',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -922,8 +947,26 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the orientation of the data in the S2P file relative to the port on the DUT port.\n\n                       %enum_table{sparameter orientation}'
+                    'description': ' Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSA_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSA_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'SparameterOrientation',
                 'name': 'sparameterOrientation',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -1197,8 +1240,158 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
+        'FancyCreateDeembeddingSparameterTableArray': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview<https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+        },
+        'included_in_proto': True,
+        'method_name_for_documentation': 'create_deembedding_sparameter_table_array',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'create_deembedding_sparameter_table_array'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                },
+                'name': 'port',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                },
+                'name': 'tableName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the frequencies for the NIRFSA_ATTR_SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.'
+                },
+                'name': 'frequencies',
+                'numpy': True,
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
+                'use_in_python_api': True
+            },
+            {
+                'array_dimensions': 3,
+                'complex_array_representation': 'complex_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameterTable',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the orientation of the input data relative to the port on the DUT port.\n\n**Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSA_VAL_PORT1_TOWARDS_DUT',
+                            '24000 (0x5dc0)',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSA_VAL_PORT2_TOWARDS_DUT',
+                            '24001 (0x5dc1)',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
+                },
+                'enum': 'SparameterOrientation',
+                'grpc_enum': None,
+                'name': 'sparameterOrientation',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'create_deembedding_sparameter_table_array',
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'FancyGetDeembeddingSparameters': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT1_TOWARDS_DUT.'
+        },
+        'included_in_proto': True,
+        'method_name_for_documentation': 'get_deembedding_sparameters',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'array_dimensions': 2,
+                'complex_array_representation': 'complex_number_array',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameters',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy.array(dtype=numpy.complex128)',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'get_deembedding_sparameters',
+        'returns': None,
+        'use_session_lock': False
+    },
     'GetAttributeViBoolean': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Queries the value of a ViBoolean attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -1258,7 +1451,7 @@ functions = {
         'use_session_lock': True
     },
     'GetAttributeViInt32': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Queries the value of a ViInt32 attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -1318,7 +1511,7 @@ functions = {
         'use_session_lock': True
     },
     'GetAttributeViInt64': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Queries the value of a ViInt64 attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -1378,7 +1571,7 @@ functions = {
         'use_session_lock': True
     },
     'GetAttributeViReal64': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Queries the value of a ViReal64 attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -1438,7 +1631,7 @@ functions = {
         'use_session_lock': True
     },
     'GetAttributeViSession': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Queries the value of a ViSession attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
@@ -1498,7 +1691,7 @@ functions = {
         'use_session_lock': True
     },
     'GetAttributeViString': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Queries the value of a ViString attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **NIRFSA_ATTR_BUF_SIZE** parameter. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the **NIRFSA_ATTR_BUF_SIZE** parameter, the function copies buffer size  1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7.\n\n                If you want to call this function just to get the required buffer size, you can pass 0 for **NIRFSA_ATTR_BUF_SIZE** and VI_NULL for the **attributeValue** buffer.\n\n                **Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -2201,6 +2394,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the signal for which you want to query the terminal.\n\n                       %enum_table{signal}'
                 },
+                'enum': 'Signal',
                 'name': 'signal',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -2245,16 +2439,17 @@ functions = {
         'use_session_lock': True
     },
     'InitWithOptions': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Creates a new session for the device. \n                \n                This function sets the initial value of certain attributes and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.\n\n                To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.\n\n                You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.\n\n                ----\n                **Note**\n                Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this function to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.\n\n                ----\n\n                ----\n                **Note**\n                For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_'
         },
         'included_in_proto': True,
+        'method_name_for_documentation': '__init__',
         'is_error_handling': False,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'initialization_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             }
@@ -2296,7 +2491,9 @@ functions = {
                     'description': 'Sets the initial value of certain attributes for the session. The attributes shown in the following table are used in this parameter.\n\n                        | Name             | Attribute                                                                                                                                  |\n                        |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|\n                        | RangeCheck       | NIRFSA_ATTR_RANGE_CHECK                         |\n                        | QueryInstrStatus | NIRFSA_ATTR_QUERY_INSTRUMENT_STATUS |\n                        | Cache            | NIRFSA_ATTR_CACHE                                     |\n                        | RecordCoercions  | NIRFSA_ATTR_RECORD_COERCIONS               |\n                        | DriverSetup      | NIRFSA_ATTR_DRIVER_SETUP                       |\n                        | Simulate         | NIRFSA_ATTR_SIMULATE                               |\n\n                        The format of this string is *AttributeName=Value*, where *AttributeName* is the name of the attribute and *Value* is the value to which the attribute will be set. For example, you can simulate the PXIe-5663 using the following strings:\n\n                        *Simulate=1, DriverSetup=Model:5663\\E*.\n\n                        *Simulate=1, DriverSetup=Model:5601*; *Digitizer:5622; LO:5652; LOBoardType:PXIe*.\n\n                        To set multiple attributes, separate their assignments with a comma.\n\n                        Refer to `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_ for more information about the driver setup string.\n\n                        Note: To simulate a device using the PXIe-5622 25 MHz digitizer, set the *Digitizer* field to 5622_25MHz_DDC and the *Simulate* field to 1. You can set the *Digitizer* field to 5622_25MHz_DDC only when using the PXIe-5665.'
                 },
                 'name': 'optionString',
+                'python_api_converter_name': 'convert_init_with_options_dictionary',
                 'type': 'ViConstString',
+                'type_in_documentation': 'dict',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2334,7 +2531,6 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
     },
     'IsSelfCalValid': {
         'codegen_method': 'public',
@@ -2793,8 +2989,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a list of steps to skip during the reset process. The default value is NIRFSA_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset.\n\n                        %enum_table{steps to omit}\n\n                        \n                        Note:NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES is not supported in external calibration or alignment sessions.\n\n                    \n                        Note:NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES is not supported for the PXI-5600/5661.'
                 },
+                'enum': 'ResetWithOptionsStepsToOmit',
                 'name': 'stepsToOmit',
                 'type': 'ViUInt64',
+                'type_in_documentation': 'Bitwise combination of enums.ResetWithOptionsStepsToOmit flags',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3023,7 +3221,7 @@ functions = {
         'use_session_lock': True
     },
     'SetAttributeViBoolean': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Sets the value of a ViBoolean attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -3083,7 +3281,7 @@ functions = {
         'use_session_lock': True
     },
     'SetAttributeViInt32': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Sets the value of a ViInt32 attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -3145,7 +3343,7 @@ functions = {
         'use_session_lock': True
     },
     'SetAttributeViInt64': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Sets the value of a ViInt64 attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -3206,7 +3404,7 @@ functions = {
         'use_session_lock': True
     },
     'SetAttributeViReal64': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Sets the value of a ViReal64 attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes, and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread-locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -3267,7 +3465,7 @@ functions = {
         'use_session_lock': True
     },
     'SetAttributeViSession': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Sets the value of a ViSession attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
@@ -3327,7 +3525,7 @@ functions = {
         'use_session_lock': True
     },
     'SetAttributeViString': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Sets the value of a ViString attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -3431,10 +3629,24 @@ functions = {
     'fancy_self_test': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'TBD'
+            'description': '\nPerforms a self-test on the NI-RFSA device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSA device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSA device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsa/page/rfsa/warmup.html>`_',
+            'table_body': [
+                [
+                    '0',
+                    'Passed self-test'
+                ],
+                [
+                    '1',
+                    'Self-test failed'
+                ]
+            ],
+            'table_header': [
+                'Self-Test Code',
+                'Description'
+            ]
         },
         'grpc_name': 'FancySelfTest',
-        'included_in_proto': False,
+        'included_in_proto': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3446,11 +3658,14 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession'
             }
         ],
         'python_name': 'self_test',
         'returns': 'ViStatus'
-    }
+    },
 }

@@ -981,6 +981,21 @@ class ReferenceTriggerType(Enum):
     '''
 
 
+class ResetWithOptionsStepsToOmit(IntFlag):
+    DEEMBEDDING_TABLES = 2
+    r'''
+    Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.
+    '''
+    NONE = 0
+    r'''
+    No step is omitted during reset.
+    '''
+    ROUTES = 1
+    r'''
+    Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
+    '''
+
+
 class RfLbSigCondPathSel(Enum):
     _1 = 3700
     r'''

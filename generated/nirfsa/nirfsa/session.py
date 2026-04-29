@@ -102,7 +102,7 @@ class _SessionBase(object):
     _is_frozen = False
 
     absolute_delay = _attributes.AttributeViReal64(1150266)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     Specifies the sub-sample clock delay, in seconds, to apply to the acquired signal.
 
@@ -314,12 +314,12 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     available_paths = _attributes.AttributeViString(1150332)
-    '''Type: str
+    '''Type: list of str
 
     Returns a comma separated list of the configurable paths available for use based on your instrument configuration.
     '''
     available_ports = _attributes.AttributeViString(1150306)
-    '''Type: str
+    '''Type: list of str
 
     Returns a comma-separated list of the available ports for use based on your instrument configuration.
 
@@ -489,7 +489,7 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668
     '''
-    common_mode = _attributes.AttributeViReal64(1150269)
+    common_mode_level = _attributes.AttributeViReal64(1150269)
     '''Type: float
 
     Specifies the common-mode level presented at each differential input terminal.
@@ -509,7 +509,7 @@ class _SessionBase(object):
     This property is not for customer use.
     '''
     decimation_delay = _attributes.AttributeViReal64(1150191)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     Specifies the sub-sample delay, in seconds, to apply to the acquired signal.
 
@@ -535,7 +535,7 @@ class _SessionBase(object):
 
     Selects the de-embedding table to apply to the measurements on the specified port.
 
-    To use this property, you must use the channelName parameter of the set_attribute_vi_string method to specify the name of the port to configure for de-embedding.
+    To use this property, you must use the channelName parameter of the _set_attribute_vi_string method to specify the name of the port to configure for de-embedding.
 
     If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
@@ -548,7 +548,7 @@ class _SessionBase(object):
 
     Specifies the type of de-embedding to apply to measurements on the specified port.
 
-    To use this property, you must use the channelName parameter of the set_attribute_vi_int32 method to specify the name of the port to configure for de-embedding.
+    To use this property, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the port to configure for de-embedding.
 
     If you set this property to DeembeddingType.SCALAR or DeembeddingType.VECTOR, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
@@ -660,7 +660,7 @@ class _SessionBase(object):
 
     **PXIe-5644/5645/5646, PXIe-5820/5840/5841/5842/5860**: If you query this property during RF list mode, list steps may take longer to complete during list execution.
 
-    **PXIe-5830/5831/5832**: To use this property, you must first set the channelName parameter of the set_attribute_vi_real64 method to using the appropriate string for your instrument configuration. Setting the set_attribute_vi_real64 property is not required for the PXIe-3621/3622. Refer to the following table to determine which strings are valid for your configuration.
+    **PXIe-5830/5831/5832**: To use this property, you must first set the channelName parameter of the _set_attribute_vi_real64 method to using the appropriate string for your instrument configuration. Setting the _set_attribute_vi_real64 property is not required for the PXIe-3621/3622. Refer to the following table to determine which strings are valid for your configuration.
 
     | Hardware Module               |         TRX Port Type          | Active Channel String     |
     |:------------------------------|:------------------------------:|:--------------------------|
@@ -681,6 +681,16 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    Tip:
+    This property can be set/get on specific device_temperatures within your :py:class:`nirfsa.Session` instance.
+    Use Python index notation on the repeated capabilities container device_temperatures to specify a subset.
+
+    Example: :py:attr:`my_session.device_temperatures[ ... ].device_temperature`
+
+    To set/get on all device_temperatures, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+    Example: :py:attr:`my_session.device_temperature`
     '''
     digital_edge_advance_trigger_source = _attributes.AttributeViString(1150037)
     '''Type: str
@@ -1190,7 +1200,7 @@ class _SessionBase(object):
 
     **PXIe-5830/5831/5832/5840/5841/5842** : The PXIe-5840/5841/5842 supports only DownconverterLoopBandwidth.MEDIUM for this property. This property is not supported if you are using an external LO.
 
-    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
+    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
     **Defined Values:**
 
@@ -1236,7 +1246,7 @@ class _SessionBase(object):
 
     *Tag* is the name of the Driver Setup string property. *Value* is the value set to the property. If multiple properties are set, their assignments are separated with a semicolon.
 
-    This property only returns the Driver Setup string that has already been defined. Refer to `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_ for more information about configuring the Driver Setup string. Refer to the init_with_options method for additional information about using the **option string** parameter.
+    This property only returns the Driver Setup string that has already been defined. Refer to `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_ for more information about configuring the Driver Setup string. Refer to the __init__ method for additional information about using the **option string** parameter.
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
@@ -1287,8 +1297,8 @@ class _SessionBase(object):
 
     - get_terminal_name
     '''
-    exported_advance_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150038)
-    '''Type: enums.ExportOutputTerminal
+    exported_advance_trigger_output_terminal = _attributes.AttributeViString(1150038)
+    '''Type: str
 
     Specifies the destination terminal for the exported Advance Trigger.
 
@@ -1316,8 +1326,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5668
     '''
-    exported_done_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150054)
-    '''Type: enums.ExportOutputTerminal
+    exported_done_event_output_terminal = _attributes.AttributeViString(1150054)
+    '''Type: str
 
     Specifies the destination terminal for the Done Event.
 
@@ -1333,8 +1343,8 @@ class _SessionBase(object):
 
     - ExportSignal
     '''
-    exported_end_of_record_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150044)
-    '''Type: enums.ExportOutputTerminal
+    exported_end_of_record_event_output_terminal = _attributes.AttributeViString(1150044)
+    '''Type: str
 
     Specifies the destination terminal for the End of Record Event.
 
@@ -1358,37 +1368,37 @@ class _SessionBase(object):
 
     - ExportSignal
     '''
-    exported_ready_for_advance_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150042)
-    '''Type: enums.ExportOutputTerminal
+    exported_ready_for_advance_event_output_terminal = _attributes.AttributeViString(1150042)
+    '''Type: str
 
     Specifies the destination terminal for the Ready for Advance Event.
 
     | Value                                           | Description                                                                                                                                                                   |
     |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | ExportOutputTerminal.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
-    | ExportOutputTerminal.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-    | ExportOutputTerminal.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-    | ExportOutputTerminal.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
-    | ExportOutputTerminal.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-    | ExportOutputTerminal.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-    | ExportOutputTerminal.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-    | ExportOutputTerminal.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+    | NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |
+    | NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+    | NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+    | NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
+    | NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+    | NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+    | NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+    | NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
     | ExportOutputTerminal.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-    | ExportOutputTerminal.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
     **Default Value**: "" (empty string)
 
@@ -1401,37 +1411,37 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    exported_ready_for_ref_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150043)
-    '''Type: enums.ExportOutputTerminal
+    exported_ready_for_ref_event_output_terminal = _attributes.AttributeViString(1150043)
+    '''Type: str
 
     Specifies the destination terminal for the Ready for Reference Event.
 
     | Value                                           | Description                                                                                                                                                                   |
     |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | ExportOutputTerminal.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
-    | ExportOutputTerminal.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-    | ExportOutputTerminal.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-    | ExportOutputTerminal.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
-    | ExportOutputTerminal.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-    | ExportOutputTerminal.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-    | ExportOutputTerminal.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-    | ExportOutputTerminal.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+    | NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |
+    | NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+    | NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+    | NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |
+    | NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+    | NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+    | NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+    | NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
     | ExportOutputTerminal.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-    | ExportOutputTerminal.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
     **Default Value**: "" (empty string)
 
@@ -1444,37 +1454,37 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    exported_ready_for_start_event_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150041)
-    '''Type: enums.ExportOutputTerminal
+    exported_ready_for_start_event_output_terminal = _attributes.AttributeViString(1150041)
+    '''Type: str
 
     Specifies the destination terminal for the Ready for Start Event.
 
     | Value                                           | Description                                                                                                                                                                   |
     |:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-    | ExportOutputTerminal.DO_NOT_EXPORT ("")          | The signal is not exported.                                                                                                                                        |
-    | ExportOutputTerminal.CLK_OUT ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-    | ExportOutputTerminal.REF_OUT ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-    | ExportOutputTerminal.REF_OUT2 ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
-    | ExportOutputTerminal.PFI0 ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-    | ExportOutputTerminal.PFI1 ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-    | ExportOutputTerminal.PXI_TRIG0 ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG1 ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG2 ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG3 ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG4 ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG5 ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG6 ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-    | ExportOutputTerminal.PXI_TRIG7 ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-    | ExportOutputTerminal.PXI_STAR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
+    | NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |
+    | NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
+    | NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
+    | NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
+    | NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
+    | NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
+    | NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
+    | NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
+    | NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
     | ExportOutputTerminal.PXIE_DSTARC ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-    | ExportOutputTerminal.DIO_PFI0 ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI1("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI2 ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI3 ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI4 ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI5 ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI6 ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-    | ExportOutputTerminal.DIO_PFI7 ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
+    | NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
 
     **Default Value**: "" (empty string)
 
@@ -1504,8 +1514,8 @@ class _SessionBase(object):
 
     - ExportSignal
     '''
-    exported_ref_clock_rate = _attributes.AttributeEnum(_attributes.AttributeViReal64, enums.ReferenceClockExportedRate, 1150326)
-    '''Type: enums.ReferenceClockExportedRate
+    exported_ref_clock_rate = _attributes.AttributeViReal64(1150326)
+    '''Type: float
 
     Specifies the Reference Clock Rate, in Hz, of the signal sent to the Ref Clock Exported Terminal.
 
@@ -1521,8 +1531,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    exported_ref_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150032)
-    '''Type: enums.ExportOutputTerminal
+    exported_ref_trigger_output_terminal = _attributes.AttributeViString(1150032)
+    '''Type: str
 
     Specifies the destination terminal for the exported Reference Trigger.
 
@@ -1538,8 +1548,8 @@ class _SessionBase(object):
 
     - ExportSignal
     '''
-    exported_start_trigger_output_terminal = _attributes.AttributeEnum(_attributes.AttributeViString, enums.ExportOutputTerminal, 1150027)
-    '''Type: enums.ExportOutputTerminal
+    exported_start_trigger_output_terminal = _attributes.AttributeViString(1150027)
+    '''Type: str
 
     Specifies the destination terminal for the exported Start Trigger.
 
@@ -1733,7 +1743,7 @@ class _SessionBase(object):
     `Resolution Bandwidth <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/resolution-bandwidth.html>`_
     '''
     fixed_group_delay_across_ports = _attributes.AttributeViString(1150324)
-    '''Type: str
+    '''Type: list of str
 
     Specifies a comma-separated list of ports for which to fix the group delay.
 
@@ -1752,7 +1762,7 @@ class _SessionBase(object):
 
     Returns a string containing the path to the location of the current NI-RFSA instrument driver FPGA extensions bitfile, a .lvbitx file, that is programmed on the device.
 
-    You can specify the bitfile location using the Driver Setup string in the **optionString** parameter of the init_with_options method.
+    You can specify the bitfile location using the Driver Setup string in the **optionString** parameter of the __init__ method.
 
     NI-RFSA instrument driver FPGA extensions enable you to use pre-compiled FPGA bitfiles to customize the behavior of the device FPGA while maintaining the functionality of the NI-RFSA instrument driver.
 
@@ -1830,6 +1840,13 @@ class _SessionBase(object):
     **Default Value**: FrequencySettlingUnits.PPM
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842
+    '''
+    group_capabilities = _attributes.AttributeViStringCommaSeparated(1050401)
+    '''Type: list of str
+
+    Returns a list of class-extension groups that NI-RFSA implements.
+
+    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
     host_dma_buffer_size = _attributes.AttributeViInt64(1150285)
     '''Type: int
@@ -2225,7 +2242,7 @@ class _SessionBase(object):
 
     Configures the terminal configuration of the I/Q port.
 
-    To use this property, you must use the channelName parameter of the set_attribute_vi_int32 method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
+    To use this property, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
     ----
     **Note**
@@ -2248,7 +2265,7 @@ class _SessionBase(object):
 
     Specifies the voltage range for the I/Q terminals.
 
-    To use this property, you must use the channelName parameter of the set_attribute_vi_real64 method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
+    To use this property, you must use the channelName parameter of the _set_attribute_vi_real64 method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
     The voltage range in differential terminal configuration is configurable from 2 V<sub>pk-pk</sub> to 0.032 V<sub>pk-pk</sub> in 1 dB steps. In single-ended terminal configuration, valid ranges are half those for differential. Values are always coerced up to the next valid range.
 
@@ -2426,7 +2443,7 @@ class _SessionBase(object):
 
     Contains the logical name you specified when opening the current IVI session.
 
-    You may pass a logical name to the Init method or the init_with_options method. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options.
+    You may pass a logical name to the Init method or the __init__ method. The IVI Configuration Utility must contain an entry for the logical name. The logical name entry refers to a driver session section in the IVI Configuration file. The driver session section specifies a physical device and initial user options.
 
     **Default Value**: N/A
 
@@ -2460,7 +2477,7 @@ class _SessionBase(object):
 
     **PXIe-5694**: You can enable this property only if you set the lo_source property to LoSource.LO_IN, or if you set the lo_source property to LoSource.ONBOARD and the if_conditioning_down_conversion_enabled property to NIRFSA_VAL_ENABLED.
 
-    **PXIe-5830/5831**: To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_boolean method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
+    **PXIe-5830/5831**: To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_boolean method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
 
     ----
     **Note**
@@ -2495,7 +2512,7 @@ class _SessionBase(object):
 
     Set this property to the actual LO frequency because NI-RFSA corrects for any difference between expected and actual LO frequencies.
 
-    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_real64 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
+    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_real64 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
     **Default Values**:
 
@@ -2632,7 +2649,7 @@ class _SessionBase(object):
 
     Specifies the power level, in dBm, of the signal at the LO OUT terminal when the lo_export_enabled property is set to True.
 
-    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_real64 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
+    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_real64 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
     **Units:** dBm
 
@@ -2657,7 +2674,7 @@ class _SessionBase(object):
 
     ----
 
-    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
+    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
     **Defined Values:**
 
@@ -2677,7 +2694,7 @@ class _SessionBase(object):
 
                     If no signal downconversion is required, this property is ignored. If this property is set to "" (empty string), NI-RFSA uses the internal LO source.
 
-                    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the set_attribute_vi_string method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
+                    To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_string method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
 
                     ----
                     **Note**
@@ -2695,6 +2712,16 @@ class _SessionBase(object):
                     **Related Topics**
                     `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/lo-sharing-using-rfsa-rfsg.html>`_
                     `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/lo-sharing-using-rfsa-rfsg.html>`_
+
+    Tip:
+    This property can be set/get on specific los within your :py:class:`nirfsa.Session` instance.
+    Use Python index notation on the repeated capabilities container los to specify a subset.
+
+    Example: :py:attr:`my_session.los[ ... ].lo_source`
+
+    To set/get on all los, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+    Example: :py:attr:`my_session.lo_source`
     '''
     lo_temperature = _attributes.AttributeViReal64(1150089)
     '''Type: float
@@ -3318,7 +3345,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     ref_to_ref_trigger_holdoff = _attributes.AttributeViReal64(1150034)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     Specifies the minimum time, in seconds, that must elapse between Reference Triggers of two records.
 
@@ -3331,7 +3358,7 @@ class _SessionBase(object):
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
     ref_trigger_delay = _attributes.AttributeViReal64(1150060)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     Specifies the trigger delay time, in seconds.
 
@@ -3344,7 +3371,7 @@ class _SessionBase(object):
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
     ref_trigger_minimum_quiet_time = _attributes.AttributeViReal64(1150058)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger.
 
@@ -3831,6 +3858,20 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
+    specific_driver_class_spec_major_version = _attributes.AttributeViInt32(1050515)
+    '''Type: int
+
+    Returns the major version number of the class specification with which NI-RFSA is compliant.
+
+    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+    '''
+    specific_driver_class_spec_minor_version = _attributes.AttributeViInt32(1050516)
+    '''Type: int
+
+    Returns the minor version number of the class specification with which NI-RFSA is compliant.
+
+    **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+    '''
     specific_driver_description = _attributes.AttributeViString(1050514)
     '''Type: str
 
@@ -3952,7 +3993,7 @@ class _SessionBase(object):
     - configure_spectrum_frequency_center_span
     '''
     start_to_ref_trigger_holdoff = _attributes.AttributeViReal64(1150033)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     Specifies the minimum time, in seconds, that must elapse after the Start Trigger is received before the device recognizes a Reference Trigger.
 
@@ -3963,7 +4004,7 @@ class _SessionBase(object):
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
     start_trigger_delay = _attributes.AttributeViReal64(1150175)
-    '''Type: float
+    '''Type: hightime.timedelta
 
     This property is not for customer use.
     '''
@@ -4076,7 +4117,7 @@ class _SessionBase(object):
     ----
     '''
     supported_instrument_models = _attributes.AttributeViString(1050327)
-    '''Type: str
+    '''Type: list of str
 
     Returns a comma-separated list of supported devices.
 
@@ -4125,7 +4166,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     sync_ref_trigger_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150189)
-    '''Type: enums.EnableAttrVals
+    '''Type: hightime.timedelta
 
     Specifies whether the Reference Trigger is delayed with the data.
 
@@ -4262,7 +4303,7 @@ class _SessionBase(object):
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     temperature_read_interval = _attributes.AttributeViReal64(1150061)
-    '''Type: float
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Indicates the minimum time between temperature sensor readings in seconds.
 
@@ -4459,8 +4500,8 @@ class _SessionBase(object):
         self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
 
     @ivi_synchronized
-    def get_attribute_vi_boolean(self, attribute_id):
-        r'''get_attribute_vi_boolean
+    def _get_attribute_vi_boolean(self, attribute_id):
+        r'''_get_attribute_vi_boolean
 
         Queries the value of a ViBoolean property.
 
@@ -4473,11 +4514,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].get_attribute_vi_boolean`
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_boolean`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.get_attribute_vi_boolean`
+        Example: :py:meth:`my_session._get_attribute_vi_boolean`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4491,8 +4532,8 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def get_attribute_vi_int32(self, attribute_id):
-        r'''get_attribute_vi_int32
+    def _get_attribute_vi_int32(self, attribute_id):
+        r'''_get_attribute_vi_int32
 
         Queries the value of a ViInt32 property.
 
@@ -4505,11 +4546,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].get_attribute_vi_int32`
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int32`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.get_attribute_vi_int32`
+        Example: :py:meth:`my_session._get_attribute_vi_int32`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4523,8 +4564,8 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def get_attribute_vi_int64(self, attribute_id):
-        r'''get_attribute_vi_int64
+    def _get_attribute_vi_int64(self, attribute_id):
+        r'''_get_attribute_vi_int64
 
         Queries the value of a ViInt64 property.
 
@@ -4537,11 +4578,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].get_attribute_vi_int64`
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_int64`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.get_attribute_vi_int64`
+        Example: :py:meth:`my_session._get_attribute_vi_int64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4555,8 +4596,8 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def get_attribute_vi_real64(self, attribute_id):
-        r'''get_attribute_vi_real64
+    def _get_attribute_vi_real64(self, attribute_id):
+        r'''_get_attribute_vi_real64
 
         Queries the value of a ViReal64 property.
 
@@ -4569,11 +4610,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].get_attribute_vi_real64`
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_real64`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.get_attribute_vi_real64`
+        Example: :py:meth:`my_session._get_attribute_vi_real64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4587,8 +4628,8 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def get_attribute_vi_session(self, attribute_id):
-        r'''get_attribute_vi_session
+    def _get_attribute_vi_session(self, attribute_id):
+        r'''_get_attribute_vi_session
 
         Queries the value of a ViSession property.
 
@@ -4601,11 +4642,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].get_attribute_vi_session`
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_session`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.get_attribute_vi_session`
+        Example: :py:meth:`my_session._get_attribute_vi_session`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4619,8 +4660,8 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
-    def get_attribute_vi_string(self, attribute_id):
-        r'''get_attribute_vi_string
+    def _get_attribute_vi_string(self, attribute_id):
+        r'''_get_attribute_vi_string
 
         Queries the value of a ViString property.
 
@@ -4640,11 +4681,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].get_attribute_vi_string`
+        Example: :py:meth:`my_session.channels[ ... ]._get_attribute_vi_string`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.get_attribute_vi_string`
+        Example: :py:meth:`my_session._get_attribute_vi_string`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4912,8 +4953,8 @@ class _SessionBase(object):
         self._interpreter.save_configurations_to_file(self._repeated_capability, file_path)
 
     @ivi_synchronized
-    def set_attribute_vi_boolean(self, attribute_id, value):
-        r'''set_attribute_vi_boolean
+    def _set_attribute_vi_boolean(self, attribute_id, value):
+        r'''_set_attribute_vi_boolean
 
         Sets the value of a ViBoolean property.
 
@@ -4928,11 +4969,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].set_attribute_vi_boolean`
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_boolean`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.set_attribute_vi_boolean`
+        Example: :py:meth:`my_session._set_attribute_vi_boolean`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4949,8 +4990,8 @@ class _SessionBase(object):
         self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
-    def set_attribute_vi_int32(self, attribute_id, value):
-        r'''set_attribute_vi_int32
+    def _set_attribute_vi_int32(self, attribute_id, value):
+        r'''_set_attribute_vi_int32
 
         Sets the value of a ViInt32 property.
 
@@ -4965,11 +5006,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].set_attribute_vi_int32`
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int32`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.set_attribute_vi_int32`
+        Example: :py:meth:`my_session._set_attribute_vi_int32`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -4986,8 +5027,8 @@ class _SessionBase(object):
         self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
-    def set_attribute_vi_int64(self, attribute_id, value):
-        r'''set_attribute_vi_int64
+    def _set_attribute_vi_int64(self, attribute_id, value):
+        r'''_set_attribute_vi_int64
 
         Sets the value of a ViInt64 property.
 
@@ -5002,11 +5043,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].set_attribute_vi_int64`
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_int64`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.set_attribute_vi_int64`
+        Example: :py:meth:`my_session._set_attribute_vi_int64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -5023,8 +5064,8 @@ class _SessionBase(object):
         self._interpreter.set_attribute_vi_int64(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
-    def set_attribute_vi_real64(self, attribute_id, value):
-        r'''set_attribute_vi_real64
+    def _set_attribute_vi_real64(self, attribute_id, value):
+        r'''_set_attribute_vi_real64
 
         Sets the value of a ViReal64 property.
 
@@ -5039,11 +5080,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].set_attribute_vi_real64`
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_real64`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.set_attribute_vi_real64`
+        Example: :py:meth:`my_session._set_attribute_vi_real64`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -5060,8 +5101,8 @@ class _SessionBase(object):
         self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
 
     @ivi_synchronized
-    def set_attribute_vi_session(self, attribute_id):
-        r'''set_attribute_vi_session
+    def _set_attribute_vi_session(self, attribute_id):
+        r'''_set_attribute_vi_session
 
         Sets the value of a ViSession property.
 
@@ -5076,11 +5117,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].set_attribute_vi_session`
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_session`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.set_attribute_vi_session`
+        Example: :py:meth:`my_session._set_attribute_vi_session`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -5089,8 +5130,8 @@ class _SessionBase(object):
         self._interpreter.set_attribute_vi_session(self._repeated_capability, attribute_id)
 
     @ivi_synchronized
-    def set_attribute_vi_string(self, attribute_id, value):
-        r'''set_attribute_vi_string
+    def _set_attribute_vi_string(self, attribute_id, value):
+        r'''_set_attribute_vi_string
 
         Sets the value of a ViString property.
 
@@ -5105,11 +5146,11 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].set_attribute_vi_string`
+        Example: :py:meth:`my_session.channels[ ... ]._set_attribute_vi_string`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.set_attribute_vi_string`
+        Example: :py:meth:`my_session._set_attribute_vi_string`
 
         Args:
             attribute_id (int): Pass the ID of a property.
@@ -5189,7 +5230,7 @@ class Session(_SessionBase):
                                         | True (Yes) | The device is reset.                                |
                                         | False (No) | The device is not reset. This value is the default. |
 
-            options (str): Specifies the initial value of certain properties for the session. The
+            options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
                 value. For example:
 
@@ -5231,13 +5272,14 @@ class Session(_SessionBase):
             freeze_it=False,
             all_channels_in_session=None
         )
+        options = _converters.convert_init_with_options_dictionary(options)
 
         # Call specified init function
         # Note that _interpreter default-initializes the session handle in its constructor, so that
-        # if init_with_options fails, the error handler can reference it.
-        # And then here, once init_with_options succeeds, we call set_session_handle
+        # if _init_with_options fails, the error handler can reference it.
+        # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self.init_with_options(resource_name, id_query, reset, options))
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset, options))
 
         self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
@@ -5441,11 +5483,21 @@ class Session(_SessionBase):
 
             table_name (str): Specifies the name of the table.
 
-            format (int): Specifies the format of parameters to interpolate.
+            format (enums.LinearInterpolationFormat): Specifies the format of parameters to interpolate. **Defined Values** :
 
-                                        %enum_table{linear interpolation format}
+                +--------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | Name                                             | Value        | Description                                                                                                                             |
+                +==================================================+==============+=========================================================================================================================================+
+                | LinearInterpolationFormat.REAL_AND_IMAGINARY     | 4001 (0xFA1) | Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion. |
+                +--------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | LinearInterpolationFormat.MAGNITUDE_AND_PHASE    | 4002 (0xFA2) | Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.                                    |
+                +--------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+
+                | LinearInterpolationFormat.MAGNITUDE_DB_AND_PHASE | 4000 (0xFA0) | Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.                      |
+                +--------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------+
 
         '''
+        if type(format) is not enums.LinearInterpolationFormat:
+            raise TypeError('Parameter format must be of type ' + str(enums.LinearInterpolationFormat))
         self._interpreter.configure_deembedding_table_interpolation_linear(port, table_name, format)
 
     @ivi_synchronized
@@ -5873,11 +5925,19 @@ class Session(_SessionBase):
 
             s2p_file_path (str): Specifies the path to the S2P file that contains de-embedding information for the specified port.
 
-            sparameter_orientation (int): Specifies the orientation of the data in the S2P file relative to the port on the DUT port.
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :
 
-                                       %enum_table{sparameter orientation}
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                    | Value          | Description                                         |
+                +=========================================+================+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
 
         '''
+        if type(sparameter_orientation) is not enums.SparameterOrientation:
+            raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
         self._interpreter.create_deembedding_sparameter_table_s2p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
     @ivi_synchronized
@@ -6003,6 +6063,79 @@ class Session(_SessionBase):
         '''
         error_message = self._interpreter.error_message(status_code)
         return error_message
+
+    def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_orientation):
+        '''create_deembedding_sparameter_table_array
+
+        Creates an s-parameter de-embedding table for the port from the input data.
+
+        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `De-embedding Overview<https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+
+        Args:
+            port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+
+            table_name (str): Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
+
+            frequencies (numpy.array(dtype=numpy.float64)): Specifies the frequencies for the SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
+
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port.
+
+                **Defined Values** :
+
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                    | Value          | Description                                         |
+                +=========================================+================+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+
+        '''
+        if (str(type(sparameter_table)).find("'numpy.ndarray'") != -1) or (str(type(frequencies)).find("'numpy.ndarray'") != -1):
+            if sparameter_table.ndim == 3:
+                if frequencies.size == sparameter_table.shape[0]:
+                    if sparameter_table.shape[1] == sparameter_table.shape[2]:
+                        number_of_ports = sparameter_table.shape[1]
+                        return self._create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation)
+                    else:
+                        raise ValueError("Row and column count of sparameter table should be equal. Table row count is {} and column count is {}.".format(sparameter_table.shape[1], sparameter_table.shape[2]))
+                else:
+                    raise ValueError("Frequencies count does not match the sparameter table count. Frequencies count is {} and sparameter table count is {}.".format(frequencies.size, sparameter_table.shape[0]))
+            else:
+                raise ValueError("Unsupported array dimension. Is {}, expected 3".format(sparameter_table.ndim))
+        else:
+            raise TypeError("Unsupported datatype. Expected numpy array.")
+
+    def get_deembedding_sparameters(self):
+        r'''get_deembedding_sparameters
+
+        Returns the S-parameters used for de-embedding a measurement on the selected port.
+
+        This includes interpolation of the parameters based on the configured carrier frequency. This method returns an empty array if no de-embedding is done.
+
+        If you want to call this method just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Note: The port orientation for the returned S-parameters is normalized to SparameterOrientation.PORT1_TOWARDS_DUT.
+
+        Returns:
+            sparameters (numpy.array(dtype=numpy.complex128)): Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.
+
+        '''
+        sparameters = self._interpreter.get_deembedding_sparameters()
+        return sparameters
 
     @ivi_synchronized
     def get_ext_cal_last_temp(self):
@@ -6174,7 +6307,7 @@ class Session(_SessionBase):
         One or more of the referenced properties are not in the Python API for this driver.
 
         Args:
-            signal (int): Specifies the signal for which you want to query the terminal.
+            signal (enums.Signal): Specifies the signal for which you want to query the terminal.
 
                                        %enum_table{signal}
 
@@ -6185,12 +6318,14 @@ class Session(_SessionBase):
             terminal_name (str): Returns the fully qualified name of the signal being queried.
 
         '''
+        if type(signal) is not enums.Signal:
+            raise TypeError('Parameter signal must be of type ' + str(enums.Signal))
         terminal_name = self._interpreter.get_terminal_name(signal, signal_identifier)
         return terminal_name
 
     @ivi_synchronized
-    def init_with_options(self, resource_name, id_query, reset, option_string):
-        r'''init_with_options
+    def _init_with_options(self, resource_name, id_query, reset, option_string):
+        r'''_init_with_options
 
         Creates a new session for the device.
 
@@ -6239,7 +6374,7 @@ class Session(_SessionBase):
                                         | True (Yes) | The device is reset.                                |
                                         | False (No) | The device is not reset. This value is the default. |
 
-            option_string (str): Sets the initial value of certain properties for the session. The properties shown in the following table are used in this parameter.
+            option_string (dict): Sets the initial value of certain properties for the session. The properties shown in the following table are used in this parameter.
 
                                         | Name             | Property                                                                                                                                  |
                                         |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
@@ -6270,6 +6405,7 @@ class Session(_SessionBase):
             vi (int): Identifies your instrument session.
 
         '''
+        option_string = _converters.convert_init_with_options_dictionary(option_string)
         vi = self._interpreter.init_with_options(resource_name, id_query, reset, option_string)
         return vi
 
@@ -6363,7 +6499,7 @@ class Session(_SessionBase):
 
                         For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.
 
-                        This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to StepsToOmit.ROUTES.
+                        This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
 
                         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6372,6 +6508,9 @@ class Session(_SessionBase):
                         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
                         `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
         '''
         self._interpreter.reset()
 
@@ -6420,11 +6559,11 @@ class Session(_SessionBase):
 
                         For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Star Trigger Controller Slot, also known as the System Timing Slot.
 
-                        By default, this method resets all properties to their default values, deletes all de-embedding tables, aborts generation, clears all routes, and resets session properties to initial values. You can specify steps to omit using the steps to omit parameter. For example, if you specify StepsToOmit.ROUTES for the **STEPS_TO_OMIT** parameter, this method does not release signal routes during the reset process.
+                        By default, this method resets all properties to their default values, deletes all de-embedding tables, aborts generation, clears all routes, and resets session properties to initial values. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES for the **STEPS_TO_OMIT** parameter, this method does not release signal routes during the reset process.
 
                         When routes of signals between two devices are released, they are released regardless of which device created the route.
 
-                        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of reset, with **STEPS_TO_OMIT** set to StepsToOmit.ROUTES.
+                        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of reset, with **STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
 
                         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6437,18 +6576,26 @@ class Session(_SessionBase):
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
 
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
         Args:
-            steps_to_omit (int): Specifies a list of steps to skip during the reset process. The default value is StepsToOmit.NONE, which specifies that no step is omitted during reset.
+            steps_to_omit (Bitwise combination of enums.ResetWithOptionsStepsToOmit flags): Specifies a list of steps to skip during the reset process. The default value is ResetWithOptionsStepsToOmit.NONE, which specifies that no step is omitted during reset.
 
                                         %enum_table{steps to omit}
 
 
-                                        Note:StepsToOmit.ROUTES is not supported in external calibration or alignment sessions.
+                                        Note:ResetWithOptionsStepsToOmit.ROUTES is not supported in external calibration or alignment sessions.
 
 
-                                        Note:StepsToOmit.ROUTES is not supported for the PXI-5600/5661.
+                                        Note:ResetWithOptionsStepsToOmit.ROUTES is not supported for the PXI-5600/5661.
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
+        if type(steps_to_omit) is not enums.ResetWithOptionsStepsToOmit:
+            raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.ResetWithOptionsStepsToOmit))
         self._interpreter.reset_with_options(steps_to_omit)
 
     @ivi_synchronized
@@ -6502,7 +6649,7 @@ class Session(_SessionBase):
 
                                         | Value                                          |  Description                                                                                                                                                                                                                     |
                                         |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | StepsToOmit.NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
+                                        | NIRFSA_VAL_RESET_WITH_OPTIONS_NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
                                         | NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
                                         | NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
                                         | NIRFSA_VAL_SELF_CAL_IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
@@ -6563,7 +6710,7 @@ class Session(_SessionBase):
 
                                         | Value                                          |  Description                                                                                                                                                                                                                     |
                                         |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | StepsToOmit.NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
+                                        | NIRFSA_VAL_RESET_WITH_OPTIONS_NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
                                         | SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
                                         | SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
                                         | SelfCalibrateRangeStepsToOmit.IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
@@ -6627,7 +6774,25 @@ class Session(_SessionBase):
     def self_test(self):
         '''self_test
 
-        TBD
+        Performs a self-test on the NI-RFSA device and returns the test results.
+
+        This method performs a simple series of tests to ensure that the NI-RFSA device is powered up and responding.
+
+        This method does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this method. The NI-RFSA device must be in the Configuration state before you call this method.
+
+        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsa/page/rfsa/warmup.html>`_
+
+        +----------------+------------------+
+        | Self-Test Code | Description      |
+        +================+==================+
+        | 0              | Passed self-test |
+        +----------------+------------------+
+        | 1              | Self-test failed |
+        +----------------+------------------+
         '''
         code, msg = self._self_test()
         if code:

@@ -1704,6 +1704,33 @@ enums = {
             }
         ]
     },
+    'ResetWithOptionsStepsToOmit': {
+        'codegen_method': 'public',
+        'class': 'IntFlag',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
+                },
+                'name': 'NIRFSA_VAL_RESET_WITH_OPTIONS_DEEMBEDDING_TABLES',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'No step is omitted during reset.'
+                },
+                'name': 'NIRFSA_VAL_RESET_WITH_OPTIONS_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
+                },
+                'name': 'NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES',
+                'value': 1
+            }
+        ]
+    },
     'RfLbSigCondPathSel': {
         'codegen_method': 'public',
         'values': [

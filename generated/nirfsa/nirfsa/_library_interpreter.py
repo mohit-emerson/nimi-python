@@ -4,6 +4,7 @@
 import array
 import ctypes
 import hightime  # noqa: F401
+import nirfsa._complextype as _complextype
 import nirfsa._library_singleton as _library_singleton
 import nirfsa._visatype as _visatype
 import nirfsa.enums as enums  # noqa: F401
@@ -24,7 +25,16 @@ def _get_ctypes_pointer_for_buffer(value=None, library_type=None, size=None):
         return ctypes.cast(addr, ctypes.POINTER(library_type))
     elif str(type(value)).find("'numpy.ndarray'") != -1:
         import numpy
-        return numpy.ctypeslib.as_ctypes(value)
+        if library_type in (_complextype.NIComplexI16, _complextype.NIComplexNumberF32, _complextype.NIComplexNumber):
+            complex_dtype = numpy.dtype(library_type)
+            if value.ndim > 1:
+                # we create a flattened view of the multi-dimensional numpy array
+                restructured_array_view = value.ravel().view(complex_dtype)
+            else:
+                restructured_array_view = value.view(complex_dtype)
+            return restructured_array_view.ctypes.data_as(ctypes.POINTER(library_type))
+        else:
+            return numpy.ctypeslib.as_ctypes(value)
     elif isinstance(value, bytes):
         return ctypes.cast(value, ctypes.POINTER(library_type))
     elif isinstance(value, list):
@@ -129,7 +139,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
         table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
-        format_ctype = _visatype.ViInt32(format)  # case S150
+        format_ctype = _visatype.ViInt32(format.value)  # case S130
         error_code = self._library.niRFSA_ConfigureDeembeddingTableInterpolationLinear(vi_ctype, port_ctype, table_name_ctype, format_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -235,7 +245,7 @@ class LibraryInterpreter(object):
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
         table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
         s2p_file_path_ctype = ctypes.create_string_buffer(s2p_file_path.encode(self._encoding))  # case C020
-        sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation)  # case S150
+        sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation.value)  # case S130
         error_code = self._library.niRFSA_CreateDeembeddingSparameterTableS2PFile(vi_ctype, port_ctype, table_name_ctype, s2p_file_path_ctype, sparameter_orientation_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -455,7 +465,7 @@ class LibraryInterpreter(object):
 
     def get_terminal_name(self, signal, signal_identifier):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        signal_ctype = _visatype.ViInt32(signal)  # case S150
+        signal_ctype = _visatype.ViInt32(signal.value)  # case S130
         signal_identifier_ctype = ctypes.create_string_buffer(signal_identifier.encode(self._encoding))  # case C020
         buffer_size_ctype = _visatype.ViInt32()  # case S170
         terminal_name_ctype = None  # case C050
@@ -565,7 +575,7 @@ class LibraryInterpreter(object):
 
     def reset_with_options(self, steps_to_omit):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        steps_to_omit_ctype = _visatype.ViUInt64(steps_to_omit)  # case S150
+        steps_to_omit_ctype = _visatype.ViUInt64(steps_to_omit.value)  # case S130
         error_code = self._library.niRFSA_ResetWithOptions(vi_ctype, steps_to_omit_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return

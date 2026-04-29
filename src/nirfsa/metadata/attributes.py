@@ -49,7 +49,20 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models',
         'name': 'SUPPORTED_INSTRUMENT_MODELS',
-        'type': 'ViString'
+        'type': 'ViString',
+        'type_in_documentation': 'list of str'
+    },
+    1050401: {
+        'access': 'read only',
+        'attribute_class': 'AttributeViStringCommaSeparated',
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns a list of class-extension groups that NI-RFSA implements.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'lv_property': 'Inherent IVI Attributes:Driver Capabilities:Class Group Capabilities',
+        'name': 'GROUP_CAPABILITIES',
+        'type': 'ViString',
+        'type_in_documentation': 'list of str'
     },
     1050510: {
         'access': 'read only',
@@ -100,6 +113,26 @@ attributes = {
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
         'name': 'SPECIFIC_DRIVER_DESCRIPTION',
         'type': 'ViString'
+    },
+    1050515: {
+        'access': 'read only',
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns the major version number of the class specification with which NI-RFSA is compliant.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
+        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
+        'type': 'ViInt32'
+    },
+    1050516: {
+        'access': 'read only',
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns the minor version number of the class specification with which NI-RFSA is compliant.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
+        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
+        'type': 'ViInt32'
     },
     1050551: {
         'access': 'read only',
@@ -376,7 +409,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the exported Start Trigger.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Start:Export:Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -419,7 +451,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the exported Reference Trigger.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Ref:Export:Output Terminal',
         'name': 'EXPORTED_REF_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -432,7 +463,8 @@ attributes = {
         },
         'lv_property': 'Triggers:Ref:Advanced:Start To Ref Trigger Holdoff (s)',
         'name': 'START_TO_REF_TRIGGER_HOLDOFF',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150034: {
         'access': 'read-write',
@@ -442,7 +474,8 @@ attributes = {
         },
         'lv_property': 'Triggers:Ref:Advanced:Ref To Ref Trigger Holdoff (s)',
         'name': 'REF_TO_REF_TRIGGER_HOLDOFF',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150035: {
         'access': 'read-write',
@@ -481,7 +514,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the exported Advance Trigger.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Advance:Export:Output Terminal',
         'name': 'EXPORTED_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -513,7 +545,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Ready for Start Event.\n\n| Value                                           | Description                                                                                                                                                                   |\n|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |\n| NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |\n| NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |\n| NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |\n| NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |\n| NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |\n| NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |\n| NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |\n| NIRFSA_VAL_PXIE_DSTARC_STR ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |\n| NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Start:Output Terminal',
         'name': 'EXPORTED_READY_FOR_START_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -524,7 +555,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Ready for Advance Event.\n\n| Value                                           | Description                                                                                                                                                                   |\n|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |\n| NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |\n| NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |\n| NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |\n| NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |\n| NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |\n| NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |\n| NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |\n| NIRFSA_VAL_PXIE_DSTARC_STR ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |\n| NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Advance:Output Terminal',
         'name': 'EXPORTED_READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -535,7 +565,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Ready for Reference Event.\n\n| Value                                           | Description                                                                                                                                                                   |\n|:-------------------------------------------|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_DO_NOT_EXPORT_STR ("")          | The signal is not exported.                                                                                                                                        |\n| NIRFSA_VAL_CLK_OUT_STR ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |\n| NIRFSA_VAL_REF_OUT_STR ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |\n| NIRFSA_VAL_REF_OUT2_STR ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists on only the PXIe-5652.                                                            |\n| NIRFSA_VAL_PFI0_STR ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |\n| NIRFSA_VAL_PFI1_STR ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |\n| NIRFSA_VAL_PXI_TRIG0_STR ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG1_STR ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG2_STR ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG3_STR ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG4_STR ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG5_STR ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG6_STR ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |\n| NIRFSA_VAL_PXI_TRIG7_STR ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |\n| NIRFSA_VAL_PXI_STAR_STR ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |\n| NIRFSA_VAL_PXIE_DSTARC_STR ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |\n| NIRFSA_VAL_DIO_PFI0_STR ("DIO/PFI0")           | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI1_STR("DIO/PFI1")           | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI2_STR ("DIO/PFI2")           | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI3_STR ("DIO/PFI3")           | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI4_STR ("DIO/PFI4")           | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI5_STR ("DIO/PFI5")           | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI6_STR ("DIO/PFI6")           | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |\n| NIRFSA_VAL_DIO_PFI7_STR ("DIO/PFI7")           | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Ref:Output Terminal',
         'name': 'EXPORTED_READY_FOR_REF_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -546,7 +575,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the End of Record Event.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_\n\n`Signal Routing <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/signal-routing.html>`_\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:End Of Record:Output Terminal',
         'name': 'EXPORTED_END_OF_RECORD_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -620,6 +648,9 @@ attributes = {
         },
         'lv_property': 'Device Characteristics:Device Temperature (Degrees C)',
         'name': 'DEVICE_TEMPERATURE',
+        'supported_rep_caps': [
+            'device_temperatures'
+        ],
         'type': 'ViReal64'
     },
     1150053: {
@@ -638,7 +669,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the destination terminal for the Done Event.\n\n**Defined Values:**\n\n%enum_table{export output terminal}\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal'
         },
-        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Done:Output Terminal',
         'name': 'EXPORTED_DONE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -682,7 +712,8 @@ attributes = {
         },
         'lv_property': 'Triggers:Ref:Minimum Quiet Time',
         'name': 'REF_TRIGGER_MINIMUM_QUIET_TIME',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150059: {
         'access': 'read-write',
@@ -702,7 +733,8 @@ attributes = {
         },
         'lv_property': 'Triggers:Ref:Advanced:Ref Trigger Delay (s)',
         'name': 'REF_TRIGGER_DELAY',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150061: {
         'access': 'read-write',
@@ -712,7 +744,8 @@ attributes = {
         },
         'lv_property': 'Device Characteristics:Temperature Read Interval',
         'name': 'TEMPERATURE_READ_INTERVAL',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150065: {
         'access': 'read only',
@@ -1278,6 +1311,9 @@ attributes = {
         'enum': 'LoSource',
         'lv_property': 'Signal Path:LO Source',
         'name': 'LO_SOURCE',
+        'supported_rep_caps': [
+            'los'
+        ],
         'type': 'ViString'
     },
     1150163: {
@@ -1371,7 +1407,8 @@ attributes = {
         },
         'lv_property': 'Triggers:Advanced:Start Trigger Delay',
         'name': 'START_TRIGGER_DELAY',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150176: {
         'access': 'read-write',
@@ -1515,7 +1552,8 @@ attributes = {
         'enum': 'EnableAttrVals',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Delay Enabled',
         'name': 'SYNC_REF_TRIGGER_DELAY_ENABLED',
-        'type': 'ViInt32'
+        'type': 'ViInt32',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150191: {
         'access': 'read-write',
@@ -1525,7 +1563,8 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:Decimation Delay',
         'name': 'DECIMATION_DELAY',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150192: {
         'access': 'read-write',
@@ -1844,7 +1883,8 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:Absolute Delay',
         'name': 'ABSOLUTE_DELAY',
-        'type': 'ViReal64'
+        'type': 'ViReal64',
+        'type_in_documentation': 'hightime.timedelta'
     },
     1150267: {
         'access': 'read-write',
@@ -1863,7 +1903,7 @@ attributes = {
             'description': 'Specifies the common-mode level presented at each differential input terminal.\n\nCommon-mode level shifts both positive and negative terminals in the same direction. This must match the common-mode level of the device under test (DUT).\n\n**Units**: volts\n\n**Default Value**: 0 V\n\n**Supported Devices**: PXIe-5820'
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:IQ In Port:Common Mode Level',
-        'name': 'COMMON_MODE',
+        'name': 'COMMON_MODE_LEVEL',
         'type': 'ViReal64'
     },
     1150271: {
@@ -1958,7 +1998,8 @@ attributes = {
         },
         'lv_property': 'Signal Path:Advanced:Available Ports',
         'name': 'AVAILABLE_PORTS',
-        'type': 'ViString'
+        'type': 'ViString',
+        'type_in_documentation': 'list of str'
     },
     1150307: {
         'access': 'read-write',
@@ -2040,7 +2081,8 @@ attributes = {
         },
         'lv_property': 'Signal Path:Advanced:Fixed Group Delay Across Ports',
         'name': 'FIXED_GROUP_DELAY_ACROSS_PORTS',
-        'type': 'ViString'
+        'type': 'ViString',
+        'type_in_documentation': 'list of str'
     },
     1150325: {
         'access': 'read only',
@@ -2058,7 +2100,6 @@ attributes = {
         'documentation': {
             'description': 'Specifies the Reference Clock Rate, in Hz, of the signal sent to the Ref Clock Exported Terminal.\n\n**Default Value**: 10 MHz\n\n**Valid Values**:\n\nPXIe-5820/5830/5831/5832/5840/5841: 10 MHz\n\nPXIe-5842: 10 MHz, 100 MHz, 1 GHz\n\nPXIe-5860: 10 MHz, 100 MHz\n\n**Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
-        'enum': 'ReferenceClockExportedRate',
         'lv_property': 'Clocking:Ref Clock Exported Rate:Ref Clock Exported Rate',
         'name': 'EXPORTED_REF_CLOCK_RATE',
         'type': 'ViReal64'
@@ -2081,7 +2122,8 @@ attributes = {
         },
         'lv_property': 'Signal Path:Advanced:Available Paths',
         'name': 'AVAILABLE_PATHS',
-        'type': 'ViString'
+        'type': 'ViString',
+        'type_in_documentation': 'list of str'
     },
     1150333: {
         'access': 'read only',

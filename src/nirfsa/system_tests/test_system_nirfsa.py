@@ -17,20 +17,20 @@ class SystemTests:
     @pytest.fixture(scope='function')
     def rfsa_device_session(self, session_creation_kwargs):
         if use_simulated_session:
-            with nirfsa.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_session:
-                yield sim_session
+            with nirfsa.Session("5841sim", options="Simulate=1, DriverSetup=Model:5841", **session_creation_kwargs) as sim_5841_session:
+                yield sim_5841_session
         else:
-            with nirfsa.Session(real_hw_resource_name, **session_creation_kwargs) as real_session:
-                yield real_session
+            with nirfsa.Session(real_hw_resource_name, **session_creation_kwargs) as real_rfsa_device_session:
+                yield real_rfsa_device_session
 
-    # Attribute set and get related tests
+# Attribute set and get related tests
     def test_get_float_attribute(self, rfsa_device_session):
         value = rfsa_device_session.reference_level
         assert isinstance(value, float)
 
     def test_set_float_attribute(self, rfsa_device_session):
-        rfsa_device_session.reference_level = -5.0
-        assert rfsa_device_session.reference_level == -5.0
+        rfsa_device_session.reference_level = -1.0
+        assert rfsa_device_session.reference_level == -1.0
 
 
 class TestLibrary(SystemTests):

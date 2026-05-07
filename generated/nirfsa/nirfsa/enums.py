@@ -441,7 +441,7 @@ class IFattenTableSel(Enum):
     '''
     ACPR = 2901
     r'''
-    Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the cal_if_filter_selection property to IFfilterSelection._1 or IFfilterSelection._2.
+    Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the CAL_IF_FILTER_SELECTION property to IFfilterSelection._1 or IFfilterSelection._2.
     '''
 
 
@@ -1238,6 +1238,17 @@ class SignalConditioningEnabled(Enum):
     BYPASSED = 3601
     r'''
     Bypasses all signal conditioning.
+    '''
+
+
+class SoftwareTriggerType(Enum):
+    SCRIPT = 1
+    r'''
+    Specifies the Script Trigger.
+    '''
+    START = 0
+    r'''
+    Specifies the Start Trigger.
     '''
 
 

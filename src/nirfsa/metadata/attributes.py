@@ -861,17 +861,6 @@ attributes = {
         'name': 'DOWNCONVERTER_CENTER_FREQUENCY',
         'type': 'ViReal64'
     },
-    1150083: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the RF path to use during calibration.\n\nThis attribute is valid only during a calibration session. When you set this attribute, NI-RFSA does not select the RF path based on the downconverter center frequency.\n\nThe following table lists the RF bands used by the supported devices.\n\n| Device                                               | RF Band   | Frequency Range      |\n|:-----------------------------------------------------|:----------|:---------------------|\n| PXIe-5603                                            | RF band 1 | 20 Hz to 3.6 GHz     |\n| PXIe-5605 (low band signal path)                     | RF band 1 | 20 Hz to 3.6 GHz     |\n| PXIe-5605 (high band signal path)                    | RF band 2 | 3.6 GHz to 14 GHz    |\n| PXIe-5606 (low band signal path)                     | RF band 1 | 20 Hz to 3.6 GHz     |\n| PXIe-5606 (high band signal path)                    | RF band 2 | 3.6 GHz to 26.5 GHz  |\n| PXIe-5606 (low band signal path, 320 MHz IF filter)  | RF band 1 | 20 Hz to 3.41 GHz    |\n| PXIe-5606 (high band signal path, 320 MHz IF filter) | RF band 2 | 3.41 GHz to 26.5 GHz |\n\n**Defined and Valid Values:**\n\n| Value                                  | Description                 | Valid For                |\n|:---------------------------------------|:----------------------------|:-------------------------|\n| NIRFSA_VAL_EXT_CAL_RF_BAND_1 (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |\n| NIRFSA_VAL_EXT_CAL_RF_BAND_2 (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |\n| NIRFSA_VAL_EXT_CAL_RF_BAND_3 (1702)    | Specifies to use RF band 3. | PXIe-5601                |\n| NIRFSA_VAL_EXT_CAL_RF_BAND_4 (1703)    | Specifies to use RF band 4. | PXIe-5601                |\n\n**Default Values**:\n\n**PXIe-5603/5605 (low band)/5606**: NIRFSA_VAL_EXT_CAL_RF_BAND_1\n\n**PXIe-5601/5605 (high band)**: NIRFSA_VAL_EXT_CAL_RF_BAND_2\n\n**Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5698'
-        },
-        'enum': 'RfPathSelection',
-        'lv_property': 'Factory Calibration:NI 5665/5668R:RF Path Selection',
-        'name': 'CAL_RF_PATH_SELECTION',
-        'type': 'ViInt32'
-    },
     1150085: {
         'access': 'read only',
         'codegen_method': 'public',
@@ -962,27 +951,6 @@ attributes = {
         'lv_property': 'Acquisition:IQ:Phase Offset',
         'name': 'PHASE_OFFSET',
         'type': 'ViReal64'
-    },
-    1150109: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the IF attenuation index from a table of valid settings. \n\nTo select a correct attenuation table, set this attribute in conjunction with the NIRFSA_ATTR_CAL_IF_FILTER_SELECTION attribute. This attribute is valid only during a calibration session.\n\n**Valid Values**: 0 to 25\n\n**Default Value**: 0\n\n**Supported Devices:** PXIe-5694'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:IF Attenuation Table Index',
-        'name': 'CAL_IF_ATTENUATION_INDEX',
-        'type': 'ViInt32'
-    },
-    1150112: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the IF filter path during calibration.\n\nThe attribute is valid only during a calibration session.\n\n**Defined Values:**\n\n%enum_table{i ffilter selection}\n\n**Default Value**: NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_4\n\n**Supported Devices**: PXIe-5694'
-        },
-        'enum': 'IFfilterSelection',
-        'lv_property': 'Factory Calibration:NI 5665/5668R:IF Filter Selection',
-        'name': 'CAL_IF_FILTER_SELECTION',
-        'type': 'ViInt32'
     },
     1150117: {
         'access': 'read only',
@@ -1177,27 +1145,6 @@ attributes = {
         'name': 'RF_PREAMP_PRESENT',
         'type': 'ViBoolean'
     },
-    1150139: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the location in a signal path where an RF downconverter calibration tone is injected or whether the tone is disabled.\n\nRefer to `PXIe-5665 Theory of Operation <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/block-diagram.2.html>`_, `PXIe-5667 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/block-diagram.html>`_, or `PXIe-5668 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/block-diagram.html>`_ for more information about signal paths for your device.\n\n**Defined and Valid Values:**\n\n| Value                                          | Description                                                                                | Valid For           |\n|:-----------------------------------------------|:-------------------------------------------------------------------------------------------|:--------------------|\n|  NIRFSA_VAL_DISABLED (2700)            | Disables the calibration tone for the associated signal path.                              | PXIe-5603/5605/5606 |\n| NIRFSA_VAL_CAL_TONE_LOWBAND_RF (2701)          | Injects the calibration tone into the low band RF signal path.                             | PXIe-5603/5605/5606 |\n| NIRFSA_VAL_CAL_TONE_HIGHBAND_RF (2702)         | Injects the calibration tone into the high band RF signal path.                            | PXIe-5605/5606      |\n| NIRFSA_VAL_CAL_TONE_HIGHBAND_IF (2703)         | Injects the calibration tone into the high band IF signal path.                            | PXIe-5605           |\n| NIRFSA_VAL_CAL_TONE_LOWBAND_RF_WITHOUT_ALC (2704) | Injects the calibration tone into the low band RF signal path, bypassing the ALC.          | PXIe-5606           |\n| NIRFSA_VAL_CAL_TONE_COMB_GENERATOR (2705)      | Injects the calibration tone into the high band RF signal path through the Comb Generator. | PXIe-5606           |\n\n**Default Value**:  NIRFSA_VAL_DISABLED\n\n**Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668'
-        },
-        'enum': 'CalToneMode',
-        'lv_property': 'Self Calibration:NI 5665/5667/5668R:Downconverter Cal Tone Mode',
-        'name': 'DOWNCONVERTER_CAL_TONE_MODE',
-        'type': 'ViInt32'
-    },
-    1150140: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the frequency of the RF downconverter calibration tone, in hertz (Hz).\n\n**Valid Values**\n\n**PXIe-5603/5605**: 134 MHz to 13.2 GHz\n\n**PXIe-5606**: 34.5 MHz to 4 GHz\n\n**Default Value**: 612.5 MHz\n\n**Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668'
-        },
-        'lv_property': 'Self Calibration:NI 5665/5667/5668R:Downconverter Cal Tone Frequency',
-        'name': 'DOWNCONVERTER_CAL_TONE_FREQUENCY',
-        'type': 'ViReal64'
-    },
     1150142: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1358,16 +1305,6 @@ attributes = {
         'name': 'NOTCH_FILTER_ENABLED',
         'type': 'ViInt32'
     },
-    1150168: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the step attenuator to engage in the calibration tone path.\n\n**Units**: dB\n\n**Valid Values**: 2.00, 10.00\n\n**Default Value**: 2.00 dB\n\n**Supported Devices**: PXIe-5693'
-        },
-        'lv_property': 'Factory Calibration:NI 5665/5668R:Cal Tone Step Attenuation',
-        'name': 'CAL_TONE_STEP_ATTENUATION',
-        'type': 'ViReal64'
-    },
     1150169: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1388,16 +1325,6 @@ attributes = {
         'lv_property': 'Signal Path:Advanced:Input Isolation Enabled',
         'name': 'INPUT_ISOLATION_ENABLED',
         'type': 'ViInt32'
-    },
-    1150174: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the power of a virtual signal connected to the RF IN connector on the PXIe-5693 front panel when the calibration tone is enabled.\n\nYou can enable a calibration tone for the PXIe-5693 by setting the NIRFSA_ATTR_RF_CONDITIONING_CAL_TONE_MODE attribute to NIRFSA_VAL_CAL_TONE_LOWBAND_RF or NIRFSA_VAL_CAL_TONE_HIGHBAND_RF.\n\n**Units**: dBm\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5693'
-        },
-        'lv_property': 'Vertical:Advanced:NI 5693:Cal Tone Power Referred to RF IN',
-        'name': 'CAL_TONE_POWER_REFERRED_TO_RF_IN',
-        'type': 'ViReal64'
     },
     1150175: {
         'access': 'read-write',
@@ -1669,27 +1596,6 @@ attributes = {
         'name': 'LOW_FREQUENCY_BYPASS_ENABLED',
         'type': 'ViInt32'
     },
-    1150208: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the location in a signal path where an RF conditioning calibration tone is injected or whether the tone is disabled.\n\n**Defined Values:**\n\n%enum_table{conditioning cal tone mode}\n\n**Default Value**: NIRFSA_VAL_DISABLED\n\n**Supported Devices**: PXIe-5667, PXIe-5693/5698'
-        },
-        'enum': 'ConditioningCalToneMode',
-        'lv_property': 'Self Calibration:RF Conditioning Cal Tone Mode',
-        'name': 'RF_CONDITIONING_CAL_TONE_MODE',
-        'type': 'ViInt32'
-    },
-    1150209: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the frequency of the RF conditioning calibration tone, in hertz (Hz).\n\n**Valid Values**: 34.5 MHz to 7.5 GHz\n\n**Default Value**: 1.0 GHz\n\n**Supported Devices**: PXIe-5667, PXIe-5693/5698'
-        },
-        'lv_property': 'Self Calibration:RF Conditioning Cal Tone Frequency',
-        'name': 'RF_CONDITIONING_CAL_TONE_FREQUENCY',
-        'type': 'ViReal64'
-    },
     1150217: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -1751,16 +1657,6 @@ attributes = {
         'lv_property': 'Device Specific:5606:Noise Source Power Enabled',
         'name': 'NOISE_SOURCE_POWER_ENABLED',
         'type': 'ViInt32'
-    },
-    1150226: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the currently associated digitizer ID.\n\nAllows the use of self calibration data when configured in external digitizer mode.\n\n**Default Value**: "" (empty string) in external digitizer mode\n\n**Supported Devices**: PXIe-5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668'
-        },
-        'lv_property': 'Self Calibration:Digitizer ID',
-        'name': 'CAL_DIGITIZER_ID',
-        'type': 'ViString'
     },
     1150228: {
         'access': 'read only',

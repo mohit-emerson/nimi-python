@@ -11,22 +11,16 @@ config = {
     },
     'custom_types': [
         {
-            'ctypes_type': 'struct_NIComplexNumber',
-            'file_name': 'ni_complex_number',
-            'grpc_name': 'NiComplexNumber',
-            'python_name': 'NiComplexNumber'
-        },
-        {
             'ctypes_type': 'struct_niRFSA_wfmInfo',
-            'file_name': 'ni_rfsa_wfm_info',
-            'grpc_name': 'NiRfsaWfmInfo',
-            'python_name': 'NiRfsaWfmInfo'
+            'file_name': 'waveform_info',
+            'grpc_name': 'WaveformInfo',
+            'python_name': 'WaveformInfo'
         },
         {
             'ctypes_type': 'struct_niRFSA_spectrumInfo',
-            'file_name': 'ni_rfsa_spectrum_info',
-            'grpc_name': 'NiRfsaSpectrumInfo',
-            'python_name': 'NiRfsaSpectrumInfo'
+            'file_name': 'spectrum_info_type',
+            'grpc_name': 'SpectrumInfoT',
+            'python_name': 'SpectrumInfoT'
         }
     ],
     'driver_name': 'NI-RFSA',

@@ -18,8 +18,8 @@ class SideEffectsHelper(object):
         self._defaults = {}
         self._defaults['Abort'] = {}
         self._defaults['Abort']['return'] = 0
-        self._defaults['ChangeExtCalPassword'] = {}
-        self._defaults['ChangeExtCalPassword']['return'] = 0
+        self._defaults['ChangeExternalCalibrationPassword'] = {}
+        self._defaults['ChangeExternalCalibrationPassword']['return'] = 0
         self._defaults['CheckAcquisitionStatus'] = {}
         self._defaults['CheckAcquisitionStatus']['return'] = 0
         self._defaults['CheckAcquisitionStatus']['isDone'] = None
@@ -72,6 +72,39 @@ class SideEffectsHelper(object):
         self._defaults['ErrorMessage'] = {}
         self._defaults['ErrorMessage']['return'] = 0
         self._defaults['ErrorMessage']['errorMessage'] = None
+        self._defaults['FancyGetSelfCalibrationDateAndTime'] = {}
+        self._defaults['FancyGetSelfCalibrationDateAndTime']['return'] = 0
+        self._defaults['FancyGetSelfCalibrationDateAndTime']['year'] = None
+        self._defaults['FancyGetSelfCalibrationDateAndTime']['month'] = None
+        self._defaults['FancyGetSelfCalibrationDateAndTime']['day'] = None
+        self._defaults['FancyGetSelfCalibrationDateAndTime']['hour'] = None
+        self._defaults['FancyGetSelfCalibrationDateAndTime']['minute'] = None
+        self._defaults['FancyReadPowerSpectrumF32'] = {}
+        self._defaults['FancyReadPowerSpectrumF32']['return'] = 0
+        self._defaults['FancyReadPowerSpectrumF32']['spectrumInfo'] = None
+        self._defaults['FancyReadPowerSpectrumF32']['powerSpectrumData'] = None
+        self._defaults['FancyReadPowerSpectrumF64'] = {}
+        self._defaults['FancyReadPowerSpectrumF64']['return'] = 0
+        self._defaults['FancyReadPowerSpectrumF64']['spectrumInfo'] = None
+        self._defaults['FancyReadPowerSpectrumF64']['powerSpectrumData'] = None
+        self._defaults['FetchIqMultiRecordComplexF32'] = {}
+        self._defaults['FetchIqMultiRecordComplexF32']['return'] = 0
+        self._defaults['FetchIqMultiRecordComplexF32']['wfmInfo'] = None
+        self._defaults['FetchIqMultiRecordComplexF64'] = {}
+        self._defaults['FetchIqMultiRecordComplexF64']['return'] = 0
+        self._defaults['FetchIqMultiRecordComplexF64']['wfmInfo'] = None
+        self._defaults['FetchIqMultiRecordComplexI16'] = {}
+        self._defaults['FetchIqMultiRecordComplexI16']['return'] = 0
+        self._defaults['FetchIqMultiRecordComplexI16']['wfmInfo'] = None
+        self._defaults['FetchIqSingleRecordComplexF32'] = {}
+        self._defaults['FetchIqSingleRecordComplexF32']['return'] = 0
+        self._defaults['FetchIqSingleRecordComplexF32']['wfmInfo'] = None
+        self._defaults['FetchIqSingleRecordComplexF64'] = {}
+        self._defaults['FetchIqSingleRecordComplexF64']['return'] = 0
+        self._defaults['FetchIqSingleRecordComplexF64']['wfmInfo'] = None
+        self._defaults['FetchIqSingleRecordComplexI16'] = {}
+        self._defaults['FetchIqSingleRecordComplexI16']['return'] = 0
+        self._defaults['FetchIqSingleRecordComplexI16']['wfmInfo'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['value'] = None
@@ -121,16 +154,9 @@ class SideEffectsHelper(object):
         self._defaults['GetGainReferenceCalBaseline']['return'] = 0
         self._defaults['GetGainReferenceCalBaseline']['numberOfGainReferenceCalConstants'] = None
         self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'] = None
-        self._defaults['GetSelfCalLastDateAndTime'] = {}
-        self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
-        self._defaults['GetSelfCalLastDateAndTime']['year'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['month'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['day'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['hour'] = None
-        self._defaults['GetSelfCalLastDateAndTime']['minute'] = None
-        self._defaults['GetSelfCalLastTemperature'] = {}
-        self._defaults['GetSelfCalLastTemperature']['return'] = 0
-        self._defaults['GetSelfCalLastTemperature']['temp'] = None
+        self._defaults['GetSelfCalibrationTemperature'] = {}
+        self._defaults['GetSelfCalibrationTemperature']['return'] = 0
+        self._defaults['GetSelfCalibrationTemperature']['temp'] = None
         self._defaults['GetTerminalName'] = {}
         self._defaults['GetTerminalName']['return'] = 0
         self._defaults['GetTerminalName']['terminalName'] = None
@@ -150,14 +176,9 @@ class SideEffectsHelper(object):
         self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['PerformThermalCorrection'] = {}
         self._defaults['PerformThermalCorrection']['return'] = 0
-        self._defaults['ReadPowerSpectrumF32'] = {}
-        self._defaults['ReadPowerSpectrumF32']['return'] = 0
-        self._defaults['ReadPowerSpectrumF32']['spectrumInfo'] = None
-        self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'] = None
-        self._defaults['ReadPowerSpectrumF64'] = {}
-        self._defaults['ReadPowerSpectrumF64']['return'] = 0
-        self._defaults['ReadPowerSpectrumF64']['spectrumInfo'] = None
-        self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'] = None
+        self._defaults['ReadIqSingleRecordComplexF64'] = {}
+        self._defaults['ReadIqSingleRecordComplexF64']['return'] = 0
+        self._defaults['ReadIqSingleRecordComplexF64']['wfmInfo'] = None
         self._defaults['Reset'] = {}
         self._defaults['Reset']['return'] = 0
         self._defaults['ResetDevice'] = {}
@@ -201,10 +222,10 @@ class SideEffectsHelper(object):
             return self._defaults['Abort']['return']
         return self._defaults['Abort']['return']
 
-    def niRFSA_ChangeExtCalPassword(self, vi, old_password, new_password):  # noqa: N802
-        if self._defaults['ChangeExtCalPassword']['return'] != 0:
-            return self._defaults['ChangeExtCalPassword']['return']
-        return self._defaults['ChangeExtCalPassword']['return']
+    def niRFSA_ChangeExternalCalibrationPassword(self, vi, old_password, new_password):  # noqa: N802
+        if self._defaults['ChangeExternalCalibrationPassword']['return'] != 0:
+            return self._defaults['ChangeExternalCalibrationPassword']['return']
+        return self._defaults['ChangeExternalCalibrationPassword']['return']
 
     def niRFSA_CheckAcquisitionStatus(self, vi, is_done):  # noqa: N802
         if self._defaults['CheckAcquisitionStatus']['return'] != 0:
@@ -344,6 +365,146 @@ class SideEffectsHelper(object):
         for i in range(len(test_value)):
             error_message[i] = test_value[i]
         return self._defaults['ErrorMessage']['return']
+
+    def niRFSA_FancyGetSelfCalibrationDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
+        if self._defaults['FancyGetSelfCalibrationDateAndTime']['return'] != 0:
+            return self._defaults['FancyGetSelfCalibrationDateAndTime']['return']
+        # year
+        if self._defaults['FancyGetSelfCalibrationDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niRFSA_FancyGetSelfCalibrationDateAndTime", param='year')
+        if year is not None:
+            year.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['year']
+        # month
+        if self._defaults['FancyGetSelfCalibrationDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niRFSA_FancyGetSelfCalibrationDateAndTime", param='month')
+        if month is not None:
+            month.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['month']
+        # day
+        if self._defaults['FancyGetSelfCalibrationDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niRFSA_FancyGetSelfCalibrationDateAndTime", param='day')
+        if day is not None:
+            day.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['day']
+        # hour
+        if self._defaults['FancyGetSelfCalibrationDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niRFSA_FancyGetSelfCalibrationDateAndTime", param='hour')
+        if hour is not None:
+            hour.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['hour']
+        # minute
+        if self._defaults['FancyGetSelfCalibrationDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niRFSA_FancyGetSelfCalibrationDateAndTime", param='minute')
+        if minute is not None:
+            minute.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['minute']
+        return self._defaults['FancyGetSelfCalibrationDateAndTime']['return']
+
+    def niRFSA_FancyReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+        if self._defaults['FancyReadPowerSpectrumF32']['return'] != 0:
+            return self._defaults['FancyReadPowerSpectrumF32']['return']
+        # spectrum_info
+        if self._defaults['FancyReadPowerSpectrumF32']['spectrumInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FancyReadPowerSpectrumF32", param='spectrumInfo')
+        for field in self._defaults['FancyReadPowerSpectrumF32']['spectrum_info']._fields_:
+            field_name = field[0]
+            setattr(spectrum_info.contents, field_name, getattr(self._defaults['FancyReadPowerSpectrumF32']['spectrum_info'], field_name))
+        # power_spectrum_data
+        if self._defaults['FancyReadPowerSpectrumF32']['powerSpectrumData'] is None:
+            raise MockFunctionCallError("niRFSA_FancyReadPowerSpectrumF32", param='powerSpectrumData')
+        if data_array_size.value == 0:
+            return len(self._defaults['FancyReadPowerSpectrumF32']['powerSpectrumData'])
+        try:
+            power_spectrum_data_ref = power_spectrum_data.contents
+        except AttributeError:
+            power_spectrum_data_ref = power_spectrum_data
+        for i in range(len(self._defaults['FancyReadPowerSpectrumF32']['powerSpectrumData'])):
+            power_spectrum_data_ref[i] = self._defaults['FancyReadPowerSpectrumF32']['powerSpectrumData'][i]
+        return self._defaults['FancyReadPowerSpectrumF32']['return']
+
+    def niRFSA_FancyReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+        if self._defaults['FancyReadPowerSpectrumF64']['return'] != 0:
+            return self._defaults['FancyReadPowerSpectrumF64']['return']
+        # spectrum_info
+        if self._defaults['FancyReadPowerSpectrumF64']['spectrumInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FancyReadPowerSpectrumF64", param='spectrumInfo')
+        for field in self._defaults['FancyReadPowerSpectrumF64']['spectrum_info']._fields_:
+            field_name = field[0]
+            setattr(spectrum_info.contents, field_name, getattr(self._defaults['FancyReadPowerSpectrumF64']['spectrum_info'], field_name))
+        # power_spectrum_data
+        if self._defaults['FancyReadPowerSpectrumF64']['powerSpectrumData'] is None:
+            raise MockFunctionCallError("niRFSA_FancyReadPowerSpectrumF64", param='powerSpectrumData')
+        if data_array_size.value == 0:
+            return len(self._defaults['FancyReadPowerSpectrumF64']['powerSpectrumData'])
+        try:
+            power_spectrum_data_ref = power_spectrum_data.contents
+        except AttributeError:
+            power_spectrum_data_ref = power_spectrum_data
+        for i in range(len(self._defaults['FancyReadPowerSpectrumF64']['powerSpectrumData'])):
+            power_spectrum_data_ref[i] = self._defaults['FancyReadPowerSpectrumF64']['powerSpectrumData'][i]
+        return self._defaults['FancyReadPowerSpectrumF64']['return']
+
+    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        if self._defaults['FetchIqMultiRecordComplexF32']['return'] != 0:
+            return self._defaults['FetchIqMultiRecordComplexF32']['return']
+        # wfm_info
+        if self._defaults['FetchIqMultiRecordComplexF32']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF32", param='wfmInfo')
+        for field in self._defaults['FetchIqMultiRecordComplexF32']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF32']['wfm_info'], field_name))
+        return self._defaults['FetchIqMultiRecordComplexF32']['return']
+
+    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        if self._defaults['FetchIqMultiRecordComplexF64']['return'] != 0:
+            return self._defaults['FetchIqMultiRecordComplexF64']['return']
+        # wfm_info
+        if self._defaults['FetchIqMultiRecordComplexF64']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF64", param='wfmInfo')
+        for field in self._defaults['FetchIqMultiRecordComplexF64']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF64']['wfm_info'], field_name))
+        return self._defaults['FetchIqMultiRecordComplexF64']['return']
+
+    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        if self._defaults['FetchIqMultiRecordComplexI16']['return'] != 0:
+            return self._defaults['FetchIqMultiRecordComplexI16']['return']
+        # wfm_info
+        if self._defaults['FetchIqMultiRecordComplexI16']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexI16", param='wfmInfo')
+        for field in self._defaults['FetchIqMultiRecordComplexI16']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexI16']['wfm_info'], field_name))
+        return self._defaults['FetchIqMultiRecordComplexI16']['return']
+
+    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        if self._defaults['FetchIqSingleRecordComplexF32']['return'] != 0:
+            return self._defaults['FetchIqSingleRecordComplexF32']['return']
+        # wfm_info
+        if self._defaults['FetchIqSingleRecordComplexF32']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF32", param='wfmInfo')
+        for field in self._defaults['FetchIqSingleRecordComplexF32']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF32']['wfm_info'], field_name))
+        return self._defaults['FetchIqSingleRecordComplexF32']['return']
+
+    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        if self._defaults['FetchIqSingleRecordComplexF64']['return'] != 0:
+            return self._defaults['FetchIqSingleRecordComplexF64']['return']
+        # wfm_info
+        if self._defaults['FetchIqSingleRecordComplexF64']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF64", param='wfmInfo')
+        for field in self._defaults['FetchIqSingleRecordComplexF64']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF64']['wfm_info'], field_name))
+        return self._defaults['FetchIqSingleRecordComplexF64']['return']
+
+    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        if self._defaults['FetchIqSingleRecordComplexI16']['return'] != 0:
+            return self._defaults['FetchIqSingleRecordComplexI16']['return']
+        # wfm_info
+        if self._defaults['FetchIqSingleRecordComplexI16']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexI16", param='wfmInfo')
+        for field in self._defaults['FetchIqSingleRecordComplexI16']['wfm_info']._fields_:
+            field_name = field[0]
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexI16']['wfm_info'], field_name))
+        return self._defaults['FetchIqSingleRecordComplexI16']['return']
 
     def niRFSA_GetAttributeViBoolean(self, vi, channel_name, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
@@ -551,45 +712,15 @@ class SideEffectsHelper(object):
             gain_reference_cal_constants_ref[i] = self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'][i]
         return self._defaults['GetGainReferenceCalBaseline']['return']
 
-    def niRFSA_GetSelfCalLastDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
-        if self._defaults['GetSelfCalLastDateAndTime']['return'] != 0:
-            return self._defaults['GetSelfCalLastDateAndTime']['return']
-        # year
-        if self._defaults['GetSelfCalLastDateAndTime']['year'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='year')
-        if year is not None:
-            year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['year']
-        # month
-        if self._defaults['GetSelfCalLastDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='month')
-        if month is not None:
-            month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['month']
-        # day
-        if self._defaults['GetSelfCalLastDateAndTime']['day'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='day')
-        if day is not None:
-            day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['day']
-        # hour
-        if self._defaults['GetSelfCalLastDateAndTime']['hour'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='hour')
-        if hour is not None:
-            hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['hour']
-        # minute
-        if self._defaults['GetSelfCalLastDateAndTime']['minute'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='minute')
-        if minute is not None:
-            minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['minute']
-        return self._defaults['GetSelfCalLastDateAndTime']['return']
-
-    def niRFSA_GetSelfCalLastTemperature(self, vi, self_calibration_step, temp):  # noqa: N802
-        if self._defaults['GetSelfCalLastTemperature']['return'] != 0:
-            return self._defaults['GetSelfCalLastTemperature']['return']
+    def niRFSA_GetSelfCalibrationTemperature(self, vi, self_calibration_step, temp):  # noqa: N802
+        if self._defaults['GetSelfCalibrationTemperature']['return'] != 0:
+            return self._defaults['GetSelfCalibrationTemperature']['return']
         # temp
-        if self._defaults['GetSelfCalLastTemperature']['temp'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalLastTemperature", param='temp')
+        if self._defaults['GetSelfCalibrationTemperature']['temp'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature", param='temp')
         if temp is not None:
-            temp.contents.value = self._defaults['GetSelfCalLastTemperature']['temp']
-        return self._defaults['GetSelfCalLastTemperature']['return']
+            temp.contents.value = self._defaults['GetSelfCalibrationTemperature']['temp']
+        return self._defaults['GetSelfCalibrationTemperature']['return']
 
     def niRFSA_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
         if self._defaults['GetTerminalName']['return'] != 0:
@@ -652,49 +783,16 @@ class SideEffectsHelper(object):
             return self._defaults['PerformThermalCorrection']['return']
         return self._defaults['PerformThermalCorrection']['return']
 
-    def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
-        if self._defaults['ReadPowerSpectrumF32']['return'] != 0:
-            return self._defaults['ReadPowerSpectrumF32']['return']
-        # spectrum_info
-        if self._defaults['ReadPowerSpectrumF32']['spectrumInfo'] is None:
-            raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF32", param='spectrumInfo')
-        for field in self._defaults['ReadPowerSpectrumF32']['spectrum_info']._fields_:
+    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, data, data_array_size, wfm_info):  # noqa: N802
+        if self._defaults['ReadIqSingleRecordComplexF64']['return'] != 0:
+            return self._defaults['ReadIqSingleRecordComplexF64']['return']
+        # wfm_info
+        if self._defaults['ReadIqSingleRecordComplexF64']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_ReadIqSingleRecordComplexF64", param='wfmInfo')
+        for field in self._defaults['ReadIqSingleRecordComplexF64']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(spectrum_info.contents, field_name, getattr(self._defaults['ReadPowerSpectrumF32']['spectrum_info'], field_name))
-        # power_spectrum_data
-        if self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'] is None:
-            raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF32", param='powerSpectrumData')
-        if data_array_size.value == 0:
-            return len(self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'])
-        try:
-            power_spectrum_data_ref = power_spectrum_data.contents
-        except AttributeError:
-            power_spectrum_data_ref = power_spectrum_data
-        for i in range(len(self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'])):
-            power_spectrum_data_ref[i] = self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'][i]
-        return self._defaults['ReadPowerSpectrumF32']['return']
-
-    def niRFSA_ReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
-        if self._defaults['ReadPowerSpectrumF64']['return'] != 0:
-            return self._defaults['ReadPowerSpectrumF64']['return']
-        # spectrum_info
-        if self._defaults['ReadPowerSpectrumF64']['spectrumInfo'] is None:
-            raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF64", param='spectrumInfo')
-        for field in self._defaults['ReadPowerSpectrumF64']['spectrum_info']._fields_:
-            field_name = field[0]
-            setattr(spectrum_info.contents, field_name, getattr(self._defaults['ReadPowerSpectrumF64']['spectrum_info'], field_name))
-        # power_spectrum_data
-        if self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'] is None:
-            raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF64", param='powerSpectrumData')
-        if data_array_size.value == 0:
-            return len(self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'])
-        try:
-            power_spectrum_data_ref = power_spectrum_data.contents
-        except AttributeError:
-            power_spectrum_data_ref = power_spectrum_data
-        for i in range(len(self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'])):
-            power_spectrum_data_ref[i] = self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'][i]
-        return self._defaults['ReadPowerSpectrumF64']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['ReadIqSingleRecordComplexF64']['wfm_info'], field_name))
+        return self._defaults['ReadIqSingleRecordComplexF64']['return']
 
     def niRFSA_Reset(self, vi):  # noqa: N802
         if self._defaults['Reset']['return'] != 0:
@@ -780,8 +878,8 @@ class SideEffectsHelper(object):
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niRFSA_Abort.side_effect = MockFunctionCallError("niRFSA_Abort")
         mock_library.niRFSA_Abort.return_value = 0
-        mock_library.niRFSA_ChangeExtCalPassword.side_effect = MockFunctionCallError("niRFSA_ChangeExtCalPassword")
-        mock_library.niRFSA_ChangeExtCalPassword.return_value = 0
+        mock_library.niRFSA_ChangeExternalCalibrationPassword.side_effect = MockFunctionCallError("niRFSA_ChangeExternalCalibrationPassword")
+        mock_library.niRFSA_ChangeExternalCalibrationPassword.return_value = 0
         mock_library.niRFSA_CheckAcquisitionStatus.side_effect = MockFunctionCallError("niRFSA_CheckAcquisitionStatus")
         mock_library.niRFSA_CheckAcquisitionStatus.return_value = 0
         mock_library.niRFSA_ClearSelfCalibrateRange.side_effect = MockFunctionCallError("niRFSA_ClearSelfCalibrateRange")
@@ -832,6 +930,24 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_EnableSessionAccess.return_value = 0
         mock_library.niRFSA_ErrorMessage.side_effect = MockFunctionCallError("niRFSA_ErrorMessage")
         mock_library.niRFSA_ErrorMessage.return_value = 0
+        mock_library.niRFSA_FancyGetSelfCalibrationDateAndTime.side_effect = MockFunctionCallError("niRFSA_FancyGetSelfCalibrationDateAndTime")
+        mock_library.niRFSA_FancyGetSelfCalibrationDateAndTime.return_value = 0
+        mock_library.niRFSA_FancyReadPowerSpectrumF32.side_effect = MockFunctionCallError("niRFSA_FancyReadPowerSpectrumF32")
+        mock_library.niRFSA_FancyReadPowerSpectrumF32.return_value = 0
+        mock_library.niRFSA_FancyReadPowerSpectrumF64.side_effect = MockFunctionCallError("niRFSA_FancyReadPowerSpectrumF64")
+        mock_library.niRFSA_FancyReadPowerSpectrumF64.return_value = 0
+        mock_library.niRFSA_FetchIqMultiRecordComplexF32.side_effect = MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF32")
+        mock_library.niRFSA_FetchIqMultiRecordComplexF32.return_value = 0
+        mock_library.niRFSA_FetchIqMultiRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF64")
+        mock_library.niRFSA_FetchIqMultiRecordComplexF64.return_value = 0
+        mock_library.niRFSA_FetchIqMultiRecordComplexI16.side_effect = MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexI16")
+        mock_library.niRFSA_FetchIqMultiRecordComplexI16.return_value = 0
+        mock_library.niRFSA_FetchIqSingleRecordComplexF32.side_effect = MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF32")
+        mock_library.niRFSA_FetchIqSingleRecordComplexF32.return_value = 0
+        mock_library.niRFSA_FetchIqSingleRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF64")
+        mock_library.niRFSA_FetchIqSingleRecordComplexF64.return_value = 0
+        mock_library.niRFSA_FetchIqSingleRecordComplexI16.side_effect = MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexI16")
+        mock_library.niRFSA_FetchIqSingleRecordComplexI16.return_value = 0
         mock_library.niRFSA_GetAttributeViBoolean.side_effect = MockFunctionCallError("niRFSA_GetAttributeViBoolean")
         mock_library.niRFSA_GetAttributeViBoolean.return_value = 0
         mock_library.niRFSA_GetAttributeViInt32.side_effect = MockFunctionCallError("niRFSA_GetAttributeViInt32")
@@ -858,10 +974,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_GetFrequencyResponse.return_value = 0
         mock_library.niRFSA_GetGainReferenceCalBaseline.side_effect = MockFunctionCallError("niRFSA_GetGainReferenceCalBaseline")
         mock_library.niRFSA_GetGainReferenceCalBaseline.return_value = 0
-        mock_library.niRFSA_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime")
-        mock_library.niRFSA_GetSelfCalLastDateAndTime.return_value = 0
-        mock_library.niRFSA_GetSelfCalLastTemperature.side_effect = MockFunctionCallError("niRFSA_GetSelfCalLastTemperature")
-        mock_library.niRFSA_GetSelfCalLastTemperature.return_value = 0
+        mock_library.niRFSA_GetSelfCalibrationTemperature.side_effect = MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature")
+        mock_library.niRFSA_GetSelfCalibrationTemperature.return_value = 0
         mock_library.niRFSA_GetTerminalName.side_effect = MockFunctionCallError("niRFSA_GetTerminalName")
         mock_library.niRFSA_GetTerminalName.return_value = 0
         mock_library.niRFSA_InitWithOptions.side_effect = MockFunctionCallError("niRFSA_InitWithOptions")
@@ -876,10 +990,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_LockSession.return_value = 0
         mock_library.niRFSA_PerformThermalCorrection.side_effect = MockFunctionCallError("niRFSA_PerformThermalCorrection")
         mock_library.niRFSA_PerformThermalCorrection.return_value = 0
-        mock_library.niRFSA_ReadPowerSpectrumF32.side_effect = MockFunctionCallError("niRFSA_ReadPowerSpectrumF32")
-        mock_library.niRFSA_ReadPowerSpectrumF32.return_value = 0
-        mock_library.niRFSA_ReadPowerSpectrumF64.side_effect = MockFunctionCallError("niRFSA_ReadPowerSpectrumF64")
-        mock_library.niRFSA_ReadPowerSpectrumF64.return_value = 0
+        mock_library.niRFSA_ReadIqSingleRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_ReadIqSingleRecordComplexF64")
+        mock_library.niRFSA_ReadIqSingleRecordComplexF64.return_value = 0
         mock_library.niRFSA_Reset.side_effect = MockFunctionCallError("niRFSA_Reset")
         mock_library.niRFSA_Reset.return_value = 0
         mock_library.niRFSA_ResetDevice.side_effect = MockFunctionCallError("niRFSA_ResetDevice")

@@ -5,13 +5,12 @@ import ctypes
 import nirfsa.errors as errors
 import threading
 
+from nirfsa._complextype import *  # noqa: F403
 from nirfsa._visatype import *  # noqa: F403,H303
 
-import nirfsa.ni_complex_number as ni_complex_number  # noqa: F401
+import nirfsa.waveform_info as waveform_info  # noqa: F401
 
-import nirfsa.ni_rfsa_wfm_info as ni_rfsa_wfm_info  # noqa: F401
-
-import nirfsa.ni_rfsa_spectrum_info as ni_rfsa_spectrum_info  # noqa: F401
+import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
 
 
 class Library(object):
@@ -26,7 +25,7 @@ class Library(object):
         self._library = ctypes_library
         # We cache the cfunc object from the ctypes.CDLL object
         self.niRFSA_Abort_cfunc = None
-        self.niRFSA_ChangeExtCalPassword_cfunc = None
+        self.niRFSA_ChangeExternalCalibrationPassword_cfunc = None
         self.niRFSA_CheckAcquisitionStatus_cfunc = None
         self.niRFSA_ClearSelfCalibrateRange_cfunc = None
         self.niRFSA_Close_cfunc = None
@@ -52,6 +51,15 @@ class Library(object):
         self.niRFSA_DisableStartTrigger_cfunc = None
         self.niRFSA_EnableSessionAccess_cfunc = None
         self.niRFSA_ErrorMessage_cfunc = None
+        self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc = None
+        self.niRFSA_FancyReadPowerSpectrumF32_cfunc = None
+        self.niRFSA_FancyReadPowerSpectrumF64_cfunc = None
+        self.niRFSA_FetchIqMultiRecordComplexF32_cfunc = None
+        self.niRFSA_FetchIqMultiRecordComplexF64_cfunc = None
+        self.niRFSA_FetchIqMultiRecordComplexI16_cfunc = None
+        self.niRFSA_FetchIqSingleRecordComplexF32_cfunc = None
+        self.niRFSA_FetchIqSingleRecordComplexF64_cfunc = None
+        self.niRFSA_FetchIqSingleRecordComplexI16_cfunc = None
         self.niRFSA_GetAttributeViBoolean_cfunc = None
         self.niRFSA_GetAttributeViInt32_cfunc = None
         self.niRFSA_GetAttributeViInt64_cfunc = None
@@ -65,8 +73,7 @@ class Library(object):
         self.niRFSA_GetFetchBacklog_cfunc = None
         self.niRFSA_GetFrequencyResponse_cfunc = None
         self.niRFSA_GetGainReferenceCalBaseline_cfunc = None
-        self.niRFSA_GetSelfCalLastDateAndTime_cfunc = None
-        self.niRFSA_GetSelfCalLastTemperature_cfunc = None
+        self.niRFSA_GetSelfCalibrationTemperature_cfunc = None
         self.niRFSA_GetTerminalName_cfunc = None
         self.niRFSA_InitWithOptions_cfunc = None
         self.niRFSA_Initiate_cfunc = None
@@ -74,8 +81,7 @@ class Library(object):
         self.niRFSA_LoadConfigurationsFromFile_cfunc = None
         self.niRFSA_LockSession_cfunc = None
         self.niRFSA_PerformThermalCorrection_cfunc = None
-        self.niRFSA_ReadPowerSpectrumF32_cfunc = None
-        self.niRFSA_ReadPowerSpectrumF64_cfunc = None
+        self.niRFSA_ReadIqSingleRecordComplexF64_cfunc = None
         self.niRFSA_Reset_cfunc = None
         self.niRFSA_ResetDevice_cfunc = None
         self.niRFSA_ResetWithDefaults_cfunc = None
@@ -107,13 +113,13 @@ class Library(object):
                 self.niRFSA_Abort_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_Abort_cfunc(vi)
 
-    def niRFSA_ChangeExtCalPassword(self, vi, old_password, new_password):  # noqa: N802
+    def niRFSA_ChangeExternalCalibrationPassword(self, vi, old_password, new_password):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_ChangeExtCalPassword_cfunc is None:
-                self.niRFSA_ChangeExtCalPassword_cfunc = self._get_library_function('niRFSA_ChangeExtCalPassword')
-                self.niRFSA_ChangeExtCalPassword_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
-                self.niRFSA_ChangeExtCalPassword_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_ChangeExtCalPassword_cfunc(vi, old_password, new_password)
+            if self.niRFSA_ChangeExternalCalibrationPassword_cfunc is None:
+                self.niRFSA_ChangeExternalCalibrationPassword_cfunc = self._get_library_function('niRFSA_ChangeExternalCalibrationPassword')
+                self.niRFSA_ChangeExternalCalibrationPassword_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_ChangeExternalCalibrationPassword_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_ChangeExternalCalibrationPassword_cfunc(vi, old_password, new_password)
 
     def niRFSA_CheckAcquisitionStatus(self, vi, is_done):  # noqa: N802
         with self._func_lock:
@@ -315,6 +321,78 @@ class Library(object):
                 self.niRFSA_ErrorMessage_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ErrorMessage_cfunc(vi, status_code, error_message)
 
+    def niRFSA_FancyGetSelfCalibrationDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc is None:
+                self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc = self._get_library_function('niRFSA_FancyGetSelfCalibrationDateAndTime')
+                self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc(vi, self_calibration_step, year, month, day, hour, minute)
+
+    def niRFSA_FancyReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FancyReadPowerSpectrumF32_cfunc is None:
+                self.niRFSA_FancyReadPowerSpectrumF32_cfunc = self._get_library_function('niRFSA_FancyReadPowerSpectrumF32')
+                self.niRFSA_FancyReadPowerSpectrumF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal32), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
+                self.niRFSA_FancyReadPowerSpectrumF32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FancyReadPowerSpectrumF32_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
+
+    def niRFSA_FancyReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FancyReadPowerSpectrumF64_cfunc is None:
+                self.niRFSA_FancyReadPowerSpectrumF64_cfunc = self._get_library_function('niRFSA_FancyReadPowerSpectrumF64')
+                self.niRFSA_FancyReadPowerSpectrumF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
+                self.niRFSA_FancyReadPowerSpectrumF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FancyReadPowerSpectrumF64_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
+
+    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FetchIqMultiRecordComplexF32_cfunc is None:
+                self.niRFSA_FetchIqMultiRecordComplexF32_cfunc = self._get_library_function('niRFSA_FetchIqMultiRecordComplexF32')
+                self.niRFSA_FetchIqMultiRecordComplexF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexNumberF32), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqMultiRecordComplexF32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FetchIqMultiRecordComplexF32_cfunc(vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info)
+
+    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FetchIqMultiRecordComplexF64_cfunc is None:
+                self.niRFSA_FetchIqMultiRecordComplexF64_cfunc = self._get_library_function('niRFSA_FetchIqMultiRecordComplexF64')
+                self.niRFSA_FetchIqMultiRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexNumber), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqMultiRecordComplexF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FetchIqMultiRecordComplexF64_cfunc(vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info)
+
+    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FetchIqMultiRecordComplexI16_cfunc is None:
+                self.niRFSA_FetchIqMultiRecordComplexI16_cfunc = self._get_library_function('niRFSA_FetchIqMultiRecordComplexI16')
+                self.niRFSA_FetchIqMultiRecordComplexI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexI16), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqMultiRecordComplexI16_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FetchIqMultiRecordComplexI16_cfunc(vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info)
+
+    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FetchIqSingleRecordComplexF32_cfunc is None:
+                self.niRFSA_FetchIqSingleRecordComplexF32_cfunc = self._get_library_function('niRFSA_FetchIqSingleRecordComplexF32')
+                self.niRFSA_FetchIqSingleRecordComplexF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexNumberF32), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqSingleRecordComplexF32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FetchIqSingleRecordComplexF32_cfunc(vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info)
+
+    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FetchIqSingleRecordComplexF64_cfunc is None:
+                self.niRFSA_FetchIqSingleRecordComplexF64_cfunc = self._get_library_function('niRFSA_FetchIqSingleRecordComplexF64')
+                self.niRFSA_FetchIqSingleRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexNumber), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqSingleRecordComplexF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FetchIqSingleRecordComplexF64_cfunc(vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info)
+
+    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_FetchIqSingleRecordComplexI16_cfunc is None:
+                self.niRFSA_FetchIqSingleRecordComplexI16_cfunc = self._get_library_function('niRFSA_FetchIqSingleRecordComplexI16')
+                self.niRFSA_FetchIqSingleRecordComplexI16_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt64, ViInt64, ViReal64, ctypes.POINTER(NIComplexI16), ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_FetchIqSingleRecordComplexI16_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_FetchIqSingleRecordComplexI16_cfunc(vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info)
+
     def niRFSA_GetAttributeViBoolean(self, vi, channel_name, attribute_id, value):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_GetAttributeViBoolean_cfunc is None:
@@ -419,21 +497,13 @@ class Library(object):
                 self.niRFSA_GetGainReferenceCalBaseline_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetGainReferenceCalBaseline_cfunc(vi, buffer_size, gain_reference_cal_constants, number_of_gain_reference_cal_constants)
 
-    def niRFSA_GetSelfCalLastDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
+    def niRFSA_GetSelfCalibrationTemperature(self, vi, self_calibration_step, temp):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_GetSelfCalLastDateAndTime_cfunc is None:
-                self.niRFSA_GetSelfCalLastDateAndTime_cfunc = self._get_library_function('niRFSA_GetSelfCalLastDateAndTime')
-                self.niRFSA_GetSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niRFSA_GetSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetSelfCalLastDateAndTime_cfunc(vi, self_calibration_step, year, month, day, hour, minute)
-
-    def niRFSA_GetSelfCalLastTemperature(self, vi, self_calibration_step, temp):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_GetSelfCalLastTemperature_cfunc is None:
-                self.niRFSA_GetSelfCalLastTemperature_cfunc = self._get_library_function('niRFSA_GetSelfCalLastTemperature')
-                self.niRFSA_GetSelfCalLastTemperature_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niRFSA_GetSelfCalLastTemperature_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetSelfCalLastTemperature_cfunc(vi, self_calibration_step, temp)
+            if self.niRFSA_GetSelfCalibrationTemperature_cfunc is None:
+                self.niRFSA_GetSelfCalibrationTemperature_cfunc = self._get_library_function('niRFSA_GetSelfCalibrationTemperature')
+                self.niRFSA_GetSelfCalibrationTemperature_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niRFSA_GetSelfCalibrationTemperature_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetSelfCalibrationTemperature_cfunc(vi, self_calibration_step, temp)
 
     def niRFSA_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
         with self._func_lock:
@@ -491,21 +561,13 @@ class Library(object):
                 self.niRFSA_PerformThermalCorrection_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_PerformThermalCorrection_cfunc(vi)
 
-    def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, data, data_array_size, wfm_info):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_ReadPowerSpectrumF32_cfunc is None:
-                self.niRFSA_ReadPowerSpectrumF32_cfunc = self._get_library_function('niRFSA_ReadPowerSpectrumF32')
-                self.niRFSA_ReadPowerSpectrumF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal32), ViInt32, ctypes.POINTER(ni_rfsa_spectrum_info.struct_niRFSA_spectrumInfo)]  # noqa: F405
-                self.niRFSA_ReadPowerSpectrumF32_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_ReadPowerSpectrumF32_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
-
-    def niRFSA_ReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_ReadPowerSpectrumF64_cfunc is None:
-                self.niRFSA_ReadPowerSpectrumF64_cfunc = self._get_library_function('niRFSA_ReadPowerSpectrumF64')
-                self.niRFSA_ReadPowerSpectrumF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(ni_rfsa_spectrum_info.struct_niRFSA_spectrumInfo)]  # noqa: F405
-                self.niRFSA_ReadPowerSpectrumF64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_ReadPowerSpectrumF64_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
+            if self.niRFSA_ReadIqSingleRecordComplexF64_cfunc is None:
+                self.niRFSA_ReadIqSingleRecordComplexF64_cfunc = self._get_library_function('niRFSA_ReadIqSingleRecordComplexF64')
+                self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(NIComplexNumber), ViInt64, ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
+                self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_ReadIqSingleRecordComplexF64_cfunc(vi, channel_list, timeout, data, data_array_size, wfm_info)
 
     def niRFSA_Reset(self, vi):  # noqa: N802
         with self._func_lock:

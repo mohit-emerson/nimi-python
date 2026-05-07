@@ -31,7 +31,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ChangeExtCalPassword': {
+    'ChangeExternalCalibrationPassword': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Changes the password that is required to initialize an external calibration session.\n\n                **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -485,6 +485,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '0',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.'
@@ -605,6 +606,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '0',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.'
@@ -1240,7 +1242,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-        'FancyCreateDeembeddingSparameterTableArray': {
+    'FancyCreateDeembeddingSparameterTableArray': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview<https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
@@ -1388,6 +1390,912 @@ functions = {
         ],
         'python_name': 'get_deembedding_sparameters',
         'returns': None,
+        'use_session_lock': False
+    },
+    'ReadIqSingleRecordComplexF64': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Initiates an acquisition and fetches a single I/Q data record. \n                \n                Do not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True,
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexNumber[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
+                },
+                'name': 'dataArraySize',
+                'size': {'mechanism': 'python-code', 'value': '0 if data is None else len(data) // 2'},
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqMultiRecordComplexF32': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.'
+                },
+                'name': 'startingRecord',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of records to fetch.'
+                },
+                'name': 'numberOfRecords',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples per record.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexNumberF32[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES attribute changes per step during RF list mode.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        #'python_name': '_fetch_iq_multi_record_complex_f32',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqMultiRecordComplexF64': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.'
+                },
+                'name': 'startingRecord',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of records to fetch.'
+                },
+                'name': 'numberOfRecords',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples per record.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexNumber[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES attribute changes per step during RF list mode.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        # 'python_name': '_fetch_iq_multi_record_complex_f64',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqMultiRecordComplexI16': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Fetches binary I/Q data from multiple records in an acquisition. \n                \n                Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.'
+                },
+                'name': 'startingRecord',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of records to fetch.'
+                },
+                'name': 'numberOfRecords',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples per record.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexI16[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES attribute changes per step during RF list mode.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        # 'python_name': '_fetch_iq_multi_record_complex_i16',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqMultiRecordComplexDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Fetches I/Q data from multiple records in an acquisition.\n\n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'fetch_iq_multi_record_complex'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.'
+                },
+                'name': 'startingRecord',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of records to fetch.'
+                },
+                'name': 'numberOfRecords',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples per record.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
+                },
+                'name': 'data',
+                'type': 'NIComplexNumber',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.'
+                },
+                'name': 'dataType',
+                'numpy': True,
+                'type': 'NIComplexNumber',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'fetch_iq_multi_record_complex',
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
+    'FetchIqSingleRecordComplexF32': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Fetches I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the record to retrieve. Record numbers are zero-based.'
+                },
+                'name': 'recordNumber',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples to fetch. The value must specify the array size of the NIRFSA_ATTR_DATA parameter.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexNumberF32[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        # 'python_name': '_fetch_iq_single_record_complex_f32',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqSingleRecordComplexF64': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Fetches I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the record to retrieve. Record numbers are zero-based.'
+                },
+                'name': 'recordNumber',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples to fetch. The value must specify the array size of the NIRFSA_ATTR_DATA parameter.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexNumber[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        # 'python_name': '_fetch_iq_single_record_complex_f64',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqSingleRecordComplexI16': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Fetches binary I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'numpy_read_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the record to retrieve. Record numbers are zero-based.'
+                },
+                'name': 'recordNumber',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples to fetch. The value must specify the array size of the NIRFSA_ATTR_DATA parameter.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'complex_array_representation': 'interleaved_real_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
+                },
+                'name': 'data',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexI16[]',
+                'use_array': True,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        # 'python_name': '_fetch_iq_single_record_complex_i16',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'FetchIqSingleRecordComplexDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Fetches I/Q data from a single record in an acquisition.\n\n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'fetch_iq_single_record_complex'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the record to retrieve. Record numbers are zero-based.'
+                },
+                'name': 'recordNumber',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the number of samples to fetch. The value must specify the array size of the NIRFSA_ATTR_DATA parameter.'
+                },
+                'name': 'numberOfSamples',
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
+                },
+                'name': 'data',
+                'type': 'NIComplexNumber',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.'
+                },
+                'name': 'dataType',
+                'numpy': True,
+                'type': 'NIComplexNumber',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n                        ----\n                        \n                        For all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n                        ----'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'fetch_iq_single_record_complex',
+        'returns': 'ViStatus',
         'use_session_lock': False
     },
     'GetAttributeViBoolean': {
@@ -2223,21 +3131,13 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetSelfCalLastDateAndTime': {
-        'codegen_method': 'public',
+    'FancyGetSelfCalibrationDateAndTime': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration. \n                \n                The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **NIRFSA_ATTR_SELF_CALIBRATION_STEP** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
+        'method_name_for_documentation': 'get_self_calibration_date_and_time',
         'parameters': [
             {
                 'direction': 'in',
@@ -2254,8 +3154,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.\n\n                        %enum_table{self calibration step}'
                 },
+                'enum': 'SelfCalibrationStep',
                 'name': 'selfCalibrationStep',
                 'type': 'ViInt64',
+                'type_in_documentation': 'Bitwise combination of enums.SelfCalibrationStep flags',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2313,7 +3215,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetSelfCalLastTemperature': {
+    'GetSelfCalibrationTemperature': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the temperature, in degrees Celsius, at the last successful self-calibration.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860'
@@ -2344,8 +3246,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.\n\n                        %enum_table{self calibration step}'
                 },
+                'enum': 'SelfCalibrationStep',
                 'name': 'selfCalibrationStep',
                 'type': 'ViInt64',
+                'type_in_documentation': 'Bitwise combination of enums.SelfCalibrationStep flags',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2703,17 +3607,17 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ReadPowerSpectrumF32': {
-        'codegen_method': 'public',
+    'FancyReadPowerSpectrumF32': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
-        'is_error_handling': False,
+        'method_name_for_documentation': 'read_power_spectrum',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             }
@@ -2740,12 +3644,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
                 },
                 'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
                 'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2784,20 +3691,22 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'python_name': '_read_power_spectrum_f32',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ReadPowerSpectrumF64': {
-        'codegen_method': 'public',
+    'FancyReadPowerSpectrumF64': {
+        'codegen_method': 'private',
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
+        'method_name_for_documentation': 'Read_Power_Spectrum',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
+                'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             }
@@ -2824,12 +3733,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
                 },
                 'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
                 'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
                 'use_in_python_api': True
             },
@@ -2869,7 +3781,74 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
+        'python_name': '_read_power_spectrum_f64',
         'use_session_lock': True
+    },
+    'ReadPowerSpectrumDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.float32 or numpy.float64.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'read_power_spectrum',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'read_power_spectrum'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.'
+                },
+                'name': 'dataType',
+                'numpy': True,
+                'type': 'NIComplexNumber',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'read_power_spectrum',
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'Reset': {
         'codegen_method': 'public',
@@ -3199,8 +4178,26 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the software signal to send.\n\n                        %enum_table{trigger}'
+                    'description': 'Specifies the trigger to send.\n\n**Default Value:** NIRFSA_VAL_START_TRIGGER\n\n**Defined Values:**',
+                    'table_body': [
+                        [
+                            'NIRFSA_VAL_START_TRIGGER',
+                            '0 (0x0)',
+                            'Specifies the Start Trigger.'
+                        ],
+                        [
+                            'NIRFSA_VAL_SCRIPT_TRIGGER',
+                            '1 (0x1)',
+                            'Specifies the Script Trigger.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Value',
+                        'Description'
+                    ]
                 },
+                'enum': 'SoftwareTriggerType',
                 'name': 'trigger',
                 'type': 'ViInt32',
                 'use_array': False,

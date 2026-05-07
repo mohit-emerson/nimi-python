@@ -10,11 +10,9 @@ import nirfsa._library_interpreter as _library_interpreter
 import nirfsa.enums as enums
 import nirfsa.errors as errors
 
-import nirfsa.ni_complex_number as ni_complex_number  # noqa: F401
+import nirfsa.waveform_info as waveform_info  # noqa: F401
 
-import nirfsa.ni_rfsa_wfm_info as ni_rfsa_wfm_info  # noqa: F401
-
-import nirfsa.ni_rfsa_spectrum_info as ni_rfsa_spectrum_info  # noqa: F401
+import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
 
 import hightime  # noqa: F401
 import nitclk
@@ -324,110 +322,6 @@ class _SessionBase(object):
     Returns a comma-separated list of the available ports for use based on your instrument configuration.
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    cal_digitizer_id = _attributes.AttributeViString(1150226)
-    '''Type: str
-
-    Returns the currently associated digitizer ID.
-
-    Allows the use of self calibration data when configured in external digitizer mode.
-
-    **Default Value**: "" (empty string) in external digitizer mode
-
-    **Supported Devices**: PXIe-5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
-    '''
-    cal_if_attenuation_index = _attributes.AttributeViInt32(1150109)
-    '''Type: int
-
-    Specifies the IF attenuation index from a table of valid settings.
-
-    To select a correct attenuation table, set this property in conjunction with the cal_if_filter_selection property. This property is valid only during a calibration session.
-
-    **Valid Values**: 0 to 25
-
-    **Default Value**: 0
-
-    **Supported Devices:** PXIe-5694
-    '''
-    cal_if_filter_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IFfilterSelection, 1150112)
-    '''Type: enums.IFfilterSelection
-
-    Specifies the IF filter path during calibration.
-
-    The property is valid only during a calibration session.
-
-    **Defined Values:**
-
-    %enum_table{i ffilter selection}
-
-    **Default Value**: IFfilterSelection._4
-
-    **Supported Devices**: PXIe-5694
-    '''
-    cal_rf_path_selection = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfPathSelection, 1150083)
-    '''Type: enums.RfPathSelection
-
-    Specifies the RF path to use during calibration.
-
-    This property is valid only during a calibration session. When you set this property, NI-RFSA does not select the RF path based on the downconverter center frequency.
-
-    The following table lists the RF bands used by the supported devices.
-
-    | Device                                               | RF Band   | Frequency Range      |
-    |:-----------------------------------------------------|:----------|:---------------------|
-    | PXIe-5603                                            | RF band 1 | 20 Hz to 3.6 GHz     |
-    | PXIe-5605 (low band signal path)                     | RF band 1 | 20 Hz to 3.6 GHz     |
-    | PXIe-5605 (high band signal path)                    | RF band 2 | 3.6 GHz to 14 GHz    |
-    | PXIe-5606 (low band signal path)                     | RF band 1 | 20 Hz to 3.6 GHz     |
-    | PXIe-5606 (high band signal path)                    | RF band 2 | 3.6 GHz to 26.5 GHz  |
-    | PXIe-5606 (low band signal path, 320 MHz IF filter)  | RF band 1 | 20 Hz to 3.41 GHz    |
-    | PXIe-5606 (high band signal path, 320 MHz IF filter) | RF band 2 | 3.41 GHz to 26.5 GHz |
-
-    **Defined and Valid Values:**
-
-    | Value                                  | Description                 | Valid For                |
-    |:---------------------------------------|:----------------------------|:-------------------------|
-    | RfPathSelection._1 (1700)    | Specifies to use RF band 1. | PXIe-5601/5603/5605/5606 |
-    | RfPathSelection._2 (1701)    | Specifies to use RF band 2. | PXIe-5601/5605/5606      |
-    | RfPathSelection._3 (1702)    | Specifies to use RF band 3. | PXIe-5601                |
-    | RfPathSelection._4 (1703)    | Specifies to use RF band 4. | PXIe-5601                |
-
-    **Default Values**:
-
-    **PXIe-5603/5605 (low band)/5606**: RfPathSelection._1
-
-    **PXIe-5601/5605 (high band)**: RfPathSelection._2
-
-    **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5698
-    '''
-    cal_tone_power_referred_to_rf_in = _attributes.AttributeViReal64(1150174)
-    '''Type: float
-
-    Returns the power of a virtual signal connected to the RF IN connector on the PXIe-5693 front panel when the calibration tone is enabled.
-
-    You can enable a calibration tone for the PXIe-5693 by setting the rf_conditioning_cal_tone_mode property to NIRFSA_VAL_CAL_TONE_LOWBAND_RF or NIRFSA_VAL_CAL_TONE_HIGHBAND_RF.
-
-    **Units**: dBm
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5693
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    cal_tone_step_attenuation = _attributes.AttributeViReal64(1150168)
-    '''Type: float
-
-    Specifies the step attenuator to engage in the calibration tone path.
-
-    **Units**: dB
-
-    **Valid Values**: 2.00, 10.00
-
-    **Default Value**: 2.00 dB
-
-    **Supported Devices**: PXIe-5693
     '''
     center_frequency = _attributes.AttributeViReal64(1150002)
     '''Type: float
@@ -1045,46 +939,6 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - get_terminal_name
-    '''
-    downconverter_cal_tone_frequency = _attributes.AttributeViReal64(1150140)
-    '''Type: float
-
-    Specifies the frequency of the RF downconverter calibration tone, in hertz (Hz).
-
-    **Valid Values**
-
-    **PXIe-5603/5605**: 134 MHz to 13.2 GHz
-
-    **PXIe-5606**: 34.5 MHz to 4 GHz
-
-    **Default Value**: 612.5 MHz
-
-    **Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668
-    '''
-    downconverter_cal_tone_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.CalToneMode, 1150139)
-    '''Type: enums.CalToneMode
-
-    Specifies the location in a signal path where an RF downconverter calibration tone is injected or whether the tone is disabled.
-
-    Refer to `PXIe-5665 Theory of Operation <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/block-diagram.2.html>`_, `PXIe-5667 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/block-diagram.html>`_, or `PXIe-5668 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/block-diagram.html>`_ for more information about signal paths for your device.
-
-    **Defined and Valid Values:**
-
-    | Value                                          | Description                                                                                | Valid For           |
-    |:-----------------------------------------------|:-------------------------------------------------------------------------------------------|:--------------------|
-    |  CalToneMode.DISABLED (2700)            | Disables the calibration tone for the associated signal path.                              | PXIe-5603/5605/5606 |
-    | CalToneMode.CAL_TONE_LOWBAND_RF (2701)          | Injects the calibration tone into the low band RF signal path.                             | PXIe-5603/5605/5606 |
-    | CalToneMode.CAL_TONE_HIGHBAND_RF (2702)         | Injects the calibration tone into the high band RF signal path.                            | PXIe-5605/5606      |
-    | CalToneMode.CAL_TONE_HIGHBAND_IF (2703)         | Injects the calibration tone into the high band IF signal path.                            | PXIe-5605           |
-    | CalToneMode.CAL_TONE_LOWBAND_RF_WITHOUT_ALC (2704) | Injects the calibration tone into the low band RF signal path, bypassing the ALC.          | PXIe-5606           |
-    | CalToneMode.CAL_TONE_COMB_GENERATOR (2705)      | Injects the calibration tone into the high band RF signal path through the Comb Generator. | PXIe-5606           |
-
-    **Default Value**:  CalToneMode.DISABLED
-
-    **Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     downconverter_center_frequency = _attributes.AttributeViReal64(1150082)
     '''Type: float
@@ -3593,33 +3447,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
     '''
-    rf_conditioning_cal_tone_frequency = _attributes.AttributeViReal64(1150209)
-    '''Type: float
-
-    Specifies the frequency of the RF conditioning calibration tone, in hertz (Hz).
-
-    **Valid Values**: 34.5 MHz to 7.5 GHz
-
-    **Default Value**: 1.0 GHz
-
-    **Supported Devices**: PXIe-5667, PXIe-5693/5698
-    '''
-    rf_conditioning_cal_tone_mode = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ConditioningCalToneMode, 1150208)
-    '''Type: enums.ConditioningCalToneMode
-
-    Specifies the location in a signal path where an RF conditioning calibration tone is injected or whether the tone is disabled.
-
-    **Defined Values:**
-
-    %enum_table{conditioning cal tone mode}
-
-    **Default Value**: ConditioningCalToneMode.DISABLED
-
-    **Supported Devices**: PXIe-5667, PXIe-5693/5698
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
     rf_high_pass_filtering = _attributes.AttributeViReal64(1150220)
     '''Type: float
 
@@ -4307,7 +4134,7 @@ class _SessionBase(object):
 
     Indicates the minimum time between temperature sensor readings in seconds.
 
-    When you call the read_power_spectrum_f64 method, the ReadIqSingleRecordComplexF64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+    When you call the ReadPowerSpectrumF64 method, the read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
     ----
     **Note**
@@ -4498,6 +4325,732 @@ class _SessionBase(object):
 
         '''
         self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
+
+    @ivi_synchronized
+    def _read_power_spectrum_f32(self, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_power_spectrum_f32
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+                        ----
+                        **Note**
+                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+                        ----
+
+                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_power_spectrum_f32`
+
+        Args:
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+
+        Returns:
+            power_spectrum_data (array.array("f")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout)
+        return power_spectrum_data, spectrum_info
+
+    @ivi_synchronized
+    def _read_power_spectrum_f64(self, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_power_spectrum_f64
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+                        ----
+                        **Note**
+                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+                        ----
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_power_spectrum_f64`
+
+        Args:
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+
+        Returns:
+            power_spectrum_data (array.array("d")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout)
+        return power_spectrum_data, spectrum_info
+
+    def fetch_iq_multi_record_complex(self, starting_record, number_of_records, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0)):
+        '''fetch_iq_multi_record_complex
+
+        Fetches I/Q data from multiple records in an acquisition.
+
+                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record_complex`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.fetch_iq_multi_record_complex`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            number_of_samples (int): Specifies the number of samples per record.
+
+            data (NIComplexNumber): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            data_type (NIComplexNumber): Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+        '''
+        import numpy
+        if data_type == numpy.complex128:
+            return self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, number_of_samples, data, timeout)
+        elif data_type == numpy.complex64:
+            return self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, number_of_samples, data, timeout)
+        elif data_type == numpy.int16:
+            return self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, number_of_samples, data, timeout)
+        else:
+            raise TypeError("Unsupported data_type. Is {}, expected {} or {} or {}".format(data_type, numpy.complex128, numpy.complex64, numpy.int16))
+
+    @ivi_synchronized
+    def _fetch_iq_multi_record_complex_f32(self, starting_record, number_of_records, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_multi_record_complex_f32
+
+        Fetches I/Q data from multiple records in an acquisition.
+
+                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_multi_record_complex_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_multi_record_complex_f32`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            number_of_samples (int): Specifies the number of samples per record.
+
+            data (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+
+                                        The following list provides more information about each of these properties:
+
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('complex64'):
+            raise TypeError('data must be numpy.ndarray of dtype=complex64, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, number_of_samples, data, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_multi_record_complex_f64(self, starting_record, number_of_records, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_multi_record_complex_f64
+
+        Fetches I/Q data from multiple records in an acquisition.
+
+                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_multi_record_complex_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_multi_record_complex_f64`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            number_of_samples (int): Specifies the number of samples per record.
+
+            data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+
+                                        The following list provides more information about each of these properties:
+
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('complex128'):
+            raise TypeError('data must be numpy.ndarray of dtype=complex128, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, number_of_samples, data, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_multi_record_complex_i16(self, starting_record, number_of_records, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_multi_record_complex_i16
+
+        Fetches binary I/Q data from multiple records in an acquisition.
+
+                        Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_multi_record_complex_i16`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_multi_record_complex_i16`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            number_of_samples (int): Specifies the number of samples per record.
+
+            data (numpy.array(dtype=numpy.int16)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **number_of_records** for this parameter.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+
+                                        The following list provides more information about each of these properties:
+
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('int16'):
+            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, number_of_samples, data, timeout)
+        return wfm_info
+
+    def fetch_iq_single_record_complex(self, record_number, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0)):
+        '''fetch_iq_single_record_complex
+
+        Fetches I/Q data from a single record in an acquisition.
+
+                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].fetch_iq_single_record_complex`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.fetch_iq_single_record_complex`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            data (NIComplexNumber): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            data_type (NIComplexNumber): Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+        '''
+        import numpy
+        if data_type == numpy.complex128:
+            return self._fetch_iq_single_record_complex_f64(record_number, number_of_samples, data, timeout)
+        elif data_type == numpy.complex64:
+            return self._fetch_iq_single_record_complex_f32(record_number, number_of_samples, data, timeout)
+        elif data_type == numpy.int16:
+            return self._fetch_iq_single_record_complex_i16(record_number, number_of_samples, data, timeout)
+        else:
+            raise TypeError("Unsupported data_type. Is {}, expected {} or {} or {}".format(data_type, numpy.complex128, numpy.complex64, numpy.int16))
+
+    @ivi_synchronized
+    def _fetch_iq_single_record_complex_f32(self, record_number, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_single_record_complex_f32
+
+        Fetches I/Q data from a single record in an acquisition.
+
+                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_single_record_complex_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_single_record_complex_f32`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            data (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **number_of_samples**.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                                        The following list provides more information about each of these properties:
+
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('complex64'):
+            raise TypeError('data must be numpy.ndarray of dtype=complex64, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, number_of_samples, data, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_single_record_complex_f64(self, record_number, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_single_record_complex_f64
+
+        Fetches I/Q data from a single record in an acquisition.
+
+                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_single_record_complex_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_single_record_complex_f64`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **number_of_samples**.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                                        The following list provides more information about each of these properties:
+
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('complex128'):
+            raise TypeError('data must be numpy.ndarray of dtype=complex128, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, number_of_samples, data, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_single_record_complex_i16(self, record_number, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_single_record_complex_i16
+
+        Fetches binary I/Q data from a single record in an acquisition.
+
+                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_single_record_complex_i16`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_single_record_complex_i16`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            data (numpy.array(dtype=numpy.int16)): Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **number_of_samples**.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                                        ----
+
+                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                                        ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                                        The following list provides more information about each of these properties:
+
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('int16'):
+            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, number_of_samples, data, timeout)
+        return wfm_info
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -4840,54 +5393,82 @@ class _SessionBase(object):
         return _Lock(self)
 
     @ivi_synchronized
-    def read_power_spectrum_f32(self, timeout):
-        r'''read_power_spectrum_f32
+    def read_iq_single_record_complex_f64(self, data, timeout=hightime.timedelta(seconds=10.0)):
+        r'''read_iq_single_record_complex_f64
 
-        Initiates a spectrum acquisition and returns power spectrum data.
+        Initiates an acquisition and fetches a single I/Q data record.
 
-                        ----
-                        **Note**
-                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+                        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
 
-                        ----
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+                        **Related Topics**
+
+                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].read_power_spectrum_f32`
+        Example: :py:meth:`my_session.channels[ ... ].read_iq_single_record_complex_f64`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.read_power_spectrum_f32`
+        Example: :py:meth:`my_session.read_iq_single_record_complex_f64`
 
         Args:
-            timeout (float): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+            data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
 
 
         Returns:
-            power_spectrum_data (array.array("f")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+                                        The following list provides more information about each of these properties:
 
-            spectrum_info (NiRfsaSpectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+                                        ----
+
+                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                                        ----
+
+                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                                        ----
+
+
+                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                                        ----
+
+                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
-        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout)
-        return power_spectrum_data, spectrum_info
+        import numpy
 
-    @ivi_synchronized
-    def read_power_spectrum_f64(self, timeout):
-        r'''read_power_spectrum_f64
+        if type(data) is not numpy.ndarray:
+            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
+        if numpy.isfortran(data) is True:
+            raise TypeError('data must be in C-order')
+        if data.dtype is not numpy.dtype('complex128'):
+            raise TypeError('data must be numpy.ndarray of dtype=complex128, is ' + str(data.dtype))
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, data, timeout)
+        return wfm_info
+
+    def read_power_spectrum(self, data_type, timeout=hightime.timedelta(seconds=10.0)):
+        '''read_power_spectrum
 
         Initiates a spectrum acquisition and returns power spectrum data.
+
+                        This method accepts a data_type parameter to specify the desired data format: numpy.float32 or numpy.float64.
 
                         ----
                         **Note**
@@ -4902,30 +5483,25 @@ class _SessionBase(object):
         Use Python index notation on the repeated capabilities container channels to specify a subset,
         and then call this method on the result.
 
-        Example: :py:meth:`my_session.channels[ ... ].read_power_spectrum_f64`
+        Example: :py:meth:`my_session.channels[ ... ].read_power_spectrum`
 
         To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-        Example: :py:meth:`my_session.read_power_spectrum_f64`
+        Example: :py:meth:`my_session.read_power_spectrum`
 
         Args:
-            timeout (float): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+            data_type (NIComplexNumber): Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.
 
-
-        Returns:
-            power_spectrum_data (array.array("d")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            spectrum_info (NiRfsaSpectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
 
         '''
-        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout)
-        return power_spectrum_data, spectrum_info
+        import numpy
+        if data_type == numpy.float64:
+            return self._read_power_spectrum_f64(timeout)
+        elif data_type == numpy.float32:
+            return self._read_power_spectrum_f32(timeout)
+        else:
+            raise TypeError("Unsupported data_type. Is {}, expected {} or {}".format(data_type, numpy.float64, numpy.float32))
 
     @ivi_synchronized
     def save_configurations_to_file(self, file_path):
@@ -5315,7 +5891,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the ReadIqSingleRecordComplexF64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -5363,7 +5939,7 @@ class Session(_SessionBase):
     def abort(self):
         r'''abort
 
-        Stops an acquisition previously started with the _initiate method or the read_power_spectrum_f64 method.
+        Stops an acquisition previously started with the _initiate method or the ReadPowerSpectrumF64 method.
 
                         You can also use the abort method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
 
@@ -5380,8 +5956,8 @@ class Session(_SessionBase):
         self._interpreter.abort()
 
     @ivi_synchronized
-    def change_ext_cal_password(self, old_password, new_password):
-        r'''change_ext_cal_password
+    def change_external_calibration_password(self, old_password, new_password):
+        r'''change_external_calibration_password
 
         Changes the password that is required to initialize an external calibration session.
 
@@ -5397,7 +5973,7 @@ class Session(_SessionBase):
                                         The maximum length of the password varies by device.
 
         '''
-        self._interpreter.change_ext_cal_password(old_password, new_password)
+        self._interpreter.change_external_calibration_password(old_password, new_password)
 
     @ivi_synchronized
     def check_acquisition_status(self):
@@ -5452,7 +6028,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the ReadIqSingleRecordComplexF64 method, or the read_power_spectrum_f64 method.
+                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read_iq_single_record_complex_f64 method, or the ReadPowerSpectrumF64 method.
 
                         ----
                         **Note**
@@ -5600,7 +6176,7 @@ class Session(_SessionBase):
         self._interpreter.configure_digital_edge_advance_trigger(source, edge)
 
     @ivi_synchronized
-    def configure_digital_edge_ref_trigger(self, source, edge, pretrigger_samples):
+    def configure_digital_edge_ref_trigger(self, source, edge, pretrigger_samples=0):
         r'''configure_digital_edge_ref_trigger
 
         Configures the device to wait for a digital edge Reference Trigger to mark a reference point within the record.
@@ -5740,7 +6316,7 @@ class Session(_SessionBase):
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
     @ivi_synchronized
-    def configure_iq_power_edge_ref_trigger(self, source, level, slope, pretrigger_samples):
+    def configure_iq_power_edge_ref_trigger(self, source, level, slope, pretrigger_samples=0):
         r'''configure_iq_power_edge_ref_trigger
 
         Configures the device to wait for the complex power of the I/Q data to cross the specified threshold to mark a reference point within the record.
@@ -6138,6 +6714,51 @@ class Session(_SessionBase):
         return sparameters
 
     @ivi_synchronized
+    def _fancy_get_self_calibration_date_and_time(self, self_calibration_step):
+        r'''_fancy_get_self_calibration_date_and_time
+
+        Returns the date and time of the last successful self-calibration.
+
+                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
+
+                        ----
+                        **Note**
+                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
+
+                        ----
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        Args:
+            self_calibration_step (Bitwise combination of enums.SelfCalibrationStep flags): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
+
+                                        %enum_table{self calibration step}
+
+
+        Returns:
+            year (int): Returns the year of the last external calibration.
+
+            month (int): Returns the month of the last external calibration.
+
+            day (int): Returns the day of the last external calibration.
+
+            hour (int): Returns the year of the last external calibration. It is expressed as an integer.
+
+            minute (int): Returns the minute of the last external calibration.
+
+        '''
+        if type(self_calibration_step) is not enums.SelfCalibrationStep:
+            raise TypeError('Parameter self_calibration_step must be of type ' + str(enums.SelfCalibrationStep))
+        year, month, day, hour, minute = self._interpreter.fancy_get_self_calibration_date_and_time(self_calibration_step)
+        return year, month, day, hour, minute
+
+    @ivi_synchronized
     def get_ext_cal_last_temp(self):
         r'''get_ext_cal_last_temp
 
@@ -6215,51 +6836,8 @@ class Session(_SessionBase):
         return gain_reference_cal_constants
 
     @ivi_synchronized
-    def get_self_cal_last_date_and_time(self, self_calibration_step):
-        r'''get_self_cal_last_date_and_time
-
-        Returns the date and time of the last successful self-calibration.
-
-                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
-
-                        ----
-                        **Note**
-                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
-
-                        ----
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        Args:
-            self_calibration_step (int): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
-
-                                        %enum_table{self calibration step}
-
-
-        Returns:
-            year (int): Returns the year of the last external calibration.
-
-            month (int): Returns the month of the last external calibration.
-
-            day (int): Returns the day of the last external calibration.
-
-            hour (int): Returns the year of the last external calibration. It is expressed as an integer.
-
-            minute (int): Returns the minute of the last external calibration.
-
-        '''
-        year, month, day, hour, minute = self._interpreter.get_self_cal_last_date_and_time(self_calibration_step)
-        return year, month, day, hour, minute
-
-    @ivi_synchronized
-    def get_self_cal_last_temperature(self, self_calibration_step):
-        r'''get_self_cal_last_temperature
+    def get_self_calibration_temperature(self, self_calibration_step):
+        r'''get_self_calibration_temperature
 
         Returns the temperature, in degrees Celsius, at the last successful self-calibration.
 
@@ -6275,7 +6853,7 @@ class Session(_SessionBase):
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         Args:
-            self_calibration_step (int): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
+            self_calibration_step (Bitwise combination of enums.SelfCalibrationStep flags): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
 
                                         %enum_table{self calibration step}
 
@@ -6284,7 +6862,9 @@ class Session(_SessionBase):
             temp (float): Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
         '''
-        temp = self._interpreter.get_self_cal_last_temperature(self_calibration_step)
+        if type(self_calibration_step) is not enums.SelfCalibrationStep:
+            raise TypeError('Parameter self_calibration_step must be of type ' + str(enums.SelfCalibrationStep))
+        temp = self._interpreter.get_self_calibration_temperature(self_calibration_step)
         return temp
 
     @ivi_synchronized
@@ -6415,7 +6995,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the ReadIqSingleRecordComplexF64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -6761,13 +7341,28 @@ class Session(_SessionBase):
                         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
-            trigger (int): Specifies the software signal to send.
+            trigger (enums.SoftwareTriggerType): Specifies the trigger to send.
 
-                                        %enum_table{trigger}
+                **Default Value:** SoftwareTriggerType.START
+
+                **Defined Values:**
+
+                +----------------------------+---------+-------------------------------+
+                | Name                       | Value   | Description                   |
+                +============================+=========+===============================+
+                | SoftwareTriggerType.START  | 0 (0x0) | Specifies the Start Trigger.  |
+                +----------------------------+---------+-------------------------------+
+                | SoftwareTriggerType.SCRIPT | 1 (0x1) | Specifies the Script Trigger. |
+                +----------------------------+---------+-------------------------------+
+
+                Note:
+                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             trigger_identifier (str): Specifies a particular instance of a trigger. NI-RFSA does not currently support this parameter.
 
         '''
+        if type(trigger) is not enums.SoftwareTriggerType:
+            raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTriggerType))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
     @ivi_synchronized

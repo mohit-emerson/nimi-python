@@ -1048,7 +1048,7 @@ IFattenTableSel
 
 
 
-        Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the :py:attr:`nirfsa.Session.cal_if_filter_selection` property to :py:data:`~nirfsa.IFfilterSelection._1` or :py:data:`~nirfsa.IFfilterSelection._2`.
+        Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the :py:attr:`nirfsa.Session.CAL_IF_FILTER_SELECTION` property to :py:data:`~nirfsa.IFfilterSelection._1` or :py:data:`~nirfsa.IFfilterSelection._2`.
 
         
 
@@ -2959,6 +2959,31 @@ SignalConditioningEnabled
 
 
         Bypasses all signal conditioning.
+
+        
+
+
+
+SoftwareTriggerType
+-------------------
+
+.. py:class:: SoftwareTriggerType
+
+    .. py:attribute:: SoftwareTriggerType.SCRIPT
+
+
+
+        Specifies the Script Trigger.
+
+        
+
+
+
+    .. py:attribute:: SoftwareTriggerType.START
+
+
+
+        Specifies the Start Trigger.
 
         
 

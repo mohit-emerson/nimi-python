@@ -488,8 +488,6 @@ def _add_python_name(a, attributes):
         n = attributes[a]['name'].lower()
         if attributes[a]['codegen_method'] == 'private':
             n = '_' + n
-        elif n[0].isdigit():
-            n = '_' + n
 
         attributes[a]['python_name'] = n
 

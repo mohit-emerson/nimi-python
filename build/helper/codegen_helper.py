@@ -119,10 +119,6 @@ def _get_interpreter_output_param_return_type(output_parameter, config):
 
     module_name = custom_type['file_name'] + '.' if is_custom_type else ''
 
-    # Handle complex number types that are defined in _complextype
-    if not is_custom_type and output_parameter['python_type'] in ('NIComplexNumber', 'NIComplexNumberF32', 'NIComplexI16'):
-        module_name = '_complextype.'
-
     if output_parameter['enum'] is not None:
         return 'enums.' + output_parameter['enum'], is_custom_type
     else:

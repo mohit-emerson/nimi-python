@@ -4134,7 +4134,7 @@ class _SessionBase(object):
 
     Indicates the minimum time between temperature sensor readings in seconds.
 
-    When you call the ReadPowerSpectrumF64 method, the read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+    When you call the Read_Power_Spectrum method, the read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
     ----
     **Note**
@@ -4325,96 +4325,6 @@ class _SessionBase(object):
 
         '''
         self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
-
-    @ivi_synchronized
-    def _read_power_spectrum_f32(self, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_read_power_spectrum_f32
-
-        Initiates a spectrum acquisition and returns power spectrum data.
-
-                        ----
-                        **Note**
-                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
-
-                        ----
-
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f32`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session._read_power_spectrum_f32`
-
-        Args:
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
-
-
-        Returns:
-            power_spectrum_data (array.array("f")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout)
-        return power_spectrum_data, spectrum_info
-
-    @ivi_synchronized
-    def _read_power_spectrum_f64(self, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_read_power_spectrum_f64
-
-        Initiates a spectrum acquisition and returns power spectrum data.
-
-                        ----
-                        **Note**
-                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
-
-                        ----
-
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f64`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session._read_power_spectrum_f64`
-
-        Args:
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
-
-
-        Returns:
-            power_spectrum_data (array.array("d")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout)
-        return power_spectrum_data, spectrum_info
 
     def fetch_iq_multi_record_complex(self, starting_record, number_of_records, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_multi_record_complex
@@ -5504,6 +5414,96 @@ class _SessionBase(object):
             raise TypeError("Unsupported data_type. Is {}, expected {} or {}".format(data_type, numpy.float64, numpy.float32))
 
     @ivi_synchronized
+    def _read_power_spectrum_f32(self, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_power_spectrum_f32
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+                        ----
+                        **Note**
+                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+                        ----
+
+                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_power_spectrum_f32`
+
+        Args:
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+
+        Returns:
+            power_spectrum_data (array.array("f")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout)
+        return power_spectrum_data, spectrum_info
+
+    @ivi_synchronized
+    def _read_power_spectrum_f64(self, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_power_spectrum_f64
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+                        ----
+                        **Note**
+                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+                        ----
+
+                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_power_spectrum_f64`
+
+        Args:
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+
+        Returns:
+            power_spectrum_data (array.array("d")): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
+        power_spectrum_data, spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout)
+        return power_spectrum_data, spectrum_info
+
+    @ivi_synchronized
     def save_configurations_to_file(self, file_path):
         r'''save_configurations_to_file
 
@@ -5939,7 +5939,7 @@ class Session(_SessionBase):
     def abort(self):
         r'''abort
 
-        Stops an acquisition previously started with the _initiate method or the ReadPowerSpectrumF64 method.
+        Stops an acquisition previously started with the _initiate method or the Read_Power_Spectrum method.
 
                         You can also use the abort method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
 
@@ -6028,7 +6028,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read_iq_single_record_complex_f64 method, or the ReadPowerSpectrumF64 method.
+                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read_iq_single_record_complex_f64 method, or the Read_Power_Spectrum method.
 
                         ----
                         **Note**
@@ -6903,7 +6903,6 @@ class Session(_SessionBase):
         terminal_name = self._interpreter.get_terminal_name(signal, signal_identifier)
         return terminal_name
 
-    @ivi_synchronized
     def _init_with_options(self, resource_name, id_query, reset, option_string):
         r'''_init_with_options
 

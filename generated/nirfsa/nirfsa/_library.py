@@ -52,8 +52,6 @@ class Library(object):
         self.niRFSA_EnableSessionAccess_cfunc = None
         self.niRFSA_ErrorMessage_cfunc = None
         self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc = None
-        self.niRFSA_FancyReadPowerSpectrumF32_cfunc = None
-        self.niRFSA_FancyReadPowerSpectrumF64_cfunc = None
         self.niRFSA_FetchIqMultiRecordComplexF32_cfunc = None
         self.niRFSA_FetchIqMultiRecordComplexF64_cfunc = None
         self.niRFSA_FetchIqMultiRecordComplexI16_cfunc = None
@@ -82,6 +80,8 @@ class Library(object):
         self.niRFSA_LockSession_cfunc = None
         self.niRFSA_PerformThermalCorrection_cfunc = None
         self.niRFSA_ReadIqSingleRecordComplexF64_cfunc = None
+        self.niRFSA_ReadPowerSpectrumF32_cfunc = None
+        self.niRFSA_ReadPowerSpectrumF64_cfunc = None
         self.niRFSA_Reset_cfunc = None
         self.niRFSA_ResetDevice_cfunc = None
         self.niRFSA_ResetWithDefaults_cfunc = None
@@ -329,22 +329,6 @@ class Library(object):
                 self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_FancyGetSelfCalibrationDateAndTime_cfunc(vi, self_calibration_step, year, month, day, hour, minute)
 
-    def niRFSA_FancyReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_FancyReadPowerSpectrumF32_cfunc is None:
-                self.niRFSA_FancyReadPowerSpectrumF32_cfunc = self._get_library_function('niRFSA_FancyReadPowerSpectrumF32')
-                self.niRFSA_FancyReadPowerSpectrumF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal32), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
-                self.niRFSA_FancyReadPowerSpectrumF32_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_FancyReadPowerSpectrumF32_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
-
-    def niRFSA_FancyReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_FancyReadPowerSpectrumF64_cfunc is None:
-                self.niRFSA_FancyReadPowerSpectrumF64_cfunc = self._get_library_function('niRFSA_FancyReadPowerSpectrumF64')
-                self.niRFSA_FancyReadPowerSpectrumF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
-                self.niRFSA_FancyReadPowerSpectrumF64_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_FancyReadPowerSpectrumF64_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
-
     def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_FetchIqMultiRecordComplexF32_cfunc is None:
@@ -568,6 +552,22 @@ class Library(object):
                 self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(NIComplexNumber), ViInt64, ctypes.POINTER(waveform_info.struct_niRFSA_wfmInfo)]  # noqa: F405
                 self.niRFSA_ReadIqSingleRecordComplexF64_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ReadIqSingleRecordComplexF64_cfunc(vi, channel_list, timeout, data, data_array_size, wfm_info)
+
+    def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_ReadPowerSpectrumF32_cfunc is None:
+                self.niRFSA_ReadPowerSpectrumF32_cfunc = self._get_library_function('niRFSA_ReadPowerSpectrumF32')
+                self.niRFSA_ReadPowerSpectrumF32_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal32), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
+                self.niRFSA_ReadPowerSpectrumF32_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_ReadPowerSpectrumF32_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
+
+    def niRFSA_ReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_ReadPowerSpectrumF64_cfunc is None:
+                self.niRFSA_ReadPowerSpectrumF64_cfunc = self._get_library_function('niRFSA_ReadPowerSpectrumF64')
+                self.niRFSA_ReadPowerSpectrumF64_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(spectrum_info_type.struct_niRFSA_spectrumInfo)]  # noqa: F405
+                self.niRFSA_ReadPowerSpectrumF64_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_ReadPowerSpectrumF64_cfunc(vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info)
 
     def niRFSA_Reset(self, vi):  # noqa: N802
         with self._func_lock:

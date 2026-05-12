@@ -605,6 +605,40 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
+    def read_power_spectrum_f32(self, channel_list, timeout):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        power_spectrum_data_ctype = None  # case B580
+        data_array_size_ctype = _visatype.ViInt32()  # case S170
+        spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
+        error_code = self._library.niRFSA_ReadPowerSpectrumF32(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        data_array_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        power_spectrum_data_size = data_array_size_ctype.value  # case B590
+        power_spectrum_data_array = array.array("f", [0]) * power_spectrum_data_size  # case B590
+        power_spectrum_data_ctype = _get_ctypes_pointer_for_buffer(value=power_spectrum_data_array, library_type=_visatype.ViReal32)  # case B590
+        error_code = self._library.niRFSA_ReadPowerSpectrumF32(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return power_spectrum_data_array, spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
+
+    def read_power_spectrum_f64(self, channel_list, timeout):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
+        timeout_ctype = _visatype.ViReal64(timeout)  # case S150
+        power_spectrum_data_ctype = None  # case B580
+        data_array_size_ctype = _visatype.ViInt32()  # case S170
+        spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
+        error_code = self._library.niRFSA_ReadPowerSpectrumF64(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
+        data_array_size_ctype = _visatype.ViInt32(error_code)  # case S180
+        power_spectrum_data_size = data_array_size_ctype.value  # case B590
+        power_spectrum_data_array = array.array("d", [0]) * power_spectrum_data_size  # case B590
+        power_spectrum_data_ctype = _get_ctypes_pointer_for_buffer(value=power_spectrum_data_array, library_type=_visatype.ViReal64)  # case B590
+        error_code = self._library.niRFSA_ReadPowerSpectrumF64(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return power_spectrum_data_array, spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
+
     def reset(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSA_Reset(vi_ctype)

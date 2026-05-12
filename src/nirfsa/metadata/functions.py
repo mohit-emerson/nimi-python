@@ -3413,7 +3413,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'Initiate': {
         'codegen_method': 'private',
@@ -3607,7 +3607,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FancyReadPowerSpectrumF32': {
+    'ReadPowerSpectrumF32': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
@@ -3617,7 +3617,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             }
@@ -3691,11 +3691,11 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'python_name': '_read_power_spectrum_f32',
+        #'python_name': '_read_power_spectrum_f32',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FancyReadPowerSpectrumF64': {
+    'ReadPowerSpectrumF64': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
@@ -3706,7 +3706,7 @@ functions = {
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
+                'library_interpreter_filename': 'default_method',
                 'method_python_name_suffix': '',
                 'session_filename': 'default_method'
             }
@@ -3781,7 +3781,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'python_name': '_read_power_spectrum_f64',
+        #'python_name': '_read_power_spectrum_f64',
         'use_session_lock': True
     },
     'ReadPowerSpectrumDispatcher': {

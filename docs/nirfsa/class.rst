@@ -126,7 +126,7 @@ abort
 
     .. py:method:: abort()
 
-            Stops an acquisition previously started with the :py:meth:`nirfsa.Session._initiate` method or the :py:meth:`nirfsa.Session.ReadPowerSpectrumF64` method.
+            Stops an acquisition previously started with the :py:meth:`nirfsa.Session._initiate` method or the :py:meth:`nirfsa.Session.Read_Power_Spectrum` method.
 
                             You can also use the :py:meth:`nirfsa.Session.abort` method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
 
@@ -261,7 +261,7 @@ commit
 
             Commits settings to hardware.
 
-                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.ReadPowerSpectrumF64` method.
+                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.Read_Power_Spectrum` method.
 
                             ----
                             **Note**
@@ -10626,7 +10626,7 @@ temperature_read_interval
 
         Indicates the minimum time between temperature sensor readings in seconds.
 
-        When you call the :py:meth:`nirfsa.Session.ReadPowerSpectrumF64` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+        When you call the :py:meth:`nirfsa.Session.Read_Power_Spectrum` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
         ----
         **Note**

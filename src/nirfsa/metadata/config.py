@@ -11,6 +11,12 @@ config = {
     },
     'custom_types': [
         {
+            'ctypes_type': 'struct_niRFSA_coefficientInfo',
+            'file_name': 'coefficient_info_type',
+            'grpc_name': 'CoefficientInfo',
+            'python_name': 'CoefficientInfo'
+        },
+        {
             'ctypes_type': 'struct_niRFSA_wfmInfo',
             'file_name': 'waveform_info',
             'grpc_name': 'WaveformInfo',

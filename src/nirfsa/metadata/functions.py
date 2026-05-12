@@ -1447,7 +1447,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
@@ -1460,7 +1460,7 @@ functions = {
                     'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
                 'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': '0 if data is None else len(data) // 2'},
+                'size': {'mechanism': 'python-code', 'value': '0 if waveform_data is None else len(waveform_data) // 2'},
                 'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': False
@@ -1564,7 +1564,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumberF32[]',
@@ -1672,7 +1672,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
@@ -1780,7 +1780,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexI16[]',
@@ -1798,7 +1798,6 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        # 'python_name': '_fetch_iq_multi_record_complex_i16',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -1874,7 +1873,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'type': 'NIComplexNumber',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1884,7 +1883,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.'
                 },
-                'name': 'dataType',
+                'name': 'waveformDataType',
                 'numpy': True,
                 'type': 'NIComplexNumber',
                 'use_array': False,
@@ -1984,7 +1983,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumberF32[]',
@@ -2082,7 +2081,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
@@ -2180,7 +2179,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexI16[]',
@@ -2264,7 +2263,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'data',
+                'name': 'waveformData',
                 'type': 'NIComplexNumber',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2274,7 +2273,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.'
                 },
-                'name': 'dataType',
+                'name': 'waveformDataType',
                 'numpy': True,
                 'type': 'NIComplexNumber',
                 'use_array': False,
@@ -3215,6 +3214,81 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
+    'GetScalingCoefficients': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns coefficients you can use to convert unscaled data to scaled I/Q data.\n\n                Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this function to obtain nirfsa_GetScalingCoefficients structures in the **NIRFSA_ATTR_COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **NIRFSA_ATTR_COEFFICIENT_INFO** array returns one element for each channel specified in the **NIRFSA_ATTR_CHANNEL_LIST** parameter. The element order matches the order specified by the **NIRFSA_ATTR_CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **NIRFSA_ATTR_COEFFICIENT_INFO** element then adding the offset from the same element.\n\n                ----\n                **Note**\n                The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.\n\n                ----\n\n                To get the required size of the array, call this function with **NIRFSA_ATTR_ARRAY_SIZE** set to 0 and NULL for the **NIRFSA_ATTR_COEFFICIENT_INFO** array. This function returns the required size in the **NIRFSA_ATTR_NUMBER_OF_COEFFICIENT_SETS** parameter.\n\n                **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array you specify for the **NIRFSA_ATTR_COEFFICIENT_INFO** parameter.'
+                },
+                'name': 'arraySize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Specifies the array for storing the coefficient info.\n\n                        - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.\n                        - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.'
+                },
+                'name': 'coefficientInfo',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'arraySize',
+                    'value_twist': 'numberOfCoefficientSets'
+                },
+                'type': 'niRFSA_coefficientInfo[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of valid coefficient sets.'
+                },
+                'name': 'numberOfCoefficientSets',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
     'GetSelfCalibrationTemperature': {
         'codegen_method': 'public',
         'documentation': {
@@ -3258,7 +3332,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.'
                 },
-                'name': 'temp',
+                'name': 'temperature',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3691,7 +3765,6 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        #'python_name': '_read_power_spectrum_f32',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -3781,7 +3854,6 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        #'python_name': '_read_power_spectrum_f64',
         'use_session_lock': True
     },
     'ReadPowerSpectrumDispatcher': {
@@ -3839,7 +3911,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.'
                 },
-                'name': 'dataType',
+                'name': 'spectrumDataType',
                 'numpy': True,
                 'type': 'NIComplexNumber',
                 'use_array': False,

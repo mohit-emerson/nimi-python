@@ -65,6 +65,25 @@ enums = {
             }
         ]
     },
+    'AllowOutOfSpecificationUserSettings': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables out-of-specification user settings.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables out-of-specification user settings.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'ArmReferenceTriggerType': {
         'codegen_method': 'public',
         'values': [
@@ -294,6 +313,25 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_VSA_COMBINED_RESPONSE',
                 'value': 2804
+            }
+        ]
+    },
+    'DigitizerDitherEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables dither on the digitizer.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables dither on the digitizer.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
             }
         ]
     },
@@ -867,6 +905,44 @@ enums = {
             }
         ]
     },
+    'InputIsolationEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables input isolation.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables input isolation.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
+    'IfConditioningDownConversionEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables IF conditioning downconversion.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables IF conditioning downconversion.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'InputPort': {
         'codegen_method': 'public',
         'values': [
@@ -1027,6 +1103,25 @@ enums = {
             }
         ]
     },
+    'Lo2ExportEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables LO2 export.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables LO2 export.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'LoInjection': {
         'codegen_method': 'public',
         'values': [
@@ -1072,6 +1167,25 @@ enums = {
             }
         ]
     },
+    'LoOutExportConfigureFromRfsg': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Do not allow NI-RFSG to control the NI-RFSA local oscillator export.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Allow NI-RFSG to control the NI-RFSA local oscillator export.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'LoPathSel': {
         'codegen_method': 'public',
         'values': [
@@ -1109,6 +1223,25 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_LO_PATH_5',
                 'value': 2304
+            }
+        ]
+    },
+    'LoPllFractionalModeEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables fractional mode for the LO PLL.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables fractional mode for the LO PLL.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
             }
         ]
     },
@@ -1186,6 +1319,44 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_LOAD_CONFIGURATIONS_FROM_FILE_RESET_OPTIONS_SKIP_DEEMBEDDING_TABLES',
                 'value': 2
+            }
+        ]
+    },
+    'NoiseSourcePowerEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables the noise source power.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables the noise source power.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
+    'LowFrequencyBypassEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables low frequency bypass.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables low frequency bypass.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
             }
         ]
     },
@@ -1484,6 +1655,25 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_REF_IN_STR',
                 'value': 'RefIn'
+            }
+        ]
+    },
+    'RefTriggerOspDelayEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables OSP delay for the Reference Trigger.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables OSP delay for the Reference Trigger.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
             }
         ]
     },
@@ -2158,6 +2348,25 @@ enums = {
             }
         ]
     },
+    'SmoothSpectrumEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables spectrum smoothing.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables spectrum smoothing.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'SoftwareTriggerType': {
         'values': [
             {
@@ -2458,6 +2667,25 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES',
                 'value': 1
+            }
+        ]
+    },
+    'SyncRefTriggerDelayEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables synchronization reference trigger delay.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables synchronization reference trigger delay.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
             }
         ]
     },

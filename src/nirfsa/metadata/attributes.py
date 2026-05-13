@@ -2420,17 +2420,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables dither on the digitizer.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables dither on the digitizer.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'DigitizerDitherEnabled',
         'lv_property': 'Signal Path:Digitizer Dither Enabled',
         'name': 'DIGITIZER_DITHER_ENABLED',
         'type': 'ViInt32'
@@ -2942,17 +2942,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables IF conditioning downconversion.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables IF conditioning downconversion.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'IfConditioningDownConversionEnabled',
         'lv_property': 'Signal Path:Advanced:IF Conditioning Downconversion Enabled',
         'name': 'IF_CONDITIONING_DOWN_CONVERSION_ENABLED',
         'type': 'ViInt32'
@@ -3171,17 +3171,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables input isolation.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables input isolation.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'InputIsolationEnabled',
         'lv_property': 'Signal Path:Advanced:Input Isolation Enabled',
         'name': 'INPUT_ISOLATION_ENABLED',
         'type': 'ViInt32'
@@ -3354,17 +3354,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables fractional mode for the LO PLL.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables fractional mode for the LO PLL.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'LoPllFractionalModeEnabled',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO PLL Fractional Mode Enabled',
         'name': 'LO_PLL_FRACTIONAL_MODE_ENABLED',
         'type': 'ViInt32'
@@ -3388,17 +3388,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables synchronization reference trigger delay.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables synchronization reference trigger delay.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'SyncRefTriggerDelayEnabled',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Delay Enabled',
         'name': 'SYNC_REF_TRIGGER_DELAY_ENABLED',
         'type': 'ViInt32',
@@ -3478,17 +3478,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables OSP delay for the Reference Trigger.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables OSP delay for the Reference Trigger.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'RefTriggerOspDelayEnabled',
         'lv_property': 'Triggers:Ref:Advanced:OSP Delay Enabled',
         'name': 'REF_TRIGGER_OSP_DELAY_ENABLED',
         'type': 'ViInt32'
@@ -3542,17 +3542,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables low frequency bypass.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables low frequency bypass.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'LowFrequencyBypassEnabled',
         'lv_property': 'Signal Path:Advanced:Low Frequency Bypass Enabled',
         'name': 'LOW_FREQUENCY_BYPASS_ENABLED',
         'type': 'ViInt32'
@@ -3586,17 +3586,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables spectrum smoothing.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables spectrum smoothing.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'SmoothSpectrumEnabled',
         'lv_property': 'Acquisition:Spectrum:Smooth Spectrum Enabled',
         'name': 'SMOOTH_SPECTRUM_ENABLED',
         'type': 'ViInt32'
@@ -3630,17 +3630,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables the noise source power.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables the noise source power.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'NoiseSourcePowerEnabled',
         'lv_property': 'Device Specific:5606:Noise Source Power Enabled',
         'name': 'NOISE_SOURCE_POWER_ENABLED',
         'type': 'ViInt32'
@@ -3708,17 +3708,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables LO2 export.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables LO2 export.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'Lo2ExportEnabled',
         'lv_property': 'Signal Path:LO2 Export Enabled',
         'name': 'LO2_EXPORT_ENABLED',
         'type': 'ViInt32'
@@ -3782,17 +3782,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Disables out-of-specification user settings.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Enables out-of-specification user settings.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'AllowOutOfSpecificationUserSettings',
         'lv_property': 'Acquisition:Advanced:Allow Out Of Specification User Settings',
         'name': 'ALLOW_OUT_OF_SPECIFICATION_USER_SETTINGS',
         'type': 'ViInt32'
@@ -3910,17 +3910,17 @@ attributes = {
                 [
                     'NIRFSA_VAL_DISABLED',
                     '1900 (0x76c)',
-                    'The attribute is disabled.',
+                    'Do not allow NI-RFSG to control the NI-RFSA local oscillator export.',
                 ],
                 [
                     'NIRFSA_VAL_ENABLED',
                     '1901 (0x76d)',
-                    'The attribute is enabled.',
+                    'Allow NI-RFSG to control the NI-RFSA local oscillator export.',
                 ],
             ],
             'table_header': ['Name', 'Value', 'Description']
         },
-        'enum': 'EnableAttrVals',
+        'enum': 'LoOutExportConfigureFromRfsg',
         'lv_property': 'Signal Path:LO Out Export Configure From RFSG',
         'name': 'LO_OUT_EXPORT_CONFIGURE_FROM_RFSG',
         'type': 'ViInt32'

@@ -42,6 +42,17 @@ class AdvanceTriggerType(Enum):
     '''
 
 
+class AllowOutOfSpecificationUserSettings(Enum):
+    DISABLED = 1900
+    r'''
+    Disables out-of-specification user settings.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables out-of-specification user settings.
+    '''
+
+
 class ArmReferenceTriggerType(Enum):
     NONE = 600
     r'''
@@ -170,6 +181,17 @@ class DeviceResponseType(Enum):
     VSA_COMBINED = 2804
     r'''
     Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.
+    '''
+
+
+class DigitizerDitherEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables dither on the digitizer.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables dither on the digitizer.
     '''
 
 
@@ -499,6 +521,28 @@ class IFfilterSelection(Enum):
     '''
 
 
+class IfConditioningDownConversionEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables IF conditioning downconversion.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables IF conditioning downconversion.
+    '''
+
+
+class InputIsolationEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables input isolation.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables input isolation.
+    '''
+
+
 class InputPort(Enum):
     RF_IN = 2000
     r'''
@@ -591,6 +635,17 @@ class LinearInterpolationFormat(Enum):
     '''
 
 
+class Lo2ExportEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables LO2 export.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables LO2 export.
+    '''
+
+
 class LoInjection(Enum):
     HIGH = 1300
     r'''
@@ -617,6 +672,17 @@ class LoNumber(Enum):
     '''
 
 
+class LoOutExportConfigureFromRfsg(Enum):
+    DISABLED = 1900
+    r'''
+    Do not allow NI-RFSG to control the NI-RFSA local oscillator export.
+    '''
+    ENABLED = 1901
+    r'''
+    Allow NI-RFSG to control the NI-RFSA local oscillator export.
+    '''
+
+
 class LoPathSel(Enum):
     _1 = 2300
     r'''
@@ -637,6 +703,17 @@ class LoPathSel(Enum):
     _5 = 2304
     r'''
     Specifies that the LO path 5 is used.
+    '''
+
+
+class LoPllFractionalModeEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables fractional mode for the LO PLL.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables fractional mode for the LO PLL.
     '''
 
 
@@ -682,6 +759,28 @@ class LoadConfigurationResetOptions(Enum):
     DEEMBEDDING_TABLES = 2
     r'''
     NI-RFSA skips resetting the de-embedding tables.
+    '''
+
+
+class LowFrequencyBypassEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables low frequency bypass.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables low frequency bypass.
+    '''
+
+
+class NoiseSourcePowerEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables the noise source power.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables the noise source power.
     '''
 
 
@@ -853,6 +952,17 @@ class PxiChassisClk10Source(Enum):
     REF_IN = 'RefIn'
     r'''
     The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 FREQ REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.
+    '''
+
+
+class RefTriggerOspDelayEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables OSP delay for the Reference Trigger.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables OSP delay for the Reference Trigger.
     '''
 
 
@@ -1241,6 +1351,17 @@ class SignalConditioningEnabled(Enum):
     '''
 
 
+class SmoothSpectrumEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables spectrum smoothing.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables spectrum smoothing.
+    '''
+
+
 class SoftwareTriggerType(Enum):
     SCRIPT = 1
     r'''
@@ -1413,6 +1534,17 @@ class StepsToOmit(Enum):
     ROUTES = 1
     r'''
     Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
+    '''
+
+
+class SyncRefTriggerDelayEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables synchronization reference trigger delay.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables synchronization reference trigger delay.
     '''
 
 

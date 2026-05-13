@@ -239,26 +239,26 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    allow_out_of_specification_user_settings = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150256)
-    '''Type: enums.EnableAttrVals
+    allow_out_of_specification_user_settings = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AllowOutOfSpecificationUserSettings, 1150256)
+    '''Type: enums.AllowOutOfSpecificationUserSettings
 
     Enables or disables warnings and errors when you set frequency, power, or bandwidth values beyond the limits of the NI-RFSA device specifications.
 
-    When you set this property to EnableAttrVals.ENABLED, the driver does not report out-of-specification warnings and errors.
+    When you set this property to AllowOutOfSpecificationUserSettings.ENABLED, the driver does not report out-of-specification warnings and errors.
 
     **Defined Values:**
 
-    **Default Value**: EnableAttrVals.DISABLED
+    **Default Value**: AllowOutOfSpecificationUserSettings.DISABLED
 
     **Supported Devices:** PXIe-5820/5830/5831/5840/5841/5842/5860
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +----------------------------------------------+--------------+----------------------------------------------+
+    | Name                                         | Value        | Description                                  |
+    +==============================================+==============+==============================================+
+    | AllowOutOfSpecificationUserSettings.DISABLED | 1900 (0x76c) | Disables out-of-specification user settings. |
+    +----------------------------------------------+--------------+----------------------------------------------+
+    | AllowOutOfSpecificationUserSettings.ENABLED  | 1901 (0x76d) | Enables out-of-specification user settings.  |
+    +----------------------------------------------+--------------+----------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1076,8 +1076,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
     '''
-    digitizer_dither_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150080)
-    '''Type: enums.EnableAttrVals
+    digitizer_dither_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitizerDitherEnabled, 1150080)
+    '''Type: enums.DigitizerDitherEnabled
 
     Specifies whether dithering is enabled on the digitizer.
 
@@ -1097,21 +1097,21 @@ class _SessionBase(object):
 
     ----
     **Note**
-    For the PXIe-5820/5830/5831/5832/5840/5841/5842, only EnableAttrVals.ENABLED is supported.
+    For the PXIe-5820/5830/5831/5832/5840/5841/5842, only DigitizerDitherEnabled.ENABLED is supported.
 
     ----
 
-    **Default Value**: EnableAttrVals.ENABLED
+    **Default Value**: DigitizerDitherEnabled.ENABLED
 
     **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +---------------------------------+--------------+-----------------------------------+
+    | Name                            | Value        | Description                       |
+    +=================================+==============+===================================+
+    | DigitizerDitherEnabled.DISABLED | 1900 (0x76c) | Disables dither on the digitizer. |
+    +---------------------------------+--------------+-----------------------------------+
+    | DigitizerDitherEnabled.ENABLED  | 1901 (0x76d) | Enables dither on the digitizer.  |
+    +---------------------------------+--------------+-----------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -2374,8 +2374,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5601/5603/5605 (external digitizer mode), PXIe-5663/5663E/5665/5667, PXIe-5693
     '''
-    if_conditioning_down_conversion_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150161)
-    '''Type: enums.EnableAttrVals
+    if_conditioning_down_conversion_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IfConditioningDownConversionEnabled, 1150161)
+    '''Type: enums.IfConditioningDownConversionEnabled
 
     Specifies whether downconversion to 21.4 MHz is enabled for the IF conditioning module.
 
@@ -2383,29 +2383,29 @@ class _SessionBase(object):
 
     ----
     **Note**
-    If you set the signal_conditioning_enabled property to SignalConditioningEnabled.BYPASSED, you cannot set the if_conditioning_down_conversion_enabled property to EnableAttrVals.ENABLED.
+    If you set the signal_conditioning_enabled property to SignalConditioningEnabled.BYPASSED, you cannot set the if_conditioning_down_conversion_enabled property to IfConditioningDownConversionEnabled.ENABLED.
 
     ----
 
     ----
     **Note**
-    For the PXI-5661, PXIe-5663/5663E/5665, the only valid value for this property is EnableAttrVals.DISABLED.
+    For the PXI-5661, PXIe-5663/5663E/5665, the only valid value for this property is IfConditioningDownConversionEnabled.DISABLED.
 
     ----
 
     **Defined Values:**
 
-    **Default Values**: EnableAttrVals.DISABLED
+    **Default Values**: IfConditioningDownConversionEnabled.DISABLED
 
     **Supported Devices**: PXIe-5667, PXIe-5694
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +----------------------------------------------+--------------+------------------------------------------+
+    | Name                                         | Value        | Description                              |
+    +==============================================+==============+==========================================+
+    | IfConditioningDownConversionEnabled.DISABLED | 1900 (0x76c) | Disables IF conditioning downconversion. |
+    +----------------------------------------------+--------------+------------------------------------------+
+    | IfConditioningDownConversionEnabled.ENABLED  | 1901 (0x76d) | Enables IF conditioning downconversion.  |
+    +----------------------------------------------+--------------+------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -2529,8 +2529,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
     '''
-    input_isolation_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150170)
-    '''Type: enums.EnableAttrVals
+    input_isolation_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.InputIsolationEnabled, 1150170)
+    '''Type: enums.InputIsolationEnabled
 
     Specifies whether input isolation is enabled.
 
@@ -2546,17 +2546,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value**: EnableAttrVals.DISABLED, if the device configuration is supported.
+    **Default Value**: InputIsolationEnabled.DISABLED, if the device configuration is supported.
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5693, PXIe-5820/5830/5831/5832/5840/5841
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +--------------------------------+--------------+---------------------------+
+    | Name                           | Value        | Description               |
+    +================================+==============+===========================+
+    | InputIsolationEnabled.DISABLED | 1900 (0x76c) | Disables input isolation. |
+    +--------------------------------+--------------+---------------------------+
+    | InputIsolationEnabled.ENABLED  | 1901 (0x76d) | Enables input isolation.  |
+    +--------------------------------+--------------+---------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -2939,8 +2939,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    lo2_export_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150235)
-    '''Type: enums.EnableAttrVals
+    lo2_export_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.Lo2ExportEnabled, 1150235)
+    '''Type: enums.Lo2ExportEnabled
 
     Specifies whether to enable the LO2 OUT terminal on the installed devices.
 
@@ -2959,13 +2959,13 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +---------------------------+--------------+----------------------+
+    | Name                      | Value        | Description          |
+    +===========================+==============+======================+
+    | Lo2ExportEnabled.DISABLED | 1900 (0x76c) | Disables LO2 export. |
+    +---------------------------+--------------+----------------------+
+    | Lo2ExportEnabled.ENABLED  | 1901 (0x76d) | Enables LO2 export.  |
+    +---------------------------+--------------+----------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3002,27 +3002,27 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    low_frequency_bypass_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150207)
-    '''Type: enums.EnableAttrVals
+    low_frequency_bypass_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LowFrequencyBypassEnabled, 1150207)
+    '''Type: enums.LowFrequencyBypassEnabled
 
     Specifies whether to use the low-frequency bypass path for the incoming RF signal.
 
     |                            |                                         |
     |:---------------------------|:----------------------------------------|
-    | EnableAttrVals.DISABLED (1900) | Disables the low-frequency bypass path. |
-    | EnableAttrVals.ENABLED (1901)  | Enables the low-frequency bypass path.  |
+    | LowFrequencyBypassEnabled.DISABLED (1900) | Disables the low-frequency bypass path. |
+    | LowFrequencyBypassEnabled.ENABLED (1901)  | Enables the low-frequency bypass path.  |
 
-    **Default Value**: EnableAttrVals.DISABLED
+    **Default Value**: LowFrequencyBypassEnabled.DISABLED
 
     **Supported Devices**: PXIe-5693, PXIe-5667
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +------------------------------------+--------------+--------------------------------+
+    | Name                               | Value        | Description                    |
+    +====================================+==============+================================+
+    | LowFrequencyBypassEnabled.DISABLED | 1900 (0x76c) | Disables low frequency bypass. |
+    +------------------------------------+--------------+--------------------------------+
+    | LowFrequencyBypassEnabled.ENABLED  | 1901 (0x76d) | Enables low frequency bypass.  |
+    +------------------------------------+--------------+--------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3193,26 +3193,26 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
     '''
-    lo_out_export_configure_from_rfsg = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150299)
-    '''Type: enums.EnableAttrVals
+    lo_out_export_configure_from_rfsg = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoOutExportConfigureFromRfsg, 1150299)
+    '''Type: enums.LoOutExportConfigureFromRfsg
 
     Specifies whether to allow NI-RFSG to control the NI-RFSA LO out export.
 
-    Set this property to EnableAttrVals.ENABLED to allow NI-RFSG to control the LO out export. Use the NIRFSG ATTR RF IN LO EXPORT ENABLED property to control the NI-RFSA LO out export from NI-RFSG.
+    Set this property to LoOutExportConfigureFromRfsg.ENABLED to allow NI-RFSG to control the LO out export. Use the NIRFSG ATTR RF IN LO EXPORT ENABLED property to control the NI-RFSA LO out export from NI-RFSG.
 
     **Defined Values:**
 
-    **Default Value:** EnableAttrVals.DISABLED
+    **Default Value:** LoOutExportConfigureFromRfsg.DISABLED
 
     **Supported Devices**: PXIe-5840/5841/5842
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +---------------------------------------+--------------+----------------------------------------------------------------------+
+    | Name                                  | Value        | Description                                                          |
+    +=======================================+==============+======================================================================+
+    | LoOutExportConfigureFromRfsg.DISABLED | 1900 (0x76c) | Do not allow NI-RFSG to control the NI-RFSA local oscillator export. |
+    +---------------------------------------+--------------+----------------------------------------------------------------------+
+    | LoOutExportConfigureFromRfsg.ENABLED  | 1901 (0x76d) | Allow NI-RFSG to control the NI-RFSA local oscillator export.        |
+    +---------------------------------------+--------------+----------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3228,8 +3228,8 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5830/5831/5832/5840/5841/5842
     '''
-    lo_pll_fractional_mode_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150187)
-    '''Type: enums.EnableAttrVals
+    lo_pll_fractional_mode_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoPllFractionalModeEnabled, 1150187)
+    '''Type: enums.LoPllFractionalModeEnabled
 
     Specifies whether to use fractional mode for the local oscillator (LO) phase-locked loop (PLL).
 
@@ -3251,17 +3251,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value**: EnableAttrVals.ENABLED
+    **Default Value**: LoPllFractionalModeEnabled.ENABLED
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +-------------------------------------+--------------+------------------------------------------+
+    | Name                                | Value        | Description                              |
+    +=====================================+==============+==========================================+
+    | LoPllFractionalModeEnabled.DISABLED | 1900 (0x76c) | Disables fractional mode for the LO PLL. |
+    +-------------------------------------+--------------+------------------------------------------+
+    | LoPllFractionalModeEnabled.ENABLED  | 1901 (0x76d) | Enables fractional mode for the LO PLL.  |
+    +-------------------------------------+--------------+------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3552,26 +3552,26 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    noise_source_power_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150222)
-    '''Type: enums.EnableAttrVals
+    noise_source_power_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.NoiseSourcePowerEnabled, 1150222)
+    '''Type: enums.NoiseSourcePowerEnabled
 
     Enables the 28 V DC source on the device front panel.
 
-    **PXIe-5668 with PXIe-5698**: When this property is set to EnableAttrVals.ENABLED, the PXIe-5698 noise source is used instead of the PXIe-5668 noise source.
+    **PXIe-5668 with PXIe-5698**: When this property is set to NoiseSourcePowerEnabled.ENABLED, the PXIe-5698 noise source is used instead of the PXIe-5668 noise source.
 
     **Units**: dB
 
-    **Default Value**: EnableAttrVals.DISABLED
+    **Default Value**: NoiseSourcePowerEnabled.DISABLED
 
     **Supported Devices**: PXIe-5606, PXIe-5668, PXIe-5698
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +----------------------------------+--------------+----------------------------------+
+    | Name                             | Value        | Description                      |
+    +==================================+==============+==================================+
+    | NoiseSourcePowerEnabled.DISABLED | 1900 (0x76c) | Disables the noise source power. |
+    +----------------------------------+--------------+----------------------------------+
+    | NoiseSourcePowerEnabled.ENABLED  | 1901 (0x76d) | Enables the noise source power.  |
+    +----------------------------------+--------------+----------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4037,8 +4037,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    ref_trigger_osp_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150196)
-    '''Type: enums.EnableAttrVals
+    ref_trigger_osp_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTriggerOspDelayEnabled, 1150196)
+    '''Type: enums.RefTriggerOspDelayEnabled
 
     Specifies whether the digitizer OSP block delays Reference Triggers, along with the data samples, moving through the OSP block or if the Reference Triggers bypass the OSP block and are processed immediately.
 
@@ -4078,17 +4078,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value**: EnableAttrVals.ENABLED
+    **Default Value**: RefTriggerOspDelayEnabled.ENABLED
 
     **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +------------------------------------+--------------+-----------------------------------------------+
+    | Name                               | Value        | Description                                   |
+    +====================================+==============+===============================================+
+    | RefTriggerOspDelayEnabled.DISABLED | 1900 (0x76c) | Disables OSP delay for the Reference Trigger. |
+    +------------------------------------+--------------+-----------------------------------------------+
+    | RefTriggerOspDelayEnabled.ENABLED  | 1901 (0x76d) | Enables OSP delay for the Reference Trigger.  |
+    +------------------------------------+--------------+-----------------------------------------------+
 
     Note:
     One or more of the referenced properties are not in the Python API for this driver.
@@ -4549,8 +4549,8 @@ class _SessionBase(object):
     | SignalConditioningEnabled.BYPASSED | 3601 (0xe11) | Bypasses all signal conditioning. |
     +------------------------------------+--------------+-----------------------------------+
     '''
-    smooth_spectrum_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150219)
-    '''Type: enums.EnableAttrVals
+    smooth_spectrum_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SmoothSpectrumEnabled, 1150219)
+    '''Type: enums.SmoothSpectrumEnabled
 
     Specifies that an optimized IF filtering selection is made at different spectrum frequency ranges during spectrum acquisition.
 
@@ -4569,17 +4569,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value**: EnableAttrVals.DISABLED
+    **Default Value**: SmoothSpectrumEnabled.DISABLED
 
     **Supported Devices**: PXIe-5665/5668
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +--------------------------------+--------------+------------------------------+
+    | Name                           | Value        | Description                  |
+    +================================+==============+==============================+
+    | SmoothSpectrumEnabled.DISABLED | 1900 (0x76c) | Disables spectrum smoothing. |
+    +--------------------------------+--------------+------------------------------+
+    | SmoothSpectrumEnabled.ENABLED  | 1901 (0x76d) | Enables spectrum smoothing.  |
+    +--------------------------------+--------------+------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4921,28 +4921,28 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    sync_ref_trigger_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableAttrVals, 1150189)
+    sync_ref_trigger_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SyncRefTriggerDelayEnabled, 1150189)
     '''Type: hightime.timedelta
 
     Specifies whether the Reference Trigger is delayed with the data.
 
-    Set this property to EnableAttrVals.DISABLED when the ref_trigger_type property is set to ReferenceTriggerType.IQ_POWER_EDGE or ReferenceTriggerType.IQ_ANALOG_EDGE.
+    Set this property to SyncRefTriggerDelayEnabled.DISABLED when the ref_trigger_type property is set to ReferenceTriggerType.IQ_POWER_EDGE or ReferenceTriggerType.IQ_ANALOG_EDGE.
 
     Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
 
     **Defined Values:**
 
-    **Default Value**: EnableAttrVals.DISABLED
+    **Default Value**: SyncRefTriggerDelayEnabled.DISABLED
 
     **Supported Devices:** PXIe-5644/5645/5646
 
-    +-------------------------+--------------+---------------------------+
-    | Name                    | Value        | Description               |
-    +=========================+==============+===========================+
-    | EnableAttrVals.DISABLED | 1900 (0x76c) | The property is disabled. |
-    +-------------------------+--------------+---------------------------+
-    | EnableAttrVals.ENABLED  | 1901 (0x76d) | The property is enabled.  |
-    +-------------------------+--------------+---------------------------+
+    +-------------------------------------+--------------+---------------------------------------------------+
+    | Name                                | Value        | Description                                       |
+    +=====================================+==============+===================================================+
+    | SyncRefTriggerDelayEnabled.DISABLED | 1900 (0x76c) | Disables synchronization reference trigger delay. |
+    +-------------------------------------+--------------+---------------------------------------------------+
+    | SyncRefTriggerDelayEnabled.ENABLED  | 1901 (0x76d) | Enables synchronization reference trigger delay.  |
+    +-------------------------------------+--------------+---------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

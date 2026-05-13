@@ -2931,35 +2931,35 @@ allow_out_of_specification_user_settings
 
         Enables or disables warnings and errors when you set frequency, power, or bandwidth values beyond the limits of the NI-RFSA device specifications.
 
-        When you set this property to :py:data:`~nirfsa.EnableAttrVals.ENABLED`, the driver does not report out-of-specification warnings and errors.
+        When you set this property to :py:data:`~nirfsa.AllowOutOfSpecificationUserSettings.ENABLED`, the driver does not report out-of-specification warnings and errors.
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Value**: :py:data:`~nirfsa.AllowOutOfSpecificationUserSettings.DISABLED`
 
         **Supported Devices:** PXIe-5820/5830/5831/5840/5841/5842/5860
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +-----------------------------------------------------------------+--------------+----------------------------------------------+
+        | Name                                                            | Value        | Description                                  |
+        +=================================================================+==============+==============================================+
+        | :py:data:`~nirfsa.AllowOutOfSpecificationUserSettings.DISABLED` | 1900 (0x76c) | Disables out-of-specification user settings. |
+        +-----------------------------------------------------------------+--------------+----------------------------------------------+
+        | :py:data:`~nirfsa.AllowOutOfSpecificationUserSettings.ENABLED`  | 1901 (0x76d) | Enables out-of-specification user settings.  |
+        +-----------------------------------------------------------------+--------------+----------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | enums.AllowOutOfSpecificationUserSettings |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -4325,35 +4325,35 @@ digitizer_dither_enabled
 
         ----
         **Note**
-        For the PXIe-5820/5830/5831/5832/5840/5841/5842, only :py:data:`~nirfsa.EnableAttrVals.ENABLED` is supported.
+        For the PXIe-5820/5830/5831/5832/5840/5841/5842, only :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED` is supported.
 
         ----
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.ENABLED`
+        **Default Value**: :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED`
 
         **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +----------------------------------------------------+--------------+-----------------------------------+
+        | Name                                               | Value        | Description                       |
+        +====================================================+==============+===================================+
+        | :py:data:`~nirfsa.DigitizerDitherEnabled.DISABLED` | 1900 (0x76c) | Disables dither on the digitizer. |
+        +----------------------------------------------------+--------------+-----------------------------------+
+        | :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED`  | 1901 (0x76d) | Enables dither on the digitizer.  |
+        +----------------------------------------------------+--------------+-----------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+------------------------------+
+            | Characteristic        | Value                        |
+            +=======================+==============================+
+            | Datatype              | enums.DigitizerDitherEnabled |
+            +-----------------------+------------------------------+
+            | Permissions           | read-write                   |
+            +-----------------------+------------------------------+
+            | Repeated Capabilities | None                         |
+            +-----------------------+------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6485,43 +6485,43 @@ if_conditioning_down_conversion_enabled
 
         ----
         **Note**
-        If you set the :py:attr:`nirfsa.Session.signal_conditioning_enabled` property to :py:data:`~nirfsa.SignalConditioningEnabled.BYPASSED`, you cannot set the :py:attr:`nirfsa.Session.if_conditioning_down_conversion_enabled` property to :py:data:`~nirfsa.EnableAttrVals.ENABLED`.
+        If you set the :py:attr:`nirfsa.Session.signal_conditioning_enabled` property to :py:data:`~nirfsa.SignalConditioningEnabled.BYPASSED`, you cannot set the :py:attr:`nirfsa.Session.if_conditioning_down_conversion_enabled` property to :py:data:`~nirfsa.IfConditioningDownConversionEnabled.ENABLED`.
 
         ----
 
         ----
         **Note**
-        For the PXI-5661, PXIe-5663/5663E/5665, the only valid value for this property is :py:data:`~nirfsa.EnableAttrVals.DISABLED`.
+        For the PXI-5661, PXIe-5663/5663E/5665, the only valid value for this property is :py:data:`~nirfsa.IfConditioningDownConversionEnabled.DISABLED`.
 
         ----
 
         **Defined Values:**
 
-        **Default Values**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Values**: :py:data:`~nirfsa.IfConditioningDownConversionEnabled.DISABLED`
 
         **Supported Devices**: PXIe-5667, PXIe-5694
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +-----------------------------------------------------------------+--------------+------------------------------------------+
+        | Name                                                            | Value        | Description                              |
+        +=================================================================+==============+==========================================+
+        | :py:data:`~nirfsa.IfConditioningDownConversionEnabled.DISABLED` | 1900 (0x76c) | Disables IF conditioning downconversion. |
+        +-----------------------------------------------------------------+--------------+------------------------------------------+
+        | :py:data:`~nirfsa.IfConditioningDownConversionEnabled.ENABLED`  | 1901 (0x76d) | Enables IF conditioning downconversion.  |
+        +-----------------------------------------------------------------+--------------+------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-------------------------------------------+
+            | Characteristic        | Value                                     |
+            +=======================+===========================================+
+            | Datatype              | enums.IfConditioningDownConversionEnabled |
+            +-----------------------+-------------------------------------------+
+            | Permissions           | read-write                                |
+            +-----------------------+-------------------------------------------+
+            | Repeated Capabilities | None                                      |
+            +-----------------------+-------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -6747,31 +6747,31 @@ input_isolation_enabled
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`, if the device configuration is supported.
+        **Default Value**: :py:data:`~nirfsa.InputIsolationEnabled.DISABLED`, if the device configuration is supported.
 
         **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5693, PXIe-5820/5830/5831/5832/5840/5841
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +---------------------------------------------------+--------------+---------------------------+
+        | Name                                              | Value        | Description               |
+        +===================================================+==============+===========================+
+        | :py:data:`~nirfsa.InputIsolationEnabled.DISABLED` | 1900 (0x76c) | Disables input isolation. |
+        +---------------------------------------------------+--------------+---------------------------+
+        | :py:data:`~nirfsa.InputIsolationEnabled.ENABLED`  | 1901 (0x76d) | Enables input isolation.  |
+        +---------------------------------------------------+--------------+---------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.InputIsolationEnabled |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | None                        |
+            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7539,27 +7539,27 @@ lo2_export_enabled
 
         **Supported Devices:** PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +----------------------------------------------+--------------+----------------------+
+        | Name                                         | Value        | Description          |
+        +==============================================+==============+======================+
+        | :py:data:`~nirfsa.Lo2ExportEnabled.DISABLED` | 1900 (0x76c) | Disables LO2 export. |
+        +----------------------------------------------+--------------+----------------------+
+        | :py:data:`~nirfsa.Lo2ExportEnabled.ENABLED`  | 1901 (0x76d) | Enables LO2 export.  |
+        +----------------------------------------------+--------------+----------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+------------------------+
+            | Characteristic        | Value                  |
+            +=======================+========================+
+            | Datatype              | enums.Lo2ExportEnabled |
+            +-----------------------+------------------------+
+            | Permissions           | read-write             |
+            +-----------------------+------------------------+
+            | Repeated Capabilities | None                   |
+            +-----------------------+------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7647,34 +7647,34 @@ low_frequency_bypass_enabled
 
         |                            |                                         |
         |:---------------------------|:----------------------------------------|
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` (1900) | Disables the low-frequency bypass path. |
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED` (1901)  | Enables the low-frequency bypass path.  |
+        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.DISABLED` (1900) | Disables the low-frequency bypass path. |
+        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.ENABLED` (1901)  | Enables the low-frequency bypass path.  |
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Value**: :py:data:`~nirfsa.LowFrequencyBypassEnabled.DISABLED`
 
         **Supported Devices**: PXIe-5693, PXIe-5667
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +-------------------------------------------------------+--------------+--------------------------------+
+        | Name                                                  | Value        | Description                    |
+        +=======================================================+==============+================================+
+        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.DISABLED` | 1900 (0x76c) | Disables low frequency bypass. |
+        +-------------------------------------------------------+--------------+--------------------------------+
+        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.ENABLED`  | 1901 (0x76d) | Enables low frequency bypass.  |
+        +-------------------------------------------------------+--------------+--------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+---------------------------------+
+            | Characteristic        | Value                           |
+            +=======================+=================================+
+            | Datatype              | enums.LowFrequencyBypassEnabled |
+            +-----------------------+---------------------------------+
+            | Permissions           | read-write                      |
+            +-----------------------+---------------------------------+
+            | Repeated Capabilities | None                            |
+            +-----------------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7957,35 +7957,35 @@ lo_out_export_configure_from_rfsg
 
         Specifies whether to allow NI-RFSG to control the NI-RFSA LO out export.
 
-        Set this property to :py:data:`~nirfsa.EnableAttrVals.ENABLED` to allow NI-RFSG to control the LO out export. Use the NIRFSG ATTR RF IN LO EXPORT ENABLED property to control the NI-RFSA LO out export from NI-RFSG.
+        Set this property to :py:data:`~nirfsa.LoOutExportConfigureFromRfsg.ENABLED` to allow NI-RFSG to control the LO out export. Use the NIRFSG ATTR RF IN LO EXPORT ENABLED property to control the NI-RFSA LO out export from NI-RFSG.
 
         **Defined Values:**
 
-        **Default Value:** :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Value:** :py:data:`~nirfsa.LoOutExportConfigureFromRfsg.DISABLED`
 
         **Supported Devices**: PXIe-5840/5841/5842
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +----------------------------------------------------------+--------------+----------------------------------------------------------------------+
+        | Name                                                     | Value        | Description                                                          |
+        +==========================================================+==============+======================================================================+
+        | :py:data:`~nirfsa.LoOutExportConfigureFromRfsg.DISABLED` | 1900 (0x76c) | Do not allow NI-RFSG to control the NI-RFSA local oscillator export. |
+        +----------------------------------------------------------+--------------+----------------------------------------------------------------------+
+        | :py:data:`~nirfsa.LoOutExportConfigureFromRfsg.ENABLED`  | 1901 (0x76d) | Allow NI-RFSG to control the NI-RFSA local oscillator export.        |
+        +----------------------------------------------------------+--------------+----------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+------------------------------------+
+            | Characteristic        | Value                              |
+            +=======================+====================================+
+            | Datatype              | enums.LoOutExportConfigureFromRfsg |
+            +-----------------------+------------------------------------+
+            | Permissions           | read-write                         |
+            +-----------------------+------------------------------------+
+            | Repeated Capabilities | None                               |
+            +-----------------------+------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8049,31 +8049,31 @@ lo_pll_fractional_mode_enabled
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.ENABLED`
+        **Default Value**: :py:data:`~nirfsa.LoPllFractionalModeEnabled.ENABLED`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +--------------------------------------------------------+--------------+------------------------------------------+
+        | Name                                                   | Value        | Description                              |
+        +========================================================+==============+==========================================+
+        | :py:data:`~nirfsa.LoPllFractionalModeEnabled.DISABLED` | 1900 (0x76c) | Disables fractional mode for the LO PLL. |
+        +--------------------------------------------------------+--------------+------------------------------------------+
+        | :py:data:`~nirfsa.LoPllFractionalModeEnabled.ENABLED`  | 1901 (0x76d) | Enables fractional mode for the LO PLL.  |
+        +--------------------------------------------------------+--------------+------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+----------------------------------+
+            | Characteristic        | Value                            |
+            +=======================+==================================+
+            | Datatype              | enums.LoPllFractionalModeEnabled |
+            +-----------------------+----------------------------------+
+            | Permissions           | read-write                       |
+            +-----------------------+----------------------------------+
+            | Repeated Capabilities | None                             |
+            +-----------------------+----------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -8682,35 +8682,35 @@ noise_source_power_enabled
 
         Enables the 28 V DC source on the device front panel.
 
-        **PXIe-5668 with PXIe-5698**: When this property is set to :py:data:`~nirfsa.EnableAttrVals.ENABLED`, the PXIe-5698 noise source is used instead of the PXIe-5668 noise source.
+        **PXIe-5668 with PXIe-5698**: When this property is set to :py:data:`~nirfsa.NoiseSourcePowerEnabled.ENABLED`, the PXIe-5698 noise source is used instead of the PXIe-5668 noise source.
 
         **Units**: dB
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Value**: :py:data:`~nirfsa.NoiseSourcePowerEnabled.DISABLED`
 
         **Supported Devices**: PXIe-5606, PXIe-5668, PXIe-5698
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +-----------------------------------------------------+--------------+----------------------------------+
+        | Name                                                | Value        | Description                      |
+        +=====================================================+==============+==================================+
+        | :py:data:`~nirfsa.NoiseSourcePowerEnabled.DISABLED` | 1900 (0x76c) | Disables the noise source power. |
+        +-----------------------------------------------------+--------------+----------------------------------+
+        | :py:data:`~nirfsa.NoiseSourcePowerEnabled.ENABLED`  | 1901 (0x76d) | Enables the noise source power.  |
+        +-----------------------------------------------------+--------------+----------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.NoiseSourcePowerEnabled |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | None                          |
+            +-----------------------+-------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9662,17 +9662,17 @@ ref_trigger_osp_delay_enabled
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.ENABLED`
+        **Default Value**: :py:data:`~nirfsa.RefTriggerOspDelayEnabled.ENABLED`
 
         **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +-------------------------------------------------------+--------------+-----------------------------------------------+
+        | Name                                                  | Value        | Description                                   |
+        +=======================================================+==============+===============================================+
+        | :py:data:`~nirfsa.RefTriggerOspDelayEnabled.DISABLED` | 1900 (0x76c) | Disables OSP delay for the Reference Trigger. |
+        +-------------------------------------------------------+--------------+-----------------------------------------------+
+        | :py:data:`~nirfsa.RefTriggerOspDelayEnabled.ENABLED`  | 1901 (0x76d) | Enables OSP delay for the Reference Trigger.  |
+        +-------------------------------------------------------+--------------+-----------------------------------------------+
 
         .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
@@ -9680,15 +9680,15 @@ ref_trigger_osp_delay_enabled
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+---------------------------------+
+            | Characteristic        | Value                           |
+            +=======================+=================================+
+            | Datatype              | enums.RefTriggerOspDelayEnabled |
+            +-----------------------+---------------------------------+
+            | Permissions           | read-write                      |
+            +-----------------------+---------------------------------+
+            | Repeated Capabilities | None                            |
+            +-----------------------+---------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10510,31 +10510,31 @@ smooth_spectrum_enabled
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Value**: :py:data:`~nirfsa.SmoothSpectrumEnabled.DISABLED`
 
         **Supported Devices**: PXIe-5665/5668
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +---------------------------------------------------+--------------+------------------------------+
+        | Name                                              | Value        | Description                  |
+        +===================================================+==============+==============================+
+        | :py:data:`~nirfsa.SmoothSpectrumEnabled.DISABLED` | 1900 (0x76c) | Disables spectrum smoothing. |
+        +---------------------------------------------------+--------------+------------------------------+
+        | :py:data:`~nirfsa.SmoothSpectrumEnabled.ENABLED`  | 1901 (0x76d) | Enables spectrum smoothing.  |
+        +---------------------------------------------------+--------------+------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableAttrVals |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-----------------------------+
+            | Characteristic        | Value                       |
+            +=======================+=============================+
+            | Datatype              | enums.SmoothSpectrumEnabled |
+            +-----------------------+-----------------------------+
+            | Permissions           | read-write                  |
+            +-----------------------+-----------------------------+
+            | Repeated Capabilities | None                        |
+            +-----------------------+-----------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11265,23 +11265,23 @@ sync_ref_trigger_delay_enabled
 
         Specifies whether the Reference Trigger is delayed with the data.
 
-        Set this property to :py:data:`~nirfsa.EnableAttrVals.DISABLED` when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE` or :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
+        Set this property to :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.DISABLED` when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE` or :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
 
         Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.EnableAttrVals.DISABLED`
+        **Default Value**: :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.DISABLED`
 
         **Supported Devices:** PXIe-5644/5645/5646
 
-        +--------------------------------------------+--------------+---------------------------+
-        | Name                                       | Value        | Description               |
-        +============================================+==============+===========================+
-        | :py:data:`~nirfsa.EnableAttrVals.DISABLED` | 1900 (0x76c) | The property is disabled. |
-        +--------------------------------------------+--------------+---------------------------+
-        | :py:data:`~nirfsa.EnableAttrVals.ENABLED`  | 1901 (0x76d) | The property is enabled.  |
-        +--------------------------------------------+--------------+---------------------------+
+        +--------------------------------------------------------+--------------+---------------------------------------------------+
+        | Name                                                   | Value        | Description                                       |
+        +========================================================+==============+===================================================+
+        | :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.DISABLED` | 1900 (0x76c) | Disables synchronization reference trigger delay. |
+        +--------------------------------------------------------+--------------+---------------------------------------------------+
+        | :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.ENABLED`  | 1901 (0x76d) | Enables synchronization reference trigger delay.  |
+        +--------------------------------------------------------+--------------+---------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 

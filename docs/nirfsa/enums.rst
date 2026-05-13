@@ -91,6 +91,31 @@ AdvanceTriggerType
 
 
 
+AllowOutOfSpecificationUserSettings
+-----------------------------------
+
+.. py:class:: AllowOutOfSpecificationUserSettings
+
+    .. py:attribute:: AllowOutOfSpecificationUserSettings.DISABLED
+
+
+
+        Disables out-of-specification user settings.
+
+        
+
+
+
+    .. py:attribute:: AllowOutOfSpecificationUserSettings.ENABLED
+
+
+
+        Enables out-of-specification user settings.
+
+        
+
+
+
 ArmReferenceTriggerType
 -----------------------
 
@@ -399,6 +424,31 @@ DeviceResponseType
 
 
         Returns the combined IF and RF response of the entire NI-RFSA device. The combined response is in terms of IF frequency. This value is supported only for the PXIe-5665/5667.
+
+        
+
+
+
+DigitizerDitherEnabled
+----------------------
+
+.. py:class:: DigitizerDitherEnabled
+
+    .. py:attribute:: DigitizerDitherEnabled.DISABLED
+
+
+
+        Disables dither on the digitizer.
+
+        
+
+
+
+    .. py:attribute:: DigitizerDitherEnabled.ENABLED
+
+
+
+        Enables dither on the digitizer.
 
         
 
@@ -1184,6 +1234,56 @@ IFfilterSelection
 
 
 
+IfConditioningDownConversionEnabled
+-----------------------------------
+
+.. py:class:: IfConditioningDownConversionEnabled
+
+    .. py:attribute:: IfConditioningDownConversionEnabled.DISABLED
+
+
+
+        Disables IF conditioning downconversion.
+
+        
+
+
+
+    .. py:attribute:: IfConditioningDownConversionEnabled.ENABLED
+
+
+
+        Enables IF conditioning downconversion.
+
+        
+
+
+
+InputIsolationEnabled
+---------------------
+
+.. py:class:: InputIsolationEnabled
+
+    .. py:attribute:: InputIsolationEnabled.DISABLED
+
+
+
+        Disables input isolation.
+
+        
+
+
+
+    .. py:attribute:: InputIsolationEnabled.ENABLED
+
+
+
+        Enables input isolation.
+
+        
+
+
+
 InputPort
 ---------
 
@@ -1404,6 +1504,31 @@ LinearInterpolationFormat
 
 
 
+Lo2ExportEnabled
+----------------
+
+.. py:class:: Lo2ExportEnabled
+
+    .. py:attribute:: Lo2ExportEnabled.DISABLED
+
+
+
+        Disables LO2 export.
+
+        
+
+
+
+    .. py:attribute:: Lo2ExportEnabled.ENABLED
+
+
+
+        Enables LO2 export.
+
+        
+
+
+
 LoInjection
 -----------
 
@@ -1464,6 +1589,31 @@ LoNumber
 
 
 
+LoOutExportConfigureFromRfsg
+----------------------------
+
+.. py:class:: LoOutExportConfigureFromRfsg
+
+    .. py:attribute:: LoOutExportConfigureFromRfsg.DISABLED
+
+
+
+        Do not allow NI-RFSG to control the NI-RFSA local oscillator export.
+
+        
+
+
+
+    .. py:attribute:: LoOutExportConfigureFromRfsg.ENABLED
+
+
+
+        Allow NI-RFSG to control the NI-RFSA local oscillator export.
+
+        
+
+
+
 LoPathSel
 ---------
 
@@ -1514,6 +1664,31 @@ LoPathSel
 
 
         Specifies that the LO path 5 is used.
+
+        
+
+
+
+LoPllFractionalModeEnabled
+--------------------------
+
+.. py:class:: LoPllFractionalModeEnabled
+
+    .. py:attribute:: LoPllFractionalModeEnabled.DISABLED
+
+
+
+        Disables fractional mode for the LO PLL.
+
+        
+
+
+
+    .. py:attribute:: LoPllFractionalModeEnabled.ENABLED
+
+
+
+        Enables fractional mode for the LO PLL.
 
         
 
@@ -1619,6 +1794,56 @@ LoadConfigurationResetOptions
 
 
         NI-RFSA skips resetting the de-embedding tables.
+
+        
+
+
+
+LowFrequencyBypassEnabled
+-------------------------
+
+.. py:class:: LowFrequencyBypassEnabled
+
+    .. py:attribute:: LowFrequencyBypassEnabled.DISABLED
+
+
+
+        Disables low frequency bypass.
+
+        
+
+
+
+    .. py:attribute:: LowFrequencyBypassEnabled.ENABLED
+
+
+
+        Enables low frequency bypass.
+
+        
+
+
+
+NoiseSourcePowerEnabled
+-----------------------
+
+.. py:class:: NoiseSourcePowerEnabled
+
+    .. py:attribute:: NoiseSourcePowerEnabled.DISABLED
+
+
+
+        Disables the noise source power.
+
+        
+
+
+
+    .. py:attribute:: NoiseSourcePowerEnabled.ENABLED
+
+
+
+        Enables the noise source power.
 
         
 
@@ -2034,6 +2259,31 @@ PxiChassisClk10Source
 
 
         The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 FREQ REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.
+
+        
+
+
+
+RefTriggerOspDelayEnabled
+-------------------------
+
+.. py:class:: RefTriggerOspDelayEnabled
+
+    .. py:attribute:: RefTriggerOspDelayEnabled.DISABLED
+
+
+
+        Disables OSP delay for the Reference Trigger.
+
+        
+
+
+
+    .. py:attribute:: RefTriggerOspDelayEnabled.ENABLED
+
+
+
+        Enables OSP delay for the Reference Trigger.
 
         
 
@@ -2964,6 +3214,31 @@ SignalConditioningEnabled
 
 
 
+SmoothSpectrumEnabled
+---------------------
+
+.. py:class:: SmoothSpectrumEnabled
+
+    .. py:attribute:: SmoothSpectrumEnabled.DISABLED
+
+
+
+        Disables spectrum smoothing.
+
+        
+
+
+
+    .. py:attribute:: SmoothSpectrumEnabled.ENABLED
+
+
+
+        Enables spectrum smoothing.
+
+        
+
+
+
 SoftwareTriggerType
 -------------------
 
@@ -3374,6 +3649,31 @@ StepsToOmit
 
 
         Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.
+
+        
+
+
+
+SyncRefTriggerDelayEnabled
+--------------------------
+
+.. py:class:: SyncRefTriggerDelayEnabled
+
+    .. py:attribute:: SyncRefTriggerDelayEnabled.DISABLED
+
+
+
+        Disables synchronization reference trigger delay.
+
+        
+
+
+
+    .. py:attribute:: SyncRefTriggerDelayEnabled.ENABLED
+
+
+
+        Enables synchronization reference trigger delay.
 
         
 

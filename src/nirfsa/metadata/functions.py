@@ -151,7 +151,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'Close': {
+    'close': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Closes the session to the device.\n\n                If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -540,6 +540,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the trigger edge to detect. The default value is NIRFSA_VAL_RISING_EDGE.\n\n                        | Value                              | Description                                |\n                        |:------------------------------|:--------------------------------|\n                        | NIRFSA_VAL_RISING_EDGE (900)  | NI-RFSA detects a rising edge.  |\n                        | NIRFSA_VAL_FALLING_EDGE (901) | NI-RFSA detects a falling edge. |'
                 },
+                'enum': 'StartTriggerDigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3922,11 +3923,12 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'Reset': {
+    'reset': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.\n\n                For the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.\n\n                This function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the nirfsa_ResetWithOptions function, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
         },
+        'grpc_name': 'Reset',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -4693,7 +4695,7 @@ functions = {
         'python_name': 'unlock',
         'render_in_session_base': True,
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'fancy_self_test': {
         'codegen_method': 'python-only',
@@ -4735,6 +4737,60 @@ functions = {
             }
         ],
         'python_name': 'self_test',
+        'returns': 'ViStatus'
+    },
+    'self_test': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Performs a self-test on the NI-RFSA device and returns the test results.\n\nThis function performs a simple series of tests to ensure that the NI-RFSA device is powered up and responding.\n\nThis function does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this function. The NI-RFSA device must be in the Configuration state before you call this function.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsa/page/rfsa/warmup.html>`_'
+        },
+        'grpc_name': 'SelfTest',
+        'included_in_proto': True,
+        'method_name_for_documentation': 'self_test',
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'This parameter contains the value returned from the NI-RFSA device self test.',
+                    'table_body': [
+                        [
+                            '0',
+                            'Self test passed'
+                        ],
+                        [
+                            '1',
+                            'Self test failed'
+                        ]
+                    ],
+                    'table_header': [
+                        'Self-Test Code',
+                        'Description'
+                    ]
+                },
+                'name': 'selfTestResult',
+                'type': 'ViInt16'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the self-test response string from the NI-RFSA device. For an explanation of the string contents, refer to the **status** parameter of this function.\n\nYou must pass a ViChar array with at least 256 bytes.'
+                },
+                'name': 'selfTestMessage',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]'
+            }
+        ],
         'returns': 'ViStatus'
     },
 }

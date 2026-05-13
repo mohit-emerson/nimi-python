@@ -10,6 +10,8 @@ import nirfsa._library_interpreter as _library_interpreter
 import nirfsa.enums as enums
 import nirfsa.errors as errors
 
+import nirfsa.coefficient_info_type as coefficient_info_type  # noqa: F401
+
 import nirfsa.waveform_info as waveform_info  # noqa: F401
 
 import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
@@ -4326,7 +4328,7 @@ class _SessionBase(object):
         '''
         self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
 
-    def fetch_iq_multi_record_complex(self, starting_record, number_of_records, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0)):
+    def fetch_iq_multi_record_complex(self, starting_record, number_of_records, number_of_samples, waveform_data, waveform_data_type, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_multi_record_complex
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -4359,9 +4361,9 @@ class _SessionBase(object):
 
             number_of_samples (int): Specifies the number of samples per record.
 
-            data (NIComplexNumber): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+            waveform_data (NIComplexNumber): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
-            data_type (NIComplexNumber): Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
+            waveform_data_type (NIComplexNumber): Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4375,17 +4377,17 @@ class _SessionBase(object):
 
         '''
         import numpy
-        if data_type == numpy.complex128:
-            return self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, number_of_samples, data, timeout)
-        elif data_type == numpy.complex64:
-            return self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, number_of_samples, data, timeout)
-        elif data_type == numpy.int16:
-            return self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, number_of_samples, data, timeout)
+        if waveform_data_type == numpy.complex128:
+            return self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, number_of_samples, waveform_data, timeout)
+        elif waveform_data_type == numpy.complex64:
+            return self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, number_of_samples, waveform_data, timeout)
+        elif waveform_data_type == numpy.int16:
+            return self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, number_of_samples, waveform_data, timeout)
         else:
-            raise TypeError("Unsupported data_type. Is {}, expected {} or {} or {}".format(data_type, numpy.complex128, numpy.complex64, numpy.int16))
+            raise TypeError("Unsupported waveform_data_type. Is {}, expected {} or {} or {}".format(waveform_data_type, numpy.complex128, numpy.complex64, numpy.int16))
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_f32(self, starting_record, number_of_records, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_multi_record_complex_f32(self, starting_record, number_of_records, number_of_samples, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_multi_record_complex_f32
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -4418,7 +4420,7 @@ class _SessionBase(object):
 
             number_of_samples (int): Specifies the number of samples per record.
 
-            data (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
+            waveform_data (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4460,18 +4462,18 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('complex64'):
-            raise TypeError('data must be numpy.ndarray of dtype=complex64, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('complex64'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, number_of_samples, data, timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, number_of_samples, waveform_data, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_f64(self, starting_record, number_of_records, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_multi_record_complex_f64(self, starting_record, number_of_records, number_of_samples, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_multi_record_complex_f64
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -4504,7 +4506,7 @@ class _SessionBase(object):
 
             number_of_samples (int): Specifies the number of samples per record.
 
-            data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
+            waveform_data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **number_of_samples** times **number_of_records** for this parameter.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4546,18 +4548,18 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('complex128'):
-            raise TypeError('data must be numpy.ndarray of dtype=complex128, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('complex128'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, number_of_samples, data, timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, number_of_samples, waveform_data, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_i16(self, starting_record, number_of_records, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_multi_record_complex_i16(self, starting_record, number_of_records, number_of_samples, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_multi_record_complex_i16
 
         Fetches binary I/Q data from multiple records in an acquisition.
@@ -4590,7 +4592,7 @@ class _SessionBase(object):
 
             number_of_samples (int): Specifies the number of samples per record.
 
-            data (numpy.array(dtype=numpy.int16)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **number_of_records** for this parameter.
+            waveform_data (numpy.array(dtype=numpy.int16)): Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **number_of_records** for this parameter.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4632,17 +4634,17 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('int16'):
-            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=int16, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, number_of_samples, data, timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, number_of_samples, waveform_data, timeout)
         return wfm_info
 
-    def fetch_iq_single_record_complex(self, record_number, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0)):
+    def fetch_iq_single_record_complex(self, record_number, number_of_samples, waveform_data, waveform_data_type, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_single_record_complex
 
         Fetches I/Q data from a single record in an acquisition.
@@ -4676,9 +4678,9 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            data (NIComplexNumber): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+            waveform_data (NIComplexNumber): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
-            data_type (NIComplexNumber): Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
+            waveform_data_type (NIComplexNumber): Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4692,17 +4694,17 @@ class _SessionBase(object):
 
         '''
         import numpy
-        if data_type == numpy.complex128:
-            return self._fetch_iq_single_record_complex_f64(record_number, number_of_samples, data, timeout)
-        elif data_type == numpy.complex64:
-            return self._fetch_iq_single_record_complex_f32(record_number, number_of_samples, data, timeout)
-        elif data_type == numpy.int16:
-            return self._fetch_iq_single_record_complex_i16(record_number, number_of_samples, data, timeout)
+        if waveform_data_type == numpy.complex128:
+            return self._fetch_iq_single_record_complex_f64(record_number, number_of_samples, waveform_data, timeout)
+        elif waveform_data_type == numpy.complex64:
+            return self._fetch_iq_single_record_complex_f32(record_number, number_of_samples, waveform_data, timeout)
+        elif waveform_data_type == numpy.int16:
+            return self._fetch_iq_single_record_complex_i16(record_number, number_of_samples, waveform_data, timeout)
         else:
-            raise TypeError("Unsupported data_type. Is {}, expected {} or {} or {}".format(data_type, numpy.complex128, numpy.complex64, numpy.int16))
+            raise TypeError("Unsupported waveform_data_type. Is {}, expected {} or {} or {}".format(waveform_data_type, numpy.complex128, numpy.complex64, numpy.int16))
 
     @ivi_synchronized
-    def _fetch_iq_single_record_complex_f32(self, record_number, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_single_record_complex_f32(self, record_number, number_of_samples, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_f32
 
         Fetches I/Q data from a single record in an acquisition.
@@ -4736,7 +4738,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            data (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **number_of_samples**.
+            waveform_data (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **number_of_samples**.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4778,18 +4780,18 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('complex64'):
-            raise TypeError('data must be numpy.ndarray of dtype=complex64, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('complex64'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=complex64, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, number_of_samples, data, timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, number_of_samples, waveform_data, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_single_record_complex_f64(self, record_number, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_single_record_complex_f64(self, record_number, number_of_samples, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_f64
 
         Fetches I/Q data from a single record in an acquisition.
@@ -4823,7 +4825,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **number_of_samples**.
+            waveform_data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **number_of_samples**.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4865,18 +4867,18 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('complex128'):
-            raise TypeError('data must be numpy.ndarray of dtype=complex128, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('complex128'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, number_of_samples, data, timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, number_of_samples, waveform_data, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_single_record_complex_i16(self, record_number, number_of_samples, data, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_single_record_complex_i16(self, record_number, number_of_samples, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_i16
 
         Fetches binary I/Q data from a single record in an acquisition.
@@ -4910,7 +4912,7 @@ class _SessionBase(object):
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            data (numpy.array(dtype=numpy.int16)): Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **number_of_samples**.
+            waveform_data (numpy.array(dtype=numpy.int16)): Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **number_of_samples**.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -4952,14 +4954,14 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('int16'):
-            raise TypeError('data must be numpy.ndarray of dtype=int16, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('int16'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=int16, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, number_of_samples, data, timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, number_of_samples, waveform_data, timeout)
         return wfm_info
 
     @ivi_synchronized
@@ -5241,6 +5243,48 @@ class _SessionBase(object):
         return frequencies, magnitude_response, phase_response
 
     @ivi_synchronized
+    def get_scaling_coefficients(self):
+        r'''get_scaling_coefficients
+
+        Returns coefficients you can use to convert unscaled data to scaled I/Q data.
+
+                        Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain get_scaling_coefficients structures in the **COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **COEFFICIENT_INFO** array returns one element for each channel specified in the **CHANNEL_LIST** parameter. The element order matches the order specified by the **CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **COEFFICIENT_INFO** element then adding the offset from the same element.
+
+                        ----
+                        **Note**
+                        The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
+
+                        ----
+
+                        To get the required size of the array, call this method with **ARRAY_SIZE** set to 0 and NULL for the **COEFFICIENT_INFO** array. This method returns the required size in the **NUMBER_OF_COEFFICIENT_SETS** parameter.
+
+                        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_scaling_coefficients`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.get_scaling_coefficients`
+
+        Returns:
+            coefficient_info (list of CoefficientInfo): Specifies the array for storing the coefficient info.
+
+                                        - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
+                                        - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
+
+        '''
+        coefficient_info = self._interpreter.get_scaling_coefficients(self._repeated_capability)
+        return coefficient_info
+
+    @ivi_synchronized
     def load_configurations_from_file(self, file_path):
         r'''load_configurations_from_file
 
@@ -5303,7 +5347,7 @@ class _SessionBase(object):
         return _Lock(self)
 
     @ivi_synchronized
-    def read_iq_single_record_complex_f64(self, data, timeout=hightime.timedelta(seconds=10.0)):
+    def read_iq_single_record_complex_f64(self, waveform_data, timeout=hightime.timedelta(seconds=10.0)):
         r'''read_iq_single_record_complex_f64
 
         Initiates an acquisition and fetches a single I/Q data record.
@@ -5328,7 +5372,7 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.read_iq_single_record_complex_f64`
 
         Args:
-            data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
+            waveform_data (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
 
@@ -5363,17 +5407,17 @@ class _SessionBase(object):
         '''
         import numpy
 
-        if type(data) is not numpy.ndarray:
-            raise TypeError('data must be {0}, is {1}'.format(numpy.ndarray, type(data)))
-        if numpy.isfortran(data) is True:
-            raise TypeError('data must be in C-order')
-        if data.dtype is not numpy.dtype('complex128'):
-            raise TypeError('data must be numpy.ndarray of dtype=complex128, is ' + str(data.dtype))
+        if type(waveform_data) is not numpy.ndarray:
+            raise TypeError('waveform_data must be {0}, is {1}'.format(numpy.ndarray, type(waveform_data)))
+        if numpy.isfortran(waveform_data) is True:
+            raise TypeError('waveform_data must be in C-order')
+        if waveform_data.dtype is not numpy.dtype('complex128'):
+            raise TypeError('waveform_data must be numpy.ndarray of dtype=complex128, is ' + str(waveform_data.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, data, timeout)
+        wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, waveform_data, timeout)
         return wfm_info
 
-    def read_power_spectrum(self, data_type, timeout=hightime.timedelta(seconds=10.0)):
+    def read_power_spectrum(self, spectrum_data_type, timeout=hightime.timedelta(seconds=10.0)):
         '''read_power_spectrum
 
         Initiates a spectrum acquisition and returns power spectrum data.
@@ -5400,18 +5444,18 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.read_power_spectrum`
 
         Args:
-            data_type (NIComplexNumber): Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.
+            spectrum_data_type (NIComplexNumber): Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
 
         '''
         import numpy
-        if data_type == numpy.float64:
+        if spectrum_data_type == numpy.float64:
             return self._read_power_spectrum_f64(timeout)
-        elif data_type == numpy.float32:
+        elif spectrum_data_type == numpy.float32:
             return self._read_power_spectrum_f32(timeout)
         else:
-            raise TypeError("Unsupported data_type. Is {}, expected {} or {}".format(data_type, numpy.float64, numpy.float32))
+            raise TypeError("Unsupported spectrum_data_type. Is {}, expected {} or {}".format(spectrum_data_type, numpy.float64, numpy.float32))
 
     @ivi_synchronized
     def _read_power_spectrum_f32(self, timeout=hightime.timedelta(seconds=10.0)):
@@ -5742,7 +5786,6 @@ class _SessionBase(object):
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
 
-    @ivi_synchronized
     def unlock(self):
         '''unlock
 
@@ -6010,17 +6053,6 @@ class Session(_SessionBase):
                         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
         '''
         self._interpreter.clear_self_calibrate_range()
-
-    def _close(self):
-        r'''_close
-
-        Closes the session to the device.
-
-                        If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-        '''
-        self._interpreter.close()
 
     @ivi_synchronized
     def commit(self):
@@ -6302,17 +6334,19 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            edge (int): Specifies the trigger edge to detect. The default value is NIRFSA_VAL_RISING_EDGE.
+            edge (enums.StartTriggerDigitalEdgeEdge): Specifies the trigger edge to detect. The default value is StartTriggerDigitalEdgeEdge.RISING.
 
                                         | Value                              | Description                                |
                                         |:------------------------------|:--------------------------------|
-                                        | NIRFSA_VAL_RISING_EDGE (900)  | NI-RFSA detects a rising edge.  |
-                                        | NIRFSA_VAL_FALLING_EDGE (901) | NI-RFSA detects a falling edge. |
+                                        | StartTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
+                                        | StartTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
+        if type(edge) is not enums.StartTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.StartTriggerDigitalEdgeEdge))
         self._interpreter.configure_digital_edge_start_trigger(source, edge)
 
     @ivi_synchronized
@@ -6859,13 +6893,13 @@ class Session(_SessionBase):
 
 
         Returns:
-            temp (float): Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
+            temperature (float): Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.
 
         '''
         if type(self_calibration_step) is not enums.SelfCalibrationStep:
             raise TypeError('Parameter self_calibration_step must be of type ' + str(enums.SelfCalibrationStep))
-        temp = self._interpreter.get_self_calibration_temperature(self_calibration_step)
-        return temp
+        temperature = self._interpreter.get_self_calibration_temperature(self_calibration_step)
+        return temperature
 
     @ivi_synchronized
     def get_terminal_name(self, signal, signal_identifier):
@@ -7071,29 +7105,6 @@ class Session(_SessionBase):
         self._interpreter.perform_thermal_correction()
 
     @ivi_synchronized
-    def reset(self):
-        r'''reset
-
-        Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.
-
-                        For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.
-
-                        This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
-
-                        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-        '''
-        self._interpreter.reset()
-
-    @ivi_synchronized
     def reset_device(self):
         r'''reset_device
 
@@ -7142,7 +7153,7 @@ class Session(_SessionBase):
 
                         When routes of signals between two devices are released, they are released regardless of which device created the route.
 
-                        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of reset, with **STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
+                        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of Reset, with **STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
 
                         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -7364,6 +7375,17 @@ class Session(_SessionBase):
             raise TypeError('Parameter trigger must be of type ' + str(enums.SoftwareTriggerType))
         self._interpreter.send_software_edge_trigger(trigger, trigger_identifier)
 
+    def _close(self):
+        r'''_close
+
+        Closes the session to the device.
+
+                        If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        '''
+        self._interpreter.close()
+
     @ivi_synchronized
     def self_test(self):
         '''self_test
@@ -7392,3 +7414,61 @@ class Session(_SessionBase):
         if code:
             raise errors.SelfTestError(code, msg)
         return None
+
+    @ivi_synchronized
+    def reset(self):
+        r'''reset
+
+        Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.
+
+                        For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.
+
+                        This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+                        **Related Topics**
+
+                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+                        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+        '''
+        self._interpreter.reset()
+
+    @ivi_synchronized
+    def _self_test(self):
+        r'''_self_test
+
+        Performs a self-test on the NI-RFSA device and returns the test results.
+
+        This method performs a simple series of tests to ensure that the NI-RFSA device is powered up and responding.
+
+        This method does not affect external I/O connections or connections between devices. Complete functional testing and calibration are not performed by this method. The NI-RFSA device must be in the Configuration state before you call this method.
+
+        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `Device Warm-Up <https://www.ni.com/docs/en-US/bundle/rfsa/page/rfsa/warmup.html>`_
+
+        Returns:
+            self_test_result (int): This parameter contains the value returned from the NI-RFSA device self test.
+
+                +----------------+------------------+
+                | Self-Test Code | Description      |
+                +================+==================+
+                | 0              | Self test passed |
+                +----------------+------------------+
+                | 1              | Self test failed |
+                +----------------+------------------+
+
+            self_test_message (str): Returns the self-test response string from the NI-RFSA device. For an explanation of the string contents, refer to the **status** parameter of this method.
+
+                You must pass a ViChar array with at least 256 bytes.
+
+        '''
+        self_test_result, self_test_message = self._interpreter.self_test()
+        return self_test_result, self_test_message

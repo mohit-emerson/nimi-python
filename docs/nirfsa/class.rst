@@ -648,19 +648,19 @@ configure_digital_edge_start_trigger
             :param edge:
 
 
-                Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.NIRFSA_VAL_RISING_EDGE`.
+                Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING`.
 
                                         | Value                              | Description                                |
                                         |:------------------------------|:--------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_RISING_EDGE` (900)  | NI-RFSA detects a rising edge.  |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_FALLING_EDGE` (901) | NI-RFSA detects a falling edge. |
+                                        | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
+                                        | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type edge: int
+            :type edge: :py:data:`nirfsa.StartTriggerDigitalEdgeEdge`
 
 configure_iq_power_edge_ref_trigger
 -----------------------------------
@@ -1355,7 +1355,7 @@ fetch_iq_multi_record_complex
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: fetch_iq_multi_record_complex(starting_record, number_of_records, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: fetch_iq_multi_record_complex(starting_record, number_of_records, number_of_samples, waveform_data, waveform_data_type, timeout=hightime.timedelta(seconds=10.0))
 
             Fetches I/Q data from multiple records in an acquisition.
 
@@ -1410,7 +1410,7 @@ fetch_iq_multi_record_complex
 
 
             :type number_of_samples: int
-            :param data:
+            :param waveform_data:
 
 
                 Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
@@ -1418,8 +1418,8 @@ fetch_iq_multi_record_complex
                 
 
 
-            :type data: NIComplexNumber
-            :param data_type:
+            :type waveform_data: NIComplexNumber
+            :param waveform_data_type:
 
 
                 Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
@@ -1427,7 +1427,7 @@ fetch_iq_multi_record_complex
                 
 
 
-            :type data_type: NIComplexNumber
+            :type waveform_data_type: NIComplexNumber
             :param timeout:
 
 
@@ -1451,7 +1451,7 @@ fetch_iq_single_record_complex
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: fetch_iq_single_record_complex(record_number, number_of_samples, data, data_type, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: fetch_iq_single_record_complex(record_number, number_of_samples, waveform_data, waveform_data_type, timeout=hightime.timedelta(seconds=10.0))
 
             Fetches I/Q data from a single record in an acquisition.
 
@@ -1499,7 +1499,7 @@ fetch_iq_single_record_complex
 
 
             :type number_of_samples: int
-            :param data:
+            :param waveform_data:
 
 
                 Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
@@ -1507,8 +1507,8 @@ fetch_iq_single_record_complex
                 
 
 
-            :type data: NIComplexNumber
-            :param data_type:
+            :type waveform_data: NIComplexNumber
+            :param waveform_data_type:
 
 
                 Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.
@@ -1516,7 +1516,7 @@ fetch_iq_single_record_complex
                 
 
 
-            :type data_type: NIComplexNumber
+            :type waveform_data_type: NIComplexNumber
             :param timeout:
 
 
@@ -1749,6 +1749,56 @@ get_gain_reference_cal_baseline
 
 
                     Returns the gain reference calibration constants.
+
+                    
+
+
+
+get_scaling_coefficients
+------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: get_scaling_coefficients()
+
+            Returns coefficients you can use to convert unscaled data to scaled I/Q data.
+
+                            Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain :py:meth:`nirfsa.Session.get_scaling_coefficients` structures in the **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** array returns one element for each channel specified in the **:py:attr:`nirfsa.Session.CHANNEL_LIST`** parameter. The element order matches the order specified by the **:py:attr:`nirfsa.Session.CHANNEL_LIST`** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** element then adding the offset from the same element.
+
+                            ----
+                            **Note**
+                            The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
+
+                            ----
+
+                            To get the required size of the array, call this method with **:py:attr:`nirfsa.Session.ARRAY_SIZE`** set to 0 and NULL for the **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** array. This method returns the required size in the **:py:attr:`nirfsa.Session.NUMBER_OF_COEFFICIENT_SETS`** parameter.
+
+                            **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+            .. note:: One or more of the referenced properties are not in the Python API for this driver.
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].get_scaling_coefficients`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.get_scaling_coefficients`
+
+
+            :rtype: list of CoefficientInfo
+            :return:
+
+
+                    Specifies the array for storing the coefficient info.
+
+                                            - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
+                                            - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
 
                     
 
@@ -2056,7 +2106,7 @@ read_iq_single_record_complex_f64
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_iq_single_record_complex_f64(data, data_array_size, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_iq_single_record_complex_f64(waveform_data, data_array_size, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates an acquisition and fetches a single I/Q data record.
 
@@ -2082,7 +2132,7 @@ read_iq_single_record_complex_f64
                 Example: :py:meth:`my_session.read_iq_single_record_complex_f64`
 
 
-            :param data:
+            :param waveform_data:
 
 
                 Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the :py:meth:`nirfsa.Session.ConfigureNumberOfSamples` method.
@@ -2090,7 +2140,7 @@ read_iq_single_record_complex_f64
                 
 
 
-            :type data: numpy.array(dtype=numpy.complex128)
+            :type waveform_data: numpy.array(dtype=numpy.complex128)
             :param timeout:
 
 
@@ -2140,7 +2190,7 @@ read_power_spectrum
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_power_spectrum(data_type, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_power_spectrum(spectrum_data_type, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates a spectrum acquisition and returns power spectrum data.
 
@@ -2168,7 +2218,7 @@ read_power_spectrum
                 Example: :py:meth:`my_session.read_power_spectrum`
 
 
-            :param data_type:
+            :param spectrum_data_type:
 
 
                 Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.
@@ -2176,7 +2226,7 @@ read_power_spectrum
                 
 
 
-            :type data_type: NIComplexNumber
+            :type spectrum_data_type: NIComplexNumber
             :param timeout:
 
 
@@ -2274,7 +2324,7 @@ reset_with_options
 
                             When routes of signals between two devices are released, they are released regardless of which device created the route.
 
-                            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of :py:meth:`nirfsa.Session.reset`, with **:py:attr:`nirfsa.Session.STEPS_TO_OMIT`** set to :py:data:`~nirfsa.NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES`.
+                            To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of :py:meth:`nirfsa.Session.Reset`, with **:py:attr:`nirfsa.Session.STEPS_TO_OMIT`** set to :py:data:`~nirfsa.NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES`.
 
                             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 

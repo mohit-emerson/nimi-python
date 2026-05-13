@@ -25,8 +25,6 @@ class SideEffectsHelper(object):
         self._defaults['CheckAcquisitionStatus']['isDone'] = None
         self._defaults['ClearSelfCalibrateRange'] = {}
         self._defaults['ClearSelfCalibrateRange']['return'] = 0
-        self._defaults['Close'] = {}
-        self._defaults['Close']['return'] = 0
         self._defaults['Commit'] = {}
         self._defaults['Commit']['return'] = 0
         self._defaults['ConfigureDeembeddingTableInterpolationLinear'] = {}
@@ -146,9 +144,13 @@ class SideEffectsHelper(object):
         self._defaults['GetGainReferenceCalBaseline']['return'] = 0
         self._defaults['GetGainReferenceCalBaseline']['numberOfGainReferenceCalConstants'] = None
         self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'] = None
+        self._defaults['GetScalingCoefficients'] = {}
+        self._defaults['GetScalingCoefficients']['return'] = 0
+        self._defaults['GetScalingCoefficients']['numberOfCoefficientSets'] = None
+        self._defaults['GetScalingCoefficients']['coefficientInfo'] = None
         self._defaults['GetSelfCalibrationTemperature'] = {}
         self._defaults['GetSelfCalibrationTemperature']['return'] = 0
-        self._defaults['GetSelfCalibrationTemperature']['temp'] = None
+        self._defaults['GetSelfCalibrationTemperature']['temperature'] = None
         self._defaults['GetTerminalName'] = {}
         self._defaults['GetTerminalName']['return'] = 0
         self._defaults['GetTerminalName']['terminalName'] = None
@@ -179,8 +181,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadPowerSpectrumF64']['return'] = 0
         self._defaults['ReadPowerSpectrumF64']['spectrumInfo'] = None
         self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'] = None
-        self._defaults['Reset'] = {}
-        self._defaults['Reset']['return'] = 0
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -210,6 +210,14 @@ class SideEffectsHelper(object):
         self._defaults['UnlockSession'] = {}
         self._defaults['UnlockSession']['return'] = 0
         self._defaults['UnlockSession']['callerHasLock'] = None
+        self._defaults['close'] = {}
+        self._defaults['close']['return'] = 0
+        self._defaults['reset'] = {}
+        self._defaults['reset']['return'] = 0
+        self._defaults['self_test'] = {}
+        self._defaults['self_test']['return'] = 0
+        self._defaults['self_test']['selfTestResult'] = None
+        self._defaults['self_test']['selfTestMessage'] = None
 
     def __getitem__(self, func):
         return self._defaults[func]
@@ -241,11 +249,6 @@ class SideEffectsHelper(object):
         if self._defaults['ClearSelfCalibrateRange']['return'] != 0:
             return self._defaults['ClearSelfCalibrateRange']['return']
         return self._defaults['ClearSelfCalibrateRange']['return']
-
-    def niRFSA_Close(self, vi):  # noqa: N802
-        if self._defaults['Close']['return'] != 0:
-            return self._defaults['Close']['return']
-        return self._defaults['Close']['return']
 
     def niRFSA_Commit(self, vi):  # noqa: N802
         if self._defaults['Commit']['return'] != 0:
@@ -396,7 +399,7 @@ class SideEffectsHelper(object):
             minute.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['minute']
         return self._defaults['FancyGetSelfCalibrationDateAndTime']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
         if self._defaults['FetchIqMultiRecordComplexF32']['return'] != 0:
             return self._defaults['FetchIqMultiRecordComplexF32']['return']
         # wfm_info
@@ -407,7 +410,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF32']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexF32']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
         if self._defaults['FetchIqMultiRecordComplexF64']['return'] != 0:
             return self._defaults['FetchIqMultiRecordComplexF64']['return']
         # wfm_info
@@ -418,7 +421,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexF64']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
         if self._defaults['FetchIqMultiRecordComplexI16']['return'] != 0:
             return self._defaults['FetchIqMultiRecordComplexI16']['return']
         # wfm_info
@@ -429,7 +432,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexI16']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexI16']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
         if self._defaults['FetchIqSingleRecordComplexF32']['return'] != 0:
             return self._defaults['FetchIqSingleRecordComplexF32']['return']
         # wfm_info
@@ -440,7 +443,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF32']['wfm_info'], field_name))
         return self._defaults['FetchIqSingleRecordComplexF32']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
         if self._defaults['FetchIqSingleRecordComplexF64']['return'] != 0:
             return self._defaults['FetchIqSingleRecordComplexF64']['return']
         # wfm_info
@@ -451,7 +454,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['FetchIqSingleRecordComplexF64']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
         if self._defaults['FetchIqSingleRecordComplexI16']['return'] != 0:
             return self._defaults['FetchIqSingleRecordComplexI16']['return']
         # wfm_info
@@ -668,14 +671,35 @@ class SideEffectsHelper(object):
             gain_reference_cal_constants_ref[i] = self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'][i]
         return self._defaults['GetGainReferenceCalBaseline']['return']
 
-    def niRFSA_GetSelfCalibrationTemperature(self, vi, self_calibration_step, temp):  # noqa: N802
+    def niRFSA_GetScalingCoefficients(self, vi, channel_list, array_size, coefficient_info, number_of_coefficient_sets):  # noqa: N802
+        if self._defaults['GetScalingCoefficients']['return'] != 0:
+            return self._defaults['GetScalingCoefficients']['return']
+        # number_of_coefficient_sets
+        if self._defaults['GetScalingCoefficients']['numberOfCoefficientSets'] is None:
+            raise MockFunctionCallError("niRFSA_GetScalingCoefficients", param='numberOfCoefficientSets')
+        if number_of_coefficient_sets is not None:
+            number_of_coefficient_sets.contents.value = self._defaults['GetScalingCoefficients']['numberOfCoefficientSets']
+        # coefficient_info
+        if self._defaults['GetScalingCoefficients']['coefficientInfo'] is None:
+            raise MockFunctionCallError("niRFSA_GetScalingCoefficients", param='coefficientInfo')
+        if array_size.value == 0:
+            return len(self._defaults['GetScalingCoefficients']['coefficientInfo'])
+        try:
+            coefficient_info_ref = coefficient_info.contents
+        except AttributeError:
+            coefficient_info_ref = coefficient_info
+        for i in range(len(self._defaults['GetScalingCoefficients']['coefficientInfo'])):
+            coefficient_info_ref[i] = self._defaults['GetScalingCoefficients']['coefficientInfo'][i]
+        return self._defaults['GetScalingCoefficients']['return']
+
+    def niRFSA_GetSelfCalibrationTemperature(self, vi, self_calibration_step, temperature):  # noqa: N802
         if self._defaults['GetSelfCalibrationTemperature']['return'] != 0:
             return self._defaults['GetSelfCalibrationTemperature']['return']
-        # temp
-        if self._defaults['GetSelfCalibrationTemperature']['temp'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature", param='temp')
-        if temp is not None:
-            temp.contents.value = self._defaults['GetSelfCalibrationTemperature']['temp']
+        # temperature
+        if self._defaults['GetSelfCalibrationTemperature']['temperature'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature", param='temperature')
+        if temperature is not None:
+            temperature.contents.value = self._defaults['GetSelfCalibrationTemperature']['temperature']
         return self._defaults['GetSelfCalibrationTemperature']['return']
 
     def niRFSA_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
@@ -739,7 +763,7 @@ class SideEffectsHelper(object):
             return self._defaults['PerformThermalCorrection']['return']
         return self._defaults['PerformThermalCorrection']['return']
 
-    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, data, data_array_size, wfm_info):  # noqa: N802
+    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, waveform_data, data_array_size, wfm_info):  # noqa: N802
         if self._defaults['ReadIqSingleRecordComplexF64']['return'] != 0:
             return self._defaults['ReadIqSingleRecordComplexF64']['return']
         # wfm_info
@@ -793,11 +817,6 @@ class SideEffectsHelper(object):
         for i in range(len(self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'])):
             power_spectrum_data_ref[i] = self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'][i]
         return self._defaults['ReadPowerSpectrumF64']['return']
-
-    def niRFSA_Reset(self, vi):  # noqa: N802
-        if self._defaults['Reset']['return'] != 0:
-            return self._defaults['Reset']['return']
-        return self._defaults['Reset']['return']
 
     def niRFSA_ResetDevice(self, vi):  # noqa: N802
         if self._defaults['ResetDevice']['return'] != 0:
@@ -874,6 +893,35 @@ class SideEffectsHelper(object):
             caller_has_lock.contents.value = self._defaults['UnlockSession']['callerHasLock']
         return self._defaults['UnlockSession']['return']
 
+    def niRFSA_close(self, vi):  # noqa: N802
+        if self._defaults['close']['return'] != 0:
+            return self._defaults['close']['return']
+        return self._defaults['close']['return']
+
+    def niRFSA_reset(self, vi):  # noqa: N802
+        if self._defaults['reset']['return'] != 0:
+            return self._defaults['reset']['return']
+        return self._defaults['reset']['return']
+
+    def niRFSA_self_test(self, vi, self_test_result, self_test_message):  # noqa: N802
+        if self._defaults['self_test']['return'] != 0:
+            return self._defaults['self_test']['return']
+        # self_test_result
+        if self._defaults['self_test']['selfTestResult'] is None:
+            raise MockFunctionCallError("niRFSA_self_test", param='selfTestResult')
+        if self_test_result is not None:
+            self_test_result.contents.value = self._defaults['self_test']['selfTestResult']
+        # self_test_message
+        if self._defaults['self_test']['selfTestMessage'] is None:
+            raise MockFunctionCallError("niRFSA_self_test", param='selfTestMessage')
+        test_value = self._defaults['self_test']['selfTestMessage']
+        if type(test_value) is str:
+            test_value = test_value.encode('ascii')
+        assert len(self_test_message) >= len(test_value)
+        for i in range(len(test_value)):
+            self_test_message[i] = test_value[i]
+        return self._defaults['self_test']['return']
+
     # Helper function to setup Mock object with default side effects and return values
     def set_side_effects_and_return_values(self, mock_library):
         mock_library.niRFSA_Abort.side_effect = MockFunctionCallError("niRFSA_Abort")
@@ -884,8 +932,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_CheckAcquisitionStatus.return_value = 0
         mock_library.niRFSA_ClearSelfCalibrateRange.side_effect = MockFunctionCallError("niRFSA_ClearSelfCalibrateRange")
         mock_library.niRFSA_ClearSelfCalibrateRange.return_value = 0
-        mock_library.niRFSA_Close.side_effect = MockFunctionCallError("niRFSA_Close")
-        mock_library.niRFSA_Close.return_value = 0
         mock_library.niRFSA_Commit.side_effect = MockFunctionCallError("niRFSA_Commit")
         mock_library.niRFSA_Commit.return_value = 0
         mock_library.niRFSA_ConfigureDeembeddingTableInterpolationLinear.side_effect = MockFunctionCallError("niRFSA_ConfigureDeembeddingTableInterpolationLinear")
@@ -970,6 +1016,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_GetFrequencyResponse.return_value = 0
         mock_library.niRFSA_GetGainReferenceCalBaseline.side_effect = MockFunctionCallError("niRFSA_GetGainReferenceCalBaseline")
         mock_library.niRFSA_GetGainReferenceCalBaseline.return_value = 0
+        mock_library.niRFSA_GetScalingCoefficients.side_effect = MockFunctionCallError("niRFSA_GetScalingCoefficients")
+        mock_library.niRFSA_GetScalingCoefficients.return_value = 0
         mock_library.niRFSA_GetSelfCalibrationTemperature.side_effect = MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature")
         mock_library.niRFSA_GetSelfCalibrationTemperature.return_value = 0
         mock_library.niRFSA_GetTerminalName.side_effect = MockFunctionCallError("niRFSA_GetTerminalName")
@@ -992,8 +1040,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_ReadPowerSpectrumF32.return_value = 0
         mock_library.niRFSA_ReadPowerSpectrumF64.side_effect = MockFunctionCallError("niRFSA_ReadPowerSpectrumF64")
         mock_library.niRFSA_ReadPowerSpectrumF64.return_value = 0
-        mock_library.niRFSA_Reset.side_effect = MockFunctionCallError("niRFSA_Reset")
-        mock_library.niRFSA_Reset.return_value = 0
         mock_library.niRFSA_ResetDevice.side_effect = MockFunctionCallError("niRFSA_ResetDevice")
         mock_library.niRFSA_ResetDevice.return_value = 0
         mock_library.niRFSA_ResetWithDefaults.side_effect = MockFunctionCallError("niRFSA_ResetWithDefaults")
@@ -1022,3 +1068,9 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_SetAttributeViString.return_value = 0
         mock_library.niRFSA_UnlockSession.side_effect = MockFunctionCallError("niRFSA_UnlockSession")
         mock_library.niRFSA_UnlockSession.return_value = 0
+        mock_library.niRFSA_close.side_effect = MockFunctionCallError("niRFSA_close")
+        mock_library.niRFSA_close.return_value = 0
+        mock_library.niRFSA_reset.side_effect = MockFunctionCallError("niRFSA_reset")
+        mock_library.niRFSA_reset.return_value = 0
+        mock_library.niRFSA_self_test.side_effect = MockFunctionCallError("niRFSA_self_test")
+        mock_library.niRFSA_self_test.return_value = 0

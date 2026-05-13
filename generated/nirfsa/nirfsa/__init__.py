@@ -9,6 +9,10 @@ from nirfsa.errors import DriverWarning  # noqa: F401
 from nirfsa.errors import Error  # noqa: F401
 from nirfsa.session import Session  # noqa: F401
 
+from nirfsa.coefficient_info_type import CoefficientInfo  # noqa: F401
+
+from nirfsa.coefficient_info_type import struct_niRFSA_coefficientInfo  # noqa: F401
+
 from nirfsa.waveform_info import WaveformInfo  # noqa: F401
 
 from nirfsa.waveform_info import struct_niRFSA_wfmInfo  # noqa: F401

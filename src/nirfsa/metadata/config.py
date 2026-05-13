@@ -3,7 +3,7 @@
 config = {
     'api_version': '26.5.0d9999',
     'c_function_prefix': 'niRFSA_',
-    'close_function': 'Close',
+    'close_function': 'close',
     'context_manager_name': {
         'abort_function': 'Abort',
         'initiate_function': 'Initiate',

@@ -1529,12 +1529,12 @@ Lo2ExportEnabled
 
 
 
-LoInjection
------------
+LoInjectionSide
+---------------
 
-.. py:class:: LoInjection
+.. py:class:: LoInjectionSide
 
-    .. py:attribute:: LoInjection.HIGH
+    .. py:attribute:: LoInjectionSide.HIGH
 
 
 
@@ -1544,7 +1544,7 @@ LoInjection
 
 
 
-    .. py:attribute:: LoInjection.LOW
+    .. py:attribute:: LoInjectionSide.LOW
 
 
 
@@ -2704,7 +2704,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._1
+    .. py:attribute:: RfPreselectorFilter.FILTER_1
 
 
 
@@ -2714,7 +2714,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._2
+    .. py:attribute:: RfPreselectorFilter.FILTER_2
 
 
 
@@ -2724,7 +2724,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._3
+    .. py:attribute:: RfPreselectorFilter.FILTER_3
 
 
 
@@ -2734,7 +2734,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._4
+    .. py:attribute:: RfPreselectorFilter.FILTER_4
 
 
 
@@ -2744,7 +2744,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._5
+    .. py:attribute:: RfPreselectorFilter.FILTER_5
 
 
 
@@ -2754,7 +2754,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._6
+    .. py:attribute:: RfPreselectorFilter.FILTER_6
 
 
 
@@ -2764,7 +2764,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._7
+    .. py:attribute:: RfPreselectorFilter.FILTER_7
 
 
 
@@ -2774,7 +2774,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._8
+    .. py:attribute:: RfPreselectorFilter.FILTER_8
 
 
 
@@ -2784,7 +2784,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._9
+    .. py:attribute:: RfPreselectorFilter.FILTER_9
 
 
 
@@ -2794,7 +2794,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._10
+    .. py:attribute:: RfPreselectorFilter.FILTER_10
 
 
 
@@ -2804,7 +2804,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._11
+    .. py:attribute:: RfPreselectorFilter.FILTER_11
 
 
 
@@ -2814,7 +2814,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._12
+    .. py:attribute:: RfPreselectorFilter.FILTER_12
 
 
 
@@ -2824,7 +2824,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._13
+    .. py:attribute:: RfPreselectorFilter.FILTER_13
 
 
 
@@ -2834,7 +2834,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._14
+    .. py:attribute:: RfPreselectorFilter.FILTER_14
 
 
 
@@ -2844,7 +2844,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._15
+    .. py:attribute:: RfPreselectorFilter.FILTER_15
 
 
 
@@ -2854,7 +2854,7 @@ RfPreselectorFilter
 
 
 
-    .. py:attribute:: RfPreselectorFilter._16
+    .. py:attribute:: RfPreselectorFilter.FILTER_16
 
 
 
@@ -3494,7 +3494,7 @@ SpectrumResolutionBandwidthType
 
 .. py:class:: SpectrumResolutionBandwidthType
 
-    .. py:attribute:: SpectrumResolutionBandwidthType._3DB
+    .. py:attribute:: SpectrumResolutionBandwidthType.THREE_DECIBELS
 
 
 
@@ -3504,7 +3504,7 @@ SpectrumResolutionBandwidthType
 
 
 
-    .. py:attribute:: SpectrumResolutionBandwidthType._6DB
+    .. py:attribute:: SpectrumResolutionBandwidthType.SIX_DECIBELS
 
 
 
@@ -3524,7 +3524,7 @@ SpectrumResolutionBandwidthType
 
 
 
-    .. py:attribute:: SpectrumResolutionBandwidthType.ENBW
+    .. py:attribute:: SpectrumResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH
 
 
 

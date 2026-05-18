@@ -1122,7 +1122,7 @@ enums = {
             }
         ]
     },
-    'LoInjection': {
+    'LoInjectionSide': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1987,112 +1987,112 @@ enums = {
                 'documentation': {
                     'description': 'Specifies that the 19 MHz to 35 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_1',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_1',
                 'value': 3301
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 33 MHz to 61 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_2',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_2',
                 'value': 3302
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 59 MHz to 110 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_3',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_3',
                 'value': 3303
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 90 MHz to 170 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_4',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_4',
                 'value': 3304
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 140 MHz to 245 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_5',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_5',
                 'value': 3305
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 205 MHz to 370 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_6',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_6',
                 'value': 3306
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 330 MHz to 575 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_7',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_7',
                 'value': 3307
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 530 MHz to 975 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_8',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_8',
                 'value': 3308
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 910 MHz to 1,640 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_9',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_9',
                 'value': 3309
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_10',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_10',
                 'value': 3310
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_11',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_11',
                 'value': 3311
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_12',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_12',
                 'value': 3312
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_13',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_13',
                 'value': 3313
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_14',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_14',
                 'value': 3314
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_15',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_15',
                 'value': 3315
             },
             {
                 'documentation': {
                     'description': 'Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.'
                 },
-                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_16',
+                'name': 'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_16',
                 'value': 3316
             },
             {
@@ -2554,14 +2554,14 @@ enums = {
                 'documentation': {
                     'description': 'Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_3DB',
+                'name': 'NIRFSA_VAL_RBW_THREE_DECIBELS',
                 'value': 300
             },
             {
                 'documentation': {
                     'description': 'Defines the RBW in terms of the 6 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_6DB',
+                'name': 'NIRFSA_VAL_RBW_SIX_DECIBELS',
                 'value': 301
             },
             {
@@ -2575,7 +2575,7 @@ enums = {
                 'documentation': {
                     'description': 'Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_ENBW',
+                'name': 'NIRFSA_VAL_RBW_EQUIVALENT_NOISE_BANDWIDTH',
                 'value': 303
             }
         ]

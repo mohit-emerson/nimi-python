@@ -646,7 +646,7 @@ class Lo2ExportEnabled(Enum):
     '''
 
 
-class LoInjection(Enum):
+class LoInjectionSide(Enum):
     HIGH = 1300
     r'''
     Configures the LO signal that the NI-RFSA device generates at a frequency higher than the RF frequency. This LO frequency is given by the formula f<sub>LO</sub> = f<sub>RF</sub> + f<sub>IF</sub>.
@@ -1141,67 +1141,67 @@ class RfPreselectorFilter(Enum):
     r'''
     Specifies that no preselector path is used.
     '''
-    _1 = 3301
+    FILTER_1 = 3301
     r'''
     Specifies that the 19 MHz to 35 MHz preselector filter is used.
     '''
-    _2 = 3302
+    FILTER_2 = 3302
     r'''
     Specifies that the 33 MHz to 61 MHz preselector filter is used.
     '''
-    _3 = 3303
+    FILTER_3 = 3303
     r'''
     Specifies that the 59 MHz to 110 MHz preselector filter is used.
     '''
-    _4 = 3304
+    FILTER_4 = 3304
     r'''
     Specifies that the 90 MHz to 170 MHz preselector filter is used.
     '''
-    _5 = 3305
+    FILTER_5 = 3305
     r'''
     Specifies that the 140 MHz to 245 MHz preselector filter is used.
     '''
-    _6 = 3306
+    FILTER_6 = 3306
     r'''
     Specifies that the 205 MHz to 370 MHz preselector filter is used.
     '''
-    _7 = 3307
+    FILTER_7 = 3307
     r'''
     Specifies that the 330 MHz to 575 MHz preselector filter is used.
     '''
-    _8 = 3308
+    FILTER_8 = 3308
     r'''
     Specifies that the 530 MHz to 975 MHz preselector filter is used.
     '''
-    _9 = 3309
+    FILTER_9 = 3309
     r'''
     Specifies that the 910 MHz to 1,640 MHz preselector filter is used.
     '''
-    _10 = 3310
+    FILTER_10 = 3310
     r'''
     Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.
     '''
-    _11 = 3311
+    FILTER_11 = 3311
     r'''
     Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.
     '''
-    _12 = 3312
+    FILTER_12 = 3312
     r'''
     Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.
     '''
-    _13 = 3313
+    FILTER_13 = 3313
     r'''
     Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.
     '''
-    _14 = 3314
+    FILTER_14 = 3314
     r'''
     Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.
     '''
-    _15 = 3315
+    FILTER_15 = 3315
     r'''
     Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.
     '''
-    _16 = 3316
+    FILTER_16 = 3316
     r'''
     Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.
     '''
@@ -1467,11 +1467,11 @@ class SpectrumFfTwindowType(Enum):
 
 
 class SpectrumResolutionBandwidthType(Enum):
-    _3DB = 300
+    THREE_DECIBELS = 300
     r'''
     Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.
     '''
-    _6DB = 301
+    SIX_DECIBELS = 301
     r'''
     Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.
     '''
@@ -1479,7 +1479,7 @@ class SpectrumResolutionBandwidthType(Enum):
     r'''
     Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
     '''
-    ENBW = 303
+    EQUIVALENT_NOISE_BANDWIDTH = 303
     r'''
     Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.
     '''

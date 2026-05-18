@@ -314,7 +314,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    assoc_aux_switch_gain_uid = _attributes.AttributeViInt32(1150356)
     attenuation = _attributes.AttributeViReal64(1150005)
     '''Type: float
 
@@ -432,7 +431,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5820
     '''
-    created_session_channel = _attributes.AttributeViInt32(1150333)
     ddc_ref_trigger_override = _attributes.AttributeViBoolean(1150164)
     '''Type: bool
 
@@ -3106,38 +3104,38 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    lo_injection_side = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoInjection, 1150069)
-    '''Type: enums.LoInjection
+    lo_injection_side = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LoInjectionSide, 1150069)
+    '''Type: enums.LoInjectionSide
 
     Specifies the LO injection side.
 
     **PXIe-5601/5663/5663E**: For frequencies below 517.5 MHz or above 6.4125 GHz, the LO injection side is fixed and NI-RFSA returns an error if you specify the incorrect value. If you do not configure this property, NI-RFSA selects the default LO injection side based on the downconverter center frequency. Reset this property to return to automatic behavior.
 
-    **PXIe-5603/5605/5665 (3.6 GHz)/5667 (3.6 GHz)**: Setting this property to LoInjection.LOW is not supported for this device.
+    **PXIe-5603/5605/5665 (3.6 GHz)/5667 (3.6 GHz)**: Setting this property to LoInjectionSide.LOW is not supported for this device.
 
-    **PXIe-5605/5665 (14 GHz)/5667 (7 GHz)**: Setting this property to LoInjection.LOW is supported for this device for frequencies greater than 4 GHz, but this configuration is not calibrated, and device specifications are not guaranteed.
+    **PXIe-5605/5665 (14 GHz)/5667 (7 GHz)**: Setting this property to LoInjectionSide.LOW is supported for this device for frequencies greater than 4 GHz, but this configuration is not calibrated, and device specifications are not guaranteed.
 
-    **PXIe-5606/5668**: Setting this property to LoInjection.LOW is supported for certain frequencies in high band, varying by final IF frequency. This configuration is not calibrated and device specifications are not guaranteed.
+    **PXIe-5606/5668**: Setting this property to LoInjectionSide.LOW is supported for certain frequencies in high band, varying by final IF frequency. This configuration is not calibrated and device specifications are not guaranteed.
 
     **Defined Values:**
 
     **Default Values**:
 
-    **PXIe-5601 (external digitizer mode), PXIe-5663/5663E (frequencies < 3.0 GHz)**: LoInjection.HIGH
+    **PXIe-5601 (external digitizer mode), PXIe-5663/5663E (frequencies < 3.0 GHz)**: LoInjectionSide.HIGH
 
-    **PXIe-5601 (external digitizer mode), PXIe-5663/5663E (frequencies  3.0 GHz)**: LoInjection.LOW
+    **PXIe-5601 (external digitizer mode), PXIe-5663/5663E (frequencies  3.0 GHz)**: LoInjectionSide.LOW
 
-    **PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668**: LoInjection.HIGH
+    **PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668**: LoInjectionSide.HIGH
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
 
-    +------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name             | Value        | Description                                                                                                                                                                                         |
-    +==================+==============+=====================================================================================================================================================================================================+
-    | LoInjection.HIGH | 1300 (0x514) | Configures the LO signal that the NI-RFSA device generates at a frequency higher than the RF frequency. This LO frequency is given by the formula f<sub>LO</sub> = f<sub>RF</sub> + f<sub>IF</sub>. |
-    +------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | LoInjection.LOW  | 1301 (0x515) | Configures the LO signal that the NI-RFSA device generates at a frequency lower than the RF frequency. This LO frequency is given by the formula f<sub>LO</sub> = f<sub>RF</sub> - f<sub>IF</sub>.  |
-    +------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +----------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                 | Value        | Description                                                                                                                                                                                         |
+    +======================+==============+=====================================================================================================================================================================================================+
+    | LoInjectionSide.HIGH | 1300 (0x514) | Configures the LO signal that the NI-RFSA device generates at a frequency higher than the RF frequency. This LO frequency is given by the formula f<sub>LO</sub> = f<sub>RF</sub> + f<sub>IF</sub>. |
+    +----------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | LoInjectionSide.LOW  | 1301 (0x515) | Configures the LO signal that the NI-RFSA device generates at a frequency lower than the RF frequency. This LO frequency is given by the formula f<sub>LO</sub> = f<sub>RF</sub> - f<sub>IF</sub>.  |
+    +----------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     '''
     lo_in_power = _attributes.AttributeViReal64(1150186)
     '''Type: float
@@ -3346,7 +3344,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    max_fundamental_silo_frequency = _attributes.AttributeViReal64(1150335)
     max_iq_rate = _attributes.AttributeViReal64(1150237)
     '''Type: float
 
@@ -3430,7 +3427,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
     '''
-    min_fundamental_silo_frequency = _attributes.AttributeViReal64(1150334)
     mixer_level = _attributes.AttributeViReal64(1150006)
     '''Type: float
 
@@ -4127,21 +4123,21 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value**: SpectrumResolutionBandwidthType._3DB
+    **Default Value**: SpectrumResolutionBandwidthType.THREE_DECIBELS
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-    +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                      | Value       | Description                                                                                                                                 |
-    +===========================================+=============+=============================================================================================================================================+
-    | SpectrumResolutionBandwidthType._3DB      | 300 (0x12c) | Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.              |
-    +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | SpectrumResolutionBandwidthType._6DB      | 301 (0x12d) | Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.                                     |
-    +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | SpectrumResolutionBandwidthType.BIN_WIDTH | 302 (0x12e) | Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire. |
-    +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | SpectrumResolutionBandwidthType.ENBW      | 303 (0x12f) | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.                  |
-    +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                                                       | Value       | Description                                                                                                                                 |
+    +============================================================+=============+=============================================================================================================================================+
+    | SpectrumResolutionBandwidthType.THREE_DECIBELS             | 300 (0x12c) | Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.              |
+    +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | SpectrumResolutionBandwidthType.SIX_DECIBELS               | 301 (0x12d) | Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.                                     |
+    +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | SpectrumResolutionBandwidthType.BIN_WIDTH                  | 302 (0x12e) | Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire. |
+    +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | SpectrumResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH | 303 (0x12f) | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.                  |
+    +------------------------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
     '''
     rf_attenuation_step_size = _attributes.AttributeViReal64(1150155)
     '''Type: float
@@ -4307,7 +4303,7 @@ class _SessionBase(object):
 
     **Default Values**:
 
-    **PXIe-5667, PXIe-5693**: RfPreselectorFilter._9
+    **PXIe-5667, PXIe-5693**: RfPreselectorFilter.FILTER_9
 
     **PXIe-5665**: RfPreselectorFilter.NONE
 
@@ -4318,37 +4314,37 @@ class _SessionBase(object):
     +=====================================+==============+============================================================================+
     | RfPreselectorFilter.NONE            | 3300 (0xce4) | Specifies that no preselector path is used.                                |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._1              | 3301 (0xce5) | Specifies that the 19 MHz to 35 MHz preselector filter is used.            |
+    | RfPreselectorFilter.FILTER_1        | 3301 (0xce5) | Specifies that the 19 MHz to 35 MHz preselector filter is used.            |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._2              | 3302 (0xce6) | Specifies that the 33 MHz to 61 MHz preselector filter is used.            |
+    | RfPreselectorFilter.FILTER_2        | 3302 (0xce6) | Specifies that the 33 MHz to 61 MHz preselector filter is used.            |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._3              | 3303 (0xce7) | Specifies that the 59 MHz to 110 MHz preselector filter is used.           |
+    | RfPreselectorFilter.FILTER_3        | 3303 (0xce7) | Specifies that the 59 MHz to 110 MHz preselector filter is used.           |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._4              | 3304 (0xce8) | Specifies that the 90 MHz to 170 MHz preselector filter is used.           |
+    | RfPreselectorFilter.FILTER_4        | 3304 (0xce8) | Specifies that the 90 MHz to 170 MHz preselector filter is used.           |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._5              | 3305 (0xce9) | Specifies that the 140 MHz to 245 MHz preselector filter is used.          |
+    | RfPreselectorFilter.FILTER_5        | 3305 (0xce9) | Specifies that the 140 MHz to 245 MHz preselector filter is used.          |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._6              | 3306 (0xcea) | Specifies that the 205 MHz to 370 MHz preselector filter is used.          |
+    | RfPreselectorFilter.FILTER_6        | 3306 (0xcea) | Specifies that the 205 MHz to 370 MHz preselector filter is used.          |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._7              | 3307 (0xceb) | Specifies that the 330 MHz to 575 MHz preselector filter is used.          |
+    | RfPreselectorFilter.FILTER_7        | 3307 (0xceb) | Specifies that the 330 MHz to 575 MHz preselector filter is used.          |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._8              | 3308 (0xcec) | Specifies that the 530 MHz to 975 MHz preselector filter is used.          |
+    | RfPreselectorFilter.FILTER_8        | 3308 (0xcec) | Specifies that the 530 MHz to 975 MHz preselector filter is used.          |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._9              | 3309 (0xced) | Specifies that the 910 MHz to 1,640 MHz preselector filter is used.        |
+    | RfPreselectorFilter.FILTER_9        | 3309 (0xced) | Specifies that the 910 MHz to 1,640 MHz preselector filter is used.        |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._10             | 3310 (0xcee) | Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.      |
+    | RfPreselectorFilter.FILTER_10       | 3310 (0xcee) | Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._11             | 3311 (0xcef) | Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.      |
+    | RfPreselectorFilter.FILTER_11       | 3311 (0xcef) | Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._12             | 3312 (0xcf0) | Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.      |
+    | RfPreselectorFilter.FILTER_12       | 3312 (0xcf0) | Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._13             | 3313 (0xcf1) | Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.      |
+    | RfPreselectorFilter.FILTER_13       | 3313 (0xcf1) | Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._14             | 3314 (0xcf2) | Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.      |
+    | RfPreselectorFilter.FILTER_14       | 3314 (0xcf2) | Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._15             | 3315 (0xcf3) | Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.      |
+    | RfPreselectorFilter.FILTER_15       | 3315 (0xcf3) | Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter._16             | 3316 (0xcf4) | Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.      |
+    | RfPreselectorFilter.FILTER_16       | 3316 (0xcf4) | Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.      |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+
     | RfPreselectorFilter.EXTERNAL_FILTER | 3317 (0xcf5) | Specifies that the 20 MHz to 3.04 GHz external filter filter path is used. |
     +-------------------------------------+--------------+----------------------------------------------------------------------------+

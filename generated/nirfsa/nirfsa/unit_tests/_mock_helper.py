@@ -176,11 +176,9 @@ class SideEffectsHelper(object):
         self._defaults['ReadPowerSpectrumF32'] = {}
         self._defaults['ReadPowerSpectrumF32']['return'] = 0
         self._defaults['ReadPowerSpectrumF32']['spectrumInfo'] = None
-        self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'] = None
         self._defaults['ReadPowerSpectrumF64'] = {}
         self._defaults['ReadPowerSpectrumF64']['return'] = 0
         self._defaults['ReadPowerSpectrumF64']['spectrumInfo'] = None
-        self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
         self._defaults['ResetWithDefaults'] = {}
@@ -399,7 +397,7 @@ class SideEffectsHelper(object):
             minute.contents.value = self._defaults['FancyGetSelfCalibrationDateAndTime']['minute']
         return self._defaults['FancyGetSelfCalibrationDateAndTime']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
         if self._defaults['FetchIqMultiRecordComplexF32']['return'] != 0:
             return self._defaults['FetchIqMultiRecordComplexF32']['return']
         # wfm_info
@@ -410,7 +408,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF32']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexF32']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
         if self._defaults['FetchIqMultiRecordComplexF64']['return'] != 0:
             return self._defaults['FetchIqMultiRecordComplexF64']['return']
         # wfm_info
@@ -421,7 +419,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexF64']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
         if self._defaults['FetchIqMultiRecordComplexI16']['return'] != 0:
             return self._defaults['FetchIqMultiRecordComplexI16']['return']
         # wfm_info
@@ -432,7 +430,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexI16']['wfm_info'], field_name))
         return self._defaults['FetchIqMultiRecordComplexI16']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
         if self._defaults['FetchIqSingleRecordComplexF32']['return'] != 0:
             return self._defaults['FetchIqSingleRecordComplexF32']['return']
         # wfm_info
@@ -443,7 +441,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF32']['wfm_info'], field_name))
         return self._defaults['FetchIqSingleRecordComplexF32']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
         if self._defaults['FetchIqSingleRecordComplexF64']['return'] != 0:
             return self._defaults['FetchIqSingleRecordComplexF64']['return']
         # wfm_info
@@ -454,7 +452,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['FetchIqSingleRecordComplexF64']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, waveform_data, wfm_info):  # noqa: N802
+    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
         if self._defaults['FetchIqSingleRecordComplexI16']['return'] != 0:
             return self._defaults['FetchIqSingleRecordComplexI16']['return']
         # wfm_info
@@ -763,7 +761,7 @@ class SideEffectsHelper(object):
             return self._defaults['PerformThermalCorrection']['return']
         return self._defaults['PerformThermalCorrection']['return']
 
-    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, waveform_data, data_array_size, wfm_info):  # noqa: N802
+    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, iq_data_array, data_array_size, wfm_info):  # noqa: N802
         if self._defaults['ReadIqSingleRecordComplexF64']['return'] != 0:
             return self._defaults['ReadIqSingleRecordComplexF64']['return']
         # wfm_info
@@ -774,7 +772,7 @@ class SideEffectsHelper(object):
             setattr(wfm_info.contents, field_name, getattr(self._defaults['ReadIqSingleRecordComplexF64']['wfm_info'], field_name))
         return self._defaults['ReadIqSingleRecordComplexF64']['return']
 
-    def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+    def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data_array, data_array_size, spectrum_info):  # noqa: N802
         if self._defaults['ReadPowerSpectrumF32']['return'] != 0:
             return self._defaults['ReadPowerSpectrumF32']['return']
         # spectrum_info
@@ -783,20 +781,9 @@ class SideEffectsHelper(object):
         for field in self._defaults['ReadPowerSpectrumF32']['spectrum_info']._fields_:
             field_name = field[0]
             setattr(spectrum_info.contents, field_name, getattr(self._defaults['ReadPowerSpectrumF32']['spectrum_info'], field_name))
-        # power_spectrum_data
-        if self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'] is None:
-            raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF32", param='powerSpectrumData')
-        if data_array_size.value == 0:
-            return len(self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'])
-        try:
-            power_spectrum_data_ref = power_spectrum_data.contents
-        except AttributeError:
-            power_spectrum_data_ref = power_spectrum_data
-        for i in range(len(self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'])):
-            power_spectrum_data_ref[i] = self._defaults['ReadPowerSpectrumF32']['powerSpectrumData'][i]
         return self._defaults['ReadPowerSpectrumF32']['return']
 
-    def niRFSA_ReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data, data_array_size, spectrum_info):  # noqa: N802
+    def niRFSA_ReadPowerSpectrumF64(self, vi, channel_list, timeout, power_spectrum_data_array, data_array_size, spectrum_info):  # noqa: N802
         if self._defaults['ReadPowerSpectrumF64']['return'] != 0:
             return self._defaults['ReadPowerSpectrumF64']['return']
         # spectrum_info
@@ -805,17 +792,6 @@ class SideEffectsHelper(object):
         for field in self._defaults['ReadPowerSpectrumF64']['spectrum_info']._fields_:
             field_name = field[0]
             setattr(spectrum_info.contents, field_name, getattr(self._defaults['ReadPowerSpectrumF64']['spectrum_info'], field_name))
-        # power_spectrum_data
-        if self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'] is None:
-            raise MockFunctionCallError("niRFSA_ReadPowerSpectrumF64", param='powerSpectrumData')
-        if data_array_size.value == 0:
-            return len(self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'])
-        try:
-            power_spectrum_data_ref = power_spectrum_data.contents
-        except AttributeError:
-            power_spectrum_data_ref = power_spectrum_data
-        for i in range(len(self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'])):
-            power_spectrum_data_ref[i] = self._defaults['ReadPowerSpectrumF64']['powerSpectrumData'][i]
         return self._defaults['ReadPowerSpectrumF64']['return']
 
     def niRFSA_ResetDevice(self, vi):  # noqa: N802

@@ -9,9 +9,12 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         import numpy
-        if spectrum_data_type == numpy.float64:
-            return self._read_power_spectrum_f64(timeout)
-        elif spectrum_data_type == numpy.float32:
-            return self._read_power_spectrum_f32(timeout)
+        if str(type(power_spectrum_data_array)).find("'numpy.ndarray'") != -1:
+            if power_spectrum_data_array.dtype == numpy.float64:
+                return self._read_power_spectrum_f64(channel_list, power_spectrum_data_array, timeout)
+            elif power_spectrum_data_array.dtype == numpy.float32:
+                return self._read_power_spectrum_f32(channel_list, power_spectrum_data_array, timeout)
+            else:
+                raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
         else:
-            raise TypeError("Unsupported spectrum_data_type. Is {}, expected {} or {}".format(spectrum_data_type, numpy.float64, numpy.float32))
+            raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))

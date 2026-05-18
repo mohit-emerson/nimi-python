@@ -802,6 +802,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -862,6 +863,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1393,6 +1395,95 @@ functions = {
         'returns': None,
         'use_session_lock': False
     },
+    'ReadIqSingleRecordDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Initiates an acquisition and fetches a single I/Q data record. \n                \n                Do not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'read_iq_single_record',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'read_iq_single_record'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
+                },
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True,
+            },
+            {
+                'complex_array_representation': 'complex_number_array',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
+                },
+                'name': 'iq_data_array',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
+                'type': 'NIComplexNumber[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
+                },
+                'name': 'dataArraySize',
+                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array) // 2'},
+                'type': 'ViInt64',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\n                        The following list provides more information about each of these properties:\n\n                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n                        ----\n                        \n                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n                        ----\n\n                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n                        ----\n                        \n                        \n                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n                        ----\n\n                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n                        - **actual samples read** Returns an integer representing the number of samples in the waveform.\n                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
+                },
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'read_iq_single_record',
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
     'ReadIqSingleRecordComplexF64': {
         'codegen_method': 'public',
         'documentation': {
@@ -1425,6 +1516,7 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'name': 'channelList',
+                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1443,16 +1535,15 @@ functions = {
                 'use_in_python_api': True,
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_array',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -1461,7 +1552,7 @@ functions = {
                     'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
                 'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': '0 if waveform_data is None else len(waveform_data) // 2'},
+                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array) // 2'},
                 'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': False
@@ -1486,7 +1577,7 @@ functions = {
             'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the nirfsa_ReadIqSingleRecordComplexF64 function because the nirfsa_ReadIqSingleRecordComplexF64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'included_in_proto': True,
-        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_name_for_documentation': 'fetch_iq_multi_record',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -1511,6 +1602,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1560,16 +1652,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
+                    'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_arrays',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumberF32[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -1583,7 +1674,6 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        #'python_name': '_fetch_iq_multi_record_complex_f32',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -1594,7 +1684,7 @@ functions = {
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_name_for_documentation': 'fetch_iq_multi_record',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -1619,6 +1709,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1668,16 +1759,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
+                    'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_arrays',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -1691,7 +1781,6 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        # 'python_name': '_fetch_iq_multi_record_complex_f64',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -1702,7 +1791,7 @@ functions = {
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_name_for_documentation': 'fetch_iq_multi_record',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -1727,6 +1816,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1779,13 +1869,12 @@ functions = {
                 'complex_array_representation': 'interleaved_real_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Returns the acquired waveform for each record fetched. The waveforms are written sequentially in the array. Allocate an array at least as large as **numberOfSamples** times **NIRFSA_ATTR_NUMBER_OF_RECORDS** for this parameter.'
+                    'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this interleaved data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_arrays',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexI16[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -1802,20 +1891,20 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqMultiRecordComplexDispatcher': {
+    'FetchIqMultiRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'included_in_proto': False,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_multi_record_complex',
+        'method_name_for_documentation': 'fetch_iq_multi_record',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
-                'session_filename': 'fetch_iq_multi_record_complex'
+                'session_filename': 'fetch_iq_multi_record'
             }
         ],
         'parameters': [
@@ -1834,6 +1923,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1870,24 +1960,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
+                    'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'waveformData',
-                'type': 'NIComplexNumber',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.'
-                },
-                'name': 'waveformDataType',
+                'name': 'iq_data_arrays',
                 'numpy': True,
-                'type': 'NIComplexNumber',
-                'use_array': False,
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': '2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16',
                 'use_in_python_api': True
             },
             {
@@ -1904,7 +1985,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'python_name': 'fetch_iq_multi_record_complex',
+        'python_name': 'fetch_iq_multi_record',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -1915,7 +1996,7 @@ functions = {
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_name_for_documentation': 'fetch_iq_single_record',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -1940,6 +2021,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1979,16 +2061,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_array',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumberF32[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -2002,7 +2083,6 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        # 'python_name': '_fetch_iq_single_record_complex_f32',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2013,7 +2093,7 @@ functions = {
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_name_for_documentation': 'fetch_iq_single_record',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -2038,6 +2118,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2077,16 +2158,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'complex_array_representation': 'interleaved_real_number_array',
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_array',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -2100,7 +2180,6 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        # 'python_name': '_fetch_iq_single_record_complex_f64',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2111,7 +2190,7 @@ functions = {
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_name_for_documentation': 'fetch_iq_single_record',
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -2136,6 +2215,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2180,7 +2260,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'waveformData',
+                'name': 'iq_data_array',
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexI16[]',
@@ -2198,24 +2278,23 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        # 'python_name': '_fetch_iq_single_record_complex_i16',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqSingleRecordComplexDispatcher': {
+    'FetchIqSingleRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'included_in_proto': False,
         'is_error_handling': False,
-        'method_name_for_documentation': 'fetch_iq_single_record_complex',
+        'method_name_for_documentation': 'fetch_iq_single_record',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
                 'method_python_name_suffix': '',
-                'session_filename': 'fetch_iq_single_record_complex'
+                'session_filename': 'fetch_iq_single_record'
             }
         ],
         'parameters': [
@@ -2234,6 +2313,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2260,24 +2340,15 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'waveformData',
-                'type': 'NIComplexNumber',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the data type for the returned IQ data. Use numpy.complex64, numpy.complex128, or numpy.int16.'
-                },
-                'name': 'waveformDataType',
+                'name': 'iq_data_array',
                 'numpy': True,
-                'type': 'NIComplexNumber',
-                'use_array': False,
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
                 'use_in_python_api': True
             },
             {
@@ -2294,7 +2365,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'python_name': 'fetch_iq_single_record_complex',
+        'python_name': 'fetch_iq_single_record',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -2932,6 +3003,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2992,6 +3064,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3246,6 +3319,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3713,6 +3787,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3732,17 +3807,14 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'out',
+                'direction': 'in',
                 'documentation': {
                     'description': 'Returns power spectrum data. Allocate an array as large as **NIRFSA_ATTR_DATA_ARRAY_SIZE**.'
                 },
-                'name': 'powerSpectrumData',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'dataArraySize'
-                },
+                'name': 'powerSpectrumDataArray',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViReal32[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -3751,9 +3823,10 @@ functions = {
                     'description': 'Specifies the size of the array that is returned by the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** parameter. Use the nirfsa_GetNumberOfSpectralLines function to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.'
                 },
                 'name': 'dataArraySize',
+                'size': {'mechanism': 'python-code', 'value': 'len(power_spectrum_data_array)'},
                 'type': 'ViInt32',
                 'use_array': False,
-                'use_in_python_api': True
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
@@ -3776,7 +3849,7 @@ functions = {
         },
         'included_in_proto': True,
         'is_error_handling': False,
-        'method_name_for_documentation': 'Read_Power_Spectrum',
+        'method_name_for_documentation': 'read_power_spectrum',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3801,6 +3874,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3820,17 +3894,14 @@ functions = {
                 'use_in_python_api': True
             },
             {
-                'direction': 'out',
+                'direction': 'in',
                 'documentation': {
-                    'description': 'Returns power spectrum data. Allocate an array as large as **NIRFSA_ATTR_DATA_ARRAY_SIZE**.'
+                    'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.'
                 },
-                'name': 'powerSpectrumData',
-                'size': {
-                    'mechanism': 'ivi-dance',
-                    'value': 'dataArraySize'
-                },
+                'name': 'powerSpectrumDataArray',
+                'numpy': True,
+                'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'ViReal64[]',
-                'use_array': True,
                 'use_in_python_api': True
             },
             {
@@ -3839,9 +3910,10 @@ functions = {
                     'description': 'Specifies the size of the array that is returned by the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** parameter. Use the nirfsa_GetNumberOfSpectralLines function to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.'
                 },
                 'name': 'dataArraySize',
+                'size': {'mechanism': 'python-code', 'value': 'len(power_spectrum_data_array)'},
                 'type': 'ViInt32',
                 'use_array': False,
-                'use_in_python_api': True
+                'use_in_python_api': False
             },
             {
                 'direction': 'out',
@@ -3889,6 +3961,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
+                'is_repeated_capability': False,
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3910,12 +3983,12 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the data type for the returned power spectrum data. Use numpy.float32 or numpy.float64.'
+                    'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. The dtype of this array determines the data format: numpy.float64 or numpy.float32. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.'
                 },
-                'name': 'spectrumDataType',
+                'name': 'powerSpectrumDataArray',
                 'numpy': True,
-                'type': 'NIComplexNumber',
-                'use_array': False,
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'numpy.array of numpy.float64 or numpy.array of numpy.float32',
                 'use_in_python_api': True
             }
         ],

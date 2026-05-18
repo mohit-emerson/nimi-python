@@ -2578,7 +2578,7 @@ ReferenceTriggerType
 
 
 
-        The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property. This value is valid only for PXIe-5644/5645 devices.
+        The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the :py:attr:`nirfsa.Session.IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE` property. This value is valid only for PXIe-5644/5645 devices.
 
         
 

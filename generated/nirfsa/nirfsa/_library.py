@@ -501,13 +501,13 @@ class Library(object):
                 self.niRFSA_GetTerminalName_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetTerminalName_cfunc(vi, signal, signal_identifier, buffer_size, terminal_name)
 
-    def niRFSA_InitWithOptions(self, resource_name, id_query, reset, option_string, vi):  # noqa: N802
+    def niRFSA_InitWithOptions(self, resource_name, id_query, reset_device, option_string, new_vi):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_InitWithOptions_cfunc is None:
                 self.niRFSA_InitWithOptions_cfunc = self._get_library_function('niRFSA_InitWithOptions')
                 self.niRFSA_InitWithOptions_cfunc.argtypes = [ctypes.POINTER(ViChar), ViBoolean, ViBoolean, ctypes.POINTER(ViChar), ctypes.POINTER(ViSession)]  # noqa: F405
                 self.niRFSA_InitWithOptions_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_InitWithOptions_cfunc(resource_name, id_query, reset, option_string, vi)
+        return self.niRFSA_InitWithOptions_cfunc(resource_name, id_query, reset_device, option_string, new_vi)
 
     def niRFSA_Initiate(self, vi):  # noqa: N802
         with self._func_lock:

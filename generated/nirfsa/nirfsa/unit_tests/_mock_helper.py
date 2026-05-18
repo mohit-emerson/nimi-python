@@ -156,7 +156,7 @@ class SideEffectsHelper(object):
         self._defaults['GetTerminalName']['terminalName'] = None
         self._defaults['InitWithOptions'] = {}
         self._defaults['InitWithOptions']['return'] = 0
-        self._defaults['InitWithOptions']['vi'] = None
+        self._defaults['InitWithOptions']['newVi'] = None
         self._defaults['Initiate'] = {}
         self._defaults['Initiate']['return'] = 0
         self._defaults['IsSelfCalValid'] = {}
@@ -711,14 +711,14 @@ class SideEffectsHelper(object):
         terminal_name.value = self._defaults['GetTerminalName']['terminalName'].encode('ascii')
         return self._defaults['GetTerminalName']['return']
 
-    def niRFSA_InitWithOptions(self, resource_name, id_query, reset, option_string, vi):  # noqa: N802
+    def niRFSA_InitWithOptions(self, resource_name, id_query, reset_device, option_string, new_vi):  # noqa: N802
         if self._defaults['InitWithOptions']['return'] != 0:
             return self._defaults['InitWithOptions']['return']
-        # vi
-        if self._defaults['InitWithOptions']['vi'] is None:
-            raise MockFunctionCallError("niRFSA_InitWithOptions", param='vi')
-        if vi is not None:
-            vi.contents.value = self._defaults['InitWithOptions']['vi']
+        # new_vi
+        if self._defaults['InitWithOptions']['newVi'] is None:
+            raise MockFunctionCallError("niRFSA_InitWithOptions", param='newVi')
+        if new_vi is not None:
+            new_vi.contents.value = self._defaults['InitWithOptions']['newVi']
         return self._defaults['InitWithOptions']['return']
 
     def niRFSA_Initiate(self, vi):  # noqa: N802

@@ -3,7 +3,7 @@
 Session
 =======
 
-.. py:class:: Session(self, resource_name, id_query, reset, options={})
+.. py:class:: Session(self, resource_name, id_query=False, reset_device=False, options={})
 
     
 
@@ -54,32 +54,38 @@ Session
     :param id_query:
         
 
-        Specifies whether NI-RFSA performs an ID query. When you perform an ID query, NI-RFSA verifies the device you initialize is supported.
+        Specifies whether you want NI-RFSA to perform an ID query.
 
-                                | Value               |  Description                                               |
-                                |:--------------|:------------------------------------------------|
-                                | True (Yes) | Perform an ID query. This value is the default. |
-                                | False (No) | Do not perform an ID query.                     |
+        **Defined Values** :
 
-        
+        +-----------+--------------------------+
+        | Value     | Description              |
+        +===========+==========================+
+        | True (1)  | Perform ID query.        |
+        +-----------+--------------------------+
+        | False (0) | Do not perform ID query. |
+        +-----------+--------------------------+
 
 
     :type id_query: bool
 
-    :param reset:
+    :param reset_device:
         
 
         Specifies whether the NI-RFSA device is reset during the initialization procedure.
 
-                                | Value              |  Description                                                   |
-                                |:--------------|:----------------------------------------------------|
-                                | True (Yes) | The device is reset.                                |
-                                | False (No) | The device is not reset. This value is the default. |
+        **Defined Values** :
 
-        
+        +-----------+----------------------+
+        | Value     | Description          |
+        +===========+======================+
+        | True (1)  | Reset the device.    |
+        +-----------+----------------------+
+        | False (0) | Do not reset device. |
+        +-----------+----------------------+
 
 
-    :type reset: bool
+    :type reset_device: bool
 
     :param options:
         
@@ -1973,7 +1979,7 @@ load_configurations_from_file
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: load_configurations_from_file(file_path)
+    .. py:method:: load_configurations_from_file(channel_name, file_path)
 
             Loads the configurations from the specified file to the NI-RFSA driver session.
 
@@ -1984,17 +1990,16 @@ load_configurations_from_file
             
 
 
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
 
-                Example: :py:meth:`my_session.channels[ ... ].load_configurations_from_file`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.load_configurations_from_file`
+            :param channel_name:
 
 
+                Specifies the name of the channel.
+
+                
+
+
+            :type channel_name: str
             :param file_path:
 
 
@@ -2425,7 +2430,7 @@ save_configurations_to_file
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: save_configurations_to_file(file_path)
+    .. py:method:: save_configurations_to_file(channel_name, file_path)
 
             Saves the configurations of the session to the specified file.
 
@@ -2434,17 +2439,16 @@ save_configurations_to_file
             
 
 
-            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-                Use Python index notation on the repeated capabilities container channels to specify a subset,
-                and then call this method on the result.
 
-                Example: :py:meth:`my_session.channels[ ... ].save_configurations_to_file`
-
-                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-                Example: :py:meth:`my_session.save_configurations_to_file`
+            :param channel_name:
 
 
+                Specifies the name of the channel.
+
+                
+
+
+            :type channel_name: str
             :param file_path:
 
 
@@ -2773,15 +2777,15 @@ absolute_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -3426,39 +3430,6 @@ ddc_ref_trigger_override
                 - LabVIEW Property: **Triggers:Advanced:DDC Reference Trigger Override**
                 - C Attribute: **NIRFSA_ATTR_DDC_REF_TRIGGER_OVERRIDE**
 
-decimation_delay
-----------------
-
-    .. py:attribute:: decimation_delay
-
-        Specifies the sub-sample delay, in seconds, to apply to the acquired signal.
-
-        To set this property, the NI-RFSA device must be in the Configuration state.
-
-        **Valid Values:** -4.16 ns to +4.16 ns
-
-        **Default Value**: 0
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Signal Path:Decimation Delay**
-                - C Attribute: **NIRFSA_ATTR_DECIMATION_DELAY**
-
 deembedding_compensation_gain
 -----------------------------
 
@@ -3503,6 +3474,18 @@ deembedding_selected_table
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
+
+
+
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
+
+            Example: :py:attr:`my_session.ports[ ... ].deembedding_selected_table`
+
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.deembedding_selected_table`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -3512,7 +3495,7 @@ deembedding_selected_table
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | ports      |
             +-----------------------+------------+
 
         .. tip::
@@ -3556,6 +3539,16 @@ deembedding_type
         | :py:data:`~nirfsa.DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS` | 3904 (0xf40) |                                                                        |
         +-----------------------------------------------------------------+--------------+------------------------------------------------------------------------+
 
+
+        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container ports to specify a subset.
+
+            Example: :py:attr:`my_session.ports[ ... ].deembedding_type`
+
+            To set/get on all ports, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.deembedding_type`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+-----------------------+
@@ -3565,7 +3558,7 @@ deembedding_type
             +-----------------------+-----------------------+
             | Permissions           | read-write            |
             +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
+            | Repeated Capabilities | ports                 |
             +-----------------------+-----------------------+
 
         .. tip::
@@ -3595,17 +3588,29 @@ device_configuration_temperature
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
+
+
+
+        .. tip:: This property can be set/get on specific device_temperatures within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container device_temperatures to specify a subset.
+
+            Example: :py:attr:`my_session.device_temperatures[ ... ].device_configuration_temperature`
+
+            To set/get on all device_temperatures, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.device_configuration_temperature`
+
         The following table lists the characteristics of this property.
 
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
+            +-----------------------+---------------------+
+            | Characteristic        | Value               |
+            +=======================+=====================+
+            | Datatype              | float               |
+            +-----------------------+---------------------+
+            | Permissions           | read-write          |
+            +-----------------------+---------------------+
+            | Repeated Capabilities | device_temperatures |
+            +-----------------------+---------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -7012,144 +7017,6 @@ io_resource_descriptor
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Resource Descriptor**
                 - C Attribute: **NIRFSA_ATTR_IO_RESOURCE_DESCRIPTOR**
 
-iq_analog_edge_ref_trigger_hysteresis
--------------------------------------
-
-    .. py:attribute:: iq_analog_edge_ref_trigger_hysteresis
-
-        Specifies the size of the hysteresis window on either side of the trigger level.
-
-        The device triggers when the signal passes through the threshold you specify with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_level` property, has the slope you specify with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
-
-        **Valid Values:** 0 to (Voltage Range/2 + Trigger Level) for Rising Slope. 0 to (Voltage Range/2 -Trigger Level) for Falling Slope. These values limit the hysteresis to the entire voltage range that is below the trigger level for Rising Slope or that is above the trigger level for Falling Slope.
-
-        **Default Value:** The default is calculated by the driver as (Range x 0.025).
-
-        **Supported Devices:** PXIe-5644/5645R
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Hysteresis**
-                - C Attribute: **NIRFSA_ATTR_IQ_ANALOG_EDGE_REF_TRIGGER_HYSTERESIS**
-
-iq_analog_edge_ref_trigger_level
---------------------------------
-
-    .. py:attribute:: iq_analog_edge_ref_trigger_level
-
-        Specifies the analog level, in volts, at which the device triggers.
-
-        The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
-
-        **Default Value:** 0 V
-
-        **Supported Devices:** PXIe-5644/5645
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | float      |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Level**
-                - C Attribute: **NIRFSA_ATTR_IQ_ANALOG_EDGE_REF_TRIGGER_LEVEL**
-
-iq_analog_edge_ref_trigger_slope
---------------------------------
-
-    .. py:attribute:: iq_analog_edge_ref_trigger_slope
-
-        Specifies whether the device asserts the trigger when the voltage level is rising or falling.
-
-        When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
-
-        **Defined Values:**
-
-        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`
-
-        **Supported Devices:** PXIe-5644/5645
-
-        +-------------------------------------------------------------+--------------+-------------------------------------------------------+
-        | Name                                                        | Value        | Description                                           |
-        +=============================================================+==============+=======================================================+
-        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`  | 1000 (0x3e8) | The trigger asserts when the signal power is rising.  |
-        +-------------------------------------------------------------+--------------+-------------------------------------------------------+
-        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING` | 1001 (0x3e9) | The trigger asserts when the signal power is falling. |
-        +-------------------------------------------------------------+--------------+-------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+----------------------------------------+
-            | Characteristic        | Value                                  |
-            +=======================+========================================+
-            | Datatype              | enums.ReferenceTriggerIqPowerEdgeSlope |
-            +-----------------------+----------------------------------------+
-            | Permissions           | read-write                             |
-            +-----------------------+----------------------------------------+
-            | Repeated Capabilities | None                                   |
-            +-----------------------+----------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Slope**
-                - C Attribute: **NIRFSA_ATTR_IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE**
-
-iq_analog_edge_ref_trigger_source
----------------------------------
-
-    .. py:attribute:: iq_analog_edge_ref_trigger_source
-
-        Specifies the channel from which the device monitors the trigger.
-
-        Use a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This property affects the device operation only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
-
-        **Valid Values:** "I", "Q", "I,Q", "Q,I"
-
-        **Default Value:** "I"
-
-        **Supported Devices:** PXIe-5644/5645
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Source**
-                - C Attribute: **NIRFSA_ATTR_IQ_ANALOG_EDGE_REF_TRIGGER_SOURCE**
-
 iq_carrier_frequency
 --------------------
 
@@ -8776,53 +8643,6 @@ noise_source_power_enabled
                 - LabVIEW Property: **Device Specific:5606:Noise Source Power Enabled**
                 - C Attribute: **NIRFSA_ATTR_NOISE_SOURCE_POWER_ENABLED**
 
-notch_filter_enabled
---------------------
-
-    .. py:attribute:: notch_filter_enabled
-
-        Specifies whether the notch filter is enabled on the RF conditioning module.
-
-        ----
-        **Note**
-        The PXI-5661 and PXIe-5663/5663E/5665 only support setting this property to :py:data:`~nirfsa.NotchFilterEnabled.DISABLED`.
-
-        ----
-
-        **Defined Values**:
-
-        **Default Value**: :py:data:`~nirfsa.NotchFilterEnabled.DISABLED`
-
-        **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5693
-
-        +-------------------------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                              | Value        | Description                                                                                                                                                                                                                                                            |
-        +===================================================================+==============+========================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsa.NotchFilterEnabled.DISABLED`                    | 3400 (0xd48) | Disables the notch filter.                                                                                                                                                                                                                                             |
-        +-------------------------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NotchFilterEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` | 3401 (0xd49) | The notch filter is automatically enabled when it is in the signal path and automatically disabled when it is not in the signal path.                                                                                                                                  |
-        +-------------------------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NotchFilterEnabled.ENABLED`                     | 3402 (0xd4a) | Enables the notch filter. If the notch filter is not in the signal path or if the notch filter is not supported on the device, NI-RFSA returns an error. Select :py:data:`~nirfsa.NotchFilterEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible to avoid an error. |
-        +-------------------------------------------------------------------+--------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------------+
-            | Characteristic        | Value                    |
-            +=======================+==========================+
-            | Datatype              | enums.NotchFilterEnabled |
-            +-----------------------+--------------------------+
-            | Permissions           | read-write               |
-            +-----------------------+--------------------------+
-            | Repeated Capabilities | None                     |
-            +-----------------------+--------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:Notch Filter Enabled**
-                - C Attribute: **NIRFSA_ATTR_NOTCH_FILTER_ENABLED**
-
 number_of_records
 -----------------
 
@@ -9595,15 +9415,15 @@ ref_to_ref_trigger_holdoff
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9628,15 +9448,15 @@ ref_trigger_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9661,15 +9481,15 @@ ref_trigger_minimum_quiet_time
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9862,8 +9682,10 @@ ref_trigger_type
         +--------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | :py:data:`~nirfsa.ReferenceTriggerType.SOFTWARE_EDGE`  | 604 (0x25c) | The Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the :py:meth:`nirfsa.Session.send_software_edge_trigger` method and selecting :py:data:`~nirfsa.NIRFSA_VAL_REF_TRIGGER` as the **trigger** parameter. |
         +--------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE` | 605 (0x25d) | The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the :py:attr:`nirfsa.Session.iq_analog_edge_ref_trigger_slope` property. This value is valid only for PXIe-5644/5645 devices.                   |
+        | :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE` | 605 (0x25d) | The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the :py:attr:`nirfsa.Session.IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE` property. This value is valid only for PXIe-5644/5645 devices.                   |
         +--------------------------------------------------------+-------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -9964,43 +9786,6 @@ resolution_bandwidth_type
 
                 - LabVIEW Property: **Acquisition:Spectrum:Resolution Bandwidth Type**
                 - C Attribute: **NIRFSA_ATTR_RESOLUTION_BANDWIDTH_TYPE**
-
-rf_attenuation_index
---------------------
-
-    .. py:attribute:: rf_attenuation_index
-
-        Specifies the value of the RF attenuation from a table of valid configurations.
-
-        This property is valid only during a calibration session and when you set the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
-
-        **Valid Values**: 0 to 64
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXIe-5693
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | int        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Factory Calibration:NI 5693:RF Attenuation Index**
-                - C Attribute: **NIRFSA_ATTR_RF_ATTENUATION_INDEX**
 
 rf_attenuation_step_size
 ------------------------
@@ -10965,15 +10750,15 @@ start_to_ref_trigger_holdoff
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10990,15 +10775,15 @@ start_trigger_delay
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
+            +-----------------------+-------------------------------------------------------------+
+            | Characteristic        | Value                                                       |
+            +=======================+=============================================================+
+            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
+            +-----------------------+-------------------------------------------------------------+
+            | Permissions           | read-write                                                  |
+            +-----------------------+-------------------------------------------------------------+
+            | Repeated Capabilities | None                                                        |
+            +-----------------------+-------------------------------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -11234,371 +11019,6 @@ supported_instrument_models
 
                 - LabVIEW Property: **Inherent IVI Attributes:Driver Capabilities:Supported Instrument Models**
                 - C Attribute: **NIRFSA_ATTR_SUPPORTED_INSTRUMENT_MODELS**
-
-sync_advance_trigger_dist_line
-------------------------------
-
-    .. py:attribute:: sync_advance_trigger_dist_line
-
-        Specifies which external trigger line distributes the synchronized Advance Trigger signal.
-
-        When synchronizing the Advance Trigger, configure all devices to use the same Advance Trigger distribution line.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-        **Default Value**: "" (empty string)
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Advance Trigger Dist Line**
-                - C Attribute: **NIRFSA_ATTR_SYNC_ADVANCE_TRIGGER_DIST_LINE**
-
-sync_advance_trigger_master
----------------------------
-
-    .. py:attribute:: sync_advance_trigger_master
-
-        Specifies whether the device is the master for synchronizing the shared Advance Trigger between multiple devices.
-
-        The master device distributes the synchronized Advance Trigger to all devices in the system through the Advance Trigger distribution line.
-
-        When synchronizing the Advance Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Advance Trigger distribution line. When the device is configured as a slave, set the :py:attr:`nirfsa.Session.advance_trigger_type` property to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`, and the :py:attr:`nirfsa.Session.digital_edge_advance_trigger_source` property to NIRFSA VAL SYNC ADVANCE TRIGGER STR.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Defined Values:**
-
-        | Value         | Description                                                                           |
-        |:---------|:---------------------------------------------------------------------------|
-        | True  | The device is the master device for synchronizing the Advance Trigger.     |
-        | False | The device is not the master device for synchronizing the Advance Trigger. |
-
-        **Default Value**: False
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Advance Trigger Master**
-                - C Attribute: **NIRFSA_ATTR_SYNC_ADVANCE_TRIGGER_MASTER**
-
-sync_ref_trigger_delay_enabled
-------------------------------
-
-    .. py:attribute:: sync_ref_trigger_delay_enabled
-
-        Specifies whether the Reference Trigger is delayed with the data.
-
-        Set this property to :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.DISABLED` when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE` or :py:data:`~nirfsa.ReferenceTriggerType.IQ_ANALOG_EDGE`.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Defined Values:**
-
-        **Default Value**: :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.DISABLED`
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-        +--------------------------------------------------------+--------------+---------------------------------------------------+
-        | Name                                                   | Value        | Description                                       |
-        +========================================================+==============+===================================================+
-        | :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.DISABLED` | 1900 (0x76c) | Disables synchronization reference trigger delay. |
-        +--------------------------------------------------------+--------------+---------------------------------------------------+
-        | :py:data:`~nirfsa.SyncRefTriggerDelayEnabled.ENABLED`  | 1901 (0x76d) | Enables synchronization reference trigger delay.  |
-        +--------------------------------------------------------+--------------+---------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+--------------------+
-            | Characteristic        | Value              |
-            +=======================+====================+
-            | Datatype              | hightime.timedelta |
-            +-----------------------+--------------------+
-            | Permissions           | read-write         |
-            +-----------------------+--------------------+
-            | Repeated Capabilities | None               |
-            +-----------------------+--------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Delay Enabled**
-                - C Attribute: **NIRFSA_ATTR_SYNC_REF_TRIGGER_DELAY_ENABLED**
-
-sync_ref_trigger_dist_line
---------------------------
-
-    .. py:attribute:: sync_ref_trigger_dist_line
-
-        Specifies which external trigger line distributes the synchronized Reference Trigger signal.
-
-        When synchronizing the Reference Trigger, configure all devices to use the same Reference Trigger distribution line.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-        **Default Value**: "" (empty string)
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Dist Line**
-                - C Attribute: **NIRFSA_ATTR_SYNC_REF_TRIGGER_DIST_LINE**
-
-sync_ref_trigger_master
------------------------
-
-    .. py:attribute:: sync_ref_trigger_master
-
-        Specifies whether the device is the master for synchronizing the shared Reference Trigger between multiple devices.
-
-        The master device distributes the synchronized Reference Trigger to all devices in the system through the Reference Trigger distribution line.
-
-        When synchronizing the Reference Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Reference Trigger distribution line. When the device is configured as a slave, set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`, and the :py:attr:`nirfsa.Session.digital_edge_ref_trigger_source` property to NIRFSA VAL SYNC REF TRIGGER STR.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Defined Values:**
-
-        |Value          | Description                                                                       |
-        |:---------|:-----------------------------------------------------------------------|
-        | True  | The device is the master device for synchronizing the Ref Trigger.     |
-        | False | The device is not the master device for synchronizing the Ref Trigger. |
-
-        **Default Value**: False
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Master**
-                - C Attribute: **NIRFSA_ATTR_SYNC_REF_TRIGGER_MASTER**
-
-sync_sample_clock_dist_line
----------------------------
-
-    .. py:attribute:: sync_sample_clock_dist_line
-
-        Specifies which external trigger line distributes the Sample Clock sync signal.
-
-        When synchronizing the Sample Clock, configure all devices to use the same Sample Clock distribution line.
-
-        Refer to `Synchronization Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5644-feature/page/synchronization-rfsa-g.html>`_ for more information about PXIe-5646 device synchronization.
-
-        **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-        **Default Value:** "" (empty string)
-
-        **Supported Devices:** PXIe-5646
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Sample Clock Dist Line**
-                - C Attribute: **NIRFSA_ATTR_SYNC_SAMPLE_CLOCK_DIST_LINE**
-
-sync_sample_clock_master
-------------------------
-
-    .. py:attribute:: sync_sample_clock_master
-
-        Specifies whether the device is the master device for synchronizing the Sample Clock between multiple devices.
-
-        The master device distributes the Sample Clock sync signal to all devices in the system through the Sample Clock sync distribution line.
-
-        When synchronizing the Sample Clock, one device must always be designated as the master. The master device actively drives the Sample Clock sync distribution line.
-
-        Refer to [Synchronization Using NI-RFSA and NI-RFSG](PXIe-5646.chm/synchronization-rfsa-g.html) for more information about PXIe-5646 device synchronization.
-
-        **Defined Values:**
-
-        | Value         | Description                                                                    |
-        |:---------|:--------------------------------------------------------------------|
-        | True  | The device is the master device for synchronizing the Sample Clock. |
-        | False | The device is not the master for synchronizing the Sample Clock.    |
-
-        **Default Value:** False
-
-        **Supported Devices:** PXIe-5646
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Sample Clock Master**
-                - C Attribute: **NIRFSA_ATTR_SYNC_SAMPLE_CLOCK_MASTER**
-
-sync_start_trigger_dist_line
-----------------------------
-
-    .. py:attribute:: sync_start_trigger_dist_line
-
-        Specifies which external trigger line distributes the synchronized Start Trigger signal.
-
-        When synchronizing the Start Trigger, configure all devices to use the same Start Trigger distribution line.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-        **Default Value**: "" (empty string)
-
-        **Supported Devices**: PXIe-5644/5645/5646
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | str        |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Start Trigger Dist Line**
-                - C Attribute: **NIRFSA_ATTR_SYNC_START_TRIGGER_DIST_LINE**
-
-sync_start_trigger_master
--------------------------
-
-    .. py:attribute:: sync_start_trigger_master
-
-        Specifies whether the device is the master for synchronizing the shared Start Trigger between multiple devices.
-
-        The master device distributes the synchronized Start Trigger to all devices in the system through the Start Trigger distribution line.
-
-        When synchronizing the Start Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Start Trigger distribution line. When the device is configured as a slave, set the :py:attr:`nirfsa.Session.start_trigger_type` property to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`, and the :py:attr:`nirfsa.Session.digital_edge_start_trigger_source` property to NIRFSA VAL SYNC START TRIGGER STR.
-
-        Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-        **Defined Values:**
-
-        |Value          | Description                                                                         |
-        |:---------|:-------------------------------------------------------------------------|
-        | True  | The device is the master device for synchronizing the Start Trigger.     |
-        | False | The device is not the master device for synchronizing the Start Trigger. |
-
-        **Default Value**: False
-
-        **Supported Devices:** PXIe-5644/5645/5646
-
-
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Start Trigger Master**
-                - C Attribute: **NIRFSA_ATTR_SYNC_START_TRIGGER_MASTER**
 
 temperature_read_interval
 -------------------------

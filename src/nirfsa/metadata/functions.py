@@ -3519,9 +3519,24 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies whether NI-RFSA performs an ID query. When you perform an ID query, NI-RFSA verifies the device you initialize is supported.\n\n                        | Value               |  Description                                               |\n                        |:--------------|:------------------------------------------------|\n                        | VI_TRUE (Yes) | Perform an ID query. This value is the default. |\n                        | VI_FALSE (No) | Do not perform an ID query.                     |'
+                    'description': 'Specifies whether you want NI-RFSA to perform an ID query.\n\n**Defined Values** :',
+                    'table_body': [
+                        [
+                            'VI_TRUE (1)',
+                            'Perform ID query.'
+                        ],
+                        [
+                            'VI_FALSE (0)',
+                            'Do not perform ID query.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Value',
+                        'Description'
+                    ]
                 },
                 'name': 'idQuery',
                 'type': 'ViBoolean',
@@ -3529,16 +3544,32 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': False,
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies whether the NI-RFSA device is reset during the initialization procedure.\n\n                        | Value              |  Description                                                   |\n                        |:--------------|:----------------------------------------------------|\n                        | VI_TRUE (Yes) | The device is reset.                                |\n                        | VI_FALSE (No) | The device is not reset. This value is the default. |'
+                    'description': 'Specifies whether the NI-RFSA device is reset during the initialization procedure.\n\n**Defined Values** :',
+                    'table_body': [
+                        [
+                            'VI_TRUE (1)',
+                            'Reset the device.'
+                        ],
+                        [
+                            'VI_FALSE (0)',
+                            'Do not reset device.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Value',
+                        'Description'
+                    ]
                 },
-                'name': 'reset',
+                'name': 'resetDevice',
                 'type': 'ViBoolean',
                 'use_array': False,
                 'use_in_python_api': True
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Sets the initial value of certain attributes for the session. The attributes shown in the following table are used in this parameter.\n\n                        | Name             | Attribute                                                                                                                                  |\n                        |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|\n                        | RangeCheck       | NIRFSA_ATTR_RANGE_CHECK                         |\n                        | QueryInstrStatus | NIRFSA_ATTR_QUERY_INSTRUMENT_STATUS |\n                        | Cache            | NIRFSA_ATTR_CACHE                                     |\n                        | RecordCoercions  | NIRFSA_ATTR_RECORD_COERCIONS               |\n                        | DriverSetup      | NIRFSA_ATTR_DRIVER_SETUP                       |\n                        | Simulate         | NIRFSA_ATTR_SIMULATE                               |\n\n                        The format of this string is *AttributeName=Value*, where *AttributeName* is the name of the attribute and *Value* is the value to which the attribute will be set. For example, you can simulate the PXIe-5663 using the following strings:\n\n                        *Simulate=1, DriverSetup=Model:5663\\E*.\n\n                        *Simulate=1, DriverSetup=Model:5601*; *Digitizer:5622; LO:5652; LOBoardType:PXIe*.\n\n                        To set multiple attributes, separate their assignments with a comma.\n\n                        Refer to `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_ for more information about the driver setup string.\n\n                        Note: To simulate a device using the PXIe-5622 25 MHz digitizer, set the *Digitizer* field to 5622_25MHz_DDC and the *Simulate* field to 1. You can set the *Digitizer* field to 5622_25MHz_DDC only when using the PXIe-5665.'
@@ -3547,15 +3578,13 @@ functions = {
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
                 'type': 'ViConstString',
                 'type_in_documentation': 'dict',
-                'use_array': False,
-                'use_in_python_api': True
             },
             {
                 'direction': 'out',
                 'documentation': {
                     'description': 'Identifies your instrument session.'
                 },
-                'name': 'vi',
+                'name': 'newVi',
                 'type': 'ViSession',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3668,6 +3697,7 @@ functions = {
                     'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
+                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4157,6 +4187,7 @@ functions = {
                     'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
+                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True

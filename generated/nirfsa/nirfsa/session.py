@@ -101,8 +101,8 @@ class _SessionBase(object):
     # This is needed during __init__. Without it, __setattr__ raises an exception
     _is_frozen = False
 
-    absolute_delay = _attributes.AttributeViReal64(1150266)
-    '''Type: hightime.timedelta
+    absolute_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150266)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the sub-sample clock delay, in seconds, to apply to the acquired signal.
 
@@ -341,12 +341,12 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    available_paths = _attributes.AttributeViString(1150332)
+    available_paths = _attributes.AttributeViStringCommaSeparated(1150332)
     '''Type: list of str
 
     Returns a comma separated list of the configurable paths available for use based on your instrument configuration.
     '''
-    available_ports = _attributes.AttributeViString(1150306)
+    available_ports = _attributes.AttributeViStringCommaSeparated(1150306)
     '''Type: list of str
 
     Returns a comma-separated list of the available ports for use based on your instrument configuration.
@@ -438,19 +438,6 @@ class _SessionBase(object):
 
     This property is not for customer use.
     '''
-    decimation_delay = _attributes.AttributeViReal64(1150191)
-    '''Type: hightime.timedelta
-
-    Specifies the sub-sample delay, in seconds, to apply to the acquired signal.
-
-    To set this property, the NI-RFSA device must be in the Configuration state.
-
-    **Valid Values:** -4.16 ns to +4.16 ns
-
-    **Default Value**: 0
-
-    **Supported Devices:** PXIe-5644/5645/5646
-    '''
     deembedding_compensation_gain = _attributes.AttributeViReal64(1150325)
     '''Type: float
 
@@ -472,6 +459,16 @@ class _SessionBase(object):
     Use the CreateDeembeddingSparameterTableArray method to create tables.
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+    Tip:
+    This property can be set/get on specific ports within your :py:class:`nirfsa.Session` instance.
+    Use Python index notation on the repeated capabilities container ports to specify a subset.
+
+    Example: :py:attr:`my_session.ports[ ... ].deembedding_selected_table`
+
+    To set/get on all ports, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+    Example: :py:attr:`my_session.deembedding_selected_table`
     '''
     deembedding_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DeembeddingType, 1150307)
     '''Type: enums.DeembeddingType
@@ -505,6 +502,16 @@ class _SessionBase(object):
     +----------------------------------------------+--------------+------------------------------------------------------------------------+
     | DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS | 3904 (0xf40) |                                                                        |
     +----------------------------------------------+--------------+------------------------------------------------------------------------+
+
+    Tip:
+    This property can be set/get on specific ports within your :py:class:`nirfsa.Session` instance.
+    Use Python index notation on the repeated capabilities container ports to specify a subset.
+
+    Example: :py:attr:`my_session.ports[ ... ].deembedding_type`
+
+    To set/get on all ports, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+    Example: :py:attr:`my_session.deembedding_type`
     '''
     device_configuration_temperature = _attributes.AttributeViReal64(1150159)
     '''Type: float
@@ -524,6 +531,16 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    Tip:
+    This property can be set/get on specific device_temperatures within your :py:class:`nirfsa.Session` instance.
+    Use Python index notation on the repeated capabilities container device_temperatures to specify a subset.
+
+    Example: :py:attr:`my_session.device_temperatures[ ... ].device_configuration_temperature`
+
+    To set/get on all device_temperatures, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+    Example: :py:attr:`my_session.device_configuration_temperature`
     '''
     device_instantaneous_bandwidth = _attributes.AttributeViReal64(1150125)
     '''Type: float
@@ -2236,7 +2253,7 @@ class _SessionBase(object):
     | SpectrumFfTwindowType.KAISER_BESSEL           | 511 (0x1ff) | A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind                                                                                                                                                                                                                                          |
     +-----------------------------------------------+-------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     '''
-    fixed_group_delay_across_ports = _attributes.AttributeViString(1150324)
+    fixed_group_delay_across_ports = _attributes.AttributeViStringCommaSeparated(1150324)
     '''Type: list of str
 
     Specifies a comma-separated list of ports for which to fix the group delay.
@@ -2635,64 +2652,6 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    iq_analog_edge_ref_trigger_hysteresis = _attributes.AttributeViReal64(1150195)
-    '''Type: float
-
-    Specifies the size of the hysteresis window on either side of the trigger level.
-
-    The device triggers when the signal passes through the threshold you specify with the iq_analog_edge_ref_trigger_level property, has the slope you specify with the iq_analog_edge_ref_trigger_slope property, and passes through the hysteresis window that you specify with this property. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
-
-    **Valid Values:** 0 to (Voltage Range/2 + Trigger Level) for Rising Slope. 0 to (Voltage Range/2 -Trigger Level) for Falling Slope. These values limit the hysteresis to the entire voltage range that is below the trigger level for Rising Slope or that is above the trigger level for Falling Slope.
-
-    **Default Value:** The default is calculated by the driver as (Range x 0.025).
-
-    **Supported Devices:** PXIe-5644/5645R
-    '''
-    iq_analog_edge_ref_trigger_level = _attributes.AttributeViReal64(1150194)
-    '''Type: float
-
-    Specifies the analog level, in volts, at which the device triggers.
-
-    The device asserts the trigger when the signal exceeds the level specified by the value of this property, taking into consideration the specified slope. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
-
-    **Default Value:** 0 V
-
-    **Supported Devices:** PXIe-5644/5645
-    '''
-    iq_analog_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerIqPowerEdgeSlope, 1150193)
-    '''Type: enums.ReferenceTriggerIqPowerEdgeSlope
-
-    Specifies whether the device asserts the trigger when the voltage level is rising or falling.
-
-    When you set the ref_trigger_type property to ReferenceTriggerType.IQ_ANALOG_EDGE, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
-
-    **Defined Values:**
-
-    **Default Value**: ReferenceTriggerIqPowerEdgeSlope.RISING
-
-    **Supported Devices:** PXIe-5644/5645
-
-    +------------------------------------------+--------------+-------------------------------------------------------+
-    | Name                                     | Value        | Description                                           |
-    +==========================================+==============+=======================================================+
-    | ReferenceTriggerIqPowerEdgeSlope.RISING  | 1000 (0x3e8) | The trigger asserts when the signal power is rising.  |
-    +------------------------------------------+--------------+-------------------------------------------------------+
-    | ReferenceTriggerIqPowerEdgeSlope.FALLING | 1001 (0x3e9) | The trigger asserts when the signal power is falling. |
-    +------------------------------------------+--------------+-------------------------------------------------------+
-    '''
-    iq_analog_edge_ref_trigger_source = _attributes.AttributeViString(1150192)
-    '''Type: str
-
-    Specifies the channel from which the device monitors the trigger.
-
-    Use a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This property affects the device operation only when the ref_trigger_type property is set to ReferenceTriggerType.IQ_ANALOG_EDGE.
-
-    **Valid Values:** "I", "Q", "I,Q", "Q,I"
-
-    **Default Value:** "I"
-
-    **Supported Devices:** PXIe-5644/5645
     '''
     iq_carrier_frequency = _attributes.AttributeViReal64(1150059)
     '''Type: float
@@ -3576,33 +3535,6 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    notch_filter_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.NotchFilterEnabled, 1150167)
-    '''Type: enums.NotchFilterEnabled
-
-    Specifies whether the notch filter is enabled on the RF conditioning module.
-
-    ----
-    **Note**
-    The PXI-5661 and PXIe-5663/5663E/5665 only support setting this property to NotchFilterEnabled.DISABLED.
-
-    ----
-
-    **Defined Values**:
-
-    **Default Value**: NotchFilterEnabled.DISABLED
-
-    **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5693
-
-    +------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                           | Value        | Description                                                                                                                                                                                                                                         |
-    +================================================+==============+=====================================================================================================================================================================================================================================================+
-    | NotchFilterEnabled.DISABLED                    | 3400 (0xd48) | Disables the notch filter.                                                                                                                                                                                                                          |
-    +------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | NotchFilterEnabled.ENABLED_WHEN_IN_SIGNAL_PATH | 3401 (0xd49) | The notch filter is automatically enabled when it is in the signal path and automatically disabled when it is not in the signal path.                                                                                                               |
-    +------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | NotchFilterEnabled.ENABLED                     | 3402 (0xd4a) | Enables the notch filter. If the notch filter is not in the signal path or if the notch filter is not supported on the device, NI-RFSA returns an error. Select NotchFilterEnabled.ENABLED_WHEN_IN_SIGNAL_PATH whenever possible to avoid an error. |
-    +------------------------------------------------+--------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    '''
     number_of_records = _attributes.AttributeViInt64(1150011)
     '''Type: int
 
@@ -3998,8 +3930,8 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    ref_to_ref_trigger_holdoff = _attributes.AttributeViReal64(1150034)
-    '''Type: hightime.timedelta
+    ref_to_ref_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150034)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the minimum time, in seconds, that must elapse between Reference Triggers of two records.
 
@@ -4011,8 +3943,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    ref_trigger_delay = _attributes.AttributeViReal64(1150060)
-    '''Type: hightime.timedelta
+    ref_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150060)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the trigger delay time, in seconds.
 
@@ -4024,8 +3956,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    ref_trigger_minimum_quiet_time = _attributes.AttributeViReal64(1150058)
-    '''Type: hightime.timedelta
+    ref_trigger_minimum_quiet_time = _attributes.AttributeViReal64TimeDeltaSeconds(1150058)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger.
 
@@ -4162,8 +4094,11 @@ class _SessionBase(object):
     +-------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | ReferenceTriggerType.SOFTWARE_EDGE  | 604 (0x25c) | The Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the send_software_edge_trigger method and selecting NIRFSA_VAL_REF_TRIGGER as the **trigger** parameter.  |
     +-------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ReferenceTriggerType.IQ_ANALOG_EDGE | 605 (0x25d) | The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the iq_analog_edge_ref_trigger_slope property. This value is valid only for PXIe-5644/5645 devices. |
+    | ReferenceTriggerType.IQ_ANALOG_EDGE | 605 (0x25d) | The Reference Trigger is asserted when the I or Q signal is changed past the level specified with the slope configured with the IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE property. This value is valid only for PXIe-5644/5645 devices. |
     +-------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4207,22 +4142,6 @@ class _SessionBase(object):
     +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
     | SpectrumResolutionBandwidthType.ENBW      | 303 (0x12f) | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.                  |
     +-------------------------------------------+-------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    '''
-    rf_attenuation_index = _attributes.AttributeViInt32(1150076)
-    '''Type: int
-
-    Specifies the value of the RF attenuation from a table of valid configurations.
-
-    This property is valid only during a calibration session and when you set the low_frequency_bypass_enabled property to NIRFSA_VAL_DISABLED.
-
-    **Valid Values**: 0 to 64
-
-    **Default Value**: N/A
-
-    **Supported Devices**: PXIe-5693
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     rf_attenuation_step_size = _attributes.AttributeViReal64(1150155)
     '''Type: float
@@ -4734,8 +4653,8 @@ class _SessionBase(object):
 
     - configure_spectrum_frequency_center_span
     '''
-    start_to_ref_trigger_holdoff = _attributes.AttributeViReal64(1150033)
-    '''Type: hightime.timedelta
+    start_to_ref_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150033)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Specifies the minimum time, in seconds, that must elapse after the Start Trigger is received before the device recognizes a Reference Trigger.
 
@@ -4745,8 +4664,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    start_trigger_delay = _attributes.AttributeViReal64(1150175)
-    '''Type: hightime.timedelta
+    start_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150175)
+    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     This property is not for customer use.
     '''
@@ -4872,7 +4791,7 @@ class _SessionBase(object):
 
     ----
     '''
-    supported_instrument_models = _attributes.AttributeViString(1050327)
+    supported_instrument_models = _attributes.AttributeViStringCommaSeparated(1050327)
     '''Type: list of str
 
     Returns a comma-separated list of supported devices.
@@ -4881,190 +4800,7 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    sync_advance_trigger_dist_line = _attributes.AttributeViString(1150185)
-    '''Type: str
-
-    Specifies which external trigger line distributes the synchronized Advance Trigger signal.
-
-    When synchronizing the Advance Trigger, configure all devices to use the same Advance Trigger distribution line.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-    **Default Value**: "" (empty string)
-
-    **Supported Devices:** PXIe-5644/5645/5646
-    '''
-    sync_advance_trigger_master = _attributes.AttributeViBoolean(1150184)
-    '''Type: bool
-
-    Specifies whether the device is the master for synchronizing the shared Advance Trigger between multiple devices.
-
-    The master device distributes the synchronized Advance Trigger to all devices in the system through the Advance Trigger distribution line.
-
-    When synchronizing the Advance Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Advance Trigger distribution line. When the device is configured as a slave, set the advance_trigger_type property to NIRFSA_VAL_DIGITAL_EDGE, and the digital_edge_advance_trigger_source property to NIRFSA VAL SYNC ADVANCE TRIGGER STR.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Defined Values:**
-
-    | Value         | Description                                                                           |
-    |:---------|:---------------------------------------------------------------------------|
-    | True  | The device is the master device for synchronizing the Advance Trigger.     |
-    | False | The device is not the master device for synchronizing the Advance Trigger. |
-
-    **Default Value**: False
-
-    **Supported Devices:** PXIe-5644/5645/5646
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    sync_ref_trigger_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SyncRefTriggerDelayEnabled, 1150189)
-    '''Type: hightime.timedelta
-
-    Specifies whether the Reference Trigger is delayed with the data.
-
-    Set this property to SyncRefTriggerDelayEnabled.DISABLED when the ref_trigger_type property is set to ReferenceTriggerType.IQ_POWER_EDGE or ReferenceTriggerType.IQ_ANALOG_EDGE.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Defined Values:**
-
-    **Default Value**: SyncRefTriggerDelayEnabled.DISABLED
-
-    **Supported Devices:** PXIe-5644/5645/5646
-
-    +-------------------------------------+--------------+---------------------------------------------------+
-    | Name                                | Value        | Description                                       |
-    +=====================================+==============+===================================================+
-    | SyncRefTriggerDelayEnabled.DISABLED | 1900 (0x76c) | Disables synchronization reference trigger delay. |
-    +-------------------------------------+--------------+---------------------------------------------------+
-    | SyncRefTriggerDelayEnabled.ENABLED  | 1901 (0x76d) | Enables synchronization reference trigger delay.  |
-    +-------------------------------------+--------------+---------------------------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    sync_ref_trigger_dist_line = _attributes.AttributeViString(1150179)
-    '''Type: str
-
-    Specifies which external trigger line distributes the synchronized Reference Trigger signal.
-
-    When synchronizing the Reference Trigger, configure all devices to use the same Reference Trigger distribution line.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-    **Default Value**: "" (empty string)
-
-    **Supported Devices:** PXIe-5644/5645/5646
-    '''
-    sync_ref_trigger_master = _attributes.AttributeViBoolean(1150178)
-    '''Type: bool
-
-    Specifies whether the device is the master for synchronizing the shared Reference Trigger between multiple devices.
-
-    The master device distributes the synchronized Reference Trigger to all devices in the system through the Reference Trigger distribution line.
-
-    When synchronizing the Reference Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Reference Trigger distribution line. When the device is configured as a slave, set the ref_trigger_type property to NIRFSA_VAL_DIGITAL_EDGE, and the digital_edge_ref_trigger_source property to NIRFSA VAL SYNC REF TRIGGER STR.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Defined Values:**
-
-    |Value          | Description                                                                       |
-    |:---------|:-----------------------------------------------------------------------|
-    | True  | The device is the master device for synchronizing the Ref Trigger.     |
-    | False | The device is not the master device for synchronizing the Ref Trigger. |
-
-    **Default Value**: False
-
-    **Supported Devices:** PXIe-5644/5645/5646
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    sync_sample_clock_dist_line = _attributes.AttributeViString(1150218)
-    '''Type: str
-
-    Specifies which external trigger line distributes the Sample Clock sync signal.
-
-    When synchronizing the Sample Clock, configure all devices to use the same Sample Clock distribution line.
-
-    Refer to `Synchronization Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5644-feature/page/synchronization-rfsa-g.html>`_ for more information about PXIe-5646 device synchronization.
-
-    **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-    **Default Value:** "" (empty string)
-
-    **Supported Devices:** PXIe-5646
-    '''
-    sync_sample_clock_master = _attributes.AttributeViBoolean(1150217)
-    '''Type: bool
-
-    Specifies whether the device is the master device for synchronizing the Sample Clock between multiple devices.
-
-    The master device distributes the Sample Clock sync signal to all devices in the system through the Sample Clock sync distribution line.
-
-    When synchronizing the Sample Clock, one device must always be designated as the master. The master device actively drives the Sample Clock sync distribution line.
-
-    Refer to [Synchronization Using NI-RFSA and NI-RFSG](PXIe-5646.chm/synchronization-rfsa-g.html) for more information about PXIe-5646 device synchronization.
-
-    **Defined Values:**
-
-    | Value         | Description                                                                    |
-    |:---------|:--------------------------------------------------------------------|
-    | True  | The device is the master device for synchronizing the Sample Clock. |
-    | False | The device is not the master for synchronizing the Sample Clock.    |
-
-    **Default Value:** False
-
-    **Supported Devices:** PXIe-5646
-    '''
-    sync_start_trigger_dist_line = _attributes.AttributeViString(1150177)
-    '''Type: str
-
-    Specifies which external trigger line distributes the synchronized Start Trigger signal.
-
-    When synchronizing the Start Trigger, configure all devices to use the same Start Trigger distribution line.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0
-
-    **Default Value**: "" (empty string)
-
-    **Supported Devices**: PXIe-5644/5645/5646
-    '''
-    sync_start_trigger_master = _attributes.AttributeViBoolean(1150176)
-    '''Type: bool
-
-    Specifies whether the device is the master for synchronizing the shared Start Trigger between multiple devices.
-
-    The master device distributes the synchronized Start Trigger to all devices in the system through the Start Trigger distribution line.
-
-    When synchronizing the Start Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Start Trigger distribution line. When the device is configured as a slave, set the start_trigger_type property to NIRFSA_VAL_DIGITAL_EDGE, and the digital_edge_start_trigger_source property to NIRFSA VAL SYNC START TRIGGER STR.
-
-    Refer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.
-
-    **Defined Values:**
-
-    |Value          | Description                                                                         |
-    |:---------|:-------------------------------------------------------------------------|
-    | True  | The device is the master device for synchronizing the Start Trigger.     |
-    | False | The device is not the master device for synchronizing the Start Trigger. |
-
-    **Default Value**: False
-
-    **Supported Devices:** PXIe-5644/5645/5646
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    temperature_read_interval = _attributes.AttributeViReal64(1150061)
+    temperature_read_interval = _attributes.AttributeViReal64TimeDeltaSeconds(1150061)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
 
     Indicates the minimum time between temperature sensor readings in seconds.
@@ -5382,33 +5118,6 @@ class _SessionBase(object):
         value = self._interpreter.get_attribute_vi_string(self._repeated_capability, attribute_id)
         return value
 
-    @ivi_synchronized
-    def load_configurations_from_file(self, file_path):
-        r'''load_configurations_from_file
-
-        Loads the configurations from the specified file to the NI-RFSA driver session.
-
-        The VI does an implicit reset before loading the configurations from the file.
-
-        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].load_configurations_from_file`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.load_configurations_from_file`
-
-        Args:
-            file_path (str): Specifies the absolute path of the file from which the NI-RFSA loads the configurations.
-
-        '''
-        self._interpreter.load_configurations_from_file(self._repeated_capability, file_path)
-
     def lock(self):
         '''lock
 
@@ -5443,31 +5152,6 @@ class _SessionBase(object):
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
-
-    @ivi_synchronized
-    def save_configurations_to_file(self, file_path):
-        r'''save_configurations_to_file
-
-        Saves the configurations of the session to the specified file.
-
-        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Tip:
-        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
-        Use Python index notation on the repeated capabilities container channels to specify a subset,
-        and then call this method on the result.
-
-        Example: :py:meth:`my_session.channels[ ... ].save_configurations_to_file`
-
-        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
-
-        Example: :py:meth:`my_session.save_configurations_to_file`
-
-        Args:
-            file_path (str): Specifies the absolute path of the file to which the NI-RFSA saves the configurations.
-
-        '''
-        self._interpreter.save_configurations_to_file(self._repeated_capability, file_path)
 
     @ivi_synchronized
     def _set_attribute_vi_boolean(self, attribute_id, value):
@@ -5696,7 +5380,7 @@ class _SessionBase(object):
 class Session(_SessionBase):
     '''An NI-RFSA session to the NI-RFSA driver'''
 
-    def __init__(self, resource_name, id_query, reset, options={}):
+    def __init__(self, resource_name, id_query=False, reset_device=False, options={}):
         r'''An NI-RFSA session to the NI-RFSA driver
 
         Creates a new session for the device.
@@ -5732,19 +5416,29 @@ class Session(_SessionBase):
 
                                         Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
 
-            id_query (bool): Specifies whether NI-RFSA performs an ID query. When you perform an ID query, NI-RFSA verifies the device you initialize is supported.
+            id_query (bool): Specifies whether you want NI-RFSA to perform an ID query.
 
-                                        | Value               |  Description                                               |
-                                        |:--------------|:------------------------------------------------|
-                                        | True (Yes) | Perform an ID query. This value is the default. |
-                                        | False (No) | Do not perform an ID query.                     |
+                **Defined Values** :
 
-            reset (bool): Specifies whether the NI-RFSA device is reset during the initialization procedure.
+                +-----------+--------------------------+
+                | Value     | Description              |
+                +===========+==========================+
+                | True (1)  | Perform ID query.        |
+                +-----------+--------------------------+
+                | False (0) | Do not perform ID query. |
+                +-----------+--------------------------+
 
-                                        | Value              |  Description                                                   |
-                                        |:--------------|:----------------------------------------------------|
-                                        | True (Yes) | The device is reset.                                |
-                                        | False (No) | The device is not reset. This value is the default. |
+            reset_device (bool): Specifies whether the NI-RFSA device is reset during the initialization procedure.
+
+                **Defined Values** :
+
+                +-----------+----------------------+
+                | Value     | Description          |
+                +===========+======================+
+                | True (1)  | Reset the device.    |
+                +-----------+----------------------+
+                | False (0) | Do not reset device. |
+                +-----------+----------------------+
 
             options (dict): Specifies the initial value of certain properties for the session. The
                 syntax for **options** is a dictionary of properties with an assigned
@@ -5776,7 +5470,7 @@ class Session(_SessionBase):
 
 
         Returns:
-            session (nirfsa.Session): A session object representing the device.
+            new_vi (int): Identifies your instrument session.
 
         '''
         interpreter = _library_interpreter.LibraryInterpreter(encoding='windows-1251')
@@ -5795,7 +5489,7 @@ class Session(_SessionBase):
         # if _init_with_options fails, the error handler can reference it.
         # And then here, once _init_with_options succeeds, we call set_session_handle
         # with the actual session handle.
-        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset, options))
+        self._interpreter.set_session_handle(self._init_with_options(resource_name, id_query, reset_device, options))
 
         self.tclk = nitclk.SessionReference(self._interpreter.get_session_handle())
 
@@ -5803,7 +5497,7 @@ class Session(_SessionBase):
         param_list = []
         param_list.append("resource_name=" + pp.pformat(resource_name))
         param_list.append("id_query=" + pp.pformat(id_query))
-        param_list.append("reset=" + pp.pformat(reset))
+        param_list.append("reset_device=" + pp.pformat(reset_device))
         param_list.append("options=" + pp.pformat(options))
         self._param_list = ', '.join(param_list)
 
@@ -7566,7 +7260,7 @@ class Session(_SessionBase):
         terminal_name = self._interpreter.get_terminal_name(signal, signal_identifier)
         return terminal_name
 
-    def _init_with_options(self, resource_name, id_query, reset, option_string):
+    def _init_with_options(self, resource_name, id_query=False, reset_device=False, option_string=""):
         r'''_init_with_options
 
         Creates a new session for the device.
@@ -7602,19 +7296,29 @@ class Session(_SessionBase):
 
                                         Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
 
-            id_query (bool): Specifies whether NI-RFSA performs an ID query. When you perform an ID query, NI-RFSA verifies the device you initialize is supported.
+            id_query (bool): Specifies whether you want NI-RFSA to perform an ID query.
 
-                                        | Value               |  Description                                               |
-                                        |:--------------|:------------------------------------------------|
-                                        | True (Yes) | Perform an ID query. This value is the default. |
-                                        | False (No) | Do not perform an ID query.                     |
+                **Defined Values** :
 
-            reset (bool): Specifies whether the NI-RFSA device is reset during the initialization procedure.
+                +-----------+--------------------------+
+                | Value     | Description              |
+                +===========+==========================+
+                | True (1)  | Perform ID query.        |
+                +-----------+--------------------------+
+                | False (0) | Do not perform ID query. |
+                +-----------+--------------------------+
 
-                                        | Value              |  Description                                                   |
-                                        |:--------------|:----------------------------------------------------|
-                                        | True (Yes) | The device is reset.                                |
-                                        | False (No) | The device is not reset. This value is the default. |
+            reset_device (bool): Specifies whether the NI-RFSA device is reset during the initialization procedure.
+
+                **Defined Values** :
+
+                +-----------+----------------------+
+                | Value     | Description          |
+                +===========+======================+
+                | True (1)  | Reset the device.    |
+                +-----------+----------------------+
+                | False (0) | Do not reset device. |
+                +-----------+----------------------+
 
             option_string (dict): Sets the initial value of certain properties for the session. The properties shown in the following table are used in this parameter.
 
@@ -7644,12 +7348,12 @@ class Session(_SessionBase):
 
 
         Returns:
-            vi (int): Identifies your instrument session.
+            new_vi (int): Identifies your instrument session.
 
         '''
         option_string = _converters.convert_init_with_options_dictionary(option_string)
-        vi = self._interpreter.init_with_options(resource_name, id_query, reset, option_string)
-        return vi
+        new_vi = self._interpreter.init_with_options(resource_name, id_query, reset_device, option_string)
+        return new_vi
 
     @ivi_synchronized
     def _initiate(self):
@@ -7712,6 +7416,24 @@ class Session(_SessionBase):
         '''
         self_cal_valid, valid_steps = self._interpreter.is_self_cal_valid()
         return self_cal_valid, valid_steps
+
+    @ivi_synchronized
+    def load_configurations_from_file(self, channel_name, file_path):
+        r'''load_configurations_from_file
+
+        Loads the configurations from the specified file to the NI-RFSA driver session.
+
+        The VI does an implicit reset before loading the configurations from the file.
+
+        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Args:
+            channel_name (str): Specifies the name of the channel.
+
+            file_path (str): Specifies the absolute path of the file from which the NI-RFSA loads the configurations.
+
+        '''
+        self._interpreter.load_configurations_from_file(channel_name, file_path)
 
     @ivi_synchronized
     def perform_thermal_correction(self):
@@ -8039,6 +7761,22 @@ class Session(_SessionBase):
         if type(steps_to_omit) is not enums.ResetWithOptionsStepsToOmit:
             raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.ResetWithOptionsStepsToOmit))
         self._interpreter.reset_with_options(steps_to_omit)
+
+    @ivi_synchronized
+    def save_configurations_to_file(self, channel_name, file_path):
+        r'''save_configurations_to_file
+
+        Saves the configurations of the session to the specified file.
+
+        **Supported Devices** : PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Args:
+            channel_name (str): Specifies the name of the channel.
+
+            file_path (str): Specifies the absolute path of the file to which the NI-RFSA saves the configurations.
+
+        '''
+        self._interpreter.save_configurations_to_file(channel_name, file_path)
 
     @ivi_synchronized
     def self_calibrate(self, steps_to_omit):

@@ -561,15 +561,15 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return terminal_name_ctype.value.decode(self._encoding)
 
-    def init_with_options(self, resource_name, id_query, reset, option_string):  # noqa: N802
+    def init_with_options(self, resource_name, id_query, reset_device, option_string):  # noqa: N802
         resource_name_ctype = ctypes.create_string_buffer(resource_name.encode(self._encoding))  # case C020
         id_query_ctype = _visatype.ViBoolean(id_query)  # case S150
-        reset_ctype = _visatype.ViBoolean(reset)  # case S150
+        reset_device_ctype = _visatype.ViBoolean(reset_device)  # case S150
         option_string_ctype = ctypes.create_string_buffer(option_string.encode(self._encoding))  # case C020
-        vi_ctype = _visatype.ViSession()  # case S220
-        error_code = self._library.niRFSA_InitWithOptions(resource_name_ctype, id_query_ctype, reset_ctype, option_string_ctype, None if vi_ctype is None else (ctypes.pointer(vi_ctype)))
+        new_vi_ctype = _visatype.ViSession()  # case S220
+        error_code = self._library.niRFSA_InitWithOptions(resource_name_ctype, id_query_ctype, reset_device_ctype, option_string_ctype, None if new_vi_ctype is None else (ctypes.pointer(new_vi_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(vi_ctype.value)
+        return int(new_vi_ctype.value)
 
     def initiate(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -587,7 +587,7 @@ class LibraryInterpreter(object):
 
     def load_configurations_from_file(self, channel_name, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C020
         file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
         error_code = self._library.niRFSA_LoadConfigurationsFromFile(vi_ctype, channel_name_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -659,7 +659,7 @@ class LibraryInterpreter(object):
 
     def save_configurations_to_file(self, channel_name, file_path):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C020
         file_path_ctype = ctypes.create_string_buffer(file_path.encode(self._encoding))  # case C020
         error_code = self._library.niRFSA_SaveConfigurationsToFile(vi_ctype, channel_name_ctype, file_path_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

@@ -43,6 +43,7 @@ attributes = {
     },
     1050327: {
         'access': 'read only',
+        'attribute_class': 'AttributeViStringCommaSeparated',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns a comma-separated list of supported devices.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -1267,6 +1268,7 @@ attributes = {
     },
     1150033: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the minimum time, in seconds, that must elapse after the Start Trigger is received before the device recognizes a Reference Trigger.\n\n**Units:** seconds\n\n**Default Value**: 0\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -1274,10 +1276,11 @@ attributes = {
         'lv_property': 'Triggers:Ref:Advanced:Start To Ref Trigger Holdoff (s)',
         'name': 'START_TO_REF_TRIGGER_HOLDOFF',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150034: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the minimum time, in seconds, that must elapse between Reference Triggers of two records. \n\nThe device does not recognize the Reference Trigger of the next record before this minimum time elapses.\n\n**Units:**: seconds\n\n**Default Value**: 0\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -1285,7 +1288,7 @@ attributes = {
         'lv_property': 'Triggers:Ref:Advanced:Ref To Ref Trigger Holdoff (s)',
         'name': 'REF_TO_REF_TRIGGER_HOLDOFF',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150035: {
         'access': 'read-write',
@@ -2218,6 +2221,7 @@ attributes = {
     },
     1150058: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger. \n\nThe signal is quiet when it is below the trigger level if the trigger slope, specified by the NIRFSA_ATTR_IQ_POWER_EDGE_REF_TRIGGER_SLOPE attribute, is set to NIRFSA_VAL_RISING_SLOPE or when it is above the trigger level if the trigger slope is set to NIRFSA_VAL_FALLING_SLOPE.\n\nBy default, this value is set to 0, which means the device does not wait for a quiet time before arming the trigger. This attribute is useful to trigger the acquisition on signals containing repeated bursts, but for which each burst may have large changes in signal power within itself. By configuring the minimum quiet time to the time between bursts, you can ensure that the trigger occurs at the beginning of a burst rather than at the signal power change within a burst.\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -2225,7 +2229,7 @@ attributes = {
         'lv_property': 'Triggers:Ref:Minimum Quiet Time',
         'name': 'REF_TRIGGER_MINIMUM_QUIET_TIME',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150059: {
         'access': 'read-write',
@@ -2239,6 +2243,7 @@ attributes = {
     },
     1150060: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the trigger delay time, in seconds. \n\nThe trigger delay time is the length of time the IF digitizer waits after it receives the trigger before it asserts the Reference Event.\n\n**Units:**: seconds\n\n**Default Value**: 0\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -2246,10 +2251,11 @@ attributes = {
         'lv_property': 'Triggers:Ref:Advanced:Ref Trigger Delay (s)',
         'name': 'REF_TRIGGER_DELAY',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150061: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Indicates the minimum time between temperature sensor readings in seconds. \n\nWhen you call the nirfsa_ReadPowerSpectrumF64 function, the nirfsa_ReadIqSingleRecordComplexF64 function, or the nirfsa_Initiate function, NI-RFSA checks whether at least the amount of time specified by this attribute has elapsed before reading the hardware temperature.\n\n----\n**Note**\nNI-RFSA ignores this attribute if you call the nirfsa_PerformThermalCorrection function or read the NIRFSA_ATTR_DOWNCONVERTER_GAIN attribute.\n\n----\n\n**Default Value**: 30 seconds\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -2400,16 +2406,6 @@ attributes = {
         'lv_property': 'Signal Path:Advanced:NI 5663:IF Attenuation (dB)',
         'name': 'IF_ATTENUATION',
         'type': 'ViReal64'
-    },
-    1150076: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the value of the RF attenuation from a table of valid configurations. \n\nThis attribute is valid only during a calibration session and when you set the NIRFSA_ATTR_LOW_FREQUENCY_BYPASS_ENABLED attribute to NIRFSA_VAL_DISABLED.\n\n**Valid Values**: 0 to 64\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5693'
-        },
-        'lv_property': 'Factory Calibration:NI 5693:RF Attenuation Index',
-        'name': 'RF_ATTENUATION_INDEX',
-        'type': 'ViInt32'
     },
     1150080: {
         'access': 'read-write',
@@ -2907,6 +2903,9 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Device Configuration Temperature (Degrees C)',
         'name': 'DEVICE_CONFIGURATION_TEMPERATURE',
+        'supported_rep_caps': [
+            'device_temperatures'
+        ],
         'type': 'ViReal64'
     },
     1150160: {
@@ -3123,35 +3122,6 @@ attributes = {
         'name': 'RF_PRESELECTOR_FILTER',
         'type': 'ViInt32'
     },
-    1150167: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the notch filter is enabled on the RF conditioning module.\n\n----\n**Note**\nThe PXI-5661 and PXIe-5663/5663E/5665 only support setting this attribute to NIRFSA_VAL_NOTCH_FILTER_DISABLED.\n\n----\n\n**Defined Values**:\n\n**Default Value**: NIRFSA_VAL_NOTCH_FILTER_DISABLED\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5693',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_NOTCH_FILTER_DISABLED',
-                    '3400 (0xd48)',
-                    'Disables the notch filter.',
-                ],
-                [
-                    'NIRFSA_VAL_NOTCH_FILTER_ENABLED_WHEN_IN_SIGNAL_PATH',
-                    '3401 (0xd49)',
-                    'The notch filter is automatically enabled when it is in the signal path and automatically disabled when it is not in the signal path.',
-                ],
-                [
-                    'NIRFSA_VAL_NOTCH_FILTER_ENABLED',
-                    '3402 (0xd4a)',
-                    'Enables the notch filter. If the notch filter is not in the signal path or if the notch filter is not supported on the device, NI-RFSA returns an error. Select NIRFSA_VAL_NOTCH_FILTER_ENABLED_WHEN_IN_SIGNAL_PATH whenever possible to avoid an error.',
-                ],
-            ],
-            'table_header': ['Name', 'Value', 'Description']
-        },
-        'enum': 'NotchFilterEnabled',
-        'lv_property': 'Signal Path:Advanced:Notch Filter Enabled',
-        'name': 'NOTCH_FILTER_ENABLED',
-        'type': 'ViInt32'
-    },
     1150169: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -3188,6 +3158,7 @@ attributes = {
     },
     1150175: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'This attribute is not for customer use.'
@@ -3195,47 +3166,7 @@ attributes = {
         'lv_property': 'Triggers:Advanced:Start Trigger Delay',
         'name': 'START_TRIGGER_DELAY',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
-    },
-    1150176: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the device is the master for synchronizing the shared Start Trigger between multiple devices. \n\nThe master device distributes the synchronized Start Trigger to all devices in the system through the Start Trigger distribution line.\n\nWhen synchronizing the Start Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Start Trigger distribution line. When the device is configured as a slave, set the NIRFSA_ATTR_START_TRIGGER_TYPE attribute to NIRFSA_VAL_DIGITAL_EDGE, and the NIRFSA_ATTR_DIGITAL_EDGE_START_TRIGGER_SOURCE attribute to NIRFSA VAL SYNC START TRIGGER STR.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Defined Values:**\n\n|Value          | Description                                                                         |\n|:---------|:-------------------------------------------------------------------------|\n| VI_TRUE  | The device is the master device for synchronizing the Start Trigger.     |\n| VI_FALSE | The device is not the master device for synchronizing the Start Trigger. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices:** PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Start Trigger Master',
-        'name': 'SYNC_START_TRIGGER_MASTER',
-        'type': 'ViBoolean'
-    },
-    1150177: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies which external trigger line distributes the synchronized Start Trigger signal. \n\nWhen synchronizing the Start Trigger, configure all devices to use the same Start Trigger distribution line.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Start Trigger Dist Line',
-        'name': 'SYNC_START_TRIGGER_DIST_LINE',
-        'type': 'ViString'
-    },
-    1150178: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the device is the master for synchronizing the shared Reference Trigger between multiple devices. \n\nThe master device distributes the synchronized Reference Trigger to all devices in the system through the Reference Trigger distribution line.\n\nWhen synchronizing the Reference Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Reference Trigger distribution line. When the device is configured as a slave, set the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute to NIRFSA_VAL_DIGITAL_EDGE, and the NIRFSA_ATTR_DIGITAL_EDGE_REF_TRIGGER_SOURCE attribute to NIRFSA VAL SYNC REF TRIGGER STR.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Defined Values:**\n\n|Value          | Description                                                                       |\n|:---------|:-----------------------------------------------------------------------|\n| VI_TRUE  | The device is the master device for synchronizing the Ref Trigger.     |\n| VI_FALSE | The device is not the master device for synchronizing the Ref Trigger. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices:** PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Master',
-        'name': 'SYNC_REF_TRIGGER_MASTER',
-        'type': 'ViBoolean'
-    },
-    1150179: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies which external trigger line distributes the synchronized Reference Trigger signal. \n\nWhen synchronizing the Reference Trigger, configure all devices to use the same Reference Trigger distribution line.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0\n\n**Default Value**: "" (empty string)\n\n**Supported Devices:** PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Dist Line',
-        'name': 'SYNC_REF_TRIGGER_DIST_LINE',
-        'type': 'ViString'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150180: {
         'access': 'read-write',
@@ -3315,26 +3246,6 @@ attributes = {
         'name': 'IQ_IN_PORT_VERTICAL_RANGE',
         'type': 'ViReal64'
     },
-    1150184: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the device is the master for synchronizing the shared Advance Trigger between multiple devices. \n\nThe master device distributes the synchronized Advance Trigger to all devices in the system through the Advance Trigger distribution line.\n\nWhen synchronizing the Advance Trigger, one device must always be designated as the master. When the device is configured as a master, it actively drives the Advance Trigger distribution line. When the device is configured as a slave, set the NIRFSA_ATTR_ADVANCE_TRIGGER_TYPE attribute to NIRFSA_VAL_DIGITAL_EDGE, and the NIRFSA_ATTR_DIGITAL_EDGE_ADVANCE_TRIGGER_SOURCE attribute to NIRFSA VAL SYNC ADVANCE TRIGGER STR.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Defined Values:**\n\n| Value         | Description                                                                           |\n|:---------|:---------------------------------------------------------------------------|\n| VI_TRUE  | The device is the master device for synchronizing the Advance Trigger.     |\n| VI_FALSE | The device is not the master device for synchronizing the Advance Trigger. |\n\n**Default Value**: VI_FALSE\n\n**Supported Devices:** PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Advance Trigger Master',
-        'name': 'SYNC_ADVANCE_TRIGGER_MASTER',
-        'type': 'ViBoolean'
-    },
-    1150185: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies which external trigger line distributes the synchronized Advance Trigger signal. \n\nWhen synchronizing the Advance Trigger, configure all devices to use the same Advance Trigger distribution line.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0\n\n**Default Value**: "" (empty string)\n\n**Supported Devices:** PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Advance Trigger Dist Line',
-        'name': 'SYNC_ADVANCE_TRIGGER_DIST_LINE',
-        'type': 'ViString'
-    },
     1150186: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -3377,96 +3288,6 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Frequency Step Size (Hz)',
         'name': 'LO_FREQUENCY_STEP_SIZE',
-        'type': 'ViReal64'
-    },
-    1150189: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the Reference Trigger is delayed with the data. \n\nSet this attribute to NIRFSA_VAL_DISABLED when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_POWER_EDGE or NIRFSA_VAL_IQ_ANALOG_EDGE.\n\nRefer to the *Synchronization Using NI-RFSA and NI-RFSG* topic appropriate to your device in the *NI RF Vector Signal Analyzers Help* for more information about device synchronization for vector signal transceivers.\n\n**Defined Values:**\n\n**Default Value**: NIRFSA_VAL_DISABLED\n\n**Supported Devices:** PXIe-5644/5645/5646',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_DISABLED',
-                    '1900 (0x76c)',
-                    'Disables synchronization reference trigger delay.',
-                ],
-                [
-                    'NIRFSA_VAL_ENABLED',
-                    '1901 (0x76d)',
-                    'Enables synchronization reference trigger delay.',
-                ],
-            ],
-            'table_header': ['Name', 'Value', 'Description']
-        },
-        'enum': 'SyncRefTriggerDelayEnabled',
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Ref Trigger Delay Enabled',
-        'name': 'SYNC_REF_TRIGGER_DELAY_ENABLED',
-        'type': 'ViInt32',
-        'type_in_documentation': 'hightime.timedelta'
-    },
-    1150191: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the sub-sample delay, in seconds, to apply to the acquired signal.\n\nTo set this attribute, the NI-RFSA device must be in the Configuration state.\n\n**Valid Values:** -4.16 ns to +4.16 ns\n\n**Default Value**: 0\n\n**Supported Devices:** PXIe-5644/5645/5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:Decimation Delay',
-        'name': 'DECIMATION_DELAY',
-        'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
-    },
-    1150192: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the channel from which the device monitors the trigger. \n\nUse a value of "I" to monitor the I channel. Use a value of "Q" to monitor the Q channel. Use a value of "I,Q" to monitor both I and Q channels. This attribute affects the device operation only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_ANALOG_EDGE.\n\n**Valid Values:** "I", "Q", "I,Q", "Q,I"\n\n**Default Value:** "I"\n\n**Supported Devices:** PXIe-5644/5645'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Source',
-        'name': 'IQ_ANALOG_EDGE_REF_TRIGGER_SOURCE',
-        'type': 'ViString'
-    },
-    1150193: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the device asserts the trigger when the voltage level is rising or falling. \n\nWhen you set the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute to NIRFSA_VAL_IQ_ANALOG_EDGE, the device asserts the trigger when the signal level exceeds the specified level with the slope you specify. This attribute affects the device operation only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_ANALOG_EDGE.\n\n**Defined Values:**\n\n**Default Value**: NIRFSA_VAL_RISING_SLOPE\n\n**Supported Devices:** PXIe-5644/5645',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_RISING_SLOPE',
-                    '1000 (0x3e8)',
-                    'The trigger asserts when the signal power is rising.',
-                ],
-                [
-                    'NIRFSA_VAL_FALLING_SLOPE',
-                    '1001 (0x3e9)',
-                    'The trigger asserts when the signal power is falling.',
-                ],
-            ],
-            'table_header': ['Name', 'Value', 'Description']
-        },
-        'enum': 'ReferenceTriggerIqPowerEdgeSlope',
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Slope',
-        'name': 'IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE',
-        'type': 'ViInt32'
-    },
-    1150194: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the analog level, in volts, at which the device triggers. \n\nThe device asserts the trigger when the signal exceeds the level specified by the value of this attribute, taking into consideration the specified slope. This attribute affects the device operation only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_ANALOG_EDGE.\n\n**Default Value:** 0 V\n\n**Supported Devices:** PXIe-5644/5645'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Level',
-        'name': 'IQ_ANALOG_EDGE_REF_TRIGGER_LEVEL',
-        'type': 'ViReal64'
-    },
-    1150195: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the size of the hysteresis window on either side of the trigger level. \n\nThe device triggers when the signal passes through the threshold you specify with the NIRFSA_ATTR_IQ_ANALOG_EDGE_REF_TRIGGER_LEVEL attribute, has the slope you specify with the NIRFSA_ATTR_IQ_ANALOG_EDGE_REF_TRIGGER_SLOPE attribute, and passes through the hysteresis window that you specify with this attribute. This attribute affects the device operation only when the NIRFSA_ATTR_REF_TRIGGER_TYPE attribute is set to NIRFSA_VAL_IQ_ANALOG_EDGE.\n\n**Valid Values:** 0 to (Voltage Range/2 + Trigger Level) for Rising Slope. 0 to (Voltage Range/2 -Trigger Level) for Falling Slope. These values limit the hysteresis to the entire voltage range that is below the trigger level for Rising Slope or that is above the trigger level for Falling Slope.\n\n**Default Value:** The default is calculated by the driver as (Range x 0.025).\n\n**Supported Devices:** PXIe-5644/5645R'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Ref:IQ Analog Edge:Hysteresis',
-        'name': 'IQ_ANALOG_EDGE_REF_TRIGGER_HYSTERESIS',
         'type': 'ViReal64'
     },
     1150196: {
@@ -3556,26 +3377,6 @@ attributes = {
         'lv_property': 'Signal Path:Advanced:Low Frequency Bypass Enabled',
         'name': 'LOW_FREQUENCY_BYPASS_ENABLED',
         'type': 'ViInt32'
-    },
-    1150217: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether the device is the master device for synchronizing the Sample Clock between multiple devices. \n\nThe master device distributes the Sample Clock sync signal to all devices in the system through the Sample Clock sync distribution line.\n\nWhen synchronizing the Sample Clock, one device must always be designated as the master. The master device actively drives the Sample Clock sync distribution line.\n\nRefer to [Synchronization Using NI-RFSA and NI-RFSG](PXIe-5646.chm/synchronization-rfsa-g.html) for more information about PXIe-5646 device synchronization.\n\n**Defined Values:**\n\n| Value         | Description                                                                    |\n|:---------|:--------------------------------------------------------------------|\n| VI_TRUE  | The device is the master device for synchronizing the Sample Clock. |\n| VI_FALSE | The device is not the master for synchronizing the Sample Clock.    |\n\n**Default Value:** VI_FALSE\n\n**Supported Devices:** PXIe-5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Sample Clock Master',
-        'name': 'SYNC_SAMPLE_CLOCK_MASTER',
-        'type': 'ViBoolean'
-    },
-    1150218: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies which external trigger line distributes the Sample Clock sync signal. \n\nWhen synchronizing the Sample Clock, configure all devices to use the same Sample Clock distribution line.\n\nRefer to `Synchronization Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5644-feature/page/synchronization-rfsa-g.html>`_ for more information about PXIe-5646 device synchronization.\n\n**Valid Values:** PXI_Trig0, PXI_Trig1, PXI_Trig2, PXI_Trig3, PXI_Trig4, PXI_Trig5, PXI_Trig6, PXI_Trig7, PFI0\n\n**Default Value:** "" (empty string)\n\n**Supported Devices:** PXIe-5646'
-        },
-        'lv_property': 'Device Specific:Vector Signal Transceiver:Triggers:Synchronization:Sync Sample Clock Dist Line',
-        'name': 'SYNC_SAMPLE_CLOCK_DIST_LINE',
-        'type': 'ViString'
     },
     1150219: {
         'access': 'read-write',
@@ -3799,6 +3600,7 @@ attributes = {
     },
     1150266: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the sub-sample clock delay, in seconds, to apply to the acquired signal.\n\nUse this attribute to reduce the trigger jitter when synchronizing multiple devices with NI-TClk. \nThis attribute can also help maintain synchronization repeatability by writing the absolute delay value of a previous measurement to the current session.\n\nTo set this attribute, the NI-RFSA device must be in the Configuration state.\n\n----\n**Note**\nIf this attribute is set, NI-TClk cannot do any sub-sample clock adjustment.\n\n----\n\n**Units:** Seconds\n\n**Valid Values:** Plus or minus half of one sample clock period\n\n**Default Value**: 0\n\n**Supported Devices:** PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -3806,7 +3608,7 @@ attributes = {
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:Absolute Delay',
         'name': 'ABSOLUTE_DELAY',
         'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta'
+        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150267: {
         'access': 'read-write',
@@ -3976,6 +3778,7 @@ attributes = {
     },
     1150306: {
         'access': 'read only',
+        'attribute_class': 'AttributeViStringCommaSeparated',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns a comma-separated list of the available ports for use based on your instrument configuration.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -4022,6 +3825,9 @@ attributes = {
         'enum': 'DeembeddingType',
         'lv_property': 'De-embedding:Type',
         'name': 'DEEMBEDDING_TYPE',
+        'supported_rep_caps': [
+            'ports'
+        ],        
         'type': 'ViInt32'
     },
     1150308: {
@@ -4032,6 +3838,9 @@ attributes = {
         },
         'lv_property': 'De-embedding:Selected Table',
         'name': 'DEEMBEDDING_SELECTED_TABLE',
+        'supported_rep_caps': [
+            'ports'
+        ],
         'type': 'ViString'
     },
     1150309: {
@@ -4100,6 +3909,7 @@ attributes = {
     },
     1150324: {
         'access': 'read-write',
+        'attribute_class': 'AttributeViStringCommaSeparated',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies a comma-separated list of ports for which to fix the group delay.\n\n**Valid Values**:\n\nPXIe-5831/5832: rf<0-1>/port<x>, where 0-1 indicates one (0) or two (1) mmRH-5582 connections and x is the port number on the mmRH-5582 front panel.\n\n**Default Value**:\n\nPXIe-5831/5832: (empty string), which specifies that the group delay will not be fixed for any port.\n\n**Supported Devices**: PXIe-5831/5832'
@@ -4141,6 +3951,7 @@ attributes = {
     },
     1150332: {
         'access': 'read only',
+        'attribute_class': 'AttributeViStringCommaSeparated',
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns a comma separated list of the configurable paths available for use based on your instrument configuration.'

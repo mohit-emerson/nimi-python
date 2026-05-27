@@ -32,7 +32,11 @@ config = {
     'driver_name': 'NI-RFSA',
     'enum_whitelist_prefix': [
         'RANGE_',
-        'CLOCK_RATE_'
+        'CLOCK_RATE_',
+        'EXT_CAL_IF_FILTER_PATH_',
+        'EXT_CAL_LO_PATH_',
+        'EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_',
+        'EXT_CAL_RF_BAND_'
     ],
     'enum_whitelist_suffix': [
         '_TOWARDS_DUT'

@@ -7768,7 +7768,9 @@ class Session(_SessionBase):
     def reset_with_defaults(self):
         r'''reset_with_defaults
 
-        TBD
+        Performs a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.
+
+        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E
         '''
         self._interpreter.reset_with_defaults()
 

@@ -1098,7 +1098,7 @@ IFattenTableSel
 
 
 
-        Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the :py:attr:`nirfsa.Session.CAL_IF_FILTER_SELECTION` property to :py:data:`~nirfsa.IFfilterSelection._1` or :py:data:`~nirfsa.IFfilterSelection._2`.
+        Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the :py:attr:`nirfsa.Session.CAL_IF_FILTER_SELECTION` property to :py:data:`~nirfsa.IFfilterSelection.EXT_CAL_IF_FILTER_PATH_1` or :py:data:`~nirfsa.IFfilterSelection.EXT_CAL_IF_FILTER_PATH_2`.
 
         
 
@@ -1154,7 +1154,7 @@ IFfilterSelection
 
 .. py:class:: IFfilterSelection
 
-    .. py:attribute:: IFfilterSelection._1
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_1
 
 
 
@@ -1164,7 +1164,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._2
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_2
 
 
 
@@ -1174,7 +1174,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._3
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_3
 
 
 
@@ -1184,7 +1184,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._4
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_4
 
 
 
@@ -1194,7 +1194,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._5
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_5
 
 
 
@@ -1204,7 +1204,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._6
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_6
 
 
 
@@ -1214,7 +1214,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._7
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_7
 
 
 
@@ -1224,7 +1224,7 @@ IFfilterSelection
 
 
 
-    .. py:attribute:: IFfilterSelection._8
+    .. py:attribute:: IFfilterSelection.EXT_CAL_IF_FILTER_PATH_8
 
 
 
@@ -1619,7 +1619,7 @@ LoPathSel
 
 .. py:class:: LoPathSel
 
-    .. py:attribute:: LoPathSel._1
+    .. py:attribute:: LoPathSel.EXT_CAL_LO_PATH_1
 
 
 
@@ -1629,7 +1629,7 @@ LoPathSel
 
 
 
-    .. py:attribute:: LoPathSel._2
+    .. py:attribute:: LoPathSel.EXT_CAL_LO_PATH_2
 
 
 
@@ -1639,7 +1639,7 @@ LoPathSel
 
 
 
-    .. py:attribute:: LoPathSel._3
+    .. py:attribute:: LoPathSel.EXT_CAL_LO_PATH_3
 
 
 
@@ -1649,7 +1649,7 @@ LoPathSel
 
 
 
-    .. py:attribute:: LoPathSel._4
+    .. py:attribute:: LoPathSel.EXT_CAL_LO_PATH_4
 
 
 
@@ -1659,7 +1659,7 @@ LoPathSel
 
 
 
-    .. py:attribute:: LoPathSel._5
+    .. py:attribute:: LoPathSel.EXT_CAL_LO_PATH_5
 
 
 
@@ -2624,7 +2624,7 @@ RfLbSigCondPathSel
 
 .. py:class:: RfLbSigCondPathSel
 
-    .. py:attribute:: RfLbSigCondPathSel._1
+    .. py:attribute:: RfLbSigCondPathSel.EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1
 
 
 
@@ -2634,7 +2634,7 @@ RfLbSigCondPathSel
 
 
 
-    .. py:attribute:: RfLbSigCondPathSel._2
+    .. py:attribute:: RfLbSigCondPathSel.EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_2
 
 
 
@@ -2649,7 +2649,7 @@ RfPathSelection
 
 .. py:class:: RfPathSelection
 
-    .. py:attribute:: RfPathSelection._1
+    .. py:attribute:: RfPathSelection.EXT_CAL_RF_BAND_1
 
 
 
@@ -2659,7 +2659,7 @@ RfPathSelection
 
 
 
-    .. py:attribute:: RfPathSelection._2
+    .. py:attribute:: RfPathSelection.EXT_CAL_RF_BAND_2
 
 
 
@@ -2669,7 +2669,7 @@ RfPathSelection
 
 
 
-    .. py:attribute:: RfPathSelection._3
+    .. py:attribute:: RfPathSelection.EXT_CAL_RF_BAND_3
 
 
 
@@ -2679,7 +2679,7 @@ RfPathSelection
 
 
 
-    .. py:attribute:: RfPathSelection._4
+    .. py:attribute:: RfPathSelection.EXT_CAL_RF_BAND_4
 
 
 

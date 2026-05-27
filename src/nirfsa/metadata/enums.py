@@ -819,6 +819,7 @@ enums = {
                     'description': 'The device uses the 187.5 MHz wide bandwidth filter.'
                 },
                 'name': 'NIRFSA_VAL_187_5_MHZ_WIDE',
+                'python_name': '_187_5_MHZ_WIDE',
                 'value': 1400
             },
             {
@@ -826,6 +827,7 @@ enums = {
                     'description': 'The device uses the 187.5 MHz narrow bandwidth filter.'
                 },
                 'name': 'NIRFSA_VAL_187_5_MHZ_NARROW',
+                'python_name': '_187_5_MHZ_NARROW',
                 'value': 1401
             },
             {
@@ -833,6 +835,7 @@ enums = {
                     'description': 'The device uses the 53 MHz filter.'
                 },
                 'name': 'NIRFSA_VAL_53_MHZ',
+                'python_name': '_53_MHZ',
                 'value': 1402
             },
             {
@@ -852,6 +855,7 @@ enums = {
                     'description': 'Specifies that the 5 MHz filter path is used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_1',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_1',
                 'value': 2100
             },
             {
@@ -859,6 +863,7 @@ enums = {
                     'description': 'Specifies that the 300 kHz filter path is used during calibration. Not supported for the PXIe-5694.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_2',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_2',
                 'value': 2101
             },
             {
@@ -866,6 +871,7 @@ enums = {
                     'description': 'None of the IF filter paths are used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_3',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_3',
                 'value': 2102
             },
             {
@@ -873,6 +879,7 @@ enums = {
                     'description': 'Specifies that the 20 MHz filter path is used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_4',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_4',
                 'value': 2103
             },
             {
@@ -880,6 +887,7 @@ enums = {
                     'description': 'Specifies that the 1.4 MHz filter path is used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_5',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_5',
                 'value': 2104
             },
             {
@@ -887,6 +895,7 @@ enums = {
                     'description': 'Specifies that the 400 kHz filter path is used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_6',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_6',
                 'value': 2105
             },
             {
@@ -894,6 +903,7 @@ enums = {
                     'description': 'Specifies that the 110 kHz filter path is used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_7',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_7',
                 'value': 2106
             },
             {
@@ -901,6 +911,7 @@ enums = {
                     'description': 'Specifies that the 30 kHz filter path is used during calibration.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_IF_FILTER_PATH_8',
+                'python_name': 'EXT_CAL_IF_FILTER_PATH_8',
                 'value': 2107
             }
         ]
@@ -1194,6 +1205,7 @@ enums = {
                     'description': 'Specifies that the LO path 1 is used.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_LO_PATH_1',
+                'python_name': 'EXT_CAL_LO_PATH_1',
                 'value': 2300
             },
             {
@@ -1201,6 +1213,7 @@ enums = {
                     'description': 'Specifies that the LO path 2 is used.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_LO_PATH_2',
+                'python_name': 'EXT_CAL_LO_PATH_2',
                 'value': 2301
             },
             {
@@ -1208,6 +1221,7 @@ enums = {
                     'description': 'Specifies that the LO path 3 is used.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_LO_PATH_3',
+                'python_name': 'EXT_CAL_LO_PATH_3',
                 'value': 2302
             },
             {
@@ -1215,6 +1229,7 @@ enums = {
                     'description': 'Specifies that the LO path 4 is used.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_LO_PATH_4',
+                'python_name': 'EXT_CAL_LO_PATH_4',
                 'value': 2303
             },
             {
@@ -1222,6 +1237,7 @@ enums = {
                     'description': 'Specifies that the LO path 5 is used.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_LO_PATH_5',
+                'python_name': 'EXT_CAL_LO_PATH_5',
                 'value': 2304
             }
         ]
@@ -1685,6 +1701,7 @@ enums = {
                     'description': 'Exports a 10 MHz Reference Clock.'
                 },
                 'name': 'NIRFSA_VAL_10MHZ',
+                'python_name': '_10MHZ',
                 'value': 10000000
             },
             {
@@ -1692,6 +1709,7 @@ enums = {
                     'description': 'Exports a 100 MHz Reference Clock.'
                 },
                 'name': 'NIRFSA_VAL_100MHZ',
+                'python_name': '_100MHZ',
                 'value': 100000000
             },
             {
@@ -1699,6 +1717,7 @@ enums = {
                     'description': 'Exports a 1 GHz Reference Clock.'
                 },
                 'name': 'NIRFSA_VAL_1GHZ',
+                'python_name': '_1GHZ',
                 'value': 1000000000.0
             }
         ]
@@ -1929,6 +1948,7 @@ enums = {
                     'description': 'yet to be defined '
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1',
+                'python_name': 'EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1',
                 'value': 3700
             },
             {
@@ -1936,6 +1956,7 @@ enums = {
                     'description': 'yet to be defined '
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_2',
+                'python_name': 'EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_2',
                 'value': 3701
             }
         ]
@@ -1948,6 +1969,7 @@ enums = {
                     'description': ' The data is the default configuration data.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_BAND_1',
+                'python_name': 'EXT_CAL_RF_BAND_1',
                 'value': 1700
             },
             {
@@ -1955,6 +1977,7 @@ enums = {
                     'description': 'The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_BAND_2',
+                'python_name': 'EXT_CAL_RF_BAND_2',
                 'value': 1701
             },
             {
@@ -1962,6 +1985,7 @@ enums = {
                     'description': ' The data is the default configuration data.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_BAND_3',
+                'python_name': 'EXT_CAL_RF_BAND_3',
                 'value': 1702
             },
             {
@@ -1969,6 +1993,7 @@ enums = {
                     'description': ' The data is the default configuration data.'
                 },
                 'name': 'NIRFSA_VAL_EXT_CAL_RF_BAND_4',
+                'python_name': 'EXT_CAL_RF_BAND_4',
                 'value': 1703
             }
         ]
@@ -2515,6 +2540,7 @@ enums = {
                     'description': 'A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))'
                 },
                 'name': 'NIRFSA_VAL_4_TERM_BLACKMAN_HARRIS',
+                'python_name': '_4_TERM_BLACKMAN_HARRIS',
                 'value': 507
             },
             {
@@ -2522,6 +2548,7 @@ enums = {
                     'description': 'A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))'
                 },
                 'name': 'NIRFSA_VAL_7_TERM_BLACKMAN_HARRIS',
+                'python_name': '_7_TERM_BLACKMAN_HARRIS',
                 'value': 508
             },
             {

@@ -4215,7 +4215,7 @@ functions = {
     'ResetWithDefaults': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'TBD'
+            'description': '\nPerforms a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4230,6 +4230,9 @@ functions = {
         'parameters': [
             {
                 'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.'
+                },
                 'name': 'vi',
                 'type': 'ViSession',
                 'use_array': False,

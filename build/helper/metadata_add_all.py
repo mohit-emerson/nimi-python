@@ -672,7 +672,7 @@ def _add_enum_value_python_name(enum_info, config):
     for v in enum_info['values']:
         assert v['python_name'], enum_info
         if enum_info['codegen_method'] != 'no' and v['python_name'][0].isdigit():
-            v['python_name'] = '_' + v['python_name']
+            raise ValueError('Invalid name: {}'.format(v['python_name']))  # pragma: no cover
 
     return enum_info
 

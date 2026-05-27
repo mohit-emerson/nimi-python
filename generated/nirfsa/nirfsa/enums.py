@@ -463,7 +463,7 @@ class IFattenTableSel(Enum):
     '''
     ACPR = 2901
     r'''
-    Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the CAL_IF_FILTER_SELECTION property to IFfilterSelection._1 or IFfilterSelection._2.
+    Specifies that the adjacent channel power ratio (ACPR) IF attenuation table is used for the external calibration. You can only select this value if you set the CAL_IF_FILTER_SELECTION property to IFfilterSelection.EXT_CAL_IF_FILTER_PATH_1 or IFfilterSelection.EXT_CAL_IF_FILTER_PATH_2.
     '''
 
 
@@ -487,35 +487,35 @@ class IFfilter(Enum):
 
 
 class IFfilterSelection(Enum):
-    _1 = 2100
+    EXT_CAL_IF_FILTER_PATH_1 = 2100
     r'''
     Specifies that the 5 MHz filter path is used during calibration.
     '''
-    _2 = 2101
+    EXT_CAL_IF_FILTER_PATH_2 = 2101
     r'''
     Specifies that the 300 kHz filter path is used during calibration. Not supported for the PXIe-5694.
     '''
-    _3 = 2102
+    EXT_CAL_IF_FILTER_PATH_3 = 2102
     r'''
     None of the IF filter paths are used during calibration.
     '''
-    _4 = 2103
+    EXT_CAL_IF_FILTER_PATH_4 = 2103
     r'''
     Specifies that the 20 MHz filter path is used during calibration.
     '''
-    _5 = 2104
+    EXT_CAL_IF_FILTER_PATH_5 = 2104
     r'''
     Specifies that the 1.4 MHz filter path is used during calibration.
     '''
-    _6 = 2105
+    EXT_CAL_IF_FILTER_PATH_6 = 2105
     r'''
     Specifies that the 400 kHz filter path is used during calibration.
     '''
-    _7 = 2106
+    EXT_CAL_IF_FILTER_PATH_7 = 2106
     r'''
     Specifies that the 110 kHz filter path is used during calibration.
     '''
-    _8 = 2107
+    EXT_CAL_IF_FILTER_PATH_8 = 2107
     r'''
     Specifies that the 30 kHz filter path is used during calibration.
     '''
@@ -684,23 +684,23 @@ class LoOutExportConfigureFromRfsg(Enum):
 
 
 class LoPathSel(Enum):
-    _1 = 2300
+    EXT_CAL_LO_PATH_1 = 2300
     r'''
     Specifies that the LO path 1 is used.
     '''
-    _2 = 2301
+    EXT_CAL_LO_PATH_2 = 2301
     r'''
     Specifies that the LO path 2 is used.
     '''
-    _3 = 2302
+    EXT_CAL_LO_PATH_3 = 2302
     r'''
     Specifies that the LO path 3 is used.
     '''
-    _4 = 2303
+    EXT_CAL_LO_PATH_4 = 2303
     r'''
     Specifies that the LO path 4 is used.
     '''
-    _5 = 2304
+    EXT_CAL_LO_PATH_5 = 2304
     r'''
     Specifies that the LO path 5 is used.
     '''
@@ -1107,30 +1107,30 @@ class ResetWithOptionsStepsToOmit(IntFlag):
 
 
 class RfLbSigCondPathSel(Enum):
-    _1 = 3700
+    EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1 = 3700
     r'''
     yet to be defined
     '''
-    _2 = 3701
+    EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_2 = 3701
     r'''
     yet to be defined
     '''
 
 
 class RfPathSelection(Enum):
-    _1 = 1700
+    EXT_CAL_RF_BAND_1 = 1700
     r'''
     The data is the default configuration data.
     '''
-    _2 = 1701
+    EXT_CAL_RF_BAND_2 = 1701
     r'''
     The data is the configuration data when the mechanical relay is disabled. Use this option to save uncalibrated measurements for more advanced operations.
     '''
-    _3 = 1702
+    EXT_CAL_RF_BAND_3 = 1702
     r'''
     The data is the default configuration data.
     '''
-    _4 = 1703
+    EXT_CAL_RF_BAND_4 = 1703
     r'''
     The data is the default configuration data.
     '''

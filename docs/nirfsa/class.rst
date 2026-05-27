@@ -728,7 +728,7 @@ configure_iq_power_edge_ref_trigger
                 
 
 
-            :type slope: int
+            :type slope: :py:data:`nirfsa.ReferenceTriggerIqPowerEdgeSlope`
             :param pretrigger_samples:
 
 
@@ -784,7 +784,7 @@ configure_ref_clock
                 
 
 
-            :type clock_source: str
+            :type clock_source: :py:data:`nirfsa.ReferenceClockSource`
             :param ref_clock_rate:
 
 
@@ -827,7 +827,7 @@ configure_software_edge_ref_trigger
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: configure_software_edge_ref_trigger(pretrigger_samples)
+    .. py:method:: configure_software_edge_ref_trigger(pretrigger_samples=0)
 
             Configures the device to wait for a software Reference Trigger to mark a reference point within the record.
 
@@ -902,26 +902,20 @@ configure_software_edge_start_trigger
 
 
 
-configure_spectrum_frequency_center_span
-----------------------------------------
+configure_spectrum_frequency
+----------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: configure_spectrum_frequency_center_span(channel_list, center_frequency, span)
+    .. py:method:: configure_spectrum_frequency(channel_list, center_frequency=None, span=None, start_frequency=None, stop_frequency=None)
 
-            Configures the span and center frequency of the spectrum read by NI-RFSA.
+            Configures the frequency range of a spectrum acquisition.
 
-                            A spectrum acquisition consists of data surrounding the center frequency.
+                            You can specify the frequency range using either center frequency and span, or start and stop frequencies.
 
                             ----
                             **Note**
                             If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
-
-                            ----
-
-                            ----
-                            **Note**
-                             For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
 
                             ----
 
@@ -943,7 +937,7 @@ configure_spectrum_frequency_center_span
             :param center_frequency:
 
 
-                Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). The NI-RFSA device you use determines the valid range. Refer to your device specifications document for more information about frequency range.
+                Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **span**.
 
                 
 
@@ -952,61 +946,16 @@ configure_spectrum_frequency_center_span
             :param span:
 
 
-                Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz).
-
-                                        ----
-
-                                        *Note* For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the :py:attr:`nirfsa.Session.digitizer_dither_enabled` property for more information about dithering.
-
-                                        ----
+                Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **center_frequency**.
 
                 
 
 
             :type span: float
-
-configure_spectrum_frequency_start_stop
----------------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: configure_spectrum_frequency_start_stop(channel_list, start_frequency, stop_frequency)
-
-            Configures the start and stop frequencies of a spectrum read by NI-RFSA.
-
-                            ----
-                            **Note**
-                            If you configure the spectrum span (**:py:attr:`nirfsa.Session.STOP_FREQUENCY`**  **:py:attr:`nirfsa.Session.START_FREQUENCY`**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.
-
-                            ----
-
-                            ----
-                            **Note**
-                             For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
-
-                            ----
-
-                            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
-
-            .. note:: One or more of the referenced properties are not in the Python API for this driver.
-
-
-
-            :param channel_list:
-
-
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param start_frequency:
 
 
-                Specifies the lower limit of a span of frequencies. This value is expressed in hertz (Hz).
+                Specifies the lower limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **stop_frequency**.
 
                 
 
@@ -1015,7 +964,7 @@ configure_spectrum_frequency_start_stop
             :param stop_frequency:
 
 
-                Specifies the upper limit of a span of frequencies. This value is expressed in hertz (Hz).
+                Specifies the upper limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **start_frequency**.
 
                 
 
@@ -1322,9 +1271,9 @@ error_message
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: error_message(status_code)
+    .. py:method:: error_message(error_code)
 
-            Converts a status code returned by an NI-RFSA method into a user-readable string.
+            Converts an error code returned by an NI-RFSA method into a user-readable string.
 
                             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
 
@@ -1332,21 +1281,21 @@ error_message
 
 
 
-            :param status_code:
+            :param error_code:
 
 
-                Passes the **status** parameter that is returned from any NI-RFSA method.
+                Passes the **errorCode** parameter that is returned from any NI-RFSA method.
 
                 
 
 
-            :type status_code: int
+            :type error_code: int
 
             :rtype: str
             :return:
 
 
-                    Returns the user-readable message string that corresponds to the status code you specify.
+                    Returns the user-readable message string that corresponds to the error code you specify.
 
                                             You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
 
@@ -1550,12 +1499,41 @@ get_deembedding_sparameters
 
 
 
-get_ext_cal_last_temp
----------------------
+get_ext_cal_last_date_and_time
+------------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_ext_cal_last_temp()
+    .. py:method:: get_ext_cal_last_date_and_time()
+
+            Returns the date and time of the last successful external calibration.
+
+            The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this method returns
+
+            14 for the hours parameter and
+
+            30 for the minutes parameter.
+
+            **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+
+            :rtype: hightime.datetime
+            :return:
+
+
+                    
+
+
+
+get_ext_cal_last_temperature
+----------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: get_ext_cal_last_temperature()
 
             Returns the temperature of the last successful external calibration.
 
@@ -1677,7 +1655,7 @@ get_frequency_response
 
                 WHERE
 
-                frequencies (array.array("d")): 
+                frequencies (numpy.array(dtype=numpy.float64)): 
 
 
                     Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
@@ -1687,7 +1665,7 @@ get_frequency_response
                     
 
 
-                magnitude_response (array.array("d")): 
+                magnitude_response (numpy.array(dtype=numpy.float64)): 
 
 
                     Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
@@ -1699,7 +1677,7 @@ get_frequency_response
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                phase_response (array.array("d")): 
+                phase_response (numpy.array(dtype=numpy.float64)): 
 
 
                     Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
@@ -1930,7 +1908,7 @@ is_self_cal_valid
 
             Indicates which calibration steps contain valid calibration data.
 
-                            To omit steps with valid calibration data from self-calibration, you can pass the **:py:attr:`nirfsa.Session.VALID_STEPS`** parameter to the **stepsToOmit** parameter of the :py:meth:`nirfsa.Session.self_calibrate` method.
+                            To omit steps with valid calibration data from self-calibration, you can pass the **:py:attr:`nirfsa.Session.VALID_STEPS`** parameter to the **stepsToOmit** parameter of the :py:meth:`nirfsa.Session.SelfCalibrate` method.
 
                             **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
@@ -2459,91 +2437,12 @@ save_configurations_to_file
 
             :type file_path: str
 
-self_calibrate
---------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: self_calibrate(steps_to_omit)
-
-            Self-calibrates the NI-RFSA device and associated modules that support self-calibration.
-
-                            If self-calibration is performed successfully, the new calibration constants are stored immediately in the self-calibration area of the module EEPROM. Refer to the specifications document for your device for more information about how often to self-calibrate.
-
-                            For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates that the calibration data for a specific step is still valid, you can omit that step for faster execution.
-
-                            **Open NI-RFSG Session for the PXIe-5820/5830/5831/5832/5840/5841/5842/5860**
-
-                            If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.
-
-                             **PXIe-5860**
-
-                             While this VI is running on one channel, if there are any existing NI-RFSG or NI-RFSA sessions open on the other channel, they may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate or niRFSA Commit or niRFSA Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.
-
-                             **PXIe-5841 with PXIe-5655**
-
-                            The PXIe-5841 maintains separate self-calibration data for both the PXIe-5841 standalone and when associated with the PXIe-5655. Use this method once for each intended configuration.
-
-                            **IF Flatness Step Time**
-
-                            - The IF Flatness step can take approximately 15 minutes to complete on the PXIe-5665 (3.6 GHz) and approximately 25 minutes to complete on the PXIe-5665 (14 GHz).
-                            - The IF Flatness step can take approximately 1 minute to complete on the PXIe-5667 (3.6 GHz) and approximately 1.5 minutes to complete on the PXIe-5667 (7 GHz).
-                            - The IF Flatness step can take approximately 15 minutes to complete on the PXIe-5668.
-
-                            **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `PXI-5661 Calibration <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/self-calibration.html>`_
-
-                            `PXIe-5663/5663E Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/self-calibration.html>`_
-
-                            `PXIe-5665 Self-Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/self-calibration.html>`_
-
-                            `PXIe-5667 Self-Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/self-calibration.html>`_
-
-            
-
-
-
-            :param steps_to_omit:
-
-
-                Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
-
-                                        ----
-
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.self_calibrate` method: :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_LO_SELF_CAL`
-
-                                        ----
-
-                                        | Value                                          |  Description                                                                                                                                                                                                                     |
-                                        |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_RESET_WITH_OPTIONS_NONE`             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |:py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
-
-                
-
-                .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-            :type steps_to_omit: int
-
 self_calibrate_range
 --------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_reference_level, max_reference_level)
+    .. py:method:: self_calibrate_range(steps_to_omit, minimum_frequency, maximum_frequency, minimum_reference_level, maximum_reference_level)
 
             Self-calibrates all configurations within the specified frequency and reference level limits.
 
@@ -2584,7 +2483,7 @@ self_calibrate_range
 
                                         ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.self_calibrate` method: :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`
+                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.SelfCalibrate` method: :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`
 
                                         ----
 
@@ -2608,7 +2507,7 @@ self_calibrate_range
 
 
             :type steps_to_omit: :py:data:`nirfsa.SelfCalibrateRangeStepsToOmit`
-            :param min_frequency:
+            :param minimum_frequency:
 
 
                 Specifies the minimum RF frequency in Hz.
@@ -2616,8 +2515,8 @@ self_calibrate_range
                 
 
 
-            :type min_frequency: float
-            :param max_frequency:
+            :type minimum_frequency: float
+            :param maximum_frequency:
 
 
                 Specifies the maximum RF frequency in Hz.
@@ -2625,8 +2524,8 @@ self_calibrate_range
                 
 
 
-            :type max_frequency: float
-            :param min_reference_level:
+            :type maximum_frequency: float
+            :param minimum_reference_level:
 
 
                 Specifies the minimum reference level in dBm.
@@ -2634,8 +2533,8 @@ self_calibrate_range
                 
 
 
-            :type min_reference_level: float
-            :param max_reference_level:
+            :type minimum_reference_level: float
+            :param maximum_reference_level:
 
 
                 Specifies the maximum reference level in dBm.
@@ -2643,7 +2542,7 @@ self_calibrate_range
                 
 
 
-            :type max_reference_level: float
+            :type maximum_reference_level: float
 
 self_test
 ---------
@@ -10619,7 +10518,7 @@ spectrum_span
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_spectrum_frequency_center_span`
+        - :py:meth:`nirfsa.Session.configure_spectrum_frequency`
 
         The following table lists the characteristics of this property.
 

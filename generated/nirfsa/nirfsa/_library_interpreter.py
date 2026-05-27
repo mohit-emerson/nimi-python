@@ -183,7 +183,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
         level_ctype = _visatype.ViReal64(level)  # case S150
-        slope_ctype = _visatype.ViInt32(slope)  # case S150
+        slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         pretrigger_samples_ctype = _visatype.ViInt64(pretrigger_samples)  # case S150
         error_code = self._library.niRFSA_ConfigureIqPowerEdgeRefTrigger(vi_ctype, source_ctype, level_ctype, slope_ctype, pretrigger_samples_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -191,7 +191,7 @@ class LibraryInterpreter(object):
 
     def configure_ref_clock(self, clock_source, ref_clock_rate):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        clock_source_ctype = ctypes.create_string_buffer(clock_source.encode(self._encoding))  # case C020
+        clock_source_ctype = ctypes.create_string_buffer(clock_source.value.encode(self._encoding))  # case C030
         ref_clock_rate_ctype = _visatype.ViReal64(ref_clock_rate)  # case S150
         error_code = self._library.niRFSA_ConfigureRefClock(vi_ctype, clock_source_ctype, ref_clock_rate_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
@@ -283,25 +283,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def error_message(self, status_code):  # noqa: N802
+    def error_message(self, error_code):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        status_code_ctype = _visatype.ViStatus(status_code)  # case S150
+        error_code_ctype = _visatype.ViStatus(error_code)  # case S150
         error_message_ctype = (_visatype.ViChar * 256)()  # case C070
-        error_code = self._library.niRFSA_ErrorMessage(vi_ctype, status_code_ctype, error_message_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        error_code = self._library.niRFSA_ErrorMessage(vi_ctype, error_code_ctype, error_message_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
-
-    def fancy_get_self_calibration_date_and_time(self, self_calibration_step):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        self_calibration_step_ctype = _visatype.ViInt64(self_calibration_step.value)  # case S130
-        year_ctype = _visatype.ViInt32()  # case S220
-        month_ctype = _visatype.ViInt32()  # case S220
-        day_ctype = _visatype.ViInt32()  # case S220
-        hour_ctype = _visatype.ViInt32()  # case S220
-        minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niRFSA_FancyGetSelfCalibrationDateAndTime(vi_ctype, self_calibration_step_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -450,10 +438,10 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
-    def get_ext_cal_last_temp(self):  # noqa: N802
+    def get_ext_cal_last_temperature(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niRFSA_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+        error_code = self._library.niRFSA_GetExtCalLastTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -497,17 +485,14 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
         buffer_size_ctype = _visatype.ViInt32(number_of_frequencies_ctype.value)  # case S200
         frequencies_size = number_of_frequencies_ctype.value  # case B620
-        frequencies_array = array.array("d", [0]) * frequencies_size  # case B620
-        frequencies_ctype = _get_ctypes_pointer_for_buffer(value=frequencies_array, library_type=_visatype.ViReal64)  # case B620
+        frequencies_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=frequencies_size)  # case B620
         magnitude_response_size = number_of_frequencies_ctype.value  # case B620
-        magnitude_response_array = array.array("d", [0]) * magnitude_response_size  # case B620
-        magnitude_response_ctype = _get_ctypes_pointer_for_buffer(value=magnitude_response_array, library_type=_visatype.ViReal64)  # case B620
+        magnitude_response_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=magnitude_response_size)  # case B620
         phase_response_size = number_of_frequencies_ctype.value  # case B620
-        phase_response_array = array.array("d", [0]) * phase_response_size  # case B620
-        phase_response_ctype = _get_ctypes_pointer_for_buffer(value=phase_response_array, library_type=_visatype.ViReal64)  # case B620
+        phase_response_ctype = _get_ctypes_pointer_for_buffer(library_type=_visatype.ViReal64, size=phase_response_size)  # case B620
         error_code = self._library.niRFSA_GetFrequencyResponse(vi_ctype, channel_list_ctype, buffer_size_ctype, frequencies_ctype, magnitude_response_ctype, phase_response_ctype, None if number_of_frequencies_ctype is None else (ctypes.pointer(number_of_frequencies_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return frequencies_array, magnitude_response_array, phase_response_array
+        return [float(frequencies_ctype[i]) for i in range(buffer_size_ctype.value)], [float(magnitude_response_ctype[i]) for i in range(buffer_size_ctype.value)], [float(phase_response_ctype[i]) for i in range(buffer_size_ctype.value)]
 
     def get_gain_reference_cal_baseline(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -538,6 +523,18 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSA_GetScalingCoefficients(vi_ctype, channel_list_ctype, array_size_ctype, coefficient_info_ctype, None if number_of_coefficient_sets_ctype is None else (ctypes.pointer(number_of_coefficient_sets_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [coefficient_info_type.CoefficientInfo(coefficient_info_ctype[i]) for i in range(array_size_ctype.value)]
+
+    def get_self_calibration_date_and_time(self, self_calibration_step):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        self_calibration_step_ctype = _visatype.ViInt64(self_calibration_step.value)  # case S130
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSA_GetSelfCalibrationDateAndTime(vi_ctype, self_calibration_step_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
     def get_self_calibration_temperature(self, self_calibration_step):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -665,21 +662,14 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def self_calibrate(self, steps_to_omit):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        steps_to_omit_ctype = _visatype.ViInt64(steps_to_omit)  # case S150
-        error_code = self._library.niRFSA_SelfCalibrate(vi_ctype, steps_to_omit_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def self_calibrate_range(self, steps_to_omit, min_frequency, max_frequency, min_reference_level, max_reference_level):  # noqa: N802
+    def self_calibrate_range(self, steps_to_omit, minimum_frequency, maximum_frequency, minimum_reference_level, maximum_reference_level):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         steps_to_omit_ctype = _visatype.ViInt64(steps_to_omit.value)  # case S130
-        min_frequency_ctype = _visatype.ViReal64(min_frequency)  # case S150
-        max_frequency_ctype = _visatype.ViReal64(max_frequency)  # case S150
-        min_reference_level_ctype = _visatype.ViReal64(min_reference_level)  # case S150
-        max_reference_level_ctype = _visatype.ViReal64(max_reference_level)  # case S150
-        error_code = self._library.niRFSA_SelfCalibrateRange(vi_ctype, steps_to_omit_ctype, min_frequency_ctype, max_frequency_ctype, min_reference_level_ctype, max_reference_level_ctype)
+        minimum_frequency_ctype = _visatype.ViReal64(minimum_frequency)  # case S150
+        maximum_frequency_ctype = _visatype.ViReal64(maximum_frequency)  # case S150
+        minimum_reference_level_ctype = _visatype.ViReal64(minimum_reference_level)  # case S150
+        maximum_reference_level_ctype = _visatype.ViReal64(maximum_reference_level)  # case S150
+        error_code = self._library.niRFSA_SelfCalibrateRange(vi_ctype, steps_to_omit_ctype, minimum_frequency_ctype, maximum_frequency_ctype, minimum_reference_level_ctype, maximum_reference_level_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

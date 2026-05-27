@@ -601,6 +601,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is NIRFSA_VAL_RISING_SLOPE.\n\n                        | Value                                | Description                                                |\n                        |:--------------------------------|:-------------------------------------------------|\n                        | NIRFSA_VAL_RISING_SLOPE (1000)  | NI-RFSA detects a rising edge (positive slope).  |\n                        | NIRFSA_VAL_FALLING_SLOPE (1001) | NI-RFSA detects a falling edge (negative slope). |'
                 },
+                'enum' : 'ReferenceTriggerIqPowerEdgeSlope',
                 'name': 'slope',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -653,6 +654,7 @@ functions = {
                     'description': 'specifies the source of the Reference Clock signal.\n                        | Clock Source          | Description |\n                        |-----------------------|-------------|\n                        | **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |\n                        | **RefIn** | Uses the signal at the front panel REF IN connector. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT; lock external signal to PXIe-3621 REF IN. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT; lock external signal to PXIe-3622 REF IN. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT; lock external signal to PXIe-3623 REF IN. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to signal at REF IN on PXIe-5655. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to signal at REF IN on PXIe-5655. Use cables as shown in the Getting Started Guide. |\n                        | **PXI Clock** | Uses the PXI_CLK signal present on the PXI backplane. |\n                        | **PXI_ClkMaster** | Valid only for PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. <br/>**PXIe-5831 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3622 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3623 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. |'
                 },
                 'name': 'clockSource',
+                'enum': 'ReferenceClockSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -733,6 +735,7 @@ functions = {
                     'description': 'Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.'
                 },
                 'name': 'pretriggerSamples',
+                'default_value': '0',
                 'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -772,7 +775,8 @@ functions = {
         'use_session_lock': True
     },
     'ConfigureSpectrumFrequencyCenterSpan': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
+        'method_name_for_documentation': 'configure_spectrum_frequency',
         'documentation': {
             'description': 'Configures the span and center frequency of the spectrum read by NI-RFSA. \n                \n                A spectrum acquisition consists of data surrounding the center frequency.\n\n                ----\n                **Note**\n                If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n                ----\n\n                ----\n                **Note**\n                 For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -833,7 +837,8 @@ functions = {
         'use_session_lock': True
     },
     'ConfigureSpectrumFrequencyStartStop': {
-        'codegen_method': 'public',
+        'codegen_method': 'private',
+        'method_name_for_documentation': 'configure_spectrum_frequency',
         'documentation': {
             'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n                ----\n                **Note**\n                If you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n                ----\n\n                ----\n                **Note**\n                 For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
@@ -892,6 +897,93 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': True
+    },
+    'ConfigureSpectrumFrequencyDispatcher': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': 'Configures the frequency range of a spectrum acquisition.\n\n                You can specify the frequency range using either center frequency and span, or start and stop frequencies.\n\n                ----\n                **Note**\n                If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': False,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'configure_spectrum_frequency',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'configure_spectrum_frequency'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'is_repeated_capability': False,
+                'name': 'channelList',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'None',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **span**.'
+                },
+                'name': 'centerFrequency',
+                'type': 'ViReal64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'None',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **center_frequency**.'
+                },
+                'name': 'span',
+                'type': 'ViReal64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'None',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the lower limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **stop_frequency**.'
+                },
+                'name': 'startFrequency',
+                'type': 'ViReal64',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'None',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the upper limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **start_frequency**.'
+                },
+                'name': 'stopFrequency',
+                'type': 'ViReal64',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': 'configure_spectrum_frequency',
+        'returns': 'ViStatus',
+        'use_session_lock': False
     },
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
@@ -1194,10 +1286,10 @@ functions = {
     'ErrorMessage': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Converts a status code returned by an NI-RFSA function into a user-readable string.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
+            'description': 'Converts an error code returned by an NI-RFSA function into a user-readable string.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
         },
         'included_in_proto': True,
-        'is_error_handling': False,
+        'is_error_handling': True,
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1220,9 +1312,9 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Passes the **status** parameter that is returned from any NI-RFSA function.'
+                    'description': 'Passes the **errorCode** parameter that is returned from any NI-RFSA function.'
                 },
-                'name': 'statusCode',
+                'name': 'errorCode',
                 'type': 'ViStatus',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1230,7 +1322,7 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns the user-readable message string that corresponds to the status code you specify.\n\n                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.'
+                    'description': 'Returns the user-readable message string that corresponds to the error code you specify.\n\n                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.'
                 },
                 'name': 'errorMessage',
                 'size': {
@@ -1243,7 +1335,7 @@ functions = {
             }
         ],
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'FancyCreateDeembeddingSparameterTableArray': {
         'codegen_method': 'python-only',
@@ -2807,6 +2899,36 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'lastCalDatetime',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
+        'returns': 'ViStatus'
+    },
     'GetExternalCalibrationLastDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
@@ -2890,7 +3012,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetExtCalLastTemp': {
+    'GetExtCalLastTemperature': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the temperature of the last successful external calibration. \n                \n                The temperature is returned in degrees Celsius.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
@@ -3086,13 +3208,14 @@ functions = {
                     'description': 'Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.\n\n                        Pass VI_NULL if you do not want to use this parameter.'
                 },
                 'name': 'frequencies',
+                'numpy': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'bufferSize',
                     'value_twist': 'numberOfFrequencies'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
+                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
                 'use_in_python_api': True
             },
             {
@@ -3101,13 +3224,14 @@ functions = {
                     'description': 'Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the NIRFSA_ATTR_FREQUENCIES array.\n\n                        Pass VI_NULL if you do not want to use this parameter.'
                 },
                 'name': 'magnitudeResponse',
+                'numpy': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'bufferSize',
                     'value_twist': 'numberOfFrequencies'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
+                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
                 'use_in_python_api': True
             },
             {
@@ -3116,13 +3240,14 @@ functions = {
                     'description': 'Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the NIRFSA_ATTR_FREQUENCIES array.\n\n                        Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.'
                 },
                 'name': 'phaseResponse',
+                'numpy': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'bufferSize',
                     'value_twist': 'numberOfFrequencies'
                 },
                 'type': 'ViReal64[]',
-                'use_array': True,
+                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
                 'use_in_python_api': True
             },
             {
@@ -3204,7 +3329,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FancyGetSelfCalibrationDateAndTime': {
+    'GetSelfCalibrationDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration. \n                \n                The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **NIRFSA_ATTR_SELF_CALIBRATION_STEP** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
@@ -4205,46 +4330,6 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
-    'SelfCalibrate': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Self-calibrates the NI-RFSA device and associated modules that support self-calibration. \n                \n                If self-calibration is performed successfully, the new calibration constants are stored immediately in the self-calibration area of the module EEPROM. Refer to the specifications document for your device for more information about how often to self-calibrate.\n\n                For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if the nirfsa_IsSelfCalValid function indicates that the calibration data for a specific step is still valid, you can omit that step for faster execution.\n\n                **Open NI-RFSG Session for the PXIe-5820/5830/5831/5832/5840/5841/5842/5860**\n\n                If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this function runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.\n\n                 **PXIe-5860**\n\n                 While this VI is running on one channel, if there are any existing NI-RFSG or NI-RFSA sessions open on the other channel, they may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate or niRFSA Commit or niRFSA Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.\n\n                 **PXIe-5841 with PXIe-5655**\n\n                The PXIe-5841 maintains separate self-calibration data for both the PXIe-5841 standalone and when associated with the PXIe-5655. Use this function once for each intended configuration.\n\n                **IF Flatness Step Time**\n\n                - The IF Flatness step can take approximately 15 minutes to complete on the PXIe-5665 (3.6 GHz) and approximately 25 minutes to complete on the PXIe-5665 (14 GHz).\n                - The IF Flatness step can take approximately 1 minute to complete on the PXIe-5667 (3.6 GHz) and approximately 1.5 minutes to complete on the PXIe-5667 (7 GHz).\n                - The IF Flatness step can take approximately 15 minutes to complete on the PXIe-5668.\n\n                **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `PXI-5661 Calibration <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/self-calibration.html>`_\n\n                `PXIe-5663/5663E Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/self-calibration.html>`_\n\n                `PXIe-5665 Self-Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/self-calibration.html>`_\n\n                `PXIe-5667 Self-Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/self-calibration.html>`_'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.\n\n                        ----\n                        \n                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY and NIRFSA_VAL_SELF_CAL_LO_SELF_CAL, you would pass the following string to the nirfsa_SelfCalibrate function: NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY | NIRFSA_VAL_SELF_CAL_LO_SELF_CAL\n\n                        ----\n\n                        | Value                                          |  Description                                                                                                                                                                                                                     |\n                        |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n                        | NIRFSA_VAL_RESET_WITH_OPTIONS_NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |\n                        | NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT | Not used by this function.                                                                                                                                                                                            |\n                        | NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE        | Not used by this function.                                                                                                                                                                                            |\n                        | NIRFSA_VAL_SELF_CAL_IF_FLATNESS           | Not used by this function.                                                                                                                                                                                            |\n                        | NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL    | Not used by this function.                                                                                                                                                                                            |\n                        | NIRFSA_VAL_SELF_CAL_LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the nirfsa_IsSelfCalValid function indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |\n                        | NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |\n                        | NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |\n                        |NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |\n                        | NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |\n                        | NIRFSA_VAL_SELF_CAL_DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |'
-                },
-                'name': 'stepsToOmit',
-                'type': 'ViInt64',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'SelfCalibrateRange': {
         'codegen_method': 'public',
         'documentation': {
@@ -4288,7 +4373,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the minimum RF frequency in Hz.'
                 },
-                'name': 'minFrequency',
+                'name': 'minimumFrequency',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4298,7 +4383,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the maximum RF frequency in Hz.'
                 },
-                'name': 'maxFrequency',
+                'name': 'maximumFrequency',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4308,7 +4393,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the minimum reference level in dBm.'
                 },
-                'name': 'minReferenceLevel',
+                'name': 'minimumReferenceLevel',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4318,7 +4403,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the maximum reference level in dBm.'
                 },
-                'name': 'maxReferenceLevel',
+                'name': 'maximumReferenceLevel',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True

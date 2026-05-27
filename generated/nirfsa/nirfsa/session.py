@@ -4647,7 +4647,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_spectrum_frequency_center_span
+    - configure_spectrum_frequency
     '''
     start_to_ref_trigger_holdoff = _attributes.AttributeViReal64TimeDeltaSeconds(1150033)
     '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
@@ -4909,6 +4909,26 @@ class _SessionBase(object):
         object.__setattr__(self, key, value)
 
     ''' These are code-generated '''
+
+    def error_message(self, error_code):
+        r'''error_message
+
+        Converts an error code returned by an NI-RFSA method into a user-readable string.
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
+
+        Args:
+            error_code (int): Passes the **errorCode** parameter that is returned from any NI-RFSA method.
+
+
+        Returns:
+            error_message (str): Returns the user-readable message string that corresponds to the error code you specify.
+
+                                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
+
+        '''
+        error_message = self._interpreter.error_message(error_code)
+        return error_message
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -5963,7 +5983,7 @@ class Session(_SessionBase):
 
             level (float): Specifies the threshold, in dBm, above or below which the device triggers.
 
-            slope (int): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is ReferenceTriggerIqPowerEdgeSlope.RISING.
+            slope (enums.ReferenceTriggerIqPowerEdgeSlope): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is ReferenceTriggerIqPowerEdgeSlope.RISING.
 
                                         | Value                                | Description                                                |
                                         |:--------------------------------|:-------------------------------------------------|
@@ -5973,6 +5993,8 @@ class Session(_SessionBase):
             pretrigger_samples (int): Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.
 
         '''
+        if type(slope) is not enums.ReferenceTriggerIqPowerEdgeSlope:
+            raise TypeError('Parameter slope must be of type ' + str(enums.ReferenceTriggerIqPowerEdgeSlope))
         self._interpreter.configure_iq_power_edge_ref_trigger(source, level, slope, pretrigger_samples)
 
     @ivi_synchronized
@@ -6000,7 +6022,7 @@ class Session(_SessionBase):
                         `PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/timing-configurations.html>`_
 
         Args:
-            clock_source (str): specifies the source of the Reference Clock signal.
+            clock_source (enums.ReferenceClockSource): specifies the source of the Reference Clock signal.
                                         | Clock Source          | Description |
                                         |-----------------------|-------------|
                                         | **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |
@@ -6011,6 +6033,8 @@ class Session(_SessionBase):
             ref_clock_rate (float): specifies the Reference Clock rate, in hertz (Hz), of the signal present at the REF IN or CLK IN connector. This parameter is only valid when the **ref clock source** parameter is set to **RefIn**. The default value is Auto (-1.0), which allows NI-RFSG to use the default Reference Clock rate for the device or automatically detect the Reference Clock rate, if supported. Refer to the Reference Clock Rate property for possible values.
 
         '''
+        if type(clock_source) is not enums.ReferenceClockSource:
+            raise TypeError('Parameter clock_source must be of type ' + str(enums.ReferenceClockSource))
         self._interpreter.configure_ref_clock(clock_source, ref_clock_rate)
 
     @ivi_synchronized
@@ -6036,7 +6060,7 @@ class Session(_SessionBase):
         self._interpreter.configure_software_edge_advance_trigger()
 
     @ivi_synchronized
-    def configure_software_edge_ref_trigger(self, pretrigger_samples):
+    def configure_software_edge_ref_trigger(self, pretrigger_samples=0):
         r'''configure_software_edge_ref_trigger
 
         Configures the device to wait for a software Reference Trigger to mark a reference point within the record.
@@ -6100,8 +6124,8 @@ class Session(_SessionBase):
         self._interpreter.configure_software_edge_start_trigger()
 
     @ivi_synchronized
-    def configure_spectrum_frequency_center_span(self, channel_list, center_frequency, span):
-        r'''configure_spectrum_frequency_center_span
+    def _configure_spectrum_frequency_center_span(self, channel_list, center_frequency, span):
+        r'''_configure_spectrum_frequency_center_span
 
         Configures the span and center frequency of the spectrum read by NI-RFSA.
 
@@ -6137,9 +6161,46 @@ class Session(_SessionBase):
         '''
         self._interpreter.configure_spectrum_frequency_center_span(channel_list, center_frequency, span)
 
+    def configure_spectrum_frequency(self, channel_list, center_frequency=None, span=None, start_frequency=None, stop_frequency=None):
+        '''configure_spectrum_frequency
+
+        Configures the frequency range of a spectrum acquisition.
+
+                        You can specify the frequency range using either center frequency and span, or start and stop frequencies.
+
+                        ----
+                        **Note**
+                        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
+
+                        ----
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Args:
+            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
+
+            center_frequency (float): Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **span**.
+
+            span (float): Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **center_frequency**.
+
+            start_frequency (float): Specifies the lower limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **stop_frequency**.
+
+            stop_frequency (float): Specifies the upper limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **start_frequency**.
+
+        '''
+        if center_frequency is not None and span is not None:
+            self._configure_spectrum_frequency_center_span(channel_list, center_frequency, span)
+        elif start_frequency is not None and stop_frequency is not None:
+            self._configure_spectrum_frequency_start_stop(channel_list, start_frequency, stop_frequency)
+        else:
+            raise ValueError(
+                "Provide either (center_frequency & span) "
+                "or (start_frequency & stop_frequency)"
+            )
+
     @ivi_synchronized
-    def configure_spectrum_frequency_start_stop(self, channel_list, start_frequency, stop_frequency):
-        r'''configure_spectrum_frequency_start_stop
+    def _configure_spectrum_frequency_start_stop(self, channel_list, start_frequency, stop_frequency):
+        r'''_configure_spectrum_frequency_start_stop
 
         Configures the start and stop frequencies of a spectrum read by NI-RFSA.
 
@@ -6311,27 +6372,6 @@ class Session(_SessionBase):
         '''
         self._interpreter.enable_session_access(enable)
 
-    @ivi_synchronized
-    def error_message(self, status_code):
-        r'''error_message
-
-        Converts a status code returned by an NI-RFSA method into a user-readable string.
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
-
-        Args:
-            status_code (int): Passes the **status** parameter that is returned from any NI-RFSA method.
-
-
-        Returns:
-            error_message (str): Returns the user-readable message string that corresponds to the status code you specify.
-
-                                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
-
-        '''
-        error_message = self._interpreter.error_message(status_code)
-        return error_message
-
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, sparameter_orientation):
         '''create_deembedding_sparameter_table_array
 
@@ -6404,51 +6444,6 @@ class Session(_SessionBase):
         '''
         sparameters = self._interpreter.get_deembedding_sparameters()
         return sparameters
-
-    @ivi_synchronized
-    def _fancy_get_self_calibration_date_and_time(self, self_calibration_step):
-        r'''_fancy_get_self_calibration_date_and_time
-
-        Returns the date and time of the last successful self-calibration.
-
-                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
-
-                        ----
-                        **Note**
-                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
-
-                        ----
-
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Note:
-        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        Args:
-            self_calibration_step (Bitwise combination of enums.SelfCalibrationStep flags): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
-
-                                        %enum_table{self calibration step}
-
-
-        Returns:
-            year (int): Returns the year of the last external calibration.
-
-            month (int): Returns the month of the last external calibration.
-
-            day (int): Returns the day of the last external calibration.
-
-            hour (int): Returns the year of the last external calibration. It is expressed as an integer.
-
-            minute (int): Returns the minute of the last external calibration.
-
-        '''
-        if type(self_calibration_step) is not enums.SelfCalibrationStep:
-            raise TypeError('Parameter self_calibration_step must be of type ' + str(enums.SelfCalibrationStep))
-        year, month, day, hour, minute = self._interpreter.fancy_get_self_calibration_date_and_time(self_calibration_step)
-        return year, month, day, hour, minute
 
     @ivi_synchronized
     def _fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
@@ -7019,8 +7014,8 @@ class Session(_SessionBase):
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
     @ivi_synchronized
-    def get_ext_cal_last_temp(self):
-        r'''get_ext_cal_last_temp
+    def get_ext_cal_last_temperature(self):
+        r'''get_ext_cal_last_temperature
 
         Returns the temperature of the last successful external calibration.
 
@@ -7032,7 +7027,7 @@ class Session(_SessionBase):
             temperature (float): Returns the temperature, in degrees Celsius, of the last external calibration.
 
         '''
-        temperature = self._interpreter.get_ext_cal_last_temp()
+        temperature = self._interpreter.get_ext_cal_last_temperature()
         return temperature
 
     @ivi_synchronized
@@ -7116,18 +7111,18 @@ class Session(_SessionBase):
 
 
         Returns:
-            frequencies (array.array("d")): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
+            frequencies (numpy.array(dtype=numpy.float64)): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
 
                                         Pass VI_NULL if you do not want to use this parameter.
 
-            magnitude_response (array.array("d")): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
+            magnitude_response (numpy.array(dtype=numpy.float64)): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
 
                                         Pass VI_NULL if you do not want to use this parameter.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            phase_response (array.array("d")): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
+            phase_response (numpy.array(dtype=numpy.float64)): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
 
                                         Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
 
@@ -7152,6 +7147,27 @@ class Session(_SessionBase):
         '''
         gain_reference_cal_constants = self._interpreter.get_gain_reference_cal_baseline()
         return gain_reference_cal_constants
+
+    @ivi_synchronized
+    def get_ext_cal_last_date_and_time(self):
+        '''get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful external calibration.
+
+        The time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this method returns
+
+        14 for the hours parameter and
+
+        30 for the minutes parameter.
+
+        **Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Returns:
+            last_cal_datetime (hightime.datetime):
+
+        '''
+        year, month, day, hour, minute, second = self._get_external_calibration_last_date_and_time()
+        return hightime.datetime(year, month, day, hour, minute, second)
 
     @ivi_synchronized
     def get_scaling_coefficients(self, channel_list):
@@ -7187,6 +7203,51 @@ class Session(_SessionBase):
         '''
         coefficient_info = self._interpreter.get_scaling_coefficients(channel_list)
         return coefficient_info
+
+    @ivi_synchronized
+    def _get_self_calibration_date_and_time(self, self_calibration_step):
+        r'''_get_self_calibration_date_and_time
+
+        Returns the date and time of the last successful self-calibration.
+
+                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
+
+                        ----
+                        **Note**
+                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
+
+                        ----
+
+                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Note:
+        One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
+
+        Args:
+            self_calibration_step (Bitwise combination of enums.SelfCalibrationStep flags): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
+
+                                        %enum_table{self calibration step}
+
+
+        Returns:
+            year (int): Returns the year of the last external calibration.
+
+            month (int): Returns the month of the last external calibration.
+
+            day (int): Returns the day of the last external calibration.
+
+            hour (int): Returns the year of the last external calibration. It is expressed as an integer.
+
+            minute (int): Returns the minute of the last external calibration.
+
+        '''
+        if type(self_calibration_step) is not enums.SelfCalibrationStep:
+            raise TypeError('Parameter self_calibration_step must be of type ' + str(enums.SelfCalibrationStep))
+        year, month, day, hour, minute = self._interpreter.get_self_calibration_date_and_time(self_calibration_step)
+        return year, month, day, hour, minute
 
     @ivi_synchronized
     def get_self_calibration_temperature(self, self_calibration_step):
@@ -7383,7 +7444,7 @@ class Session(_SessionBase):
 
         Indicates which calibration steps contain valid calibration data.
 
-                        To omit steps with valid calibration data from self-calibration, you can pass the **VALID_STEPS** parameter to the **stepsToOmit** parameter of the self_calibrate method.
+                        To omit steps with valid calibration data from self-calibration, you can pass the **VALID_STEPS** parameter to the **stepsToOmit** parameter of the SelfCalibrate method.
 
                         **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
@@ -7775,76 +7836,7 @@ class Session(_SessionBase):
         self._interpreter.save_configurations_to_file(channel_name, file_path)
 
     @ivi_synchronized
-    def self_calibrate(self, steps_to_omit):
-        r'''self_calibrate
-
-        Self-calibrates the NI-RFSA device and associated modules that support self-calibration.
-
-                        If self-calibration is performed successfully, the new calibration constants are stored immediately in the self-calibration area of the module EEPROM. Refer to the specifications document for your device for more information about how often to self-calibrate.
-
-                        For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if the is_self_cal_valid method indicates that the calibration data for a specific step is still valid, you can omit that step for faster execution.
-
-                        **Open NI-RFSG Session for the PXIe-5820/5830/5831/5832/5840/5841/5842/5860**
-
-                        If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.
-
-                         **PXIe-5860**
-
-                         While this VI is running on one channel, if there are any existing NI-RFSG or NI-RFSA sessions open on the other channel, they may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate or niRFSA Commit or niRFSA Initiate. For the existing open session to use the new self-calibration data, the session will need to be closed and reopened.
-
-                         **PXIe-5841 with PXIe-5655**
-
-                        The PXIe-5841 maintains separate self-calibration data for both the PXIe-5841 standalone and when associated with the PXIe-5655. Use this method once for each intended configuration.
-
-                        **IF Flatness Step Time**
-
-                        - The IF Flatness step can take approximately 15 minutes to complete on the PXIe-5665 (3.6 GHz) and approximately 25 minutes to complete on the PXIe-5665 (14 GHz).
-                        - The IF Flatness step can take approximately 1 minute to complete on the PXIe-5667 (3.6 GHz) and approximately 1.5 minutes to complete on the PXIe-5667 (7 GHz).
-                        - The IF Flatness step can take approximately 15 minutes to complete on the PXIe-5668.
-
-                        **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                        **Related Topics**
-
-                        `PXI-5661 Calibration <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/self-calibration.html>`_
-
-                        `PXIe-5663/5663E Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/self-calibration.html>`_
-
-                        `PXIe-5665 Self-Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/self-calibration.html>`_
-
-                        `PXIe-5667 Self-Calibration <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/self-calibration.html>`_
-
-        Args:
-            steps_to_omit (int): Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
-
-                                        ----
-
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY and NIRFSA_VAL_SELF_CAL_LO_SELF_CAL, you would pass the following string to the self_calibrate method: NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY | NIRFSA_VAL_SELF_CAL_LO_SELF_CAL
-
-                                        ----
-
-                                        | Value                                          |  Description                                                                                                                                                                                                                     |
-                                        |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_RESET_WITH_OPTIONS_NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
-                                        | NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
-                                        | NIRFSA_VAL_SELF_CAL_IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
-                                        | NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
-                                        | NIRFSA_VAL_SELF_CAL_LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | NIRFSA_VAL_SELF_CAL_DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
-
-                Note:
-                One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        '''
-        self._interpreter.self_calibrate(steps_to_omit)
-
-    @ivi_synchronized
-    def self_calibrate_range(self, steps_to_omit, min_frequency, max_frequency, min_reference_level, max_reference_level):
+    def self_calibrate_range(self, steps_to_omit, minimum_frequency, maximum_frequency, minimum_reference_level, maximum_reference_level):
         r'''self_calibrate_range
 
         Self-calibrates all configurations within the specified frequency and reference level limits.
@@ -7880,7 +7872,7 @@ class Session(_SessionBase):
 
                                         ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY and SelfCalibrateRangeStepsToOmit.LO_SELF_CAL, you would pass the following string to the self_calibrate method: SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
+                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY and SelfCalibrateRangeStepsToOmit.LO_SELF_CAL, you would pass the following string to the SelfCalibrate method: SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
 
                                         ----
 
@@ -7901,18 +7893,18 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            min_frequency (float): Specifies the minimum RF frequency in Hz.
+            minimum_frequency (float): Specifies the minimum RF frequency in Hz.
 
-            max_frequency (float): Specifies the maximum RF frequency in Hz.
+            maximum_frequency (float): Specifies the maximum RF frequency in Hz.
 
-            min_reference_level (float): Specifies the minimum reference level in dBm.
+            minimum_reference_level (float): Specifies the minimum reference level in dBm.
 
-            max_reference_level (float): Specifies the maximum reference level in dBm.
+            maximum_reference_level (float): Specifies the maximum reference level in dBm.
 
         '''
         if type(steps_to_omit) is not enums.SelfCalibrateRangeStepsToOmit:
             raise TypeError('Parameter steps_to_omit must be of type ' + str(enums.SelfCalibrateRangeStepsToOmit))
-        self._interpreter.self_calibrate_range(steps_to_omit, min_frequency, max_frequency, min_reference_level, max_reference_level)
+        self._interpreter.self_calibrate_range(steps_to_omit, minimum_frequency, maximum_frequency, minimum_reference_level, maximum_reference_level)
 
     @ivi_synchronized
     def send_software_edge_trigger(self, trigger, trigger_identifier):

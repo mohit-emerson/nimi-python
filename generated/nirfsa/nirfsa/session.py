@@ -454,7 +454,7 @@ class _SessionBase(object):
 
     If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
-    Use the _create_deembedding_sparameter_table_array method to create tables.
+    Use the create deembedding sparameter table array method to create tables.
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -5541,7 +5541,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the _read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -5667,7 +5667,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the _read_iq_single_record_complex_f64 method, or the read_power_spectrum method.
+                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read IQ single record complex F64 method, or the read_power_spectrum method.
 
                         ----
                         **Note**
@@ -6514,7 +6514,7 @@ class Session(_SessionBase):
 
                         A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6591,7 +6591,7 @@ class Session(_SessionBase):
 
                         A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6668,7 +6668,7 @@ class Session(_SessionBase):
 
                         Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6797,7 +6797,7 @@ class Session(_SessionBase):
 
                         The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6875,7 +6875,7 @@ class Session(_SessionBase):
 
                         The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6953,7 +6953,7 @@ class Session(_SessionBase):
 
                         The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -7479,7 +7479,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the _read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**

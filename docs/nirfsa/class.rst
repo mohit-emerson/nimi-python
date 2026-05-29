@@ -267,7 +267,7 @@ commit
 
             Commits settings to hardware.
 
-                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session._read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum` method.
+                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the read IQ single record complex F64 method, or the :py:meth:`nirfsa.Session.read_power_spectrum` method.
 
                             ----
                             **Note**
@@ -1875,7 +1875,7 @@ initiate
 
             Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                            You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the :py:meth:`nirfsa.Session._read_iq_single_record_complex_f64` method to both initiate the acquisition and retrieve I/Q data at one time.
+                            You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                             ----
                             **Note**
@@ -3240,7 +3240,7 @@ deembedding_selected_table
 
         If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
-        Use the :py:meth:`nirfsa.Session._create_deembedding_sparameter_table_array` method to create tables.
+        Use the create deembedding sparameter table array method to create tables.
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 

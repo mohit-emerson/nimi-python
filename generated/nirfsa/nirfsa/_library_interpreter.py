@@ -234,6 +234,20 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
+        table_name_ctype = ctypes.create_string_buffer(table_name.encode(self._encoding))  # case C020
+        frequencies_ctype = _get_ctypes_pointer_for_buffer(value=frequencies)  # case B510
+        frequencies_size_ctype = _visatype.ViInt32(0 if frequencies is None else len(frequencies))  # case S160
+        sparameter_table_ctype = _get_ctypes_pointer_for_buffer(value=sparameter_table, library_type=_complextype.NIComplexNumber)  # case B510
+        sparameter_table_size_ctype = _visatype.ViInt32(0 if sparameter_table is None else sparameter_table.size)  # case S161
+        number_of_ports_ctype = _visatype.ViInt32(number_of_ports)  # case S150
+        sparameter_orientation_ctype = _visatype.ViInt32(sparameter_orientation.value)  # case S130
+        error_code = self._library.niRFSA_CreateDeembeddingSparameterTableArray(vi_ctype, port_ctype, table_name_ctype, frequencies_ctype, frequencies_size_ctype, sparameter_table_ctype, sparameter_table_size_ctype, number_of_ports_ctype, sparameter_orientation_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
@@ -424,6 +438,28 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSA_GetAttributeViString(vi_ctype, channel_name_ctype, attribute_id_ctype, buf_size_ctype, value_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return value_ctype.value.decode(self._encoding)
+
+    def get_deembedding_sparameters(self):
+        import numpy as np
+        number_of_ports = self.get_deembedding_table_number_of_ports()
+        sparameters_array_size = number_of_ports ** 2
+        sparameters = np.full((number_of_ports, number_of_ports), 0 + 0j, dtype=np.complex128)
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        sparameters_ctype = _get_ctypes_pointer_for_buffer(value=sparameters, library_type=_complextype.NIComplexNumber)  # case B510
+        sparameters_array_size_ctype = _visatype.ViInt32(sparameters_array_size)  # case S150
+        number_of_sparameters_ctype = _visatype.ViInt32()  # case S220
+        number_of_ports_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSA_GetDeembeddingSparameters(vi_ctype, sparameters_ctype, sparameters_array_size_ctype, None if number_of_sparameters_ctype is None else (ctypes.pointer(number_of_sparameters_ctype)), None if number_of_ports_ctype is None else (ctypes.pointer(number_of_ports_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        sparameters = sparameters.reshape((int(number_of_ports_ctype.value), int(number_of_ports_ctype.value)))
+        return sparameters
+
+    def get_deembedding_table_number_of_ports(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        number_of_ports_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSA_GetDeembeddingTableNumberOfPorts(vi_ctype, None if number_of_ports_ctype is None else (ctypes.pointer(number_of_ports_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(number_of_ports_ctype.value)
 
     def get_error(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

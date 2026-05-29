@@ -267,7 +267,7 @@ commit
 
             Commits settings to hardware.
 
-                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum` method.
+                            Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the :py:meth:`nirfsa.Session._read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session.read_power_spectrum` method.
 
                             ----
                             **Note**
@@ -1875,7 +1875,7 @@ initiate
 
             Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                            You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method to both initiate the acquisition and retrieve I/Q data at one time.
+                            You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the :py:meth:`nirfsa.Session._read_iq_single_record_complex_f64` method to both initiate the acquisition and retrieve I/Q data at one time.
 
                             ----
                             **Note**
@@ -2100,89 +2100,6 @@ read_iq_single_record
 
 
             :type iq_data_array: list of NIComplexNumber
-            :param timeout:
-
-
-                Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
-
-                
-
-
-            :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
-
-            :rtype: WaveformInfo
-            :return:
-
-
-                    Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                                            The following list provides more information about each of these properties:
-
-                                            - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                                            ----
-
-                                            The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                                            ----
-
-                                            - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                                            ----
-
-
-                                            The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                                            ----
-
-                                            - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                            - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                            - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                            - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-                    
-
-
-
-read_iq_single_record_complex_f64
----------------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: read_iq_single_record_complex_f64(channel_list, iq_data_array, data_array_size, timeout=hightime.timedelta(seconds=10.0))
-
-            Initiates an acquisition and fetches a single I/Q data record.
-
-                            Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
-
-                            **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-                            **Related Topics**
-
-                            `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-            
-
-
-
-            :param channel_list:
-
-
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
-            :param iq_data_array:
-
-
-                Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the :py:meth:`nirfsa.Session.ConfigureNumberOfSamples` method.
-
-                
-
-
-            :type iq_data_array: numpy.array(dtype=numpy.complex128)
             :param timeout:
 
 
@@ -3323,7 +3240,7 @@ deembedding_selected_table
 
         If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
-        Use the :py:meth:`nirfsa.Session.CreateDeembeddingSparameterTableArray` method to create tables.
+        Use the :py:meth:`nirfsa.Session._create_deembedding_sparameter_table_array` method to create tables.
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -10832,7 +10749,7 @@ temperature_read_interval
 
         Indicates the minimum time between temperature sensor readings in seconds.
 
-        When you call the :py:meth:`nirfsa.Session.read_power_spectrum` method, the :py:meth:`nirfsa.Session.read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+        When you call the :py:meth:`nirfsa.Session.read_power_spectrum` method, the :py:meth:`nirfsa.Session._read_iq_single_record_complex_f64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
         ----
         **Note**

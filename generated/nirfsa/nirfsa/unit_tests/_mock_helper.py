@@ -53,6 +53,8 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureSpectrumFrequencyCenterSpan']['return'] = 0
         self._defaults['ConfigureSpectrumFrequencyStartStop'] = {}
         self._defaults['ConfigureSpectrumFrequencyStartStop']['return'] = 0
+        self._defaults['CreateDeembeddingSparameterTableArray'] = {}
+        self._defaults['CreateDeembeddingSparameterTableArray']['return'] = 0
         self._defaults['CreateDeembeddingSparameterTableS2PFile'] = {}
         self._defaults['CreateDeembeddingSparameterTableS2PFile']['return'] = 0
         self._defaults['DeleteAllDeembeddingTables'] = {}
@@ -106,6 +108,14 @@ class SideEffectsHelper(object):
         self._defaults['GetAttributeViString'] = {}
         self._defaults['GetAttributeViString']['return'] = 0
         self._defaults['GetAttributeViString']['value'] = None
+        self._defaults['GetDeembeddingSparameters'] = {}
+        self._defaults['GetDeembeddingSparameters']['return'] = 0
+        self._defaults['GetDeembeddingSparameters']['sparameters'] = None
+        self._defaults['GetDeembeddingSparameters']['numberOfSparameters'] = None
+        self._defaults['GetDeembeddingSparameters']['numberOfPorts'] = None
+        self._defaults['GetDeembeddingTableNumberOfPorts'] = {}
+        self._defaults['GetDeembeddingTableNumberOfPorts']['return'] = 0
+        self._defaults['GetDeembeddingTableNumberOfPorts']['numberOfPorts'] = None
         self._defaults['GetError'] = {}
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
@@ -316,6 +326,11 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureSpectrumFrequencyStartStop']['return']
         return self._defaults['ConfigureSpectrumFrequencyStartStop']['return']
 
+    def niRFSA_CreateDeembeddingSparameterTableArray(self, vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):  # noqa: N802
+        if self._defaults['CreateDeembeddingSparameterTableArray']['return'] != 0:
+            return self._defaults['CreateDeembeddingSparameterTableArray']['return']
+        return self._defaults['CreateDeembeddingSparameterTableArray']['return']
+
     def niRFSA_CreateDeembeddingSparameterTableS2PFile(self, vi, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         if self._defaults['CreateDeembeddingSparameterTableS2PFile']['return'] != 0:
             return self._defaults['CreateDeembeddingSparameterTableS2PFile']['return']
@@ -491,6 +506,42 @@ class SideEffectsHelper(object):
             return len(self._defaults['GetAttributeViString']['value'])
         value.value = self._defaults['GetAttributeViString']['value'].encode('ascii')
         return self._defaults['GetAttributeViString']['return']
+
+    def niRFSA_GetDeembeddingSparameters(self, vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
+        if self._defaults['GetDeembeddingSparameters']['return'] != 0:
+            return self._defaults['GetDeembeddingSparameters']['return']
+        # sparameters
+        if self._defaults['GetDeembeddingSparameters']['sparameters'] is None:
+            raise MockFunctionCallError("niRFSA_GetDeembeddingSparameters", param='sparameters')
+        test_value = self._defaults['GetDeembeddingSparameters']['sparameters']
+        try:
+            sparameters_ref = sparameters.contents
+        except AttributeError:
+            sparameters_ref = sparameters
+        assert len(sparameters_ref) >= len(test_value)
+        for i in range(len(test_value)):
+            sparameters_ref[i] = test_value[i]
+        # number_of_sparameters
+        if self._defaults['GetDeembeddingSparameters']['numberOfSparameters'] is None:
+            raise MockFunctionCallError("niRFSA_GetDeembeddingSparameters", param='numberOfSparameters')
+        if number_of_sparameters is not None:
+            number_of_sparameters.contents.value = self._defaults['GetDeembeddingSparameters']['numberOfSparameters']
+        # number_of_ports
+        if self._defaults['GetDeembeddingSparameters']['numberOfPorts'] is None:
+            raise MockFunctionCallError("niRFSA_GetDeembeddingSparameters", param='numberOfPorts')
+        if number_of_ports is not None:
+            number_of_ports.contents.value = self._defaults['GetDeembeddingSparameters']['numberOfPorts']
+        return self._defaults['GetDeembeddingSparameters']['return']
+
+    def niRFSA_GetDeembeddingTableNumberOfPorts(self, vi, number_of_ports):  # noqa: N802
+        if self._defaults['GetDeembeddingTableNumberOfPorts']['return'] != 0:
+            return self._defaults['GetDeembeddingTableNumberOfPorts']['return']
+        # number_of_ports
+        if self._defaults['GetDeembeddingTableNumberOfPorts']['numberOfPorts'] is None:
+            raise MockFunctionCallError("niRFSA_GetDeembeddingTableNumberOfPorts", param='numberOfPorts')
+        if number_of_ports is not None:
+            number_of_ports.contents.value = self._defaults['GetDeembeddingTableNumberOfPorts']['numberOfPorts']
+        return self._defaults['GetDeembeddingTableNumberOfPorts']['return']
 
     def niRFSA_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         if self._defaults['GetError']['return'] != 0:
@@ -929,6 +980,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_ConfigureSpectrumFrequencyCenterSpan.return_value = 0
         mock_library.niRFSA_ConfigureSpectrumFrequencyStartStop.side_effect = MockFunctionCallError("niRFSA_ConfigureSpectrumFrequencyStartStop")
         mock_library.niRFSA_ConfigureSpectrumFrequencyStartStop.return_value = 0
+        mock_library.niRFSA_CreateDeembeddingSparameterTableArray.side_effect = MockFunctionCallError("niRFSA_CreateDeembeddingSparameterTableArray")
+        mock_library.niRFSA_CreateDeembeddingSparameterTableArray.return_value = 0
         mock_library.niRFSA_CreateDeembeddingSparameterTableS2PFile.side_effect = MockFunctionCallError("niRFSA_CreateDeembeddingSparameterTableS2PFile")
         mock_library.niRFSA_CreateDeembeddingSparameterTableS2PFile.return_value = 0
         mock_library.niRFSA_DeleteAllDeembeddingTables.side_effect = MockFunctionCallError("niRFSA_DeleteAllDeembeddingTables")
@@ -969,6 +1022,10 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_GetAttributeViSession.return_value = 0
         mock_library.niRFSA_GetAttributeViString.side_effect = MockFunctionCallError("niRFSA_GetAttributeViString")
         mock_library.niRFSA_GetAttributeViString.return_value = 0
+        mock_library.niRFSA_GetDeembeddingSparameters.side_effect = MockFunctionCallError("niRFSA_GetDeembeddingSparameters")
+        mock_library.niRFSA_GetDeembeddingSparameters.return_value = 0
+        mock_library.niRFSA_GetDeembeddingTableNumberOfPorts.side_effect = MockFunctionCallError("niRFSA_GetDeembeddingTableNumberOfPorts")
+        mock_library.niRFSA_GetDeembeddingTableNumberOfPorts.return_value = 0
         mock_library.niRFSA_GetError.side_effect = MockFunctionCallError("niRFSA_GetError")
         mock_library.niRFSA_GetError.return_value = 0
         mock_library.niRFSA_GetExtCalLastTemperature.side_effect = MockFunctionCallError("niRFSA_GetExtCalLastTemperature")

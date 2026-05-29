@@ -454,7 +454,7 @@ class _SessionBase(object):
 
     If de-embedding is enabled, NI-RFSA uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
-    Use the CreateDeembeddingSparameterTableArray method to create tables.
+    Use the _create_deembedding_sparameter_table_array method to create tables.
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -4801,7 +4801,7 @@ class _SessionBase(object):
 
     Indicates the minimum time between temperature sensor readings in seconds.
 
-    When you call the read_power_spectrum method, the read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
+    When you call the read_power_spectrum method, the _read_iq_single_record_complex_f64 method, or the _initiate method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
     ----
     **Note**
@@ -5541,7 +5541,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the _read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -5667,7 +5667,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read_iq_single_record_complex_f64 method, or the read_power_spectrum method.
+                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the _read_iq_single_record_complex_f64 method, or the read_power_spectrum method.
 
                         ----
                         **Note**
@@ -6232,6 +6232,67 @@ class Session(_SessionBase):
         self._interpreter.configure_spectrum_frequency_start_stop(channel_list, start_frequency, stop_frequency)
 
     @ivi_synchronized
+    def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):
+        r'''_create_deembedding_sparameter_table_array
+
+        Creates an s-parameter de-embedding table for the port from the input data.
+
+        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+
+        **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+
+        Args:
+            port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+
+            table_name (str): Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
+
+            frequencies (numpy.array(dtype=numpy.float64)): Specifies the frequencies for the SPARAMETER_TABLE rows. Frequencies must be unique and in ascending order.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            sparameter_table (numpy.array(dtype=numpy.complex128)): Specifies the S-parameters for each frequency. S-parameters for each frequency are placed in the array in the following order: s11, s12, s21, s22.
+
+            sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the input data relative to the port on the DUT port.
+
+                **Defined Values** :
+
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | Name                                    | Value          | Description                                         |
+                +=========================================+================+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+----------------+-----------------------------------------------------+
+
+        '''
+        import numpy
+
+        if type(sparameter_orientation) is not enums.SparameterOrientation:
+            raise TypeError('Parameter sparameter_orientation must be of type ' + str(enums.SparameterOrientation))
+        if type(frequencies) is not numpy.ndarray:
+            raise TypeError('frequencies must be {0}, is {1}'.format(numpy.ndarray, type(frequencies)))
+        if numpy.isfortran(frequencies) is True:
+            raise TypeError('frequencies must be in C-order')
+        if frequencies.dtype is not numpy.dtype('float64'):
+            raise TypeError('frequencies must be numpy.ndarray of dtype=float64, is ' + str(frequencies.dtype))
+        if frequencies.ndim != 1:
+            raise TypeError('frequencies must be numpy.ndarray of dimension=1, is ' + str(frequencies.ndim))
+        if type(sparameter_table) is not numpy.ndarray:
+            raise TypeError('sparameter_table must be {0}, is {1}'.format(numpy.ndarray, type(sparameter_table)))
+        if numpy.isfortran(sparameter_table) is True:
+            raise TypeError('sparameter_table must be in C-order')
+        if sparameter_table.dtype is not numpy.dtype('complex128'):
+            raise TypeError('sparameter_table must be numpy.ndarray of dtype=complex128, is ' + str(sparameter_table.dtype))
+        if sparameter_table.ndim != 3:
+            raise TypeError('sparameter_table must be numpy.ndarray of dimension=3, is ' + str(sparameter_table.ndim))
+        self._interpreter.create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation)
+
+    @ivi_synchronized
     def create_deembedding_sparameter_table_s2p_file(self, port, table_name, s2p_file_path, sparameter_orientation):
         r'''create_deembedding_sparameter_table_s2p_file
 
@@ -6453,7 +6514,7 @@ class Session(_SessionBase):
 
                         A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6530,7 +6591,7 @@ class Session(_SessionBase):
 
                         A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6607,7 +6668,7 @@ class Session(_SessionBase):
 
                         Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6736,7 +6797,7 @@ class Session(_SessionBase):
 
                         The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6814,7 +6875,7 @@ class Session(_SessionBase):
 
                         The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -6892,7 +6953,7 @@ class Session(_SessionBase):
 
                         The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read_iq_single_record_complex_f64 method because the read_iq_single_record_complex_f64 method performs the fetch as part of the method.
+                        This method is not necessary if you use the _read_iq_single_record_complex_f64 method because the _read_iq_single_record_complex_f64 method performs the fetch as part of the method.
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -7418,7 +7479,7 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
+                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the _read_iq_single_record_complex_f64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
                         ----
                         **Note**
@@ -7513,8 +7574,8 @@ class Session(_SessionBase):
         self._interpreter.perform_thermal_correction()
 
     @ivi_synchronized
-    def read_iq_single_record_complex_f64(self, channel_list, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''read_iq_single_record_complex_f64
+    def _read_iq_single_record_complex_f64(self, channel_list, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_iq_single_record_complex_f64
 
         Initiates an acquisition and fetches a single I/Q data record.
 

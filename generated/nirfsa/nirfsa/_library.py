@@ -44,6 +44,7 @@ class Library(object):
         self.niRFSA_ConfigureSoftwareEdgeStartTrigger_cfunc = None
         self.niRFSA_ConfigureSpectrumFrequencyCenterSpan_cfunc = None
         self.niRFSA_ConfigureSpectrumFrequencyStartStop_cfunc = None
+        self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc = None
         self.niRFSA_CreateDeembeddingSparameterTableS2PFile_cfunc = None
         self.niRFSA_DeleteAllDeembeddingTables_cfunc = None
         self.niRFSA_DeleteDeembeddingTable_cfunc = None
@@ -64,6 +65,8 @@ class Library(object):
         self.niRFSA_GetAttributeViReal64_cfunc = None
         self.niRFSA_GetAttributeViSession_cfunc = None
         self.niRFSA_GetAttributeViString_cfunc = None
+        self.niRFSA_GetDeembeddingSparameters_cfunc = None
+        self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc = None
         self.niRFSA_GetError_cfunc = None
         self.niRFSA_GetExtCalLastTemperature_cfunc = None
         self.niRFSA_GetExtCalRecommendedInterval_cfunc = None
@@ -252,6 +255,14 @@ class Library(object):
                 self.niRFSA_ConfigureSpectrumFrequencyStartStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ConfigureSpectrumFrequencyStartStop_cfunc(vi, channel_list, start_frequency, stop_frequency)
 
+    def niRFSA_CreateDeembeddingSparameterTableArray(self, vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc is None:
+                self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc = self._get_library_function('niRFSA_CreateDeembeddingSparameterTableArray')
+                self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ctypes.POINTER(ViChar), ctypes.POINTER(ViReal64), ViInt32, ctypes.POINTER(NIComplexNumber), ViInt32, ViInt32, ViInt32]  # noqa: F405
+                self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc(vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation)
+
     def niRFSA_CreateDeembeddingSparameterTableS2PFile(self, vi, port, table_name, s2p_file_path, sparameter_orientation):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_CreateDeembeddingSparameterTableS2PFile_cfunc is None:
@@ -411,6 +422,22 @@ class Library(object):
                 self.niRFSA_GetAttributeViString_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViAttr, ViInt32, ctypes.POINTER(ViChar)]  # noqa: F405
                 self.niRFSA_GetAttributeViString_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetAttributeViString_cfunc(vi, channel_name, attribute_id, buf_size, value)
+
+    def niRFSA_GetDeembeddingSparameters(self, vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_GetDeembeddingSparameters_cfunc is None:
+                self.niRFSA_GetDeembeddingSparameters_cfunc = self._get_library_function('niRFSA_GetDeembeddingSparameters')
+                self.niRFSA_GetDeembeddingSparameters_cfunc.argtypes = [ViSession, ctypes.POINTER(NIComplexNumber), ViInt32, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_GetDeembeddingSparameters_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetDeembeddingSparameters_cfunc(vi, sparameters, sparameters_array_size, number_of_sparameters, number_of_ports)
+
+    def niRFSA_GetDeembeddingTableNumberOfPorts(self, vi, number_of_ports):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc is None:
+                self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc = self._get_library_function('niRFSA_GetDeembeddingTableNumberOfPorts')
+                self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc(vi, number_of_ports)
 
     def niRFSA_GetError(self, vi, error_code, error_description_buffer_size, error_description):  # noqa: N802
         with self._func_lock:

@@ -6261,13 +6261,13 @@ class Session(_SessionBase):
 
                 **Defined Values** :
 
-                +-----------------------------------------+----------------+-----------------------------------------------------+
-                | Name                                    | Value          | Description                                         |
-                +=========================================+================+=====================================================+
-                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
-                +-----------------------------------------+----------------+-----------------------------------------------------+
-                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
-                +-----------------------------------------+----------------+-----------------------------------------------------+
+                +-----------------------------------------+--------------+-----------------------------------------------------+
+                | Name                                    | Value        | Description                                         |
+                +=========================================+==============+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 3800 (0xed8) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+--------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 3801 (0xed9) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+--------------+-----------------------------------------------------+
 
         '''
         import numpy
@@ -6317,13 +6317,13 @@ class Session(_SessionBase):
 
             sparameter_orientation (enums.SparameterOrientation): Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :
 
-                +-----------------------------------------+----------------+-----------------------------------------------------+
-                | Name                                    | Value          | Description                                         |
-                +=========================================+================+=====================================================+
-                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
-                +-----------------------------------------+----------------+-----------------------------------------------------+
-                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
-                +-----------------------------------------+----------------+-----------------------------------------------------+
+                +-----------------------------------------+--------------+-----------------------------------------------------+
+                | Name                                    | Value        | Description                                         |
+                +=========================================+==============+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 3800 (0xed8) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+--------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 3801 (0xed9) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+--------------+-----------------------------------------------------+
 
         '''
         if type(sparameter_orientation) is not enums.SparameterOrientation:
@@ -6462,13 +6462,13 @@ class Session(_SessionBase):
 
                 **Defined Values** :
 
-                +-----------------------------------------+----------------+-----------------------------------------------------+
-                | Name                                    | Value          | Description                                         |
-                +=========================================+================+=====================================================+
-                | SparameterOrientation.PORT1_TOWARDS_DUT | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
-                +-----------------------------------------+----------------+-----------------------------------------------------+
-                | SparameterOrientation.PORT2_TOWARDS_DUT | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
-                +-----------------------------------------+----------------+-----------------------------------------------------+
+                +-----------------------------------------+--------------+-----------------------------------------------------+
+                | Name                                    | Value        | Description                                         |
+                +=========================================+==============+=====================================================+
+                | SparameterOrientation.PORT1_TOWARDS_DUT | 3800 (0xed8) | Port 1 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+--------------+-----------------------------------------------------+
+                | SparameterOrientation.PORT2_TOWARDS_DUT | 3801 (0xed9) | Port 2 of the S2P is oriented towards the DUT port. |
+                +-----------------------------------------+--------------+-----------------------------------------------------+
 
         '''
         if (str(type(sparameter_table)).find("'numpy.ndarray'") != -1) or (str(type(frequencies)).find("'numpy.ndarray'") != -1):

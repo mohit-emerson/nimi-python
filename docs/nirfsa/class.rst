@@ -1037,13 +1037,13 @@ create_deembedding_sparameter_table_array
 
                 **Defined Values** :
 
-                +------------------------------------------------------------+----------------+-----------------------------------------------------+
-                | Name                                                       | Value          | Description                                         |
-                +============================================================+================+=====================================================+
-                | :py:data:`~nirfsa.SparameterOrientation.PORT1_TOWARDS_DUT` | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
-                +------------------------------------------------------------+----------------+-----------------------------------------------------+
-                | :py:data:`~nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT` | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
-                +------------------------------------------------------------+----------------+-----------------------------------------------------+
+                +------------------------------------------------------------+--------------+-----------------------------------------------------+
+                | Name                                                       | Value        | Description                                         |
+                +============================================================+==============+=====================================================+
+                | :py:data:`~nirfsa.SparameterOrientation.PORT1_TOWARDS_DUT` | 3800 (0xed8) | Port 1 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------------------+--------------+-----------------------------------------------------+
+                | :py:data:`~nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT` | 3801 (0xed9) | Port 2 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------------------+--------------+-----------------------------------------------------+
 
 
             :type sparameter_orientation: :py:data:`nirfsa.SparameterOrientation`
@@ -1103,13 +1103,13 @@ create_deembedding_sparameter_table_s2p_file
 
                 Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :
 
-                +------------------------------------------------------------+----------------+-----------------------------------------------------+
-                | Name                                                       | Value          | Description                                         |
-                +============================================================+================+=====================================================+
-                | :py:data:`~nirfsa.SparameterOrientation.PORT1_TOWARDS_DUT` | 24000 (0x5dc0) | Port 1 of the S2P is oriented towards the DUT port. |
-                +------------------------------------------------------------+----------------+-----------------------------------------------------+
-                | :py:data:`~nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT` | 24001 (0x5dc1) | Port 2 of the S2P is oriented towards the DUT port. |
-                +------------------------------------------------------------+----------------+-----------------------------------------------------+
+                +------------------------------------------------------------+--------------+-----------------------------------------------------+
+                | Name                                                       | Value        | Description                                         |
+                +============================================================+==============+=====================================================+
+                | :py:data:`~nirfsa.SparameterOrientation.PORT1_TOWARDS_DUT` | 3800 (0xed8) | Port 1 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------------------+--------------+-----------------------------------------------------+
+                | :py:data:`~nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT` | 3801 (0xed9) | Port 2 of the S2P is oriented towards the DUT port. |
+                +------------------------------------------------------------+--------------+-----------------------------------------------------+
 
 
             :type sparameter_orientation: :py:data:`nirfsa.SparameterOrientation`

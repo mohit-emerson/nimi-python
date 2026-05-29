@@ -1048,12 +1048,12 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            '24000 (0x5dc0)',
+                            '3800 (0xed8)',
                             'Port 1 of the S2P is oriented towards the DUT port.'
                         ],
                         [
                             'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            '24001 (0x5dc1)',
+                            '3801 (0xed9)',
                             'Port 2 of the S2P is oriented towards the DUT port.'
                         ]
                     ],
@@ -1448,12 +1448,12 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            '24000 (0x5dc0)',
+                            '3800 (0xed8)',
                             'Port 1 of the S2P is oriented towards the DUT port.'
                         ],
                         [
                             'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            '24001 (0x5dc1)',
+                            '3801 (0xed9)',
                             'Port 2 of the S2P is oriented towards the DUT port.'
                         ]
                     ],
@@ -1549,12 +1549,12 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            '24000 (0x5dc0)',
+                            '3800 (0xed8)',
                             'Port 1 of the S2P is oriented towards the DUT port.'
                         ],
                         [
                             'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            '24001 (0x5dc1)',
+                            '3801 (0xed9)',
                             'Port 2 of the S2P is oriented towards the DUT port.'
                         ]
                     ],

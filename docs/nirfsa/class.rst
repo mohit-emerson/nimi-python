@@ -475,19 +475,19 @@ configure_digital_edge_advance_trigger
             :param edge:
 
 
-                Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.NIRFSA_VAL_RISING_EDGE`.
+                Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING`.
 
                                         | Value                              | Description                                |
                                         |:------------------------------|:--------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_RISING_EDGE` (900)  | NI-RFSA detects a rising edge.  |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_FALLING_EDGE` (901) | NI-RFSA detects a falling edge. |
+                                        | :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
+                                        | :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type edge: int
+            :type edge: :py:data:`nirfsa.AdvanceTriggerDigitalEdgeEdge`
 
 configure_digital_edge_ref_trigger
 ----------------------------------
@@ -560,19 +560,19 @@ configure_digital_edge_ref_trigger
             :param edge:
 
 
-                Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.NIRFSA_VAL_RISING_EDGE`.
+                Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING`.
 
                                         |Value                               |Description                                 |
                                         |:------------------------------|:--------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_RISING_EDGE` (900)  | NI-RFSA detects a rising edge.  |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_FALLING_EDGE` (901) | NI-RFSA detects a falling edge. |
+                                        | :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
+                                        | :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
 
                 
 
                 .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
 
-            :type edge: int
+            :type edge: :py:data:`nirfsa.ReferenceTriggerDigitalEdgeEdge`
             :param pretrigger_samples:
 
 

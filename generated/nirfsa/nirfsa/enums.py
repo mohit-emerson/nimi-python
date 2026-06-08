@@ -27,6 +27,17 @@ class Action(Enum):
     '''
 
 
+class AdvanceTriggerDigitalEdgeEdge(Enum):
+    RISING = 900
+    r'''
+    The trigger asserts on the rising edge of the signal.
+    '''
+    FALLING = 901
+    r'''
+    The trigger asserts on the falling edge of the signal.
+    '''
+
+
 class AdvanceTriggerType(Enum):
     NONE = 600
     r'''

@@ -65,6 +65,25 @@ enums = {
             }
         ]
     },
+    'AdvanceTriggerDigitalEdgeEdge': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The trigger asserts on the rising edge of the signal.'
+                },
+                'name': 'NIRFSA_VAL_RISING_EDGE',
+                'value': 900
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger asserts on the falling edge of the signal.'
+                },
+                'name': 'NIRFSA_VAL_FALLING_EDGE',
+                'value': 901
+            }
+        ]
+    },
     'AllowOutOfSpecificationUserSettings': {
         'codegen_method': 'public',
         'values': [

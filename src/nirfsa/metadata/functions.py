@@ -429,6 +429,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the trigger edge to detect. The default value is NIRFSA_VAL_RISING_EDGE.\n\n                        | Value                              | Description                                |\n                        |:------------------------------|:--------------------------------|\n                        | NIRFSA_VAL_RISING_EDGE (900)  | NI-RFSA detects a rising edge.  |\n                        | NIRFSA_VAL_FALLING_EDGE (901) | NI-RFSA detects a falling edge. |'
                 },
+                'enum': 'AdvanceTriggerDigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -479,6 +480,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the trigger edge to detect. The default value is NIRFSA_VAL_RISING_EDGE.\n\n                        |Value                               |Description                                 |\n                        |:------------------------------|:--------------------------------|\n                        | NIRFSA_VAL_RISING_EDGE (900)  | NI-RFSA detects a rising edge.  |\n                        | NIRFSA_VAL_FALLING_EDGE (901) | NI-RFSA detects a falling edge. |'
                 },
+                'enum': 'ReferenceTriggerDigitalEdgeEdge',
                 'name': 'edge',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -3324,7 +3326,7 @@ functions = {
                     'description': 'Returns the recommended maximum interval between external calibrations, in months.'
                 },
                 'name': 'months',
-                'python_api_converter_name': 'convert_timedelta_to_months_int32',
+                'python_api_converter_name': 'convert_month_to_timedelta',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in months',
                 'type': 'ViInt32',
                 'use_array': False,

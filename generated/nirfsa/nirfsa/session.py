@@ -5801,17 +5801,19 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            edge (int): Specifies the trigger edge to detect. The default value is NIRFSA_VAL_RISING_EDGE.
+            edge (enums.AdvanceTriggerDigitalEdgeEdge): Specifies the trigger edge to detect. The default value is AdvanceTriggerDigitalEdgeEdge.RISING.
 
                                         | Value                              | Description                                |
                                         |:------------------------------|:--------------------------------|
-                                        | NIRFSA_VAL_RISING_EDGE (900)  | NI-RFSA detects a rising edge.  |
-                                        | NIRFSA_VAL_FALLING_EDGE (901) | NI-RFSA detects a falling edge. |
+                                        | AdvanceTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
+                                        | AdvanceTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         '''
+        if type(edge) is not enums.AdvanceTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.AdvanceTriggerDigitalEdgeEdge))
         self._interpreter.configure_digital_edge_advance_trigger(source, edge)
 
     @ivi_synchronized
@@ -5870,12 +5872,12 @@ class Session(_SessionBase):
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
-            edge (int): Specifies the trigger edge to detect. The default value is NIRFSA_VAL_RISING_EDGE.
+            edge (enums.ReferenceTriggerDigitalEdgeEdge): Specifies the trigger edge to detect. The default value is ReferenceTriggerDigitalEdgeEdge.RISING.
 
                                         |Value                               |Description                                 |
                                         |:------------------------------|:--------------------------------|
-                                        | NIRFSA_VAL_RISING_EDGE (900)  | NI-RFSA detects a rising edge.  |
-                                        | NIRFSA_VAL_FALLING_EDGE (901) | NI-RFSA detects a falling edge. |
+                                        | ReferenceTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
+                                        | ReferenceTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5883,6 +5885,8 @@ class Session(_SessionBase):
             pretrigger_samples (int): Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.
 
         '''
+        if type(edge) is not enums.ReferenceTriggerDigitalEdgeEdge:
+            raise TypeError('Parameter edge must be of type ' + str(enums.ReferenceTriggerDigitalEdgeEdge))
         self._interpreter.configure_digital_edge_ref_trigger(source, edge, pretrigger_samples)
 
     @ivi_synchronized

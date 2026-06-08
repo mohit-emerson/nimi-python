@@ -32,6 +32,11 @@ class SystemTests:
             with nirfsa.Session(real_hw_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_rfsa_device_session:
                 yield real_rfsa_device_session
 
+    @pytest.fixture(scope='function')
+    def simulated_5831_device_session(self, session_creation_kwargs):
+        with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+            yield sim_5831_session
+
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsa_device_session):
         value = rfsa_device_session.reference_level
@@ -49,6 +54,10 @@ class SystemTests:
         rfsa_device_session.fetch_offset = 5
         assert rfsa_device_session.fetch_offset == 5
 
+    def test_set_int32_enum_attribute(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        assert rfsa_device_session.acquisition_type == nirfsa.AcquisitionType.SPECTRUM
+
     def test_get_bool_attribute(self, rfsa_device_session):
         value = rfsa_device_session.allow_more_records_than_memory
         assert isinstance(value, bool)
@@ -61,7 +70,16 @@ class SystemTests:
         value = rfsa_device_session.serial_number
         assert isinstance(value, str)
 
-    def test_get_set_center_frequency(self, rfsa_device_session):
+    def test_get_list_of_strings_attribute(self, rfsa_device_session):
+        models = rfsa_device_session.supported_instrument_models
+        assert isinstance(models, list) and all(isinstance(model, str) for model in models)
+        assert "NI PXIe-5841" in models
+
+    def test_get_timedelta_attribute(self, rfsa_device_session):
+        value = rfsa_device_session.absolute_delay
+        assert isinstance(value, hightime.timedelta)
+
+    def test_set_center_frequency(self, rfsa_device_session):
         rfsa_device_session.center_frequency = 2.4e9
         assert rfsa_device_session.center_frequency == 2.4e9
 
@@ -72,14 +90,6 @@ class SystemTests:
     def test_set_invalid_attribute_raises(self, rfsa_device_session):
         with pytest.raises(AttributeError):
             rfsa_device_session.non_existent_attribute = 123
-
-    def test_get_error(self, rfsa_device_session):
-        try:
-            rfsa_device_session.instrument_model = ''
-            assert False
-        except nirfsa.Error as e:
-            assert e.code == -1074135027
-            assert "Attribute is read-only" in e.description
 
 # Multi-threading related tests
     def test_multi_threading_lock_unlock(self, rfsa_device_session):
@@ -94,7 +104,16 @@ class SystemTests:
             with nirfsa.Session(resource_name="invalid_model", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:invalid_model", **session_creation_kwargs):
                 assert False
         except nirfsa.Error as e:
-            assert e.code != 0
+            assert e.code == -1074135025
+            assert "Invalid model in DriverSetup string" in e.description
+
+    def test_get_error(self, rfsa_device_session):
+        try:
+            rfsa_device_session.instrument_model = ''
+            assert False
+        except nirfsa.Error as e:
+            assert e.code == -1074135027
+            assert "Attribute is read-only" in e.description
 
     def test_save_load_configuration(self, rfsa_device_session):
         rfsa_device_session.center_frequency = 2.4e9
@@ -135,6 +154,10 @@ class SystemTests:
         dt = rfsa_device_session.get_ext_cal_last_date_and_time()
         assert isinstance(dt, hightime.datetime)
 
+    def test_get_ext_cal_recommended_interval(self, rfsa_device_session):
+        interval = rfsa_device_session.get_ext_cal_recommended_interval()
+        assert interval.days > 0
+
     def test_get_terminal_name(self, rfsa_device_session):
         terminal_name = rfsa_device_session.get_terminal_name(nirfsa.Signal.REF_TRIGGER, '')
         print(terminal_name)
@@ -146,7 +169,61 @@ class SystemTests:
         rfsa_device_session.check_acquisition_status()
         rfsa_device_session.abort()
 
+# Repeated capability tests
+    def test_ports_rep_cap(self, simulated_5831_device_session):
+        requested_deembedding_type = nirfsa.DeembeddingType.SCALAR
+        simulated_5831_device_session.ports['if1'].deembedding_type = requested_deembedding_type
+        assert simulated_5831_device_session.ports['if1'].deembedding_type == requested_deembedding_type
+
+    def test_los_rep_cap(self, simulated_5831_device_session):
+        requested_lo_source = nirfsa.LoSource.LO_SOURCE_SG_SA_SHARED
+        simulated_5831_device_session.los[2].lo_source = requested_lo_source
+        assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
+
 # Trigger configuration tests
+    def test_configure_ref_clock(self, rfsa_device_session):
+        requested_ref_clock_source = nirfsa.ReferenceClockSource.REF_IN
+        requested_ref_clock_rate = 10e6
+        rfsa_device_session.configure_ref_clock(requested_ref_clock_source, requested_ref_clock_rate)
+        assert rfsa_device_session.ref_clock_source == requested_ref_clock_source
+        assert rfsa_device_session.ref_clock_rate == requested_ref_clock_rate
+
+    def test_configure_spectrum_frequency_span(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        requested_center_frequency = 2.4e9
+        requested_span = 20e6
+        rfsa_device_session.configure_spectrum_frequency('', center_frequency=requested_center_frequency, span=requested_span)
+        assert rfsa_device_session.center_frequency == requested_center_frequency
+        assert rfsa_device_session.spectrum_span == pytest.approx(requested_span, rel=1e-2)
+
+    def test_configure_spectrum_frequency_start_stop(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        requested_start_frequency = 2.39e9
+        requested_stop_frequency = 2.41e9
+        rfsa_device_session.configure_spectrum_frequency('', start_frequency=requested_start_frequency, stop_frequency=requested_stop_frequency)
+        assert rfsa_device_session.center_frequency == pytest.approx(2.4e9, rel=1e-9)
+        assert rfsa_device_session.spectrum_span == pytest.approx(20e6, rel=1e-2)
+
+    def test_configure_digital_edge_advance_trigger(self, rfsa_device_session):
+        rfsa_device_session.configure_digital_edge_advance_trigger('PXI_Trig1', nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING)
+        assert rfsa_device_session.advance_trigger_type == nirfsa.AdvanceTriggerType.DIGITAL_EDGE
+
+    def test_disable_advance_trigger(self, rfsa_device_session):
+        rfsa_device_session.configure_digital_edge_advance_trigger('PXI_Trig1', nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING)
+        assert rfsa_device_session.advance_trigger_type == nirfsa.AdvanceTriggerType.DIGITAL_EDGE
+        rfsa_device_session.disable_advance_trigger()
+        assert rfsa_device_session.advance_trigger_type == nirfsa.AdvanceTriggerType.NONE
+
+    def test_configure_digital_edge_ref_trigger(self, rfsa_device_session):
+        rfsa_device_session.configure_digital_edge_ref_trigger('PXI_Trig1', nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING)
+        assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.DIGITAL_EDGE
+
+    def test_disable_ref_trigger(self, rfsa_device_session):
+        rfsa_device_session.configure_digital_edge_ref_trigger('PXI_Trig1', nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING)
+        assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.DIGITAL_EDGE
+        rfsa_device_session.disable_ref_trigger()
+        assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.NONE
+
     def test_configure_digital_edge_start_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsa.StartTriggerDigitalEdgeEdge.RISING)
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.DIGITAL_EDGE

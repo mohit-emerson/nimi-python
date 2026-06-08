@@ -157,7 +157,7 @@ class LibraryInterpreter(object):
     def configure_digital_edge_advance_trigger(self, source, edge):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge)  # case S150
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         error_code = self._library.niRFSA_ConfigureDigitalEdgeAdvanceTrigger(vi_ctype, source_ctype, edge_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
@@ -165,7 +165,7 @@ class LibraryInterpreter(object):
     def configure_digital_edge_ref_trigger(self, source, edge, pretrigger_samples):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         source_ctype = ctypes.create_string_buffer(source.encode(self._encoding))  # case C020
-        edge_ctype = _visatype.ViInt32(edge)  # case S150
+        edge_ctype = _visatype.ViInt32(edge.value)  # case S130
         pretrigger_samples_ctype = _visatype.ViInt64(pretrigger_samples)  # case S150
         error_code = self._library.niRFSA_ConfigureDigitalEdgeRefTrigger(vi_ctype, source_ctype, edge_ctype, pretrigger_samples_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)

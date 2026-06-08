@@ -56,6 +56,31 @@ Action
 
 
 
+AdvanceTriggerDigitalEdgeEdge
+-----------------------------
+
+.. py:class:: AdvanceTriggerDigitalEdgeEdge
+
+    .. py:attribute:: AdvanceTriggerDigitalEdgeEdge.RISING
+
+
+
+        The trigger asserts on the rising edge of the signal.
+
+        
+
+
+
+    .. py:attribute:: AdvanceTriggerDigitalEdgeEdge.FALLING
+
+
+
+        The trigger asserts on the falling edge of the signal.
+
+        
+
+
+
 AdvanceTriggerType
 ------------------
 

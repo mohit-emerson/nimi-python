@@ -419,6 +419,7 @@ functions = {
                 'documentation': {
                     'description': "Specifies the source of the digital edge for the Advance Trigger.\n\n                        | Value                                           | Description                                                                                                                                                                                                                |\n                        |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n                        | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |\n                        | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |\n                        | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |\n                        | NIRFSA_VAL_PXIE_DSTARB_STR ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n                        | NIRFSA_VAL_TIMER_EVENT_STR ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI1_STR('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal. |"
                 },
+                'grpc_name': 'source_raw',
                 'name': 'source',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -470,6 +471,7 @@ functions = {
                 'documentation': {
                     'description': "Specifies the source of the digital edge for the Reference trigger.\n\n                        |Value                                            |Description                                                                                                                                                                                                                               |\n                        |:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n                        | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |\n                        | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                                             |\n                        | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |\n                        | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |\n                        | NIRFSA_VAL_PXIE_DSTARB_STR ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n                        | NIRFSA_VAL_TIMER_EVENT_STR ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI1_STR('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |"
                 },
+                'grpc_name': 'source_raw',
                 'name': 'source',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -532,6 +534,7 @@ functions = {
                 'documentation': {
                     'description': "Specifies the source of the digital edge for the Start Trigger.\n\n                        | Value                                           | Description                                                                                                                                                                                                               |\n                        |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n                        | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |\n                        | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |\n                        | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |\n                        | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |\n                        | NIRFSA_VAL_PXIE_DSTARB_STR ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n                        | NIRFSA_VAL_TIMER_EVENT_STR ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI1')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI1_STR('PFI2')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI3')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI4')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI5')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI6')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI7')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI8')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |"
                 },
+                'grpc_name': 'source_raw',
                 'name': 'source',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -557,6 +560,7 @@ functions = {
         'documentation': {
             'description': 'Configures the device to wait for the complex power of the I/Q data to cross the specified threshold to mark a reference point within the record.\n\n                To trigger on burst signals, add a minimum quiet time, configured with the NIRFSA_ATTR_REF_TRIGGER_MINIMUM_QUIET_TIME attribute, to ensure the trigger does not occur in the middle of a burst if the acquisition starts while a burst is being generated. The quiet time should be set to a value smaller than the time between bursts, but large enough to ignore power changes within a burst.\n\n                You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
+        'grpc_name': 'ConfigureIQPowerEdgeRefTrigger',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -1316,6 +1320,7 @@ functions = {
                 'documentation': {
                     'description': 'Passes the **errorCode** parameter that is returned from any NI-RFSA function.'
                 },
+                'grpc_name': 'status_code',
                 'name': 'errorCode',
                 'type': 'ViStatus',
                 'use_array': False,
@@ -1823,6 +1828,7 @@ functions = {
         'documentation': {
             'description': 'Initiates an acquisition and fetches a single I/Q data record. \n                \n                Do not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'ReadIQSingleRecordComplexF64',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -1910,6 +1916,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'FetchIQMultiRecordComplexF32',
         'included_in_proto': True,
         'method_name_for_documentation': 'fetch_iq_multi_record',
         'method_templates': [
@@ -2016,6 +2023,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'FetchIQMultiRecordComplexF64',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_multi_record',
@@ -2123,6 +2131,7 @@ functions = {
         'documentation': {
             'description': 'Fetches binary I/Q data from multiple records in an acquisition. \n                \n                Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'FetchIQMultiRecordComplexI16',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_multi_record',
@@ -2328,6 +2337,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'FetchIQSingleRecordComplexF32',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -2425,6 +2435,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'FetchIQSingleRecordComplexF64',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -2522,6 +2533,7 @@ functions = {
         'documentation': {
             'description': 'Fetches binary I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'FetchIQSingleRecordComplexI16',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -3259,6 +3271,7 @@ functions = {
         'documentation': {
             'description': 'Returns the temperature of the last successful external calibration. \n                \n                The temperature is returned in degrees Celsius.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
+        'grpc_name': 'GetExtCalLastTemp',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -3576,6 +3589,7 @@ functions = {
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration. \n                \n                The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **NIRFSA_ATTR_SELF_CALIBRATION_STEP** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'grpc_name': 'GetSelfCalLastDateAndTime',
         'included_in_proto': True,
         'method_name_for_documentation': 'get_self_calibration_date_and_time',
         'parameters': [
@@ -3736,6 +3750,7 @@ functions = {
         'documentation': {
             'description': 'Returns the temperature, in degrees Celsius, at the last successful self-calibration.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860'
         },
+        'grpc_name': 'GetSelfCalLastTemp',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -3763,6 +3778,7 @@ functions = {
                     'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.\n\n                        %enum_table{self calibration step}'
                 },
                 'enum': 'SelfCalibrationStep',
+                'grpc_name': 'self_calibration_step',
                 'name': 'selfCalibrationStep',
                 'type': 'ViInt64',
                 'type_in_documentation': 'Bitwise combination of enums.SelfCalibrationStep flags',
@@ -3774,6 +3790,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the temperature, in degrees Celsius, of the device at the last successful self-calibration.'
                 },
+                'grpc_name': 'temp',
                 'name': 'temperature',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -3930,7 +3947,8 @@ functions = {
                         'Description'
                     ]
                 },
-                'name': 'resetDevice',
+                    'grpc_name': 'reset',
+                    'name': 'resetDevice',
                 'type': 'ViBoolean',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3951,6 +3969,7 @@ functions = {
                 'documentation': {
                     'description': 'Identifies your instrument session.'
                 },
+                'grpc_name': 'vi',
                 'name': 'newVi',
                 'type': 'ViSession',
                 'use_array': False,
@@ -4618,6 +4637,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the minimum RF frequency in Hz.'
                 },
+                'grpc_name': 'min_frequency',
                 'name': 'minimumFrequency',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4628,6 +4648,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the maximum RF frequency in Hz.'
                 },
+                'grpc_name': 'max_frequency',
                 'name': 'maximumFrequency',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4638,6 +4659,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the minimum reference level in dBm.'
                 },
+                'grpc_name': 'min_reference_level',
                 'name': 'minimumReferenceLevel',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -4648,6 +4670,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies the maximum reference level in dBm.'
                 },
+                'grpc_name': 'max_reference_level',
                 'name': 'maximumReferenceLevel',
                 'type': 'ViReal64',
                 'use_array': False,
@@ -5209,6 +5232,7 @@ functions = {
                         'Description'
                     ]
                 },
+                'grpc_name': 'test_result',
                 'name': 'selfTestResult',
                 'type': 'ViInt16'
             },
@@ -5217,6 +5241,7 @@ functions = {
                 'documentation': {
                     'description': 'Returns the self-test response string from the NI-RFSA device. For an explanation of the string contents, refer to the **status** parameter of this function.\n\nYou must pass a ViChar array with at least 256 bytes.'
                 },
+                'grpc_name': 'test_message',
                 'name': 'selfTestMessage',
                 'size': {
                     'mechanism': 'fixed',

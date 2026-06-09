@@ -1,3 +1,4 @@
+import grpc
 import hightime
 import nirfsa
 import numpy as np
@@ -8,7 +9,9 @@ import sys
 
 
 sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'shared'))
-import system_test_utilities  # noqa: E402, F401
+sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/nirfsa'))
+
+import system_test_utilities  # noqa: E402
 
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 use_simulated_session = True
@@ -17,9 +20,6 @@ real_hw_resource_name = '5841'
 
 def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
-
-
-sys.path.insert(0, str(pathlib.Path(__file__).parent.parent.parent / 'generated/nirfsa'))
 
 
 class SystemTests:
@@ -317,3 +317,18 @@ class TestLibrary(SystemTests):
     @pytest.fixture(scope='class')
     def session_creation_kwargs(self):
         return {}
+
+
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpc(SystemTests):
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        config_file_path = r"C:\PythonRFSATesting\src\nirfsa\system_tests\grpc_server_config.json"
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
+
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}

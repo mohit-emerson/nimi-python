@@ -16,7 +16,7 @@ import nirfsa.waveform_info as waveform_info  # noqa: F401
 
 import nirfsa.spectrum_info_type as spectrum_info_type  # noqa: F401
 
-import hightime  # noqa: F401
+import hightime
 import nitclk
 
 # Used for __repr__

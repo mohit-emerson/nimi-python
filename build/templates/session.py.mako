@@ -42,11 +42,7 @@ import ${module_name}.errors as errors
 import ${module_name}.${c['file_name']} as ${c['file_name']}  # noqa: F401
 % endfor
 
-% if module_name == 'nirfsa':
-import hightime  # noqa: F401
-% else:
 import hightime
-% endif
 % if config['uses_nitclk']:
 import nitclk
 % endif

@@ -1538,12 +1538,12 @@ get_ext_cal_last_date_and_time
 
 
 
-get_ext_cal_last_temperature
-----------------------------
+get_ext_cal_last_temp
+---------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_ext_cal_last_temperature()
+    .. py:method:: get_ext_cal_last_temp()
 
             Returns the temperature of the last successful external calibration.
 
@@ -1770,6 +1770,45 @@ get_scaling_coefficients
 
                                             - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
                                             - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
+
+                    
+
+
+
+get_self_cal_last_date_and_time
+-------------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: get_self_cal_last_date_and_time(self_calibration_step)
+
+            Returns the date and time of the last successful self-calibration.
+
+            The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this method returns
+
+            14 for the hours parameter and
+
+            30 for the minutes parameter.
+
+            **Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+
+            :param self_calibration_step:
+
+
+                Specifies the self-calibration step to query for the last successful self-calibration date and time data.
+
+                
+
+
+            :type self_calibration_step: :py:data:`nirfsa.SelfCalibrationStep`
+
+            :rtype: hightime.datetime
+            :return:
+
 
                     
 
@@ -2332,7 +2371,7 @@ reset_with_defaults
 
             Performs a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.
 
-            **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E
+            **Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
             
 
@@ -3248,31 +3287,6 @@ common_mode_level
 
                 - LabVIEW Property: **Device Specific:Vector Signal Transceiver:IQ In Port:Common Mode Level**
                 - C Attribute: **NIRFSA_ATTR_COMMON_MODE_LEVEL**
-
-ddc_ref_trigger_override
-------------------------
-
-    .. py:attribute:: ddc_ref_trigger_override
-
-        This property is not for customer use.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+------------+
-            | Characteristic        | Value      |
-            +=======================+============+
-            | Datatype              | bool       |
-            +-----------------------+------------+
-            | Permissions           | read-write |
-            +-----------------------+------------+
-            | Repeated Capabilities | None       |
-            +-----------------------+------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Advanced:DDC Reference Trigger Override**
-                - C Attribute: **NIRFSA_ATTR_DDC_REF_TRIGGER_OVERRIDE**
 
 deembedding_compensation_gain
 -----------------------------
@@ -8108,7 +8122,7 @@ mechanical_attenuation
 
         **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
 
-        **PXIe-5668with PXIe-5698**: This property is read-only when the :py:attr:`nirfsa.Session.rf_preamp_enabled` property is set to :py:data:`~nirfsa.EnableRfPreamp.ENABLED`.
+        **PXIe-5668with PXIe-5698**: This property is read-only when the :py:attr:`nirfsa.Session.rf_preamp_enabled` property is set to :py:data:`~nirfsa.RfPreampEnabled.ENABLED`.
 
         **Units**: dB
 
@@ -8128,7 +8142,7 @@ mechanical_attenuation
 
         **PXIe-5667 (7 GHz) using the PXIe-5693 RF preselector filter path**: 0
 
-        **PXIe-5668 with PXIe-5698 with the** :py:attr:`nirfsa.Session.rf_preamp_enabled` property set to :py:data:`~nirfsa.EnableRfPreamp.ENABLED`: 5
+        **PXIe-5668 with PXIe-5698 with the** :py:attr:`nirfsa.Session.rf_preamp_enabled` property set to :py:data:`~nirfsa.RfPreampEnabled.ENABLED`: 5
 
         **Default Value**: N/A
 
@@ -9336,17 +9350,17 @@ ref_trigger_osp_delay_enabled
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.RefTriggerOspDelayEnabled.ENABLED`
+        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerOspDelayEnabled.ENABLED`
 
         **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
 
-        +-------------------------------------------------------+-----------------------------------------------+
-        | Name                                                  | Description                                   |
-        +=======================================================+===============================================+
-        | :py:data:`~nirfsa.RefTriggerOspDelayEnabled.DISABLED` | Disables OSP delay for the Reference Trigger. |
-        +-------------------------------------------------------+-----------------------------------------------+
-        | :py:data:`~nirfsa.RefTriggerOspDelayEnabled.ENABLED`  | Enables OSP delay for the Reference Trigger.  |
-        +-------------------------------------------------------+-----------------------------------------------+
+        +-------------------------------------------------------------+-----------------------------------------------+
+        | Name                                                        | Description                                   |
+        +=============================================================+===============================================+
+        | :py:data:`~nirfsa.ReferenceTriggerOspDelayEnabled.DISABLED` | Disables OSP delay for the Reference Trigger. |
+        +-------------------------------------------------------------+-----------------------------------------------+
+        | :py:data:`~nirfsa.ReferenceTriggerOspDelayEnabled.ENABLED`  | Enables OSP delay for the Reference Trigger.  |
+        +-------------------------------------------------------------+-----------------------------------------------+
 
         .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
@@ -9354,15 +9368,15 @@ ref_trigger_osp_delay_enabled
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.RefTriggerOspDelayEnabled |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
+            +-----------------------+---------------------------------------+
+            | Characteristic        | Value                                 |
+            +=======================+=======================================+
+            | Datatype              | enums.ReferenceTriggerOspDelayEnabled |
+            +-----------------------+---------------------------------------+
+            | Permissions           | read-write                            |
+            +-----------------------+---------------------------------------+
+            | Repeated Capabilities | None                                  |
+            +-----------------------+---------------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9549,33 +9563,33 @@ resolution_bandwidth_type
 
         **Defined Values:**
 
-        **Default Value**: :py:data:`~nirfsa.SpectrumResolutionBandwidthType.THREE_DECIBELS`
+        **Default Value**: :py:data:`~nirfsa.ResolutionBandwidthType.THREE_DECIBELS`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-        +-------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                                          | Description                                                                                                                                              |
-        +===============================================================================+==========================================================================================================================================================+
-        | :py:data:`~nirfsa.SpectrumResolutionBandwidthType.THREE_DECIBELS`             | Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property. |
-        +-------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.SpectrumResolutionBandwidthType.SIX_DECIBELS`               | Defines the RBW in terms of the 6 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.                        |
-        +-------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.SpectrumResolutionBandwidthType.BIN_WIDTH`                  | Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.              |
-        +-------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.SpectrumResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH` | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.     |
-        +-------------------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +-----------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Name                                                                  | Description                                                                                                                                              |
+        +=======================================================================+==========================================================================================================================================================+
+        | :py:data:`~nirfsa.ResolutionBandwidthType.THREE_DECIBELS`             | Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property. |
+        +-----------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.ResolutionBandwidthType.SIX_DECIBELS`               | Defines the RBW in terms of the 6 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.                        |
+        +-----------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.ResolutionBandwidthType.BIN_WIDTH`                  | Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.              |
+        +-----------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.ResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH` | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.     |
+        +-----------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------------+
-            | Characteristic        | Value                                 |
-            +=======================+=======================================+
-            | Datatype              | enums.SpectrumResolutionBandwidthType |
-            +-----------------------+---------------------------------------+
-            | Permissions           | read-write                            |
-            +-----------------------+---------------------------------------+
-            | Repeated Capabilities | None                                  |
-            +-----------------------+---------------------------------------+
+            +-----------------------+-------------------------------+
+            | Characteristic        | Value                         |
+            +=======================+===============================+
+            | Datatype              | enums.ResolutionBandwidthType |
+            +-----------------------+-------------------------------+
+            | Permissions           | read-write                    |
+            +-----------------------+-------------------------------+
+            | Repeated Capabilities | None                          |
+            +-----------------------+-------------------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9702,33 +9716,33 @@ rf_out_lo_export_enabled
 
         **Defined Values:**
 
-        **Default Value:**: :py:data:`~nirfsa.EnableUnspecifiedAttrVals.UNSPECIFIED`
+        **Default Value:**: :py:data:`~nirfsa.RfOutLoExport.UNSPECIFIED`
 
         **Supported Devices**: PXIe-5840/5841/5842
 
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-        | Name                                                     | Description                                                                                                    |
-        +==========================================================+================================================================================================================+
-        | :py:data:`~nirfsa.EnableUnspecifiedAttrVals.DISABLED`    | The LO signal is not exported from the RF OUT LO OUT terminal.                                                 |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.EnableUnspecifiedAttrVals.ENABLED`     | The LO signal is exported from the RF OUT LO OUT terminal.                                                     |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.EnableUnspecifiedAttrVals.UNSPECIFIED` | The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it. |
-        +----------------------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+        +----------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+        | Name                                         | Description                                                                                                    |
+        +==============================================+================================================================================================================+
+        | :py:data:`~nirfsa.RfOutLoExport.DISABLED`    | The LO signal is not exported from the RF OUT LO OUT terminal.                                                 |
+        +----------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.RfOutLoExport.ENABLED`     | The LO signal is exported from the RF OUT LO OUT terminal.                                                     |
+        +----------------------------------------------+----------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.RfOutLoExport.UNSPECIFIED` | The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it. |
+        +----------------------------------------------+----------------------------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.EnableUnspecifiedAttrVals |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
+            +-----------------------+---------------------+
+            | Characteristic        | Value               |
+            +=======================+=====================+
+            | Datatype              | enums.RfOutLoExport |
+            +-----------------------+---------------------+
+            | Permissions           | read-write          |
+            +-----------------------+---------------------+
+            | Repeated Capabilities | None                |
+            +-----------------------+---------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -9743,15 +9757,15 @@ rf_preamp_enabled
 
         Specifies whether the RF preamplifier is enabled in the system.
 
-        **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` value enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` to the selected value.
+        **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` value enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` to the selected value.
 
         ----
         **Note**
-        For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, :py:data:`~nirfsa.EnableRfPreamp.ENABLED` may improve the noise floor while :py:data:`~nirfsa.EnableRfPreamp.DISABLED` may improve distortion.
+        For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, :py:data:`~nirfsa.RfPreampEnabled.ENABLED` may improve the noise floor while :py:data:`~nirfsa.RfPreampEnabled.DISABLED` may improve distortion.
 
         ----
 
-        **PXIe-5667**: The :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.EnableRfPreamp.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH`.
+        **PXIe-5667**: The :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.RfPreampEnabled.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH`.
 
         **PXIe-5668 with PXIe-5698**: If you set this property to :py:attr:`nirfsa.Session.rf_preamp_enabled`, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
@@ -9759,35 +9773,35 @@ rf_preamp_enabled
 
         **Default Value**:
 
-        **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC`
+        **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC`
 
-        **All other devices**: :py:data:`~nirfsa.EnableRfPreamp.DISABLED`
+        **All other devices**: :py:data:`~nirfsa.RfPreampEnabled.DISABLED`
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5698, PXIe-5830/5831/5832/5840/5841/5842
 
-        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                          | Description                                                                                                                                                                                                                                                                                                                                                                      |
-        +===============================================================+==================================================================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsa.EnableRfPreamp.DISABLED`                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                                                    |
-        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH` | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier. |
-        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.EnableRfPreamp.ENABLED`                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.                                                                                                                                                       |
-        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC`                   | Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
-        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Name                                                           | Description                                                                                                                                                                                                                                                                                                                                                                      |
+        +================================================================+==================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nirfsa.RfPreampEnabled.DISABLED`                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                                                    |
+        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier. |
+        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.RfPreampEnabled.ENABLED`                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.                                                                                                                                                      |
+        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC`                   | Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
+        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+----------------------+
-            | Characteristic        | Value                |
-            +=======================+======================+
-            | Datatype              | enums.EnableRfPreamp |
-            +-----------------------+----------------------+
-            | Permissions           | read-write           |
-            +-----------------------+----------------------+
-            | Repeated Capabilities | None                 |
-            +-----------------------+----------------------+
+            +-----------------------+-----------------------+
+            | Characteristic        | Value                 |
+            +=======================+=======================+
+            | Datatype              | enums.RfPreampEnabled |
+            +-----------------------+-----------------------+
+            | Permissions           | read-write            |
+            +-----------------------+-----------------------+
+            | Repeated Capabilities | None                  |
+            +-----------------------+-----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
@@ -10562,31 +10576,6 @@ start_to_ref_trigger_holdoff
                 - LabVIEW Property: **Triggers:Ref:Advanced:Start To Ref Trigger Holdoff (s)**
                 - C Attribute: **NIRFSA_ATTR_START_TO_REF_TRIGGER_HOLDOFF**
 
-start_trigger_delay
--------------------
-
-    .. py:attribute:: start_trigger_delay
-
-        This property is not for customer use.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-------------------------------------------------------------+
-            | Characteristic        | Value                                                       |
-            +=======================+=============================================================+
-            | Datatype              | hightime.timedelta, datetime.timedelta, or float in seconds |
-            +-----------------------+-------------------------------------------------------------+
-            | Permissions           | read-write                                                  |
-            +-----------------------+-------------------------------------------------------------+
-            | Repeated Capabilities | None                                                        |
-            +-----------------------+-------------------------------------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Triggers:Advanced:Start Trigger Delay**
-                - C Attribute: **NIRFSA_ATTR_START_TRIGGER_DELAY**
-
 start_trigger_terminal_name
 ---------------------------
 
@@ -10686,45 +10675,6 @@ start_trigger_type
 
                 - LabVIEW Property: **Triggers:Start:Type**
                 - C Attribute: **NIRFSA_ATTR_START_TRIGGER_TYPE**
-
-step_gain_enabled
------------------
-
-    .. py:attribute:: step_gain_enabled
-
-        Specifies whether to enable the step gain amplifier.
-
-        **Defined Values:**
-
-        **Default Value**: :py:data:`~nirfsa.StepGainEnabled.DISABLED`
-
-        **Supported Devices**: PXIe-5694
-
-        +---------------------------------------------+-----------------------------------+
-        | Name                                        | Description                       |
-        +=============================================+===================================+
-        | :py:data:`~nirfsa.StepGainEnabled.DISABLED` | Disables the step gain amplifier. |
-        +---------------------------------------------+-----------------------------------+
-        | :py:data:`~nirfsa.StepGainEnabled.ENABLED`  | Enables the step gain amplifier.  |
-        +---------------------------------------------+-----------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------------------+
-            | Characteristic        | Value                 |
-            +=======================+=======================+
-            | Datatype              | enums.StepGainEnabled |
-            +-----------------------+-----------------------+
-            | Permissions           | read-write            |
-            +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Vertical:Advanced:NI 5694:Step Gain Enabled**
-                - C Attribute: **NIRFSA_ATTR_STEP_GAIN_ENABLED**
 
 subspan_overlap
 ---------------

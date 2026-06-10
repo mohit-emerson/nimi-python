@@ -431,11 +431,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5820
     '''
-    ddc_ref_trigger_override = _attributes.AttributeViBoolean(1150164)
-    '''Type: bool
-
-    This property is not for customer use.
-    '''
     deembedding_compensation_gain = _attributes.AttributeViReal64(1150325)
     '''Type: float
 
@@ -3360,7 +3355,7 @@ class _SessionBase(object):
 
     **PXIe-5667**: This property is read-only when the low_frequency_bypass_enabled property is set to NIRFSA_VAL_DISABLED.
 
-    **PXIe-5668with PXIe-5698**: This property is read-only when the rf_preamp_enabled property is set to EnableRfPreamp.ENABLED.
+    **PXIe-5668with PXIe-5698**: This property is read-only when the rf_preamp_enabled property is set to RfPreampEnabled.ENABLED.
 
     **Units**: dB
 
@@ -3380,7 +3375,7 @@ class _SessionBase(object):
 
     **PXIe-5667 (7 GHz) using the PXIe-5693 RF preselector filter path**: 0
 
-    **PXIe-5668 with PXIe-5698 with the** rf_preamp_enabled property set to EnableRfPreamp.ENABLED: 5
+    **PXIe-5668 with PXIe-5698 with the** rf_preamp_enabled property set to RfPreampEnabled.ENABLED: 5
 
     **Default Value**: N/A
 
@@ -3965,8 +3960,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    ref_trigger_osp_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RefTriggerOspDelayEnabled, 1150196)
-    '''Type: enums.RefTriggerOspDelayEnabled
+    ref_trigger_osp_delay_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerOspDelayEnabled, 1150196)
+    '''Type: enums.ReferenceTriggerOspDelayEnabled
 
     Specifies whether the digitizer OSP block delays Reference Triggers, along with the data samples, moving through the OSP block or if the Reference Triggers bypass the OSP block and are processed immediately.
 
@@ -4006,17 +4001,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value**: RefTriggerOspDelayEnabled.ENABLED
+    **Default Value**: ReferenceTriggerOspDelayEnabled.ENABLED
 
     **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
 
-    +------------------------------------+-----------------------------------------------+
-    | Name                               | Description                                   |
-    +====================================+===============================================+
-    | RefTriggerOspDelayEnabled.DISABLED | Disables OSP delay for the Reference Trigger. |
-    +------------------------------------+-----------------------------------------------+
-    | RefTriggerOspDelayEnabled.ENABLED  | Enables OSP delay for the Reference Trigger.  |
-    +------------------------------------+-----------------------------------------------+
+    +------------------------------------------+-----------------------------------------------+
+    | Name                                     | Description                                   |
+    +==========================================+===============================================+
+    | ReferenceTriggerOspDelayEnabled.DISABLED | Disables OSP delay for the Reference Trigger. |
+    +------------------------------------------+-----------------------------------------------+
+    | ReferenceTriggerOspDelayEnabled.ENABLED  | Enables OSP delay for the Reference Trigger.  |
+    +------------------------------------------+-----------------------------------------------+
 
     Note:
     One or more of the referenced properties are not in the Python API for this driver.
@@ -4116,28 +4111,28 @@ class _SessionBase(object):
 
     - ConfigureResolutionBandwidth
     '''
-    resolution_bandwidth_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.SpectrumResolutionBandwidthType, 1150014)
-    '''Type: enums.SpectrumResolutionBandwidthType
+    resolution_bandwidth_type = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ResolutionBandwidthType, 1150014)
+    '''Type: enums.ResolutionBandwidthType
 
     Specifies how the resolution_bandwidth property is expressed.
 
     **Defined Values:**
 
-    **Default Value**: SpectrumResolutionBandwidthType.THREE_DECIBELS
+    **Default Value**: ResolutionBandwidthType.THREE_DECIBELS
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                                       | Description                                                                                                                                 |
-    +============================================================+=============================================================================================================================================+
-    | SpectrumResolutionBandwidthType.THREE_DECIBELS             | Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.              |
-    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | SpectrumResolutionBandwidthType.SIX_DECIBELS               | Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.                                     |
-    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | SpectrumResolutionBandwidthType.BIN_WIDTH                  | Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire. |
-    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
-    | SpectrumResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.                  |
-    +------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                                               | Description                                                                                                                                 |
+    +====================================================+=============================================================================================================================================+
+    | ResolutionBandwidthType.THREE_DECIBELS             | Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.              |
+    +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | ResolutionBandwidthType.SIX_DECIBELS               | Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.                                     |
+    +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | ResolutionBandwidthType.BIN_WIDTH                  | Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire. |
+    +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
+    | ResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH | Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.                  |
+    +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
     '''
     rf_attenuation_step_size = _attributes.AttributeViReal64(1150155)
     '''Type: float
@@ -4207,8 +4202,8 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5606, PXIe-5668
     '''
-    rf_out_lo_export_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableUnspecifiedAttrVals, 1150298)
-    '''Type: enums.EnableUnspecifiedAttrVals
+    rf_out_lo_export_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfOutLoExport, 1150298)
+    '''Type: enums.RfOutLoExport
 
     Specifies whether to enable the RF OUT LO OUT terminal on the PXIe-5840/5841.
 
@@ -4216,37 +4211,37 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    **Default Value:**: EnableUnspecifiedAttrVals.UNSPECIFIED
+    **Default Value:**: RfOutLoExport.UNSPECIFIED
 
     **Supported Devices**: PXIe-5840/5841/5842
 
-    +---------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | Name                                  | Description                                                                                                    |
-    +=======================================+================================================================================================================+
-    | EnableUnspecifiedAttrVals.DISABLED    | The LO signal is not exported from the RF OUT LO OUT terminal.                                                 |
-    +---------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | EnableUnspecifiedAttrVals.ENABLED     | The LO signal is exported from the RF OUT LO OUT terminal.                                                     |
-    +---------------------------------------+----------------------------------------------------------------------------------------------------------------+
-    | EnableUnspecifiedAttrVals.UNSPECIFIED | The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it. |
-    +---------------------------------------+----------------------------------------------------------------------------------------------------------------+
+    +---------------------------+----------------------------------------------------------------------------------------------------------------+
+    | Name                      | Description                                                                                                    |
+    +===========================+================================================================================================================+
+    | RfOutLoExport.DISABLED    | The LO signal is not exported from the RF OUT LO OUT terminal.                                                 |
+    +---------------------------+----------------------------------------------------------------------------------------------------------------+
+    | RfOutLoExport.ENABLED     | The LO signal is exported from the RF OUT LO OUT terminal.                                                     |
+    +---------------------------+----------------------------------------------------------------------------------------------------------------+
+    | RfOutLoExport.UNSPECIFIED | The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it. |
+    +---------------------------+----------------------------------------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    rf_preamp_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableRfPreamp, 1150129)
-    '''Type: enums.EnableRfPreamp
+    rf_preamp_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfPreampEnabled, 1150129)
+    '''Type: enums.RfPreampEnabled
 
     Specifies whether the RF preamplifier is enabled in the system.
 
-    **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  EnableRfPreamp.AUTOMATIC value enables the RF preamplifier based on the value of the reference_level property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from EnableRfPreamp.AUTOMATIC to the selected value.
+    **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  RfPreampEnabled.AUTOMATIC value enables the RF preamplifier based on the value of the reference_level property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from RfPreampEnabled.AUTOMATIC to the selected value.
 
     ----
     **Note**
-    For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, EnableRfPreamp.ENABLED may improve the noise floor while EnableRfPreamp.DISABLED may improve distortion.
+    For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, RfPreampEnabled.ENABLED may improve the noise floor while RfPreampEnabled.DISABLED may improve distortion.
 
     ----
 
-    **PXIe-5667**: The EnableRfPreamp.AUTOMATIC value is supported only when the low_frequency_bypass_enabled property is set to EnableRfPreamp.DISABLED. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the rf_preamp_enabled property to EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH.
+    **PXIe-5667**: The RfPreampEnabled.AUTOMATIC value is supported only when the low_frequency_bypass_enabled property is set to RfPreampEnabled.DISABLED. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the rf_preamp_enabled property to RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH.
 
     **PXIe-5668 with PXIe-5698**: If you set this property to rf_preamp_enabled, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
@@ -4254,23 +4249,23 @@ class _SessionBase(object):
 
     **Default Value**:
 
-    **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: EnableRfPreamp.AUTOMATIC
+    **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: RfPreampEnabled.AUTOMATIC
 
-    **All other devices**: EnableRfPreamp.DISABLED
+    **All other devices**: RfPreampEnabled.DISABLED
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5698, PXIe-5830/5831/5832/5840/5841/5842
 
-    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                       | Description                                                                                                                                                                                                                                                                                                                                            |
-    +============================================+========================================================================================================================================================================================================================================================================================================================================================+
-    | EnableRfPreamp.DISABLED                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                          |
-    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier. |
-    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | EnableRfPreamp.ENABLED                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.                                                                                                                                                |
-    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | EnableRfPreamp.AUTOMATIC                   | Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
-    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                                        | Description                                                                                                                                                                                                                                                                                                                                            |
+    +=============================================+========================================================================================================================================================================================================================================================================================================================================================+
+    | RfPreampEnabled.DISABLED                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                          |
+    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier. |
+    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | RfPreampEnabled.ENABLED                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.                                                                                                                                               |
+    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | RfPreampEnabled.AUTOMATIC                   | Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
+    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     '''
     rf_preamp_present = _attributes.AttributeViBoolean(1150137)
     '''Type: bool
@@ -4660,11 +4655,6 @@ class _SessionBase(object):
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
     '''
-    start_trigger_delay = _attributes.AttributeViReal64TimeDeltaSeconds(1150175)
-    '''Type: hightime.timedelta, datetime.timedelta, or float in seconds
-
-    This property is not for customer use.
-    '''
     start_trigger_terminal_name = _attributes.AttributeViString(1150122)
     '''Type: str
 
@@ -4726,25 +4716,6 @@ class _SessionBase(object):
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-    '''
-    step_gain_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.StepGainEnabled, 1150157)
-    '''Type: enums.StepGainEnabled
-
-    Specifies whether to enable the step gain amplifier.
-
-    **Defined Values:**
-
-    **Default Value**: StepGainEnabled.DISABLED
-
-    **Supported Devices**: PXIe-5694
-
-    +--------------------------+-----------------------------------+
-    | Name                     | Description                       |
-    +==========================+===================================+
-    | StepGainEnabled.DISABLED | Disables the step gain amplifier. |
-    +--------------------------+-----------------------------------+
-    | StepGainEnabled.ENABLED  | Enables the step gain amplifier.  |
-    +--------------------------+-----------------------------------+
     '''
     subspan_overlap = _attributes.AttributeViReal64(1150234)
     '''Type: float
@@ -7140,8 +7111,8 @@ class Session(_SessionBase):
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
     @ivi_synchronized
-    def get_ext_cal_last_temperature(self):
-        r'''get_ext_cal_last_temperature
+    def get_ext_cal_last_temp(self):
+        r'''get_ext_cal_last_temp
 
         Returns the temperature of the last successful external calibration.
 
@@ -7153,7 +7124,7 @@ class Session(_SessionBase):
             temperature (float): Returns the temperature, in degrees Celsius, of the last external calibration.
 
         '''
-        temperature = self._interpreter.get_ext_cal_last_temperature()
+        temperature = self._interpreter.get_ext_cal_last_temp()
         return temperature
 
     @ivi_synchronized
@@ -7294,6 +7265,31 @@ class Session(_SessionBase):
         '''
         year, month, day, hour, minute, second = self._get_external_calibration_last_date_and_time()
         return hightime.datetime(year, month, day, hour, minute, second)
+
+    @ivi_synchronized
+    def get_self_cal_last_date_and_time(self, self_calibration_step):
+        '''get_self_cal_last_date_and_time
+
+        Returns the date and time of the last successful self-calibration.
+
+        The time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this method returns
+
+        14 for the hours parameter and
+
+        30 for the minutes parameter.
+
+        **Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Args:
+            self_calibration_step (enums.SelfCalibrationStep): Specifies the self-calibration step to query for the last successful self-calibration date and time data.
+
+
+        Returns:
+            last_cal_datetime (hightime.datetime):
+
+        '''
+        year, month, day, hour, minute = self._get_self_calibration_date_and_time(self_calibration_step)
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_scaling_coefficients(self, channel_list):
@@ -7964,7 +7960,7 @@ class Session(_SessionBase):
 
         Performs a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.
 
-        **Supported Devices** : PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696,PXI-5670/5671, PXIe-5672/5673/5673E
+        **Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.reset_with_defaults()
 

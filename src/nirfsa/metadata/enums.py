@@ -510,7 +510,7 @@ enums = {
             }
         ]
     },
-    'EnableRfPreamp': {
+    'RfPreampEnabled': {
         'codegen_method': 'public',
         'values': [
             {
@@ -543,7 +543,7 @@ enums = {
             }
         ]
     },
-    'EnableUnspecifiedAttrVals': {
+    'RfOutLoExport': {
         'codegen_method': 'public',
         'values': [
             {
@@ -1693,7 +1693,7 @@ enums = {
             }
         ]
     },
-    'RefTriggerOspDelayEnabled': {
+    'ReferenceTriggerOspDelayEnabled': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2593,7 +2593,7 @@ enums = {
             }
         ]
     },
-    'SpectrumResolutionBandwidthType': {
+    'ResolutionBandwidthType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2668,25 +2668,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_SOFTWARE_EDGE',
                 'value': 604
-            }
-        ]
-    },
-    'StepGainEnabled': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Disables the step gain amplifier.'
-                },
-                'name': 'NIRFSA_VAL_STEP_GAIN_DISABLED',
-                'value': 3200
-            },
-            {
-                'documentation': {
-                    'description': 'Enables the step gain amplifier.'
-                },
-                'name': 'NIRFSA_VAL_STEP_GAIN_ENABLED',
-                'value': 3201
             }
         ]
     },

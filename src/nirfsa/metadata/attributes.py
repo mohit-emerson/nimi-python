@@ -340,7 +340,7 @@ attributes = {
             ],
             'table_header': ['Name', 'Description']
         },
-        'enum': 'SpectrumResolutionBandwidthType',
+        'enum': 'ResolutionBandwidthType',
         'lv_property': 'Acquisition:Spectrum:Resolution Bandwidth Type',
         'name': 'RESOLUTION_BANDWIDTH_TYPE',
         'type': 'ViInt32'
@@ -2382,7 +2382,7 @@ attributes = {
             ],
             'table_header': ['Name', 'Description']
         },
-        'enum': 'EnableRfPreamp',
+        'enum': 'RfPreampEnabled',
         'lv_property': 'Vertical:Advanced:Preamp Enabled',
         'name': 'RF_PREAMP_ENABLED',
         'type': 'ViInt32'
@@ -2557,28 +2557,6 @@ attributes = {
         'name': 'RF_ATTENUATION_STEP_SIZE',
         'type': 'ViReal64'
     },
-    1150157: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to enable the step gain amplifier.\n\n**Defined Values:**\n\n**Default Value**: NIRFSA_VAL_STEP_GAIN_DISABLED\n\n**Supported Devices**: PXIe-5694',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_STEP_GAIN_DISABLED',
-                    'Disables the step gain amplifier.',
-                ],
-                [
-                    'NIRFSA_VAL_STEP_GAIN_ENABLED',
-                    'Enables the step gain amplifier.',
-                ],
-            ],
-            'table_header': ['Name', 'Description']
-        },
-        'enum': 'StepGainEnabled',
-        'lv_property': 'Vertical:Advanced:NI 5694:Step Gain Enabled',
-        'name': 'STEP_GAIN_ENABLED',
-        'type': 'ViInt32'
-    },
     1150159: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -2682,16 +2660,6 @@ attributes = {
         'lv_property': 'Vertical:Advanced:Amplitude Settling',
         'name': 'AMPLITUDE_SETTLING',
         'type': 'ViReal64'
-    },
-    1150164: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'This attribute is not for customer use.'
-        },
-        'lv_property': 'Triggers:Advanced:DDC Reference Trigger Override',
-        'name': 'DDC_REF_TRIGGER_OVERRIDE',
-        'type': 'ViBoolean'
     },
     1150166: {
         'access': 'read-write',
@@ -2810,18 +2778,6 @@ attributes = {
         'lv_property': 'Signal Path:Advanced:Input Isolation Enabled',
         'name': 'INPUT_ISOLATION_ENABLED',
         'type': 'ViInt32'
-    },
-    1150175: {
-        'access': 'read-write',
-        'attribute_class': 'AttributeViReal64TimeDeltaSeconds',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'This attribute is not for customer use.'
-        },
-        'lv_property': 'Triggers:Advanced:Start Trigger Delay',
-        'name': 'START_TRIGGER_DELAY',
-        'type': 'ViReal64',
-        'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds'
     },
     1150180: {
         'access': 'read-write',
@@ -2954,7 +2910,7 @@ attributes = {
             ],
             'table_header': ['Name', 'Description']
         },
-        'enum': 'RefTriggerOspDelayEnabled',
+        'enum': 'ReferenceTriggerOspDelayEnabled',
         'lv_property': 'Triggers:Ref:Advanced:OSP Delay Enabled',
         'name': 'REF_TRIGGER_OSP_DELAY_ENABLED',
         'type': 'ViInt32'
@@ -3326,7 +3282,7 @@ attributes = {
             ],
             'table_header': ['Name', 'Description']
         },
-        'enum': 'EnableUnspecifiedAttrVals',
+        'enum': 'RfOutLoExport',
         'lv_property': 'Signal Path:RF Out LO Export Enabled',
         'name': 'RF_OUT_LO_EXPORT_ENABLED',
         'type': 'ViInt32'

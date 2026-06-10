@@ -331,7 +331,7 @@ class GrpcStubInterpreter(object):
         )
         return response.error_code, response.error_description
 
-    def get_ext_cal_last_temperature(self):  # noqa: N802
+    def get_ext_cal_last_temp(self):  # noqa: N802
         response = self._invoke(
             self._client.GetExtCalLastTemp,
             grpc_types.GetExtCalLastTempRequest(vi=self._vi),

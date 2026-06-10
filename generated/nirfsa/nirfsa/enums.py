@@ -296,40 +296,6 @@ class EnablePreselector(Enum):
     '''
 
 
-class EnableRfPreamp(Enum):
-    DISABLED = 2500
-    r'''
-    Disables the RF preamplifier.
-    '''
-    ENABLED_WHEN_IN_SIGNAL_PATH = 2501
-    r'''
-    Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier.
-    '''
-    ENABLED = 2502
-    r'''
-    Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.
-    '''
-    AUTOMATIC = 2503
-    r'''
-    Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
-    '''
-
-
-class EnableUnspecifiedAttrVals(Enum):
-    DISABLED = 1900
-    r'''
-    The LO signal is not exported from the RF OUT LO OUT terminal.
-    '''
-    ENABLED = 1901
-    r'''
-    The LO signal is exported from the RF OUT LO OUT terminal.
-    '''
-    UNSPECIFIED = 1902
-    r'''
-    The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.
-    '''
-
-
 class ExportOutputTerminal(Enum):
     DO_NOT_EXPORT = ''
     r'''
@@ -919,17 +885,6 @@ class PxiChassisClk10Source(Enum):
     '''
 
 
-class RefTriggerOspDelayEnabled(Enum):
-    DISABLED = 1900
-    r'''
-    Disables OSP delay for the Reference Trigger.
-    '''
-    ENABLED = 1901
-    r'''
-    Enables OSP delay for the Reference Trigger.
-    '''
-
-
 class ReferenceClockExportedRate(Enum):
     _10MHZ = 10000000
     r'''
@@ -1032,6 +987,17 @@ class ReferenceTriggerIqPowerEdgeSlope(Enum):
     '''
 
 
+class ReferenceTriggerOspDelayEnabled(Enum):
+    DISABLED = 1900
+    r'''
+    Disables OSP delay for the Reference Trigger.
+    '''
+    ENABLED = 1901
+    r'''
+    Enables OSP delay for the Reference Trigger.
+    '''
+
+
 class ReferenceTriggerType(Enum):
     NONE = 600
     r'''
@@ -1070,6 +1036,25 @@ class ResetWithOptionsStepsToOmit(IntFlag):
     '''
 
 
+class ResolutionBandwidthType(Enum):
+    THREE_DECIBELS = 300
+    r'''
+    Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.
+    '''
+    SIX_DECIBELS = 301
+    r'''
+    Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.
+    '''
+    BIN_WIDTH = 302
+    r'''
+    Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
+    '''
+    EQUIVALENT_NOISE_BANDWIDTH = 303
+    r'''
+    Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.
+    '''
+
+
 class RfLbSigCondPathSel(Enum):
     EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1 = 3700
     r'''
@@ -1078,6 +1063,21 @@ class RfLbSigCondPathSel(Enum):
     EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_2 = 3701
     r'''
     yet to be defined
+    '''
+
+
+class RfOutLoExport(Enum):
+    DISABLED = 1900
+    r'''
+    The LO signal is not exported from the RF OUT LO OUT terminal.
+    '''
+    ENABLED = 1901
+    r'''
+    The LO signal is exported from the RF OUT LO OUT terminal.
+    '''
+    UNSPECIFIED = 1902
+    r'''
+    The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.
     '''
 
 
@@ -1097,6 +1097,25 @@ class RfPathSelection(Enum):
     EXT_CAL_RF_BAND_4 = 1703
     r'''
     The data is the default configuration data.
+    '''
+
+
+class RfPreampEnabled(Enum):
+    DISABLED = 2500
+    r'''
+    Disables the RF preamplifier.
+    '''
+    ENABLED_WHEN_IN_SIGNAL_PATH = 2501
+    r'''
+    Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier.
+    '''
+    ENABLED = 2502
+    r'''
+    Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.
+    '''
+    AUTOMATIC = 2503
+    r'''
+    Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
     '''
 
 
@@ -1477,25 +1496,6 @@ class SpectrumFfTwindowType(Enum):
     '''
 
 
-class SpectrumResolutionBandwidthType(Enum):
-    THREE_DECIBELS = 300
-    r'''
-    Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.
-    '''
-    SIX_DECIBELS = 301
-    r'''
-    Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.
-    '''
-    BIN_WIDTH = 302
-    r'''
-    Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
-    '''
-    EQUIVALENT_NOISE_BANDWIDTH = 303
-    r'''
-    Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.
-    '''
-
-
 class StartTriggerDigitalEdgeEdge(Enum):
     RISING = 900
     r'''
@@ -1519,17 +1519,6 @@ class StartTriggerType(Enum):
     SOFTWARE_EDGE = 604
     r'''
     The Start Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the send_software_edge_trigger method and selecting NIRFSA_VAL_START_TRIGGER as the value of the **trigger** parameter.
-    '''
-
-
-class StepGainEnabled(Enum):
-    DISABLED = 3200
-    r'''
-    Disables the step gain amplifier.
-    '''
-    ENABLED = 3201
-    r'''
-    Enables the step gain amplifier.
     '''
 
 

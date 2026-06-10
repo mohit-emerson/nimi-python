@@ -689,86 +689,6 @@ EnablePreselector
 
 
 
-EnableRfPreamp
---------------
-
-.. py:class:: EnableRfPreamp
-
-    .. py:attribute:: EnableRfPreamp.DISABLED
-
-
-
-        Disables the RF preamplifier.
-
-        
-
-
-
-    .. py:attribute:: EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH
-
-
-
-        Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier.
-
-        
-
-
-
-    .. py:attribute:: EnableRfPreamp.ENABLED
-
-
-
-        Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.
-
-        
-
-
-
-    .. py:attribute:: EnableRfPreamp.AUTOMATIC
-
-
-
-        Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
-
-        
-
-
-
-EnableUnspecifiedAttrVals
--------------------------
-
-.. py:class:: EnableUnspecifiedAttrVals
-
-    .. py:attribute:: EnableUnspecifiedAttrVals.DISABLED
-
-
-
-        The LO signal is not exported from the RF OUT LO OUT terminal.
-
-        
-
-
-
-    .. py:attribute:: EnableUnspecifiedAttrVals.ENABLED
-
-
-
-        The LO signal is exported from the RF OUT LO OUT terminal.
-
-        
-
-
-
-    .. py:attribute:: EnableUnspecifiedAttrVals.UNSPECIFIED
-
-
-
-        The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.
-
-        
-
-
-
 ExportOutputTerminal
 --------------------
 
@@ -2174,31 +2094,6 @@ PxiChassisClk10Source
 
 
 
-RefTriggerOspDelayEnabled
--------------------------
-
-.. py:class:: RefTriggerOspDelayEnabled
-
-    .. py:attribute:: RefTriggerOspDelayEnabled.DISABLED
-
-
-
-        Disables OSP delay for the Reference Trigger.
-
-        
-
-
-
-    .. py:attribute:: RefTriggerOspDelayEnabled.ENABLED
-
-
-
-        Enables OSP delay for the Reference Trigger.
-
-        
-
-
-
 ReferenceClockExportedRate
 --------------------------
 
@@ -2439,6 +2334,31 @@ ReferenceTriggerIqPowerEdgeSlope
 
 
 
+ReferenceTriggerOspDelayEnabled
+-------------------------------
+
+.. py:class:: ReferenceTriggerOspDelayEnabled
+
+    .. py:attribute:: ReferenceTriggerOspDelayEnabled.DISABLED
+
+
+
+        Disables OSP delay for the Reference Trigger.
+
+        
+
+
+
+    .. py:attribute:: ReferenceTriggerOspDelayEnabled.ENABLED
+
+
+
+        Enables OSP delay for the Reference Trigger.
+
+        
+
+
+
 ReferenceTriggerType
 --------------------
 
@@ -2529,6 +2449,51 @@ ResetWithOptionsStepsToOmit
 
 
 
+ResolutionBandwidthType
+-----------------------
+
+.. py:class:: ResolutionBandwidthType
+
+    .. py:attribute:: ResolutionBandwidthType.THREE_DECIBELS
+
+
+
+        Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.
+
+        
+
+
+
+    .. py:attribute:: ResolutionBandwidthType.SIX_DECIBELS
+
+
+
+        Defines the RBW in terms of the 6 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.
+
+        
+
+
+
+    .. py:attribute:: ResolutionBandwidthType.BIN_WIDTH
+
+
+
+        Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
+
+        
+
+
+
+    .. py:attribute:: ResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH
+
+
+
+        Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.
+
+        
+
+
+
 RfLbSigCondPathSel
 ------------------
 
@@ -2549,6 +2514,41 @@ RfLbSigCondPathSel
 
 
         yet to be defined
+
+        
+
+
+
+RfOutLoExport
+-------------
+
+.. py:class:: RfOutLoExport
+
+    .. py:attribute:: RfOutLoExport.DISABLED
+
+
+
+        The LO signal is not exported from the RF OUT LO OUT terminal.
+
+        
+
+
+
+    .. py:attribute:: RfOutLoExport.ENABLED
+
+
+
+        The LO signal is exported from the RF OUT LO OUT terminal.
+
+        
+
+
+
+    .. py:attribute:: RfOutLoExport.UNSPECIFIED
+
+
+
+        The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.
 
         
 
@@ -2594,6 +2594,51 @@ RfPathSelection
 
 
         The data is the default configuration data.
+
+        
+
+
+
+RfPreampEnabled
+---------------
+
+.. py:class:: RfPreampEnabled
+
+    .. py:attribute:: RfPreampEnabled.DISABLED
+
+
+
+        Disables the RF preamplifier.
+
+        
+
+
+
+    .. py:attribute:: RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH
+
+
+
+        Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier.
+
+        
+
+
+
+    .. py:attribute:: RfPreampEnabled.ENABLED
+
+
+
+        Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.
+
+        
+
+
+
+    .. py:attribute:: RfPreampEnabled.AUTOMATIC
+
+
+
+        Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
 
         
 
@@ -3514,51 +3559,6 @@ SpectrumFfTwindowType
 
 
 
-SpectrumResolutionBandwidthType
--------------------------------
-
-.. py:class:: SpectrumResolutionBandwidthType
-
-    .. py:attribute:: SpectrumResolutionBandwidthType.THREE_DECIBELS
-
-
-
-        Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.
-
-        
-
-
-
-    .. py:attribute:: SpectrumResolutionBandwidthType.SIX_DECIBELS
-
-
-
-        Defines the RBW in terms of the 6 dB bandwidth of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.
-
-        
-
-
-
-    .. py:attribute:: SpectrumResolutionBandwidthType.BIN_WIDTH
-
-
-
-        Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
-
-        
-
-
-
-    .. py:attribute:: SpectrumResolutionBandwidthType.EQUIVALENT_NOISE_BANDWIDTH
-
-
-
-        Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the :py:attr:`nirfsa.Session.fft_window_type` property.
-
-        
-
-
-
 StartTriggerDigitalEdgeEdge
 ---------------------------
 
@@ -3614,31 +3614,6 @@ StartTriggerType
 
 
         The Start Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the :py:meth:`nirfsa.Session.send_software_edge_trigger` method and selecting :py:data:`~nirfsa.NIRFSA_VAL_START_TRIGGER` as the value of the **trigger** parameter.
-
-        
-
-
-
-StepGainEnabled
----------------
-
-.. py:class:: StepGainEnabled
-
-    .. py:attribute:: StepGainEnabled.DISABLED
-
-
-
-        Disables the step gain amplifier.
-
-        
-
-
-
-    .. py:attribute:: StepGainEnabled.ENABLED
-
-
-
-        Enables the step gain amplifier.
 
         
 

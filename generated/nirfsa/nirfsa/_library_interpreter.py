@@ -474,7 +474,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
-    def get_ext_cal_last_temperature(self):  # noqa: N802
+    def get_ext_cal_last_temp(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S220
         error_code = self._library.niRFSA_GetExtCalLastTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))

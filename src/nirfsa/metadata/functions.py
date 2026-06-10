@@ -258,23 +258,19 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_REAL_AND_IMAGINARY',
-                            '4001 (0xFA1)',
                             'Results in a linear interpolation of the real portion of the complex number and a separate linear interpolation of the complex portion.'
                         ],
                         [
                             'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_AND_PHASE',
-                            '4002 (0xFA2)',
                             'Results in a linear interpolation of the magnitude and a separate linear interpolation of the phase.'
                         ],
                         [
                             'NIRFSA_VAL_LINEAR_INTERPOLATION_FORMAT_MAGNITUDE_DB_AND_PHASE',
-                            '4000 (0xFA0)',
                             'Results in a linear interpolation of the magnitude, in decibels, and a separate linear interpolation of the phase.'
                         ]
                     ],
                     'table_header': [
                         'Name',
-                        'Value',
                         'Description'
                     ]
                 },
@@ -1054,18 +1050,15 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            '3800 (0xed8)',
                             'Port 1 of the S2P is oriented towards the DUT port.'
                         ],
                         [
                             'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            '3801 (0xed9)',
                             'Port 2 of the S2P is oriented towards the DUT port.'
                         ]
                     ],
                     'table_header': [
                         'Name',
-                        'Value',
                         'Description'
                     ]
                 },
@@ -1455,18 +1448,15 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            '3800 (0xed8)',
                             'Port 1 of the S2P is oriented towards the DUT port.'
                         ],
                         [
                             'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            '3801 (0xed9)',
                             'Port 2 of the S2P is oriented towards the DUT port.'
                         ]
                     ],
                     'table_header': [
                         'Name',
-                        'Value',
                         'Description'
                     ]
                 },
@@ -1556,18 +1546,15 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            '3800 (0xed8)',
                             'Port 1 of the S2P is oriented towards the DUT port.'
                         ],
                         [
                             'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            '3801 (0xed9)',
                             'Port 2 of the S2P is oriented towards the DUT port.'
                         ]
                     ],
                     'table_header': [
                         'Name',
-                        'Value',
                         'Description'
                     ]
                 },
@@ -1795,6 +1782,7 @@ functions = {
                 'numpy': True,
                 'size': {'mechanism': 'fixed', 'value': 1},
                 'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
                 'use_in_python_api': True
             },
             {
@@ -3606,7 +3594,53 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.\n\n                        %enum_table{self calibration step}'
+                    'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.',
+                    'table_body': [
+                        [
+                            'SelfCalibrationStep.PRESELECTOR_ALIGNMENT',
+                            'Calls for preselector alignment.'
+                        ],
+                        [
+                            'SelfCalibrationStep.GAIN_REFERENCE',
+                            'Measures the changes in gain since the last external calibration was run.'
+                        ],
+                        [
+                            'SelfCalibrationStep.IF_FLATNESS',
+                            'Measures the IF response of the entire system for each of the supported IF filters'
+                        ],
+                        [
+                            'SelfCalibrationStep.DIGITIZER_SELF_CAL',
+                            'Calls for digitizer self-calibration, if the digitizer is associated with the RF downconverter.'
+                        ],
+                        [
+                            'SelfCalibrationStep.LO_SELF_CAL',
+                            'Calls for LO self-calibration, if the LO source module is associated with the RF downconverter.'
+                        ],
+                        [
+                            'SelfCalibrationStep.AMPLITUDE_ACCURACY',
+                            'Selects the Amplitude Accuracy self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.RESIDUAL_LO_POWER',
+                            'Selects the Residual LO Power self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.IMAGE_SUPPRESSION',
+                            'Selects the Image Suppression self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.SYNTHESIZER_ALIGNMENT',
+                            'Selects the Synthesizer Alignment self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.DC_OFFSET',
+                            'Selects the DC Offset self-calibration step.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Description'
+                    ]
                 },
                 'enum': 'SelfCalibrationStep',
                 'name': 'selfCalibrationStep',
@@ -3775,7 +3809,53 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.\n\n                        %enum_table{self calibration step}'
+                    'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.',
+                    'table_body': [
+                        [
+                            'SelfCalibrationStep.PRESELECTOR_ALIGNMENT',
+                            'Calls for preselector alignment.'
+                        ],
+                        [
+                            'SelfCalibrationStep.GAIN_REFERENCE',
+                            'Measures the changes in gain since the last external calibration was run.'
+                        ],
+                        [
+                            'SelfCalibrationStep.IF_FLATNESS',
+                            'Measures the IF response of the entire system for each of the supported IF filters'
+                        ],
+                        [
+                            'SelfCalibrationStep.DIGITIZER_SELF_CAL',
+                            'Calls for digitizer self-calibration, if the digitizer is associated with the RF downconverter.'
+                        ],
+                        [
+                            'SelfCalibrationStep.LO_SELF_CAL',
+                            'Calls for LO self-calibration, if the LO source module is associated with the RF downconverter.'
+                        ],
+                        [
+                            'SelfCalibrationStep.AMPLITUDE_ACCURACY',
+                            'Selects the Amplitude Accuracy self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.RESIDUAL_LO_POWER',
+                            'Selects the Residual LO Power self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.IMAGE_SUPPRESSION',
+                            'Selects the Image Suppression self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.SYNTHESIZER_ALIGNMENT',
+                            'Selects the Synthesizer Alignment self-calibration step.'
+                        ],
+                        [
+                            'SelfCalibrationStep.DC_OFFSET',
+                            'Selects the DC Offset self-calibration step.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Description'
+                    ]
                 },
                 'enum': 'SelfCalibrationStep',
                 'grpc_name': 'self_calibration_step',
@@ -3829,7 +3909,49 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the signal for which you want to query the terminal.\n\n                       %enum_table{signal}'
+                    'description': 'Specifies the signal for which you want to query the terminal.',
+                    'table_body': [
+                        [
+                            'Signal.START_TRIGGER',
+                            'NI-RFSA routes a Start Trigger.'
+                        ],
+                        [
+                            'Signal.REF_TRIGGER',
+                            'NI-RFSA routes a Reference'
+                        ],
+                        [
+                            'Signal.ADVANCE_TRIGGER',
+                            'NI-RFSA routes an Advance'
+                        ],
+                        [
+                            'Signal.READY_FOR_START_EVENT',
+                            'NI-RFSA routes a Ready for Start Event.'
+                        ],
+                        [
+                            'Signal.READY_FOR_REF_EVENT',
+                            'NI-RFSA routes a Ready for Reference Event..'
+                        ],
+                        [
+                            'Signal.END_OF_RECORD_EVENT',
+                            'NI-RFSA routes a End of Record Event.'
+                        ],
+                        [
+                            'Signal.DONE_EVENT',
+                            'NI-RFSA routes a Done Event.'
+                        ],
+                        [
+                            'Signal.REF_CLOCK',
+                            'NI-RFSA routes a Reference Clock.'
+                        ],
+                        [
+                            'Signal.USER',
+                            'NI-RFSA routes a User Defined Signal.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Description'
+                    ]
                 },
                 'enum': 'Signal',
                 'name': 'signal',
@@ -3909,16 +4031,13 @@ functions = {
                     'description': 'Specifies whether you want NI-RFSA to perform an ID query.\n\n**Defined Values** :',
                     'table_body': [
                         [
-                            'VI_TRUE (1)',
                             'Perform ID query.'
                         ],
                         [
-                            'VI_FALSE (0)',
                             'Do not perform ID query.'
                         ]
                     ],
                     'table_header': [
-                        'Value',
                         'Description'
                     ]
                 },
@@ -3934,16 +4053,13 @@ functions = {
                     'description': 'Specifies whether the NI-RFSA device is reset during the initialization procedure.\n\n**Defined Values** :',
                     'table_body': [
                         [
-                            'VI_TRUE (1)',
                             'Reset the device.'
                         ],
                         [
-                            'VI_FALSE (0)',
                             'Do not reset device.'
                         ]
                     ],
                     'table_header': [
-                        'Value',
                         'Description'
                     ]
                 },
@@ -4039,12 +4155,62 @@ functions = {
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns valid steps.\n\n                        ----\n                        If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both NIRFSA_VAL_SELF_CAL_IF_FLATNESS and NIRFSA_VAL_SELF_CAL_LO_SELF_CAL steps are valid, NI-RFSA returns the following string:\n\n                        NIRFSA_VAL_SELF_CAL_IF_FLATNESS |\n\n                        NIRFSA_VAL_SELF_CAL_LO_SELF_CAL\n\n                        ----\n\n                        %enum_table{self calibration step}'
+                    'description': 'Returns valid steps.\n\n                        ----\n                        If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both NIRFSA_VAL_SELF_CAL_IF_FLATNESS and NIRFSA_VAL_SELF_CAL_LO_SELF_CAL steps are valid, NI-RFSA returns the following string:\n\n                        NIRFSA_VAL_SELF_CAL_IF_FLATNESS |\n\n                        NIRFSA_VAL_SELF_CAL_LO_SELF_CAL\n\n                        ----',
+                    'table_body': [
+                        [
+                            'SelfCalSteps.DIGITIZER_SELF_CAL',
+                            'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.PRESELECTOR_ALIGNMENT',
+                            'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.OMIT_NONE',
+                            'No calibration steps are omitted.'
+                        ],
+                        [
+                            'SelfCalSteps.GAIN_REFERENCE',
+                            'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.IF_FLATNESS',
+                            'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.LO_SELF_CAL',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.AMPLITUDE_ACCURACY',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.RESIDUAL_LO_POWER',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.IMAGE_SUPPRESSION',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.SYNTHESIZER_ALIGNMENT',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ],
+                        [
+                            'SelfCalSteps.DC_OFFSET',
+                            'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Description'
+                    ]
                 },
-                'enum': 'IsSelfCalValidValidSteps',
+                'enum': 'SelfCalSteps',
                 'name': 'validSteps',
                 'type': 'ViInt64',
-                'type_in_documentation': 'Bitwise combination of enums.IsSelfCalValidValidSteps flags',
+                'type_in_documentation': 'Bitwise combination of enums.SelfCalSteps flags',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -4083,7 +4249,6 @@ functions = {
                     'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4348,7 +4513,7 @@ functions = {
     'ReadPowerSpectrumDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.float32 or numpy.float64.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -4532,7 +4697,25 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies a list of steps to skip during the reset process. The default value is NIRFSA_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset.\n\n                        %enum_table{steps to omit}\n\n                        \n                        Note:NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES is not supported in external calibration or alignment sessions.\n\n                    \n                        Note:NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES is not supported for the PXI-5600/5661.'
+                    'description': 'Specifies a list of steps to skip during the reset process. The default value is NIRFSA_VAL_RESET_WITH_OPTIONS_NONE, which specifies that no step is omitted during reset.\n\n                        Note:NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES is not supported in external calibration or alignment sessions.\n\n                        Note:NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES is not supported for the PXI-5600/5661.',
+                    'table_body': [
+                        [
+                            'ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES',
+                            'Omits deleting de-embedding tables. This step is valid only for the PXIe-5830/5831/5832/5840.'
+                        ],
+                        [
+                            'ResetWithOptionsStepsToOmit.NONE',
+                            'No step is omitted during reset.'
+                        ],
+                        [
+                            'ResetWithOptionsStepsToOmit.ROUTES',
+                            'Omits the routing reset step. Routing is preserved after a reset. However, routing related properties are reset to default, and routing is released if the default properties are committed after a reset.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Description'
+                    ]
                 },
                 'enum': 'ResetWithOptionsStepsToOmit',
                 'name': 'stepsToOmit',
@@ -4576,7 +4759,6 @@ functions = {
                     'description': 'Specifies the name of the channel.'
                 },
                 'name': 'channelName',
-                'is_repeated_capability': False,
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4713,18 +4895,15 @@ functions = {
                     'table_body': [
                         [
                             'NIRFSA_VAL_START_TRIGGER',
-                            '0 (0x0)',
                             'Specifies the Start Trigger.'
                         ],
                         [
                             'NIRFSA_VAL_SCRIPT_TRIGGER',
-                            '1 (0x1)',
                             'Specifies the Script Trigger.'
                         ]
                     ],
                     'table_header': [
                         'Name',
-                        'Value',
                         'Description'
                     ]
                 },

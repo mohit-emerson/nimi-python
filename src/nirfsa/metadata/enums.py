@@ -1025,7 +1025,7 @@ enums = {
             }
         ]
     },
-    'IsSelfCalValidValidSteps': {
+    'SelfCalSteps': {
         'class': 'IntFlag',
         'values': [
             {

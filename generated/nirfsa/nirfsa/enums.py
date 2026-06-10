@@ -584,53 +584,6 @@ class IqInPortTerminalConfiguration(Enum):
     '''
 
 
-class IsSelfCalValidValidSteps(IntFlag):
-    DIGITIZER_SELF_CAL = 8
-    r'''
-    Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
-    '''
-    PRESELECTOR_ALIGNMENT = 1
-    r'''
-    Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
-    '''
-    OMIT_NONE = 0
-    r'''
-    No calibration steps are omitted.
-    '''
-    GAIN_REFERENCE = 2
-    r'''
-    Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
-    '''
-    IF_FLATNESS = 4
-    r'''
-    Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
-    '''
-    LO_SELF_CAL = 10
-    r'''
-    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-    '''
-    AMPLITUDE_ACCURACY = 20
-    r'''
-    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-    '''
-    RESIDUAL_LO_POWER = 40
-    r'''
-    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-    '''
-    IMAGE_SUPPRESSION = 80
-    r'''
-    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-    '''
-    SYNTHESIZER_ALIGNMENT = 100
-    r'''
-    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-    '''
-    DC_OFFSET = 200
-    r'''
-    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-    '''
-
-
 class LinearInterpolationFormat(Enum):
     MAGNITUDE_AND_PHASE = 4001
     r'''
@@ -1219,6 +1172,53 @@ class RfPreselectorFilter(Enum):
     EXTERNAL_FILTER = 3317
     r'''
     Specifies that the 20 MHz to 3.04 GHz external filter filter path is used.
+    '''
+
+
+class SelfCalSteps(IntFlag):
+    DIGITIZER_SELF_CAL = 8
+    r'''
+    Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
+    '''
+    PRESELECTOR_ALIGNMENT = 1
+    r'''
+    Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
+    '''
+    OMIT_NONE = 0
+    r'''
+    No calibration steps are omitted.
+    '''
+    GAIN_REFERENCE = 2
+    r'''
+    Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
+    '''
+    IF_FLATNESS = 4
+    r'''
+    Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
+    '''
+    LO_SELF_CAL = 10
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    AMPLITUDE_ACCURACY = 20
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    RESIDUAL_LO_POWER = 40
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    IMAGE_SUPPRESSION = 80
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    SYNTHESIZER_ALIGNMENT = 100
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+    '''
+    DC_OFFSET = 200
+    r'''
+    Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
 
 

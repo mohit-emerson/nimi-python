@@ -424,7 +424,7 @@ class GrpcStubInterpreter(object):
             self._client.IsSelfCalValid,
             grpc_types.IsSelfCalValidRequest(vi=self._vi),
         )
-        return response.self_cal_valid, enums.IsSelfCalValidValidSteps(response.valid_steps_raw)
+        return response.self_cal_valid, enums.SelfCalSteps(response.valid_steps_raw)
 
     def load_configurations_from_file(self, channel_name, file_path):  # noqa: N802
         self._invoke(

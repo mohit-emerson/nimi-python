@@ -1379,121 +1379,6 @@ IqInPortTerminalConfiguration
 
 
 
-IsSelfCalValidValidSteps
-------------------------
-
-.. py:class:: IsSelfCalValidValidSteps
-
-    .. py:attribute:: IsSelfCalValidValidSteps.DIGITIZER_SELF_CAL
-
-
-
-        Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.PRESELECTOR_ALIGNMENT
-
-
-
-        Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.OMIT_NONE
-
-
-
-        No calibration steps are omitted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.GAIN_REFERENCE
-
-
-
-        Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.IF_FLATNESS
-
-
-
-        Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.LO_SELF_CAL
-
-
-
-        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.AMPLITUDE_ACCURACY
-
-
-
-        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.RESIDUAL_LO_POWER
-
-
-
-        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.IMAGE_SUPPRESSION
-
-
-
-        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.SYNTHESIZER_ALIGNMENT
-
-
-
-        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-
-        
-
-
-
-    .. py:attribute:: IsSelfCalValidValidSteps.DC_OFFSET
-
-
-
-        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
-
-        
-
-
-
 LinearInterpolationFormat
 -------------------------
 
@@ -2894,6 +2779,121 @@ RfPreselectorFilter
 
 
         Specifies that the 20 MHz to 3.04 GHz external filter filter path is used.
+
+        
+
+
+
+SelfCalSteps
+------------
+
+.. py:class:: SelfCalSteps
+
+    .. py:attribute:: SelfCalSteps.DIGITIZER_SELF_CAL
+
+
+
+        Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.PRESELECTOR_ALIGNMENT
+
+
+
+        Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.OMIT_NONE
+
+
+
+        No calibration steps are omitted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.GAIN_REFERENCE
+
+
+
+        Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.IF_FLATNESS
+
+
+
+        Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.LO_SELF_CAL
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.AMPLITUDE_ACCURACY
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.RESIDUAL_LO_POWER
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.IMAGE_SUPPRESSION
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.SYNTHESIZER_ALIGNMENT
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
+
+        
+
+
+
+    .. py:attribute:: SelfCalSteps.DC_OFFSET
+
+
+
+        Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
 
         
 

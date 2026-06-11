@@ -284,14 +284,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR',
                 'value': 3902
-            },
-            {
-                'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
-                'value': 3903
-            },
-            {
-                'name': 'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
-                'value': 3904
             }
         ]
     },

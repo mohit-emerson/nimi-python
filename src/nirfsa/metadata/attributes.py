@@ -3385,14 +3385,6 @@ attributes = {
                     'NIRFSA_VAL_DEEMBEDDING_TYPE_VECTOR',
                     'De-embeds the measurement using the gain term and the reflection term.',
                 ],
-                [
-                    'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
-                    '',
-                ],
-                [
-                    'NIRFSA_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
-                    '',
-                ],
             ],
             'table_header': ['Name', 'Description']
         },

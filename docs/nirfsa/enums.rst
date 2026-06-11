@@ -391,14 +391,6 @@ DeembeddingType
 
 
 
-    .. py:attribute:: DeembeddingType.AMPLITUDE_FLATNESS
-
-
-
-    .. py:attribute:: DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS
-
-
-
 DeviceResponseType
 ------------------
 

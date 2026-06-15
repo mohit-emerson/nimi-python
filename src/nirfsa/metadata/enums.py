@@ -476,7 +476,7 @@ enums = {
             }
         ]
     },
-    'EnablePreselector': {
+    'DownconverterPreselectorEnabled': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2494,7 +2494,7 @@ enums = {
             }
         ]
     },
-    'SpectrumFfTwindowType': {
+    'FftWindowType': {
         'codegen_method': 'public',
         'values': [
             {

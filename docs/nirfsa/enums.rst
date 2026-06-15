@@ -621,6 +621,41 @@ DownconverterLoopBandwidth
 
 
 
+DownconverterPreselectorEnabled
+-------------------------------
+
+.. py:class:: DownconverterPreselectorEnabled
+
+    .. py:attribute:: DownconverterPreselectorEnabled.DISABLED
+
+
+
+        Disables the preselector.
+
+        
+
+
+
+    .. py:attribute:: DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH
+
+
+
+        The preselector is automatically enabled when it is in the signal path and is automatically disabled when it is not in the signal path. Use the :py:attr:`nirfsa.Session.preselector_present` property to determine if the downconverter has an preselector.
+
+        
+
+
+
+    .. py:attribute:: DownconverterPreselectorEnabled.ENABLED
+
+
+
+        Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible avoid an error.
+
+        
+
+
+
 EnableAttrVals
 --------------
 
@@ -641,41 +676,6 @@ EnableAttrVals
 
 
         The property is enabled.
-
-        
-
-
-
-EnablePreselector
------------------
-
-.. py:class:: EnablePreselector
-
-    .. py:attribute:: EnablePreselector.DISABLED
-
-
-
-        Disables the preselector.
-
-        
-
-
-
-    .. py:attribute:: EnablePreselector.ENABLED_WHEN_IN_SIGNAL_PATH
-
-
-
-        The preselector is automatically enabled when it is in the signal path and is automatically disabled when it is not in the signal path. Use the :py:attr:`nirfsa.Session.preselector_present` property to determine if the downconverter has an preselector.
-
-        
-
-
-
-    .. py:attribute:: EnablePreselector.ENABLED
-
-
-
-        Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the :py:data:`~nirfsa.EnablePreselector.ENABLED_WHEN_IN_SIGNAL_PATH` whenever possible avoid an error.
 
         
 
@@ -976,6 +976,131 @@ FetchRelativeTo
 
 
         Fetching occurs after the last fetched sample.
+
+        
+
+
+
+FftWindowType
+-------------
+
+.. py:class:: FftWindowType
+
+    .. py:attribute:: FftWindowType.UNIFORM
+
+
+
+        No window is applied.
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.HANNING
+
+
+
+        The Hanning window is useful for analyzing transients longer than the time duration of the window, and also for general-purpose applications.
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.HAMMING
+
+
+
+        A Hamming window is applied to the waveform using the following equation: y[i] = x[i] * (0.54 - 0.46cos(w)) where w = (2)i/n and n = the waveform size. Note: Hanning and Hamming windows are somewhat similar. However, in the time domain, the Hamming window does not get as close to zero near the edges as does the Hanning window.
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.BLACKMAN_HARRIS
+
+
+
+        A Blackman-Harris window is applied to the waveform using the following equation: y[i] = x[i] * (0.42323 - 0.49755*cos(w) + 0.07922*cos(2w))
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.EXACT_BLACKMAN
+
+
+
+        An Exact Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w))
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.BLACKMAN
+
+
+
+        A Blackman window is useful for analyzing transient signals, and provides similar windowing to Hanning and Hamming windows but adds one additional cosine term to reduce ripple. A Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (0.42 - 0.50*cos(w) + 0.08*cos(2w))
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.FLAT_TOP
+
+
+
+        The fifth-order Flat Top window has the best amplitude accuracy of all the window methods. The increased amplitude accuracy (0.02 dB for signals exactly between integral cycles) is at the expense of frequency selectivity. The Flat Top window is most useful in accurately measuring the amplitude of single frequency components with little nearby spectral energy in the signal. A fifth-order Flat Top window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w))
+
+        
+
+
+
+    .. py:attribute:: FftWindowType._4_TERM_BLACKMAN_HARRIS
+
+
+
+        A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))
+
+        
+
+
+
+    .. py:attribute:: FftWindowType._7_TERM_BLACKMAN_HARRIS
+
+
+
+        A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.LOW_SIDE_LOBE
+
+
+
+        The Low Side Lobe window further reduces the size of the main lobe. The following equation defines the Low Side Lobe window. where   *N* is the length of window
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.GAUSSIAN
+
+
+
+        A Gaussian window is applied to the waveform using the following equation: y[i] = x[i] * exp(-0.5*(i - (N-1)/2)^2 / ((N-1)/2)^2) where N is the length of the window
+
+        
+
+
+
+    .. py:attribute:: FftWindowType.KAISER_BESSEL
+
+
+
+        A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind
 
         
 
@@ -3421,131 +3546,6 @@ SpectrumAveragingMode
 
 
         Configures NI-RFSA to perform no averaging on acquisitions.
-
-        
-
-
-
-SpectrumFfTwindowType
----------------------
-
-.. py:class:: SpectrumFfTwindowType
-
-    .. py:attribute:: SpectrumFfTwindowType.UNIFORM
-
-
-
-        No window is applied.
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.HANNING
-
-
-
-        The Hanning window is useful for analyzing transients longer than the time duration of the window, and also for general-purpose applications.
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.HAMMING
-
-
-
-        A Hamming window is applied to the waveform using the following equation: y[i] = x[i] * (0.54 - 0.46cos(w)) where w = (2)i/n and n = the waveform size. Note: Hanning and Hamming windows are somewhat similar. However, in the time domain, the Hamming window does not get as close to zero near the edges as does the Hanning window.
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.BLACKMAN_HARRIS
-
-
-
-        A Blackman-Harris window is applied to the waveform using the following equation: y[i] = x[i] * (0.42323 - 0.49755*cos(w) + 0.07922*cos(2w))
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.EXACT_BLACKMAN
-
-
-
-        An Exact Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w))
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.BLACKMAN
-
-
-
-        A Blackman window is useful for analyzing transient signals, and provides similar windowing to Hanning and Hamming windows but adds one additional cosine term to reduce ripple. A Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (0.42 - 0.50*cos(w) + 0.08*cos(2w))
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.FLAT_TOP
-
-
-
-        The fifth-order Flat Top window has the best amplitude accuracy of all the window methods. The increased amplitude accuracy (0.02 dB for signals exactly between integral cycles) is at the expense of frequency selectivity. The Flat Top window is most useful in accurately measuring the amplitude of single frequency components with little nearby spectral energy in the signal. A fifth-order Flat Top window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w))
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType._4_TERM_BLACKMAN_HARRIS
-
-
-
-        A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType._7_TERM_BLACKMAN_HARRIS
-
-
-
-        A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.LOW_SIDE_LOBE
-
-
-
-        The Low Side Lobe window further reduces the size of the main lobe. The following equation defines the Low Side Lobe window. where   *N* is the length of window
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.GAUSSIAN
-
-
-
-        A Gaussian window is applied to the waveform using the following equation: y[i] = x[i] * exp(-0.5*(i - (N-1)/2)^2 / ((N-1)/2)^2) where N is the length of the window
-
-        
-
-
-
-    .. py:attribute:: SpectrumFfTwindowType.KAISER_BESSEL
-
-
-
-        A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind
 
         
 

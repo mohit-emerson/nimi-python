@@ -268,18 +268,7 @@ class DownconverterLoopBandwidth(Enum):
     '''
 
 
-class EnableAttrVals(Enum):
-    DISABLED = 1900
-    r'''
-    The property is disabled.
-    '''
-    ENABLED = 1901
-    r'''
-    The property is enabled.
-    '''
-
-
-class EnablePreselector(Enum):
+class DownconverterPreselectorEnabled(Enum):
     DISABLED = 2600
     r'''
     Disables the preselector.
@@ -290,7 +279,18 @@ class EnablePreselector(Enum):
     '''
     ENABLED = 2602
     r'''
-    Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the EnablePreselector.ENABLED_WHEN_IN_SIGNAL_PATH whenever possible avoid an error.
+    Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH whenever possible avoid an error.
+    '''
+
+
+class EnableAttrVals(Enum):
+    DISABLED = 1900
+    r'''
+    The property is disabled.
+    '''
+    ENABLED = 1901
+    r'''
+    The property is enabled.
     '''
 
 
@@ -413,6 +413,57 @@ class FetchRelativeTo(Enum):
     CURRENT_READ_POSITION = 704
     r'''
     Fetching occurs after the last fetched sample.
+    '''
+
+
+class FftWindowType(Enum):
+    UNIFORM = 500
+    r'''
+    No window is applied.
+    '''
+    HANNING = 501
+    r'''
+    The Hanning window is useful for analyzing transients longer than the time duration of the window, and also for general-purpose applications.
+    '''
+    HAMMING = 502
+    r'''
+    A Hamming window is applied to the waveform using the following equation: y[i] = x[i] * (0.54 - 0.46cos(w)) where w = (2)i/n and n = the waveform size. Note: Hanning and Hamming windows are somewhat similar. However, in the time domain, the Hamming window does not get as close to zero near the edges as does the Hanning window.
+    '''
+    BLACKMAN_HARRIS = 503
+    r'''
+    A Blackman-Harris window is applied to the waveform using the following equation: y[i] = x[i] * (0.42323 - 0.49755*cos(w) + 0.07922*cos(2w))
+    '''
+    EXACT_BLACKMAN = 504
+    r'''
+    An Exact Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w))
+    '''
+    BLACKMAN = 505
+    r'''
+    A Blackman window is useful for analyzing transient signals, and provides similar windowing to Hanning and Hamming windows but adds one additional cosine term to reduce ripple. A Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (0.42 - 0.50*cos(w) + 0.08*cos(2w))
+    '''
+    FLAT_TOP = 506
+    r'''
+    The fifth-order Flat Top window has the best amplitude accuracy of all the window methods. The increased amplitude accuracy (0.02 dB for signals exactly between integral cycles) is at the expense of frequency selectivity. The Flat Top window is most useful in accurately measuring the amplitude of single frequency components with little nearby spectral energy in the signal. A fifth-order Flat Top window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w))
+    '''
+    _4_TERM_BLACKMAN_HARRIS = 507
+    r'''
+    A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))
+    '''
+    _7_TERM_BLACKMAN_HARRIS = 508
+    r'''
+    A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))
+    '''
+    LOW_SIDE_LOBE = 509
+    r'''
+    The Low Side Lobe window further reduces the size of the main lobe. The following equation defines the Low Side Lobe window. where   *N* is the length of window
+    '''
+    GAUSSIAN = 510
+    r'''
+    A Gaussian window is applied to the waveform using the following equation: y[i] = x[i] * exp(-0.5*(i - (N-1)/2)^2 / ((N-1)/2)^2) where N is the length of the window
+    '''
+    KAISER_BESSEL = 511
+    r'''
+    A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind
     '''
 
 
@@ -1440,57 +1491,6 @@ class SpectrumAveragingMode(Enum):
     LOG = 406
     r'''
     Configures NI-RFSA to perform no averaging on acquisitions.
-    '''
-
-
-class SpectrumFfTwindowType(Enum):
-    UNIFORM = 500
-    r'''
-    No window is applied.
-    '''
-    HANNING = 501
-    r'''
-    The Hanning window is useful for analyzing transients longer than the time duration of the window, and also for general-purpose applications.
-    '''
-    HAMMING = 502
-    r'''
-    A Hamming window is applied to the waveform using the following equation: y[i] = x[i] * (0.54 - 0.46cos(w)) where w = (2)i/n and n = the waveform size. Note: Hanning and Hamming windows are somewhat similar. However, in the time domain, the Hamming window does not get as close to zero near the edges as does the Hanning window.
-    '''
-    BLACKMAN_HARRIS = 503
-    r'''
-    A Blackman-Harris window is applied to the waveform using the following equation: y[i] = x[i] * (0.42323 - 0.49755*cos(w) + 0.07922*cos(2w))
-    '''
-    EXACT_BLACKMAN = 504
-    r'''
-    An Exact Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w))
-    '''
-    BLACKMAN = 505
-    r'''
-    A Blackman window is useful for analyzing transient signals, and provides similar windowing to Hanning and Hamming windows but adds one additional cosine term to reduce ripple. A Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (0.42 - 0.50*cos(w) + 0.08*cos(2w))
-    '''
-    FLAT_TOP = 506
-    r'''
-    The fifth-order Flat Top window has the best amplitude accuracy of all the window methods. The increased amplitude accuracy (0.02 dB for signals exactly between integral cycles) is at the expense of frequency selectivity. The Flat Top window is most useful in accurately measuring the amplitude of single frequency components with little nearby spectral energy in the signal. A fifth-order Flat Top window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w))
-    '''
-    _4_TERM_BLACKMAN_HARRIS = 507
-    r'''
-    A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))
-    '''
-    _7_TERM_BLACKMAN_HARRIS = 508
-    r'''
-    A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))
-    '''
-    LOW_SIDE_LOBE = 509
-    r'''
-    The Low Side Lobe window further reduces the size of the main lobe. The following equation defines the Low Side Lobe window. where   *N* is the length of window
-    '''
-    GAUSSIAN = 510
-    r'''
-    A Gaussian window is applied to the waveform using the following equation: y[i] = x[i] * exp(-0.5*(i - (N-1)/2)^2 / ((N-1)/2)^2) where N is the length of the window
-    '''
-    KAISER_BESSEL = 511
-    r'''
-    A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind
     '''
 
 

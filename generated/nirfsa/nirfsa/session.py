@@ -4824,7 +4824,7 @@ class _SessionBase(object):
         Returns:
             error_message (str): Returns the user-readable message string that corresponds to the error code you specify.
 
-                                        You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
+                You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
 
         '''
         error_message = self._interpreter.error_message(error_code)
@@ -5025,7 +5025,7 @@ class _SessionBase(object):
         Returns:
             value (str): The buffer in which the method returns the current value of the property. The buffer must be of type ViChar and have at least as many bytes as indicated in **BUF_SIZE**.
 
-                                        If you specify 0 for the **BUF_SIZE** parameter, you can pass VI_NULL for this parameter.
+                If you specify 0 for the **BUF_SIZE** parameter, you can pass VI_NULL for this parameter.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -5149,11 +5149,11 @@ class _SessionBase(object):
 
             value (bool): Pass the value to which you want to set the property.
 
-                                        ----
+                ----
 
-                                        Some of the values might not be valid depending on the current state of the instrument session.
+                Some of the values might not be valid depending on the current state of the instrument session.
 
-                                        ----
+                ----
 
         '''
         self._interpreter.set_attribute_vi_boolean(self._repeated_capability, attribute_id, value)
@@ -5186,11 +5186,11 @@ class _SessionBase(object):
 
             value (int): Pass the value to which you want to set the property.
 
-                                        ----
+                ----
 
-                                        Some of the values might not be valid depending on the current state of the instrument session.
+                Some of the values might not be valid depending on the current state of the instrument session.
 
-                                        ----
+                ----
 
         '''
         self._interpreter.set_attribute_vi_int32(self._repeated_capability, attribute_id, value)
@@ -5223,11 +5223,11 @@ class _SessionBase(object):
 
             value (int): Pass the value to which you want to set the property.
 
-                                        ----
+                ----
 
-                                        Some of the values might not be valid depending on the current state of the instrument session.
+                Some of the values might not be valid depending on the current state of the instrument session.
 
-                                        ----
+                ----
 
         '''
         self._interpreter.set_attribute_vi_int64(self._repeated_capability, attribute_id, value)
@@ -5260,11 +5260,11 @@ class _SessionBase(object):
 
             value (float): Pass the value to which you want to set the property.
 
-                                        ----
+                ----
 
-                                        Some of the values might not be valid depending on the current state of the instrument session.
+                Some of the values might not be valid depending on the current state of the instrument session.
 
-                                        ----
+                ----
 
         '''
         self._interpreter.set_attribute_vi_real64(self._repeated_capability, attribute_id, value)
@@ -5326,11 +5326,11 @@ class _SessionBase(object):
 
             value (str): Pass the value to which you want to set the property.
 
-                                        ----
+                ----
 
-                                        Some of the values might not be valid depending on the current state of the instrument session.
+                Some of the values might not be valid depending on the current state of the instrument session.
 
-                                        ----
+                ----
 
         '''
         self._interpreter.set_attribute_vi_string(self._repeated_capability, attribute_id, value)
@@ -5380,9 +5380,9 @@ class Session(_SessionBase):
         Args:
             resource_name (str): Specifies the resource name of the device to initialize.
 
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
+                For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
 
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
+                Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
 
             id_query (bool): Specifies whether you want NI-RFSA to perform an ID query.
 
@@ -5577,11 +5577,11 @@ class Session(_SessionBase):
         Args:
             old_password (str): Specifies the old (current) external calibration password.
 
-                                        The maximum length of the password varies by device.
+                The maximum length of the password varies by device.
 
             new_password (str): Specifies the new (desired) external calibration password.
 
-                                        The maximum length of the password varies by device.
+                The maximum length of the password varies by device.
 
         '''
         self._interpreter.change_external_calibration_password(old_password, new_password)
@@ -5603,10 +5603,10 @@ class Session(_SessionBase):
         Returns:
             is_done (bool): Returns signal acquisition status.
 
-                                        |Value          |Description                                     |
-                                        |:---------|:------------------------------------|
-                                        | True  | Signal acquisition is complete.     |
-                                        | False | Signal acquisition is not complete. |
+                |Value          |Description                                     |
+                |:---------|:------------------------------------|
+                | True  | Signal acquisition is complete.     |
+                | False | Signal acquisition is not complete. |
 
         '''
         is_done = self._interpreter.check_acquisition_status()
@@ -5735,39 +5735,39 @@ class Session(_SessionBase):
         Args:
             source (str): Specifies the source of the digital edge for the Advance Trigger.
 
-                                        | Value                                           | Description                                                                                                                                                                                                                |
-                                        |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
-                                        | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
-                                        | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
-                                        | OutputTerm.PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
-                                        | OutputTerm.TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
-                                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI1_STR('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal. |
+                | Value                                           | Description                                                                                                                                                                                                                |
+                |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
+                | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
+                | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
+                | OutputTerm.PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
+                | OutputTerm.TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
+                | NIRFSA_VAL_DIO_PFI0_STR ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI1_STR('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI2_STR ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI3_STR ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI4_STR ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI5_STR ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI6_STR ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI7_STR ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             edge (enums.AdvanceTriggerDigitalEdgeEdge): Specifies the trigger edge to detect. The default value is AdvanceTriggerDigitalEdgeEdge.RISING.
 
-                                        | Value                              | Description                                |
-                                        |:------------------------------|:--------------------------------|
-                                        | AdvanceTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
-                                        | AdvanceTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
+                | Value                              | Description                                |
+                |:------------------------------|:--------------------------------|
+                | AdvanceTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
+                | AdvanceTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5806,39 +5806,39 @@ class Session(_SessionBase):
         Args:
             source (str): Specifies the source of the digital edge for the Reference trigger.
 
-                                        |Value                                            |Description                                                                                                                                                                                                                               |
-                                        |:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |
-                                        | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                                             |
-                                        | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |
-                                        | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |
-                                        | OutputTerm.PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
-                                        | OutputTerm.TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
-                                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI1_STR('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
+                |Value                                            |Description                                                                                                                                                                                                                               |
+                |:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |
+                | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                                             |
+                | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |
+                | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |
+                | OutputTerm.PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
+                | OutputTerm.TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
+                | NIRFSA_VAL_DIO_PFI0_STR ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI1_STR('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI2_STR ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI3_STR ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI4_STR ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI5_STR ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI6_STR ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI7_STR ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             edge (enums.ReferenceTriggerDigitalEdgeEdge): Specifies the trigger edge to detect. The default value is ReferenceTriggerDigitalEdgeEdge.RISING.
 
-                                        |Value                               |Description                                 |
-                                        |:------------------------------|:--------------------------------|
-                                        | ReferenceTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
-                                        | ReferenceTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
+                |Value                               |Description                                 |
+                |:------------------------------|:--------------------------------|
+                | ReferenceTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
+                | ReferenceTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5879,39 +5879,39 @@ class Session(_SessionBase):
         Args:
             source (str): Specifies the source of the digital edge for the Start Trigger.
 
-                                        | Value                                           | Description                                                                                                                                                                                                               |
-                                        |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
-                                        | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
-                                        | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
-                                        | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
-                                        | OutputTerm.PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
-                                        | OutputTerm.TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
-                                        | NIRFSA_VAL_DIO_PFI0_STR ('PFI1')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI1_STR('PFI2')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI2_STR ('PFI3')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI3_STR ('PFI4')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI4_STR ('PFI5')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI5_STR ('PFI6')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI6_STR ('PFI7')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
-                                        | NIRFSA_VAL_DIO_PFI7_STR ('PFI8')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
+                | Value                                           | Description                                                                                                                                                                                                               |
+                |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | NIRFSA_VAL_PFI0_STR ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
+                | NIRFSA_VAL_PFI1_STR ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
+                | NIRFSA_VAL_PXI_TRIG0_STR ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG1_STR ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG2_STR ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG3_STR ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG4_STR ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG5_STR ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG6_STR ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_TRIG7_STR ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
+                | NIRFSA_VAL_PXI_STAR_STR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
+                | OutputTerm.PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
+                | OutputTerm.TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
+                | NIRFSA_VAL_DIO_PFI0_STR ('PFI1')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI1_STR('PFI2')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI2_STR ('PFI3')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI3_STR ('PFI4')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI4_STR ('PFI5')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI5_STR ('PFI6')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI6_STR ('PFI7')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
+                | NIRFSA_VAL_DIO_PFI7_STR ('PFI8')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
             edge (enums.StartTriggerDigitalEdgeEdge): Specifies the trigger edge to detect. The default value is StartTriggerDigitalEdgeEdge.RISING.
 
-                                        | Value                              | Description                                |
-                                        |:------------------------------|:--------------------------------|
-                                        | StartTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
-                                        | StartTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
+                | Value                              | Description                                |
+                |:------------------------------|:--------------------------------|
+                | StartTriggerDigitalEdgeEdge.RISING (900)  | NI-RFSA detects a rising edge.  |
+                | StartTriggerDigitalEdgeEdge.FALLING (901) | NI-RFSA detects a falling edge. |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -5950,10 +5950,10 @@ class Session(_SessionBase):
 
             slope (enums.ReferenceTriggerIqPowerEdgeSlope): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is ReferenceTriggerIqPowerEdgeSlope.RISING.
 
-                                        | Value                                | Description                                                |
-                                        |:--------------------------------|:-------------------------------------------------|
-                                        | ReferenceTriggerIqPowerEdgeSlope.RISING (1000)  | NI-RFSA detects a rising edge (positive slope).  |
-                                        | ReferenceTriggerIqPowerEdgeSlope.FALLING (1001) | NI-RFSA detects a falling edge (negative slope). |
+                | Value                                | Description                                                |
+                |:--------------------------------|:-------------------------------------------------|
+                | ReferenceTriggerIqPowerEdgeSlope.RISING (1000)  | NI-RFSA detects a rising edge (positive slope).  |
+                | ReferenceTriggerIqPowerEdgeSlope.FALLING (1001) | NI-RFSA detects a falling edge (negative slope). |
 
             pretrigger_samples (int): Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.
 
@@ -5988,12 +5988,12 @@ class Session(_SessionBase):
 
         Args:
             clock_source (enums.ReferenceClockSource): specifies the source of the Reference Clock signal.
-                                        | Clock Source          | Description |
-                                        |-----------------------|-------------|
-                                        | **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |
-                                        | **RefIn** | Uses the signal at the front panel REF IN connector. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT; lock external signal to PXIe-3621 REF IN. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT; lock external signal to PXIe-3622 REF IN. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT; lock external signal to PXIe-3623 REF IN. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to signal at REF IN on PXIe-5655. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to signal at REF IN on PXIe-5655. Use cables as shown in the Getting Started Guide. |
-                                        | **PXI Clock** | Uses the PXI_CLK signal present on the PXI backplane. |
-                                        | **PXI_ClkMaster** | Valid only for PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. <br/>**PXIe-5831 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3622 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3623 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. |
+                | Clock Source          | Description |
+                |-----------------------|-------------|
+                | **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |
+                | **RefIn** | Uses the signal at the front panel REF IN connector. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT; lock external signal to PXIe-3621 REF IN. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT; lock external signal to PXIe-3622 REF IN. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT; lock external signal to PXIe-3623 REF IN. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to signal at REF IN on PXIe-5655. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to signal at REF IN on PXIe-5655. Use cables as shown in the Getting Started Guide. |
+                | **PXI Clock** | Uses the PXI_CLK signal present on the PXI backplane. |
+                | **PXI_ClkMaster** | Valid only for PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. <br/>**PXIe-5831 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3622 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3623 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. |
 
             ref_clock_rate (float): specifies the Reference Clock rate, in hertz (Hz), of the signal present at the REF IN or CLK IN connector. This parameter is only valid when the **ref clock source** parameter is set to **RefIn**. The default value is Auto (-1.0), which allows NI-RFSG to use the default Reference Clock rate for the device or automatically detect the Reference Clock rate, if supported. Refer to the Reference Clock Rate property for possible values.
 
@@ -6117,11 +6117,11 @@ class Session(_SessionBase):
 
             span (float): Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz).
 
-                                        ----
+                ----
 
-                                        *Note* For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the digitizer_dither_enabled property for more information about dithering.
+                *Note* For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the digitizer_dither_enabled property for more information about dithering.
 
-                                        ----
+                ----
 
         '''
         self._interpreter.configure_spectrum_frequency_center_span(channel_list, center_frequency, span)
@@ -6390,10 +6390,10 @@ class Session(_SessionBase):
         Args:
             enable (bool): Enables or disables SFP session access for the specified device.
 
-                                        | Value         | Description                         |
-                                        |:---------|:-------------------------|
-                                        | True  | Enables session access.  |
-                                        | False | Disables session access. |
+                | Value         | Description                         |
+                |:---------|:-------------------------|
+                | True  | Enables session access.  |
+                | False | Disables session access. |
 
         '''
         self._interpreter.enable_session_access(enable)
@@ -6500,40 +6500,40 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
 
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -6577,40 +6577,40 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
 
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -6654,40 +6654,40 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
 
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -6730,13 +6730,13 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
         '''
         import numpy
@@ -6784,40 +6784,40 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
 
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -6862,40 +6862,40 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
 
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -6940,40 +6940,40 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
 
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -7017,13 +7017,13 @@ class Session(_SessionBase):
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
         '''
         import numpy
@@ -7139,18 +7139,18 @@ class Session(_SessionBase):
         Returns:
             frequencies (numpy.array(dtype=numpy.float64)): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
 
-                                        Pass VI_NULL if you do not want to use this parameter.
+                Pass VI_NULL if you do not want to use this parameter.
 
             magnitude_response (numpy.array(dtype=numpy.float64)): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
 
-                                        Pass VI_NULL if you do not want to use this parameter.
+                Pass VI_NULL if you do not want to use this parameter.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
             phase_response (numpy.array(dtype=numpy.float64)): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
 
-                                        Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
+                Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -7233,8 +7233,8 @@ class Session(_SessionBase):
         Returns:
             coefficient_info (list of CoefficientInfo): Specifies the array for storing the coefficient info.
 
-                                        - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
-                                        - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
+                - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
+                - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
 
         '''
         coefficient_info = self._interpreter.get_scaling_coefficients(channel_list)
@@ -7449,9 +7449,9 @@ class Session(_SessionBase):
         Args:
             resource_name (str): Specifies the resource name of the device to initialize.
 
-                                        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
+                For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
 
-                                        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
+                Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
 
             id_query (bool): Specifies whether you want NI-RFSA to perform an ID query.
 
@@ -7479,26 +7479,26 @@ class Session(_SessionBase):
 
             option_string (dict): Sets the initial value of certain properties for the session. The properties shown in the following table are used in this parameter.
 
-                                        | Name             | Property                                                                                                                                  |
-                                        |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | RangeCheck       | RANGE_CHECK                         |
-                                        | QueryInstrStatus | QUERY_INSTRUMENT_STATUS |
-                                        | Cache            | CACHE                                     |
-                                        | RecordCoercions  | RECORD_COERCIONS               |
-                                        | DriverSetup      | driver_setup                       |
-                                        | Simulate         | SIMULATE                               |
+                | Name             | Property                                                                                                                                  |
+                |:-----------------|:-------------------------------------------------------------------------------------------------------------------------------------------|
+                | RangeCheck       | RANGE_CHECK                         |
+                | QueryInstrStatus | QUERY_INSTRUMENT_STATUS |
+                | Cache            | CACHE                                     |
+                | RecordCoercions  | RECORD_COERCIONS               |
+                | DriverSetup      | driver_setup                       |
+                | Simulate         | SIMULATE                               |
 
-                                        The format of this string is *AttributeName=Value*, where *AttributeName* is the name of the property and *Value* is the value to which the property will be set. For example, you can simulate the PXIe-5663 using the following strings:
+                The format of this string is *AttributeName=Value*, where *AttributeName* is the name of the property and *Value* is the value to which the property will be set. For example, you can simulate the PXIe-5663 using the following strings:
 
-                                        *Simulate=1, DriverSetup=Model:5663\E*.
+                *Simulate=1, DriverSetup=Model:5663\E*.
 
-                                        *Simulate=1, DriverSetup=Model:5601*; *Digitizer:5622; LO:5652; LOBoardType:PXIe*.
+                *Simulate=1, DriverSetup=Model:5601*; *Digitizer:5622; LO:5652; LOBoardType:PXIe*.
 
-                                        To set multiple properties, separate their assignments with a comma.
+                To set multiple properties, separate their assignments with a comma.
 
-                                        Refer to `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_ for more information about the driver setup string.
+                Refer to `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_ for more information about the driver setup string.
 
-                                        Note: To simulate a device using the PXIe-5622 25 MHz digitizer, set the *Digitizer* field to 5622_25MHz_DDC and the *Simulate* field to 1. You can set the *Digitizer* field to 5622_25MHz_DDC only when using the PXIe-5665.
+                Note: To simulate a device using the PXIe-5622 25 MHz digitizer, set the *Digitizer* field to 5622_25MHz_DDC and the *Simulate* field to 1. You can set the *Digitizer* field to 5622_25MHz_DDC only when using the PXIe-5665.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -7556,14 +7556,14 @@ class Session(_SessionBase):
 
             valid_steps (Bitwise combination of enums.SelfCalSteps flags): Returns valid steps.
 
-                                        ----
-                                        If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both SelfCalSteps.IF_FLATNESS and SelfCalSteps.LO_SELF_CAL steps are valid, NI-RFSA returns the following string:
+                ----
+                If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both SelfCalSteps.IF_FLATNESS and SelfCalSteps.LO_SELF_CAL steps are valid, NI-RFSA returns the following string:
 
-                                        SelfCalSteps.IF_FLATNESS |
+                SelfCalSteps.IF_FLATNESS |
 
-                                        SelfCalSteps.LO_SELF_CAL
+                SelfCalSteps.LO_SELF_CAL
 
-                                        ----
+                ----
 
                 +------------------------------------+---------------------------------------------------------------------------------------------------------------------+
                 | Name                               | Description                                                                                                         |
@@ -7643,29 +7643,29 @@ class Session(_SessionBase):
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -7704,29 +7704,29 @@ class Session(_SessionBase):
         Returns:
             wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                                        The following list provides more information about each of these properties:
+                The following list provides more information about each of these properties:
 
-                                        - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                        ----
+                ----
 
-                                        The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                        ----
+                ----
 
-                                        - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                        ----
+                ----
 
 
-                                        The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                        ----
+                ----
 
-                                        - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                        - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                        - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                        - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
         '''
         import numpy
@@ -7909,9 +7909,9 @@ class Session(_SessionBase):
         Args:
             steps_to_omit (Bitwise combination of enums.ResetWithOptionsStepsToOmit flags): Specifies a list of steps to skip during the reset process. The default value is ResetWithOptionsStepsToOmit.NONE, which specifies that no step is omitted during reset.
 
-                                        Note:ResetWithOptionsStepsToOmit.ROUTES is not supported in external calibration or alignment sessions.
+                Note:ResetWithOptionsStepsToOmit.ROUTES is not supported in external calibration or alignment sessions.
 
-                                        Note:ResetWithOptionsStepsToOmit.ROUTES is not supported for the PXI-5600/5661.
+                Note:ResetWithOptionsStepsToOmit.ROUTES is not supported for the PXI-5600/5661.
 
                 +------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | Name                                           | Description                                                                                                                                                                                                |
@@ -7966,25 +7966,25 @@ class Session(_SessionBase):
         Args:
             steps_to_omit (Bitwise combination of enums.SelfCalibrateRangeStepsToOmit flags): Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
 
-                                        ----
+                ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY and SelfCalibrateRangeStepsToOmit.LO_SELF_CAL, you would pass the following string to the SelfCalibrate method: SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
+                To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY and SelfCalibrateRangeStepsToOmit.LO_SELF_CAL, you would pass the following string to the SelfCalibrate method: SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
 
-                                        ----
+                ----
 
-                                        | Value                                          |  Description                                                                                                                                                                                                                     |
-                                        |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | NIRFSA_VAL_RESET_WITH_OPTIONS_NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrateRangeStepsToOmit.IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
-                                        | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | SelfCalibrateRangeStepsToOmit.DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+                | Value                                          |  Description                                                                                                                                                                                                                     |
+                |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | NIRFSA_VAL_RESET_WITH_OPTIONS_NONE             | No step is omitted during self-calibration.                                                                                                                                                                           |
+                | SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT | Not used by this method.                                                                                                                                                                                            |
+                | SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE        | Not used by this method.                                                                                                                                                                                            |
+                | SelfCalibrateRangeStepsToOmit.IF_FLATNESS           | Not used by this method.                                                                                                                                                                                            |
+                | SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL    | Not used by this method.                                                                                                                                                                                            |
+                | SelfCalibrateRangeStepsToOmit.LO_SELF_CAL           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the is_self_cal_valid method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
+                | SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
+                | SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
+                |SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
+                | SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
+                | SelfCalibrateRangeStepsToOmit.DC_OFFSET             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

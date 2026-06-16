@@ -42,9 +42,9 @@ Session
 
         Specifies the resource name of the device to initialize.
 
-                                For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
+        For NI-RFSA devices, the syntax is the device name specified in MAX. The typical default name for your device in MAX is PXI1Slot2. You can rename your device by right-clicking the name in MAX, selecting **Rename** from the drop-down menu, and entering a new name. You can also pass in the name of an IVI logical name configured with the IVI Configuration utility. For additional information, refer to the **Installed Devices IVI** topic of the *Measurement & Automation Explorer Help*.
 
-                                Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
+        Device names are not case-sensitive. However, IVI logical names are case-sensitive. If you use an IVI logical name, verify the name is identical to the name shown in the IVI Configuration Utility.
 
         
 
@@ -180,7 +180,7 @@ change_external_calibration_password
 
                 Specifies the old (current) external calibration password.
 
-                                        The maximum length of the password varies by device.
+                The maximum length of the password varies by device.
 
                 
 
@@ -191,7 +191,7 @@ change_external_calibration_password
 
                 Specifies the new (desired) external calibration password.
 
-                                        The maximum length of the password varies by device.
+                The maximum length of the password varies by device.
 
                 
 
@@ -225,10 +225,10 @@ check_acquisition_status
 
                     Returns signal acquisition status.
 
-                                            |Value          |Description                                     |
-                                            |:---------|:------------------------------------|
-                                            | True  | Signal acquisition is complete.     |
-                                            | False | Signal acquisition is not complete. |
+                    |Value          |Description                                     |
+                    |:---------|:------------------------------------|
+                    | True  | Signal acquisition is complete.     |
+                    | False | Signal acquisition is not complete. |
 
                     
 
@@ -452,29 +452,29 @@ configure_digital_edge_advance_trigger
 
                 Specifies the source of the digital edge for the Advance Trigger.
 
-                                        | Value                                           | Description                                                                                                                                                                                                                |
-                                        |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR` ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR` ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR` ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR` ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR` ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR` ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR` ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR` ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR` ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR` ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
-                                        | :py:data:`~nirfsa.OutputTerm.PXIE_DSTARB` ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
-                                        | :py:data:`~nirfsa.OutputTerm.TIMER_EVENT` ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR`('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal. |
+                | Value                                           | Description                                                                                                                                                                                                                |
+                |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR` ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR` ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR` ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR` ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR` ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR` ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR` ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR` ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR` ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR` ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
+                | :py:data:`~nirfsa.OutputTerm.PXIE_DSTARB` ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
+                | :py:data:`~nirfsa.OutputTerm.TIMER_EVENT` ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR`('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal. |
 
                 
 
@@ -487,10 +487,10 @@ configure_digital_edge_advance_trigger
 
                 Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING`.
 
-                                        | Value                              | Description                                |
-                                        |:------------------------------|:--------------------------------|
-                                        | :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
-                                        | :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
+                | Value                              | Description                                |
+                |:------------------------------|:--------------------------------|
+                | :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
+                | :py:data:`~nirfsa.AdvanceTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
 
                 
 
@@ -537,29 +537,29 @@ configure_digital_edge_ref_trigger
 
                 Specifies the source of the digital edge for the Reference trigger.
 
-                                        |Value                                            |Description                                                                                                                                                                                                                               |
-                                        |:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR` ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                                             |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR` ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR` ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR` ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR` ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR` ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR` ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR` ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR` ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR` ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |
-                                        | :py:data:`~nirfsa.OutputTerm.PXIE_DSTARB` ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
-                                        | :py:data:`~nirfsa.OutputTerm.TIMER_EVENT` ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR`('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
+                |Value                                            |Description                                                                                                                                                                                                                               |
+                |:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR` ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                                             |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR` ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR` ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR` ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR` ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR` ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR` ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR` ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR` ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR` ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |
+                | :py:data:`~nirfsa.OutputTerm.PXIE_DSTARB` ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
+                | :py:data:`~nirfsa.OutputTerm.TIMER_EVENT` ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR`('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
 
                 
 
@@ -572,10 +572,10 @@ configure_digital_edge_ref_trigger
 
                 Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING`.
 
-                                        |Value                               |Description                                 |
-                                        |:------------------------------|:--------------------------------|
-                                        | :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
-                                        | :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
+                |Value                               |Description                                 |
+                |:------------------------------|:--------------------------------|
+                | :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
+                | :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
 
                 
 
@@ -631,29 +631,29 @@ configure_digital_edge_start_trigger
 
                 Specifies the source of the digital edge for the Start Trigger.
 
-                                        | Value                                           | Description                                                                                                                                                                                                               |
-                                        |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR` ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR` ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR` ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR` ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR` ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR` ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR` ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR` ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR` ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR` ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
-                                        | :py:data:`~nirfsa.OutputTerm.PXIE_DSTARB` ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
-                                        | :py:data:`~nirfsa.OutputTerm.TIMER_EVENT` ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI1')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR`('PFI2')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI3')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI4')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI5')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI6')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI7')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI8')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
+                | Value                                           | Description                                                                                                                                                                                                               |
+                |:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | :py:data:`~nirfsa.NIRFSA_VAL_PFI0_STR` ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PFI1_STR` ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0_STR` ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1_STR` ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2_STR` ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3_STR` ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4_STR` ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5_STR` ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6_STR` ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7_STR` ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |
+                | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR_STR` ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |
+                | :py:data:`~nirfsa.OutputTerm.PXIE_DSTARB` ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |
+                | :py:data:`~nirfsa.OutputTerm.TIMER_EVENT` ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0_STR` ('PFI1')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1_STR`('PFI2')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2_STR` ('PFI3')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3_STR` ('PFI4')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4_STR` ('PFI5')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5_STR` ('PFI6')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6_STR` ('PFI7')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |
+                | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7_STR` ('PFI8')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |
 
                 
 
@@ -666,10 +666,10 @@ configure_digital_edge_start_trigger
 
                 Specifies the trigger edge to detect. The default value is :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING`.
 
-                                        | Value                              | Description                                |
-                                        |:------------------------------|:--------------------------------|
-                                        | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
-                                        | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
+                | Value                              | Description                                |
+                |:------------------------------|:--------------------------------|
+                | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.RISING` (900)  | NI-RFSA detects a rising edge.  |
+                | :py:data:`~nirfsa.StartTriggerDigitalEdgeEdge.FALLING` (901) | NI-RFSA detects a falling edge. |
 
                 
 
@@ -730,10 +730,10 @@ configure_iq_power_edge_ref_trigger
 
                 Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`.
 
-                                        | Value                                | Description                                                |
-                                        |:--------------------------------|:-------------------------------------------------|
-                                        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING` (1000)  | NI-RFSA detects a rising edge (positive slope).  |
-                                        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING` (1001) | NI-RFSA detects a falling edge (negative slope). |
+                | Value                                | Description                                                |
+                |:--------------------------------|:-------------------------------------------------|
+                | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING` (1000)  | NI-RFSA detects a rising edge (positive slope).  |
+                | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING` (1001) | NI-RFSA detects a falling edge (negative slope). |
 
                 
 
@@ -784,12 +784,12 @@ configure_ref_clock
 
 
                 specifies the source of the Reference Clock signal.
-                                        | Clock Source          | Description |
-                                        |-----------------------|-------------|
-                                        | **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |
-                                        | **RefIn** | Uses the signal at the front panel REF IN connector. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT; lock external signal to PXIe-3621 REF IN. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT; lock external signal to PXIe-3622 REF IN. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT; lock external signal to PXIe-3623 REF IN. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to signal at REF IN on PXIe-5655. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to signal at REF IN on PXIe-5655. Use cables as shown in the Getting Started Guide. |
-                                        | **PXI Clock** | Uses the PXI_CLK signal present on the PXI backplane. |
-                                        | **PXI_ClkMaster** | Valid only for PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. <br/>**PXIe-5831 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3622 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3623 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. |
+                | Clock Source          | Description |
+                |-----------------------|-------------|
+                | **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |
+                | **RefIn** | Uses the signal at the front panel REF IN connector. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT; lock external signal to PXIe-3621 REF IN. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT; lock external signal to PXIe-3622 REF IN. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT; lock external signal to PXIe-3623 REF IN. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to signal at REF IN on PXIe-5655. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to signal at REF IN on PXIe-5655. Use cables as shown in the Getting Started Guide. |
+                | **PXI Clock** | Uses the PXI_CLK signal present on the PXI backplane. |
+                | **PXI_ClkMaster** | Valid only for PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. <br/>**PXIe-5831 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3622 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3623 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. |
 
                 
 
@@ -1266,10 +1266,10 @@ enable_session_access
 
                 Enables or disables SFP session access for the specified device.
 
-                                        | Value         | Description                         |
-                                        |:---------|:-------------------------|
-                                        | True  | Enables session access.  |
-                                        | False | Disables session access. |
+                | Value         | Description                         |
+                |:---------|:-------------------------|
+                | True  | Enables session access.  |
+                | False | Disables session access. |
 
                 
 
@@ -1307,7 +1307,7 @@ error_message
 
                     Returns the user-readable message string that corresponds to the error code you specify.
 
-                                            You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
+                    You must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.
 
                     
 
@@ -1386,13 +1386,13 @@ fetch_iq_multi_record
 
                 **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
                 
 
@@ -1465,13 +1465,13 @@ fetch_iq_single_record
 
                 **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
-                                        **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                                        ----
+                ----
 
-                                        For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
 
-                                        ----
+                ----
 
                 
 
@@ -1670,7 +1670,7 @@ get_frequency_response
 
                     Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
 
-                                            Pass VI_NULL if you do not want to use this parameter.
+                    Pass VI_NULL if you do not want to use this parameter.
 
                     
 
@@ -1680,7 +1680,7 @@ get_frequency_response
 
                     Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
 
-                                            Pass VI_NULL if you do not want to use this parameter.
+                    Pass VI_NULL if you do not want to use this parameter.
 
                     
 
@@ -1692,7 +1692,7 @@ get_frequency_response
 
                     Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
 
-                                            Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
+                    Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
 
                     
 
@@ -1743,8 +1743,8 @@ get_scaling_coefficients
 
                     Specifies the array for storing the coefficient info.
 
-                                            - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
-                                            - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
+                    - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
+                    - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
 
                     
 
@@ -1997,14 +1997,14 @@ is_self_cal_valid
 
                     Returns valid steps.
 
-                                            ----
-                                            If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both :py:data:`~nirfsa.SelfCalSteps.IF_FLATNESS` and :py:data:`~nirfsa.SelfCalSteps.LO_SELF_CAL` steps are valid, NI-RFSA returns the following string:
+                    ----
+                    If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both :py:data:`~nirfsa.SelfCalSteps.IF_FLATNESS` and :py:data:`~nirfsa.SelfCalSteps.LO_SELF_CAL` steps are valid, NI-RFSA returns the following string:
 
-                                            :py:data:`~nirfsa.SelfCalSteps.IF_FLATNESS` |
+                    :py:data:`~nirfsa.SelfCalSteps.IF_FLATNESS` |
 
-                                            :py:data:`~nirfsa.SelfCalSteps.LO_SELF_CAL`
+                    :py:data:`~nirfsa.SelfCalSteps.LO_SELF_CAL`
 
-                                            ----
+                    ----
 
                     +------------------------------------+---------------------------------------------------------------------------------------------------------------------+
                     | Name                               | Description                                                                                                         |
@@ -2201,29 +2201,29 @@ read_iq_single_record
 
                     Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
 
-                                            The following list provides more information about each of these properties:
+                    The following list provides more information about each of these properties:
 
-                                            - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+                    - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                                            ----
+                    ----
 
-                                            The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+                    The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
 
-                                            ----
+                    ----
 
-                                            - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+                    - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                                            ----
+                    ----
 
 
-                                            The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+                    The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
 
-                                            ----
+                    ----
 
-                                            - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                                            - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                                            - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                                            - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+                    - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                    - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                    - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                    - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
 
                     
 
@@ -2390,9 +2390,9 @@ reset_with_options
 
                 Specifies a list of steps to skip during the reset process. The default value is :py:data:`~nirfsa.ResetWithOptionsStepsToOmit.NONE`, which specifies that no step is omitted during reset.
 
-                                        Note::py:data:`~nirfsa.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
+                Note::py:data:`~nirfsa.ResetWithOptionsStepsToOmit.ROUTES` is not supported in external calibration or alignment sessions.
 
-                                        Note::py:data:`~nirfsa.ResetWithOptionsStepsToOmit.ROUTES` is not supported for the PXI-5600/5661.
+                Note::py:data:`~nirfsa.ResetWithOptionsStepsToOmit.ROUTES` is not supported for the PXI-5600/5661.
 
                 +------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
                 | Name                                           | Description                                                                                                                                                                                                |
@@ -2488,25 +2488,25 @@ self_calibrate_range
 
                 Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
 
-                                        ----
+                ----
 
-                                        To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.SelfCalibrate` method: :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`
+                To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.SelfCalibrate` method: :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`
 
-                                        ----
+                ----
 
-                                        | Value                                          |  Description                                                                                                                                                                                                                     |
-                                        |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-                                        | :py:data:`~nirfsa.NIRFSA_VAL_RESET_WITH_OPTIONS_NONE`             | No step is omitted during self-calibration.                                                                                                                                                                           |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
-                                        |:py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
-                                        | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
+                | Value                                          |  Description                                                                                                                                                                                                                     |
+                |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+                | :py:data:`~nirfsa.NIRFSA_VAL_RESET_WITH_OPTIONS_NONE`             | No step is omitted during self-calibration.                                                                                                                                                                           |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.PRESELECTOR_ALIGNMENT` | Not used by this method.                                                                                                                                                                                            |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.GAIN_REFERENCE`        | Not used by this method.                                                                                                                                                                                            |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.IF_FLATNESS`           | Not used by this method.                                                                                                                                                                                            |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL`    | Not used by this method.                                                                                                                                                                                            |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`           | Omits the Local Oscillator (LO) Self Cal step. If you omit this step and the :py:meth:`nirfsa.Session.is_self_cal_valid` method indicates the calibration data for this step is invalid, the LO phase-locked loop (PLL) may fail to lock. |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY`    | Omits the Amplitude Accuracy step. If you omit this step, the absolute accuracy of the device is not adjusted.                                                                                                        |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.RESIDUAL_LO_POWER`     | Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.                                                                                                           |
+                |:py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.IMAGE_SUPPRESSION`      | Omits the Image Suppression step. If you omit this step, the Residual Sideband Image Performance is not adjusted.                                                                                                     |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.SYNTHESIZER_ALIGNMENT` | Omits the Synthesizer Alignment step. If you omit this step, the LO PLL is not adjusted. This step is not valid for the PXIe-5820.                                                                                    |
+                | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.DC_OFFSET`             | Omits the DC Offset step. This step applies only to the PXIe-5820.                                                                                                                                                    |
 
                 
 

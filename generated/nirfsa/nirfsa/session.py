@@ -520,16 +520,6 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-    Tip:
-    This property can be set/get on specific device_temperatures within your :py:class:`nirfsa.Session` instance.
-    Use Python index notation on the repeated capabilities container device_temperatures to specify a subset.
-
-    Example: :py:attr:`my_session.device_temperatures[ ... ].device_configuration_temperature`
-
-    To set/get on all device_temperatures, you can call the property directly on the :py:class:`nirfsa.Session`.
-
-    Example: :py:attr:`my_session.device_configuration_temperature`
     '''
     device_instantaneous_bandwidth = _attributes.AttributeViReal64(1150125)
     '''Type: float
@@ -4825,7 +4815,7 @@ class _SessionBase(object):
 
         Converts an error code returned by an NI-RFSA method into a user-readable string.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840
 
         Args:
             error_code (int): Passes the **errorCode** parameter that is returned from any NI-RFSA method.
@@ -4846,9 +4836,9 @@ class _SessionBase(object):
 
         Queries the value of a ViBoolean property.
 
-                        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
+        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -4878,9 +4868,9 @@ class _SessionBase(object):
 
         Queries the value of a ViInt32 property.
 
-                        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
+        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -4910,9 +4900,9 @@ class _SessionBase(object):
 
         Queries the value of a ViInt64 property.
 
-                        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
+        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -4942,9 +4932,9 @@ class _SessionBase(object):
 
         Queries the value of a ViReal64 property.
 
-                        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
+        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -4974,9 +4964,9 @@ class _SessionBase(object):
 
         Queries the value of a ViSession property.
 
-                        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
+        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5006,13 +4996,13 @@ class _SessionBase(object):
 
         Queries the value of a ViString property.
 
-                        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
+        You can use this low-level method to get the values of inherent IVI properties and instrument-specific properties.
 
-                        You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **BUF_SIZE** parameter. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the **BUF_SIZE** parameter, the method copies buffer size  1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7.
+        You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **BUF_SIZE** parameter. If the current value of the property, including the terminating NULL byte, is larger than the size you indicate in the **BUF_SIZE** parameter, the method copies buffer size  1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the method places "123" into the buffer and returns 7.
 
-                        If you want to call this method just to get the required buffer size, you can pass 0 for **BUF_SIZE** and VI_NULL for the **attributeValue** buffer.
+        If you want to call this method just to get the required buffer size, you can pass 0 for **BUF_SIZE** and VI_NULL for the **attributeValue** buffer.
 
-                        **Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -5137,11 +5127,11 @@ class _SessionBase(object):
 
         Sets the value of a ViBoolean property.
 
-                        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
+        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
 
-                        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
+        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5174,11 +5164,11 @@ class _SessionBase(object):
 
         Sets the value of a ViInt32 property.
 
-                        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
+        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
 
-                        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
+        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5211,11 +5201,11 @@ class _SessionBase(object):
 
         Sets the value of a ViInt64 property.
 
-                        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
+        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
 
-                        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
+        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5248,11 +5238,11 @@ class _SessionBase(object):
 
         Sets the value of a ViReal64 property.
 
-                        Use this low-level method to set the values of inherent IVI properties, and instrument-specific properties.
+        Use this low-level method to set the values of inherent IVI properties, and instrument-specific properties.
 
-                        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread-locking for you.
+        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread-locking for you.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5285,11 +5275,11 @@ class _SessionBase(object):
 
         Sets the value of a ViSession property.
 
-                        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
+        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
 
-                        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
+        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5314,11 +5304,11 @@ class _SessionBase(object):
 
         Sets the value of a ViString property.
 
-                        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
+        Use this low-level method to set the values of inherent IVI properties and instrument-specific properties.
 
-                        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
+        NI-RFSA contains high-level methods that set most of the instrument properties. NI recommends you use the high-level methods as much as possible. High-level methods handle order dependencies and multithread locking for you.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Tip:
         This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
@@ -5363,29 +5353,29 @@ class Session(_SessionBase):
 
         Creates a new session for the device.
 
-                        This method sets the initial value of certain properties and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.
+        This method sets the initial value of certain properties and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.
 
-                        To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.
+        To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.
 
-                        You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
+        You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
 
-                        ----
-                        **Note**
-                        Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
+        ----
+        **Note**
+        Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                        For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
+        ----
+        **Note**
+        For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_
+        `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_
 
         Args:
             resource_name (str): Specifies the resource name of the device to initialize.
@@ -5512,23 +5502,23 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
+        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
-                        ----
-                        **Note**
-                        If you are using external digitizer mode, this method commits settings and waits for settling, but it does not start an acquisition. Notice that using the commit method on its own commits settings to hardware, but the device does not wait for hardware settling.
+        ----
+        **Note**
+        If you are using external digitizer mode, this method commits settings and waits for settling, but it does not start an acquisition. Notice that using the commit method on its own commits settings to hardware, but the device does not wait for hardware settling.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
+        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
 
-                        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_
+        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_
 
         Note:
         This method will return a Python context manager that will initiate on entering and abort on exit.
@@ -5540,9 +5530,9 @@ class Session(_SessionBase):
 
         Closes the session to the device.
 
-                        If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.
+        If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note:
         This method is not needed when using the session context manager
@@ -5562,17 +5552,17 @@ class Session(_SessionBase):
 
         Stops an acquisition previously started with the _initiate method or the read_power_spectrum method.
 
-                        You can also use the abort method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
+        You can also use the abort method to stop a self-calibration. Calling this method is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.
 
-                        You can stop the following kinds of acquisitions:
+        You can stop the following kinds of acquisitions:
 
-                        - Triggered spectrum acquisitions that have not yet been triggered
-                        - Multispan acquisitions in progress
-                        - Average spectrum acquisitions in progress
-                        - Single-record spectrum acquisitions in progress
-                        - Streaming in progress
+        - Triggered spectrum acquisitions that have not yet been triggered
+        - Multispan acquisitions in progress
+        - Average spectrum acquisitions in progress
+        - Single-record spectrum acquisitions in progress
+        - Streaming in progress
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.abort()
 
@@ -5582,7 +5572,7 @@ class Session(_SessionBase):
 
         Changes the password that is required to initialize an external calibration session.
 
-                        **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             old_password (str): Specifies the old (current) external calibration password.
@@ -5602,13 +5592,13 @@ class Session(_SessionBase):
 
         Checks the status of the acquisition.
 
-                        Use this method to check for any errors that may occur during signal acquisition or to check whether the device has completed the acquisition operation.
+        Use this method to check for any errors that may occur during signal acquisition or to check whether the device has completed the acquisition operation.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_
+        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_
 
         Returns:
             is_done (bool): Returns signal acquisition status.
@@ -5628,7 +5618,7 @@ class Session(_SessionBase):
 
         Clears the data obtained from the self_calibrate_range method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
+        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
         '''
         self._interpreter.clear_self_calibrate_range()
 
@@ -5638,19 +5628,19 @@ class Session(_SessionBase):
 
         Commits settings to hardware.
 
-                        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read IQ single record complex F64 method, or the read_power_spectrum method.
+        Calling this method is optional. Settings are automatically committed to hardware when you call the _initiate method, the read IQ single record complex F64 method, or the read_power_spectrum method.
 
-                        ----
-                        **Note**
-                        This method does not wait for settling time, unlike the _initiate method.
+        ----
+        **Note**
+        This method does not wait for settling time, unlike the _initiate method.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_
+        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_
         '''
         self._interpreter.commit()
 
@@ -5660,9 +5650,9 @@ class Session(_SessionBase):
 
         Selects the linear interpolation method.
 
-                        If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
+        If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -5692,9 +5682,9 @@ class Session(_SessionBase):
 
         Selects the nearest interpolation method.
 
-                        NI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.
+        NI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -5710,9 +5700,9 @@ class Session(_SessionBase):
 
         Selects the spline interpolation method.
 
-                        If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
+        If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -5728,19 +5718,19 @@ class Session(_SessionBase):
 
         Configures the device to wait for a digital edge Advance Trigger.
 
-                        The Advance Trigger indicates where a new record begins.
+        The Advance Trigger indicates where a new record begins.
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
             source (str): Specifies the source of the digital edge for the Advance Trigger.
@@ -5793,25 +5783,25 @@ class Session(_SessionBase):
 
         Configures the device to wait for a digital edge Reference Trigger to mark a reference point within the record.
 
-                        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
+        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-                        ----
-                        **Note**
-                         The PXIe-5644/5645/5646 does not support the NI-TClk API.
+        ----
+        **Note**
+         The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
             source (str): Specifies the source of the digital edge for the Reference trigger.
@@ -5866,25 +5856,25 @@ class Session(_SessionBase):
 
         Configures the device to wait for a digital edge Start Trigger at the beginning of the acquisition.
 
-                        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
+        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-                        ----
-                        **Note**
-                         The PXIe-5644/5645/5646 does not support the NI-TClk API.
+        ----
+        **Note**
+         The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
             source (str): Specifies the source of the digital edge for the Start Trigger.
@@ -5937,21 +5927,21 @@ class Session(_SessionBase):
 
         Configures the device to wait for the complex power of the I/Q data to cross the specified threshold to mark a reference point within the record.
 
-                        To trigger on burst signals, add a minimum quiet time, configured with the ref_trigger_minimum_quiet_time property, to ensure the trigger does not occur in the middle of a burst if the acquisition starts while a burst is being generated. The quiet time should be set to a value smaller than the time between bursts, but large enough to ignore power changes within a burst.
+        To trigger on burst signals, add a minimum quiet time, configured with the ref_trigger_minimum_quiet_time property, to ensure the trigger does not occur in the middle of a burst if the acquisition starts while a burst is being generated. The quiet time should be set to a value smaller than the time between bursts, but large enough to ignore power changes within a burst.
 
-                        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
+        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
             source (str): Specifies the source of the RF signal for the power edge Reference trigger. The only supported value is "0".
@@ -5978,23 +5968,23 @@ class Session(_SessionBase):
 
         Configures the NI-RFSA device Reference Clock.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `PXI-5661 Reference Clock <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/reference-clock.html>`_
+        `PXI-5661 Reference Clock <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/reference-clock.html>`_
 
-                        `PXIe-5663 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/timing-configurations.html>`_
+        `PXIe-5663 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/timing-configurations.html>`_
 
-                        `PXIe-5665 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/timing-configurations.html>`_
+        `PXIe-5665 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/timing-configurations.html>`_
 
-                        `PXIe-5667 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/timing-configurations.html>`_
+        `PXIe-5667 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/timing-configurations.html>`_
 
-                        `PXIe-5668 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/timing-configurations.html>`_
+        `PXIe-5668 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/timing-configurations.html>`_
 
-                        `PXIe-5830 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/timing-configurations.html>`_
+        `PXIe-5830 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/timing-configurations.html>`_
 
-                        `PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/timing-configurations.html>`_
+        `PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/timing-configurations.html>`_
 
         Args:
             clock_source (enums.ReferenceClockSource): specifies the source of the Reference Clock signal.
@@ -6018,19 +6008,19 @@ class Session(_SessionBase):
 
         Configures the device to wait for a software Advance Trigger.
 
-                        The Advance Trigger indicates where a new record begins. The device waits until you call the send_software_edge_trigger method to assert the trigger.
+        The Advance Trigger indicates where a new record begins. The device waits until you call the send_software_edge_trigger method to assert the trigger.
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
         '''
         self._interpreter.configure_software_edge_advance_trigger()
 
@@ -6040,27 +6030,27 @@ class Session(_SessionBase):
 
         Configures the device to wait for a software Reference Trigger to mark a reference point within the record.
 
-                        The device waits until you call the send_software_edge_trigger method to assert the trigger.
+        The device waits until you call the send_software_edge_trigger method to assert the trigger.
 
-                        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
+        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-                        ----
-                        **Note**
-                         The PXIe-5644/5645/5646 does not support the NI-TClk API.
+        ----
+        **Note**
+         The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
             pretrigger_samples (int): Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.
@@ -6074,27 +6064,27 @@ class Session(_SessionBase):
 
         Configures the device to wait for a software Start Trigger at the beginning of the acquisition.
 
-                        The device waits until you call the send_software_edge_trigger method to assert the trigger.
+        The device waits until you call the send_software_edge_trigger method to assert the trigger.
 
-                        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
+        You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-                        ----
-                        **Note**
-                         The PXIe-5644/5645/5646 does not support the NI-TClk API.
+        ----
+        **Note**
+         The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
+        ----
+        **Note**
+         This method is not supported if you set the **acquisitionType** parameter to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method or if you set the acquisition_type property to AcquisitionType.SPECTRUM.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
         '''
         self._interpreter.configure_software_edge_start_trigger()
 
@@ -6104,21 +6094,21 @@ class Session(_SessionBase):
 
         Configures the span and center frequency of the spectrum read by NI-RFSA.
 
-                        A spectrum acquisition consists of data surrounding the center frequency.
+        A spectrum acquisition consists of data surrounding the center frequency.
 
-                        ----
-                        **Note**
-                        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
+        ----
+        **Note**
+        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
+        ----
+        **Note**
+         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6141,15 +6131,15 @@ class Session(_SessionBase):
 
         Configures the frequency range of a spectrum acquisition.
 
-                        You can specify the frequency range using either center frequency and span, or start and stop frequencies.
+        You can specify the frequency range using either center frequency and span, or start and stop frequencies.
 
-                        ----
-                        **Note**
-                        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
+        ----
+        **Note**
+        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6179,19 +6169,19 @@ class Session(_SessionBase):
 
         Configures the start and stop frequencies of a spectrum read by NI-RFSA.
 
-                        ----
-                        **Note**
-                        If you configure the spectrum span (**STOP_FREQUENCY**  **START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.
+        ----
+        **Note**
+        If you configure the spectrum span (**STOP_FREQUENCY**  **START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
+        ----
+        **Note**
+         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -6273,15 +6263,15 @@ class Session(_SessionBase):
 
         Creates an S-parameter de-embedding table for the port based on the specified S2P file.
 
-                        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
+        If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
+        `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_
 
-                        `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_
+        `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -6311,7 +6301,7 @@ class Session(_SessionBase):
 
         Deletes all configured de-embedding tables for the session.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.delete_all_deembedding_tables()
 
@@ -6321,7 +6311,7 @@ class Session(_SessionBase):
 
         Deletes the selected de-embedding table for a given port.
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             port (str): Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
@@ -6337,13 +6327,13 @@ class Session(_SessionBase):
 
         Configures the device to not use an Advance Trigger.
 
-                        This method is necessary only if you configured an Advance Trigger in the past and now want to disable it.
+        This method is necessary only if you configured an Advance Trigger in the past and now want to disable it.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
         '''
         self._interpreter.disable_advance_trigger()
 
@@ -6353,13 +6343,13 @@ class Session(_SessionBase):
 
         Configures the device to not wait for a Reference Trigger to mark a reference point within a record.
 
-                        This method is necessary only if you previously configured a Reference trigger in the past and now want to disable it.
+        This method is necessary only if you previously configured a Reference trigger in the past and now want to disable it.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
         '''
         self._interpreter.disable_ref_trigger()
 
@@ -6369,13 +6359,13 @@ class Session(_SessionBase):
 
         Configures the device to not wait for a Start Trigger at the beginning of the acquisition.
 
-                        This method is necessary only if you previously configured a Start Trigger in the past and now want to disable it.
+        This method is necessary only if you previously configured a Start Trigger in the past and now want to disable it.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
         '''
         self._interpreter.disable_start_trigger()
 
@@ -6385,17 +6375,17 @@ class Session(_SessionBase):
 
         Enables or disables SFP session access for the specified instrument.
 
-                        SFP session access allows the NI-RFSA Soft Front Panel (SFP) to access a device with an existing open session and can help you debug your code. To enable session access, pass True to the **enabled** parameter. To disable session access, pass False to the **enabled** parameter.
+        SFP session access allows the NI-RFSA Soft Front Panel (SFP) to access a device with an existing open session and can help you debug your code. To enable session access, pass True to the **enabled** parameter. To disable session access, pass False to the **enabled** parameter.
 
-                        Refer to `Configuring SFP Session Access using LabWindows/CVI or C <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/configuring_session_access_labwindows.html>`_ for more information about SFP session access.
+        Refer to `Configuring SFP Session Access using LabWindows/CVI or C <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/configuring_session_access_labwindows.html>`_ for more information about SFP session access.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        ----
-                        **Note**
-                        NI-RFSA does not support NI-TClk when driver session debugging is enabled.
+        ----
+        **Note**
+        NI-RFSA does not support NI-TClk when driver session debugging is enabled.
 
-                        ----
+        ----
 
         Args:
             enable (bool): Enables or disables SFP session access for the specified device.
@@ -6487,15 +6477,15 @@ class Session(_SessionBase):
 
         Fetches I/Q data from multiple records in an acquisition.
 
-                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6564,15 +6554,15 @@ class Session(_SessionBase):
 
         Fetches I/Q data from multiple records in an acquisition.
 
-                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6641,15 +6631,15 @@ class Session(_SessionBase):
 
         Fetches binary I/Q data from multiple records in an acquisition.
 
-                        Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6717,15 +6707,15 @@ class Session(_SessionBase):
 
         Fetches I/Q data from multiple records in an acquisition.
 
-                        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
+        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6770,15 +6760,15 @@ class Session(_SessionBase):
 
         Fetches I/Q data from a single record in an acquisition.
 
-                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6848,15 +6838,15 @@ class Session(_SessionBase):
 
         Fetches I/Q data from a single record in an acquisition.
 
-                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -6926,15 +6916,15 @@ class Session(_SessionBase):
 
         Fetches binary I/Q data from a single record in an acquisition.
 
-                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7003,15 +6993,15 @@ class Session(_SessionBase):
 
         Fetches I/Q data from a single record in an acquisition.
 
-                        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
 
-                        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
+        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7055,9 +7045,9 @@ class Session(_SessionBase):
 
         Returns the temperature of the last successful external calibration.
 
-                        The temperature is returned in degrees Celsius.
+        The temperature is returned in degrees Celsius.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
 
         Returns:
             temperature (float): Returns the temperature, in degrees Celsius, of the last external calibration.
@@ -7072,7 +7062,7 @@ class Session(_SessionBase):
 
         Returns the recommended interval between external calibrations, in months.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Returns:
             months (hightime.timedelta, datetime.timedelta, or int in months): Returns the recommended maximum interval between external calibrations, in months.
@@ -7087,9 +7077,9 @@ class Session(_SessionBase):
 
         Returns the date and time of the last successful external calibration.
 
-                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
+        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7117,7 +7107,7 @@ class Session(_SessionBase):
 
         Returns the number of points acquired that have not yet been fetched.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7138,9 +7128,9 @@ class Session(_SessionBase):
 
         Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
 
-                        Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.
+        Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7168,21 +7158,6 @@ class Session(_SessionBase):
         '''
         frequencies, magnitude_response, phase_response = self._interpreter.get_frequency_response(channel_list)
         return frequencies, magnitude_response, phase_response
-
-    @ivi_synchronized
-    def get_gain_reference_cal_baseline(self):
-        r'''get_gain_reference_cal_baseline
-
-        Returns the gain reference calibration constants.
-
-                        **Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668
-
-        Returns:
-            gain_reference_cal_constants (array.array("d")): Returns the gain reference calibration constants.
-
-        '''
-        gain_reference_cal_constants = self._interpreter.get_gain_reference_cal_baseline()
-        return gain_reference_cal_constants
 
     @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
@@ -7236,17 +7211,17 @@ class Session(_SessionBase):
 
         Returns coefficients you can use to convert unscaled data to scaled I/Q data.
 
-                        Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain get_scaling_coefficients structures in the **COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **COEFFICIENT_INFO** array returns one element for each channel specified in the **CHANNEL_LIST** parameter. The element order matches the order specified by the **CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **COEFFICIENT_INFO** element then adding the offset from the same element.
+        Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain get_scaling_coefficients structures in the **COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **COEFFICIENT_INFO** array returns one element for each channel specified in the **CHANNEL_LIST** parameter. The element order matches the order specified by the **CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **COEFFICIENT_INFO** element then adding the offset from the same element.
 
-                        ----
-                        **Note**
-                        The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
+        ----
+        **Note**
+        The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
 
-                        ----
+        ----
 
-                        To get the required size of the array, call this method with **ARRAY_SIZE** set to 0 and NULL for the **COEFFICIENT_INFO** array. This method returns the required size in the **NUMBER_OF_COEFFICIENT_SETS** parameter.
+        To get the required size of the array, call this method with **ARRAY_SIZE** set to 0 and NULL for the **COEFFICIENT_INFO** array. This method returns the required size in the **NUMBER_OF_COEFFICIENT_SETS** parameter.
 
-                        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7271,15 +7246,15 @@ class Session(_SessionBase):
 
         Returns the date and time of the last successful self-calibration.
 
-                        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
+        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
 
-                        ----
-                        **Note**
-                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
+        ----
+        **Note**
+        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **SELF_CALIBRATION_STEP** parameter.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7338,13 +7313,13 @@ class Session(_SessionBase):
 
         Returns the temperature, in degrees Celsius, at the last successful self-calibration.
 
-                        ----
-                        **Note**
-                        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.
+        ----
+        **Note**
+        For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -7387,20 +7362,20 @@ class Session(_SessionBase):
         return temperature
 
     @ivi_synchronized
-    def get_terminal_name(self, signal, signal_identifier):
+    def get_terminal_name(self, signal, signal_identifier=""):
         r'''get_terminal_name
 
         Returns the fully qualified name of the signal being queried.
 
-                        Signals can be triggers, clocks, or events.
+        Signals can be triggers, clocks, or events.
 
-                        You can pass the **TERMINAL_NAME** parameter that is returned to the **source** parameter of a configure trigger method.
+        You can pass the **TERMINAL_NAME** parameter that is returned to the **source** parameter of a configure trigger method.
 
-                        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
+        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7447,29 +7422,29 @@ class Session(_SessionBase):
 
         Creates a new session for the device.
 
-                        This method sets the initial value of certain properties and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.
+        This method sets the initial value of certain properties and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.
 
-                        To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.
+        To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.
 
-                        You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
+        You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
 
-                        ----
-                        **Note**
-                        Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
+        ----
+        **Note**
+        Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                        For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
+        ----
+        **Note**
+        For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_
+        `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_
 
         Args:
             resource_name (str): Specifies the resource name of the device to initialize.
@@ -7543,23 +7518,23 @@ class Session(_SessionBase):
 
         Commits settings to hardware, waits for hardware settling, and starts an acquisition.
 
-                        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
+        You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
-                        ----
-                        **Note**
-                        If you are using external digitizer mode, this method commits settings and waits for settling, but it does not start an acquisition. Notice that using the commit method on its own commits settings to hardware, but the device does not wait for hardware settling.
+        ----
+        **Note**
+        If you are using external digitizer mode, this method commits settings and waits for settling, but it does not start an acquisition. Notice that using the commit method on its own commits settings to hardware, but the device does not wait for hardware settling.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
-                        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
+        `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_
 
-                        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_
+        `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_
         '''
         self._interpreter.initiate()
 
@@ -7569,9 +7544,9 @@ class Session(_SessionBase):
 
         Indicates which calibration steps contain valid calibration data.
 
-                        To omit steps with valid calibration data from self-calibration, you can pass the **VALID_STEPS** parameter to the **stepsToOmit** parameter of the SelfCalibrate method.
+        To omit steps with valid calibration data from self-calibration, you can pass the **VALID_STEPS** parameter to the **stepsToOmit** parameter of the SelfCalibrate method.
 
-                        **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
+        **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7629,17 +7604,17 @@ class Session(_SessionBase):
 
         Corrects for temperature variations while acquiring the same signal for an extended period of time in a continuous acquisition.
 
-                        NI-RFSA internally acquires the temperature every time you initiate an acquisition. If you are performing a continuous acquisition, National Instruments recommends calling this method once every 10 minutes in a stable temperature environment to periodically update temperature calibration. If the ambient temperature varies, call this method more frequently.
+        NI-RFSA internally acquires the temperature every time you initiate an acquisition. If you are performing a continuous acquisition, National Instruments recommends calling this method once every 10 minutes in a stable temperature environment to periodically update temperature calibration. If the ambient temperature varies, call this method more frequently.
 
-                        ----
-                        **Note**
-                        You cannot call this method if your device is operating in `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.
+        ----
+        **Note**
+        You cannot call this method if your device is operating in `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.
 
-                        ----
+        ----
 
-                        Refer to the *Thermal Management* section for your device for more information about typical operating temperatures.
+        Refer to the *Thermal Management* section for your device for more information about typical operating temperatures.
 
-                        **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842
+        **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842
         '''
         self._interpreter.perform_thermal_correction()
 
@@ -7649,13 +7624,13 @@ class Session(_SessionBase):
 
         Initiates an acquisition and fetches a single I/Q data record.
 
-                        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
+        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7710,13 +7685,13 @@ class Session(_SessionBase):
 
         Initiates an acquisition and fetches a single I/Q data record.
 
-                        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
+        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7768,13 +7743,13 @@ class Session(_SessionBase):
 
         Initiates a spectrum acquisition and returns power spectrum data.
 
-                        ----
-                        **Note**
-                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+        ----
+        **Note**
+         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7801,13 +7776,13 @@ class Session(_SessionBase):
 
         Initiates a spectrum acquisition and returns power spectrum data.
 
-                        ----
-                        **Note**
-                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+        ----
+        **Note**
+         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7837,13 +7812,13 @@ class Session(_SessionBase):
 
         Initiates a spectrum acquisition and returns power spectrum data.
 
-                        ----
-                        **Note**
-                         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+        ----
+        **Note**
+         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
 
         Args:
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
@@ -7870,20 +7845,20 @@ class Session(_SessionBase):
 
         Performs a hard reset on the device.
 
-                        A hard reset consists of the following actions:
+        A hard reset consists of the following actions:
 
-                        - Signal acquisition is stopped.
-                        - All routes are released.
-                        - External bidirectional terminals are tristated.
-                        - FPGAs are reset.
-                        - Hardware is configured to its default state.
-                        - All session properties are reset to their default states.
+        - Signal acquisition is stopped.
+        - All routes are released.
+        - External bidirectional terminals are tristated.
+        - FPGAs are reset.
+        - Hardware is configured to its default state.
+        - All session properties are reset to their default states.
 
-                        During a device reset, routes of signals between this and other devices are released, regardless of which device created the route. For example, a trigger signal exported to a PXI trigger line that is used by another device is no longer exported.
+        During a device reset, routes of signals between this and other devices are released, regardless of which device created the route. For example, a trigger signal exported to a PXI trigger line that is used by another device is no longer exported.
 
-                        On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the ConfigurePxiChassisClk10 method and set the **pxiClk10Source** parameter to NIRFSA_VAL_NONE_STR or set the PXI_CHASSIS_CLK10_SOURCE property to NIRFSA_VAL_NONE_STR.
+        On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the ConfigurePxiChassisClk10 method and set the **pxiClk10Source** parameter to NIRFSA_VAL_NONE_STR or set the PXI_CHASSIS_CLK10_SOURCE property to NIRFSA_VAL_NONE_STR.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7909,21 +7884,21 @@ class Session(_SessionBase):
 
         Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.
 
-                        For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Star Trigger Controller Slot, also known as the System Timing Slot.
+        For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Star Trigger Controller Slot, also known as the System Timing Slot.
 
-                        By default, this method resets all properties to their default values, deletes all de-embedding tables, aborts generation, clears all routes, and resets session properties to initial values. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES for the **STEPS_TO_OMIT** parameter, this method does not release signal routes during the reset process.
+        By default, this method resets all properties to their default values, deletes all de-embedding tables, aborts generation, clears all routes, and resets session properties to initial values. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES for the **STEPS_TO_OMIT** parameter, this method does not release signal routes during the reset process.
 
-                        When routes of signals between two devices are released, they are released regardless of which device created the route.
+        When routes of signals between two devices are released, they are released regardless of which device created the route.
 
-                        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of Reset, with **STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
+        To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this method instead of Reset, with **STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
-                        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
+        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
 
         Note:
         One or more of the referenced properties are not in the Python API for this driver.
@@ -7962,31 +7937,31 @@ class Session(_SessionBase):
 
         Self-calibrates all configurations within the specified frequency and reference level limits.
 
-                        Self-calibration range data is valid until you restart the system or call the clear_self_calibrate_range method.
+        Self-calibration range data is valid until you restart the system or call the clear_self_calibrate_range method.
 
-                        NI recommends that no external signals are present on the RF In port while the calibration is taking place.
+        NI recommends that no external signals are present on the RF In port while the calibration is taking place.
 
-                        ----
-                        **Note**
-                        This method does not update self-calibration date and temperature.
+        ----
+        **Note**
+        This method does not update self-calibration date and temperature.
 
-                        ----
+        ----
 
-                        For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if certain aspects of performance are less important for your application, you can omit that step for faster execution.
+        For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if certain aspects of performance are less important for your application, you can omit that step for faster execution.
 
-                        ----
-                        **Note**
-                        If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate.
+        ----
+        **Note**
+        If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate.
 
-                        ----
+        ----
 
-                        ----
-                        **Note**
-                        If there is an existing NI-RFSG session open for the same PXIe-5644/5645/5646, it may remain open but cannot be used while this method runs.
+        ----
+        **Note**
+        If there is an existing NI-RFSG session open for the same PXIe-5644/5645/5646, it may remain open but cannot be used while this method runs.
 
-                        ----
+        ----
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
+        **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
 
         Args:
             steps_to_omit (Bitwise combination of enums.SelfCalibrateRangeStepsToOmit flags): Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
@@ -8028,26 +8003,26 @@ class Session(_SessionBase):
         self._interpreter.self_calibrate_range(steps_to_omit, minimum_frequency, maximum_frequency, minimum_reference_level, maximum_reference_level)
 
     @ivi_synchronized
-    def send_software_edge_trigger(self, trigger, trigger_identifier):
+    def send_software_edge_trigger(self, trigger, trigger_identifier=""):
         r'''send_software_edge_trigger
 
         Sends a trigger to the device when you use a software version of a supported trigger and the device is waiting for the trigger to be sent.
 
-                        You can also use this method to override a hardware trigger.
+        You can also use this method to override a hardware trigger.
 
-                        This method returns an error in the following situations:
+        This method returns an error in the following situations:
 
-                        - You configure an invalid trigger.
-                        - You set the **acquisitionType** to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method.
-                        - You have not previously called the _initiate method.
+        - You configure an invalid trigger.
+        - You set the **acquisitionType** to AcquisitionType.SPECTRUM using the ConfigureAcquisitionType method.
+        - You have not previously called the _initiate method.
 
-                        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Software Trigger <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/software-edge-trigger.html>`_
+        `Software Trigger <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/software-edge-trigger.html>`_
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
         Args:
             trigger (enums.SoftwareTriggerType): Specifies the trigger to send.
@@ -8079,9 +8054,9 @@ class Session(_SessionBase):
 
         Closes the session to the device.
 
-                        If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.
+        If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.close()
 
@@ -8120,17 +8095,17 @@ class Session(_SessionBase):
 
         Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.
 
-                        For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.
+        For the PXI-5600, this method does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.
 
-                        This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
+        This method resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the reset_with_options method, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.
 
-                        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-                        **Related Topics**
+        **Related Topics**
 
-                        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+        `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
 
-                        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
+        `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_
 
         Note:
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

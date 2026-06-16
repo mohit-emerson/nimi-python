@@ -143,10 +143,6 @@ class SideEffectsHelper(object):
         self._defaults['GetFrequencyResponse']['frequencies'] = None
         self._defaults['GetFrequencyResponse']['magnitudeResponse'] = None
         self._defaults['GetFrequencyResponse']['phaseResponse'] = None
-        self._defaults['GetGainReferenceCalBaseline'] = {}
-        self._defaults['GetGainReferenceCalBaseline']['return'] = 0
-        self._defaults['GetGainReferenceCalBaseline']['numberOfGainReferenceCalConstants'] = None
-        self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'] = None
         self._defaults['GetScalingCoefficients'] = {}
         self._defaults['GetScalingCoefficients']['return'] = 0
         self._defaults['GetScalingCoefficients']['numberOfCoefficientSets'] = None
@@ -667,27 +663,6 @@ class SideEffectsHelper(object):
             phase_response_ref[i] = self._defaults['GetFrequencyResponse']['phaseResponse'][i]
         return self._defaults['GetFrequencyResponse']['return']
 
-    def niRFSA_GetGainReferenceCalBaseline(self, vi, buffer_size, gain_reference_cal_constants, number_of_gain_reference_cal_constants):  # noqa: N802
-        if self._defaults['GetGainReferenceCalBaseline']['return'] != 0:
-            return self._defaults['GetGainReferenceCalBaseline']['return']
-        # number_of_gain_reference_cal_constants
-        if self._defaults['GetGainReferenceCalBaseline']['numberOfGainReferenceCalConstants'] is None:
-            raise MockFunctionCallError("niRFSA_GetGainReferenceCalBaseline", param='numberOfGainReferenceCalConstants')
-        if number_of_gain_reference_cal_constants is not None:
-            number_of_gain_reference_cal_constants.contents.value = self._defaults['GetGainReferenceCalBaseline']['numberOfGainReferenceCalConstants']
-        # gain_reference_cal_constants
-        if self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'] is None:
-            raise MockFunctionCallError("niRFSA_GetGainReferenceCalBaseline", param='gainReferenceCalConstants')
-        if buffer_size.value == 0:
-            return len(self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'])
-        try:
-            gain_reference_cal_constants_ref = gain_reference_cal_constants.contents
-        except AttributeError:
-            gain_reference_cal_constants_ref = gain_reference_cal_constants
-        for i in range(len(self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'])):
-            gain_reference_cal_constants_ref[i] = self._defaults['GetGainReferenceCalBaseline']['gainReferenceCalConstants'][i]
-        return self._defaults['GetGainReferenceCalBaseline']['return']
-
     def niRFSA_GetScalingCoefficients(self, vi, channel_list, array_size, coefficient_info, number_of_coefficient_sets):  # noqa: N802
         if self._defaults['GetScalingCoefficients']['return'] != 0:
             return self._defaults['GetScalingCoefficients']['return']
@@ -1038,8 +1013,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_GetFetchBacklog.return_value = 0
         mock_library.niRFSA_GetFrequencyResponse.side_effect = MockFunctionCallError("niRFSA_GetFrequencyResponse")
         mock_library.niRFSA_GetFrequencyResponse.return_value = 0
-        mock_library.niRFSA_GetGainReferenceCalBaseline.side_effect = MockFunctionCallError("niRFSA_GetGainReferenceCalBaseline")
-        mock_library.niRFSA_GetGainReferenceCalBaseline.return_value = 0
         mock_library.niRFSA_GetScalingCoefficients.side_effect = MockFunctionCallError("niRFSA_GetScalingCoefficients")
         mock_library.niRFSA_GetScalingCoefficients.return_value = 0
         mock_library.niRFSA_GetSelfCalibrationDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime")

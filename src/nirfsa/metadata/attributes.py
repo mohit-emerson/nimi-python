@@ -2328,9 +2328,6 @@ attributes = {
         },
         'lv_property': 'Vertical:Advanced:Device Configuration Temperature (Degrees C)',
         'name': 'DEVICE_CONFIGURATION_TEMPERATURE',
-        'supported_rep_caps': [
-            'device_temperatures'
-        ],
         'type': 'ViReal64'
     },
     1150160: {

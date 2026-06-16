@@ -530,21 +530,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [float(frequencies_ctype[i]) for i in range(buffer_size_ctype.value)], [float(magnitude_response_ctype[i]) for i in range(buffer_size_ctype.value)], [float(phase_response_ctype[i]) for i in range(buffer_size_ctype.value)]
 
-    def get_gain_reference_cal_baseline(self):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        buffer_size_ctype = _visatype.ViInt32(0)  # case S190
-        gain_reference_cal_constants_ctype = None  # case B610
-        number_of_gain_reference_cal_constants_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niRFSA_GetGainReferenceCalBaseline(vi_ctype, buffer_size_ctype, gain_reference_cal_constants_ctype, None if number_of_gain_reference_cal_constants_ctype is None else (ctypes.pointer(number_of_gain_reference_cal_constants_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=True, is_error_handling=False)
-        buffer_size_ctype = _visatype.ViInt32(number_of_gain_reference_cal_constants_ctype.value)  # case S200
-        gain_reference_cal_constants_size = number_of_gain_reference_cal_constants_ctype.value  # case B620
-        gain_reference_cal_constants_array = array.array("d", [0]) * gain_reference_cal_constants_size  # case B620
-        gain_reference_cal_constants_ctype = _get_ctypes_pointer_for_buffer(value=gain_reference_cal_constants_array, library_type=_visatype.ViReal64)  # case B620
-        error_code = self._library.niRFSA_GetGainReferenceCalBaseline(vi_ctype, buffer_size_ctype, gain_reference_cal_constants_ctype, None if number_of_gain_reference_cal_constants_ctype is None else (ctypes.pointer(number_of_gain_reference_cal_constants_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return gain_reference_cal_constants_array
-
     def get_scaling_coefficients(self, channel_list):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020

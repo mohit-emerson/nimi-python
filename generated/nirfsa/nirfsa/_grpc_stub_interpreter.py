@@ -366,13 +366,6 @@ class GrpcStubInterpreter(object):
         )
         return response.frequencies, response.magnitude_response, response.phase_response
 
-    def get_gain_reference_cal_baseline(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetGainReferenceCalBaseline,
-            grpc_types.GetGainReferenceCalBaselineRequest(vi=self._vi),
-        )
-        return response.gain_reference_cal_constants
-
     def get_scaling_coefficients(self, channel_list):  # noqa: N802
         response = self._invoke(
             self._client.GetScalingCoefficients,

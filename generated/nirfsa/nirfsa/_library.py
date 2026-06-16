@@ -73,7 +73,6 @@ class Library(object):
         self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc = None
         self.niRFSA_GetFetchBacklog_cfunc = None
         self.niRFSA_GetFrequencyResponse_cfunc = None
-        self.niRFSA_GetGainReferenceCalBaseline_cfunc = None
         self.niRFSA_GetScalingCoefficients_cfunc = None
         self.niRFSA_GetSelfCalibrationDateAndTime_cfunc = None
         self.niRFSA_GetSelfCalibrationTemperature_cfunc = None
@@ -486,14 +485,6 @@ class Library(object):
                 self.niRFSA_GetFrequencyResponse_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niRFSA_GetFrequencyResponse_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetFrequencyResponse_cfunc(vi, channel_list, buffer_size, frequencies, magnitude_response, phase_response, number_of_frequencies)
-
-    def niRFSA_GetGainReferenceCalBaseline(self, vi, buffer_size, gain_reference_cal_constants, number_of_gain_reference_cal_constants):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_GetGainReferenceCalBaseline_cfunc is None:
-                self.niRFSA_GetGainReferenceCalBaseline_cfunc = self._get_library_function('niRFSA_GetGainReferenceCalBaseline')
-                self.niRFSA_GetGainReferenceCalBaseline_cfunc.argtypes = [ViSession, ViInt32, ctypes.POINTER(ViReal64), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niRFSA_GetGainReferenceCalBaseline_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetGainReferenceCalBaseline_cfunc(vi, buffer_size, gain_reference_cal_constants, number_of_gain_reference_cal_constants)
 
     def niRFSA_GetScalingCoefficients(self, vi, channel_list, array_size, coefficient_info, number_of_coefficient_sets):  # noqa: N802
         with self._func_lock:

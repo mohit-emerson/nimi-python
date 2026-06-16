@@ -4,7 +4,7 @@ functions = {
     'Abort': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Stops an acquisition previously started with the nirfsa_Initiate function or the nirfsa_ReadPowerSpectrumF64 function. \n                \n                You can also use the nirfsa_Abort function to stop a self-calibration. Calling this function is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.\n\n                You can stop the following kinds of acquisitions:\n\n                - Triggered spectrum acquisitions that have not yet been triggered\n                - Multispan acquisitions in progress\n                - Average spectrum acquisitions in progress\n                - Single-record spectrum acquisitions in progress\n                - Streaming in progress\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Stops an acquisition previously started with the nirfsa_Initiate function or the nirfsa_ReadPowerSpectrumF64 function.\n\nYou can also use the nirfsa_Abort function to stop a self-calibration. Calling this function is optional, unless you want to stop an acquisition before it is complete or you are continuously acquiring data.\n\nYou can stop the following kinds of acquisitions:\n\n- Triggered spectrum acquisitions that have not yet been triggered\n- Multispan acquisitions in progress\n- Average spectrum acquisitions in progress\n- Single-record spectrum acquisitions in progress\n- Streaming in progress\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -34,7 +34,7 @@ functions = {
     'ChangeExternalCalibrationPassword': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Changes the password that is required to initialize an external calibration session.\n\n                **Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Changes the password that is required to initialize an external calibration session.\n\n**Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -84,7 +84,7 @@ functions = {
     'CheckAcquisitionStatus': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Checks the status of the acquisition. \n                \n                Use this function to check for any errors that may occur during signal acquisition or to check whether the device has completed the acquisition operation.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_'
+            'description': 'Checks the status of the acquisition.\n\nUse this function to check for any errors that may occur during signal acquisition or to check whether the device has completed the acquisition operation.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -124,7 +124,7 @@ functions = {
     'ClearSelfCalibrateRange': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Clears the data obtained from the nirfsa_SelfCalibrateRange function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842'
+            'description': 'Clears the data obtained from the nirfsa_SelfCalibrateRange function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -154,7 +154,7 @@ functions = {
     'close': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Closes the session to the device.\n\n                If you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Closes the session to the device.\n\nIf you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'grpc_name': 'Close',
@@ -178,7 +178,7 @@ functions = {
     'Commit': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Commits settings to hardware. \n                \n                Calling this function is optional. Settings are automatically committed to hardware when you call the nirfsa_Initiate function, the read IQ single record complex F64 function, or the nirfsa_ReadPowerSpectrumF64 function.\n\n                ----\n                **Note**\n                This function does not wait for settling time, unlike the nirfsa_Initiate function.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_'
+            'description': 'Commits settings to hardware.\n\nCalling this function is optional. Settings are automatically committed to hardware when you call the nirfsa_Initiate function, the read IQ single record complex F64 function, or the nirfsa_ReadPowerSpectrumF64 function.\n\n----\n**Note**\nThis function does not wait for settling time, unlike the nirfsa_Initiate function.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/hardware-state-diagram.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -208,7 +208,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the linear interpolation method. \n                \n                If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nSelects the linear interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -287,7 +287,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the nearest interpolation method. \n                \n                NI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nSelects the nearest interpolation method.\n\nNI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -337,7 +337,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the spline interpolation method. \n                \n                If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nSelects the spline interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -387,7 +387,7 @@ functions = {
     'ConfigureDigitalEdgeAdvanceTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for a digital edge Advance Trigger. \n                \n                The Advance Trigger indicates where a new record begins.\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for a digital edge Advance Trigger.\n\nThe Advance Trigger indicates where a new record begins.\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -439,7 +439,7 @@ functions = {
     'ConfigureDigitalEdgeRefTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for a digital edge Reference Trigger to mark a reference point within the record.\n\n                You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n                ----\n                **Note**\n                 The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n                ----\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for a digital edge Reference Trigger to mark a reference point within the record.\n\nYou can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n----\n**Note**\n The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n----\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -502,7 +502,7 @@ functions = {
     'ConfigureDigitalEdgeStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for a digital edge Start Trigger at the beginning of the acquisition.\n\n                You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n                ----\n                **Note**\n                 The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n                ----\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for a digital edge Start Trigger at the beginning of the acquisition.\n\nYou can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n----\n**Note**\n The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n----\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -554,7 +554,7 @@ functions = {
     'ConfigureIqPowerEdgeRefTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for the complex power of the I/Q data to cross the specified threshold to mark a reference point within the record.\n\n                To trigger on burst signals, add a minimum quiet time, configured with the NIRFSA_ATTR_REF_TRIGGER_MINIMUM_QUIET_TIME attribute, to ensure the trigger does not occur in the middle of a burst if the acquisition starts while a burst is being generated. The quiet time should be set to a value smaller than the time between bursts, but large enough to ignore power changes within a burst.\n\n                You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for the complex power of the I/Q data to cross the specified threshold to mark a reference point within the record.\n\nTo trigger on burst signals, add a minimum quiet time, configured with the NIRFSA_ATTR_REF_TRIGGER_MINIMUM_QUIET_TIME attribute, to ensure the trigger does not occur in the middle of a burst if the acquisition starts while a burst is being generated. The quiet time should be set to a value smaller than the time between bursts, but large enough to ignore power changes within a burst.\n\nYou can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'grpc_name': 'ConfigureIQPowerEdgeRefTrigger',
         'included_in_proto': True,
@@ -627,7 +627,7 @@ functions = {
     'ConfigureRefClock': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the NI-RFSA device Reference Clock.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `PXI-5661 Reference Clock <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/reference-clock.html>`_\n\n                `PXIe-5663 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/timing-configurations.html>`_\n\n                `PXIe-5665 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/timing-configurations.html>`_\n\n                `PXIe-5667 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/timing-configurations.html>`_\n\n                `PXIe-5668 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/timing-configurations.html>`_\n\n                `PXIe-5830 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/timing-configurations.html>`_\n\n                `PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/timing-configurations.html>`_'
+            'description': 'Configures the NI-RFSA device Reference Clock.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`PXI-5661 Reference Clock <https://www.ni.com/docs/en-US/bundle/pxi-5661-feature/page/reference-clock.html>`_\n\n`PXIe-5663 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/timing-configurations.html>`_\n\n`PXIe-5665 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/timing-configurations.html>`_\n\n`PXIe-5667 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/timing-configurations.html>`_\n\n`PXIe-5668 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/timing-configurations.html>`_\n\n`PXIe-5830 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/timing-configurations.html>`_\n\n`PXIe-5831 Timing Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/timing-configurations.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -678,7 +678,7 @@ functions = {
     'ConfigureSoftwareEdgeAdvanceTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for a software Advance Trigger. \n                \n                The Advance Trigger indicates where a new record begins. The device waits until you call the nirfsa_SendSoftwareEdgeTrigger function to assert the trigger.\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for a software Advance Trigger.\n\nThe Advance Trigger indicates where a new record begins. The device waits until you call the nirfsa_SendSoftwareEdgeTrigger function to assert the trigger.\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -708,7 +708,7 @@ functions = {
     'ConfigureSoftwareEdgeRefTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for a software Reference Trigger to mark a reference point within the record. \n                \n                The device waits until you call the nirfsa_SendSoftwareEdgeTrigger function to assert the trigger.\n\n                You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n                ----\n                **Note**\n                 The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n                ----\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for a software Reference Trigger to mark a reference point within the record.\n\nThe device waits until you call the nirfsa_SendSoftwareEdgeTrigger function to assert the trigger.\n\nYou can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n----\n**Note**\n The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n----\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -749,7 +749,7 @@ functions = {
     'ConfigureSoftwareEdgeStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to wait for a software Start Trigger at the beginning of the acquisition. \n                \n                The device waits until you call the nirfsa_SendSoftwareEdgeTrigger function to assert the trigger.\n\n                You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n                ----\n                **Note**\n                 The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n                ----\n\n                ----\n                **Note**\n                 This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to wait for a software Start Trigger at the beginning of the acquisition.\n\nThe device waits until you call the nirfsa_SendSoftwareEdgeTrigger function to assert the trigger.\n\nYou can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n----\n**Note**\n The PXIe-5644/5645/5646 does not support the NI-TClk API.\n\n----\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -780,7 +780,7 @@ functions = {
         'codegen_method': 'private',
         'method_name_for_documentation': 'configure_spectrum_frequency',
         'documentation': {
-            'description': 'Configures the span and center frequency of the spectrum read by NI-RFSA. \n                \n                A spectrum acquisition consists of data surrounding the center frequency.\n\n                ----\n                **Note**\n                If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n                ----\n\n                ----\n                **Note**\n                 For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Configures the span and center frequency of the spectrum read by NI-RFSA.\n\nA spectrum acquisition consists of data surrounding the center frequency.\n\n----\n**Note**\nIf you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -842,7 +842,7 @@ functions = {
         'codegen_method': 'private',
         'method_name_for_documentation': 'configure_spectrum_frequency',
         'documentation': {
-            'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n                ----\n                **Note**\n                If you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n                ----\n\n                ----\n                **Note**\n                 For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n----\n**Note**\nIf you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -903,7 +903,7 @@ functions = {
     'ConfigureSpectrumFrequencyDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Configures the frequency range of a spectrum acquisition.\n\n                You can specify the frequency range using either center frequency and span, or start and stop frequencies.\n\n                ----\n                **Note**\n                If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Configures the frequency range of a spectrum acquisition.\n\nYou can specify the frequency range using either center frequency and span, or start and stop frequencies.\n\n----\n**Note**\nIf you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -990,7 +990,7 @@ functions = {
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Creates an S-parameter de-embedding table for the port based on the specified S2P file.\n\n                If you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n                `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
+            'description': '\nCreates an S-parameter de-embedding table for the port based on the specified S2P file.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1075,7 +1075,7 @@ functions = {
     'DeleteAllDeembeddingTables': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Deletes all configured de-embedding tables for the session.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nDeletes all configured de-embedding tables for the session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1105,7 +1105,7 @@ functions = {
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Deletes the selected de-embedding table for a given port.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': '\nDeletes the selected de-embedding table for a given port.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1155,7 +1155,7 @@ functions = {
     'DisableAdvanceTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to not use an Advance Trigger. \n                \n                This function is necessary only if you configured an Advance Trigger in the past and now want to disable it.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to not use an Advance Trigger.\n\nThis function is necessary only if you configured an Advance Trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1185,7 +1185,7 @@ functions = {
     'DisableRefTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to not wait for a Reference Trigger to mark a reference point within a record. \n                \n                This function is necessary only if you previously configured a Reference trigger in the past and now want to disable it.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to not wait for a Reference Trigger to mark a reference point within a record.\n\nThis function is necessary only if you previously configured a Reference trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1215,7 +1215,7 @@ functions = {
     'DisableStartTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Configures the device to not wait for a Start Trigger at the beginning of the acquisition. \n                \n                This function is necessary only if you previously configured a Start Trigger in the past and now want to disable it.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Configures the device to not wait for a Start Trigger at the beginning of the acquisition.\n\nThis function is necessary only if you previously configured a Start Trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1245,7 +1245,7 @@ functions = {
     'EnableSessionAccess': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Enables or disables SFP session access for the specified instrument.\n\n                SFP session access allows the NI-RFSA Soft Front Panel (SFP) to access a device with an existing open session and can help you debug your code. To enable session access, pass VI_TRUE to the **enabled** parameter. To disable session access, pass VI_FALSE to the **enabled** parameter.\n\n                Refer to `Configuring SFP Session Access using LabWindows/CVI or C <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/configuring_session_access_labwindows.html>`_ for more information about SFP session access.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                ----\n                **Note**\n                NI-RFSA does not support NI-TClk when driver session debugging is enabled.\n\n                ----'
+            'description': 'Enables or disables SFP session access for the specified instrument.\n\nSFP session access allows the NI-RFSA Soft Front Panel (SFP) to access a device with an existing open session and can help you debug your code. To enable session access, pass VI_TRUE to the **enabled** parameter. To disable session access, pass VI_FALSE to the **enabled** parameter.\n\nRefer to `Configuring SFP Session Access using LabWindows/CVI or C <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/configuring_session_access_labwindows.html>`_ for more information about SFP session access.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n----\n**Note**\nNI-RFSA does not support NI-TClk when driver session debugging is enabled.\n\n----'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1285,7 +1285,7 @@ functions = {
     'ErrorMessage': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Converts an error code returned by an NI-RFSA function into a user-readable string.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
+            'description': 'Converts an error code returned by an NI-RFSA function into a user-readable string.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
         },
         'included_in_proto': True,
         'is_error_handling': True,
@@ -1724,7 +1724,7 @@ functions = {
     'ReadIqSingleRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Initiates an acquisition and fetches a single I/Q data record. \n                \n                Do not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -1814,7 +1814,7 @@ functions = {
     'ReadIqSingleRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Initiates an acquisition and fetches a single I/Q data record. \n                \n                Do not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'ReadIQSingleRecordComplexF64',
         'included_in_proto': True,
@@ -1902,7 +1902,7 @@ functions = {
     'FetchIqMultiRecordComplexF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'FetchIQMultiRecordComplexF32',
         'included_in_proto': True,
@@ -2009,7 +2009,7 @@ functions = {
     'FetchIqMultiRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Fetches I/Q data from multiple records in an acquisition. \n                \n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'FetchIQMultiRecordComplexF64',
         'included_in_proto': True,
@@ -2117,7 +2117,7 @@ functions = {
     'FetchIqMultiRecordComplexI16': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Fetches binary I/Q data from multiple records in an acquisition. \n                \n                Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches binary I/Q data from multiple records in an acquisition.\n\nFetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'FetchIQMultiRecordComplexI16',
         'included_in_proto': True,
@@ -2225,7 +2225,7 @@ functions = {
     'FetchIqMultiRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Fetches I/Q data from multiple records in an acquisition.\n\n                A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2323,7 +2323,7 @@ functions = {
     'FetchIqSingleRecordComplexF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Fetches I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'FetchIQSingleRecordComplexF32',
         'included_in_proto': True,
@@ -2421,7 +2421,7 @@ functions = {
     'FetchIqSingleRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Fetches I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'FetchIQSingleRecordComplexF64',
         'included_in_proto': True,
@@ -2519,7 +2519,7 @@ functions = {
     'FetchIqSingleRecordComplexI16': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Fetches binary I/Q data from a single record in an acquisition. \n                \n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches binary I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'grpc_name': 'FetchIQSingleRecordComplexI16',
         'included_in_proto': True,
@@ -2618,7 +2618,7 @@ functions = {
     'FetchIqSingleRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Fetches I/Q data from a single record in an acquisition.\n\n                The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\n                This function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
+            'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -2706,7 +2706,7 @@ functions = {
     'GetAttributeViBoolean': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Queries the value of a ViBoolean attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Queries the value of a ViBoolean attribute.\n\nYou can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2766,7 +2766,7 @@ functions = {
     'GetAttributeViInt32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Queries the value of a ViInt32 attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Queries the value of a ViInt32 attribute.\n\nYou can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2826,7 +2826,7 @@ functions = {
     'GetAttributeViInt64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Queries the value of a ViInt64 attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Queries the value of a ViInt64 attribute.\n\nYou can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2886,7 +2886,7 @@ functions = {
     'GetAttributeViReal64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Queries the value of a ViReal64 attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Queries the value of a ViReal64 attribute.\n\nYou can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2946,7 +2946,7 @@ functions = {
     'GetAttributeViSession': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Queries the value of a ViSession attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Queries the value of a ViSession attribute.\n\nYou can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -3006,7 +3006,7 @@ functions = {
     'GetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Queries the value of a ViString attribute.\n\n                You can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\n                You must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **NIRFSA_ATTR_BUF_SIZE** parameter. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the **NIRFSA_ATTR_BUF_SIZE** parameter, the function copies buffer size  1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7.\n\n                If you want to call this function just to get the required buffer size, you can pass 0 for **NIRFSA_ATTR_BUF_SIZE** and VI_NULL for the **attributeValue** buffer.\n\n                **Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Queries the value of a ViString attribute.\n\nYou can use this low-level function to get the values of inherent IVI attributes and instrument-specific attributes.\n\nYou must provide a ViChar array to serve as a buffer for the value. You pass the number of bytes in the buffer as the **NIRFSA_ATTR_BUF_SIZE** parameter. If the current value of the attribute, including the terminating NULL byte, is larger than the size you indicate in the **NIRFSA_ATTR_BUF_SIZE** parameter, the function copies buffer size  1 bytes into the buffer, places an ASCII NULL byte at the end of the buffer, and returns the buffer size you must pass to get the entire value. For example, if the value is "123456" and the buffer size is 4, the function places "123" into the buffer and returns 7.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **NIRFSA_ATTR_BUF_SIZE** and VI_NULL for the **attributeValue** buffer.\n\n**Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -3080,7 +3080,7 @@ functions = {
     'GetError': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Retrieves and then clears the IVI error information for the session or the current execution thread.\n\n                ----\n                **Note**\n                If the **NIRFSA_ATTR_ERROR_DESCRIPTION_BUFFER_SIZE** parameter is 0, this function does not clear the error information. By passing 0 to **NIRFSA_ATTR_ERROR_DESCRIPTION_BUFFER_SIZE**, you can determine the buffer size required to read the entire error description string. You can then call this function again with a sufficiently large buffer.\n\n                If you specify a valid IVI session for the NIRFSA_ATTR_VI parameter, this function retrieves and then clears the error information for the session. If you pass VI_NULL for NIRFSA_ATTR_VI, this function retrieves and then clears the error information for the current execution thread. If NIRFSA_ATTR_VI is an invalid session, this function does nothing and returns an error. Normally, the error information describes the first error that occurred since you last called this function or the nirfsa_ClearError function.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
+            'description': 'Retrieves and then clears the IVI error information for the session or the current execution thread.\n\n----\n**Note**\nIf the **NIRFSA_ATTR_ERROR_DESCRIPTION_BUFFER_SIZE** parameter is 0, this function does not clear the error information. By passing 0 to **NIRFSA_ATTR_ERROR_DESCRIPTION_BUFFER_SIZE**, you can determine the buffer size required to read the entire error description string. You can then call this function again with a sufficiently large buffer.\n\nIf you specify a valid IVI session for the NIRFSA_ATTR_VI parameter, this function retrieves and then clears the error information for the session. If you pass VI_NULL for NIRFSA_ATTR_VI, this function retrieves and then clears the error information for the current execution thread. If NIRFSA_ATTR_VI is an invalid session, this function does nothing and returns an error. Normally, the error information describes the first error that occurred since you last called this function or the nirfsa_ClearError function.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
         },
         'included_in_proto': True,
         'is_error_handling': True,
@@ -3213,7 +3213,7 @@ functions = {
     'GetExternalCalibrationLastDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Returns the date and time of the last successful external calibration. \n                \n                The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
@@ -3296,7 +3296,7 @@ functions = {
     'GetExtCalLastTemperature': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the temperature of the last successful external calibration. \n                \n                The temperature is returned in degrees Celsius.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Returns the temperature of the last successful external calibration.\n\nThe temperature is returned in degrees Celsius.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'grpc_name': 'GetExtCalLastTemp',
         'included_in_proto': True,
@@ -3338,7 +3338,7 @@ functions = {
     'GetExtCalRecommendedInterval': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the recommended interval between external calibrations, in months.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns the recommended interval between external calibrations, in months.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -3380,7 +3380,7 @@ functions = {
     'GetFetchBacklog': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the number of points acquired that have not yet been fetched.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns the number of points acquired that have not yet been fetched.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -3441,7 +3441,7 @@ functions = {
     'GetFrequencyResponse': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.\n\n                Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.\n\nRefer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -3547,75 +3547,10 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetGainReferenceCalBaseline': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the gain reference calibration constants.\n\n                **Supported Devices**: PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_InitExtCal function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the buffer size.'
-                },
-                'name': 'bufferSize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the gain reference calibration constants.'
-                },
-                'name': 'gainReferenceCalConstants',
-                'size': {
-                    'mechanism': 'ivi-dance-with-a-twist',
-                    'value': 'bufferSize',
-                    'value_twist': 'numberOfGainReferenceCalConstants'
-                },
-                'type': 'ViReal64[]',
-                'use_array': True,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Specifies the number of elements in the **NIRFSA_ATTR_GAIN_REFERENCE_CAL_CONSTANTS** array.'
-                },
-                'name': 'numberOfGainReferenceCalConstants',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'GetSelfCalibrationDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Returns the date and time of the last successful self-calibration. \n                \n                The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **NIRFSA_ATTR_SELF_CALIBRATION_STEP** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns the date and time of the last successful self-calibration.\n\nThe time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n----\n**Note**\nFor the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **NIRFSA_ATTR_SELF_CALIBRATION_STEP** parameter.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'grpc_name': 'GetSelfCalLastDateAndTime',
         'included_in_proto': True,
@@ -3746,7 +3681,7 @@ functions = {
     'GetScalingCoefficients': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns coefficients you can use to convert unscaled data to scaled I/Q data.\n\n                Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this function to obtain nirfsa_GetScalingCoefficients structures in the **NIRFSA_ATTR_COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **NIRFSA_ATTR_COEFFICIENT_INFO** array returns one element for each channel specified in the **NIRFSA_ATTR_CHANNEL_LIST** parameter. The element order matches the order specified by the **NIRFSA_ATTR_CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **NIRFSA_ATTR_COEFFICIENT_INFO** element then adding the offset from the same element.\n\n                ----\n                **Note**\n                The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.\n\n                ----\n\n                To get the required size of the array, call this function with **NIRFSA_ATTR_ARRAY_SIZE** set to 0 and NULL for the **NIRFSA_ATTR_COEFFICIENT_INFO** array. This function returns the required size in the **NIRFSA_ATTR_NUMBER_OF_COEFFICIENT_SETS** parameter.\n\n                **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns coefficients you can use to convert unscaled data to scaled I/Q data.\n\nAcquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this function to obtain nirfsa_GetScalingCoefficients structures in the **NIRFSA_ATTR_COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **NIRFSA_ATTR_COEFFICIENT_INFO** array returns one element for each channel specified in the **NIRFSA_ATTR_CHANNEL_LIST** parameter. The element order matches the order specified by the **NIRFSA_ATTR_CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **NIRFSA_ATTR_COEFFICIENT_INFO** element then adding the offset from the same element.\n\n----\n**Note**\nThe coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.\n\n----\n\nTo get the required size of the array, call this function with **NIRFSA_ATTR_ARRAY_SIZE** set to 0 and NULL for the **NIRFSA_ATTR_COEFFICIENT_INFO** array. This function returns the required size in the **NIRFSA_ATTR_NUMBER_OF_COEFFICIENT_SETS** parameter.\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -3822,7 +3757,7 @@ functions = {
     'GetSelfCalibrationTemperature': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the temperature, in degrees Celsius, at the last successful self-calibration.\n\n                ----\n                **Note**\n                For the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860'
+            'description': 'Returns the temperature, in degrees Celsius, at the last successful self-calibration.\n\n----\n**Note**\nFor the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860'
         },
         'grpc_name': 'GetSelfCalLastTemp',
         'included_in_proto': True,
@@ -3923,7 +3858,7 @@ functions = {
     'GetTerminalName': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the fully qualified name of the signal being queried. \n                \n                Signals can be triggers, clocks, or events.\n\n                You can pass the **NIRFSA_ATTR_TERMINAL_NAME** parameter that is returned to the **source** parameter of a configure trigger function.\n\n                **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
+            'description': 'Returns the fully qualified name of the signal being queried.\n\nSignals can be triggers, clocks, or events.\n\nYou can pass the **NIRFSA_ATTR_TERMINAL_NAME** parameter that is returned to the **source** parameter of a configure trigger function.\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4004,6 +3939,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a particular instance of a trigger. NI-RFSA does not support this parameter.'
                 },
+                'default_value': '""',
                 'name': 'signalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4040,7 +3976,7 @@ functions = {
     'InitWithOptions': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Creates a new session for the device. \n                \n                This function sets the initial value of certain attributes and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.\n\n                To create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.\n\n                You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.\n\n                ----\n                **Note**\n                Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this function to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.\n\n                ----\n\n                ----\n                **Note**\n                For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_'
+            'description': 'Creates a new session for the device.\n\nThis function sets the initial value of certain attributes and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.\n\nTo create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.\n\nYou can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.\n\n----\n**Note**\nBefore initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this function to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.\n\n----\n\n----\n**Note**\nFor multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_'
         },
         'included_in_proto': True,
         'method_name_for_documentation': '__init__',
@@ -4138,7 +4074,7 @@ functions = {
     'Initiate': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Commits settings to hardware, waits for hardware settling, and starts an acquisition. \n                \n                You can use this function in conjunction with one of the niRFSA fetch I/Q functions to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 function to both initiate the acquisition and retrieve I/Q data at one time.\n\n                ----\n                **Note**\n                If you are using external digitizer mode, this function commits settings and waits for settling, but it does not start an acquisition. Notice that using the nirfsa_Commit function on its own commits settings to hardware, but the device does not wait for hardware settling.\n\n                ----\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_\n\n                `RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_\n\n                `NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_'
+            'description': 'Commits settings to hardware, waits for hardware settling, and starts an acquisition.\n\nYou can use this function in conjunction with one of the niRFSA fetch I/Q functions to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 function to both initiate the acquisition and retrieve I/Q data at one time.\n\n----\n**Note**\nIf you are using external digitizer mode, this function commits settings and waits for settling, but it does not start an acquisition. Notice that using the nirfsa_Commit function on its own commits settings to hardware, but the device does not wait for hardware settling.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_\n\n`RF List Mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_\n\n`NI RF Vector Signal Analyzer State Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/hardware-state-diagram.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4159,7 +4095,7 @@ functions = {
     'IsSelfCalValid': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Indicates which calibration steps contain valid calibration data. \n                \n                To omit steps with valid calibration data from self-calibration, you can pass the **NIRFSA_ATTR_VALID_STEPS** parameter to the **stepsToOmit** parameter of the nirfsa_SelfCalibrate function.\n\n                **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668'
+            'description': 'Indicates which calibration steps contain valid calibration data.\n\nTo omit steps with valid calibration data from self-calibration, you can pass the **NIRFSA_ATTR_VALID_STEPS** parameter to the **stepsToOmit** parameter of the nirfsa_SelfCalibrate function.\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4309,7 +4245,7 @@ functions = {
     'LockSession': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Obtains a multithread lock on the instrument session. \n                \n                Before doing so, this function waits until all other execution threads have released their locks on the instrument session.\n\n                Other threads might have obtained a lock on this session in the following ways:\n\n                - Your application already called this function.\n                - A call to NI-RFSA locked the session.\n\n                After the call to this function returns successfully, no other threads can access the instrument session until you call the nirfsa_UnlockSession function. Use the nirfsa_LockSession function and the nirfsa_UnlockSession function around a sequence of calls to NI-RFSA functions if you require that the NI-RFSA device retain its settings through the end of the sequence.\n\n                You can safely make nested calls to the nirfsa_LockSession function within the same thread. To completely unlock the session, balance each call to the nirfsa_LockSession function with a call to the nirfsa_UnlockSession function. If, however, you use **NIRFSA_ATTR_CALLER_HAS_LOCK** in all calls to the nirfsa_LockSession function and the nirfsa_UnlockSession function within a function, the IVI Library locks the session only once within the function regardless of the number of calls you make to the nirfsa_LockSession function. Locking the session only once allows you to call the nirfsa_UnlockSession function just once at the end of the function.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Obtains a multithread lock on the instrument session.\n\nBefore doing so, this function waits until all other execution threads have released their locks on the instrument session.\n\nOther threads might have obtained a lock on this session in the following ways:\n\n- Your application already called this function.\n- A call to NI-RFSA locked the session.\n\nAfter the call to this function returns successfully, no other threads can access the instrument session until you call the nirfsa_UnlockSession function. Use the nirfsa_LockSession function and the nirfsa_UnlockSession function around a sequence of calls to NI-RFSA functions if you require that the NI-RFSA device retain its settings through the end of the sequence.\n\nYou can safely make nested calls to the nirfsa_LockSession function within the same thread. To completely unlock the session, balance each call to the nirfsa_LockSession function with a call to the nirfsa_UnlockSession function. If, however, you use **NIRFSA_ATTR_CALLER_HAS_LOCK** in all calls to the nirfsa_LockSession function and the nirfsa_UnlockSession function within a function, the IVI Library locks the session only once within the function regardless of the number of calls you make to the nirfsa_LockSession function. Locking the session only once allows you to call the nirfsa_UnlockSession function just once at the end of the function.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -4350,7 +4286,7 @@ functions = {
     'PerformThermalCorrection': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Corrects for temperature variations while acquiring the same signal for an extended period of time in a continuous acquisition.\n\n                NI-RFSA internally acquires the temperature every time you initiate an acquisition. If you are performing a continuous acquisition, National Instruments recommends calling this function once every 10 minutes in a stable temperature environment to periodically update temperature calibration. If the ambient temperature varies, call this function more frequently.\n\n                ----\n                **Note**\n                You cannot call this function if your device is operating in `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.\n\n                ----\n\n                Refer to the *Thermal Management* section for your device for more information about typical operating temperatures.\n\n                **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842'
+            'description': 'Corrects for temperature variations while acquiring the same signal for an extended period of time in a continuous acquisition.\n\nNI-RFSA internally acquires the temperature every time you initiate an acquisition. If you are performing a continuous acquisition, National Instruments recommends calling this function once every 10 minutes in a stable temperature environment to periodically update temperature calibration. If the ambient temperature varies, call this function more frequently.\n\n----\n**Note**\nYou cannot call this function if your device is operating in `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.\n\n----\n\nRefer to the *Thermal Management* section for your device for more information about typical operating temperatures.\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4380,7 +4316,7 @@ functions = {
     'ReadPowerSpectrumF32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_name_for_documentation': 'read_power_spectrum',
@@ -4466,7 +4402,7 @@ functions = {
     'ReadPowerSpectrumF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4553,7 +4489,7 @@ functions = {
     'ReadPowerSpectrumDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n                ----\n                **Note**\n                 Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': False,
         'is_error_handling': False,
@@ -4620,7 +4556,7 @@ functions = {
     'reset': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.\n\n                For the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.\n\n                This function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the nirfsa_ResetWithOptions function, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
+            'description': 'Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.\n\nFor the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.\n\nThis function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the nirfsa_ResetWithOptions function, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
         },
         'grpc_name': 'Reset',
         'included_in_proto': True,
@@ -4651,7 +4587,7 @@ functions = {
     'ResetDevice': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Performs a hard reset on the device. \n                \n                A hard reset consists of the following actions:\n\n                - Signal acquisition is stopped.\n                - All routes are released.\n                - External bidirectional terminals are tristated.\n                - FPGAs are reset.\n                - Hardware is configured to its default state.\n                - All session attributes are reset to their default states.\n\n                During a device reset, routes of signals between this and other devices are released, regardless of which device created the route. For example, a trigger signal exported to a PXI trigger line that is used by another device is no longer exported.\n\n                On the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the nirfsa_ConfigurePxiChassisClk10 function and set the **pxiClk10Source** parameter to NIRFSA_VAL_NONE_STR or set the NIRFSA_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute to NIRFSA_VAL_NONE_STR.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Performs a hard reset on the device.\n\nA hard reset consists of the following actions:\n\n- Signal acquisition is stopped.\n- All routes are released.\n- External bidirectional terminals are tristated.\n- FPGAs are reset.\n- Hardware is configured to its default state.\n- All session attributes are reset to their default states.\n\nDuring a device reset, routes of signals between this and other devices are released, regardless of which device created the route. For example, a trigger signal exported to a PXI trigger line that is used by another device is no longer exported.\n\nOn the PXI-5600, if you are driving the PXI_CLK10 line, you continue to drive the clock even after a device reset. To stop driving the PXI_CLK10 line, use the nirfsa_ConfigurePxiChassisClk10 function and set the **pxiClk10Source** parameter to NIRFSA_VAL_NONE_STR or set the NIRFSA_ATTR_PXI_CHASSIS_CLK10_SOURCE attribute to NIRFSA_VAL_NONE_STR.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4711,7 +4647,7 @@ functions = {
     'ResetWithOptions': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\n                For the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Star Trigger Controller Slot, also known as the System Timing Slot.\n\n                By default, this function resets all properties to their default values, deletes all de-embedding tables, aborts generation, clears all routes, and resets session properties to initial values. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES for the **NIRFSA_ATTR_STEPS_TO_OMIT** parameter, this function does not release signal routes during the reset process.\n\n                When routes of signals between two devices are released, they are released regardless of which device created the route.\n\n                To avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this function instead of nirfsa_Reset, with **NIRFSA_ATTR_STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n                `Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
+            'description': 'Resets all properties to default values and specifies steps to omit during the reset process, such as signal routes.\n\nFor the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Star Trigger Controller Slot, also known as the System Timing Slot.\n\nBy default, this function resets all properties to their default values, deletes all de-embedding tables, aborts generation, clears all routes, and resets session properties to initial values. You can specify steps to omit using the steps to omit parameter. For example, if you specify NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES for the **NIRFSA_ATTR_STEPS_TO_OMIT** parameter, this function does not release signal routes during the reset process.\n\nWhen routes of signals between two devices are released, they are released regardless of which device created the route.\n\nTo avoid resetting routes on PXIe-5820/5830/5831/5832/5840/5841/5842/5860 that are in use by NI-RFSG sessions, NI recommends using this function instead of nirfsa_Reset, with **NIRFSA_ATTR_STEPS_TO_OMIT** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4819,7 +4755,7 @@ functions = {
     'SelfCalibrateRange': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Self-calibrates all configurations within the specified frequency and reference level limits.\n\n                Self-calibration range data is valid until you restart the system or call the nirfsa_ClearSelfCalibrateRange function.\n\n                NI recommends that no external signals are present on the RF In port while the calibration is taking place.\n\n                ----\n                **Note**\n                This function does not update self-calibration date and temperature.\n\n                ----\n\n                For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if certain aspects of performance are less important for your application, you can omit that step for faster execution.\n\n                ----\n                **Note**\n                If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this function runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate.\n\n                ----\n\n                ----\n                **Note**\n                If there is an existing NI-RFSG session open for the same PXIe-5644/5645/5646, it may remain open but cannot be used while this function runs.\n\n                ----\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842'
+            'description': 'Self-calibrates all configurations within the specified frequency and reference level limits.\n\nSelf-calibration range data is valid until you restart the system or call the nirfsa_ClearSelfCalibrateRange function.\n\nNI recommends that no external signals are present on the RF In port while the calibration is taking place.\n\n----\n**Note**\nThis function does not update self-calibration date and temperature.\n\n----\n\nFor best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if certain aspects of performance are less important for your application, you can omit that step for faster execution.\n\n----\n**Note**\nIf there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this function runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate.\n\n----\n\n----\n**Note**\nIf there is an existing NI-RFSG session open for the same PXIe-5644/5645/5646, it may remain open but cannot be used while this function runs.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4905,7 +4841,7 @@ functions = {
     'SendSoftwareEdgeTrigger': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Sends a trigger to the device when you use a software version of a supported trigger and the device is waiting for the trigger to be sent. \n                \n                You can also use this function to override a hardware trigger.\n\n                This function returns an error in the following situations:\n\n                - You configure an invalid trigger.\n                - You set the **acquisitionType** to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function.\n                - You have not previously called the nirfsa_Initiate function.\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n                **Related Topics**\n\n                `Software Trigger <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/software-edge-trigger.html>`_\n\n                `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+            'description': 'Sends a trigger to the device when you use a software version of a supported trigger and the device is waiting for the trigger to be sent.\n\nYou can also use this function to override a hardware trigger.\n\nThis function returns an error in the following situations:\n\n- You configure an invalid trigger.\n- You set the **acquisitionType** to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function.\n- You have not previously called the nirfsa_Initiate function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Software Trigger <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/software-edge-trigger.html>`_\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -4958,6 +4894,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a particular instance of a trigger. NI-RFSA does not currently support this parameter.'
                 },
+                'default_value': '""',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4970,7 +4907,7 @@ functions = {
     'SetAttributeViBoolean': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Sets the value of a ViBoolean attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Sets the value of a ViBoolean attribute.\n\nUse this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\nNI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5030,7 +4967,7 @@ functions = {
     'SetAttributeViInt32': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Sets the value of a ViInt32 attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Sets the value of a ViInt32 attribute.\n\nUse this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\nNI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5092,7 +5029,7 @@ functions = {
     'SetAttributeViInt64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Sets the value of a ViInt64 attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Sets the value of a ViInt64 attribute.\n\nUse this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\nNI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5153,7 +5090,7 @@ functions = {
     'SetAttributeViReal64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Sets the value of a ViReal64 attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes, and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread-locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Sets the value of a ViReal64 attribute.\n\nUse this low-level function to set the values of inherent IVI attributes, and instrument-specific attributes.\n\nNI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread-locking for you.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5214,7 +5151,7 @@ functions = {
     'SetAttributeViSession': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Sets the value of a ViSession attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Sets the value of a ViSession attribute.\n\nUse this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\nNI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5274,7 +5211,7 @@ functions = {
     'SetAttributeViString': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Sets the value of a ViString attribute.\n\n                Use this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\n                NI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Sets the value of a ViString attribute.\n\nUse this low-level function to set the values of inherent IVI attributes and instrument-specific attributes.\n\nNI-RFSA contains high-level functions that set most of the instrument attributes. NI recommends you use the high-level functions as much as possible. High-level functions handle order dependencies and multithread locking for you.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -5335,7 +5272,7 @@ functions = {
     'UnlockSession': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Releases a lock obtained on an NI-RFSA device session by calling the nirfsa_LockSession function. \n                \n                Refer to the nirfsa_LockSession function for additional information on session locks.\n\n                **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
+            'description': 'Releases a lock obtained on an NI-RFSA device session by calling the nirfsa_LockSession function.\n\nRefer to the nirfsa_LockSession function for additional information on session locks.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
         'included_in_proto': True,
         'method_templates': [

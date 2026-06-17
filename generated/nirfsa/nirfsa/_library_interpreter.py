@@ -305,12 +305,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return error_message_ctype.value.decode(self._encoding)
 
-    def fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout):  # noqa: N802
+    def fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         starting_record_ctype = _visatype.ViInt64(starting_record)  # case S150
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
-        number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
+        number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_arrays is None else len(iq_data_arrays))  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_arrays_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_arrays, library_type=_complextype.NIComplexNumberF32)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
@@ -318,12 +318,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
-    def fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout):  # noqa: N802
+    def fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         starting_record_ctype = _visatype.ViInt64(starting_record)  # case S150
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
-        number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
+        number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_arrays is None else len(iq_data_arrays))  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_arrays_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_arrays, library_type=_complextype.NIComplexNumber)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
@@ -331,12 +331,12 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
-    def fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout):  # noqa: N802
+    def fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         starting_record_ctype = _visatype.ViInt64(starting_record)  # case S150
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
-        number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
+        number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_arrays is None else len(iq_data_arrays) // 2)  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_arrays_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_arrays, library_type=_complextype.NIComplexI16)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
@@ -344,11 +344,11 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
-    def fetch_iq_single_record_complex_f32(self, channel_list, record_number, number_of_samples, iq_data_array, timeout):  # noqa: N802
+    def fetch_iq_single_record_complex_f32(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
-        number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
+        number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array))  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexNumberF32)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
@@ -356,11 +356,11 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
-    def fetch_iq_single_record_complex_f64(self, channel_list, record_number, number_of_samples, iq_data_array, timeout):  # noqa: N802
+    def fetch_iq_single_record_complex_f64(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
-        number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
+        number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array))  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexNumber)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
@@ -368,11 +368,11 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
-    def fetch_iq_single_record_complex_i16(self, channel_list, record_number, number_of_samples, iq_data_array, timeout):  # noqa: N802
+    def fetch_iq_single_record_complex_i16(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
-        number_of_samples_ctype = _visatype.ViInt64(number_of_samples)  # case S150
+        number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array) // 2)  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexI16)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220

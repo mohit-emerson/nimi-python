@@ -1988,7 +1988,7 @@ functions = {
                 },
                 'name': 'iq_data_arrays',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
+                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                 'type': 'NIComplexNumberF32[]',
                 'use_in_python_api': True
             },
@@ -2096,7 +2096,7 @@ functions = {
                 },
                 'name': 'iq_data_arrays',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
+                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },
@@ -2204,7 +2204,7 @@ functions = {
                 },
                 'name': 'iq_data_arrays',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
+                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                 'type': 'NIComplexI16[]',
                 'use_in_python_api': True
             },
@@ -2400,7 +2400,7 @@ functions = {
                 },
                 'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
+                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                 'type': 'NIComplexNumberF32[]',
                 'use_in_python_api': True
             },
@@ -2498,7 +2498,7 @@ functions = {
                 },
                 'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
+                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },
@@ -2596,7 +2596,7 @@ functions = {
                 },
                 'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
+                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
                 'type': 'NIComplexI16[]',
                 'use_array': True,
                 'use_in_python_api': True

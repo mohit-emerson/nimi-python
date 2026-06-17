@@ -934,6 +934,11 @@ class PxiChassisClk10Source(Enum):
     '''
 
 
+class ReallocationPolicy(Enum):
+    DO_NOT_REALLOCATE = 0
+    TO_GROW = 1
+
+
 class ReferenceClockExportedRate(Enum):
     _10MHZ = 10000000
     r'''

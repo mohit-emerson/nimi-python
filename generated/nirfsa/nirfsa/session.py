@@ -6472,7 +6472,7 @@ class Session(_SessionBase):
         return sparameters
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_multi_record_complex_f32
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -6493,8 +6493,6 @@ class Session(_SessionBase):
             starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
 
             number_of_records (int): Specifies the number of records to fetch.
-
-            number_of_samples (int): Specifies the number of samples per record.
 
             iq_data_arrays (numpy.array(dtype=numpy.complex64)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
@@ -6545,11 +6543,11 @@ class Session(_SessionBase):
         if iq_data_arrays.dtype is not numpy.dtype('complex64'):
             raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=complex64, is ' + str(iq_data_arrays.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_multi_record_complex_f64
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -6570,8 +6568,6 @@ class Session(_SessionBase):
             starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
 
             number_of_records (int): Specifies the number of records to fetch.
-
-            number_of_samples (int): Specifies the number of samples per record.
 
             iq_data_arrays (numpy.array(dtype=numpy.complex128)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
@@ -6622,11 +6618,11 @@ class Session(_SessionBase):
         if iq_data_arrays.dtype is not numpy.dtype('complex128'):
             raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_arrays.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_multi_record_complex_i16
 
         Fetches binary I/Q data from multiple records in an acquisition.
@@ -6647,8 +6643,6 @@ class Session(_SessionBase):
             starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
 
             number_of_records (int): Specifies the number of records to fetch.
-
-            number_of_samples (int): Specifies the number of samples per record.
 
             iq_data_arrays (numpy.array(dtype=numpy.int16)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this interleaved data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
@@ -6699,10 +6693,10 @@ class Session(_SessionBase):
         if iq_data_arrays.dtype is not numpy.dtype('int16'):
             raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=int16, is ' + str(iq_data_arrays.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
         return wfm_info
 
-    def fetch_iq_multi_record(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+    def fetch_iq_multi_record(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
         '''fetch_iq_multi_record
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -6743,19 +6737,41 @@ class Session(_SessionBase):
         if str(type(iq_data_arrays)).find("'numpy.ndarray'") != -1:
             if iq_data_arrays.ndim != 2:
                 raise ValueError("iq_data_arrays must be a 2D numpy array (number_of_records x number_of_samples), but got {}D array".format(iq_data_arrays.ndim))
+            if iq_data_arrays.shape[0] < number_of_records:
+                raise ValueError("iq_data_arrays must have at least {} rows (number_of_records), but has {}".format(number_of_records, iq_data_arrays.shape[0]))
+            if iq_data_arrays.dtype == numpy.int16:
+                expected_buffer_size = 2 * number_of_samples
+            else:
+                expected_buffer_size = number_of_samples
+
+            if iq_data_arrays.shape[1] < expected_buffer_size:
+                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
+                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
+                    raise ValueError("The width of iq_data_arrays is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+
             if iq_data_arrays.dtype == numpy.complex128:
-                return self._fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
+                if wfm_info_struct.actual_number_of_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_number_of_samples), refcheck=False)
+                return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.complex64:
-                return self._fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
+                if wfm_info_struct.actual_number_of_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_number_of_samples), refcheck=False)
+                return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.int16:
-                return self._fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
+                if wfm_info_struct.actual_number_of_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], 2 * wfm_info_struct.actual_number_of_samples), refcheck=False)
+                return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
     @ivi_synchronized
-    def _fetch_iq_single_record_complex_f32(self, channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_single_record_complex_f32(self, channel_list, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_f32
 
         Fetches I/Q data from a single record in an acquisition.
@@ -6774,11 +6790,6 @@ class Session(_SessionBase):
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
 
             record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
 
             iq_data_array (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **number_of_samples**.
 
@@ -6829,11 +6840,11 @@ class Session(_SessionBase):
         if iq_data_array.dtype is not numpy.dtype('complex64'):
             raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex64, is ' + str(iq_data_array.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(channel_list, record_number, number_of_samples, iq_data_array, timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(channel_list, record_number, iq_data_array, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_single_record_complex_f64(self, channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_single_record_complex_f64(self, channel_list, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_f64
 
         Fetches I/Q data from a single record in an acquisition.
@@ -6852,11 +6863,6 @@ class Session(_SessionBase):
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
 
             record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
 
             iq_data_array (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **number_of_samples**.
 
@@ -6907,11 +6913,11 @@ class Session(_SessionBase):
         if iq_data_array.dtype is not numpy.dtype('complex128'):
             raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_array.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(channel_list, record_number, number_of_samples, iq_data_array, timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(channel_list, record_number, iq_data_array, timeout)
         return wfm_info
 
     @ivi_synchronized
-    def _fetch_iq_single_record_complex_i16(self, channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+    def _fetch_iq_single_record_complex_i16(self, channel_list, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_i16
 
         Fetches binary I/Q data from a single record in an acquisition.
@@ -6930,11 +6936,6 @@ class Session(_SessionBase):
             channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
 
             record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
 
             iq_data_array (numpy.array(dtype=numpy.int16)): Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **number_of_samples**.
 
@@ -6985,10 +6986,10 @@ class Session(_SessionBase):
         if iq_data_array.dtype is not numpy.dtype('int16'):
             raise TypeError('iq_data_array must be numpy.ndarray of dtype=int16, is ' + str(iq_data_array.dtype))
         timeout = _converters.convert_timedeltas_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(channel_list, record_number, number_of_samples, iq_data_array, timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(channel_list, record_number, iq_data_array, timeout)
         return wfm_info
 
-    def fetch_iq_single_record(self, channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+    def fetch_iq_single_record(self, channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
         '''fetch_iq_single_record
 
         Fetches I/Q data from a single record in an acquisition.
@@ -7028,12 +7029,32 @@ class Session(_SessionBase):
         '''
         import numpy
         if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
+            if iq_data_array.dtype == numpy.int16:
+                expected_buffer_size = 2 * number_of_samples
+            else:
+                expected_buffer_size = number_of_samples
+
+            if len(iq_data_array) < expected_buffer_size:
+                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
+                    iq_data_array.resize(expected_buffer_size, refcheck=False)
+                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
+                    raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to TO_GROW.")
+
             if iq_data_array.dtype == numpy.complex128:
-                return self._fetch_iq_single_record_complex_f64(channel_list, record_number, number_of_samples, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_f64(channel_list, record_number, iq_data_array, timeout)
+                if wfm_info_struct.actual_number_of_samples < number_of_samples:
+                    iq_data_array.resize(wfm_info_struct.actual_number_of_samples, refcheck=False)
+                return wfm_info_struct
             elif iq_data_array.dtype == numpy.complex64:
-                return self._fetch_iq_single_record_complex_f32(channel_list, record_number, number_of_samples, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_f32(channel_list, record_number, iq_data_array, timeout)
+                if wfm_info_struct.actual_number_of_samples < number_of_samples:
+                    iq_data_array.resize(wfm_info_struct.actual_number_of_samples, refcheck=False)
+                return wfm_info_struct
             elif iq_data_array.dtype == numpy.int16:
-                return self._fetch_iq_single_record_complex_i16(channel_list, record_number, number_of_samples, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_i16(channel_list, record_number, iq_data_array, timeout)
+                if wfm_info_struct.actual_number_of_samples < number_of_samples:
+                    iq_data_array.resize(2 * wfm_info_struct.actual_number_of_samples, refcheck=False)
+                return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:

@@ -314,7 +314,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_arrays_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_arrays, library_type=_complextype.NIComplexNumberF32)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_FetchIqMultiRecordComplexF32(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, iq_data_arrays_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_FetchIQMultiRecordComplexF32(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, iq_data_arrays_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
@@ -327,7 +327,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_arrays_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_arrays, library_type=_complextype.NIComplexNumber)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_FetchIqMultiRecordComplexF64(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, iq_data_arrays_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_FetchIQMultiRecordComplexF64(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, iq_data_arrays_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
@@ -340,7 +340,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_arrays_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_arrays, library_type=_complextype.NIComplexI16)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_FetchIqMultiRecordComplexI16(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, iq_data_arrays_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_FetchIQMultiRecordComplexI16(vi_ctype, channel_list_ctype, starting_record_ctype, number_of_records_ctype, number_of_samples_ctype, timeout_ctype, iq_data_arrays_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
@@ -352,7 +352,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexNumberF32)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_FetchIqSingleRecordComplexF32(vi_ctype, channel_list_ctype, record_number_ctype, number_of_samples_ctype, timeout_ctype, iq_data_array_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_FetchIQSingleRecordComplexF32(vi_ctype, channel_list_ctype, record_number_ctype, number_of_samples_ctype, timeout_ctype, iq_data_array_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
@@ -364,7 +364,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexNumber)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_FetchIqSingleRecordComplexF64(vi_ctype, channel_list_ctype, record_number_ctype, number_of_samples_ctype, timeout_ctype, iq_data_array_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_FetchIQSingleRecordComplexF64(vi_ctype, channel_list_ctype, record_number_ctype, number_of_samples_ctype, timeout_ctype, iq_data_array_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
@@ -376,7 +376,7 @@ class LibraryInterpreter(object):
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexI16)  # case B510
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_FetchIqSingleRecordComplexI16(vi_ctype, channel_list_ctype, record_number_ctype, number_of_samples_ctype, timeout_ctype, iq_data_array_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_FetchIQSingleRecordComplexI16(vi_ctype, channel_list_ctype, record_number_ctype, number_of_samples_ctype, timeout_ctype, iq_data_array_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 
@@ -629,9 +629,9 @@ class LibraryInterpreter(object):
         channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexNumber)  # case B510
-        data_array_size_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array) // 2)  # case S120
+        data_array_size_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array))  # case S120
         wfm_info_ctype = waveform_info.struct_niRFSA_wfmInfo()  # case S220
-        error_code = self._library.niRFSA_ReadIqSingleRecordComplexF64(vi_ctype, channel_list_ctype, timeout_ctype, iq_data_array_ctype, data_array_size_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
+        error_code = self._library.niRFSA_ReadIQSingleRecordComplexF64(vi_ctype, channel_list_ctype, timeout_ctype, iq_data_array_ctype, data_array_size_ctype, None if wfm_info_ctype is None else (ctypes.pointer(wfm_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return waveform_info.WaveformInfo(wfm_info_ctype)
 

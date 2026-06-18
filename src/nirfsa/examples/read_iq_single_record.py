@@ -6,27 +6,22 @@ import nirfsa
 NUMBER_OF_SAMPLES = 1000
 
 
-def run_fetch_case(session, label, buffer_length, reallocation_policy):
+def run_read_iq_case(session, label, buffer_length, reallocation_policy):
     iq_data_array = np.zeros(buffer_length, dtype=np.complex128)
     print(f"\n{label}")
-    print(f"  before fetch: len={len(iq_data_array)}, policy={reallocation_policy}")
+    print(f"  before read: len={len(iq_data_array)}, policy={reallocation_policy}")
 
-    session.initiate()
     try:
-        wfm_info = session.fetch_iq_single_record(
+        wfm_info = session.read_iq_single_record(
             channel_list="",
-            record_number=0,
-            number_of_samples=NUMBER_OF_SAMPLES,
             iq_data_array=iq_data_array,
             timeout=10.0,
             reallocation_policy=reallocation_policy,
         )
-        print(f"  after fetch:  len={len(iq_data_array)}")
+        print(f"  after read:  len={len(iq_data_array)}")
         print(f"  actual samples read: {wfm_info.actual_samples}")
     except ValueError as error:
-        print(f"  fetch raised ValueError: {error}")
-    finally:
-        session.abort()
+        print(f"  read_iq_single_record raised ValueError: {error}")
 
 
 with nirfsa.Session(
@@ -40,19 +35,19 @@ with nirfsa.Session(
     session.iq_rate = 1e6
     session.number_of_samples = NUMBER_OF_SAMPLES
 
-    run_fetch_case(
+    run_read_iq_case(
         session,
         label="Scenario 1: smaller buffer with TO_GROW",
         buffer_length=250,
         reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW,
     )
-    run_fetch_case(
+    run_read_iq_case(
         session,
         label="Scenario 2: smaller buffer with DO_NOT_REALLOCATE",
         buffer_length=250,
         reallocation_policy=nirfsa.ReallocationPolicy.DO_NOT_REALLOCATE,
     )
-    run_fetch_case(
+    run_read_iq_case(
         session,
         label="Scenario 3: larger buffer than number_of_samples",
         buffer_length=1500,

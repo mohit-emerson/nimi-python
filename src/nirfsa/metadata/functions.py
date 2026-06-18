@@ -1766,7 +1766,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -1791,7 +1791,7 @@ functions = {
                     'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.',
                 },
                 'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array) // 2'},
+                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array)'},
                 'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': False
@@ -1811,7 +1811,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'ReadIqSingleRecordComplexF64': {
+    'ReadIQSingleRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -1856,7 +1856,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -1880,7 +1880,7 @@ functions = {
                     'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.',
                 },
                 'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array) // 2'},
+                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array)'},
                 'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': False
@@ -1899,7 +1899,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqMultiRecordComplexF32': {
+    'FetchIQMultiRecordComplexF32': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -1974,7 +1974,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2006,7 +2006,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqMultiRecordComplexF64': {
+    'FetchIQMultiRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -2082,7 +2082,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2114,7 +2114,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqMultiRecordComplexI16': {
+    'FetchIQMultiRecordComplexI16': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches binary I/Q data from multiple records in an acquisition.\n\nFetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -2190,7 +2190,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2309,7 +2309,7 @@ functions = {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----',
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2320,7 +2320,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'FetchIqSingleRecordComplexF32': {
+    'FetchIQSingleRecordComplexF32': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -2386,7 +2386,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2418,7 +2418,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqSingleRecordComplexF64': {
+    'FetchIQSingleRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -2484,7 +2484,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2516,7 +2516,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqSingleRecordComplexI16': {
+    'FetchIQSingleRecordComplexI16': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches binary I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_',
@@ -2582,7 +2582,7 @@ functions = {
                 },
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -2692,7 +2692,7 @@ functions = {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----',
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -4357,7 +4357,7 @@ functions = {
                     'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.',
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -4444,7 +4444,7 @@ functions = {
                     'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.',
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
@@ -4531,7 +4531,7 @@ functions = {
                     'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.',
                 },
                 'name': 'timeout',
-                'python_api_converter_name': 'convert_timedeltas_to_seconds_real64',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,

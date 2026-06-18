@@ -27,18 +27,18 @@
 
             if iq_data_arrays.dtype == numpy.complex128:
                 wfm_info_struct = self._fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_number_of_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_number_of_samples), refcheck=False)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.complex64:
                 wfm_info_struct = self._fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_number_of_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_number_of_samples), refcheck=False)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.int16:
                 wfm_info_struct = self._fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_number_of_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], 2 * wfm_info_struct.actual_number_of_samples), refcheck=False)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], 2 * wfm_info_struct.actual_samples), refcheck=False)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))

@@ -19,22 +19,22 @@
                 if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
                     iq_data_array.resize(expected_buffer_size, refcheck=False)
                 elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to TO_GROW.")
+                    raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
 
             if iq_data_array.dtype == numpy.complex128:
                 wfm_info_struct = self._fetch_iq_single_record_complex_f64(channel_list, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_number_of_samples < number_of_samples:
-                    iq_data_array.resize(wfm_info_struct.actual_number_of_samples, refcheck=False)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.complex64:
                 wfm_info_struct = self._fetch_iq_single_record_complex_f32(channel_list, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_number_of_samples < number_of_samples:
-                    iq_data_array.resize(wfm_info_struct.actual_number_of_samples, refcheck=False)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.int16:
                 wfm_info_struct = self._fetch_iq_single_record_complex_i16(channel_list, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_number_of_samples < number_of_samples:
-                    iq_data_array.resize(2 * wfm_info_struct.actual_number_of_samples, refcheck=False)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_array.resize(2 * wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))

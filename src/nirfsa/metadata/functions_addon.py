@@ -6,7 +6,7 @@ functions_override_metadata = {
         'codegen_method': 'private',
         'is_error_handling': True,
     },
-    'FetchIqSingleRecordComplexF32': {
+    'FetchIQSingleRecordComplexF32': {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -16,7 +16,7 @@ functions_override_metadata = {
             }
         ],
     },
-    'FetchIqSingleRecordComplexF64': {
+    'FetchIQSingleRecordComplexF64': {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -26,7 +26,7 @@ functions_override_metadata = {
             }
         ],
     },
-    'FetchIqSingleRecordComplexI16': {
+    'FetchIQSingleRecordComplexI16': {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -36,7 +36,7 @@ functions_override_metadata = {
             }
         ],
     },
-    'FetchIqMultiRecordComplexF32': {
+    'FetchIQMultiRecordComplexF32': {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -46,7 +46,7 @@ functions_override_metadata = {
             }
         ],
     },
-    'FetchIqMultiRecordComplexF64': {
+    'FetchIQMultiRecordComplexF64': {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',
@@ -56,7 +56,7 @@ functions_override_metadata = {
             }
         ],
     },
-    'FetchIqMultiRecordComplexI16': {
+    'FetchIQMultiRecordComplexI16': {
         'method_templates': [
             {
                 'documentation_filename': 'numpy_method',

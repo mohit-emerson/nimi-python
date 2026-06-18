@@ -72,24 +72,24 @@ class SideEffectsHelper(object):
         self._defaults['ErrorMessage'] = {}
         self._defaults['ErrorMessage']['return'] = 0
         self._defaults['ErrorMessage']['errorMessage'] = None
-        self._defaults['FetchIqMultiRecordComplexF32'] = {}
-        self._defaults['FetchIqMultiRecordComplexF32']['return'] = 0
-        self._defaults['FetchIqMultiRecordComplexF32']['wfmInfo'] = None
-        self._defaults['FetchIqMultiRecordComplexF64'] = {}
-        self._defaults['FetchIqMultiRecordComplexF64']['return'] = 0
-        self._defaults['FetchIqMultiRecordComplexF64']['wfmInfo'] = None
-        self._defaults['FetchIqMultiRecordComplexI16'] = {}
-        self._defaults['FetchIqMultiRecordComplexI16']['return'] = 0
-        self._defaults['FetchIqMultiRecordComplexI16']['wfmInfo'] = None
-        self._defaults['FetchIqSingleRecordComplexF32'] = {}
-        self._defaults['FetchIqSingleRecordComplexF32']['return'] = 0
-        self._defaults['FetchIqSingleRecordComplexF32']['wfmInfo'] = None
-        self._defaults['FetchIqSingleRecordComplexF64'] = {}
-        self._defaults['FetchIqSingleRecordComplexF64']['return'] = 0
-        self._defaults['FetchIqSingleRecordComplexF64']['wfmInfo'] = None
-        self._defaults['FetchIqSingleRecordComplexI16'] = {}
-        self._defaults['FetchIqSingleRecordComplexI16']['return'] = 0
-        self._defaults['FetchIqSingleRecordComplexI16']['wfmInfo'] = None
+        self._defaults['FetchIQMultiRecordComplexF32'] = {}
+        self._defaults['FetchIQMultiRecordComplexF32']['return'] = 0
+        self._defaults['FetchIQMultiRecordComplexF32']['wfmInfo'] = None
+        self._defaults['FetchIQMultiRecordComplexF64'] = {}
+        self._defaults['FetchIQMultiRecordComplexF64']['return'] = 0
+        self._defaults['FetchIQMultiRecordComplexF64']['wfmInfo'] = None
+        self._defaults['FetchIQMultiRecordComplexI16'] = {}
+        self._defaults['FetchIQMultiRecordComplexI16']['return'] = 0
+        self._defaults['FetchIQMultiRecordComplexI16']['wfmInfo'] = None
+        self._defaults['FetchIQSingleRecordComplexF32'] = {}
+        self._defaults['FetchIQSingleRecordComplexF32']['return'] = 0
+        self._defaults['FetchIQSingleRecordComplexF32']['wfmInfo'] = None
+        self._defaults['FetchIQSingleRecordComplexF64'] = {}
+        self._defaults['FetchIQSingleRecordComplexF64']['return'] = 0
+        self._defaults['FetchIQSingleRecordComplexF64']['wfmInfo'] = None
+        self._defaults['FetchIQSingleRecordComplexI16'] = {}
+        self._defaults['FetchIQSingleRecordComplexI16']['return'] = 0
+        self._defaults['FetchIQSingleRecordComplexI16']['wfmInfo'] = None
         self._defaults['GetAttributeViBoolean'] = {}
         self._defaults['GetAttributeViBoolean']['return'] = 0
         self._defaults['GetAttributeViBoolean']['value'] = None
@@ -176,9 +176,9 @@ class SideEffectsHelper(object):
         self._defaults['LockSession']['callerHasLock'] = None
         self._defaults['PerformThermalCorrection'] = {}
         self._defaults['PerformThermalCorrection']['return'] = 0
-        self._defaults['ReadIqSingleRecordComplexF64'] = {}
-        self._defaults['ReadIqSingleRecordComplexF64']['return'] = 0
-        self._defaults['ReadIqSingleRecordComplexF64']['wfmInfo'] = None
+        self._defaults['ReadIQSingleRecordComplexF64'] = {}
+        self._defaults['ReadIQSingleRecordComplexF64']['return'] = 0
+        self._defaults['ReadIQSingleRecordComplexF64']['wfmInfo'] = None
         self._defaults['ReadPowerSpectrumF32'] = {}
         self._defaults['ReadPowerSpectrumF32']['return'] = 0
         self._defaults['ReadPowerSpectrumF32']['spectrumInfo'] = None
@@ -376,71 +376,71 @@ class SideEffectsHelper(object):
             error_message[i] = test_value[i]
         return self._defaults['ErrorMessage']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
-        if self._defaults['FetchIqMultiRecordComplexF32']['return'] != 0:
-            return self._defaults['FetchIqMultiRecordComplexF32']['return']
+    def niRFSA_FetchIQMultiRecordComplexF32(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
+        if self._defaults['FetchIQMultiRecordComplexF32']['return'] != 0:
+            return self._defaults['FetchIQMultiRecordComplexF32']['return']
         # wfm_info
-        if self._defaults['FetchIqMultiRecordComplexF32']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF32", param='wfmInfo')
-        for field in self._defaults['FetchIqMultiRecordComplexF32']['wfm_info']._fields_:
+        if self._defaults['FetchIQMultiRecordComplexF32']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIQMultiRecordComplexF32", param='wfmInfo')
+        for field in self._defaults['FetchIQMultiRecordComplexF32']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF32']['wfm_info'], field_name))
-        return self._defaults['FetchIqMultiRecordComplexF32']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIQMultiRecordComplexF32']['wfm_info'], field_name))
+        return self._defaults['FetchIQMultiRecordComplexF32']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
-        if self._defaults['FetchIqMultiRecordComplexF64']['return'] != 0:
-            return self._defaults['FetchIqMultiRecordComplexF64']['return']
+    def niRFSA_FetchIQMultiRecordComplexF64(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
+        if self._defaults['FetchIQMultiRecordComplexF64']['return'] != 0:
+            return self._defaults['FetchIQMultiRecordComplexF64']['return']
         # wfm_info
-        if self._defaults['FetchIqMultiRecordComplexF64']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF64", param='wfmInfo')
-        for field in self._defaults['FetchIqMultiRecordComplexF64']['wfm_info']._fields_:
+        if self._defaults['FetchIQMultiRecordComplexF64']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIQMultiRecordComplexF64", param='wfmInfo')
+        for field in self._defaults['FetchIQMultiRecordComplexF64']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexF64']['wfm_info'], field_name))
-        return self._defaults['FetchIqMultiRecordComplexF64']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIQMultiRecordComplexF64']['wfm_info'], field_name))
+        return self._defaults['FetchIQMultiRecordComplexF64']['return']
 
-    def niRFSA_FetchIqMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
-        if self._defaults['FetchIqMultiRecordComplexI16']['return'] != 0:
-            return self._defaults['FetchIqMultiRecordComplexI16']['return']
+    def niRFSA_FetchIQMultiRecordComplexI16(self, vi, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays, wfm_info):  # noqa: N802
+        if self._defaults['FetchIQMultiRecordComplexI16']['return'] != 0:
+            return self._defaults['FetchIQMultiRecordComplexI16']['return']
         # wfm_info
-        if self._defaults['FetchIqMultiRecordComplexI16']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexI16", param='wfmInfo')
-        for field in self._defaults['FetchIqMultiRecordComplexI16']['wfm_info']._fields_:
+        if self._defaults['FetchIQMultiRecordComplexI16']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIQMultiRecordComplexI16", param='wfmInfo')
+        for field in self._defaults['FetchIQMultiRecordComplexI16']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqMultiRecordComplexI16']['wfm_info'], field_name))
-        return self._defaults['FetchIqMultiRecordComplexI16']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIQMultiRecordComplexI16']['wfm_info'], field_name))
+        return self._defaults['FetchIQMultiRecordComplexI16']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
-        if self._defaults['FetchIqSingleRecordComplexF32']['return'] != 0:
-            return self._defaults['FetchIqSingleRecordComplexF32']['return']
+    def niRFSA_FetchIQSingleRecordComplexF32(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
+        if self._defaults['FetchIQSingleRecordComplexF32']['return'] != 0:
+            return self._defaults['FetchIQSingleRecordComplexF32']['return']
         # wfm_info
-        if self._defaults['FetchIqSingleRecordComplexF32']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF32", param='wfmInfo')
-        for field in self._defaults['FetchIqSingleRecordComplexF32']['wfm_info']._fields_:
+        if self._defaults['FetchIQSingleRecordComplexF32']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIQSingleRecordComplexF32", param='wfmInfo')
+        for field in self._defaults['FetchIQSingleRecordComplexF32']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF32']['wfm_info'], field_name))
-        return self._defaults['FetchIqSingleRecordComplexF32']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIQSingleRecordComplexF32']['wfm_info'], field_name))
+        return self._defaults['FetchIQSingleRecordComplexF32']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
-        if self._defaults['FetchIqSingleRecordComplexF64']['return'] != 0:
-            return self._defaults['FetchIqSingleRecordComplexF64']['return']
+    def niRFSA_FetchIQSingleRecordComplexF64(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
+        if self._defaults['FetchIQSingleRecordComplexF64']['return'] != 0:
+            return self._defaults['FetchIQSingleRecordComplexF64']['return']
         # wfm_info
-        if self._defaults['FetchIqSingleRecordComplexF64']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF64", param='wfmInfo')
-        for field in self._defaults['FetchIqSingleRecordComplexF64']['wfm_info']._fields_:
+        if self._defaults['FetchIQSingleRecordComplexF64']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIQSingleRecordComplexF64", param='wfmInfo')
+        for field in self._defaults['FetchIQSingleRecordComplexF64']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexF64']['wfm_info'], field_name))
-        return self._defaults['FetchIqSingleRecordComplexF64']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIQSingleRecordComplexF64']['wfm_info'], field_name))
+        return self._defaults['FetchIQSingleRecordComplexF64']['return']
 
-    def niRFSA_FetchIqSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
-        if self._defaults['FetchIqSingleRecordComplexI16']['return'] != 0:
-            return self._defaults['FetchIqSingleRecordComplexI16']['return']
+    def niRFSA_FetchIQSingleRecordComplexI16(self, vi, channel_list, record_number, number_of_samples, timeout, iq_data_array, wfm_info):  # noqa: N802
+        if self._defaults['FetchIQSingleRecordComplexI16']['return'] != 0:
+            return self._defaults['FetchIQSingleRecordComplexI16']['return']
         # wfm_info
-        if self._defaults['FetchIqSingleRecordComplexI16']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexI16", param='wfmInfo')
-        for field in self._defaults['FetchIqSingleRecordComplexI16']['wfm_info']._fields_:
+        if self._defaults['FetchIQSingleRecordComplexI16']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_FetchIQSingleRecordComplexI16", param='wfmInfo')
+        for field in self._defaults['FetchIQSingleRecordComplexI16']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIqSingleRecordComplexI16']['wfm_info'], field_name))
-        return self._defaults['FetchIqSingleRecordComplexI16']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['FetchIQSingleRecordComplexI16']['wfm_info'], field_name))
+        return self._defaults['FetchIQSingleRecordComplexI16']['return']
 
     def niRFSA_GetAttributeViBoolean(self, vi, channel_name, attribute_id, value):  # noqa: N802
         if self._defaults['GetAttributeViBoolean']['return'] != 0:
@@ -785,16 +785,16 @@ class SideEffectsHelper(object):
             return self._defaults['PerformThermalCorrection']['return']
         return self._defaults['PerformThermalCorrection']['return']
 
-    def niRFSA_ReadIqSingleRecordComplexF64(self, vi, channel_list, timeout, iq_data_array, data_array_size, wfm_info):  # noqa: N802
-        if self._defaults['ReadIqSingleRecordComplexF64']['return'] != 0:
-            return self._defaults['ReadIqSingleRecordComplexF64']['return']
+    def niRFSA_ReadIQSingleRecordComplexF64(self, vi, channel_list, timeout, iq_data_array, data_array_size, wfm_info):  # noqa: N802
+        if self._defaults['ReadIQSingleRecordComplexF64']['return'] != 0:
+            return self._defaults['ReadIQSingleRecordComplexF64']['return']
         # wfm_info
-        if self._defaults['ReadIqSingleRecordComplexF64']['wfmInfo'] is None:
-            raise MockFunctionCallError("niRFSA_ReadIqSingleRecordComplexF64", param='wfmInfo')
-        for field in self._defaults['ReadIqSingleRecordComplexF64']['wfm_info']._fields_:
+        if self._defaults['ReadIQSingleRecordComplexF64']['wfmInfo'] is None:
+            raise MockFunctionCallError("niRFSA_ReadIQSingleRecordComplexF64", param='wfmInfo')
+        for field in self._defaults['ReadIQSingleRecordComplexF64']['wfm_info']._fields_:
             field_name = field[0]
-            setattr(wfm_info.contents, field_name, getattr(self._defaults['ReadIqSingleRecordComplexF64']['wfm_info'], field_name))
-        return self._defaults['ReadIqSingleRecordComplexF64']['return']
+            setattr(wfm_info.contents, field_name, getattr(self._defaults['ReadIQSingleRecordComplexF64']['wfm_info'], field_name))
+        return self._defaults['ReadIQSingleRecordComplexF64']['return']
 
     def niRFSA_ReadPowerSpectrumF32(self, vi, channel_list, timeout, power_spectrum_data_array, data_array_size, spectrum_info):  # noqa: N802
         if self._defaults['ReadPowerSpectrumF32']['return'] != 0:
@@ -973,18 +973,18 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_EnableSessionAccess.return_value = 0
         mock_library.niRFSA_ErrorMessage.side_effect = MockFunctionCallError("niRFSA_ErrorMessage")
         mock_library.niRFSA_ErrorMessage.return_value = 0
-        mock_library.niRFSA_FetchIqMultiRecordComplexF32.side_effect = MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF32")
-        mock_library.niRFSA_FetchIqMultiRecordComplexF32.return_value = 0
-        mock_library.niRFSA_FetchIqMultiRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexF64")
-        mock_library.niRFSA_FetchIqMultiRecordComplexF64.return_value = 0
-        mock_library.niRFSA_FetchIqMultiRecordComplexI16.side_effect = MockFunctionCallError("niRFSA_FetchIqMultiRecordComplexI16")
-        mock_library.niRFSA_FetchIqMultiRecordComplexI16.return_value = 0
-        mock_library.niRFSA_FetchIqSingleRecordComplexF32.side_effect = MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF32")
-        mock_library.niRFSA_FetchIqSingleRecordComplexF32.return_value = 0
-        mock_library.niRFSA_FetchIqSingleRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexF64")
-        mock_library.niRFSA_FetchIqSingleRecordComplexF64.return_value = 0
-        mock_library.niRFSA_FetchIqSingleRecordComplexI16.side_effect = MockFunctionCallError("niRFSA_FetchIqSingleRecordComplexI16")
-        mock_library.niRFSA_FetchIqSingleRecordComplexI16.return_value = 0
+        mock_library.niRFSA_FetchIQMultiRecordComplexF32.side_effect = MockFunctionCallError("niRFSA_FetchIQMultiRecordComplexF32")
+        mock_library.niRFSA_FetchIQMultiRecordComplexF32.return_value = 0
+        mock_library.niRFSA_FetchIQMultiRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_FetchIQMultiRecordComplexF64")
+        mock_library.niRFSA_FetchIQMultiRecordComplexF64.return_value = 0
+        mock_library.niRFSA_FetchIQMultiRecordComplexI16.side_effect = MockFunctionCallError("niRFSA_FetchIQMultiRecordComplexI16")
+        mock_library.niRFSA_FetchIQMultiRecordComplexI16.return_value = 0
+        mock_library.niRFSA_FetchIQSingleRecordComplexF32.side_effect = MockFunctionCallError("niRFSA_FetchIQSingleRecordComplexF32")
+        mock_library.niRFSA_FetchIQSingleRecordComplexF32.return_value = 0
+        mock_library.niRFSA_FetchIQSingleRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_FetchIQSingleRecordComplexF64")
+        mock_library.niRFSA_FetchIQSingleRecordComplexF64.return_value = 0
+        mock_library.niRFSA_FetchIQSingleRecordComplexI16.side_effect = MockFunctionCallError("niRFSA_FetchIQSingleRecordComplexI16")
+        mock_library.niRFSA_FetchIQSingleRecordComplexI16.return_value = 0
         mock_library.niRFSA_GetAttributeViBoolean.side_effect = MockFunctionCallError("niRFSA_GetAttributeViBoolean")
         mock_library.niRFSA_GetAttributeViBoolean.return_value = 0
         mock_library.niRFSA_GetAttributeViInt32.side_effect = MockFunctionCallError("niRFSA_GetAttributeViInt32")
@@ -1033,8 +1033,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_LockSession.return_value = 0
         mock_library.niRFSA_PerformThermalCorrection.side_effect = MockFunctionCallError("niRFSA_PerformThermalCorrection")
         mock_library.niRFSA_PerformThermalCorrection.return_value = 0
-        mock_library.niRFSA_ReadIqSingleRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_ReadIqSingleRecordComplexF64")
-        mock_library.niRFSA_ReadIqSingleRecordComplexF64.return_value = 0
+        mock_library.niRFSA_ReadIQSingleRecordComplexF64.side_effect = MockFunctionCallError("niRFSA_ReadIQSingleRecordComplexF64")
+        mock_library.niRFSA_ReadIQSingleRecordComplexF64.return_value = 0
         mock_library.niRFSA_ReadPowerSpectrumF32.side_effect = MockFunctionCallError("niRFSA_ReadPowerSpectrumF32")
         mock_library.niRFSA_ReadPowerSpectrumF32.return_value = 0
         mock_library.niRFSA_ReadPowerSpectrumF64.side_effect = MockFunctionCallError("niRFSA_ReadPowerSpectrumF64")

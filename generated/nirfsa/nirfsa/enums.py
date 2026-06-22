@@ -402,7 +402,7 @@ class FetchRelativeTo(Enum):
     r'''
     Fetching occurs at the first sample acquired by the device. If the device wraps its buffer, the first sample is no longer available. In this case, NI-RFSA returns an error if the fetch offset is in the overwritten data.
     '''
-    REFERENCE_TRIGGER_STR = 702
+    REFERENCE_TRIGGER = 702
     r'''
     Fetching occurs relative to the Reference Trigger. This value behaves like FetchRelativeTo.FIRST_SAMPLE if no Reference Trigger is configured.
     '''

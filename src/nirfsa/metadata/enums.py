@@ -353,14 +353,14 @@ enums = {
                 'documentation': {
                     'description': 'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_NONE_STR',
+                'name': 'NIRFSA_VAL_NONE',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'name': 'NIRFSA_VAL_CLK_OUT',
                 'value': 'ClkOut'
             }
         ]
@@ -372,35 +372,35 @@ enums = {
                 'documentation': {
                     'description': 'The digitizer uses its onboard clock as the Sample Clock timebase.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_CLOCK_STR',
+                'name': 'NIRFSA_VAL_ONBOARD_CLOCK',
                 'value': 'OnboardClock'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal present on the CLK IN connector as the Sample Clock timebase.'
                 },
-                'name': 'NIRFSA_VAL_CLK_IN_STR',
+                'name': 'NIRFSA_VAL_CLK_IN',
                 'value': 'ClkIn'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal generated on the 100 MHz REF OUT terminal on the PXIe-5653 as the Sample Clock timebase. This value is supported only for the PXIe-5665.'
                 },
-                'name': 'NIRFSA_VAL_LO_REF_CLK_STR',
+                'name': 'NIRFSA_VAL_LO_REF_CLK',
                 'value': 'LORefClk'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal present at the PXI star trigger line as the Sample Clock timebase. This value is not supported for the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_PXI_STAR_STR',
+                'name': 'NIRFSA_VAL_PXI_STAR',
                 'value': 'PXI_STAR'
             },
             {
                 'documentation': {
                     'description': 'The digitizer uses the signal present on the LO2 OUT connector on the downconverter as the Sample Clock timebase. This value is supported only for the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_DOWNCONVERTER_LO2_OUT_STR',
+                'name': 'NIRFSA_VAL_DOWNCONVERTER_LO2_OUT',
                 'value': 'DownconverterLO2Out'
             }
         ]
@@ -568,168 +568,168 @@ enums = {
                 'documentation': {
                     'description': 'The signal is not exported.'
                 },
-                'name': 'NIRFSA_VAL_DO_NOT_EXPORT_STR',
+                'name': 'NIRFSA_VAL_DO_NOT_EXPORT',
                 'value': ''
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'name': 'NIRFSA_VAL_CLK_OUT',
                 'value': 'ClkOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT_STR',
+                'name': 'NIRFSA_VAL_REF_OUT',
                 'value': 'RefOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT2_STR',
+                'name': 'NIRFSA_VAL_REF_OUT2',
                 'value': 'RefOut2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.'
                 },
-                'name': 'NIRFSA_VAL_PFI0_STR',
+                'name': 'NIRFSA_VAL_PFI0',
                 'value': 'PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 1.'
                 },
-                'name': 'NIRFSA_VAL_PFI1_STR',
+                'name': 'NIRFSA_VAL_PFI1',
                 'value': 'PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 0.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG0_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG0',
                 'value': 'PXI_Trig0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 1.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG1_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG1',
                 'value': 'PXI_Trig1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 2.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG2_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG2',
                 'value': 'PXI_Trig2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 3.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG3_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG3',
                 'value': 'PXI_Trig3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 4.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG4_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG4',
                 'value': 'PXI_Trig4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 5.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG5_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG5',
                 'value': 'PXI_Trig5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 6.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG6_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG6',
                 'value': 'PXI_Trig6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 7.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG7_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG7',
                 'value': 'PXI_Trig7'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_PXI_STAR_STR',
+                'name': 'NIRFSA_VAL_PXI_STAR',
                 'value': 'PXI_STAR'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_PXIE_DSTARC_STR',
+                'name': 'NIRFSA_VAL_PXIE_DSTARC',
                 'value': 'PXIe_DStarC'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI0_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI0',
                 'value': 'DIO/PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI1_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI1',
                 'value': 'DIO/PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI2_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI2',
                 'value': 'DIO/PFI2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI3_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI3',
                 'value': 'DIO/PFI3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI4_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI4',
                 'value': 'DIO/PFI4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI5_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI5',
                 'value': 'DIO/PFI5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI6_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI6',
                 'value': 'DIO/PFI6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI7_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI7',
                 'value': 'DIO/PFI7'
             }
         ]
@@ -755,7 +755,7 @@ enums = {
                 'documentation': {
                     'description': 'Fetching occurs relative to the Reference Trigger. This value behaves like NIRFSA_VAL_FIRST_SAMPLE if no Reference Trigger is configured.'
                 },
-                'name': 'NIRFSA_VAL_REFERENCE_TRIGGER_STR',
+                'name': 'NIRFSA_VAL_REFERENCE_TRIGGER',
                 'value': 702
             },
             {
@@ -1279,35 +1279,35 @@ enums = {
                 'documentation': {
                     'description': 'Specifies that no LO source is required to downconvert the RF input signal.'
                 },
-                'name': 'NIRFSA_VAL_NONE_STR',
+                'name': 'NIRFSA_VAL_NONE',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'Specifies that the onboard synthesizer is used to generate the LO signal that downconverts the RF input signal.**PXIe-5831/5832** This configuration uses the onboard LO of the PXIe-3622, using the LO2 stage.**PXIe-5831/5832 with PXIe-5653** This configuration uses the onboard LO of the PXIe-5653 when associated with the PXIe-3622.**PXIe-5841 with PXIe-5655** This configuration uses the onboard LO of the PXIe-5655.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_STR',
+                'name': 'NIRFSA_VAL_ONBOARD',
                 'value': 'Onboard'
             },
             {
                 'documentation': {
                     'description': 'Specifies that the LO source used to downconvert the RF input signal is connected to the LO IN connector on the front panel.'
                 },
-                'name': 'NIRFSA_VAL_LO_IN_STR',
+                'name': 'NIRFSA_VAL_LO_IN',
                 'value': 'LO_In'
             },
             {
                 'documentation': {
                     'description': 'Uses the PXIe-5831/5840 internal LO as the LO source. This value is valid on only the PXIe-5831 with PXIe-5653 (LO1 stage only) or PXIe-5832 with PCIe-5653 (LO1 stage only).'
                 },
-                'name': 'NIRFSA_VAL_LO_SOURCE_SECONDARY_STR',
+                'name': 'NIRFSA_VAL_LO_SOURCE_SECONDARY',
                 'value': 'Secondary'
             },
             {
                 'documentation': {
                     'description': 'Uses the same internal LO during NI-RFSA and NI-RFSG sessions. NI-RFSA selects an internal synthesizer and the synthesizer signal is switched to both the RF Out and RF In mixers. This value is valid on only the PXIe-5830/5831/5832/5841 with PXIe-5655.'
                 },
-                'name': 'NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED_STR',
+                'name': 'NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED',
                 'value': 'SG_SA_Shared'
             }
         ]
@@ -1420,175 +1420,175 @@ enums = {
                 'documentation': {
                     'description': 'The signal is not exported.'
                 },
-                'name': 'NIRFSA_VAL_DO_NOT_EXPORT_STR',
+                'name': 'NIRFSA_VAL_DO_NOT_EXPORT',
                 'value': ''
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'name': 'NIRFSA_VAL_CLK_OUT',
                 'value': 'ClkOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT_STR',
+                'name': 'NIRFSA_VAL_REF_OUT',
                 'value': 'RefOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT2_STR',
+                'name': 'NIRFSA_VAL_REF_OUT2',
                 'value': 'RefOut2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.'
                 },
-                'name': 'NIRFSA_VAL_PFI0_STR',
+                'name': 'NIRFSA_VAL_PFI0',
                 'value': 'PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI 1.'
                 },
-                'name': 'NIRFSA_VAL_PFI1_STR',
+                'name': 'NIRFSA_VAL_PFI1',
                 'value': 'PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 0.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG0_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG0',
                 'value': 'PXI_Trig0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 1.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG1_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG1',
                 'value': 'PXI_Trig1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 2.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG2_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG2',
                 'value': 'PXI_Trig2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 3.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG3_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG3',
                 'value': 'PXI_Trig3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 4.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG4_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG4',
                 'value': 'PXI_Trig4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 5.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG5_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG5',
                 'value': 'PXI_Trig5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 6.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG6_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG6',
                 'value': 'PXI_Trig6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PXI trigger line 7.'
                 },
-                'name': 'NIRFSA_VAL_PXI_TRIG7_STR',
+                'name': 'NIRFSA_VAL_PXI_TRIG7',
                 'value': 'PXI_Trig7'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXI star trigger line. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_PXI_STAR_STR',
+                'name': 'NIRFSA_VAL_PXI_STAR',
                 'value': 'PXI_STAR'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_PXIE_DSTARB_STR',
+                'name': 'NIRFSA_VAL_PXIE_DSTARB',
                 'value': 'PXIe_DStarB'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI0 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI0_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI0',
                 'value': 'DIO/PFI0'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI1 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI1_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI1',
                 'value': 'DIO/PFI1'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI2 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI2_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI2',
                 'value': 'DIO/PFI2'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI3 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI3_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI3',
                 'value': 'DIO/PFI3'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI4 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI4_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI4',
                 'value': 'DIO/PFI4'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI5 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI5_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI5',
                 'value': 'DIO/PFI5'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI6 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI6_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI6',
                 'value': 'DIO/PFI6'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received on PFI7 from the front panel DIO terminal.'
                 },
-                'name': 'NIRFSA_VAL_DIO_PFI7_STR',
+                'name': 'NIRFSA_VAL_DIO_PFI7',
                 'value': 'DIO/PFI7'
             },
             {
                 'documentation': {
                     'description': 'The trigger is received from the Timer Event. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841, and for digital edge Advance Triggers on the PXIe-5663E/5665.'
                 },
-                'name': 'NIRFSA_VAL_TIMER_EVENT_STR',
+                'name': 'NIRFSA_VAL_TIMER_EVENT',
                 'value': 'TimerEvent'
             }
         ]
@@ -1666,21 +1666,21 @@ enums = {
                 'documentation': {
                     'description': 'The device does not drive the PXI 10 MHz backplane Reference Clock.'
                 },
-                'name': 'NIRFSA_VAL_NONE_STR',
+                'name': 'NIRFSA_VAL_NONE',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'The device drives the PXI 10 MHz backplane Reference Clock with the PXI-5600 onboard clock. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_CLOCK_STR',
+                'name': 'NIRFSA_VAL_ONBOARD_CLOCK',
                 'value': 'OnboardClock'
             },
             {
                 'documentation': {
                     'description': 'The device drives the PXI 10 MHz backplane Reference Clock with the reference source attached to the PXI-5600 FREQ REF IN connector. You must connect the 10 MHz OUT connector to the PXI 10 MHz I/O connector on the PXI-5600 front panel to use this option.'
                 },
-                'name': 'NIRFSA_VAL_REF_IN_STR',
+                'name': 'NIRFSA_VAL_REF_IN',
                 'value': 'RefIn'
             }
         ]
@@ -1740,35 +1740,35 @@ enums = {
                 'documentation': {
                     'description': 'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 },
-                'name': 'NIRFSA_VAL_NONE_STR',
+                'name': 'NIRFSA_VAL_NONE',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF IN/OUT terminal on the PXI/PXIe-5652, the REF OUT terminals on the PXIe-5653, or the REF OUT terminal on the PXIe-5644/5645/5646, PXIe-5694, or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT_STR',
+                'name': 'NIRFSA_VAL_REF_OUT',
                 'value': 'RefOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT2 terminal on the PXIe-5652. This value is valid only for the PXIe-5663E.'
                 },
-                'name': 'NIRFSA_VAL_REF_OUT2_STR',
+                'name': 'NIRFSA_VAL_REF_OUT2',
                 'value': 'RefOut2'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 },
-                'name': 'NIRFSA_VAL_CLK_OUT_STR',
+                'name': 'NIRFSA_VAL_CLK_OUT',
                 'value': 'ClkOut'
             },
             {
                 'documentation': {
                     'description': 'Export the clock on the REF OUT terminal on the PXIe-5694. This value is valid only for the PXIe-5667.'
                 },
-                'name': 'NIRFSA_VAL_IF_COND_REF_OUT_STR',
+                'name': 'NIRFSA_VAL_IF_COND_REF_OUT',
                 'value': 'IFCondRefOut'
             }
         ]
@@ -1780,49 +1780,49 @@ enums = {
                 'documentation': {
                     'description': 'No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.'
                 },
-                'name': 'NIRFSA_VAL_NONE_STR',
+                'name': 'NIRFSA_VAL_NONE',
                 'value': 'None'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI-5600 RF downconverter onboard clock.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to the PXI/PXIe-5652 LO source onboard clock. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, connect the REF IN/OUT connector on the PXI/PXIe-5652 to the CLK IN terminal on the PXI5622.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to the PXIe-5653 LO source onboard clock. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694.**PXIe-5668 **Lock the PXIe-5668 to the PXIe-5653 LO SOURCE onboard clock. Connect the LO2 OUT connector on the PXIe-5606 to the CLK IN connector on the PXIe-5624.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831/5832, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to its onboard clock.**PXIe-5841 with PXIe-5655 **Lock to the PXIe-5655 onboard clock. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector.**PXIe-5842 **Lock to the PXIe-5655 onboard clock. Cables between modules are required as shown in the User Manual for the instrument.**PXIe-5860 **Lock to the PXIe-5860 onboard clock.'
                 },
-                'name': 'NIRFSA_VAL_ONBOARD_CLOCK_STR',
+                'name': 'NIRFSA_VAL_ONBOARD_CLOCK',
                 'value': 'OnboardClock'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **NI-RFSA locks the NI-RFSA device to the signal at the external FREQ REF IN connector on the PXI-5600**PXIe-5663/5663E **Connect the external signal to the PXI/PXIe-5652 REF IN/OUT connector. Connect the REF OUT2 connector (if it exists) on the PXI/PXIe-5652 to the CLK IN terminal on the PXIe-5622. On versions of the PXIe-5663/5663E that lack a REF OUT2 connector on the PXI/PXIe-5652, this configuration can only be used in external digitizer mode.**PXIe-5665 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the NIRFSA_ATTR_REF_CLOCK_RATE attribute according to the frequency of your external clock signal.**PXIe-5667 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the 100 MHz REF OUT terminal on the PXIe-5653 to the CLK IN terminal on the PXIe-5622, and connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. If your external clock signal frequency is set to a frequency other than 10 MHz, set the NIRFSA_ATTR_REF_CLOCK_RATE attribute according to the frequency of your external clock signal.**PXIe-5668 **Connect the external signal to the PXIe-5653 REF IN connector. Connect the LO2 OUT on the PXIe-5606 to the CLK IN connector on the PXIe-5622. If your external clock signal frequency is set to a frequency other than 10 MHz, set the **clock rate** parameter according to the frequency of your external clock signal.**PXIe-5694 **Connect the Reference Clock signal to the REF/LO IN connector on the PXIe-5694 front panel.**PXIe-5644/5645/5646, PXIe-5820/5840/5841 **Lock the NI-RFSA device to the signal at the external REF IN connector.**PXIe-5830/5831 **For the PXIe-5830, connect the PXIe-5820 REF IN connector to the PXIe-3621 REF OUT connector. For the PXIe-5831, connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. For the PXIe-5830, lock the external signal to the PXIe-3621 REF IN connector. For the PXIe-5831/5832, lock the external signal to the PXIe-3622 REF IN connector.**PXIe-5831/5832 with PXIe-5653 **Connect the PXIe-5820 REF IN connector to the PXIe-3622 REF OUT connector. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXIe-3622 REF IN connector. Lock the external signal to the PXIe-5653 REF IN connector.**PXIe-5841 with PXIe-5655 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Connect the REF OUT connector on the PXIe-5655 to the PXIe-5841 REF IN connector. **PXIe-5842 **Lock to the signal at the REF IN connector on the associated PXIe-5655. Cables between modules are required as shown in the User Manual for the instrument. PXIe-5860 Lock to the signal at the REF IN connector on the PXIe-5860.'
                 },
-                'name': 'NIRFSA_VAL_REF_IN_STR',
+                'name': 'NIRFSA_VAL_REF_IN',
                 'value': 'RefIn'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **NI-RFSA locks the NI-RFSA device to the PXI backplane clock using the PXI-5600. You must connect the PXI 10 MHz connector to the REF IN connector on the PXI-5600 front panel to use this option. **PXIe-5668 **Lock the PXIe-5653 to the PXI backplane clock. Connect the PXIe-5606 LO2 OUT to the LO2 IN connector on the PXIe-5624.**PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667, PXIe-5694, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **Lock the device to the PXI backplane clock.'
                 },
-                'name': 'NIRFSA_VAL_PXI_CLK_STR',
+                'name': 'NIRFSA_VAL_PXI_CLK',
                 'value': 'PXI_Clk'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661 **This configuration does not apply to the PXI-5661.**PXIe-5663/5663E **NI-RFSA locks the PXIe-5663/5663E to an external 10 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the FREQ REF IN connector on the PXI/PXIe-5652.**PXIe-5665 **NI-RFSA locks the PXIe-5665 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the NIRFSA_ATTR_REF_CLOCK_RATE attribute to 100 MHz.**PXIe-5667 **NI-RFSA locks the PXIe-5667 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5622, and connect the PXIe-5622 CLK OUT connector to the REF IN connector on the PXIe-5653. Connect the 10 MHZ REF OUT terminal on the PXIe-5653 to the REF/LO IN connector on the PXIe-5694. Set the NIRFSA_ATTR_REF_CLOCK_RATE attribute to 100 MHz.**PXIe-5668 **Lock the PXIe-5668 to an external 100 MHz signal. Connect the external signal to the CLK IN connector on the PXIe-5624, and connect the PXIe-5624 CLK OUT connector to the REF IN connector on the PXIe-5653. Set the **clock rate** parameter to 100 MHz.**PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5840 with PXIe-5653/5841/5841 with PXIe-5655/5842/5860 **This configuration does not apply.'
                 },
-                'name': 'NIRFSA_VAL_CLK_IN_STR',
+                'name': 'NIRFSA_VAL_CLK_IN',
                 'value': 'ClkIn'
             },
             {
                 'documentation': {
                     'description': '**PXIe-5831/5832 with PXIe-5653 **NI-RFSA configures the PXIe-5653 to export the Reference clock and configures the PXIe-5820 and PXIe-3622 to use PXI_Clk as the Reference Clock source. Connect the PXIe-5653 REF OUT (10 MHz) connector to the PXI chassis REF IN connector.**PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5840/5841/5841 with PXIe-5655 /5842/5860**This configuration does not apply.'
                 },
-                'name': 'NIRFSA_VAL_PXI_CLK_MASTER_STR',
+                'name': 'NIRFSA_VAL_PXI_CLK_MASTER',
                 'value': 'PXI_ClkMaster'
             },
             {
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5644/5645/5646, PXIe-5820/5830/5831/5831/5832 with PXIe-5653/5840/5841/5841 with PXIe-5655 **This configuration does not apply.'
                 },
-                'name': 'NIRFSA_VAL_REF_IN_2_STR',
+                'name': 'NIRFSA_VAL_REF_IN_2',
                 'value': 'RefIn2'
             }
         ]

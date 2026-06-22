@@ -951,7 +951,7 @@ FetchRelativeTo
 
 
 
-    .. py:attribute:: FetchRelativeTo.REFERENCE_TRIGGER_STR
+    .. py:attribute:: FetchRelativeTo.REFERENCE_TRIGGER
 
 
 

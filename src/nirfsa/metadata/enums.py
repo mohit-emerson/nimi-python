@@ -756,7 +756,7 @@ enums = {
                     'description': 'Fetching occurs relative to the Reference Trigger. This value behaves like NIRFSA_VAL_FIRST_SAMPLE if no Reference Trigger is configured.'
                 },
                 'name': 'NIRFSA_VAL_REFERENCE_TRIGGER_STR',
-                'value': 'ReferenceTrigger'
+                'value': 702
             },
             {
                 'documentation': {

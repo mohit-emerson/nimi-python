@@ -4680,6 +4680,16 @@ downconverter_loop_bandwidth
         | :py:data:`~nirfsa.DownconverterLoopBandwidth.WIDE`   | Specifies that the downconverter module uses a wide loop bandwidth.   |
         +------------------------------------------------------+-----------------------------------------------------------------------+
 
+
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
+
+            Example: :py:attr:`my_session.los[ ... ].downconverter_loop_bandwidth`
+
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.downconverter_loop_bandwidth`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------------------------+
@@ -4689,7 +4699,7 @@ downconverter_loop_bandwidth
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
+            | Repeated Capabilities | los                              |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -4829,7 +4839,7 @@ driver_setup
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:
 
-                - LabVIEW Property: **Inherent IVI Attributes:User Options:Driver Setup**
+                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Prefix**
                 - C Attribute: **NIRFSA_ATTR_DRIVER_SETUP**
 
 enable_fractional_resampling
@@ -7568,6 +7578,16 @@ lo_export_enabled
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
+
+            Example: :py:attr:`my_session.los[ ... ].lo_export_enabled`
+
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.lo_export_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -7577,7 +7597,7 @@ lo_export_enabled
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | los        |
             +-----------------------+------------+
 
         .. tip::
@@ -7615,6 +7635,18 @@ lo_frequency
 
         `PXIe-5841 Frequency and Bandwidth Configuration <https://www.ni.com/docs/en-US/bundle/pxie-5841/page/frequency-and-bandwidth-configuration.html>`_
 
+
+
+
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
+
+            Example: :py:attr:`my_session.los[ ... ].lo_frequency`
+
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.lo_frequency`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -7624,7 +7656,7 @@ lo_frequency
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | los        |
             +-----------------------+------------+
 
         .. tip::
@@ -7856,6 +7888,18 @@ lo_out_power
 
         **Supported Devices:** PXIe-5830/5831/5832/5840/5841/5842
 
+
+
+
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
+
+            Example: :py:attr:`my_session.los[ ... ].lo_out_power`
+
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.lo_out_power`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+------------+
@@ -7865,7 +7909,7 @@ lo_out_power
             +-----------------------+------------+
             | Permissions           | read-write |
             +-----------------------+------------+
-            | Repeated Capabilities | None       |
+            | Repeated Capabilities | los        |
             +-----------------------+------------+
 
         .. tip::
@@ -7913,6 +7957,16 @@ lo_pll_fractional_mode_enabled
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
+
+        .. tip:: This property can be set/get on specific los within your :py:class:`nirfsa.Session` instance.
+            Use Python index notation on the repeated capabilities container los to specify a subset.
+
+            Example: :py:attr:`my_session.los[ ... ].lo_pll_fractional_mode_enabled`
+
+            To set/get on all los, you can call the property directly on the :py:class:`nirfsa.Session`.
+
+            Example: :py:attr:`my_session.lo_pll_fractional_mode_enabled`
+
         The following table lists the characteristics of this property.
 
             +-----------------------+----------------------------------+
@@ -7922,7 +7976,7 @@ lo_pll_fractional_mode_enabled
             +-----------------------+----------------------------------+
             | Permissions           | read-write                       |
             +-----------------------+----------------------------------+
-            | Repeated Capabilities | None                             |
+            | Repeated Capabilities | los                              |
             +-----------------------+----------------------------------+
 
         .. tip::
@@ -10261,246 +10315,6 @@ smooth_spectrum_enabled
 
                 - LabVIEW Property: **Acquisition:Spectrum:Smooth Spectrum Enabled**
                 - C Attribute: **NIRFSA_ATTR_SMOOTH_SPECTRUM_ENABLED**
-
-specific_driver_class_spec_major_version
-----------------------------------------
-
-    .. py:attribute:: specific_driver_class_spec_major_version
-
-        Returns the major version number of the class specification with which NI-RFSA is compliant.
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Major Version**
-                - C Attribute: **NIRFSA_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION**
-
-specific_driver_class_spec_minor_version
-----------------------------------------
-
-    .. py:attribute:: specific_driver_class_spec_minor_version
-
-        Returns the minor version number of the class specification with which NI-RFSA is compliant.
-
-        **Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | int       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Class Specification Minor Version**
-                - C Attribute: **NIRFSA_ATTR_SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION**
-
-specific_driver_description
----------------------------
-
-    .. py:attribute:: specific_driver_description
-
-        Returns a string that contains a brief description of NI-RFSA.
-
-        This property returns
-
-        RF Signal Analyzer Instrument Driver.
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Description**
-                - C Attribute: **NIRFSA_ATTR_SPECIFIC_DRIVER_DESCRIPTION**
-
-specific_driver_prefix
-----------------------
-
-    .. py:attribute:: specific_driver_prefix
-
-        Specifies the destination terminal for the Ready for Advance Event.
-
-        **Default Value**: "" (empty string)
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **High-Level Methods**:
-
-        - :py:meth:`nirfsa.Session.ExportSignal`
-
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Value                                                     | Description                                                                                                                                                        |
-        +===========================================================+====================================================================================================================================================================+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DO_NOT_EXPORT` ("")          | The signal is not exported.                                                                                                                                        |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_CLK_OUT` ("ClkOut")          | The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_REF_OUT` ("RefOut")          | The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841. |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_REF_OUT2` ("RefOut2")        | The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.                                                            |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PFI0` ("PFI0")               | The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.                                    |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PFI1` ("PFI1")               | The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.                                                                                       |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG0` ("PXI_Trig0")     | The signal is exported to the PXI trigger line 0.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG1` ("PXI_Trig1")     | The signal is exported to the PXI trigger line 1.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG2` ("PXI_Trig2")     | The signal is exported to the PXI trigger line 2.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG3` ("PXI_Trig3")     | The signal is exported to the PXI trigger line 3.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG4` ("PXI_Trig4")     | The signal is exported to the PXI trigger line 4.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG5` ("PXI_Trig5")     | The signal is exported to the PXI trigger line 5.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG6` ("PXI_Trig6")     | The signal is exported to the PXI trigger line 6.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_TRIG7` ("PXI_Trig7")     | The signal is exported to the PXI trigger line 7.                                                                                                                  |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXI_STAR` ("PXI_Star")       | The signal is exported to the PXI star trigger line.                                                                                                               |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_PXIE_DSTARC` ("PXIe_DStarC") | The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.                                      |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI0` ("DIO/PFI0")       | The trigger is received on PFI0 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI1` ("DIO/PFI1")       | The trigger is received on PFI1 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI2` ("DIO/PFI2")       | The trigger is received on PFI2 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI3` ("DIO/PFI3")       | The trigger is received on PFI3 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI4` ("DIO/PFI4")       | The trigger is received on PFI4 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI5` ("DIO/PFI5")       | The trigger is received on PFI5 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI6` ("DIO/PFI6")       | The trigger is received on PFI6 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.NIRFSA_VAL_DIO_PFI7` ("DIO/PFI7")       | The trigger is received on PFI7 from the front panel DIO terminal.                                                                                                 |
-        +-----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Prefix**
-                - C Attribute: **NIRFSA_ATTR_SPECIFIC_DRIVER_PREFIX**
-
-specific_driver_revision
-------------------------
-
-    .. py:attribute:: specific_driver_revision
-
-        Returns a string that contains additional version information about NI-RFSA.
-
-        For example, NI-RFSA can return
-
-        Driver: NI-RFSA 2.6, Compiler: MSVC 7.10, Components: IVI Engine 4.00, VISA-Spec 4.00 as the value of this property.
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Revision**
-                - C Attribute: **NIRFSA_ATTR_SPECIFIC_DRIVER_REVISION**
-
-specific_driver_vendor
-----------------------
-
-    .. py:attribute:: specific_driver_vendor
-
-        Returns a string that contains the name of the vendor that supplies NI-RFSA.
-
-        This property returns
-
-        National Instruments.
-
-        **Default Value**: N/A
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+-----------+
-            | Characteristic        | Value     |
-            +=======================+===========+
-            | Datatype              | str       |
-            +-----------------------+-----------+
-            | Permissions           | read only |
-            +-----------------------+-----------+
-            | Repeated Capabilities | None      |
-            +-----------------------+-----------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Inherent IVI Attributes:Driver Identification:Driver Vendor**
-                - C Attribute: **NIRFSA_ATTR_SPECIFIC_DRIVER_VENDOR**
 
 spectrum_averaging_mode
 -----------------------

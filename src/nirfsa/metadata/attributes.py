@@ -106,117 +106,8 @@ attributes = {
             ],
             'table_header': ['Value', 'Description']
         },
-        'lv_property': 'Inherent IVI Attributes:User Options:Driver Setup',
-        'name': 'DRIVER_SETUP',
-        'type': 'ViString'
-    },
-    1050302: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the destination terminal for the Ready for Advance Event.\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_DO_NOT_EXPORT ("")',
-                    'The signal is not exported.',
-                ],
-                [
-                    'NIRFSA_VAL_CLK_OUT ("ClkOut")',
-                    'The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.',
-                ],
-                [
-                    'NIRFSA_VAL_REF_OUT ("RefOut")',
-                    'The signal is exported to the REF IN/OUT terminal on the PXI/PXIe-5652 and the REF OUT terminal on the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841.',
-                ],
-                [
-                    'NIRFSA_VAL_REF_OUT2 ("RefOut2")',
-                    'The signal is exported to the REF OUT2 terminal on the LO. This connector exists only on the PXIe-5652.',
-                ],
-                [
-                    'NIRFSA_VAL_PFI0 ("PFI0")',
-                    'The signal is exported to the PFI 0 connector. For the PXIe-5841 with PXIe-5655, the signal is exported to the PXIe-5841 PFI 0.',
-                ],
-                [
-                    'NIRFSA_VAL_PFI1 ("PFI1")',
-                    'The signal is exported to the PFI 1 connector on the PXI-5142 and PXIe-5622.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG0 ("PXI_Trig0")',
-                    'The signal is exported to the PXI trigger line 0.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG1 ("PXI_Trig1")',
-                    'The signal is exported to the PXI trigger line 1.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG2 ("PXI_Trig2")',
-                    'The signal is exported to the PXI trigger line 2.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG3 ("PXI_Trig3")',
-                    'The signal is exported to the PXI trigger line 3.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG4 ("PXI_Trig4")',
-                    'The signal is exported to the PXI trigger line 4.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG5 ("PXI_Trig5")',
-                    'The signal is exported to the PXI trigger line 5.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG6 ("PXI_Trig6")',
-                    'The signal is exported to the PXI trigger line 6.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_TRIG7 ("PXI_Trig7")',
-                    'The signal is exported to the PXI trigger line 7.',
-                ],
-                [
-                    'NIRFSA_VAL_PXI_STAR ("PXI_Star")',
-                    'The signal is exported to the PXI star trigger line.',
-                ],
-                [
-                    'NIRFSA_VAL_PXIE_DSTARC ("PXIe_DStarC")',
-                    'The trigger is received on the PXIe DStar C trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI0 ("DIO/PFI0")',
-                    'The trigger is received on PFI0 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI1 ("DIO/PFI1")',
-                    'The trigger is received on PFI1 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI2 ("DIO/PFI2")',
-                    'The trigger is received on PFI2 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI3 ("DIO/PFI3")',
-                    'The trigger is received on PFI3 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI4 ("DIO/PFI4")',
-                    'The trigger is received on PFI4 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI5 ("DIO/PFI5")',
-                    'The trigger is received on PFI5 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI6 ("DIO/PFI6")',
-                    'The trigger is received on PFI6 from the front panel DIO terminal.',
-                ],
-                [
-                    'NIRFSA_VAL_DIO_PFI7 ("DIO/PFI7")',
-                    'The trigger is received on PFI7 from the front panel DIO terminal.',
-                ],
-            ],
-            'table_header': ['Value', 'Description']
-        },
         'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Prefix',
-        'name': 'SPECIFIC_DRIVER_PREFIX',
+        'name': 'DRIVER_SETUP',
         'type': 'ViString'
     },
     1050304: {
@@ -390,56 +281,6 @@ attributes = {
         },
         'lv_property': 'Inherent IVI Attributes:Instrument Identification:Model',
         'name': 'INSTRUMENT_MODEL',
-        'type': 'ViString'
-    },
-    1050513: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns a string that contains the name of the vendor that supplies NI-RFSA. \n\nThis attribute returns\n\nNational Instruments.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Driver Vendor',
-        'name': 'SPECIFIC_DRIVER_VENDOR',
-        'type': 'ViString'
-    },
-    1050514: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns a string that contains a brief description of NI-RFSA. \n\nThis attribute returns\n\nRF Signal Analyzer Instrument Driver.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Description',
-        'name': 'SPECIFIC_DRIVER_DESCRIPTION',
-        'type': 'ViString'
-    },
-    1050515: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the major version number of the class specification with which NI-RFSA is compliant.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Major Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MAJOR_VERSION',
-        'type': 'ViInt32'
-    },
-    1050516: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the minor version number of the class specification with which NI-RFSA is compliant.\n\n**Supported Devices:** PXI-5610, PXIe-5611, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654 with PXIe-5696, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Class Specification Minor Version',
-        'name': 'SPECIFIC_DRIVER_CLASS_SPEC_MINOR_VERSION',
-        'type': 'ViInt32'
-    },
-    1050551: {
-        'access': 'read only',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns a string that contains additional version information about NI-RFSA. \n\nFor example, NI-RFSA can return\n\nDriver: NI-RFSA 2.6, Compiler: MSVC 7.10, Components: IVI Engine 4.00, VISA-Spec 4.00 as the value of this attribute.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'lv_property': 'Inherent IVI Attributes:Driver Identification:Revision',
-        'name': 'SPECIFIC_DRIVER_REVISION',
         'type': 'ViString'
     },
     1150001: {
@@ -2557,6 +2398,9 @@ attributes = {
         'enum': 'DownconverterLoopBandwidth',
         'lv_property': 'Signal Path:Advanced:Downconverter Loop Bandwidth',
         'name': 'DOWNCONVERTER_LOOP_BANDWIDTH',
+        'supported_rep_caps': [
+            'los'
+        ],
         'type': 'ViInt32'
     },
     1150068: {
@@ -2567,6 +2411,9 @@ attributes = {
         },
         'lv_property': 'Signal Path:LO Frequency',
         'name': 'LO_FREQUENCY',
+        'supported_rep_caps': [
+            'los'
+        ],
         'type': 'ViReal64'
     },
     1150069: {
@@ -2987,6 +2834,9 @@ attributes = {
         },
         'lv_property': 'Signal Path:LO Export Enabled',
         'name': 'LO_EXPORT_ENABLED',
+        'supported_rep_caps': [
+            'los'
+        ],
         'type': 'ViBoolean'
     },
     1150135: {
@@ -3402,6 +3252,9 @@ attributes = {
         'enum': 'LoPllFractionalModeEnabled',
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO PLL Fractional Mode Enabled',
         'name': 'LO_PLL_FRACTIONAL_MODE_ENABLED',
+        'supported_rep_caps': [
+            'los'
+        ],
         'type': 'ViInt32'
     },
     1150188: {
@@ -3664,6 +3517,9 @@ attributes = {
         },
         'lv_property': 'Device Specific:Vector Signal Transceiver:Signal Path:LO Out Power (dBm)',
         'name': 'LO_OUT_POWER',
+        'supported_rep_caps': [
+            'los'
+        ],
         'type': 'ViReal64'
     },
     1150254: {

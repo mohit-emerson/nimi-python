@@ -87,7 +87,6 @@ class Library(object):
         self.niRFSA_ReadPowerSpectrumF32_cfunc = None
         self.niRFSA_ReadPowerSpectrumF64_cfunc = None
         self.niRFSA_ResetDevice_cfunc = None
-        self.niRFSA_ResetWithDefaults_cfunc = None
         self.niRFSA_ResetWithOptions_cfunc = None
         self.niRFSA_SaveConfigurationsToFile_cfunc = None
         self.niRFSA_SelfCalibrateRange_cfunc = None
@@ -597,14 +596,6 @@ class Library(object):
                 self.niRFSA_ResetDevice_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSA_ResetDevice_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ResetDevice_cfunc(vi)
-
-    def niRFSA_ResetWithDefaults(self, vi):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_ResetWithDefaults_cfunc is None:
-                self.niRFSA_ResetWithDefaults_cfunc = self._get_library_function('niRFSA_ResetWithDefaults')
-                self.niRFSA_ResetWithDefaults_cfunc.argtypes = [ViSession]  # noqa: F405
-                self.niRFSA_ResetWithDefaults_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_ResetWithDefaults_cfunc(vi)
 
     def niRFSA_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
         with self._func_lock:

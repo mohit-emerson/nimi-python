@@ -187,8 +187,6 @@ class SideEffectsHelper(object):
         self._defaults['ReadPowerSpectrumF64']['spectrumInfo'] = None
         self._defaults['ResetDevice'] = {}
         self._defaults['ResetDevice']['return'] = 0
-        self._defaults['ResetWithDefaults'] = {}
-        self._defaults['ResetWithDefaults']['return'] = 0
         self._defaults['ResetWithOptions'] = {}
         self._defaults['ResetWithOptions']['return'] = 0
         self._defaults['SaveConfigurationsToFile'] = {}
@@ -823,11 +821,6 @@ class SideEffectsHelper(object):
             return self._defaults['ResetDevice']['return']
         return self._defaults['ResetDevice']['return']
 
-    def niRFSA_ResetWithDefaults(self, vi):  # noqa: N802
-        if self._defaults['ResetWithDefaults']['return'] != 0:
-            return self._defaults['ResetWithDefaults']['return']
-        return self._defaults['ResetWithDefaults']['return']
-
     def niRFSA_ResetWithOptions(self, vi, steps_to_omit):  # noqa: N802
         if self._defaults['ResetWithOptions']['return'] != 0:
             return self._defaults['ResetWithOptions']['return']
@@ -1041,8 +1034,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_ReadPowerSpectrumF64.return_value = 0
         mock_library.niRFSA_ResetDevice.side_effect = MockFunctionCallError("niRFSA_ResetDevice")
         mock_library.niRFSA_ResetDevice.return_value = 0
-        mock_library.niRFSA_ResetWithDefaults.side_effect = MockFunctionCallError("niRFSA_ResetWithDefaults")
-        mock_library.niRFSA_ResetWithDefaults.return_value = 0
         mock_library.niRFSA_ResetWithOptions.side_effect = MockFunctionCallError("niRFSA_ResetWithOptions")
         mock_library.niRFSA_ResetWithOptions.return_value = 0
         mock_library.niRFSA_SaveConfigurationsToFile.side_effect = MockFunctionCallError("niRFSA_SaveConfigurationsToFile")

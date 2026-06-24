@@ -808,7 +808,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -870,7 +871,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -932,7 +934,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1753,7 +1756,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1844,7 +1848,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
                 'name': 'channelList',
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1931,7 +1936,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2039,7 +2045,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2147,7 +2154,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2254,7 +2262,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2353,7 +2362,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2451,7 +2461,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2549,7 +2560,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -2647,7 +2659,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3408,7 +3421,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3469,7 +3483,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -3709,7 +3724,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4344,7 +4360,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4431,7 +4448,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4518,7 +4536,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.',
                 },
-                'is_repeated_capability': False,
+                'is_repeated_capability': True,
+                'repeated_capability_type': 'channels',
                 'name': 'channelList',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4604,36 +4623,6 @@ functions = {
                 'direction': 'in',
                 'documentation': {
                     'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.',
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'ResetWithDefaults': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nPerforms a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.\n\n**Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsg_Init function or the nirfsg_InitWithOptions function and identifies a particular instrument session.',
                 },
                 'name': 'vi',
                 'type': 'ViSession',

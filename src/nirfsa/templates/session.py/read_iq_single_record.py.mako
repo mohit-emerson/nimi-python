@@ -18,7 +18,7 @@
                     elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
                         raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
 
-                wfm_info_struct = self._read_iq_single_record_complex_f64(channel_list, iq_data_array, timeout)
+                wfm_info_struct = self._read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
                 if wfm_info_struct.actual_samples < expected_buffer_size:
                     iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct

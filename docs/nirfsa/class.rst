@@ -917,7 +917,7 @@ configure_spectrum_frequency
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: configure_spectrum_frequency(channel_list, center_frequency=None, span=None, start_frequency=None, stop_frequency=None)
+    .. py:method:: configure_spectrum_frequency(center_frequency=None, span=None, start_frequency=None, stop_frequency=None)
 
             Configures the frequency range of a spectrum acquisition.
 
@@ -934,16 +934,17 @@ configure_spectrum_frequency
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].configure_spectrum_frequency`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.configure_spectrum_frequency`
 
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param center_frequency:
 
 
@@ -1318,7 +1319,7 @@ fetch_iq_multi_record
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: fetch_iq_multi_record(channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: fetch_iq_multi_record(starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0))
 
             Fetches I/Q data from multiple records in an acquisition.
 
@@ -1335,16 +1336,17 @@ fetch_iq_multi_record
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.fetch_iq_multi_record`
 
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param starting_record:
 
 
@@ -1404,7 +1406,7 @@ fetch_iq_single_record
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: fetch_iq_single_record(channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: fetch_iq_single_record(record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0))
 
             Fetches I/Q data from a single record in an acquisition.
 
@@ -1421,16 +1423,17 @@ fetch_iq_single_record
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].fetch_iq_single_record`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.fetch_iq_single_record`
 
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param record_number:
 
 
@@ -1595,7 +1598,7 @@ get_fetch_backlog
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_fetch_backlog(channel_list, record_number)
+    .. py:method:: get_fetch_backlog(record_number)
 
             Returns the number of points acquired that have not yet been fetched.
 
@@ -1604,16 +1607,17 @@ get_fetch_backlog
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].get_fetch_backlog`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.get_fetch_backlog`
 
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param record_number:
 
 
@@ -1639,7 +1643,7 @@ get_frequency_response
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_frequency_response(channel_list)
+    .. py:method:: get_frequency_response()
 
             Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
 
@@ -1650,16 +1654,16 @@ get_frequency_response
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].get_frequency_response`
 
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
+                Example: :py:meth:`my_session.get_frequency_response`
 
-                
-
-
-            :type channel_list: str
 
             :rtype: tuple (frequencies, magnitude_response, phase_response)
 
@@ -1705,7 +1709,7 @@ get_scaling_coefficients
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: get_scaling_coefficients(channel_list)
+    .. py:method:: get_scaling_coefficients()
 
             Returns coefficients you can use to convert unscaled data to scaled I/Q data.
 
@@ -1726,16 +1730,16 @@ get_scaling_coefficients
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].get_scaling_coefficients`
 
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
+                Example: :py:meth:`my_session.get_scaling_coefficients`
 
-                
-
-
-            :type channel_list: str
 
             :rtype: list of CoefficientInfo
             :return:
@@ -2151,7 +2155,7 @@ read_iq_single_record
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_iq_single_record(channel_list, iq_data_array, data_array_size, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_iq_single_record(iq_data_array, data_array_size, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates an acquisition and fetches a single I/Q data record.
 
@@ -2166,16 +2170,17 @@ read_iq_single_record
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].read_iq_single_record`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.read_iq_single_record`
 
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param iq_data_array:
 
 
@@ -2234,7 +2239,7 @@ read_power_spectrum
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_power_spectrum(channel_list, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_power_spectrum(power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates a spectrum acquisition and returns power spectrum data.
 
@@ -2249,16 +2254,17 @@ read_power_spectrum
             
 
 
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
 
-            :param channel_list:
+                Example: :py:meth:`my_session.channels[ ... ].read_power_spectrum`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.read_power_spectrum`
 
 
-                Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-                
-
-
-            :type channel_list: str
             :param power_spectrum_data_array:
 
 
@@ -2334,21 +2340,6 @@ reset_device
             .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
             .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-
-
-reset_with_defaults
--------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: reset_with_defaults()
-
-            Performs a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.
-
-            **Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-            
 
 
 

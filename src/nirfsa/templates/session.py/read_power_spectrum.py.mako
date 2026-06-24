@@ -18,12 +18,12 @@
                     raise ValueError("The length of power_spectrum_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
 
             if power_spectrum_data_array.dtype == numpy.float64:
-                spectrum_info_struct = self._read_power_spectrum_f64(channel_list, power_spectrum_data_array, timeout)
+                spectrum_info_struct = self._read_power_spectrum_f64(self._repeated_capability, power_spectrum_data_array, timeout)
                 if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
                     power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
                 return spectrum_info_struct
             elif power_spectrum_data_array.dtype == numpy.float32:
-                spectrum_info_struct = self._read_power_spectrum_f32(channel_list, power_spectrum_data_array, timeout)
+                spectrum_info_struct = self._read_power_spectrum_f32(self._repeated_capability, power_spectrum_data_array, timeout)
                 if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
                     power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
                 return spectrum_info_struct

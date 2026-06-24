@@ -218,7 +218,7 @@ class LibraryInterpreter(object):
 
     def configure_spectrum_frequency_center_span(self, channel_list, center_frequency, span):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         center_frequency_ctype = _visatype.ViReal64(center_frequency)  # case S150
         span_ctype = _visatype.ViReal64(span)  # case S150
         error_code = self._library.niRFSA_ConfigureSpectrumFrequencyCenterSpan(vi_ctype, channel_list_ctype, center_frequency_ctype, span_ctype)
@@ -227,7 +227,7 @@ class LibraryInterpreter(object):
 
     def configure_spectrum_frequency_start_stop(self, channel_list, start_frequency, stop_frequency):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         start_frequency_ctype = _visatype.ViReal64(start_frequency)  # case S150
         stop_frequency_ctype = _visatype.ViReal64(stop_frequency)  # case S150
         error_code = self._library.niRFSA_ConfigureSpectrumFrequencyStartStop(vi_ctype, channel_list_ctype, start_frequency_ctype, stop_frequency_ctype)
@@ -308,7 +308,7 @@ class LibraryInterpreter(object):
     def fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
         samples_per_record = 0 if iq_data_arrays is None else (iq_data_arrays.shape[1] if hasattr(iq_data_arrays, 'shape') and len(iq_data_arrays.shape) > 1 else len(iq_data_arrays))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         starting_record_ctype = _visatype.ViInt64(starting_record)  # case S150
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(samples_per_record)  # case S160
@@ -322,7 +322,7 @@ class LibraryInterpreter(object):
     def fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
         samples_per_record = 0 if iq_data_arrays is None else (iq_data_arrays.shape[1] if hasattr(iq_data_arrays, 'shape') and len(iq_data_arrays.shape) > 1 else len(iq_data_arrays))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         starting_record_ctype = _visatype.ViInt64(starting_record)  # case S150
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(samples_per_record)  # case S160
@@ -336,7 +336,7 @@ class LibraryInterpreter(object):
     def fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
         samples_per_record = 0 if iq_data_arrays is None else (iq_data_arrays.shape[1] if hasattr(iq_data_arrays, 'shape') and len(iq_data_arrays.shape) > 1 else len(iq_data_arrays))
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         starting_record_ctype = _visatype.ViInt64(starting_record)  # case S150
         number_of_records_ctype = _visatype.ViInt64(number_of_records)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(samples_per_record // 2)  # case S160
@@ -349,7 +349,7 @@ class LibraryInterpreter(object):
 
     def fetch_iq_single_record_complex_f32(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array))  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
@@ -361,7 +361,7 @@ class LibraryInterpreter(object):
 
     def fetch_iq_single_record_complex_f64(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array))  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
@@ -373,7 +373,7 @@ class LibraryInterpreter(object):
 
     def fetch_iq_single_record_complex_i16(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
         number_of_samples_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array) // 2)  # case S160
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
@@ -505,7 +505,7 @@ class LibraryInterpreter(object):
 
     def get_fetch_backlog(self, channel_list, record_number):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         record_number_ctype = _visatype.ViInt64(record_number)  # case S150
         backlog_ctype = _visatype.ViInt64()  # case S220
         error_code = self._library.niRFSA_GetFetchBacklog(vi_ctype, channel_list_ctype, record_number_ctype, None if backlog_ctype is None else (ctypes.pointer(backlog_ctype)))
@@ -514,7 +514,7 @@ class LibraryInterpreter(object):
 
     def get_frequency_response(self, channel_list):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         buffer_size_ctype = _visatype.ViInt32(0)  # case S190
         frequencies_ctype = None  # case B610
         magnitude_response_ctype = None  # case B610
@@ -535,7 +535,7 @@ class LibraryInterpreter(object):
 
     def get_scaling_coefficients(self, channel_list):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         array_size_ctype = _visatype.ViInt32(0)  # case S190
         coefficient_info_ctype = None  # case B610
         number_of_coefficient_sets_ctype = _visatype.ViInt32()  # case S220
@@ -629,7 +629,7 @@ class LibraryInterpreter(object):
 
     def read_iq_single_record_complex_f64(self, channel_list, iq_data_array, timeout):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         iq_data_array_ctype = _get_ctypes_pointer_for_buffer(value=iq_data_array, library_type=_complextype.NIComplexNumber)  # case B510
         data_array_size_ctype = _visatype.ViInt64(0 if iq_data_array is None else len(iq_data_array))  # case S120
@@ -640,7 +640,7 @@ class LibraryInterpreter(object):
 
     def read_power_spectrum_f32(self, channel_list, timeout, power_spectrum_data_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         power_spectrum_data_array_ctype = _get_ctypes_pointer_for_buffer(value=power_spectrum_data_array, library_type=_visatype.ViReal32)  # case B550
         data_array_size_ctype = _visatype.ViInt32(len(power_spectrum_data_array))  # case S120
@@ -651,7 +651,7 @@ class LibraryInterpreter(object):
 
     def read_power_spectrum_f64(self, channel_list, timeout, power_spectrum_data_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C020
+        channel_list_ctype = ctypes.create_string_buffer(channel_list.encode(self._encoding))  # case C010
         timeout_ctype = _visatype.ViReal64(timeout)  # case S150
         power_spectrum_data_array_ctype = _get_ctypes_pointer_for_buffer(value=power_spectrum_data_array, library_type=_visatype.ViReal64)  # case B550
         data_array_size_ctype = _visatype.ViInt32(len(power_spectrum_data_array))  # case S120
@@ -663,12 +663,6 @@ class LibraryInterpreter(object):
     def reset_device(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSA_ResetDevice(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def reset_with_defaults(self):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        error_code = self._library.niRFSA_ResetWithDefaults(vi_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

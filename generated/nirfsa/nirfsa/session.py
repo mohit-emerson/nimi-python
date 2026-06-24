@@ -4906,6 +4906,141 @@ class _SessionBase(object):
 
     ''' These are code-generated '''
 
+    @ivi_synchronized
+    def _configure_spectrum_frequency_center_span(self, center_frequency, span):
+        r'''_configure_spectrum_frequency_center_span
+
+        Configures the span and center frequency of the spectrum read by NI-RFSA.
+
+        A spectrum acquisition consists of data surrounding the center frequency.
+
+        ----
+        **Note**
+        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
+
+        ----
+
+        ----
+        **Note**
+         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
+
+        ----
+
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._configure_spectrum_frequency_center_span`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._configure_spectrum_frequency_center_span`
+
+        Args:
+            center_frequency (float): Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). The NI-RFSA device you use determines the valid range. Refer to your device specifications document for more information about frequency range.
+
+            span (float): Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz).
+
+                ----
+
+                *Note* For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the digitizer_dither_enabled property for more information about dithering.
+
+                ----
+
+        '''
+        self._interpreter.configure_spectrum_frequency_center_span(self._repeated_capability, center_frequency, span)
+
+    def configure_spectrum_frequency(self, center_frequency=None, span=None, start_frequency=None, stop_frequency=None):
+        '''configure_spectrum_frequency
+
+        Configures the frequency range of a spectrum acquisition.
+
+        You can specify the frequency range using either center frequency and span, or start and stop frequencies.
+
+        ----
+        **Note**
+        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
+
+        ----
+
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].configure_spectrum_frequency`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.configure_spectrum_frequency`
+
+        Args:
+            center_frequency (float): Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **span**.
+
+            span (float): Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **center_frequency**.
+
+            start_frequency (float): Specifies the lower limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **stop_frequency**.
+
+            stop_frequency (float): Specifies the upper limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **start_frequency**.
+
+        '''
+        if center_frequency is not None and span is not None:
+            self._configure_spectrum_frequency_center_span(self._repeated_capability, center_frequency, span)
+        elif start_frequency is not None and stop_frequency is not None:
+            self._configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
+        else:
+            raise ValueError(
+                "Provide either (center_frequency & span) "
+                "or (start_frequency & stop_frequency)"
+            )
+
+    @ivi_synchronized
+    def _configure_spectrum_frequency_start_stop(self, start_frequency, stop_frequency):
+        r'''_configure_spectrum_frequency_start_stop
+
+        Configures the start and stop frequencies of a spectrum read by NI-RFSA.
+
+        ----
+        **Note**
+        If you configure the spectrum span (**STOP_FREQUENCY**  **START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.
+
+        ----
+
+        ----
+        **Note**
+         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
+
+        ----
+
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._configure_spectrum_frequency_start_stop`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._configure_spectrum_frequency_start_stop`
+
+        Args:
+            start_frequency (float): Specifies the lower limit of a span of frequencies. This value is expressed in hertz (Hz).
+
+            stop_frequency (float): Specifies the upper limit of a span of frequencies. This value is expressed in hertz (Hz).
+
+        '''
+        self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
+
     def error_message(self, error_code):
         r'''error_message
 
@@ -4925,6 +5060,667 @@ class _SessionBase(object):
         '''
         error_message = self._interpreter.error_message(error_code)
         return error_message
+
+    @ivi_synchronized
+    def _fetch_iq_multi_record_complex_f32(self, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_multi_record_complex_f32
+
+        Fetches I/Q data from multiple records in an acquisition.
+
+        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_multi_record_complex_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_multi_record_complex_f32`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            iq_data_arrays (numpy.array(dtype=numpy.complex64)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_arrays) is not numpy.ndarray:
+            raise TypeError('iq_data_arrays must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_arrays)))
+        if numpy.isfortran(iq_data_arrays) is True:
+            raise TypeError('iq_data_arrays must be in C-order')
+        if iq_data_arrays.dtype is not numpy.dtype('complex64'):
+            raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=complex64, is ' + str(iq_data_arrays.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_multi_record_complex_f64(self, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_multi_record_complex_f64
+
+        Fetches I/Q data from multiple records in an acquisition.
+
+        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_multi_record_complex_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_multi_record_complex_f64`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            iq_data_arrays (numpy.array(dtype=numpy.complex128)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_arrays) is not numpy.ndarray:
+            raise TypeError('iq_data_arrays must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_arrays)))
+        if numpy.isfortran(iq_data_arrays) is True:
+            raise TypeError('iq_data_arrays must be in C-order')
+        if iq_data_arrays.dtype is not numpy.dtype('complex128'):
+            raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_arrays.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_multi_record_complex_i16(self, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_multi_record_complex_i16
+
+        Fetches binary I/Q data from multiple records in an acquisition.
+
+        Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_multi_record_complex_i16`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_multi_record_complex_i16`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            iq_data_arrays (numpy.array(dtype=numpy.int16)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this interleaved data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_arrays) is not numpy.ndarray:
+            raise TypeError('iq_data_arrays must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_arrays)))
+        if numpy.isfortran(iq_data_arrays) is True:
+            raise TypeError('iq_data_arrays must be in C-order')
+        if iq_data_arrays.dtype is not numpy.dtype('int16'):
+            raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=int16, is ' + str(iq_data_arrays.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_single_record_complex_f32(self, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_single_record_complex_f32
+
+        Fetches I/Q data from a single record in an acquisition.
+
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_single_record_complex_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_single_record_complex_f32`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            iq_data_array (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **number_of_samples**.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_array) is not numpy.ndarray:
+            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
+        if numpy.isfortran(iq_data_array) is True:
+            raise TypeError('iq_data_array must be in C-order')
+        if iq_data_array.dtype is not numpy.dtype('complex64'):
+            raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex64, is ' + str(iq_data_array.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, iq_data_array, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_single_record_complex_f64(self, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_single_record_complex_f64
+
+        Fetches I/Q data from a single record in an acquisition.
+
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_single_record_complex_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_single_record_complex_f64`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            iq_data_array (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **number_of_samples**.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_array) is not numpy.ndarray:
+            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
+        if numpy.isfortran(iq_data_array) is True:
+            raise TypeError('iq_data_array must be in C-order')
+        if iq_data_array.dtype is not numpy.dtype('complex128'):
+            raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_array.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, iq_data_array, timeout)
+        return wfm_info
+
+    @ivi_synchronized
+    def _fetch_iq_single_record_complex_i16(self, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_fetch_iq_single_record_complex_i16
+
+        Fetches binary I/Q data from a single record in an acquisition.
+
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._fetch_iq_single_record_complex_i16`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._fetch_iq_single_record_complex_i16`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            iq_data_array (numpy.array(dtype=numpy.int16)): Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **number_of_samples**.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_array) is not numpy.ndarray:
+            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
+        if numpy.isfortran(iq_data_array) is True:
+            raise TypeError('iq_data_array must be in C-order')
+        if iq_data_array.dtype is not numpy.dtype('int16'):
+            raise TypeError('iq_data_array must be numpy.ndarray of dtype=int16, is ' + str(iq_data_array.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
+        return wfm_info
+
+    def fetch_iq_multi_record(self, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+        '''fetch_iq_multi_record
+
+        Fetches I/Q data from multiple records in an acquisition.
+
+        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].fetch_iq_multi_record`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.fetch_iq_multi_record`
+
+        Args:
+            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
+
+            number_of_records (int): Specifies the number of records to fetch.
+
+            number_of_samples (int): Specifies the number of samples per record.
+
+            iq_data_arrays (2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+        '''
+        import numpy
+        if str(type(iq_data_arrays)).find("'numpy.ndarray'") != -1:
+            if iq_data_arrays.ndim != 2:
+                raise ValueError("iq_data_arrays must be a 2D numpy array (number_of_records x number_of_samples), but got {}D array".format(iq_data_arrays.ndim))
+            if iq_data_arrays.shape[0] < number_of_records:
+                raise ValueError("iq_data_arrays must have at least {} rows (number_of_records), but has {}".format(number_of_records, iq_data_arrays.shape[0]))
+            if iq_data_arrays.dtype == numpy.int16:
+                expected_buffer_size = 2 * number_of_samples
+            else:
+                expected_buffer_size = number_of_samples
+
+            if iq_data_arrays.shape[1] < expected_buffer_size:
+                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
+                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
+                    raise ValueError("The width of iq_data_arrays is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+
+            if iq_data_arrays.dtype == numpy.complex128:
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
+                return wfm_info_struct
+            elif iq_data_arrays.dtype == numpy.complex64:
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
+                return wfm_info_struct
+            elif iq_data_arrays.dtype == numpy.int16:
+                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], 2 * wfm_info_struct.actual_samples), refcheck=False)
+                return wfm_info_struct
+            else:
+                raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
+        else:
+            raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+    def fetch_iq_single_record(self, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+        '''fetch_iq_single_record
+
+        Fetches I/Q data from a single record in an acquisition.
+
+        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
+
+        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].fetch_iq_single_record`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.fetch_iq_single_record`
+
+        Args:
+            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
+
+            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            iq_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
+
+                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
+
+                ----
+
+                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
+
+                ----
+
+        '''
+        import numpy
+        if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
+            if iq_data_array.dtype == numpy.int16:
+                expected_buffer_size = 2 * number_of_samples
+            else:
+                expected_buffer_size = number_of_samples
+
+            if len(iq_data_array) < expected_buffer_size:
+                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
+                    iq_data_array.resize(expected_buffer_size, refcheck=False)
+                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
+                    raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+
+            if iq_data_array.dtype == numpy.complex128:
+                wfm_info_struct = self._fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, iq_data_array, timeout)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
+                return wfm_info_struct
+            elif iq_data_array.dtype == numpy.complex64:
+                wfm_info_struct = self._fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, iq_data_array, timeout)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
+                return wfm_info_struct
+            elif iq_data_array.dtype == numpy.int16:
+                wfm_info_struct = self._fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
+                if wfm_info_struct.actual_samples < number_of_samples:
+                    iq_data_array.resize(2 * wfm_info_struct.actual_samples, refcheck=False)
+                return wfm_info_struct
+            else:
+                raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
+        else:
+            raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -5131,6 +5927,122 @@ class _SessionBase(object):
         return value
 
     @ivi_synchronized
+    def get_fetch_backlog(self, record_number):
+        r'''get_fetch_backlog
+
+        Returns the number of points acquired that have not yet been fetched.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_fetch_backlog`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.get_fetch_backlog`
+
+        Args:
+            record_number (int): Specifies the record from which to read the backlog. Record numbers are zero-based.
+
+
+        Returns:
+            backlog (int): Returns the number of samples available to read for the requested record.
+
+        '''
+        backlog = self._interpreter.get_fetch_backlog(self._repeated_capability, record_number)
+        return backlog
+
+    @ivi_synchronized
+    def get_frequency_response(self):
+        r'''get_frequency_response
+
+        Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
+
+        Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.
+
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_frequency_response`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.get_frequency_response`
+
+        Returns:
+            frequencies (numpy.array(dtype=numpy.float64)): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
+
+                Pass VI_NULL if you do not want to use this parameter.
+
+            magnitude_response (numpy.array(dtype=numpy.float64)): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
+
+                Pass VI_NULL if you do not want to use this parameter.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            phase_response (numpy.array(dtype=numpy.float64)): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
+
+                Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        frequencies, magnitude_response, phase_response = self._interpreter.get_frequency_response(self._repeated_capability)
+        return frequencies, magnitude_response, phase_response
+
+    @ivi_synchronized
+    def get_scaling_coefficients(self):
+        r'''get_scaling_coefficients
+
+        Returns coefficients you can use to convert unscaled data to scaled I/Q data.
+
+        Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain get_scaling_coefficients structures in the **COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **COEFFICIENT_INFO** array returns one element for each channel specified in the **CHANNEL_LIST** parameter. The element order matches the order specified by the **CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **COEFFICIENT_INFO** element then adding the offset from the same element.
+
+        ----
+        **Note**
+        The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
+
+        ----
+
+        To get the required size of the array, call this method with **ARRAY_SIZE** set to 0 and NULL for the **COEFFICIENT_INFO** array. This method returns the required size in the **NUMBER_OF_COEFFICIENT_SETS** parameter.
+
+        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].get_scaling_coefficients`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.get_scaling_coefficients`
+
+        Returns:
+            coefficient_info (list of CoefficientInfo): Specifies the array for storing the coefficient info.
+
+                - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
+                - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
+
+        '''
+        coefficient_info = self._interpreter.get_scaling_coefficients(self._repeated_capability)
+        return coefficient_info
+
+    @ivi_synchronized
     def load_configurations_from_file(self, file_path):
         r'''load_configurations_from_file
 
@@ -5191,6 +6103,295 @@ class _SessionBase(object):
         # act standalone as well and let the client call unlock() explicitly. If they do use the context manager,
         # that will handle the unlock for them
         return _Lock(self)
+
+    @ivi_synchronized
+    def _read_iq_single_record_complex_f64(self, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_iq_single_record_complex_f64
+
+        Initiates an acquisition and fetches a single I/Q data record.
+
+        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_iq_single_record_complex_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_iq_single_record_complex_f64`
+
+        Args:
+            iq_data_array (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+
+        if type(iq_data_array) is not numpy.ndarray:
+            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
+        if numpy.isfortran(iq_data_array) is True:
+            raise TypeError('iq_data_array must be in C-order')
+        if iq_data_array.dtype is not numpy.dtype('complex128'):
+            raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_array.dtype))
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
+        return wfm_info
+
+    def read_iq_single_record(self, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+        '''read_iq_single_record
+
+        Initiates an acquisition and fetches a single I/Q data record.
+
+        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Related Topics**
+
+        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].read_iq_single_record`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.read_iq_single_record`
+
+        Args:
+            iq_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
+
+
+        Returns:
+            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
+
+                The following list provides more information about each of these properties:
+
+                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
+
+                ----
+
+                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
+
+                ----
+
+                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
+
+                ----
+
+
+                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
+
+                ----
+
+                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
+                - **actual samples read** Returns an integer representing the number of samples in the waveform.
+                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
+                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
+
+        '''
+        import numpy
+        if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
+            if iq_data_array.dtype == numpy.complex128:
+                expected_buffer_size = self.number_of_samples
+                if len(iq_data_array) < expected_buffer_size:
+                    if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
+                        iq_data_array.resize(expected_buffer_size, refcheck=False)
+                    elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
+                        raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+
+                wfm_info_struct = self._read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
+                if wfm_info_struct.actual_samples < expected_buffer_size:
+                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
+                return wfm_info_struct
+            else:
+                raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
+        else:
+            raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
+
+    def read_power_spectrum(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+        '''read_power_spectrum
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+        ----
+        **Note**
+         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+        ----
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].read_power_spectrum`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.read_power_spectrum`
+
+        Args:
+            power_spectrum_data_array (numpy.array of numpy.float64 or numpy.array of numpy.float32): Specifies a pre-allocated numpy array to be filled with power spectrum data. The dtype of this array determines the data format: numpy.float64 or numpy.float32. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+        '''
+        import numpy
+        if str(type(power_spectrum_data_array)).find("'numpy.ndarray'") != -1:
+            expected_buffer_size = self.number_of_spectral_lines
+            if len(power_spectrum_data_array) < expected_buffer_size:
+                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
+                    power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
+                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
+                    raise ValueError("The length of power_spectrum_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+
+            if power_spectrum_data_array.dtype == numpy.float64:
+                spectrum_info_struct = self._read_power_spectrum_f64(self._repeated_capability, power_spectrum_data_array, timeout)
+                if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
+                    power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
+                return spectrum_info_struct
+            elif power_spectrum_data_array.dtype == numpy.float32:
+                spectrum_info_struct = self._read_power_spectrum_f32(self._repeated_capability, power_spectrum_data_array, timeout)
+                if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
+                    power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
+                return spectrum_info_struct
+            else:
+                raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
+        else:
+            raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
+
+    @ivi_synchronized
+    def _read_power_spectrum_f32(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_power_spectrum_f32
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+        ----
+        **Note**
+         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+        ----
+
+        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f32`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_power_spectrum_f32`
+
+        Args:
+            power_spectrum_data_array (list of float): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+
+        Returns:
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        spectrum_info = self._interpreter.read_power_spectrum_f32(self._repeated_capability, timeout, power_spectrum_data_array)
+        return spectrum_info
+
+    @ivi_synchronized
+    def _read_power_spectrum_f64(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):
+        r'''_read_power_spectrum_f64
+
+        Initiates a spectrum acquisition and returns power spectrum data.
+
+        ----
+        **Note**
+         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
+
+        ----
+
+        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ]._read_power_spectrum_f64`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session._read_power_spectrum_f64`
+
+        Args:
+            power_spectrum_data_array (list of float): Specifies a pre-allocated numpy array to be filled with power spectrum data. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.
+
+            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
+
+
+        Returns:
+            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+
+                Note:
+                One or more of the referenced properties are not in the Python API for this driver.
+
+        '''
+        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
+        spectrum_info = self._interpreter.read_power_spectrum_f64(self._repeated_capability, timeout, power_spectrum_data_array)
+        return spectrum_info
 
     @ivi_synchronized
     def save_configurations_to_file(self, file_path):
@@ -6185,114 +7386,6 @@ class Session(_SessionBase):
         self._interpreter.configure_software_edge_start_trigger()
 
     @ivi_synchronized
-    def _configure_spectrum_frequency_center_span(self, channel_list, center_frequency, span):
-        r'''_configure_spectrum_frequency_center_span
-
-        Configures the span and center frequency of the spectrum read by NI-RFSA.
-
-        A spectrum acquisition consists of data surrounding the center frequency.
-
-        ----
-        **Note**
-        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
-
-        ----
-
-        ----
-        **Note**
-         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
-
-        ----
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            center_frequency (float): Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). The NI-RFSA device you use determines the valid range. Refer to your device specifications document for more information about frequency range.
-
-            span (float): Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz).
-
-                ----
-
-                *Note* For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect your measurements. Refer to the digitizer_dither_enabled property for more information about dithering.
-
-                ----
-
-        '''
-        self._interpreter.configure_spectrum_frequency_center_span(channel_list, center_frequency, span)
-
-    def configure_spectrum_frequency(self, channel_list, center_frequency=None, span=None, start_frequency=None, stop_frequency=None):
-        '''configure_spectrum_frequency
-
-        Configures the frequency range of a spectrum acquisition.
-
-        You can specify the frequency range using either center frequency and span, or start and stop frequencies.
-
-        ----
-        **Note**
-        If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
-
-        ----
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            center_frequency (float): Specifies the center frequency in a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **span**.
-
-            span (float): Specifies the span of a spectrum acquisition. The value is expressed in hertz (Hz). Must be used together with **center_frequency**.
-
-            start_frequency (float): Specifies the lower limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **stop_frequency**.
-
-            stop_frequency (float): Specifies the upper limit of a span of frequencies. The value is expressed in hertz (Hz). Must be used together with **start_frequency**.
-
-        '''
-        if center_frequency is not None and span is not None:
-            self._configure_spectrum_frequency_center_span(channel_list, center_frequency, span)
-        elif start_frequency is not None and stop_frequency is not None:
-            self._configure_spectrum_frequency_start_stop(channel_list, start_frequency, stop_frequency)
-        else:
-            raise ValueError(
-                "Provide either (center_frequency & span) "
-                "or (start_frequency & stop_frequency)"
-            )
-
-    @ivi_synchronized
-    def _configure_spectrum_frequency_start_stop(self, channel_list, start_frequency, stop_frequency):
-        r'''_configure_spectrum_frequency_start_stop
-
-        Configures the start and stop frequencies of a spectrum read by NI-RFSA.
-
-        ----
-        **Note**
-        If you configure the spectrum span (**STOP_FREQUENCY**  **START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.
-
-        ----
-
-        ----
-        **Note**
-         For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).
-
-        ----
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            start_frequency (float): Specifies the lower limit of a span of frequencies. This value is expressed in hertz (Hz).
-
-            stop_frequency (float): Specifies the upper limit of a span of frequencies. This value is expressed in hertz (Hz).
-
-        '''
-        self._interpreter.configure_spectrum_frequency_start_stop(channel_list, start_frequency, stop_frequency)
-
-    @ivi_synchronized
     def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):
         r'''_create_deembedding_sparameter_table_array
 
@@ -6568,595 +7661,6 @@ class Session(_SessionBase):
         return sparameters
 
     @ivi_synchronized
-    def _fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_fetch_iq_multi_record_complex_f32
-
-        Fetches I/Q data from multiple records in an acquisition.
-
-        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-            number_of_records (int): Specifies the number of records to fetch.
-
-            iq_data_arrays (numpy.array(dtype=numpy.complex64)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_arrays) is not numpy.ndarray:
-            raise TypeError('iq_data_arrays must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_arrays)))
-        if numpy.isfortran(iq_data_arrays) is True:
-            raise TypeError('iq_data_arrays must be in C-order')
-        if iq_data_arrays.dtype is not numpy.dtype('complex64'):
-            raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=complex64, is ' + str(iq_data_arrays.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-        return wfm_info
-
-    @ivi_synchronized
-    def _fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_fetch_iq_multi_record_complex_f64
-
-        Fetches I/Q data from multiple records in an acquisition.
-
-        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-            number_of_records (int): Specifies the number of records to fetch.
-
-            iq_data_arrays (numpy.array(dtype=numpy.complex128)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_arrays) is not numpy.ndarray:
-            raise TypeError('iq_data_arrays must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_arrays)))
-        if numpy.isfortran(iq_data_arrays) is True:
-            raise TypeError('iq_data_arrays must be in C-order')
-        if iq_data_arrays.dtype is not numpy.dtype('complex128'):
-            raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_arrays.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-        return wfm_info
-
-    @ivi_synchronized
-    def _fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_fetch_iq_multi_record_complex_i16
-
-        Fetches binary I/Q data from multiple records in an acquisition.
-
-        Fetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-            number_of_records (int): Specifies the number of records to fetch.
-
-            iq_data_arrays (numpy.array(dtype=numpy.int16)): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this interleaved data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read. Each element of this array corresponds to a record.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.The actual number of samples for each record can vary if the NIRFSA ATTR NUMBER OF SAMPLES property changes per step during RF list mode.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_arrays) is not numpy.ndarray:
-            raise TypeError('iq_data_arrays must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_arrays)))
-        if numpy.isfortran(iq_data_arrays) is True:
-            raise TypeError('iq_data_arrays must be in C-order')
-        if iq_data_arrays.dtype is not numpy.dtype('int16'):
-            raise TypeError('iq_data_arrays must be numpy.ndarray of dtype=int16, is ' + str(iq_data_arrays.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-        return wfm_info
-
-    @ivi_synchronized
-    def _fetch_iq_single_record_complex_f32(self, channel_list, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_fetch_iq_single_record_complex_f32
-
-        Fetches I/Q data from a single record in an acquisition.
-
-        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            iq_data_array (numpy.array(dtype=numpy.complex64)): Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **number_of_samples**.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_array) is not numpy.ndarray:
-            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
-        if numpy.isfortran(iq_data_array) is True:
-            raise TypeError('iq_data_array must be in C-order')
-        if iq_data_array.dtype is not numpy.dtype('complex64'):
-            raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex64, is ' + str(iq_data_array.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_f32(channel_list, record_number, iq_data_array, timeout)
-        return wfm_info
-
-    @ivi_synchronized
-    def _fetch_iq_single_record_complex_f64(self, channel_list, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_fetch_iq_single_record_complex_f64
-
-        Fetches I/Q data from a single record in an acquisition.
-
-        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            iq_data_array (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **number_of_samples**.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_array) is not numpy.ndarray:
-            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
-        if numpy.isfortran(iq_data_array) is True:
-            raise TypeError('iq_data_array must be in C-order')
-        if iq_data_array.dtype is not numpy.dtype('complex128'):
-            raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_array.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_f64(channel_list, record_number, iq_data_array, timeout)
-        return wfm_info
-
-    @ivi_synchronized
-    def _fetch_iq_single_record_complex_i16(self, channel_list, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_fetch_iq_single_record_complex_i16
-
-        Fetches binary I/Q data from a single record in an acquisition.
-
-        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method is not necessary if you use the read IQ single record complex F64 method because the read IQ single record complex F64 method performs the fetch as part of the method.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            iq_data_array (numpy.array(dtype=numpy.int16)): Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **number_of_samples**.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_array) is not numpy.ndarray:
-            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
-        if numpy.isfortran(iq_data_array) is True:
-            raise TypeError('iq_data_array must be in C-order')
-        if iq_data_array.dtype is not numpy.dtype('int16'):
-            raise TypeError('iq_data_array must be numpy.ndarray of dtype=int16, is ' + str(iq_data_array.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(channel_list, record_number, iq_data_array, timeout)
-        return wfm_info
-
-    def fetch_iq_multi_record(self, channel_list, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
-        '''fetch_iq_multi_record
-
-        Fetches I/Q data from multiple records in an acquisition.
-
-        A fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
-
-            number_of_records (int): Specifies the number of records to fetch.
-
-            number_of_samples (int): Specifies the number of samples per record.
-
-            iq_data_arrays (2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-        '''
-        import numpy
-        if str(type(iq_data_arrays)).find("'numpy.ndarray'") != -1:
-            if iq_data_arrays.ndim != 2:
-                raise ValueError("iq_data_arrays must be a 2D numpy array (number_of_records x number_of_samples), but got {}D array".format(iq_data_arrays.ndim))
-            if iq_data_arrays.shape[0] < number_of_records:
-                raise ValueError("iq_data_arrays must have at least {} rows (number_of_records), but has {}".format(number_of_records, iq_data_arrays.shape[0]))
-            if iq_data_arrays.dtype == numpy.int16:
-                expected_buffer_size = 2 * number_of_samples
-            else:
-                expected_buffer_size = number_of_samples
-
-            if iq_data_arrays.shape[1] < expected_buffer_size:
-                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
-                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The width of iq_data_arrays is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
-
-            if iq_data_arrays.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
-                return wfm_info_struct
-            elif iq_data_arrays.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
-                return wfm_info_struct
-            elif iq_data_arrays.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(channel_list, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], 2 * wfm_info_struct.actual_samples), refcheck=False)
-                return wfm_info_struct
-            else:
-                raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
-        else:
-            raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
-
-    def fetch_iq_single_record(self, channel_list, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
-        '''fetch_iq_single_record
-
-        Fetches I/Q data from a single record in an acquisition.
-
-        The fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.
-
-        This method accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
-
-            number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            iq_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
-
-                **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
-
-                ----
-
-                For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
-
-        '''
-        import numpy
-        if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
-            if iq_data_array.dtype == numpy.int16:
-                expected_buffer_size = 2 * number_of_samples
-            else:
-                expected_buffer_size = number_of_samples
-
-            if len(iq_data_array) < expected_buffer_size:
-                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                    iq_data_array.resize(expected_buffer_size, refcheck=False)
-                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
-
-            if iq_data_array.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f64(channel_list, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
-                return wfm_info_struct
-            elif iq_data_array.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f32(channel_list, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
-                return wfm_info_struct
-            elif iq_data_array.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_single_record_complex_i16(channel_list, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_array.resize(2 * wfm_info_struct.actual_samples, refcheck=False)
-                return wfm_info_struct
-            else:
-                raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
-        else:
-            raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
-
-    @ivi_synchronized
     def get_ext_cal_last_temp(self):
         r'''get_ext_cal_last_temp
 
@@ -7219,64 +7723,6 @@ class Session(_SessionBase):
         return year, month, day, hour, minute, second
 
     @ivi_synchronized
-    def get_fetch_backlog(self, channel_list, record_number):
-        r'''get_fetch_backlog
-
-        Returns the number of points acquired that have not yet been fetched.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            record_number (int): Specifies the record from which to read the backlog. Record numbers are zero-based.
-
-
-        Returns:
-            backlog (int): Returns the number of samples available to read for the requested record.
-
-        '''
-        backlog = self._interpreter.get_fetch_backlog(channel_list, record_number)
-        return backlog
-
-    @ivi_synchronized
-    def get_frequency_response(self, channel_list):
-        r'''get_frequency_response
-
-        Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.
-
-        Refer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-
-        Returns:
-            frequencies (numpy.array(dtype=numpy.float64)): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
-
-                Pass VI_NULL if you do not want to use this parameter.
-
-            magnitude_response (numpy.array(dtype=numpy.float64)): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
-
-                Pass VI_NULL if you do not want to use this parameter.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            phase_response (numpy.array(dtype=numpy.float64)): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
-
-                Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        frequencies, magnitude_response, phase_response = self._interpreter.get_frequency_response(channel_list)
-        return frequencies, magnitude_response, phase_response
-
-    @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
@@ -7321,41 +7767,6 @@ class Session(_SessionBase):
         '''
         year, month, day, hour, minute = self._get_self_calibration_date_and_time(self_calibration_step)
         return hightime.datetime(year, month, day, hour, minute)
-
-    @ivi_synchronized
-    def get_scaling_coefficients(self, channel_list):
-        r'''get_scaling_coefficients
-
-        Returns coefficients you can use to convert unscaled data to scaled I/Q data.
-
-        Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain get_scaling_coefficients structures in the **COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **COEFFICIENT_INFO** array returns one element for each channel specified in the **CHANNEL_LIST** parameter. The element order matches the order specified by the **CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **COEFFICIENT_INFO** element then adding the offset from the same element.
-
-        ----
-        **Note**
-        The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
-
-        ----
-
-        To get the required size of the array, call this method with **ARRAY_SIZE** set to 0 and NULL for the **COEFFICIENT_INFO** array. This method returns the required size in the **NUMBER_OF_COEFFICIENT_SETS** parameter.
-
-        **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-
-        Returns:
-            coefficient_info (list of CoefficientInfo): Specifies the array for storing the coefficient info.
-
-                - **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.
-                - **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.
-
-        '''
-        coefficient_info = self._interpreter.get_scaling_coefficients(channel_list)
-        return coefficient_info
 
     @ivi_synchronized
     def _get_self_calibration_date_and_time(self, self_calibration_step):
@@ -7736,250 +8147,6 @@ class Session(_SessionBase):
         self._interpreter.perform_thermal_correction()
 
     @ivi_synchronized
-    def _read_iq_single_record_complex_f64(self, channel_list, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_read_iq_single_record_complex_f64
-
-        Initiates an acquisition and fetches a single I/Q data record.
-
-        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            iq_data_array (numpy.array(dtype=numpy.complex128)): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-
-        if type(iq_data_array) is not numpy.ndarray:
-            raise TypeError('iq_data_array must be {0}, is {1}'.format(numpy.ndarray, type(iq_data_array)))
-        if numpy.isfortran(iq_data_array) is True:
-            raise TypeError('iq_data_array must be in C-order')
-        if iq_data_array.dtype is not numpy.dtype('complex128'):
-            raise TypeError('iq_data_array must be numpy.ndarray of dtype=complex128, is ' + str(iq_data_array.dtype))
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        wfm_info = self._interpreter.read_iq_single_record_complex_f64(channel_list, iq_data_array, timeout)
-        return wfm_info
-
-    def read_iq_single_record(self, channel_list, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
-        '''read_iq_single_record
-
-        Initiates an acquisition and fetches a single I/Q data record.
-
-        Do not use this method if you have configured the device to continuously acquire data samples or to acquire multiple records.
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        **Related Topics**
-
-        `None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            iq_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the ConfigureNumberOfSamples method.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies in seconds the time allotted for the method to complete before returning a timeout error. A value of  specifies the method waits until all data is available.
-
-
-        Returns:
-            wfm_info (WaveformInfo): Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.
-
-                The following list provides more information about each of these properties:
-
-                - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
-
-                ----
-
-                The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                ----
-
-                - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
-
-                ----
-
-
-                The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                ----
-
-                - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
-                - **actual samples read** Returns an integer representing the number of samples in the waveform.
-                - **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.
-                - **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.
-
-        '''
-        import numpy
-        if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
-            if iq_data_array.dtype == numpy.complex128:
-                expected_buffer_size = self.number_of_samples
-                if len(iq_data_array) < expected_buffer_size:
-                    if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                        iq_data_array.resize(expected_buffer_size, refcheck=False)
-                    elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                        raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
-
-                wfm_info_struct = self._read_iq_single_record_complex_f64(channel_list, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < expected_buffer_size:
-                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
-                return wfm_info_struct
-            else:
-                raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
-        else:
-            raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
-
-    def read_power_spectrum(self, channel_list, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
-        '''read_power_spectrum
-
-        Initiates a spectrum acquisition and returns power spectrum data.
-
-        ----
-        **Note**
-         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
-
-        ----
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            power_spectrum_data_array (numpy.array of numpy.float64 or numpy.array of numpy.float32): Specifies a pre-allocated numpy array to be filled with power spectrum data. The dtype of this array determines the data format: numpy.float64 or numpy.float32. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
-
-        '''
-        import numpy
-        if str(type(power_spectrum_data_array)).find("'numpy.ndarray'") != -1:
-            expected_buffer_size = self.number_of_spectral_lines
-            if len(power_spectrum_data_array) < expected_buffer_size:
-                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                    power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
-                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The length of power_spectrum_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
-
-            if power_spectrum_data_array.dtype == numpy.float64:
-                spectrum_info_struct = self._read_power_spectrum_f64(channel_list, power_spectrum_data_array, timeout)
-                if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
-                    power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
-                return spectrum_info_struct
-            elif power_spectrum_data_array.dtype == numpy.float32:
-                spectrum_info_struct = self._read_power_spectrum_f32(channel_list, power_spectrum_data_array, timeout)
-                if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
-                    power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
-                return spectrum_info_struct
-            else:
-                raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
-        else:
-            raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
-
-    @ivi_synchronized
-    def _read_power_spectrum_f32(self, channel_list, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_read_power_spectrum_f32
-
-        Initiates a spectrum acquisition and returns power spectrum data.
-
-        ----
-        **Note**
-         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
-
-        ----
-
-        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            power_spectrum_data_array (list of float): Returns power spectrum data. Allocate an array as large as **DATA_ARRAY_SIZE**.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
-
-
-        Returns:
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        spectrum_info = self._interpreter.read_power_spectrum_f32(channel_list, timeout, power_spectrum_data_array)
-        return spectrum_info
-
-    @ivi_synchronized
-    def _read_power_spectrum_f64(self, channel_list, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):
-        r'''_read_power_spectrum_f64
-
-        Initiates a spectrum acquisition and returns power spectrum data.
-
-        ----
-        **Note**
-         Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
-
-        ----
-
-        **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
-
-        Args:
-            channel_list (str): Identifies which channels to apply settings. Specify an empty string as the value of this parameter.
-
-            power_spectrum_data_array (list of float): Specifies a pre-allocated numpy array to be filled with power spectrum data. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.
-
-            timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
-
-
-        Returns:
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
-
-                Note:
-                One or more of the referenced properties are not in the Python API for this driver.
-
-        '''
-        timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
-        spectrum_info = self._interpreter.read_power_spectrum_f64(channel_list, timeout, power_spectrum_data_array)
-        return spectrum_info
-
-    @ivi_synchronized
     def reset_device(self):
         r'''reset_device
 
@@ -8007,16 +8174,6 @@ class Session(_SessionBase):
         One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
         '''
         self._interpreter.reset_device()
-
-    @ivi_synchronized
-    def reset_with_defaults(self):
-        r'''reset_with_defaults
-
-        Performs a software reset of the device, returning it to the default state and applying any initial default settings from the IVI Configuration Store.
-
-        **Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-        '''
-        self._interpreter.reset_with_defaults()
 
     @ivi_synchronized
     def reset_with_options(self, steps_to_omit):

@@ -457,12 +457,6 @@ class GrpcStubInterpreter(object):
             grpc_types.ResetDeviceRequest(vi=self._vi),
         )
 
-    def reset_with_defaults(self):  # noqa: N802
-        self._invoke(
-            self._client.ResetWithDefaults,
-            grpc_types.ResetWithDefaultsRequest(vi=self._vi),
-        )
-
     def reset_with_options(self, steps_to_omit):  # noqa: N802
         self._invoke(
             self._client.ResetWithOptions,

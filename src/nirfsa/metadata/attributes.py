@@ -3032,92 +3032,6 @@ attributes = {
         'name': 'AMPLITUDE_SETTLING',
         'type': 'ViReal64'
     },
-    1150166: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies the RF preselector filter to use.\n\n----\n**Note**\nYou can write to this attribute when using only the PXIe-5693 as a stand-alone device.\n\n----\n\n**Defined Values**:\n\n**Default Values**:\n\n**PXIe-5667, PXIe-5693**: NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_9\n\n**PXIe-5665**: NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_NONE\n\n**Supported Devices**: PXIe-5665/5667, PXIe-5693',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_NONE',
-                    'Specifies that no preselector path is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_1',
-                    'Specifies that the 19 MHz to 35 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_2',
-                    'Specifies that the 33 MHz to 61 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_3',
-                    'Specifies that the 59 MHz to 110 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_4',
-                    'Specifies that the 90 MHz to 170 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_5',
-                    'Specifies that the 140 MHz to 245 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_6',
-                    'Specifies that the 205 MHz to 370 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_7',
-                    'Specifies that the 330 MHz to 575 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_8',
-                    'Specifies that the 530 MHz to 975 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_9',
-                    'Specifies that the 910 MHz to 1,640 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_10',
-                    'Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_11',
-                    'Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_12',
-                    'Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_13',
-                    'Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_14',
-                    'Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_15',
-                    'Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_FILTER_16',
-                    'Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.',
-                ],
-                [
-                    'NIRFSA_VAL_RF_PRESELECTOR_FILTER_PATH_EXTERNAL_FILTER',
-                    'Specifies that the 20 MHz to 3.04 GHz external filter filter path is used.',
-                ],
-            ],
-            'table_header': ['Name', 'Description']
-        },
-        'enum': 'RfPreselectorFilter',
-        'lv_property': 'Signal Path:Advanced:RF Preselector Filter',
-        'name': 'RF_PRESELECTOR_FILTER',
-        'type': 'ViInt32'
-    },
     1150169: {
         'access': 'read-write',
         'codegen_method': 'public',
@@ -3328,28 +3242,6 @@ attributes = {
         'lv_property': 'Acquisition:Spectrum:FFT Window Shape Factor',
         'name': 'FFT_WINDOW_SHAPE_FACTOR',
         'type': 'ViReal64'
-    },
-    1150207: {
-        'access': 'read-write',
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Specifies whether to use the low-frequency bypass path for the incoming RF signal.\n\n|                            |                                         |\n|:---------------------------|:----------------------------------------|\n| NIRFSA_VAL_DISABLED (1900) | Disables the low-frequency bypass path. |\n| NIRFSA_VAL_ENABLED (1901)  | Enables the low-frequency bypass path.  |\n\n**Default Value**: NIRFSA_VAL_DISABLED\n\n**Supported Devices**: PXIe-5693, PXIe-5667',
-            'table_body': [
-                [
-                    'NIRFSA_VAL_DISABLED',
-                    'Disables low frequency bypass.',
-                ],
-                [
-                    'NIRFSA_VAL_ENABLED',
-                    'Enables low frequency bypass.',
-                ],
-            ],
-            'table_header': ['Name', 'Description']
-        },
-        'enum': 'LowFrequencyBypassEnabled',
-        'lv_property': 'Signal Path:Advanced:Low Frequency Bypass Enabled',
-        'name': 'LOW_FREQUENCY_BYPASS_ENABLED',
-        'type': 'ViInt32'
     },
     1150219: {
         'access': 'read-write',

@@ -3040,7 +3040,7 @@ attenuation
 
         **PXIe-5603/5605/5606/5665/5668**: You can set multiple properties to modify the attenuation values for the device. Refer to `PXIe-5665 RF Attenuation and Signal Levels <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/attenuation-and-signal-levels.html>`_ for more information about configuring attenuation.
 
-        **PXIe-5667**: This property specifies the nominal attenuation setting for all attenuators before the first RF mixer in the input signal path. This property is read-only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
+        **PXIe-5667**: This property specifies the nominal attenuation setting for all attenuators before the first RF mixer in the input signal path. This property is read-only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
 
         **PXIe-5693**: This property is read-only and returns the nominal RF attenuation of the PXIe-5693.
 
@@ -3051,6 +3051,8 @@ attenuation
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693
 
 
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -7319,7 +7321,7 @@ iq_rate
 
         **PXIe-5665**: Your maximum allowed instantaneous bandwidth depends on the downconverter center frequency if you have enabled the preselector (YIG-tuned filter).
 
-        **PXIe-5667**: Your maximum allowed instantaneous bandwidth depends on the selected [RF preselector filter](:py:attr:`nirfsa.Session.rf_preselector_filter`.html) and whether the preselector on the [RF downconverter](:py:attr:`nirfsa.Session.PRESELECTOR_ENABLED`.html) is enabled.
+        **PXIe-5667**: Your maximum allowed instantaneous bandwidth depends on the selected [RF preselector filter](:py:attr:`nirfsa.Session.RF_PRESELECTOR_FILTER`.html) and whether the preselector on the [RF downconverter](:py:attr:`nirfsa.Session.PRESELECTOR_ENABLED`.html) is enabled.
 
         **PXIe-5668**: Your maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use and whether or not you enable the highpass filter or preselector (YIG-tuned filter).
 
@@ -7485,50 +7487,6 @@ logical_name
 
                 - LabVIEW Property: **Inherent IVI Attributes:Advanced Session Information:Logical Name**
                 - C Attribute: **NIRFSA_ATTR_LOGICAL_NAME**
-
-low_frequency_bypass_enabled
-----------------------------
-
-    .. py:attribute:: low_frequency_bypass_enabled
-
-        Specifies whether to use the low-frequency bypass path for the incoming RF signal.
-
-        |                            |                                         |
-        |:---------------------------|:----------------------------------------|
-        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.DISABLED` (1900) | Disables the low-frequency bypass path. |
-        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.ENABLED` (1901)  | Enables the low-frequency bypass path.  |
-
-        **Default Value**: :py:data:`~nirfsa.LowFrequencyBypassEnabled.DISABLED`
-
-        **Supported Devices**: PXIe-5693, PXIe-5667
-
-        +-------------------------------------------------------+--------------------------------+
-        | Name                                                  | Description                    |
-        +=======================================================+================================+
-        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.DISABLED` | Disables low frequency bypass. |
-        +-------------------------------------------------------+--------------------------------+
-        | :py:data:`~nirfsa.LowFrequencyBypassEnabled.ENABLED`  | Enables low frequency bypass.  |
-        +-------------------------------------------------------+--------------------------------+
-
-        .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+---------------------------------+
-            | Characteristic        | Value                           |
-            +=======================+=================================+
-            | Datatype              | enums.LowFrequencyBypassEnabled |
-            +-----------------------+---------------------------------+
-            | Permissions           | read-write                      |
-            +-----------------------+---------------------------------+
-            | Repeated Capabilities | None                            |
-            +-----------------------+---------------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:Low Frequency Bypass Enabled**
-                - C Attribute: **NIRFSA_ATTR_LOW_FREQUENCY_BYPASS_ENABLED**
 
 lo_export_enabled
 -----------------
@@ -8231,7 +8189,7 @@ mechanical_attenuation
 
         Specifies the level of mechanical attenuation for the RF path, in dB.
 
-        **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
+        **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
 
         **PXIe-5668with PXIe-5698**: This property is read-only when the :py:attr:`nirfsa.Session.rf_preamp_enabled` property is set to :py:data:`~nirfsa.RfPreampEnabled.ENABLED`.
 
@@ -8260,6 +8218,8 @@ mechanical_attenuation
         **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
 
 
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -8372,7 +8332,7 @@ mixer_level
 
         **PXIe-5601/5663/5663E**: This property is read-only.
 
-        **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
+        **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
 
         **Units**: dBm
 
@@ -8387,6 +8347,8 @@ mixer_level
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
 
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -8419,7 +8381,7 @@ mixer_level_offset
 
         You cannot set the :py:attr:`nirfsa.Session.mixer_level` and :py:attr:`nirfsa.Session.mixer_level_offset` properties at the same time.
 
-        **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
+        **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
 
         **Units**: dB
 
@@ -8428,6 +8390,8 @@ mixer_level_offset
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
 
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         .. note:: One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
 
@@ -9876,7 +9840,7 @@ rf_preamp_enabled
 
         ----
 
-        **PXIe-5667**: The :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.low_frequency_bypass_enabled` property is set to :py:data:`~nirfsa.RfPreampEnabled.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH`.
+        **PXIe-5667**: The :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.RfPreampEnabled.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH`.
 
         **PXIe-5668 with PXIe-5698**: If you set this property to :py:attr:`nirfsa.Session.rf_preamp_enabled`, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
@@ -9901,6 +9865,8 @@ rf_preamp_enabled
         +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC`                   | Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
         +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+        .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
@@ -9955,87 +9921,6 @@ rf_preamp_present
 
                 - LabVIEW Property: **Device Characteristics:RF Preamp Present**
                 - C Attribute: **NIRFSA_ATTR_RF_PREAMP_PRESENT**
-
-rf_preselector_filter
----------------------
-
-    .. py:attribute:: rf_preselector_filter
-
-        Specifies the RF preselector filter to use.
-
-        ----
-        **Note**
-        You can write to this property when using only the PXIe-5693 as a stand-alone device.
-
-        ----
-
-        **Defined Values**:
-
-        **Default Values**:
-
-        **PXIe-5667, PXIe-5693**: :py:data:`~nirfsa.RfPreselectorFilter.FILTER_9`
-
-        **PXIe-5665**: :py:data:`~nirfsa.RfPreselectorFilter.NONE`
-
-        **Supported Devices**: PXIe-5665/5667, PXIe-5693
-
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | Name                                                   | Description                                                                |
-        +========================================================+============================================================================+
-        | :py:data:`~nirfsa.RfPreselectorFilter.NONE`            | Specifies that no preselector path is used.                                |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_1`        | Specifies that the 19 MHz to 35 MHz preselector filter is used.            |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_2`        | Specifies that the 33 MHz to 61 MHz preselector filter is used.            |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_3`        | Specifies that the 59 MHz to 110 MHz preselector filter is used.           |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_4`        | Specifies that the 90 MHz to 170 MHz preselector filter is used.           |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_5`        | Specifies that the 140 MHz to 245 MHz preselector filter is used.          |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_6`        | Specifies that the 205 MHz to 370 MHz preselector filter is used.          |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_7`        | Specifies that the 330 MHz to 575 MHz preselector filter is used.          |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_8`        | Specifies that the 530 MHz to 975 MHz preselector filter is used.          |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_9`        | Specifies that the 910 MHz to 1,640 MHz preselector filter is used.        |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_10`       | Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_11`       | Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_12`       | Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_13`       | Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_14`       | Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_15`       | Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.FILTER_16`       | Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.      |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreselectorFilter.EXTERNAL_FILTER` | Specifies that the 20 MHz to 3.04 GHz external filter filter path is used. |
-        +--------------------------------------------------------+----------------------------------------------------------------------------+
-
-        The following table lists the characteristics of this property.
-
-            +-----------------------+---------------------------+
-            | Characteristic        | Value                     |
-            +=======================+===========================+
-            | Datatype              | enums.RfPreselectorFilter |
-            +-----------------------+---------------------------+
-            | Permissions           | read-write                |
-            +-----------------------+---------------------------+
-            | Repeated Capabilities | None                      |
-            +-----------------------+---------------------------+
-
-        .. tip::
-            This property corresponds to the following LabVIEW Property or C Attribute:
-
-                - LabVIEW Property: **Signal Path:Advanced:RF Preselector Filter**
-                - C Attribute: **NIRFSA_ATTR_RF_PRESELECTOR_FILTER**
 
 selected_path
 -------------

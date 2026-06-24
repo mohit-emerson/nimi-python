@@ -327,7 +327,7 @@ class _SessionBase(object):
 
     **PXIe-5603/5605/5606/5665/5668**: You can set multiple properties to modify the attenuation values for the device. Refer to `PXIe-5665 RF Attenuation and Signal Levels <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/attenuation-and-signal-levels.html>`_ for more information about configuring attenuation.
 
-    **PXIe-5667**: This property specifies the nominal attenuation setting for all attenuators before the first RF mixer in the input signal path. This property is read-only when the low_frequency_bypass_enabled property is set to NIRFSA_VAL_DISABLED.
+    **PXIe-5667**: This property specifies the nominal attenuation setting for all attenuators before the first RF mixer in the input signal path. This property is read-only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to NIRFSA_VAL_DISABLED.
 
     **PXIe-5693**: This property is read-only and returns the nominal RF attenuation of the PXIe-5693.
 
@@ -336,6 +336,9 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -2982,7 +2985,7 @@ class _SessionBase(object):
 
     **PXIe-5665**: Your maximum allowed instantaneous bandwidth depends on the downconverter center frequency if you have enabled the preselector (YIG-tuned filter).
 
-    **PXIe-5667**: Your maximum allowed instantaneous bandwidth depends on the selected [RF preselector filter](rf_preselector_filter.html) and whether the preselector on the [RF downconverter](PRESELECTOR_ENABLED.html) is enabled.
+    **PXIe-5667**: Your maximum allowed instantaneous bandwidth depends on the selected [RF preselector filter](RF_PRESELECTOR_FILTER.html) and whether the preselector on the [RF downconverter](PRESELECTOR_ENABLED.html) is enabled.
 
     **PXIe-5668**: Your maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use and whether or not you enable the highpass filter or preselector (YIG-tuned filter).
 
@@ -3072,31 +3075,6 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-    '''
-    low_frequency_bypass_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.LowFrequencyBypassEnabled, 1150207)
-    '''Type: enums.LowFrequencyBypassEnabled
-
-    Specifies whether to use the low-frequency bypass path for the incoming RF signal.
-
-    |                            |                                         |
-    |:---------------------------|:----------------------------------------|
-    | LowFrequencyBypassEnabled.DISABLED (1900) | Disables the low-frequency bypass path. |
-    | LowFrequencyBypassEnabled.ENABLED (1901)  | Enables the low-frequency bypass path.  |
-
-    **Default Value**: LowFrequencyBypassEnabled.DISABLED
-
-    **Supported Devices**: PXIe-5693, PXIe-5667
-
-    +------------------------------------+--------------------------------+
-    | Name                               | Description                    |
-    +====================================+================================+
-    | LowFrequencyBypassEnabled.DISABLED | Disables low frequency bypass. |
-    +------------------------------------+--------------------------------+
-    | LowFrequencyBypassEnabled.ENABLED  | Enables low frequency bypass.  |
-    +------------------------------------+--------------------------------+
-
-    Note:
-    One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     lo_export_enabled = _attributes.AttributeViBoolean(1150134)
     '''Type: bool
@@ -3515,7 +3493,7 @@ class _SessionBase(object):
 
     Specifies the level of mechanical attenuation for the RF path, in dB.
 
-    **PXIe-5667**: This property is read-only when the low_frequency_bypass_enabled property is set to NIRFSA_VAL_DISABLED.
+    **PXIe-5667**: This property is read-only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to NIRFSA_VAL_DISABLED.
 
     **PXIe-5668with PXIe-5698**: This property is read-only when the rf_preamp_enabled property is set to RfPreampEnabled.ENABLED.
 
@@ -3542,6 +3520,9 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3595,7 +3576,7 @@ class _SessionBase(object):
 
     **PXIe-5601/5663/5663E**: This property is read-only.
 
-    **PXIe-5667**: This property is read-only when the low_frequency_bypass_enabled property is set to NIRFSA_VAL_DISABLED.
+    **PXIe-5667**: This property is read-only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to NIRFSA_VAL_DISABLED.
 
     **Units**: dBm
 
@@ -3610,6 +3591,9 @@ class _SessionBase(object):
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
 
     Note:
+    One or more of the referenced properties are not in the Python API for this driver.
+
+    Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
     mixer_level_offset = _attributes.AttributeViReal64(1150127)
@@ -3621,13 +3605,16 @@ class _SessionBase(object):
 
     You cannot set the mixer_level and mixer_level_offset properties at the same time.
 
-    **PXIe-5667**: This property is read-only when the low_frequency_bypass_enabled property is set to NIRFSA_VAL_DISABLED.
+    **PXIe-5667**: This property is read-only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to NIRFSA_VAL_DISABLED.
 
     **Units**: dB
 
     **Default Value**: 0
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -4403,7 +4390,7 @@ class _SessionBase(object):
 
     ----
 
-    **PXIe-5667**: The RfPreampEnabled.AUTOMATIC value is supported only when the low_frequency_bypass_enabled property is set to RfPreampEnabled.DISABLED. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the rf_preamp_enabled property to RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH.
+    **PXIe-5667**: The RfPreampEnabled.AUTOMATIC value is supported only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to RfPreampEnabled.DISABLED. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the rf_preamp_enabled property to RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH.
 
     **PXIe-5668 with PXIe-5698**: If you set this property to rf_preamp_enabled, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
@@ -4428,6 +4415,9 @@ class _SessionBase(object):
     +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | RfPreampEnabled.AUTOMATIC                   | Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
     +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+
+    Note:
+    One or more of the referenced properties are not in the Python API for this driver.
     '''
     rf_preamp_present = _attributes.AttributeViBoolean(1150137)
     '''Type: bool
@@ -4444,67 +4434,6 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
-    '''
-    rf_preselector_filter = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfPreselectorFilter, 1150166)
-    '''Type: enums.RfPreselectorFilter
-
-    Specifies the RF preselector filter to use.
-
-    ----
-    **Note**
-    You can write to this property when using only the PXIe-5693 as a stand-alone device.
-
-    ----
-
-    **Defined Values**:
-
-    **Default Values**:
-
-    **PXIe-5667, PXIe-5693**: RfPreselectorFilter.FILTER_9
-
-    **PXIe-5665**: RfPreselectorFilter.NONE
-
-    **Supported Devices**: PXIe-5665/5667, PXIe-5693
-
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | Name                                | Description                                                                |
-    +=====================================+============================================================================+
-    | RfPreselectorFilter.NONE            | Specifies that no preselector path is used.                                |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_1        | Specifies that the 19 MHz to 35 MHz preselector filter is used.            |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_2        | Specifies that the 33 MHz to 61 MHz preselector filter is used.            |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_3        | Specifies that the 59 MHz to 110 MHz preselector filter is used.           |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_4        | Specifies that the 90 MHz to 170 MHz preselector filter is used.           |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_5        | Specifies that the 140 MHz to 245 MHz preselector filter is used.          |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_6        | Specifies that the 205 MHz to 370 MHz preselector filter is used.          |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_7        | Specifies that the 330 MHz to 575 MHz preselector filter is used.          |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_8        | Specifies that the 530 MHz to 975 MHz preselector filter is used.          |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_9        | Specifies that the 910 MHz to 1,640 MHz preselector filter is used.        |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_10       | Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_11       | Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_12       | Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_13       | Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_14       | Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_15       | Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.FILTER_16       | Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.      |
-    +-------------------------------------+----------------------------------------------------------------------------+
-    | RfPreselectorFilter.EXTERNAL_FILTER | Specifies that the 20 MHz to 3.04 GHz external filter filter path is used. |
-    +-------------------------------------+----------------------------------------------------------------------------+
     '''
     selected_path = _attributes.AttributeViString(1150331)
     '''Type: str

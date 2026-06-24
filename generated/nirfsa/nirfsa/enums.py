@@ -741,17 +741,6 @@ class LoadConfigurationResetOptions(Enum):
     '''
 
 
-class LowFrequencyBypassEnabled(Enum):
-    DISABLED = 1900
-    r'''
-    Disables low frequency bypass.
-    '''
-    ENABLED = 1901
-    r'''
-    Enables low frequency bypass.
-    '''
-
-
 class NoiseSourcePowerEnabled(Enum):
     DISABLED = 1900
     r'''
@@ -1170,81 +1159,6 @@ class RfPreampEnabled(Enum):
     AUTOMATIC = 2503
     r'''
     Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
-    '''
-
-
-class RfPreselectorFilter(Enum):
-    NONE = 3300
-    r'''
-    Specifies that no preselector path is used.
-    '''
-    FILTER_1 = 3301
-    r'''
-    Specifies that the 19 MHz to 35 MHz preselector filter is used.
-    '''
-    FILTER_2 = 3302
-    r'''
-    Specifies that the 33 MHz to 61 MHz preselector filter is used.
-    '''
-    FILTER_3 = 3303
-    r'''
-    Specifies that the 59 MHz to 110 MHz preselector filter is used.
-    '''
-    FILTER_4 = 3304
-    r'''
-    Specifies that the 90 MHz to 170 MHz preselector filter is used.
-    '''
-    FILTER_5 = 3305
-    r'''
-    Specifies that the 140 MHz to 245 MHz preselector filter is used.
-    '''
-    FILTER_6 = 3306
-    r'''
-    Specifies that the 205 MHz to 370 MHz preselector filter is used.
-    '''
-    FILTER_7 = 3307
-    r'''
-    Specifies that the 330 MHz to 575 MHz preselector filter is used.
-    '''
-    FILTER_8 = 3308
-    r'''
-    Specifies that the 530 MHz to 975 MHz preselector filter is used.
-    '''
-    FILTER_9 = 3309
-    r'''
-    Specifies that the 910 MHz to 1,640 MHz preselector filter is used.
-    '''
-    FILTER_10 = 3310
-    r'''
-    Specifies that the 1,560 MHz to 2,040 MHz preselector filter is used.
-    '''
-    FILTER_11 = 3311
-    r'''
-    Specifies that the 1,960 MHz to 2,540 MHz pre-elector filter is used.
-    '''
-    FILTER_12 = 3312
-    r'''
-    Specifies that the 2,460 MHz to 3,040 MHz preselector filter is used.
-    '''
-    FILTER_13 = 3313
-    r'''
-    Specifies that the 2,960 MHz to 3,840 MHz preselector filter is used.
-    '''
-    FILTER_14 = 3314
-    r'''
-    Specifies that the 3,760 MHz to 4,640 MHz preselector filter is used.
-    '''
-    FILTER_15 = 3315
-    r'''
-    Specifies that the 4,560 MHz to 5,840 MHz preselector filter is used.
-    '''
-    FILTER_16 = 3316
-    r'''
-    Specifies that the 5,760 MHz to 7,040 MHz preselector filter is used.
-    '''
-    EXTERNAL_FILTER = 3317
-    r'''
-    Specifies that the 20 MHz to 3.04 GHz external filter filter path is used.
     '''
 
 

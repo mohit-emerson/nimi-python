@@ -1,4 +1,4 @@
-import grpc
+# import grpc
 import hightime
 import nirfsa
 import numpy as np
@@ -196,9 +196,9 @@ class SystemTests:
         assert frequencies.size == magnitude_response.size == phase_response.size
 
     def test_get_scaling_coefficients(self, rfsa_device_session):
-        coefficient_info_before_commit = rfsa_device_session.get_scaling_coefficients('')
+        coefficient_info_before_commit = rfsa_device_session.get_scaling_coefficients()
         rfsa_device_session.commit()
-        coefficient_info_after_commit = rfsa_device_session.get_scaling_coefficients('')
+        coefficient_info_after_commit = rfsa_device_session.get_scaling_coefficients()
 
         assert isinstance(coefficient_info_before_commit, list)
         assert isinstance(coefficient_info_after_commit, list)
@@ -224,7 +224,7 @@ class SystemTests:
         with rfsa_device_session.initiate():
             time.sleep(1)
         rfsa_device_session.abort()
-        backlog_after_abort = rfsa_device_session.get_fetch_backlog('', 0)
+        backlog_after_abort = rfsa_device_session.get_fetch_backlog(0)
         assert backlog_after_abort == rfsa_device_session.number_of_samples
 
 # Repeated capability tests
@@ -250,7 +250,7 @@ class SystemTests:
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         requested_center_frequency = 2.4e9
         requested_span = 20e6
-        rfsa_device_session.configure_spectrum_frequency('', center_frequency=requested_center_frequency, span=requested_span)
+        rfsa_device_session.configure_spectrum_frequency(center_frequency=requested_center_frequency, span=requested_span)
         center_frequency_diff_mhz = abs(rfsa_device_session.center_frequency - requested_center_frequency) / 1e6
         span_diff_mhz = abs(rfsa_device_session.spectrum_span - requested_span) / 1e6
         assert center_frequency_diff_mhz < 1
@@ -260,7 +260,7 @@ class SystemTests:
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         requested_start_frequency = 2.39e9
         requested_stop_frequency = 2.41e9
-        rfsa_device_session.configure_spectrum_frequency('', start_frequency=requested_start_frequency, stop_frequency=requested_stop_frequency)
+        rfsa_device_session.configure_spectrum_frequency(start_frequency=requested_start_frequency, stop_frequency=requested_stop_frequency)
         center_frequency_diff_mhz = abs(rfsa_device_session.center_frequency - 2.4e9) / 1e6
         span_diff_mhz = abs(rfsa_device_session.spectrum_span - 20e6) / 1e6
         assert center_frequency_diff_mhz < 1

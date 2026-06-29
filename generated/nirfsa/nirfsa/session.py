@@ -4990,9 +4990,9 @@ class _SessionBase(object):
 
         '''
         if center_frequency is not None and span is not None:
-            self._configure_spectrum_frequency_center_span(self._repeated_capability, center_frequency, span)
+            self._configure_spectrum_frequency_center_span(center_frequency, span)
         elif start_frequency is not None and stop_frequency is not None:
-            self._configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
+            self._configure_spectrum_frequency_start_stop(start_frequency, stop_frequency)
         else:
             raise ValueError(
                 "Provide either (center_frequency & span) "
@@ -5559,7 +5559,7 @@ class _SessionBase(object):
         wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
         return wfm_info
 
-    def fetch_iq_multi_record(self, starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+    def fetch_iq_multi_record_into(self, iq_data_arrays, starting_record=0, number_of_records=None, number_of_samples=None, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_multi_record
 
         Fetches I/Q data from multiple records in an acquisition.
@@ -5586,13 +5586,13 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.fetch_iq_multi_record`
 
         Args:
+            iq_data_arrays (2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
             starting_record (int): Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.
 
             number_of_records (int): Specifies the number of records to fetch.
 
             number_of_samples (int): Specifies the number of samples per record.
-
-            iq_data_arrays (2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16): Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -5607,6 +5607,12 @@ class _SessionBase(object):
         '''
         import numpy
         if str(type(iq_data_arrays)).find("'numpy.ndarray'") != -1:
+            if number_of_records is None:
+                number_of_records = self.number_of_records
+
+            if number_of_samples is None:
+                number_of_samples = self.number_of_samples
+
             if iq_data_arrays.ndim != 2:
                 raise ValueError("iq_data_arrays must be a 2D numpy array (number_of_records x number_of_samples), but got {}D array".format(iq_data_arrays.ndim))
             if iq_data_arrays.shape[0] < number_of_records:
@@ -5617,32 +5623,23 @@ class _SessionBase(object):
                 expected_buffer_size = number_of_samples
 
             if iq_data_arrays.shape[1] < expected_buffer_size:
-                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
-                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The width of iq_data_arrays is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+                iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
 
             if iq_data_arrays.dtype == numpy.complex128:
                 wfm_info_struct = self._fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.complex64:
                 wfm_info_struct = self._fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], wfm_info_struct.actual_samples), refcheck=False)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.int16:
                 wfm_info_struct = self._fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_arrays.resize((iq_data_arrays.shape[0], 2 * wfm_info_struct.actual_samples), refcheck=False)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
-    def fetch_iq_single_record(self, record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+    def fetch_iq_single_record_into(self, iq_data_array, record_number=0, number_of_samples=None, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_single_record
 
         Fetches I/Q data from a single record in an acquisition.
@@ -5669,14 +5666,14 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.fetch_iq_single_record`
 
         Args:
+            iq_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
             record_number (int): Specifies the record to retrieve. Record numbers are zero-based.
 
             number_of_samples (int): Specifies the number of samples to fetch. The value must specify the array size of the DATA parameter.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
-
-            iq_data_array (numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16): Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
 
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): **PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the method to complete before returning a timeout error.
 
@@ -5691,31 +5688,25 @@ class _SessionBase(object):
         '''
         import numpy
         if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
+            if number_of_samples is None:
+                number_of_samples = self.number_of_samples
+
             if iq_data_array.dtype == numpy.int16:
                 expected_buffer_size = 2 * number_of_samples
             else:
                 expected_buffer_size = number_of_samples
 
             if len(iq_data_array) < expected_buffer_size:
-                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                    iq_data_array.resize(expected_buffer_size, refcheck=False)
-                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+                iq_data_array.resize(expected_buffer_size, refcheck=False)
 
             if iq_data_array.dtype == numpy.complex128:
                 wfm_info_struct = self._fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.complex64:
                 wfm_info_struct = self._fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.int16:
                 wfm_info_struct = self._fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < number_of_samples:
-                    iq_data_array.resize(2 * wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
@@ -6175,7 +6166,7 @@ class _SessionBase(object):
         wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
         return wfm_info
 
-    def read_iq_single_record(self, iq_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+    def read_iq_single_record(self, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
         '''read_iq_single_record
 
         Initiates an acquisition and fetches a single I/Q data record.
@@ -6238,21 +6229,16 @@ class _SessionBase(object):
             if iq_data_array.dtype == numpy.complex128:
                 expected_buffer_size = self.number_of_samples
                 if len(iq_data_array) < expected_buffer_size:
-                    if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                        iq_data_array.resize(expected_buffer_size, refcheck=False)
-                    elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                        raise ValueError("The length of iq_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+                    iq_data_array.resize(expected_buffer_size, refcheck=False)
 
                 wfm_info_struct = self._read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
-                if wfm_info_struct.actual_samples < expected_buffer_size:
-                    iq_data_array.resize(wfm_info_struct.actual_samples, refcheck=False)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
 
-    def read_power_spectrum(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0), reallocation_policy=enums.ReallocationPolicy.TO_GROW):
+    def read_power_spectrum_into(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):
         '''read_power_spectrum
 
         Initiates a spectrum acquisition and returns power spectrum data.
@@ -6286,20 +6272,13 @@ class _SessionBase(object):
         if str(type(power_spectrum_data_array)).find("'numpy.ndarray'") != -1:
             expected_buffer_size = self.number_of_spectral_lines
             if len(power_spectrum_data_array) < expected_buffer_size:
-                if reallocation_policy == enums.ReallocationPolicy.TO_GROW:
-                    power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
-                elif reallocation_policy == enums.ReallocationPolicy.DO_NOT_REALLOCATE:
-                    raise ValueError("The length of power_spectrum_data_array is less than expected_buffer_size. ReallocationPolicy is set to DO_NOT_REALLOCATE.")
+                power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:
                 spectrum_info_struct = self._read_power_spectrum_f64(self._repeated_capability, power_spectrum_data_array, timeout)
-                if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
-                    power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
                 return spectrum_info_struct
             elif power_spectrum_data_array.dtype == numpy.float32:
                 spectrum_info_struct = self._read_power_spectrum_f32(self._repeated_capability, power_spectrum_data_array, timeout)
-                if spectrum_info_struct.number_of_spectral_lines < expected_buffer_size:
-                    power_spectrum_data_array.resize(spectrum_info_struct.number_of_spectral_lines, refcheck=False)
                 return spectrum_info_struct
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))

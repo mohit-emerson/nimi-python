@@ -1314,12 +1314,12 @@ error_message
 
 
 
-fetch_iq_multi_record
----------------------
+fetch_iq_multi_record_into
+--------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: fetch_iq_multi_record(starting_record, number_of_records, number_of_samples, iq_data_arrays, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: fetch_iq_multi_record_into(iq_data_arrays, starting_record=0, number_of_records=None, number_of_samples=None, timeout=hightime.timedelta(seconds=10.0))
 
             Fetches I/Q data from multiple records in an acquisition.
 
@@ -1347,6 +1347,15 @@ fetch_iq_multi_record
                 Example: :py:meth:`my_session.fetch_iq_multi_record`
 
 
+            :param iq_data_arrays:
+
+
+                Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+                
+
+
+            :type iq_data_arrays: 2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16
             :param starting_record:
 
 
@@ -1374,15 +1383,6 @@ fetch_iq_multi_record
 
 
             :type number_of_samples: int
-            :param iq_data_arrays:
-
-
-                Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q data. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-                
-
-
-            :type iq_data_arrays: 2D numpy.array of numpy.complex64, 2D numpy.array of numpy.complex128 or interleaved complex data in the form of 2D numpy.array of numpy.int16
             :param timeout:
 
 
@@ -1401,12 +1401,12 @@ fetch_iq_multi_record
 
             :type timeout: hightime.timedelta, datetime.timedelta, or float in seconds
 
-fetch_iq_single_record
-----------------------
+fetch_iq_single_record_into
+---------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: fetch_iq_single_record(record_number, number_of_samples, iq_data_array, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: fetch_iq_single_record_into(iq_data_array, record_number=0, number_of_samples=None, timeout=hightime.timedelta(seconds=10.0))
 
             Fetches I/Q data from a single record in an acquisition.
 
@@ -1434,6 +1434,15 @@ fetch_iq_single_record
                 Example: :py:meth:`my_session.fetch_iq_single_record`
 
 
+            :param iq_data_array:
+
+
+                Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
+
+                
+
+
+            :type iq_data_array: numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16
             :param record_number:
 
 
@@ -1454,15 +1463,6 @@ fetch_iq_single_record
 
 
             :type number_of_samples: int
-            :param iq_data_array:
-
-
-                Specifies the pre-allocated numpy array to be filled with the acquired I/Q data. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.
-
-                
-
-
-            :type iq_data_array: numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16
             :param timeout:
 
 
@@ -2234,12 +2234,12 @@ read_iq_single_record
 
 
 
-read_power_spectrum
--------------------
+read_power_spectrum_into
+------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_power_spectrum(power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_power_spectrum_into(power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates a spectrum acquisition and returns power spectrum data.
 

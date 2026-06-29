@@ -9,9 +9,9 @@
         ${helper.get_function_docstring(f, False, config, indent=8)}
         '''
         if center_frequency is not None and span is not None:
-            self._configure_spectrum_frequency_center_span(self._repeated_capability, center_frequency, span)
+            self._configure_spectrum_frequency_center_span(center_frequency, span)
         elif start_frequency is not None and stop_frequency is not None:
-            self._configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
+            self._configure_spectrum_frequency_start_stop(start_frequency, stop_frequency)
         else:
             raise ValueError(
                 "Provide either (center_frequency & span) "

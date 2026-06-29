@@ -2242,7 +2242,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
+                'method_python_name_suffix': '_into',
                 'session_filename': 'fetch_iq_multi_record'
             }
         ],
@@ -2270,6 +2270,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 0,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the first record to retrieve. Record numbers are zero-based. The default value is 0.',
@@ -2280,6 +2281,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': None,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the number of records to fetch.',
@@ -2290,6 +2292,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': None,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the number of samples per record.',
@@ -2639,7 +2642,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
+                'method_python_name_suffix': '_into',
                 'session_filename': 'fetch_iq_single_record'
             }
         ],
@@ -2667,6 +2670,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 0,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the record to retrieve. Record numbers are zero-based.',
@@ -2677,6 +2681,7 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': None,
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the number of samples to fetch. The value must specify the array size of the NIRFSA_ATTR_DATA parameter.',
@@ -4516,7 +4521,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
+                'method_python_name_suffix': '_into',
                 'session_filename': 'read_power_spectrum'
             }
         ],

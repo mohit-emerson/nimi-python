@@ -30,13 +30,13 @@
                 iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
 
             if iq_data_arrays.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))

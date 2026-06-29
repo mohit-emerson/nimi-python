@@ -23,13 +23,13 @@
                 iq_data_array.resize(expected_buffer_size, refcheck=False)
 
             if iq_data_array.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_f32(record_number, iq_data_array, timeout)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_i16(record_number, iq_data_array, timeout)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))

@@ -2150,12 +2150,12 @@ perform_thermal_correction
 
 
 
-read_iq_single_record
----------------------
+read_iq_single_record_into
+--------------------------
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_iq_single_record(iq_data_array, data_array_size, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_iq_single_record_into(iq_data_array, data_array_size, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates an acquisition and fetches a single I/Q data record.
 

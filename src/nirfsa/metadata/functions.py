@@ -1736,7 +1736,7 @@ functions = {
             {
                 'documentation_filename': 'default_method',
                 'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
+                'method_python_name_suffix': '_into',
                 'session_filename': 'read_iq_single_record'
             }
         ],

@@ -5626,13 +5626,13 @@ class _SessionBase(object):
                 iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
 
             if iq_data_arrays.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
                 return wfm_info_struct
             elif iq_data_arrays.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(self._repeated_capability, starting_record, number_of_records, iq_data_arrays, timeout)
+                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
@@ -5700,13 +5700,13 @@ class _SessionBase(object):
                 iq_data_array.resize(expected_buffer_size, refcheck=False)
 
             if iq_data_array.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f64(self._repeated_capability, record_number, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f32(self._repeated_capability, record_number, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_f32(record_number, iq_data_array, timeout)
                 return wfm_info_struct
             elif iq_data_array.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
+                wfm_info_struct = self._fetch_iq_single_record_complex_i16(record_number, iq_data_array, timeout)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
@@ -6166,7 +6166,7 @@ class _SessionBase(object):
         wfm_info = self._interpreter.read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
         return wfm_info
 
-    def read_iq_single_record(self, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
+    def read_iq_single_record_into(self, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
         '''read_iq_single_record
 
         Initiates an acquisition and fetches a single I/Q data record.
@@ -6231,7 +6231,7 @@ class _SessionBase(object):
                 if len(iq_data_array) < expected_buffer_size:
                     iq_data_array.resize(expected_buffer_size, refcheck=False)
 
-                wfm_info_struct = self._read_iq_single_record_complex_f64(self._repeated_capability, iq_data_array, timeout)
+                wfm_info_struct = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
                 return wfm_info_struct
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
@@ -6281,10 +6281,10 @@ class _SessionBase(object):
                 power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:
-                spectrum_info_struct = self._read_power_spectrum_f64(self._repeated_capability, power_spectrum_data_array, timeout)
+                spectrum_info_struct = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
                 return spectrum_info_struct
             elif power_spectrum_data_array.dtype == numpy.float32:
-                spectrum_info_struct = self._read_power_spectrum_f32(self._repeated_capability, power_spectrum_data_array, timeout)
+                spectrum_info_struct = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
                 return spectrum_info_struct
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))

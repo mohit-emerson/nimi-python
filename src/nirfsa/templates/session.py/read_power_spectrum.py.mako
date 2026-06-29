@@ -20,10 +20,10 @@
                 power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:
-                spectrum_info_struct = self._read_power_spectrum_f64(self._repeated_capability, power_spectrum_data_array, timeout)
+                spectrum_info_struct = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
                 return spectrum_info_struct
             elif power_spectrum_data_array.dtype == numpy.float32:
-                spectrum_info_struct = self._read_power_spectrum_f32(self._repeated_capability, power_spectrum_data_array, timeout)
+                spectrum_info_struct = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
                 return spectrum_info_struct
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))

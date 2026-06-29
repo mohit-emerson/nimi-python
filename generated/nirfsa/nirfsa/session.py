@@ -6275,9 +6275,9 @@ class _SessionBase(object):
             if data_array_size is None:
                 data_array_size = self.number_of_spectral_lines
 
-            expected_buffer_size = self.number_of_spectral_lines
+            expected_buffer_size = data_array_size
 
-            if data_array_size < expected_buffer_size:
+            if len(power_spectrum_data_array) < expected_buffer_size:
                 power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:

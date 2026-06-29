@@ -6238,7 +6238,7 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
 
-    def read_power_spectrum_into(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):
+    def read_power_spectrum_into(self, power_spectrum_data_array, data_array_size=None, timeout=hightime.timedelta(seconds=10.0)):
         '''read_power_spectrum
 
         Initiates a spectrum acquisition and returns power spectrum data.
@@ -6265,13 +6265,19 @@ class _SessionBase(object):
         Args:
             power_spectrum_data_array (numpy.array of numpy.float64 or numpy.array of numpy.float32): Specifies a pre-allocated numpy array to be filled with power spectrum data. The dtype of this array determines the data format: numpy.float64 or numpy.float32. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.
 
+            data_array_size (int): Specifies the expected number of spectral lines. If None, falls back to self.number_of_spectral_lines.
+
             timeout (hightime.timedelta, datetime.timedelta, or float in seconds): Specifies the time, in seconds, allotted for the method to complete before returning a timeout error. A value of specifies the method waits until all data is available.
 
         '''
         import numpy
         if str(type(power_spectrum_data_array)).find("'numpy.ndarray'") != -1:
+            if data_array_size is None:
+                data_array_size = self.number_of_spectral_lines
+
             expected_buffer_size = self.number_of_spectral_lines
-            if len(power_spectrum_data_array) < expected_buffer_size:
+
+            if data_array_size < expected_buffer_size:
                 power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:

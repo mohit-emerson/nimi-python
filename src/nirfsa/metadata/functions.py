@@ -4549,6 +4549,28 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. The dtype of this array determines the data format: numpy.float64 or numpy.float32. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.',
+                },
+                'name': 'powerSpectrumDataArray',
+                'numpy': True,
+                'type': 'ViReal64[]',
+                'type_in_documentation': 'numpy.array of numpy.float64 or numpy.array of numpy.float32',
+                'use_in_python_api': True
+            },
+            {
+                'default_value': None,
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the expected number of spectral lines. If None, falls back to self.number_of_spectral_lines.',
+                },
+                'name': 'dataArraySize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
@@ -4559,17 +4581,6 @@ functions = {
                 'type': 'ViReal64',
                 'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
                 'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. The dtype of this array determines the data format: numpy.float64 or numpy.float32. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.',
-                },
-                'name': 'powerSpectrumDataArray',
-                'numpy': True,
-                'type': 'ViReal64[]',
-                'type_in_documentation': 'numpy.array of numpy.float64 or numpy.array of numpy.float32',
                 'use_in_python_api': True
             }
         ],

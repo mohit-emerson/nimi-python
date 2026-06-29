@@ -2239,7 +2239,7 @@ read_power_spectrum_into
 
     .. py:currentmodule:: nirfsa.Session
 
-    .. py:method:: read_power_spectrum_into(power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0))
+    .. py:method:: read_power_spectrum_into(power_spectrum_data_array, data_array_size=None, timeout=hightime.timedelta(seconds=10.0))
 
             Initiates a spectrum acquisition and returns power spectrum data.
 
@@ -2274,6 +2274,15 @@ read_power_spectrum_into
 
 
             :type power_spectrum_data_array: numpy.array of numpy.float64 or numpy.array of numpy.float32
+            :param data_array_size:
+
+
+                Specifies the expected number of spectral lines. If None, falls back to self.number_of_spectral_lines.
+
+                
+
+
+            :type data_array_size: int
             :param timeout:
 
 

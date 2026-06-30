@@ -11,14 +11,21 @@
         '''
         import numpy
         if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
-            if iq_data_array.dtype == numpy.complex128:
-                expected_buffer_size = self.number_of_samples
-                if len(iq_data_array) < expected_buffer_size:
-                    iq_data_array.resize(expected_buffer_size, refcheck=False)
-
-                wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
-                return wfm_info
-            else:
+            if iq_data_array.dtype != numpy.complex128:
                 raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
+
+            expected_buffer_size = self.number_of_samples
+            if len(iq_data_array) < expected_buffer_size:
+                iq_data_array.resize(expected_buffer_size, refcheck=False)
+
+            wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
+
+        mv = memoryview(iq_data_array)
+
+        waveform_info._populate_samples_info(wfm_info, mv, self.number_of_samples)
+
+<%include file="./fetch_waveform_info_population.py.mako" args="start_record_variable='0'"/>
+
+        return wfm_info

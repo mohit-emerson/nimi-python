@@ -6259,17 +6259,34 @@ class _SessionBase(object):
         '''
         import numpy
         if str(type(iq_data_array)).find("'numpy.ndarray'") != -1:
-            if iq_data_array.dtype == numpy.complex128:
-                expected_buffer_size = self.number_of_samples
-                if len(iq_data_array) < expected_buffer_size:
-                    iq_data_array.resize(expected_buffer_size, refcheck=False)
-
-                wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
-                return wfm_info
-            else:
+            if iq_data_array.dtype != numpy.complex128:
                 raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
+
+            expected_buffer_size = self.number_of_samples
+            if len(iq_data_array) < expected_buffer_size:
+                iq_data_array.resize(expected_buffer_size, refcheck=False)
+
+            wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
+
+        mv = memoryview(iq_data_array)
+
+        waveform_info._populate_samples_info(wfm_info, mv, self.number_of_samples)
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        wfm_info_count = len(wfm_info)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(0, 0 + actual_num_records))
+
+        return wfm_info
 
     def read_power_spectrum_into(self, power_spectrum_data_array, data_array_size=None, timeout=hightime.timedelta(seconds=10.0)):
         '''read_power_spectrum

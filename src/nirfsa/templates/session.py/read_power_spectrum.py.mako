@@ -20,12 +20,20 @@
                 power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:
-                spectrum_info_struct = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
-                return spectrum_info_struct
+                spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
+                return spectrum_info
             elif power_spectrum_data_array.dtype == numpy.float32:
-                spectrum_info_struct = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
-                return spectrum_info_struct
+                spectrum_info = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
+                return spectrum_info
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
+
+        mv = memoryview(power_spectrum_data_array)
+
+        spectrum_info_type._populate_samples_info(spectrum_info, mv, data_array_size)
+
+<%include file="./fetch_spectrum_info_population.py.mako"/>
+
+        return spectrum_info

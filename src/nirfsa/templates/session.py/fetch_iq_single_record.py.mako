@@ -4,6 +4,7 @@
     import build.helper as helper
     suffix = method_template['method_python_name_suffix']
 %>\
+
     def ${f['python_name']}${suffix}(${helper.get_params_snippet(f, helper.ParameterUsageOptions.SESSION_NUMPY_INTO_METHOD_DECLARATION)}):
         '''${f['python_name']}
 
@@ -23,15 +24,20 @@
                 iq_data_array.resize(expected_buffer_size, refcheck=False)
 
             if iq_data_array.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
             elif iq_data_array.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f32(record_number, iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_single_record_complex_f32(record_number, iq_data_array, timeout)
             elif iq_data_array.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_single_record_complex_i16(record_number, iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_single_record_complex_i16(record_number, iq_data_array, timeout)
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+        mv = memoryview(iq_data_array)
+
+        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
+
+<%include file="./fetch_waveform_info_population.py.mako" args="start_record_variable='record_number'"/>
+
+        return wfm_info

@@ -16,8 +16,8 @@
                 if len(iq_data_array) < expected_buffer_size:
                     iq_data_array.resize(expected_buffer_size, refcheck=False)
 
-                wfm_info_struct = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
+                return wfm_info
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
         else:

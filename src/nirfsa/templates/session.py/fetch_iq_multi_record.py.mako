@@ -30,15 +30,23 @@
                 iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
 
             if iq_data_arrays.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
+                return wfm_info
             elif iq_data_arrays.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
+                return wfm_info
             elif iq_data_arrays.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
+                return wfm_info
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+        mv = memoryview(iq_data_arrays)
+
+        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
+
+<%include file="./fetch_waveform_info_population.py.mako"/>
+
+        return wfm_info

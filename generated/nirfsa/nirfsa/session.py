@@ -5626,18 +5626,36 @@ class _SessionBase(object):
                 iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
 
             if iq_data_arrays.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
+                return wfm_info
             elif iq_data_arrays.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
+                return wfm_info
             elif iq_data_arrays.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
+                return wfm_info
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+        mv = memoryview(iq_data_arrays)
+
+        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        wfm_info_count = len(wfm_info)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(starting_record, starting_record + actual_num_records))
+
+        return wfm_info
 
     def fetch_iq_single_record_into(self, iq_data_array, record_number=0, number_of_samples=None, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_single_record
@@ -5700,18 +5718,33 @@ class _SessionBase(object):
                 iq_data_array.resize(expected_buffer_size, refcheck=False)
 
             if iq_data_array.dtype == numpy.complex128:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
             elif iq_data_array.dtype == numpy.complex64:
-                wfm_info_struct = self._fetch_iq_single_record_complex_f32(record_number, iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_single_record_complex_f32(record_number, iq_data_array, timeout)
             elif iq_data_array.dtype == numpy.int16:
-                wfm_info_struct = self._fetch_iq_single_record_complex_i16(record_number, iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._fetch_iq_single_record_complex_i16(record_number, iq_data_array, timeout)
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_array.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+        mv = memoryview(iq_data_array)
+
+        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        wfm_info_count = len(wfm_info)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
+        actual_num_records = int(wfm_info_count / channel_count)
+        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
+
+        return wfm_info
 
     @ivi_synchronized
     def _get_attribute_vi_boolean(self, attribute_id):
@@ -6231,8 +6264,8 @@ class _SessionBase(object):
                 if len(iq_data_array) < expected_buffer_size:
                     iq_data_array.resize(expected_buffer_size, refcheck=False)
 
-                wfm_info_struct = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
-                return wfm_info_struct
+                wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
+                return wfm_info
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {}".format(iq_data_array.dtype, numpy.complex128))
         else:
@@ -6281,15 +6314,33 @@ class _SessionBase(object):
                 power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
 
             if power_spectrum_data_array.dtype == numpy.float64:
-                spectrum_info_struct = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
-                return spectrum_info_struct
+                spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
+                return spectrum_info
             elif power_spectrum_data_array.dtype == numpy.float32:
-                spectrum_info_struct = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
-                return spectrum_info_struct
+                spectrum_info = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
+                return spectrum_info
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
+
+        mv = memoryview(power_spectrum_data_array)
+
+        spectrum_info_type._populate_samples_info(spectrum_info, mv, data_array_size)
+
+        channel_names = _converters.expand_channel_string(
+            self._repeated_capability,
+            self._all_channels_in_session
+        )
+
+        spectrum_info_count = len(spectrum_info)
+        channel_count = len(channel_names)
+        # Should this raise instead? If this asserts, is it the users fault?
+        assert spectrum_info_count % channel_count == 0, 'Number of spectrums should be evenly divisible by the number of channels: len(spectrum_info) == {0}, len(channel_names) == {1}'.format(spectrum_info_count, channel_count)
+        actual_num_records = int(spectrum_info_count / channel_count)
+        spectrum_info_type._populate_channel_and_record_info(spectrum_info, channel_names, range(0, 0 + actual_num_records))
+
+        return spectrum_info
 
     @ivi_synchronized
     def _read_power_spectrum_f32(self, power_spectrum_data_array, timeout=hightime.timedelta(seconds=10.0)):

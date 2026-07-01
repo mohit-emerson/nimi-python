@@ -6,6 +6,8 @@
             self._repeated_capability,
             self._all_channels_in_session
         )
+        if not channel_names:
+            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
 
         ${results_name}_count = len(${results_name})
         channel_count = len(channel_names)

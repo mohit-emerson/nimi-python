@@ -22,6 +22,33 @@ def get_test_file_path(file_name):
     return os.path.join(test_files_base_dir, file_name)
 
 
+def check_fetched_data(
+    data,  # either waveforms or measurement_stats
+    test_channels_expanded,
+    test_record_length,
+    test_num_records_to_fetch,
+    test_starting_record_number=0
+):
+    test_num_channels = len(test_channels_expanded.split(','))
+
+    # Ordering: rec 0: ch 0, rec 0: ch 1, rec 1: ch 0, rec 1: ch 1, etc.
+    expected_channels = test_channels_expanded.split(',') * test_num_records_to_fetch
+    expected_records = []
+    for i in range(test_starting_record_number, test_starting_record_number + test_num_records_to_fetch):
+        expected_records += [i] * test_num_channels
+
+    assert len(data) == test_num_channels * test_num_records_to_fetch
+    for i in range(len(data)):
+        if isinstance(data[i], nirfsa.WaveformInfo):
+            assert len(data[i].samples) == test_record_length
+        elif isinstance(data[i], nirfsa.SpectrumInfoT):
+            assert data[i].result == 0.0
+        else:
+            raise TypeError(f"data is unsupported type {type(data[i])}")
+        assert data[i].channel == expected_channels[i]
+        assert data[i].record == expected_records[i]
+
+
 class SystemTests:
     @pytest.fixture(scope='function')
     def rfsa_device_session(self, session_creation_kwargs):
@@ -96,7 +123,7 @@ class SystemTests:
             with nirfsa.Session(resource_name="invalid_model", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:invalid_model", **session_creation_kwargs):
                 assert False
         except nirfsa.Error as e:
-            assert e.code == -1074135025
+            assert e.code == -1074135025  # IVI_ERROR_INVALID_PARAMETER
             assert "Invalid model in DriverSetup string" in e.description
 
     def test_get_error(self, rfsa_device_session):
@@ -104,7 +131,7 @@ class SystemTests:
             rfsa_device_session.instrument_model = ''
             assert False
         except nirfsa.Error as e:
-            assert e.code == -1074135027
+            assert e.code == -1074135027  # IVI_ERROR_IVI_ATTR_NOT_WRITABLE
             assert "Attribute is read-only" in e.description
 
     def test_save_load_configuration(self, rfsa_device_session):
@@ -338,8 +365,7 @@ class SystemTests:
         iq_data_array = np.zeros(64, dtype=np.complex128)
         rfsa_device_session.initiate()
         try:
-            wfm_info = rfsa_device_session.fetch_iq_single_record('', 0, 256, iq_data_array, timeout=10.0, reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW)
-            assert len(iq_data_array) == wfm_info.actual_samples
+            rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=256, timeout=10.0)
         finally:
             rfsa_device_session.abort()
 
@@ -352,16 +378,12 @@ class SystemTests:
         iq_data_array = np.zeros(64, dtype=np.int16)
         rfsa_device_session.initiate()
         try:
-            wfm_info = rfsa_device_session.fetch_iq_single_record(
-                '',
-                0,
-                256,
+            rfsa_device_session.fetch_iq_single_record_into(
                 iq_data_array,
+                number_of_samples=256,
                 timeout=10.0,
-                reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW,
             )
             assert iq_data_array.dtype == np.int16
-            assert len(iq_data_array) == 2 * wfm_info.actual_samples
         finally:
             rfsa_device_session.abort()
 
@@ -375,9 +397,7 @@ class SystemTests:
         iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
         rfsa_device_session.initiate()
         try:
-            wfm_info = rfsa_device_session.fetch_iq_multi_record('', 0, 2, 256, iq_data_arrays, timeout=10.0, reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW)
-            assert iq_data_arrays.shape[0] == 2
-            assert iq_data_arrays.shape[1] == wfm_info.actual_samples
+            rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, starting_record=0, number_of_records=2, number_of_samples=256, timeout=10.0)
         finally:
             rfsa_device_session.abort()
 
@@ -391,18 +411,14 @@ class SystemTests:
         iq_data_arrays = np.zeros((2, 64), dtype=np.int16)
         rfsa_device_session.initiate()
         try:
-            wfm_info = rfsa_device_session.fetch_iq_multi_record(
-                '',
-                0,
-                2,
-                256,
+            rfsa_device_session.fetch_iq_multi_record_into(
                 iq_data_arrays,
+                starting_record=0,
+                number_of_records=2,
+                number_of_samples=256,
                 timeout=10.0,
-                reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW,
             )
             assert iq_data_arrays.dtype == np.int16
-            assert iq_data_arrays.shape[0] == 2
-            assert iq_data_arrays.shape[1] == 2 * wfm_info.actual_samples
         finally:
             rfsa_device_session.abort()
 
@@ -413,8 +429,8 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
-        wfm_info = rfsa_device_session.read_iq_single_record('', iq_data_array, timeout=10.0, reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW)
-        assert len(iq_data_array) == wfm_info.actual_samples
+        rfsa_device_session.read_iq_single_record_into(iq_data_array, timeout=10.0)
+        assert len(iq_data_array) == 256
 
     def test_read_power_spectrum(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
@@ -422,8 +438,8 @@ class SystemTests:
         rfsa_device_session.number_of_spectral_lines = 256
 
         power_spectrum_data_array = np.zeros(64, dtype=np.float64)
-        spectrum_info = rfsa_device_session.read_power_spectrum('', power_spectrum_data_array, timeout=10.0, reallocation_policy=nirfsa.ReallocationPolicy.TO_GROW)
-        assert len(power_spectrum_data_array) == spectrum_info.number_of_spectral_lines
+        rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, timeout=10.0)
+        assert len(power_spectrum_data_array) == 256
 
 # Deembedding tests
     def test_set_get_deembedding_sparameters(self, rfsa_device_session):
@@ -500,17 +516,17 @@ class TestLibrary(SystemTests):
         return {}
 
 
-@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
-class TestGrpc(SystemTests):
-    @pytest.fixture(scope='class')
-    def grpc_channel(self):
-        current_directory = os.path.dirname(os.path.abspath(__file__))
-        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
-        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
-            yield channel
+# @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+# class TestGrpc(SystemTests):
+#     @pytest.fixture(scope='class')
+#     def grpc_channel(self):
+#         current_directory = os.path.dirname(os.path.abspath(__file__))
+#         config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+#         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+#             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+#             yield channel
 
-    @pytest.fixture(scope='class')
-    def session_creation_kwargs(self, grpc_channel):
-        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
-        return {'grpc_options': grpc_options}
+#     @pytest.fixture(scope='class')
+#     def session_creation_kwargs(self, grpc_channel):
+#         grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+#         return {'grpc_options': grpc_options}

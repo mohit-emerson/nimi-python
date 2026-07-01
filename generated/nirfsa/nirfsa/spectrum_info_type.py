@@ -111,10 +111,8 @@ def _populate_samples_info(spectrum_infos, sample_data, num_samples_per_spectrum
     '''
     for i in range(len(spectrum_infos)):
         start = i * num_samples_per_spectrum
-        end = start + spectrum_infos[i]._actual_samples
-        # We use the actual number of samples returned from the device to determine the end of the spectrum.
-        # We then remove it from spectrum_info since the length of the spectrum will tell us that information.
-        spectrum_infos[i]._actual_samples = None
+        end = start + spectrum_infos[i].number_of_spectral_lines
+        # We use the actual number of spectral lines returned from the device to determine the end of the spectrum.
         spectrum_infos[i].samples = sample_data[start:end]
 
 

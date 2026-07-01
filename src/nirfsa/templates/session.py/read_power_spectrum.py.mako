@@ -21,14 +21,15 @@
 
             if power_spectrum_data_array.dtype == numpy.float64:
                 spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
-                return spectrum_info
             elif power_spectrum_data_array.dtype == numpy.float32:
                 spectrum_info = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
-                return spectrum_info
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
+
+        if isinstance(spectrum_info, spectrum_info_type.SpectrumInfoT):
+            spectrum_info = [spectrum_info]
 
         mv = memoryview(power_spectrum_data_array)
 

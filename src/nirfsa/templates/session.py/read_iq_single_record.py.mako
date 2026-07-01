@@ -22,6 +22,9 @@
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
 
+        if isinstance(wfm_info, waveform_info.WaveformInfo):
+            wfm_info = [wfm_info]
+
         mv = memoryview(iq_data_array)
 
         waveform_info._populate_samples_info(wfm_info, mv, self.number_of_samples)

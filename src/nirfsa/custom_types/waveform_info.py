@@ -111,10 +111,10 @@ def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform
     '''
     for i in range(len(waveform_infos)):
         start = i * num_samples_per_waveform
-        end = start + waveform_infos[i]._actual_samples
+        end = start + waveform_infos[i].actual_samples
         # We use the actual number of samples returned from the device to determine the end of the waveform.
         # We then remove it from waveform_info since the length of the waveform will tell us that information.
-        waveform_infos[i]._actual_samples = None
+        waveform_infos[i].actual_samples = None
         waveform_infos[i].samples = sample_data[start:end]
 
 

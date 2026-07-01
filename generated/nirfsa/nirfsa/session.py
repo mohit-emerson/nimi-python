@@ -5627,17 +5627,17 @@ class _SessionBase(object):
 
             if iq_data_arrays.dtype == numpy.complex128:
                 wfm_info = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info
             elif iq_data_arrays.dtype == numpy.complex64:
                 wfm_info = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info
             elif iq_data_arrays.dtype == numpy.int16:
                 wfm_info = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+        if isinstance(wfm_info, waveform_info.WaveformInfo):
+            wfm_info = [wfm_info]
 
         mv = memoryview(iq_data_arrays)
 
@@ -5647,6 +5647,8 @@ class _SessionBase(object):
             self._repeated_capability,
             self._all_channels_in_session
         )
+        if not channel_names:
+            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
 
         wfm_info_count = len(wfm_info)
         channel_count = len(channel_names)
@@ -5728,6 +5730,9 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
+        if isinstance(wfm_info, waveform_info.WaveformInfo):
+            wfm_info = [wfm_info]
+
         mv = memoryview(iq_data_array)
 
         waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
@@ -5736,6 +5741,8 @@ class _SessionBase(object):
             self._repeated_capability,
             self._all_channels_in_session
         )
+        if not channel_names:
+            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
 
         wfm_info_count = len(wfm_info)
         channel_count = len(channel_names)
@@ -6270,6 +6277,9 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
 
+        if isinstance(wfm_info, waveform_info.WaveformInfo):
+            wfm_info = [wfm_info]
+
         mv = memoryview(iq_data_array)
 
         waveform_info._populate_samples_info(wfm_info, mv, self.number_of_samples)
@@ -6278,6 +6288,8 @@ class _SessionBase(object):
             self._repeated_capability,
             self._all_channels_in_session
         )
+        if not channel_names:
+            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
 
         wfm_info_count = len(wfm_info)
         channel_count = len(channel_names)
@@ -6332,14 +6344,15 @@ class _SessionBase(object):
 
             if power_spectrum_data_array.dtype == numpy.float64:
                 spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
-                return spectrum_info
             elif power_spectrum_data_array.dtype == numpy.float32:
                 spectrum_info = self._read_power_spectrum_f32(power_spectrum_data_array, timeout)
-                return spectrum_info
             else:
                 raise TypeError("Unsupported dtype. Is {}, expected {} or {}".format(power_spectrum_data_array.dtype, numpy.float64, numpy.float32))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
+
+        if isinstance(spectrum_info, spectrum_info_type.SpectrumInfoT):
+            spectrum_info = [spectrum_info]
 
         mv = memoryview(power_spectrum_data_array)
 
@@ -6349,6 +6362,8 @@ class _SessionBase(object):
             self._repeated_capability,
             self._all_channels_in_session
         )
+        if not channel_names:
+            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
 
         spectrum_info_count = len(spectrum_info)
         channel_count = len(channel_names)

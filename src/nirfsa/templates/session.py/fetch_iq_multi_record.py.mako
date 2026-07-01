@@ -31,17 +31,17 @@
 
             if iq_data_arrays.dtype == numpy.complex128:
                 wfm_info = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info
             elif iq_data_arrays.dtype == numpy.complex64:
                 wfm_info = self._fetch_iq_multi_record_complex_f32(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info
             elif iq_data_arrays.dtype == numpy.int16:
                 wfm_info = self._fetch_iq_multi_record_complex_i16(starting_record, number_of_records, iq_data_arrays, timeout)
-                return wfm_info
             else:
                 raise TypeError("Unsupported datatype. Is {}, expected {} or {} or {}".format(iq_data_arrays.dtype, numpy.complex128, numpy.complex64, numpy.int16))
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
+
+        if isinstance(wfm_info, waveform_info.WaveformInfo):
+            wfm_info = [wfm_info]
 
         mv = memoryview(iq_data_arrays)
 

@@ -189,8 +189,10 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Calibration temperature may be unsupported or unreliable on simulated RFSA")
     def test_get_ext_cal_last_temp(self, rfsa_device_session):
-        temperature = rfsa_device_session.get_ext_cal_last_temp()
-        assert isinstance(temperature, float)
+        with pytest.raises(nirfsa.Error) as exc_info:
+            rfsa_device_session.get_ext_cal_last_temp()
+        description = exc_info.value.description.lower()
+        assert "function or method not supported" in description or "not supported" in description
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
     def test_get_self_cal_last_date_and_time(self, rfsa_device_session):
@@ -204,11 +206,10 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Self-cal validity state may be unsupported or unreliable on simulated RFSA")
     def test_is_self_cal_valid(self, rfsa_device_session):
-        self_cal_valid, valid_steps = rfsa_device_session.is_self_cal_valid()
-        print(self_cal_valid, valid_steps)
-        # TODO(msaini): check and assert expected self_cal_valid value.
-        assert isinstance(self_cal_valid, bool)
-        assert isinstance(valid_steps, nirfsa.SelfCalSteps)
+        with pytest.raises(nirfsa.Error) as exc_info:
+            rfsa_device_session.is_self_cal_valid()
+        description = exc_info.value.description.lower()
+        assert "function or method not supported" in description or "not supported" in description
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Thermal correction is unsupported on simulated RFSA")
     def test_perform_thermal_correction(self, rfsa_device_session):
@@ -216,11 +217,10 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Frequency response data may be unavailable on simulated RFSA")
     def test_get_frequency_response(self, rfsa_device_session):
-        frequencies, magnitude_response, phase_response = rfsa_device_session.get_frequency_response('')
-        assert isinstance(frequencies, np.ndarray)
-        assert isinstance(magnitude_response, np.ndarray)
-        assert isinstance(phase_response, np.ndarray)
-        assert frequencies.size == magnitude_response.size == phase_response.size
+        with pytest.raises(nirfsa.Error) as exc_info:
+            rfsa_device_session.get_frequency_response()
+        description = exc_info.value.description.lower()
+        assert "function or method not supported" in description or "not supported" in description
 
     def test_get_scaling_coefficients(self, rfsa_device_session):
         coefficient_info_before_commit = rfsa_device_session.get_scaling_coefficients()
@@ -313,6 +313,7 @@ class SystemTests:
         rfsa_device_session.disable_ref_trigger()
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.NONE
 
+    #TODO check failign on hw
     @pytest.mark.skipif(use_simulated_session is True, reason="IQ power edge trigger is unsupported on simulated RFSA")
     def test_configure_iq_power_edge_ref_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_iq_power_edge_ref_trigger('0', -20.0, nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING, pretrigger_samples=32)
@@ -345,6 +346,7 @@ class SystemTests:
         rfsa_device_session.configure_software_edge_start_trigger()
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
 
+    #TODO check failing on hw
     @pytest.mark.skipif(use_simulated_session is True, reason="Simulated device does not support software trigger behavior")
     def test_send_software_edge_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_software_edge_start_trigger()

@@ -331,6 +331,13 @@ class GrpcStubInterpreter(object):
         )
         return response.error_code, response.error_description
 
+    def get_ext_cal_last_date_and_time(self):  # noqa: N802
+        response = self._invoke(
+            self._client.GetExtCalLastDateAndTime,
+            grpc_types.GetExtCalLastDateAndTimeRequest(vi=self._vi),
+        )
+        return response.year, response.month, response.day, response.hour, response.minute
+
     def get_ext_cal_last_temp(self):  # noqa: N802
         response = self._invoke(
             self._client.GetExtCalLastTemp,
@@ -344,13 +351,6 @@ class GrpcStubInterpreter(object):
             grpc_types.GetExtCalRecommendedIntervalRequest(vi=self._vi),
         )
         return response.months
-
-    def get_external_calibration_last_date_and_time(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetExternalCalibrationLastDateAndTime,
-            grpc_types.GetExternalCalibrationLastDateAndTimeRequest(vi=self._vi),
-        )
-        return response.year, response.month, response.day, response.hour, response.minute, response.second
 
     def get_fetch_backlog(self, channel_list, record_number):  # noqa: N802
         response = self._invoke(
@@ -373,7 +373,7 @@ class GrpcStubInterpreter(object):
         )
         return [coefficient_info_type.CoefficientInfo(x) for x in response.coefficient_info]
 
-    def get_self_calibration_date_and_time(self, self_calibration_step):  # noqa: N802
+    def get_self_cal_last_date_and_time(self, self_calibration_step):  # noqa: N802
         response = self._invoke(
             self._client.GetSelfCalLastDateAndTime,
             grpc_types.GetSelfCalLastDateAndTimeRequest(vi=self._vi, self_calibration_step_raw=self_calibration_step.value),

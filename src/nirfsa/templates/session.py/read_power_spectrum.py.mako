@@ -17,7 +17,15 @@
             expected_buffer_size = data_array_size
 
             if len(power_spectrum_data_array) < expected_buffer_size:
-                power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
+                try:
+                    power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize power_spectrum_data_array from {} to {}: {}".format(
+                            len(power_spectrum_data_array), expected_buffer_size, e
+                        )
+                    ) from e
+                assert len(power_spectrum_data_array) == expected_buffer_size, "power_spectrum_data_array length must match requested data_array_size after resize"
 
             if power_spectrum_data_array.dtype == numpy.float64:
                 spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)

@@ -120,20 +120,19 @@ class SideEffectsHelper(object):
         self._defaults['GetError']['return'] = 0
         self._defaults['GetError']['errorCode'] = None
         self._defaults['GetError']['errorDescription'] = None
-        self._defaults['GetExtCalLastTemperature'] = {}
-        self._defaults['GetExtCalLastTemperature']['return'] = 0
-        self._defaults['GetExtCalLastTemperature']['temperature'] = None
+        self._defaults['GetExtCalLastDateAndTime'] = {}
+        self._defaults['GetExtCalLastDateAndTime']['return'] = 0
+        self._defaults['GetExtCalLastDateAndTime']['year'] = None
+        self._defaults['GetExtCalLastDateAndTime']['month'] = None
+        self._defaults['GetExtCalLastDateAndTime']['day'] = None
+        self._defaults['GetExtCalLastDateAndTime']['hour'] = None
+        self._defaults['GetExtCalLastDateAndTime']['minute'] = None
+        self._defaults['GetExtCalLastTemp'] = {}
+        self._defaults['GetExtCalLastTemp']['return'] = 0
+        self._defaults['GetExtCalLastTemp']['temperature'] = None
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['months'] = None
-        self._defaults['GetExternalCalibrationLastDateAndTime'] = {}
-        self._defaults['GetExternalCalibrationLastDateAndTime']['return'] = 0
-        self._defaults['GetExternalCalibrationLastDateAndTime']['year'] = None
-        self._defaults['GetExternalCalibrationLastDateAndTime']['month'] = None
-        self._defaults['GetExternalCalibrationLastDateAndTime']['day'] = None
-        self._defaults['GetExternalCalibrationLastDateAndTime']['hour'] = None
-        self._defaults['GetExternalCalibrationLastDateAndTime']['minute'] = None
-        self._defaults['GetExternalCalibrationLastDateAndTime']['second'] = None
         self._defaults['GetFetchBacklog'] = {}
         self._defaults['GetFetchBacklog']['return'] = 0
         self._defaults['GetFetchBacklog']['backlog'] = None
@@ -147,16 +146,16 @@ class SideEffectsHelper(object):
         self._defaults['GetScalingCoefficients']['return'] = 0
         self._defaults['GetScalingCoefficients']['numberOfCoefficientSets'] = None
         self._defaults['GetScalingCoefficients']['coefficientInfo'] = None
-        self._defaults['GetSelfCalibrationDateAndTime'] = {}
-        self._defaults['GetSelfCalibrationDateAndTime']['return'] = 0
-        self._defaults['GetSelfCalibrationDateAndTime']['year'] = None
-        self._defaults['GetSelfCalibrationDateAndTime']['month'] = None
-        self._defaults['GetSelfCalibrationDateAndTime']['day'] = None
-        self._defaults['GetSelfCalibrationDateAndTime']['hour'] = None
-        self._defaults['GetSelfCalibrationDateAndTime']['minute'] = None
-        self._defaults['GetSelfCalibrationTemperature'] = {}
-        self._defaults['GetSelfCalibrationTemperature']['return'] = 0
-        self._defaults['GetSelfCalibrationTemperature']['temperature'] = None
+        self._defaults['GetSelfCalLastDateAndTime'] = {}
+        self._defaults['GetSelfCalLastDateAndTime']['return'] = 0
+        self._defaults['GetSelfCalLastDateAndTime']['year'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['month'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['day'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['hour'] = None
+        self._defaults['GetSelfCalLastDateAndTime']['minute'] = None
+        self._defaults['GetSelfCalLastTemp'] = {}
+        self._defaults['GetSelfCalLastTemp']['return'] = 0
+        self._defaults['GetSelfCalLastTemp']['temperature'] = None
         self._defaults['GetTerminalName'] = {}
         self._defaults['GetTerminalName']['return'] = 0
         self._defaults['GetTerminalName']['terminalName'] = None
@@ -553,15 +552,45 @@ class SideEffectsHelper(object):
         error_description.value = self._defaults['GetError']['errorDescription'].encode('ascii')
         return self._defaults['GetError']['return']
 
-    def niRFSA_GetExtCalLastTemperature(self, vi, temperature):  # noqa: N802
-        if self._defaults['GetExtCalLastTemperature']['return'] != 0:
-            return self._defaults['GetExtCalLastTemperature']['return']
+    def niRFSA_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
+        if self._defaults['GetExtCalLastDateAndTime']['return'] != 0:
+            return self._defaults['GetExtCalLastDateAndTime']['return']
+        # year
+        if self._defaults['GetExtCalLastDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime", param='year')
+        if year is not None:
+            year.contents.value = self._defaults['GetExtCalLastDateAndTime']['year']
+        # month
+        if self._defaults['GetExtCalLastDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime", param='month')
+        if month is not None:
+            month.contents.value = self._defaults['GetExtCalLastDateAndTime']['month']
+        # day
+        if self._defaults['GetExtCalLastDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime", param='day')
+        if day is not None:
+            day.contents.value = self._defaults['GetExtCalLastDateAndTime']['day']
+        # hour
+        if self._defaults['GetExtCalLastDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime", param='hour')
+        if hour is not None:
+            hour.contents.value = self._defaults['GetExtCalLastDateAndTime']['hour']
+        # minute
+        if self._defaults['GetExtCalLastDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime", param='minute')
+        if minute is not None:
+            minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['minute']
+        return self._defaults['GetExtCalLastDateAndTime']['return']
+
+    def niRFSA_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        if self._defaults['GetExtCalLastTemp']['return'] != 0:
+            return self._defaults['GetExtCalLastTemp']['return']
         # temperature
-        if self._defaults['GetExtCalLastTemperature']['temperature'] is None:
-            raise MockFunctionCallError("niRFSA_GetExtCalLastTemperature", param='temperature')
+        if self._defaults['GetExtCalLastTemp']['temperature'] is None:
+            raise MockFunctionCallError("niRFSA_GetExtCalLastTemp", param='temperature')
         if temperature is not None:
-            temperature.contents.value = self._defaults['GetExtCalLastTemperature']['temperature']
-        return self._defaults['GetExtCalLastTemperature']['return']
+            temperature.contents.value = self._defaults['GetExtCalLastTemp']['temperature']
+        return self._defaults['GetExtCalLastTemp']['return']
 
     def niRFSA_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
@@ -572,41 +601,6 @@ class SideEffectsHelper(object):
         if months is not None:
             months.contents.value = self._defaults['GetExtCalRecommendedInterval']['months']
         return self._defaults['GetExtCalRecommendedInterval']['return']
-
-    def niRFSA_GetExternalCalibrationLastDateAndTime(self, vi, year, month, day, hour, minute, second):  # noqa: N802
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['return'] != 0:
-            return self._defaults['GetExternalCalibrationLastDateAndTime']['return']
-        # year
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['year'] is None:
-            raise MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime", param='year')
-        if year is not None:
-            year.contents.value = self._defaults['GetExternalCalibrationLastDateAndTime']['year']
-        # month
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime", param='month')
-        if month is not None:
-            month.contents.value = self._defaults['GetExternalCalibrationLastDateAndTime']['month']
-        # day
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['day'] is None:
-            raise MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime", param='day')
-        if day is not None:
-            day.contents.value = self._defaults['GetExternalCalibrationLastDateAndTime']['day']
-        # hour
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['hour'] is None:
-            raise MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime", param='hour')
-        if hour is not None:
-            hour.contents.value = self._defaults['GetExternalCalibrationLastDateAndTime']['hour']
-        # minute
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['minute'] is None:
-            raise MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime", param='minute')
-        if minute is not None:
-            minute.contents.value = self._defaults['GetExternalCalibrationLastDateAndTime']['minute']
-        # second
-        if self._defaults['GetExternalCalibrationLastDateAndTime']['second'] is None:
-            raise MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime", param='second')
-        if second is not None:
-            second.contents.value = self._defaults['GetExternalCalibrationLastDateAndTime']['second']
-        return self._defaults['GetExternalCalibrationLastDateAndTime']['return']
 
     def niRFSA_GetFetchBacklog(self, vi, channel_list, record_number, backlog):  # noqa: N802
         if self._defaults['GetFetchBacklog']['return'] != 0:
@@ -682,45 +676,45 @@ class SideEffectsHelper(object):
             coefficient_info_ref[i] = self._defaults['GetScalingCoefficients']['coefficientInfo'][i]
         return self._defaults['GetScalingCoefficients']['return']
 
-    def niRFSA_GetSelfCalibrationDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
-        if self._defaults['GetSelfCalibrationDateAndTime']['return'] != 0:
-            return self._defaults['GetSelfCalibrationDateAndTime']['return']
+    def niRFSA_GetSelfCalLastDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
+        if self._defaults['GetSelfCalLastDateAndTime']['return'] != 0:
+            return self._defaults['GetSelfCalLastDateAndTime']['return']
         # year
-        if self._defaults['GetSelfCalibrationDateAndTime']['year'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime", param='year')
+        if self._defaults['GetSelfCalLastDateAndTime']['year'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='year')
         if year is not None:
-            year.contents.value = self._defaults['GetSelfCalibrationDateAndTime']['year']
+            year.contents.value = self._defaults['GetSelfCalLastDateAndTime']['year']
         # month
-        if self._defaults['GetSelfCalibrationDateAndTime']['month'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime", param='month')
+        if self._defaults['GetSelfCalLastDateAndTime']['month'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='month')
         if month is not None:
-            month.contents.value = self._defaults['GetSelfCalibrationDateAndTime']['month']
+            month.contents.value = self._defaults['GetSelfCalLastDateAndTime']['month']
         # day
-        if self._defaults['GetSelfCalibrationDateAndTime']['day'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime", param='day')
+        if self._defaults['GetSelfCalLastDateAndTime']['day'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='day')
         if day is not None:
-            day.contents.value = self._defaults['GetSelfCalibrationDateAndTime']['day']
+            day.contents.value = self._defaults['GetSelfCalLastDateAndTime']['day']
         # hour
-        if self._defaults['GetSelfCalibrationDateAndTime']['hour'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime", param='hour')
+        if self._defaults['GetSelfCalLastDateAndTime']['hour'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='hour')
         if hour is not None:
-            hour.contents.value = self._defaults['GetSelfCalibrationDateAndTime']['hour']
+            hour.contents.value = self._defaults['GetSelfCalLastDateAndTime']['hour']
         # minute
-        if self._defaults['GetSelfCalibrationDateAndTime']['minute'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime", param='minute')
+        if self._defaults['GetSelfCalLastDateAndTime']['minute'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime", param='minute')
         if minute is not None:
-            minute.contents.value = self._defaults['GetSelfCalibrationDateAndTime']['minute']
-        return self._defaults['GetSelfCalibrationDateAndTime']['return']
+            minute.contents.value = self._defaults['GetSelfCalLastDateAndTime']['minute']
+        return self._defaults['GetSelfCalLastDateAndTime']['return']
 
-    def niRFSA_GetSelfCalibrationTemperature(self, vi, self_calibration_step, temperature):  # noqa: N802
-        if self._defaults['GetSelfCalibrationTemperature']['return'] != 0:
-            return self._defaults['GetSelfCalibrationTemperature']['return']
+    def niRFSA_GetSelfCalLastTemp(self, vi, self_calibration_step, temperature):  # noqa: N802
+        if self._defaults['GetSelfCalLastTemp']['return'] != 0:
+            return self._defaults['GetSelfCalLastTemp']['return']
         # temperature
-        if self._defaults['GetSelfCalibrationTemperature']['temperature'] is None:
-            raise MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature", param='temperature')
+        if self._defaults['GetSelfCalLastTemp']['temperature'] is None:
+            raise MockFunctionCallError("niRFSA_GetSelfCalLastTemp", param='temperature')
         if temperature is not None:
-            temperature.contents.value = self._defaults['GetSelfCalibrationTemperature']['temperature']
-        return self._defaults['GetSelfCalibrationTemperature']['return']
+            temperature.contents.value = self._defaults['GetSelfCalLastTemp']['temperature']
+        return self._defaults['GetSelfCalLastTemp']['return']
 
     def niRFSA_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
         if self._defaults['GetTerminalName']['return'] != 0:
@@ -996,22 +990,22 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_GetDeembeddingTableNumberOfPorts.return_value = 0
         mock_library.niRFSA_GetError.side_effect = MockFunctionCallError("niRFSA_GetError")
         mock_library.niRFSA_GetError.return_value = 0
-        mock_library.niRFSA_GetExtCalLastTemperature.side_effect = MockFunctionCallError("niRFSA_GetExtCalLastTemperature")
-        mock_library.niRFSA_GetExtCalLastTemperature.return_value = 0
+        mock_library.niRFSA_GetExtCalLastDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime")
+        mock_library.niRFSA_GetExtCalLastDateAndTime.return_value = 0
+        mock_library.niRFSA_GetExtCalLastTemp.side_effect = MockFunctionCallError("niRFSA_GetExtCalLastTemp")
+        mock_library.niRFSA_GetExtCalLastTemp.return_value = 0
         mock_library.niRFSA_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niRFSA_GetExtCalRecommendedInterval")
         mock_library.niRFSA_GetExtCalRecommendedInterval.return_value = 0
-        mock_library.niRFSA_GetExternalCalibrationLastDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetExternalCalibrationLastDateAndTime")
-        mock_library.niRFSA_GetExternalCalibrationLastDateAndTime.return_value = 0
         mock_library.niRFSA_GetFetchBacklog.side_effect = MockFunctionCallError("niRFSA_GetFetchBacklog")
         mock_library.niRFSA_GetFetchBacklog.return_value = 0
         mock_library.niRFSA_GetFrequencyResponse.side_effect = MockFunctionCallError("niRFSA_GetFrequencyResponse")
         mock_library.niRFSA_GetFrequencyResponse.return_value = 0
         mock_library.niRFSA_GetScalingCoefficients.side_effect = MockFunctionCallError("niRFSA_GetScalingCoefficients")
         mock_library.niRFSA_GetScalingCoefficients.return_value = 0
-        mock_library.niRFSA_GetSelfCalibrationDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetSelfCalibrationDateAndTime")
-        mock_library.niRFSA_GetSelfCalibrationDateAndTime.return_value = 0
-        mock_library.niRFSA_GetSelfCalibrationTemperature.side_effect = MockFunctionCallError("niRFSA_GetSelfCalibrationTemperature")
-        mock_library.niRFSA_GetSelfCalibrationTemperature.return_value = 0
+        mock_library.niRFSA_GetSelfCalLastDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetSelfCalLastDateAndTime")
+        mock_library.niRFSA_GetSelfCalLastDateAndTime.return_value = 0
+        mock_library.niRFSA_GetSelfCalLastTemp.side_effect = MockFunctionCallError("niRFSA_GetSelfCalLastTemp")
+        mock_library.niRFSA_GetSelfCalLastTemp.return_value = 0
         mock_library.niRFSA_GetTerminalName.side_effect = MockFunctionCallError("niRFSA_GetTerminalName")
         mock_library.niRFSA_GetTerminalName.return_value = 0
         mock_library.niRFSA_InitWithOptions.side_effect = MockFunctionCallError("niRFSA_InitWithOptions")

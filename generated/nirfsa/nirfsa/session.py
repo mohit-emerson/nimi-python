@@ -5623,7 +5623,15 @@ class _SessionBase(object):
                 expected_buffer_size = number_of_samples
 
             if iq_data_arrays.shape[1] < expected_buffer_size:
-                iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
+                try:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize iq_data_arrays from {} to {}: {}".format(
+                            iq_data_arrays.shape, (iq_data_arrays.shape[0], expected_buffer_size), e
+                        )
+                    ) from e
+                assert iq_data_arrays.shape[1] == expected_buffer_size, "iq_data_arrays width must match requested number_of_samples after resize"
 
             if iq_data_arrays.dtype == numpy.complex128:
                 wfm_info = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)
@@ -5717,7 +5725,15 @@ class _SessionBase(object):
                 expected_buffer_size = number_of_samples
 
             if len(iq_data_array) < expected_buffer_size:
-                iq_data_array.resize(expected_buffer_size, refcheck=False)
+                try:
+                    iq_data_array.resize(expected_buffer_size, refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize iq_data_array from {} to {}: {}".format(
+                            len(iq_data_array), expected_buffer_size, e
+                        )
+                    ) from e
+                assert len(iq_data_array) == expected_buffer_size, "iq_data_array length must match requested number_of_samples after resize"
 
             if iq_data_array.dtype == numpy.complex128:
                 wfm_info = self._fetch_iq_single_record_complex_f64(record_number, iq_data_array, timeout)
@@ -6271,7 +6287,15 @@ class _SessionBase(object):
 
             expected_buffer_size = self.number_of_samples
             if len(iq_data_array) < expected_buffer_size:
-                iq_data_array.resize(expected_buffer_size, refcheck=False)
+                try:
+                    iq_data_array.resize(expected_buffer_size, refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize iq_data_array from {} to {}: {}".format(
+                            len(iq_data_array), expected_buffer_size, e
+                        )
+                    ) from e
+                assert len(iq_data_array) == expected_buffer_size, "iq_data_array length must match requested number_of_samples after resize"
 
             wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
         else:
@@ -6340,7 +6364,15 @@ class _SessionBase(object):
             expected_buffer_size = data_array_size
 
             if len(power_spectrum_data_array) < expected_buffer_size:
-                power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
+                try:
+                    power_spectrum_data_array.resize(expected_buffer_size, refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize power_spectrum_data_array from {} to {}: {}".format(
+                            len(power_spectrum_data_array), expected_buffer_size, e
+                        )
+                    ) from e
+                assert len(power_spectrum_data_array) == expected_buffer_size, "power_spectrum_data_array length must match requested data_array_size after resize"
 
             if power_spectrum_data_array.dtype == numpy.float64:
                 spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
@@ -7729,6 +7761,34 @@ class Session(_SessionBase):
         return sparameters
 
     @ivi_synchronized
+    def _get_ext_cal_last_date_and_time(self):
+        r'''_get_ext_cal_last_date_and_time
+
+        Returns the date and time of the last successful external calibration.
+
+        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
+
+        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        Note:
+        One or more of the referenced properties are not in the Python API for this driver.
+
+        Returns:
+            year (int): Returns the year of the last external calibration.
+
+            month (int): Returns the month of the last external calibration.
+
+            day (int): Returns the day of the last external calibration.
+
+            hour (int): Returns the hour of the last external calibration.
+
+            minute (int): Returns the minute of the last external calibration.
+
+        '''
+        year, month, day, hour, minute = self._interpreter.get_ext_cal_last_date_and_time()
+        return year, month, day, hour, minute
+
+    @ivi_synchronized
     def get_ext_cal_last_temp(self):
         r'''get_ext_cal_last_temp
 
@@ -7761,36 +7821,6 @@ class Session(_SessionBase):
         return _converters.convert_month_to_timedelta(months)
 
     @ivi_synchronized
-    def _get_external_calibration_last_date_and_time(self):
-        r'''_get_external_calibration_last_date_and_time
-
-        Returns the date and time of the last successful external calibration.
-
-        The time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this method returns 14 for the HOUR parameter, 30 for the MINUTE parameter, 12 for the MONTH parameter, 31 for the DAY parameter, and 2010 for the YEAR parameter.
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
-
-        Note:
-        One or more of the referenced properties are not in the Python API for this driver.
-
-        Returns:
-            year (int): Returns the year of the last external calibration.
-
-            month (int): Returns the month of the last external calibration.
-
-            day (int): Returns the day of the last external calibration.
-
-            hour (int): Returns the hour of the last external calibration.
-
-            minute (int): Returns the minute of the last external calibration.
-
-            second (int): Returns the second of the last successful calibration.
-
-        '''
-        year, month, day, hour, minute, second = self._interpreter.get_external_calibration_last_date_and_time()
-        return year, month, day, hour, minute, second
-
-    @ivi_synchronized
     def get_ext_cal_last_date_and_time(self):
         '''get_ext_cal_last_date_and_time
 
@@ -7808,8 +7838,8 @@ class Session(_SessionBase):
             last_cal_datetime (hightime.datetime):
 
         '''
-        year, month, day, hour, minute, second = self._get_external_calibration_last_date_and_time()
-        return hightime.datetime(year, month, day, hour, minute, second)
+        year, month, day, hour, minute = self._get_ext_cal_last_date_and_time()
+        return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
     def get_self_cal_last_date_and_time(self, self_calibration_step):
@@ -7833,12 +7863,12 @@ class Session(_SessionBase):
             last_cal_datetime (hightime.datetime):
 
         '''
-        year, month, day, hour, minute = self._get_self_calibration_date_and_time(self_calibration_step)
+        year, month, day, hour, minute = self._get_self_cal_last_date_and_time(self_calibration_step)
         return hightime.datetime(year, month, day, hour, minute)
 
     @ivi_synchronized
-    def _get_self_calibration_date_and_time(self, self_calibration_step):
-        r'''_get_self_calibration_date_and_time
+    def _get_self_cal_last_date_and_time(self, self_calibration_step):
+        r'''_get_self_cal_last_date_and_time
 
         Returns the date and time of the last successful self-calibration.
 
@@ -7900,7 +7930,7 @@ class Session(_SessionBase):
         '''
         if type(self_calibration_step) is not enums.SelfCalibrationStep:
             raise TypeError('Parameter self_calibration_step must be of type ' + str(enums.SelfCalibrationStep))
-        year, month, day, hour, minute = self._interpreter.get_self_calibration_date_and_time(self_calibration_step)
+        year, month, day, hour, minute = self._interpreter.get_self_cal_last_date_and_time(self_calibration_step)
         return year, month, day, hour, minute
 
     @ivi_synchronized

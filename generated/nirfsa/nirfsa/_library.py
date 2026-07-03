@@ -68,14 +68,14 @@ class Library(object):
         self.niRFSA_GetDeembeddingSparameters_cfunc = None
         self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc = None
         self.niRFSA_GetError_cfunc = None
-        self.niRFSA_GetExtCalLastTemperature_cfunc = None
+        self.niRFSA_GetExtCalLastDateAndTime_cfunc = None
+        self.niRFSA_GetExtCalLastTemp_cfunc = None
         self.niRFSA_GetExtCalRecommendedInterval_cfunc = None
-        self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc = None
         self.niRFSA_GetFetchBacklog_cfunc = None
         self.niRFSA_GetFrequencyResponse_cfunc = None
         self.niRFSA_GetScalingCoefficients_cfunc = None
-        self.niRFSA_GetSelfCalibrationDateAndTime_cfunc = None
-        self.niRFSA_GetSelfCalibrationTemperature_cfunc = None
+        self.niRFSA_GetSelfCalLastDateAndTime_cfunc = None
+        self.niRFSA_GetSelfCalLastTemp_cfunc = None
         self.niRFSA_GetTerminalName_cfunc = None
         self.niRFSA_InitWithOptions_cfunc = None
         self.niRFSA_Initiate_cfunc = None
@@ -445,13 +445,21 @@ class Library(object):
                 self.niRFSA_GetError_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetError_cfunc(vi, error_code, error_description_buffer_size, error_description)
 
-    def niRFSA_GetExtCalLastTemperature(self, vi, temperature):  # noqa: N802
+    def niRFSA_GetExtCalLastDateAndTime(self, vi, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_GetExtCalLastTemperature_cfunc is None:
-                self.niRFSA_GetExtCalLastTemperature_cfunc = self._get_library_function('niRFSA_GetExtCalLastTemperature')
-                self.niRFSA_GetExtCalLastTemperature_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niRFSA_GetExtCalLastTemperature_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetExtCalLastTemperature_cfunc(vi, temperature)
+            if self.niRFSA_GetExtCalLastDateAndTime_cfunc is None:
+                self.niRFSA_GetExtCalLastDateAndTime_cfunc = self._get_library_function('niRFSA_GetExtCalLastDateAndTime')
+                self.niRFSA_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
+
+    def niRFSA_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_GetExtCalLastTemp_cfunc is None:
+                self.niRFSA_GetExtCalLastTemp_cfunc = self._get_library_function('niRFSA_GetExtCalLastTemp')
+                self.niRFSA_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niRFSA_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetExtCalLastTemp_cfunc(vi, temperature)
 
     def niRFSA_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         with self._func_lock:
@@ -460,14 +468,6 @@ class Library(object):
                 self.niRFSA_GetExtCalRecommendedInterval_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niRFSA_GetExtCalRecommendedInterval_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetExtCalRecommendedInterval_cfunc(vi, months)
-
-    def niRFSA_GetExternalCalibrationLastDateAndTime(self, vi, year, month, day, hour, minute, second):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc is None:
-                self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc = self._get_library_function('niRFSA_GetExternalCalibrationLastDateAndTime')
-                self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetExternalCalibrationLastDateAndTime_cfunc(vi, year, month, day, hour, minute, second)
 
     def niRFSA_GetFetchBacklog(self, vi, channel_list, record_number, backlog):  # noqa: N802
         with self._func_lock:
@@ -493,21 +493,21 @@ class Library(object):
                 self.niRFSA_GetScalingCoefficients_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetScalingCoefficients_cfunc(vi, channel_list, array_size, coefficient_info, number_of_coefficient_sets)
 
-    def niRFSA_GetSelfCalibrationDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
+    def niRFSA_GetSelfCalLastDateAndTime(self, vi, self_calibration_step, year, month, day, hour, minute):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_GetSelfCalibrationDateAndTime_cfunc is None:
-                self.niRFSA_GetSelfCalibrationDateAndTime_cfunc = self._get_library_function('niRFSA_GetSelfCalibrationDateAndTime')
-                self.niRFSA_GetSelfCalibrationDateAndTime_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
-                self.niRFSA_GetSelfCalibrationDateAndTime_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetSelfCalibrationDateAndTime_cfunc(vi, self_calibration_step, year, month, day, hour, minute)
+            if self.niRFSA_GetSelfCalLastDateAndTime_cfunc is None:
+                self.niRFSA_GetSelfCalLastDateAndTime_cfunc = self._get_library_function('niRFSA_GetSelfCalLastDateAndTime')
+                self.niRFSA_GetSelfCalLastDateAndTime_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
+                self.niRFSA_GetSelfCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetSelfCalLastDateAndTime_cfunc(vi, self_calibration_step, year, month, day, hour, minute)
 
-    def niRFSA_GetSelfCalibrationTemperature(self, vi, self_calibration_step, temperature):  # noqa: N802
+    def niRFSA_GetSelfCalLastTemp(self, vi, self_calibration_step, temperature):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_GetSelfCalibrationTemperature_cfunc is None:
-                self.niRFSA_GetSelfCalibrationTemperature_cfunc = self._get_library_function('niRFSA_GetSelfCalibrationTemperature')
-                self.niRFSA_GetSelfCalibrationTemperature_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niRFSA_GetSelfCalibrationTemperature_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetSelfCalibrationTemperature_cfunc(vi, self_calibration_step, temperature)
+            if self.niRFSA_GetSelfCalLastTemp_cfunc is None:
+                self.niRFSA_GetSelfCalLastTemp_cfunc = self._get_library_function('niRFSA_GetSelfCalLastTemp')
+                self.niRFSA_GetSelfCalLastTemp_cfunc.argtypes = [ViSession, ViInt64, ctypes.POINTER(ViReal64)]  # noqa: F405
+                self.niRFSA_GetSelfCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_GetSelfCalLastTemp_cfunc(vi, self_calibration_step, temperature)
 
     def niRFSA_GetTerminalName(self, vi, signal, signal_identifier, buffer_size, terminal_name):  # noqa: N802
         with self._func_lock:

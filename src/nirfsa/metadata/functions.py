@@ -3186,7 +3186,7 @@ functions = {
             }
         ],
         'python_name': 'get_ext_cal_last_date_and_time',
-        'real_datetime_call': 'GetExternalCalibrationLastDateAndTime',
+        'real_datetime_call': 'GetExtCalLastDateAndTime',
         'returns': 'ViStatus'
     },
     'GetLastSelfCalLastDateAndTime': {
@@ -3225,10 +3225,10 @@ functions = {
             }
         ],
         'python_name': 'get_self_cal_last_date_and_time',
-        'real_datetime_call': 'GetSelfCalibrationDateAndTime',
+        'real_datetime_call': 'GetSelfCalLastDateAndTime',
         'returns': 'ViStatus'
     },
-    'GetExternalCalibrationLastDateAndTime': {
+    'GetExtCalLastDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
@@ -3297,21 +3297,11 @@ functions = {
                 'use_array': False,
                 'use_in_python_api': True
             },            
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the second of the last successful calibration.',
-                },
-                'name': 'second',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
         ],
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetExtCalLastTemperature': {
+    'GetExtCalLastTemp': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the temperature of the last successful external calibration.\n\nThe temperature is returned in degrees Celsius.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698',
@@ -3567,7 +3557,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetSelfCalibrationDateAndTime': {
+    'GetSelfCalLastDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Returns the date and time of the last successful self-calibration.\n\nThe time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n----\n**Note**\nFor the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **NIRFSA_ATTR_SELF_CALIBRATION_STEP** parameter.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860',
@@ -3775,7 +3765,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetSelfCalibrationTemperature': {
+    'GetSelfCalLastTemp': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Returns the temperature, in degrees Celsius, at the last successful self-calibration.\n\n----\n**Note**\nFor the PXIe-5644/5645/5646, you must select NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION for the **selfCalibrationStep** parameter.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860',
@@ -3783,6 +3773,7 @@ functions = {
         'grpc_name': 'GetSelfCalLastTemp',
         'included_in_proto': True,
         'is_error_handling': False,
+        'python_name': 'get_self_calibration_temperature',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',

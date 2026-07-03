@@ -27,7 +27,15 @@
                 expected_buffer_size = number_of_samples
 
             if iq_data_arrays.shape[1] < expected_buffer_size:
-                iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
+                try:
+                    iq_data_arrays.resize((iq_data_arrays.shape[0], expected_buffer_size), refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize iq_data_arrays from {} to {}: {}".format(
+                            iq_data_arrays.shape, (iq_data_arrays.shape[0], expected_buffer_size), e
+                        )
+                    ) from e
+                assert iq_data_arrays.shape[1] == expected_buffer_size, "iq_data_arrays width must match requested number_of_samples after resize"
 
             if iq_data_arrays.dtype == numpy.complex128:
                 wfm_info = self._fetch_iq_multi_record_complex_f64(starting_record, number_of_records, iq_data_arrays, timeout)

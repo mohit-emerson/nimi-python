@@ -477,10 +477,21 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=True)
         return int(error_code_ctype.value), error_description_ctype.value.decode(self._encoding)
 
+    def get_ext_cal_last_date_and_time(self):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        year_ctype = _visatype.ViInt32()  # case S220
+        month_ctype = _visatype.ViInt32()  # case S220
+        day_ctype = _visatype.ViInt32()  # case S220
+        hour_ctype = _visatype.ViInt32()  # case S220
+        minute_ctype = _visatype.ViInt32()  # case S220
+        error_code = self._library.niRFSA_GetExtCalLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
+
     def get_ext_cal_last_temp(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niRFSA_GetExtCalLastTemperature(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+        error_code = self._library.niRFSA_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 
@@ -490,18 +501,6 @@ class LibraryInterpreter(object):
         error_code = self._library.niRFSA_GetExtCalRecommendedInterval(vi_ctype, None if months_ctype is None else (ctypes.pointer(months_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(months_ctype.value)
-
-    def get_external_calibration_last_date_and_time(self):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        year_ctype = _visatype.ViInt32()  # case S220
-        month_ctype = _visatype.ViInt32()  # case S220
-        day_ctype = _visatype.ViInt32()  # case S220
-        hour_ctype = _visatype.ViInt32()  # case S220
-        minute_ctype = _visatype.ViInt32()  # case S220
-        second_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niRFSA_GetExternalCalibrationLastDateAndTime(vi_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)), None if second_ctype is None else (ctypes.pointer(second_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value), int(second_ctype.value)
 
     def get_fetch_backlog(self, channel_list, record_number):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -548,7 +547,7 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return [coefficient_info_type.CoefficientInfo(coefficient_info_ctype[i]) for i in range(array_size_ctype.value)]
 
-    def get_self_calibration_date_and_time(self, self_calibration_step):  # noqa: N802
+    def get_self_cal_last_date_and_time(self, self_calibration_step):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         self_calibration_step_ctype = _visatype.ViInt64(self_calibration_step.value)  # case S130
         year_ctype = _visatype.ViInt32()  # case S220
@@ -556,7 +555,7 @@ class LibraryInterpreter(object):
         day_ctype = _visatype.ViInt32()  # case S220
         hour_ctype = _visatype.ViInt32()  # case S220
         minute_ctype = _visatype.ViInt32()  # case S220
-        error_code = self._library.niRFSA_GetSelfCalibrationDateAndTime(vi_ctype, self_calibration_step_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
+        error_code = self._library.niRFSA_GetSelfCalLastDateAndTime(vi_ctype, self_calibration_step_ctype, None if year_ctype is None else (ctypes.pointer(year_ctype)), None if month_ctype is None else (ctypes.pointer(month_ctype)), None if day_ctype is None else (ctypes.pointer(day_ctype)), None if hour_ctype is None else (ctypes.pointer(hour_ctype)), None if minute_ctype is None else (ctypes.pointer(minute_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
@@ -564,7 +563,7 @@ class LibraryInterpreter(object):
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         self_calibration_step_ctype = _visatype.ViInt64(self_calibration_step.value)  # case S130
         temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niRFSA_GetSelfCalibrationTemperature(vi_ctype, self_calibration_step_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
+        error_code = self._library.niRFSA_GetSelfCalLastTemp(vi_ctype, self_calibration_step_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return float(temperature_ctype.value)
 

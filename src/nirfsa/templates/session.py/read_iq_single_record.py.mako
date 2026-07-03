@@ -16,7 +16,15 @@
 
             expected_buffer_size = self.number_of_samples
             if len(iq_data_array) < expected_buffer_size:
-                iq_data_array.resize(expected_buffer_size, refcheck=False)
+                try:
+                    iq_data_array.resize(expected_buffer_size, refcheck=False)
+                except (MemoryError, ValueError) as e:
+                    raise type(e)(
+                        "Failed to resize iq_data_array from {} to {}: {}".format(
+                            len(iq_data_array), expected_buffer_size, e
+                        )
+                    ) from e
+                assert len(iq_data_array) == expected_buffer_size, "iq_data_array length must match requested number_of_samples after resize"
 
             wfm_info = self._read_iq_single_record_complex_f64(iq_data_array, timeout)
         else:

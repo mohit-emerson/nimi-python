@@ -37,7 +37,7 @@ class Library(object):
         self.niRFSA_ConfigureDigitalEdgeAdvanceTrigger_cfunc = None
         self.niRFSA_ConfigureDigitalEdgeRefTrigger_cfunc = None
         self.niRFSA_ConfigureDigitalEdgeStartTrigger_cfunc = None
-        self.niRFSA_ConfigureIqPowerEdgeRefTrigger_cfunc = None
+        self.niRFSA_ConfigureIQPowerEdgeRefTrigger_cfunc = None
         self.niRFSA_ConfigureRefClock_cfunc = None
         self.niRFSA_ConfigureSoftwareEdgeAdvanceTrigger_cfunc = None
         self.niRFSA_ConfigureSoftwareEdgeRefTrigger_cfunc = None
@@ -197,13 +197,13 @@ class Library(object):
                 self.niRFSA_ConfigureDigitalEdgeStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ConfigureDigitalEdgeStartTrigger_cfunc(vi, source, edge)
 
-    def niRFSA_ConfigureIqPowerEdgeRefTrigger(self, vi, source, level, slope, pretrigger_samples):  # noqa: N802
+    def niRFSA_ConfigureIQPowerEdgeRefTrigger(self, vi, source, level, slope, pretrigger_samples):  # noqa: N802
         with self._func_lock:
-            if self.niRFSA_ConfigureIqPowerEdgeRefTrigger_cfunc is None:
-                self.niRFSA_ConfigureIqPowerEdgeRefTrigger_cfunc = self._get_library_function('niRFSA_ConfigureIqPowerEdgeRefTrigger')
-                self.niRFSA_ConfigureIqPowerEdgeRefTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt64]  # noqa: F405
-                self.niRFSA_ConfigureIqPowerEdgeRefTrigger_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_ConfigureIqPowerEdgeRefTrigger_cfunc(vi, source, level, slope, pretrigger_samples)
+            if self.niRFSA_ConfigureIQPowerEdgeRefTrigger_cfunc is None:
+                self.niRFSA_ConfigureIQPowerEdgeRefTrigger_cfunc = self._get_library_function('niRFSA_ConfigureIQPowerEdgeRefTrigger')
+                self.niRFSA_ConfigureIQPowerEdgeRefTrigger_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar), ViReal64, ViInt32, ViInt64]  # noqa: F405
+                self.niRFSA_ConfigureIQPowerEdgeRefTrigger_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_ConfigureIQPowerEdgeRefTrigger_cfunc(vi, source, level, slope, pretrigger_samples)
 
     def niRFSA_ConfigureRefClock(self, vi, clock_source, ref_clock_rate):  # noqa: N802
         with self._func_lock:

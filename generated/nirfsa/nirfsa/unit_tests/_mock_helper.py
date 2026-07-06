@@ -39,8 +39,8 @@ class SideEffectsHelper(object):
         self._defaults['ConfigureDigitalEdgeRefTrigger']['return'] = 0
         self._defaults['ConfigureDigitalEdgeStartTrigger'] = {}
         self._defaults['ConfigureDigitalEdgeStartTrigger']['return'] = 0
-        self._defaults['ConfigureIqPowerEdgeRefTrigger'] = {}
-        self._defaults['ConfigureIqPowerEdgeRefTrigger']['return'] = 0
+        self._defaults['ConfigureIQPowerEdgeRefTrigger'] = {}
+        self._defaults['ConfigureIQPowerEdgeRefTrigger']['return'] = 0
         self._defaults['ConfigureRefClock'] = {}
         self._defaults['ConfigureRefClock']['return'] = 0
         self._defaults['ConfigureSoftwareEdgeAdvanceTrigger'] = {}
@@ -284,10 +284,10 @@ class SideEffectsHelper(object):
             return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
         return self._defaults['ConfigureDigitalEdgeStartTrigger']['return']
 
-    def niRFSA_ConfigureIqPowerEdgeRefTrigger(self, vi, source, level, slope, pretrigger_samples):  # noqa: N802
-        if self._defaults['ConfigureIqPowerEdgeRefTrigger']['return'] != 0:
-            return self._defaults['ConfigureIqPowerEdgeRefTrigger']['return']
-        return self._defaults['ConfigureIqPowerEdgeRefTrigger']['return']
+    def niRFSA_ConfigureIQPowerEdgeRefTrigger(self, vi, source, level, slope, pretrigger_samples):  # noqa: N802
+        if self._defaults['ConfigureIQPowerEdgeRefTrigger']['return'] != 0:
+            return self._defaults['ConfigureIQPowerEdgeRefTrigger']['return']
+        return self._defaults['ConfigureIQPowerEdgeRefTrigger']['return']
 
     def niRFSA_ConfigureRefClock(self, vi, clock_source, ref_clock_rate):  # noqa: N802
         if self._defaults['ConfigureRefClock']['return'] != 0:
@@ -928,8 +928,8 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_ConfigureDigitalEdgeRefTrigger.return_value = 0
         mock_library.niRFSA_ConfigureDigitalEdgeStartTrigger.side_effect = MockFunctionCallError("niRFSA_ConfigureDigitalEdgeStartTrigger")
         mock_library.niRFSA_ConfigureDigitalEdgeStartTrigger.return_value = 0
-        mock_library.niRFSA_ConfigureIqPowerEdgeRefTrigger.side_effect = MockFunctionCallError("niRFSA_ConfigureIqPowerEdgeRefTrigger")
-        mock_library.niRFSA_ConfigureIqPowerEdgeRefTrigger.return_value = 0
+        mock_library.niRFSA_ConfigureIQPowerEdgeRefTrigger.side_effect = MockFunctionCallError("niRFSA_ConfigureIQPowerEdgeRefTrigger")
+        mock_library.niRFSA_ConfigureIQPowerEdgeRefTrigger.return_value = 0
         mock_library.niRFSA_ConfigureRefClock.side_effect = MockFunctionCallError("niRFSA_ConfigureRefClock")
         mock_library.niRFSA_ConfigureRefClock.return_value = 0
         mock_library.niRFSA_ConfigureSoftwareEdgeAdvanceTrigger.side_effect = MockFunctionCallError("niRFSA_ConfigureSoftwareEdgeAdvanceTrigger")

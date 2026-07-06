@@ -2912,7 +2912,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_iq_power_edge_ref_trigger
+    - ConfigureIqPowerEdgeRefTrigger
     '''
     iq_power_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerIqPowerEdgeSlope, 1150057)
     '''Type: enums.ReferenceTriggerIqPowerEdgeSlope
@@ -2933,7 +2933,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_iq_power_edge_ref_trigger
+    - ConfigureIqPowerEdgeRefTrigger
 
     +------------------------------------------+-------------------------------------------------------+
     | Name                                     | Description                                           |
@@ -2960,7 +2960,7 @@ class _SessionBase(object):
 
     **High-Level Methods**:
 
-    - configure_iq_power_edge_ref_trigger
+    - ConfigureIqPowerEdgeRefTrigger
     '''
     iq_rate = _attributes.AttributeViReal64(1150007)
     '''Type: float
@@ -4185,7 +4185,7 @@ class _SessionBase(object):
 
     - configure_digital_edge_ref_trigger
     - configure_software_edge_ref_trigger
-    - configure_iq_power_edge_ref_trigger
+    - ConfigureIqPowerEdgeRefTrigger
     '''
     ref_trigger_terminal_name = _attributes.AttributeViString(1150123)
     '''Type: str
@@ -5647,9 +5647,7 @@ class _SessionBase(object):
         if isinstance(wfm_info, waveform_info.WaveformInfo):
             wfm_info = [wfm_info]
 
-        mv = memoryview(iq_data_arrays)
-
-        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
+        waveform_info._populate_samples_info(wfm_info, iq_data_arrays, number_of_samples)
 
         channel_names = _converters.expand_channel_string(
             self._repeated_capability,

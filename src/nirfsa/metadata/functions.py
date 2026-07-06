@@ -551,7 +551,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ConfigureIqPowerEdgeRefTrigger': {
+    'ConfigureIQPowerEdgeRefTrigger': {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Configures the device to wait for the complex power of the I/Q data to cross the specified threshold to mark a reference point within the record.\n\nTo trigger on burst signals, add a minimum quiet time, configured with the NIRFSA_ATTR_REF_TRIGGER_MINIMUM_QUIET_TIME attribute, to ensure the trigger does not occur in the middle of a burst if the acquisition starts while a burst is being generated. The quiet time should be set to a value smaller than the time between bursts, but large enough to ignore power changes within a burst.\n\nYou can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.\n\n----\n**Note**\n This function is not supported if you set the **acquisitionType** parameter to NIRFSA_VAL_SPECTRUM using the nirfsa_ConfigureAcquisitionType function or if you set the NIRFSA_ATTR_ACQUISITION_TYPE attribute to NIRFSA_VAL_SPECTRUM.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_',

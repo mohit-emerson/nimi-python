@@ -51,9 +51,7 @@
         if isinstance(wfm_info, waveform_info.WaveformInfo):
             wfm_info = [wfm_info]
 
-        mv = memoryview(iq_data_arrays)
-
-        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
+        waveform_info._populate_samples_info(wfm_info, iq_data_arrays, number_of_samples)
 
 <%include file="./fetch_waveform_info_population.py.mako"/>
 

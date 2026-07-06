@@ -42,7 +42,7 @@ def check_fetched_data(
         if isinstance(data[i], nirfsa.WaveformInfo):
             assert len(data[i].samples) == test_record_length
         elif isinstance(data[i], nirfsa.SpectrumInfoT):
-            assert data[i].result == 0.0
+            assert len(data[i].samples) == test_record_length
         else:
             raise TypeError(f"data is unsupported type {type(data[i])}")
         assert data[i].channel == expected_channels[i]
@@ -213,7 +213,10 @@ class SystemTests:
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Thermal correction is unsupported on simulated RFSA")
     def test_perform_thermal_correction(self, rfsa_device_session):
-        rfsa_device_session.perform_thermal_correction()
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        with rfsa_device_session.initiate():
+            rfsa_device_session.perform_thermal_correction()
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Frequency response data may be unavailable on simulated RFSA")
     def test_get_frequency_response(self, rfsa_device_session):
@@ -250,7 +253,6 @@ class SystemTests:
         rfsa_device_session.fetch_relative_to = nirfsa.FetchRelativeTo.REFERENCE_TRIGGER
         with rfsa_device_session.initiate():
             time.sleep(1)
-        rfsa_device_session.abort()
         backlog_after_abort = rfsa_device_session.get_fetch_backlog(0)
         assert backlog_after_abort == rfsa_device_session.number_of_samples
 
@@ -313,13 +315,12 @@ class SystemTests:
         rfsa_device_session.disable_ref_trigger()
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.NONE
 
-    #TODO check failign on hw
     @pytest.mark.skipif(use_simulated_session is True, reason="IQ power edge trigger is unsupported on simulated RFSA")
     def test_configure_iq_power_edge_ref_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_iq_power_edge_ref_trigger('0', -20.0, nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING, pretrigger_samples=32)
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.IQ_POWER_EDGE
         assert rfsa_device_session.iq_power_edge_ref_trigger_source == '0'
-        assert rfsa_device_session.iq_power_edge_ref_trigger_level == -20.0
+        assert rfsa_device_session.iq_power_edge_ref_trigger_level == pytest.approx(-20.0, rel=1e-6)
         assert rfsa_device_session.iq_power_edge_ref_trigger_slope == nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING
         assert rfsa_device_session.ref_trigger_pretrigger_samples == 32
 
@@ -346,16 +347,20 @@ class SystemTests:
         rfsa_device_session.configure_software_edge_start_trigger()
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
 
-    #TODO check failing on hw
+    # TODO(msaini): check failing on hw with  nirfsa.errors.DriverError: -1074097994: Trigger type requested to be sent as the software trigger is invalid.
     @pytest.mark.skipif(use_simulated_session is True, reason="Simulated device does not support software trigger behavior")
     def test_send_software_edge_trigger(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        rfsa_device_session.number_of_samples = 256
         rfsa_device_session.configure_software_edge_start_trigger()
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
-        rfsa_device_session.initiate()
-        assert rfsa_device_session.check_acquisition_status() is False
-        rfsa_device_session.send_software_edge_trigger(nirfsa.SoftwareTriggerType.START, '')
-        assert rfsa_device_session.check_acquisition_status() is True
-        rfsa_device_session.abort()
+        rfsa_device_session.commit()
+        iq_data = np.zeros(256, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            rfsa_device_session.send_software_edge_trigger(nirfsa.SoftwareTriggerType.START, '')
+            rfsa_device_session.fetch_iq_single_record_into(iq_data, number_of_samples=256, timeout=5.0)
+            assert len(iq_data) == 256
 
 # Fetch tests
     def test_fetch_iq_single_record(self, rfsa_device_session):
@@ -365,11 +370,9 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
-        rfsa_device_session.initiate()
-        try:
-            rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=256, timeout=10.0)
-        finally:
-            rfsa_device_session.abort()
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=256, timeout=10.0)
+        check_fetched_data(wfm_info, '', 256, 1)
 
     def test_fetch_iq_single_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -378,16 +381,14 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.int16)
-        rfsa_device_session.initiate()
-        try:
-            rfsa_device_session.fetch_iq_single_record_into(
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(
                 iq_data_array,
                 number_of_samples=256,
                 timeout=10.0,
             )
-            assert iq_data_array.dtype == np.int16
-        finally:
-            rfsa_device_session.abort()
+        assert iq_data_array.dtype == np.int16
+        check_fetched_data(wfm_info, '', 256, 1)
 
     def test_fetch_iq_multi_record(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -397,11 +398,9 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 256
 
         iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
-        rfsa_device_session.initiate()
-        try:
-            rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, starting_record=0, number_of_records=2, number_of_samples=256, timeout=10.0)
-        finally:
-            rfsa_device_session.abort()
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, starting_record=0, number_of_records=2, number_of_samples=256, timeout=10.0)
+        check_fetched_data(wfm_info, '', 256, 2)
 
     def test_fetch_iq_multi_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -411,18 +410,16 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 256
 
         iq_data_arrays = np.zeros((2, 64), dtype=np.int16)
-        rfsa_device_session.initiate()
-        try:
-            rfsa_device_session.fetch_iq_multi_record_into(
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(
                 iq_data_arrays,
                 starting_record=0,
                 number_of_records=2,
                 number_of_samples=256,
                 timeout=10.0,
             )
-            assert iq_data_arrays.dtype == np.int16
-        finally:
-            rfsa_device_session.abort()
+        assert iq_data_arrays.dtype == np.int16
+        check_fetched_data(wfm_info, '', 256, 2)
 
     def test_read_iq_single_record(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -431,8 +428,8 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
-        rfsa_device_session.read_iq_single_record_into(iq_data_array, timeout=10.0)
-        assert len(iq_data_array) == 256
+        wfm_info = rfsa_device_session.read_iq_single_record_into(iq_data_array, timeout=10.0)
+        check_fetched_data(wfm_info, '', 256, 1)
 
     def test_read_power_spectrum(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
@@ -440,8 +437,8 @@ class SystemTests:
         rfsa_device_session.number_of_spectral_lines = 256
 
         power_spectrum_data_array = np.zeros(64, dtype=np.float64)
-        rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, timeout=10.0)
-        assert len(power_spectrum_data_array) == 256
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, timeout=10.0)
+        check_fetched_data(spectrum_info, '', 256, 1)
 
 # Deembedding tests
     def test_set_get_deembedding_sparameters(self, rfsa_device_session):

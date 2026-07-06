@@ -7188,7 +7188,7 @@ iq_power_edge_ref_trigger_level
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_iq_power_edge_ref_trigger`
+        - :py:meth:`nirfsa.Session.ConfigureIqPowerEdgeRefTrigger`
 
         The following table lists the characteristics of this property.
 
@@ -7229,7 +7229,7 @@ iq_power_edge_ref_trigger_slope
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_iq_power_edge_ref_trigger`
+        - :py:meth:`nirfsa.Session.ConfigureIqPowerEdgeRefTrigger`
 
         +-------------------------------------------------------------+-------------------------------------------------------+
         | Name                                                        | Description                                           |
@@ -7276,7 +7276,7 @@ iq_power_edge_ref_trigger_source
 
         **High-Level Methods**:
 
-        - :py:meth:`nirfsa.Session.configure_iq_power_edge_ref_trigger`
+        - :py:meth:`nirfsa.Session.ConfigureIqPowerEdgeRefTrigger`
 
         The following table lists the characteristics of this property.
 
@@ -9478,7 +9478,7 @@ ref_trigger_pretrigger_samples
 
         - :py:meth:`nirfsa.Session.configure_digital_edge_ref_trigger`
         - :py:meth:`nirfsa.Session.configure_software_edge_ref_trigger`
-        - :py:meth:`nirfsa.Session.configure_iq_power_edge_ref_trigger`
+        - :py:meth:`nirfsa.Session.ConfigureIqPowerEdgeRefTrigger`
 
         The following table lists the characteristics of this property.
 

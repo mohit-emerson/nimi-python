@@ -185,7 +185,7 @@ class LibraryInterpreter(object):
         level_ctype = _visatype.ViReal64(level)  # case S150
         slope_ctype = _visatype.ViInt32(slope.value)  # case S130
         pretrigger_samples_ctype = _visatype.ViInt64(pretrigger_samples)  # case S150
-        error_code = self._library.niRFSA_ConfigureIqPowerEdgeRefTrigger(vi_ctype, source_ctype, level_ctype, slope_ctype, pretrigger_samples_ctype)
+        error_code = self._library.niRFSA_ConfigureIQPowerEdgeRefTrigger(vi_ctype, source_ctype, level_ctype, slope_ctype, pretrigger_samples_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

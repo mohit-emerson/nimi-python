@@ -110,6 +110,8 @@ def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform
         num_samples_per_waveform (int): Number of samples belonging to each waveform
     '''
     if hasattr(sample_data, 'ndim') and sample_data.ndim == 2:
+        # 2D case (multi-record fetch): sample_data[i] is a 1D view of row i.
+        # Slice to exact actual_samples to handle rows wider than actual_samples (e.g. int16).
         for i in range(len(waveform_infos)):
             actual_samples = waveform_infos[i].actual_samples
             waveform_infos[i].actual_samples = None
@@ -119,6 +121,8 @@ def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform
         for i in range(len(waveform_infos)):
             start = i * num_samples_per_waveform
             end = start + waveform_infos[i].actual_samples
+            # We use the actual number of samples returned from the device to determine the end of the waveform.
+            # We then remove it from waveform_info since the length of the waveform will tell us that information.
             waveform_infos[i].actual_samples = None
             waveform_infos[i].samples = sample_data[start:end]
 

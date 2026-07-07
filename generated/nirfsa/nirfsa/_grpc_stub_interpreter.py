@@ -246,23 +246,72 @@ class GrpcStubInterpreter(object):
         )
         return response.error_message
 
-    def fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def fetch_iq_multi_record_complex_f32(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
+        import numpy
+        samples_per_record = (iq_data_arrays.shape[1]) if iq_data_arrays is not None and iq_data_arrays.ndim > 1 else 0
+        response = self._invoke(
+            self._client.FetchIQMultiRecordComplexF32,
+            grpc_types.FetchIQMultiRecordComplexF32Request(vi=self._vi, channel_list=channel_list, starting_record=starting_record, number_of_records=number_of_records, number_of_samples=samples_per_record, timeout=timeout),
+        )
+        data_flat = numpy.array([complex(x.real, x.imaginary) for x in response.data], dtype=numpy.complex64)
+        for rec in range(number_of_records):
+            iq_data_arrays[rec] = data_flat[rec * samples_per_record:(rec + 1) * samples_per_record]
+        return [waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain) for r in response.wfm_info]
 
-    def fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def fetch_iq_multi_record_complex_f64(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
+        import numpy
+        samples_per_record = (iq_data_arrays.shape[1]) if iq_data_arrays is not None and iq_data_arrays.ndim > 1 else 0
+        response = self._invoke(
+            self._client.FetchIQMultiRecordComplexF64,
+            grpc_types.FetchIQMultiRecordComplexF64Request(vi=self._vi, channel_list=channel_list, starting_record=starting_record, number_of_records=number_of_records, number_of_samples=samples_per_record, timeout=timeout),
+        )
+        data_flat = numpy.array([complex(x.real, x.imaginary) for x in response.data], dtype=numpy.complex128)
+        for rec in range(number_of_records):
+            iq_data_arrays[rec] = data_flat[rec * samples_per_record:(rec + 1) * samples_per_record]
+        return [waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain) for r in response.wfm_info]
 
-    def fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, number_of_samples, timeout, iq_data_arrays):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def fetch_iq_multi_record_complex_i16(self, channel_list, starting_record, number_of_records, iq_data_arrays, timeout):  # noqa: N802
+        samples_per_record = (iq_data_arrays.shape[1] // 2) if iq_data_arrays is not None and iq_data_arrays.ndim > 1 else 0
+        response = self._invoke(
+            self._client.FetchIQMultiRecordComplexI16,
+            grpc_types.FetchIQMultiRecordComplexI16Request(vi=self._vi, channel_list=channel_list, starting_record=starting_record, number_of_records=number_of_records, number_of_samples=samples_per_record, timeout=timeout),
+        )
+        for rec in range(number_of_records):
+            for i, x in enumerate(response.data[rec * samples_per_record:(rec + 1) * samples_per_record]):
+                iq_data_arrays[rec, 2 * i] = x.real
+                iq_data_arrays[rec, 2 * i + 1] = x.imaginary
+        return [waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain) for r in response.wfm_info]
 
-    def fetch_iq_single_record_complex_f32(self, channel_list, record_number, number_of_samples, timeout, iq_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def fetch_iq_single_record_complex_f32(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
+        import numpy
+        response = self._invoke(
+            self._client.FetchIQSingleRecordComplexF32,
+            grpc_types.FetchIQSingleRecordComplexF32Request(vi=self._vi, channel_list=channel_list, record_number=record_number, number_of_samples=len(iq_data_array), timeout=timeout),
+        )
+        iq_data_array[:] = numpy.array([complex(x.real, x.imaginary) for x in response.data], dtype=numpy.complex64)
+        r = response.wfm_info
+        return waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain)
 
-    def fetch_iq_single_record_complex_f64(self, channel_list, record_number, number_of_samples, timeout, iq_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def fetch_iq_single_record_complex_f64(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
+        import numpy
+        response = self._invoke(
+            self._client.FetchIQSingleRecordComplexF64,
+            grpc_types.FetchIQSingleRecordComplexF64Request(vi=self._vi, channel_list=channel_list, record_number=record_number, number_of_samples=len(iq_data_array), timeout=timeout),
+        )
+        iq_data_array[:] = numpy.array([complex(x.real, x.imaginary) for x in response.data], dtype=numpy.complex128)
+        r = response.wfm_info
+        return waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain)
 
-    def fetch_iq_single_record_complex_i16(self, channel_list, record_number, number_of_samples, timeout, iq_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def fetch_iq_single_record_complex_i16(self, channel_list, record_number, iq_data_array, timeout):  # noqa: N802
+        response = self._invoke(
+            self._client.FetchIQSingleRecordComplexI16,
+            grpc_types.FetchIQSingleRecordComplexI16Request(vi=self._vi, channel_list=channel_list, record_number=record_number, number_of_samples=len(iq_data_array) // 2, timeout=timeout),
+        )
+        for i, x in enumerate(response.data):
+            iq_data_array[2 * i] = x.real
+            iq_data_array[2 * i + 1] = x.imaginary
+        r = response.wfm_info
+        return waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain)
 
     def get_attribute_vi_boolean(self, channel_name, attribute_id):  # noqa: N802
         response = self._invoke(
@@ -371,7 +420,7 @@ class GrpcStubInterpreter(object):
             self._client.GetScalingCoefficients,
             grpc_types.GetScalingCoefficientsRequest(vi=self._vi, channel_list=channel_list),
         )
-        return [coefficient_info_type.CoefficientInfo(x) for x in response.coefficient_info]
+        return [coefficient_info_type.CoefficientInfo(offset=x.offset, gain=x.gain) for x in response.coefficient_info]
 
     def get_self_cal_last_date_and_time(self, self_calibration_step):  # noqa: N802
         response = self._invoke(
@@ -390,7 +439,7 @@ class GrpcStubInterpreter(object):
     def get_terminal_name(self, signal, signal_identifier):  # noqa: N802
         response = self._invoke(
             self._client.GetTerminalName,
-            grpc_types.GetTerminalNameRequest(vi=self._vi, signal_raw=signal.value, signal_identifier=signal_identifier),
+            grpc_types.GetTerminalNameRequest(vi=self._vi, signal_raw=signal.value, signal_identifier=signal_identifier, buffer_size=2048),
         )
         return response.terminal_name
 
@@ -434,22 +483,33 @@ class GrpcStubInterpreter(object):
             grpc_types.PerformThermalCorrectionRequest(vi=self._vi),
         )
 
-    def read_iq_single_record_complex_f64(self, channel_list, timeout, iq_data_array):  # noqa: N802
-        raise NotImplementedError('numpy-specific methods are not supported over gRPC')
+    def read_iq_single_record_complex_f64(self, channel_list, iq_data_array, timeout):  # noqa: N802
+        import numpy
+        response = self._invoke(
+            self._client.ReadIQSingleRecordComplexF64,
+            grpc_types.ReadIQSingleRecordComplexF64Request(vi=self._vi, channel_list=channel_list, timeout=timeout, data_array_size=len(iq_data_array)),
+        )
+        iq_data_array[:] = numpy.array([complex(x.real, x.imaginary) for x in response.data], dtype=numpy.complex128)
+        r = response.wfm_info
+        return waveform_info.WaveformInfo(absolute_initial_x=r.absolute_initial_x, relative_initial_x=r.relative_initial_x, x_increment=r.x_increment, actual_samples=r.actual_samples, offset=r.offset, gain=r.gain)
 
     def read_power_spectrum_f32(self, channel_list, timeout, power_spectrum_data_array):  # noqa: N802
         response = self._invoke(
             self._client.ReadPowerSpectrumF32,
-            grpc_types.ReadPowerSpectrumF32Request(vi=self._vi, channel_list=channel_list, timeout=timeout, power_spectrum_data_array=power_spectrum_data_array, data_array_size=len(power_spectrum_data_array)),
+            grpc_types.ReadPowerSpectrumF32Request(vi=self._vi, channel_list=channel_list, timeout=timeout, data_array_size=len(power_spectrum_data_array)),
         )
-        return spectrum_info_type.SpectrumInfoT(response.spectrum_info)
+        power_spectrum_data_array[:] = response.power_spectrum_data
+        s = response.spectrum_info
+        return spectrum_info_type.SpectrumInfoT(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
 
     def read_power_spectrum_f64(self, channel_list, timeout, power_spectrum_data_array):  # noqa: N802
         response = self._invoke(
             self._client.ReadPowerSpectrumF64,
-            grpc_types.ReadPowerSpectrumF64Request(vi=self._vi, channel_list=channel_list, timeout=timeout, power_spectrum_data_array=power_spectrum_data_array, data_array_size=len(power_spectrum_data_array)),
+            grpc_types.ReadPowerSpectrumF64Request(vi=self._vi, channel_list=channel_list, timeout=timeout, data_array_size=len(power_spectrum_data_array)),
         )
-        return spectrum_info_type.SpectrumInfoT(response.spectrum_info)
+        power_spectrum_data_array[:] = response.power_spectrum_data
+        s = response.spectrum_info
+        return spectrum_info_type.SpectrumInfoT(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
 
     def reset_device(self):  # noqa: N802
         self._invoke(

@@ -66,6 +66,56 @@ functions_override_metadata = {
             }
         ],
     },
+    'GetTerminalName': {
+        'method_templates': [
+            {
+                'documentation_filename': '/default_method',
+                'library_interpreter_filename': 'get_terminal_name',
+                'method_python_name_suffix': '',
+                'session_filename': '/default_method',
+            }
+        ],
+    },
+    'GetScalingCoefficients': {
+        'method_templates': [
+            {
+                'documentation_filename': '/default_method',
+                'library_interpreter_filename': 'get_coefficient_info',
+                'method_python_name_suffix': '',
+                'session_filename': '/default_method',
+            }
+        ],
+    },
+    'ReadPowerSpectrumF32': {
+        'method_templates': [
+            {
+                'documentation_filename': '/default_method',
+                'library_interpreter_filename': 'read_power_spectrum',
+                'method_python_name_suffix': '',
+                'session_filename': '/default_method',
+            }
+        ],
+    },
+    'ReadPowerSpectrumF64': {
+        'method_templates': [
+            {
+                'documentation_filename': '/default_method',
+                'library_interpreter_filename': 'read_power_spectrum',
+                'method_python_name_suffix': '',
+                'session_filename': '/default_method',
+            }
+        ],
+    },
+    'ReadIQSingleRecordComplexF64': {
+        'method_templates': [
+            {
+                'documentation_filename': '/numpy_method',
+                'library_interpreter_filename': 'read_iq_single_record',
+                'method_python_name_suffix': '',
+                'session_filename': '/numpy_read_method',
+            }
+        ],
+    },
 }
 functions_additional_fetch_array_measurement = {
 }

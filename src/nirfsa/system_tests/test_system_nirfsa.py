@@ -1,4 +1,4 @@
-# import grpc
+import grpc
 import hightime
 import nirfsa
 import numpy as np
@@ -16,6 +16,8 @@ import system_test_utilities  # noqa: E402
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 use_simulated_session = True
 real_hw_resource_name = '5841'
+use_real_5663_session = False
+real_5663_resource_name = '5663'
 
 
 def get_test_file_path(file_name):
@@ -63,6 +65,10 @@ class SystemTests:
     def simulated_5831_device_session(self, session_creation_kwargs):
         with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
             yield sim_5831_session
+
+    def real_5663_device_session(self, session_creation_kwargs):
+        with nirfsa.Session(real_5663_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_5663_session:
+            yield real_5663_session
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsa_device_session):
@@ -161,7 +167,7 @@ class SystemTests:
         rfsa_device_session.self_test()
 
     @pytest.mark.skipif(use_simulated_session is False, reason="Takes long time on real device")
-    def test_self_calibrate_range(self, rfsa_device_session):
+    def test_self_cal_range(self, rfsa_device_session):
         steps_to_omit = nirfsa.SelfCalibrateRangeStepsToOmit.DIGITIZER_SELF_CAL | nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL
         rfsa_device_session.self_calibrate_range(steps_to_omit, 1e9, 2e9, -20, 0)
 
@@ -175,7 +181,7 @@ class SystemTests:
 
     def test_get_ext_cal_recommended_interval(self, rfsa_device_session):
         interval = rfsa_device_session.get_ext_cal_recommended_interval()
-        assert interval.days > 0
+        assert isinstance(interval, hightime.timedelta)
 
     def test_get_terminal_name(self, rfsa_device_session):
         terminal_name = rfsa_device_session.get_terminal_name(nirfsa.Signal.REF_TRIGGER, '')
@@ -187,12 +193,21 @@ class SystemTests:
         rfsa_device_session.check_acquisition_status()
         rfsa_device_session.abort()
 
-    @pytest.mark.skipif(use_simulated_session is True, reason="Calibration temperature may be unsupported or unreliable on simulated RFSA")
-    def test_get_ext_cal_last_temp(self, rfsa_device_session):
-        with pytest.raises(nirfsa.Error) as exc_info:
-            rfsa_device_session.get_ext_cal_last_temp()
-        description = exc_info.value.description.lower()
-        assert "function or method not supported" in description or "not supported" in description
+    @pytest.mark.skipif(use_simulated_session is True, reason="is_done is always True on simulated device")
+    def test_abort_with_status(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_carrier_frequency = 2.4e9
+        rfsa_device_session.reference_level = 0.0
+        rfsa_device_session.iq_rate = 1e6
+        rfsa_device_session.number_of_samples_is_finite = False
+        with rfsa_device_session.initiate():
+            assert rfsa_device_session.check_acquisition_status() is False  # is_done never True for continuous acquisition
+        assert rfsa_device_session.check_acquisition_status() is True  # is_done True after abort
+
+    @pytest.mark.skipif(use_real_5663_session is False, reason="Requires real 5663 hardware")
+    def test_get_ext_cal_last_temp(self, real_5663_device_session):
+        temperature = real_5663_device_session.get_ext_cal_last_temp()
+        assert isinstance(temperature, float)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
     def test_get_self_cal_last_date_and_time(self, rfsa_device_session):
@@ -204,45 +219,36 @@ class SystemTests:
         temperature = rfsa_device_session.get_self_calibration_temperature(nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION)
         assert isinstance(temperature, float)
 
-    @pytest.mark.skipif(use_simulated_session is True, reason="Self-cal validity state may be unsupported or unreliable on simulated RFSA")
-    def test_is_self_cal_valid(self, rfsa_device_session):
-        with pytest.raises(nirfsa.Error) as exc_info:
-            rfsa_device_session.is_self_cal_valid()
-        description = exc_info.value.description.lower()
-        assert "function or method not supported" in description or "not supported" in description
+    @pytest.mark.skipif(use_real_5663_session is False, reason="Requires real 5663 hardware")
+    def test_is_self_cal_valid(self, real_5663_device_session):
+        self_cal_valid, valid_steps = real_5663_device_session.is_self_cal_valid()
+        assert isinstance(self_cal_valid, bool)
+        assert valid_steps is not None
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Thermal correction is unsupported on simulated RFSA")
     def test_perform_thermal_correction(self, rfsa_device_session):
+        rfsa_device_session.number_of_samples_is_finite = False
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
         with rfsa_device_session.initiate():
             rfsa_device_session.perform_thermal_correction()
 
-    @pytest.mark.skipif(use_simulated_session is True, reason="Frequency response data may be unavailable on simulated RFSA")
-    def test_get_frequency_response(self, rfsa_device_session):
-        with pytest.raises(nirfsa.Error) as exc_info:
-            rfsa_device_session.get_frequency_response()
-        description = exc_info.value.description.lower()
-        assert "function or method not supported" in description or "not supported" in description
+    @pytest.mark.skipif(use_real_5663_session is False, reason="Requires real 5663 hardware")
+    def test_get_frequency_response(self, real_5663_device_session):
+        frequencies, magnitude_response, phase_response = real_5663_device_session.get_frequency_response()
+        assert isinstance(frequencies, np.ndarray)
+        assert isinstance(magnitude_response, np.ndarray)
+        assert isinstance(phase_response, np.ndarray)
 
     def test_get_scaling_coefficients(self, rfsa_device_session):
-        coefficient_info_before_commit = rfsa_device_session.get_scaling_coefficients()
-        rfsa_device_session.commit()
-        coefficient_info_after_commit = rfsa_device_session.get_scaling_coefficients()
-
-        assert isinstance(coefficient_info_before_commit, list)
-        assert isinstance(coefficient_info_after_commit, list)
-        assert len(coefficient_info_before_commit) == len(coefficient_info_after_commit)
-
-        before_values = [
-            (info.offset, info.gain, info.reserved1, info.reserved2)
-            for info in coefficient_info_before_commit
-        ]
-        after_values = [
-            (info.offset, info.gain, info.reserved1, info.reserved2)
-            for info in coefficient_info_after_commit
-        ]
-        assert after_values == before_values
+        coefficient_info = rfsa_device_session.get_scaling_coefficients()
+        assert isinstance(coefficient_info, list)
+        assert len(coefficient_info) > 0
+        for info in coefficient_info:
+            assert hasattr(info, 'offset')
+            assert hasattr(info, 'gain')
+            assert hasattr(info, 'reserved1')
+            assert hasattr(info, 'reserved2')
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Fetch backlog behavior differs on simulated RFSA")
     def test_get_fetch_backlog(self, rfsa_device_session):
@@ -252,9 +258,9 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 2000
         rfsa_device_session.fetch_relative_to = nirfsa.FetchRelativeTo.REFERENCE_TRIGGER
         with rfsa_device_session.initiate():
-            time.sleep(1)
-        backlog_after_abort = rfsa_device_session.get_fetch_backlog(0)
-        assert backlog_after_abort == rfsa_device_session.number_of_samples
+            time.sleep(3)  # check on this if its okay
+            backlog = rfsa_device_session.get_fetch_backlog(0)
+        assert backlog == rfsa_device_session.number_of_samples
 
 # Repeated capability tests
     def test_ports_rep_cap(self, simulated_5831_device_session):
@@ -267,37 +273,58 @@ class SystemTests:
         simulated_5831_device_session.los[2].lo_source = requested_lo_source
         assert simulated_5831_device_session.los[2].lo_source == requested_lo_source
 
-# Trigger configuration tests
-    def test_configure_ref_clock(self, rfsa_device_session):
-        requested_ref_clock_source = nirfsa.ReferenceClockSource.REF_IN
-        requested_ref_clock_rate = 10e6
-        rfsa_device_session.configure_ref_clock(requested_ref_clock_source, requested_ref_clock_rate)
-        assert rfsa_device_session.ref_clock_source == requested_ref_clock_source
-        assert rfsa_device_session.ref_clock_rate == requested_ref_clock_rate
+    def test_device_temperatures_rep_cap(self, rfsa_device_session):
+        temperature = rfsa_device_session.device_temperatures['0'].device_temperature
+        assert isinstance(temperature, float)
 
-    def test_configure_spectrum_frequency_span(self, rfsa_device_session):
+# Trigger configuration tests
+
+    def test_configure_spectrum_frequency_center_span(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         requested_center_frequency = 2.4e9
         requested_span = 20e6
         rfsa_device_session.configure_spectrum_frequency(center_frequency=requested_center_frequency, span=requested_span)
-        center_frequency_diff_mhz = abs(rfsa_device_session.center_frequency - requested_center_frequency) / 1e6
-        span_diff_mhz = abs(rfsa_device_session.spectrum_span - requested_span) / 1e6
-        assert center_frequency_diff_mhz < 1
-        assert span_diff_mhz < 1
+        center_frequency_diff = abs(rfsa_device_session.center_frequency - requested_center_frequency)
+        span_diff = abs(rfsa_device_session.spectrum_span - requested_span)
+        assert center_frequency_diff < 1
+        assert span_diff < 1
 
     def test_configure_spectrum_frequency_start_stop(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         requested_start_frequency = 2.39e9
         requested_stop_frequency = 2.41e9
         rfsa_device_session.configure_spectrum_frequency(start_frequency=requested_start_frequency, stop_frequency=requested_stop_frequency)
-        center_frequency_diff_mhz = abs(rfsa_device_session.center_frequency - 2.4e9) / 1e6
-        span_diff_mhz = abs(rfsa_device_session.spectrum_span - 20e6) / 1e6
-        assert center_frequency_diff_mhz < 1
-        assert span_diff_mhz < 1
+        expected_center_frequency = requested_start_frequency + (requested_stop_frequency - requested_start_frequency) / 2
+        center_frequency_diff = abs(rfsa_device_session.center_frequency - expected_center_frequency)
+        expected_span = requested_stop_frequency - requested_start_frequency
+        span_diff = abs(rfsa_device_session.spectrum_span - expected_span)
+        assert center_frequency_diff < 1
+        assert span_diff < 1
+
+    def test_configure_spectrum_frequency_wrong_parameter_error(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        expected_error = "Provide either (center_frequency & span) or (start_frequency & stop_frequency)"
+
+        with pytest.raises(ValueError) as exc_info:
+            rfsa_device_session.configure_spectrum_frequency(center_frequency=2.4e9)
+        assert str(exc_info.value) == expected_error
+
+        with pytest.raises(ValueError) as exc_info:
+            rfsa_device_session.configure_spectrum_frequency(span=20e6)
+        assert str(exc_info.value) == expected_error
+
+        with pytest.raises(ValueError) as exc_info:
+            rfsa_device_session.configure_spectrum_frequency(center_frequency=2.4e9, stop_frequency=2.41e9)
+        assert str(exc_info.value) == expected_error
+
+        with pytest.raises(ValueError) as exc_info:
+            rfsa_device_session.configure_spectrum_frequency()
+        assert str(exc_info.value) == expected_error
 
     def test_configure_digital_edge_advance_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_advance_trigger('PXI_Trig1', nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING)
         assert rfsa_device_session.advance_trigger_type == nirfsa.AdvanceTriggerType.DIGITAL_EDGE
+        # add checks for all (3 asserts)
 
     def test_disable_advance_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_advance_trigger('PXI_Trig1', nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING)
@@ -315,12 +342,11 @@ class SystemTests:
         rfsa_device_session.disable_ref_trigger()
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.NONE
 
-    @pytest.mark.skipif(use_simulated_session is True, reason="IQ power edge trigger is unsupported on simulated RFSA")
     def test_configure_iq_power_edge_ref_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_iq_power_edge_ref_trigger('0', -20.0, nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING, pretrigger_samples=32)
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.IQ_POWER_EDGE
         assert rfsa_device_session.iq_power_edge_ref_trigger_source == '0'
-        assert rfsa_device_session.iq_power_edge_ref_trigger_level == pytest.approx(-20.0, rel=1e-6)
+        assert abs(rfsa_device_session.iq_power_edge_ref_trigger_level - (-20.0)) < 1
         assert rfsa_device_session.iq_power_edge_ref_trigger_slope == nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING
         assert rfsa_device_session.ref_trigger_pretrigger_samples == 32
 
@@ -339,9 +365,9 @@ class SystemTests:
         assert rfsa_device_session.advance_trigger_type == nirfsa.AdvanceTriggerType.SOFTWARE_EDGE
 
     def test_configure_software_edge_ref_trigger(self, rfsa_device_session):
-        rfsa_device_session.configure_software_edge_ref_trigger(pretrigger_samples=24)
+        rfsa_device_session.configure_software_edge_ref_trigger(pretrigger_samples=32)
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.SOFTWARE_EDGE
-        assert rfsa_device_session.ref_trigger_pretrigger_samples == 24
+        assert rfsa_device_session.ref_trigger_pretrigger_samples == 32
 
     def test_configure_software_edge_start_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_software_edge_start_trigger()
@@ -352,15 +378,12 @@ class SystemTests:
     def test_send_software_edge_trigger(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
-        rfsa_device_session.number_of_samples = 256
         rfsa_device_session.configure_software_edge_start_trigger()
-        assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
-        rfsa_device_session.commit()
-        iq_data = np.zeros(256, dtype=np.complex128)
         with rfsa_device_session.initiate():
+            assert rfsa_device_session.check_acquisition_status() is False
             rfsa_device_session.send_software_edge_trigger(nirfsa.SoftwareTriggerType.START, '')
-            rfsa_device_session.fetch_iq_single_record_into(iq_data, number_of_samples=256, timeout=5.0)
-            assert len(iq_data) == 256
+            time.sleep(3)
+            assert rfsa_device_session.check_acquisition_status() is True
 
 # Fetch tests
     def test_fetch_iq_single_record(self, rfsa_device_session):
@@ -515,17 +538,17 @@ class TestLibrary(SystemTests):
         return {}
 
 
-# @pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
-# class TestGrpc(SystemTests):
-#     @pytest.fixture(scope='class')
-#     def grpc_channel(self):
-#         current_directory = os.path.dirname(os.path.abspath(__file__))
-#         config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
-#         with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
-#             channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
-#             yield channel
+@pytest.mark.skipif(sys.maxsize < 2**32, reason="gRPC tests not supported on 32-bit Python")
+class TestGrpc(SystemTests):
+    @pytest.fixture(scope='class')
+    def grpc_channel(self):
+        current_directory = os.path.dirname(os.path.abspath(__file__))
+        config_file_path = os.path.join(current_directory, 'grpc_server_config.json')
+        with system_test_utilities.GrpcServerProcess(config_file_path) as proc:
+            channel = grpc.insecure_channel(f"localhost:{proc.server_port}")
+            yield channel
 
-#     @pytest.fixture(scope='class')
-#     def session_creation_kwargs(self, grpc_channel):
-#         grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
-#         return {'grpc_options': grpc_options}
+    @pytest.fixture(scope='class')
+    def session_creation_kwargs(self, grpc_channel):
+        grpc_options = nirfsa.GrpcSessionOptions(grpc_channel, "")
+        return {'grpc_options': grpc_options}

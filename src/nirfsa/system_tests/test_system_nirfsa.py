@@ -278,7 +278,6 @@ class SystemTests:
         assert isinstance(temperature, float)
 
 # Trigger configuration tests
-
     def test_configure_spectrum_frequency_center_span(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         requested_center_frequency = 2.4e9
@@ -287,7 +286,7 @@ class SystemTests:
         center_frequency_diff = abs(rfsa_device_session.center_frequency - requested_center_frequency)
         span_diff = abs(rfsa_device_session.spectrum_span - requested_span)
         assert center_frequency_diff < 1
-        assert span_diff < 1
+        assert span_diff < 1e5  # tolerance chosen as 100k to account for the coercions done by driver while planning the spectrum
 
     def test_configure_spectrum_frequency_start_stop(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
@@ -299,7 +298,7 @@ class SystemTests:
         expected_span = requested_stop_frequency - requested_start_frequency
         span_diff = abs(rfsa_device_session.spectrum_span - expected_span)
         assert center_frequency_diff < 1
-        assert span_diff < 1
+        assert span_diff < 1e5  # tolerance chosen as 100k to account for the coercions done by driver while planning the spectrum
 
     def test_configure_spectrum_frequency_wrong_parameter_error(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
@@ -324,7 +323,7 @@ class SystemTests:
     def test_configure_digital_edge_advance_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_advance_trigger('PXI_Trig1', nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING)
         assert rfsa_device_session.advance_trigger_type == nirfsa.AdvanceTriggerType.DIGITAL_EDGE
-        # add checks for all (3 asserts)
+        assert rfsa_device_session.digital_edge_advance_trigger_source == 'PXI_Trig1'
 
     def test_disable_advance_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_advance_trigger('PXI_Trig1', nirfsa.AdvanceTriggerDigitalEdgeEdge.RISING)
@@ -335,6 +334,8 @@ class SystemTests:
     def test_configure_digital_edge_ref_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_ref_trigger('PXI_Trig1', nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING)
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.DIGITAL_EDGE
+        assert rfsa_device_session.digital_edge_ref_trigger_source == 'PXI_Trig1'
+        assert rfsa_device_session.digital_edge_ref_trigger_edge == nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING
 
     def test_disable_ref_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_ref_trigger('PXI_Trig1', nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING)
@@ -353,6 +354,8 @@ class SystemTests:
     def test_configure_digital_edge_start_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsa.StartTriggerDigitalEdgeEdge.RISING)
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.DIGITAL_EDGE
+        assert rfsa_device_session.digital_edge_start_trigger_source == 'PXI_Trig1'
+        assert rfsa_device_session.digital_edge_start_trigger_edge == nirfsa.StartTriggerDigitalEdgeEdge.RISING
 
     def test_disable_start_trigger(self, rfsa_device_session):
         rfsa_device_session.configure_digital_edge_start_trigger('PXI_Trig1', nirfsa.StartTriggerDigitalEdgeEdge.RISING)

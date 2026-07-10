@@ -30,13 +30,9 @@
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
 
-        if isinstance(wfm_info, waveform_info.WaveformInfo):
-            wfm_info = [wfm_info]
-
         mv = memoryview(iq_data_array)
 
-        waveform_info._populate_samples_info(wfm_info, mv, self.number_of_samples)
-
-<%include file="./fetch_waveform_info_population.py.mako" args="start_record_variable='0'"/>
+        wfm_info.samples = mv[0:self.number_of_samples]
+        wfm_info.actual_samples = None
 
         return wfm_info

@@ -99,36 +99,16 @@ class SpectrumInfoT:
         return self.__repr__()
 
 
-def _populate_samples_info(spectrum_infos, sample_data, num_samples_per_spectrum):
-    '''Chunk up flat array of sample_data and copy each chunk into individual WaveformInfo instance
+def _populate_samples_info(spectrum_info, sample_data, num_samples_per_spectrum):
+    '''Chunk up flat array of sample_data and copy each chunk into individual SpectrumInfo instance
 
     Args:
-        spectrum_infos (Iterable of WaveformInfo): WaveformInfo class instances
+        spectrum_info (SpectrumInfo): SpectrumInfo class instance
 
-        sample_data (Iterable of float): Waveform sample data
+        sample_data (Iterable of float): Spectrum sample data
 
         num_samples_per_spectrum (int): Number of samples belonging to each spectrum
     '''
-    for i in range(len(spectrum_infos)):
-        start = i * num_samples_per_spectrum
-        end = start + spectrum_infos[i].number_of_spectral_lines
-        # We use the actual number of spectral lines returned from the device to determine the end of the spectrum.
-        spectrum_infos[i].samples = sample_data[start:end]
-
-
-def _populate_channel_and_record_info(spectrum_infos, channels, records):
-    '''Populate the channel and record attributes of WaveformInfo instances
-
-    Args:
-        spectrum_infos (Iterable of WaveformInfo): WaveformInfo class instances
-
-        channels (Iterable of str): Channel names
-
-        records (Iterable of int): Record numbers
-    '''
-    i = 0
-    for record in records:
-        for channel in channels:
-            spectrum_infos[i].channel = channel
-            spectrum_infos[i].record = record
-            i += 1
+    start = 0
+    end = start + spectrum_info.number_of_spectral_lines
+    spectrum_info.samples = sample_data[start:end]

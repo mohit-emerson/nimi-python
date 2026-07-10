@@ -36,13 +36,8 @@
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
 
-        if isinstance(spectrum_info, spectrum_info_type.SpectrumInfoT):
-            spectrum_info = [spectrum_info]
-
         mv = memoryview(power_spectrum_data_array)
 
         spectrum_info_type._populate_samples_info(spectrum_info, mv, data_array_size)
-
-<%include file="./fetch_spectrum_info_population.py.mako"/>
 
         return spectrum_info

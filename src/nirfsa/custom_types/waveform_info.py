@@ -99,15 +99,13 @@ class WaveformInfo:
         return self.__repr__()
 
 
-def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform):
+def _populate_samples_info(waveform_infos, sample_data):
     '''Chunk up flat array of sample_data and copy each chunk into individual WaveformInfo instance
 
     Args:
         waveform_infos (Iterable of WaveformInfo): WaveformInfo class instances
 
         sample_data (Iterable of float): Waveform sample data
-
-        num_samples_per_waveform (int): Number of samples belonging to each waveform
     '''
     if hasattr(sample_data, 'ndim') and sample_data.ndim == 2:
         # 2D case (multi-record fetch): sample_data[i] is a 1D view of row i.
@@ -116,31 +114,4 @@ def _populate_samples_info(waveform_infos, sample_data, num_samples_per_waveform
             actual_samples = waveform_infos[i].actual_samples
             waveform_infos[i].actual_samples = None
             waveform_infos[i].samples = sample_data[i, :actual_samples]
-    else:
-        # 1D case (single-record fetch): flat index arithmetic.
-        for i in range(len(waveform_infos)):
-            start = i * num_samples_per_waveform
-            end = start + waveform_infos[i].actual_samples
-            # We use the actual number of samples returned from the device to determine the end of the waveform.
-            # We then remove it from waveform_info since the length of the waveform will tell us that information.
-            waveform_infos[i].actual_samples = None
-            waveform_infos[i].samples = sample_data[start:end]
-
-
-def _populate_channel_and_record_info(waveform_infos, channels, records):
-    '''Populate the channel and record attributes of WaveformInfo instances
-
-    Args:
-        waveform_infos (Iterable of WaveformInfo): WaveformInfo class instances
-
-        channels (Iterable of str): Channel names
-
-        records (Iterable of int): Record numbers
-    '''
-    i = 0
-    for record in records:
-        for channel in channels:
-            waveform_infos[i].channel = channel
-            waveform_infos[i].record = record
-            i += 1
 

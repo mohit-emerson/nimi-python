@@ -1,5 +1,5 @@
-import array
 import nirfsa.waveform_info
+import numpy
 
 
 def test_populate_samples_info():
@@ -8,31 +8,19 @@ def test_populate_samples_info():
         waveform_infos.append(nirfsa.waveform_info.WaveformInfo())
         waveform_infos[-1].actual_samples = i
 
-    sample_data = array.array('d', [0, 1, 2, 3, 4, 5, 6, 7, 8])
-    nirfsa.waveform_info._populate_samples_info(waveform_infos, sample_data, 3)
+    # 2D case (multi-record fetch): each row may be wider than actual_samples.
+    sample_data = numpy.array([
+        [0, 0, 0],
+        [3, 4, 0],
+        [6, 7, 8],
+    ], dtype=numpy.float64)
+    nirfsa.waveform_info._populate_samples_info(waveform_infos, sample_data)
 
     expected = [
-        array.array('d', [0]),
-        array.array('d', [3, 4]),
-        array.array('d', [6, 7, 8])
+        [0],
+        [3, 4],
+        [6, 7, 8],
     ]
     for i in range(len(waveform_infos)):
         assert waveform_infos[i].actual_samples is None
-        assert waveform_infos[i].samples == expected[i]
-
-
-def test_populate_channel_and_record_info():
-    waveform_infos = []
-    for i in range(6):
-        waveform_infos.append(nirfsa.waveform_info.WaveformInfo())
-
-    channels = ["Dev1/4", "Dev2/2"]
-    records = [0, 1, 2]
-    nirfsa.waveform_info._populate_channel_and_record_info(waveform_infos, channels, records)
-
-    expected_channels = ["Dev1/4", "Dev2/2"] * len(records)
-    expected_records = [0, 0, 1, 1, 2, 2]
-
-    for i in range(len(waveform_infos)):
-        assert waveform_infos[i].channel == expected_channels[i]
-        assert waveform_infos[i].record == expected_records[i]
+        assert list(waveform_infos[i].samples) == expected[i]

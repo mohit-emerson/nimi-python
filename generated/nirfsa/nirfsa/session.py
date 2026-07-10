@@ -5644,24 +5644,7 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
-        if isinstance(wfm_info, waveform_info.WaveformInfo):
-            wfm_info = [wfm_info]
-
-        waveform_info._populate_samples_info(wfm_info, iq_data_arrays, number_of_samples)
-
-        channel_names = _converters.expand_channel_string(
-            self._repeated_capability,
-            self._all_channels_in_session
-        )
-        if not channel_names:
-            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
-
-        wfm_info_count = len(wfm_info)
-        channel_count = len(channel_names)
-        # Should this raise instead? If this asserts, is it the users fault?
-        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
-        actual_num_records = int(wfm_info_count / channel_count)
-        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(starting_record, starting_record + actual_num_records))
+        waveform_info._populate_samples_info(wfm_info, iq_data_arrays)
 
         return wfm_info
 
@@ -5744,26 +5727,10 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {} or {}".format(numpy.complex128, numpy.complex64, numpy.int16))
 
-        if isinstance(wfm_info, waveform_info.WaveformInfo):
-            wfm_info = [wfm_info]
-
         mv = memoryview(iq_data_array)
 
-        waveform_info._populate_samples_info(wfm_info, mv, number_of_samples)
-
-        channel_names = _converters.expand_channel_string(
-            self._repeated_capability,
-            self._all_channels_in_session
-        )
-        if not channel_names:
-            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
-
-        wfm_info_count = len(wfm_info)
-        channel_count = len(channel_names)
-        # Should this raise instead? If this asserts, is it the users fault?
-        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
-        actual_num_records = int(wfm_info_count / channel_count)
-        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(record_number, record_number + actual_num_records))
+        wfm_info.samples = mv[0:wfm_info.actual_samples]
+        wfm_info.actual_samples = None
 
         return wfm_info
 
@@ -6299,26 +6266,10 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {}".format(numpy.complex128))
 
-        if isinstance(wfm_info, waveform_info.WaveformInfo):
-            wfm_info = [wfm_info]
-
         mv = memoryview(iq_data_array)
 
-        waveform_info._populate_samples_info(wfm_info, mv, self.number_of_samples)
-
-        channel_names = _converters.expand_channel_string(
-            self._repeated_capability,
-            self._all_channels_in_session
-        )
-        if not channel_names:
-            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
-
-        wfm_info_count = len(wfm_info)
-        channel_count = len(channel_names)
-        # Should this raise instead? If this asserts, is it the users fault?
-        assert wfm_info_count % channel_count == 0, 'Number of waveforms should be evenly divisible by the number of channels: len(wfm_info) == {0}, len(channel_names) == {1}'.format(wfm_info_count, channel_count)
-        actual_num_records = int(wfm_info_count / channel_count)
-        waveform_info._populate_channel_and_record_info(wfm_info, channel_names, range(0, 0 + actual_num_records))
+        wfm_info.samples = mv[0:self.number_of_samples]
+        wfm_info.actual_samples = None
 
         return wfm_info
 
@@ -6381,26 +6332,9 @@ class _SessionBase(object):
         else:
             raise TypeError("Unsupported datatype. Expected numpy array of {} or {}".format(numpy.float64, numpy.float32))
 
-        if isinstance(spectrum_info, spectrum_info_type.SpectrumInfoT):
-            spectrum_info = [spectrum_info]
-
         mv = memoryview(power_spectrum_data_array)
 
         spectrum_info_type._populate_samples_info(spectrum_info, mv, data_array_size)
-
-        channel_names = _converters.expand_channel_string(
-            self._repeated_capability,
-            self._all_channels_in_session
-        )
-        if not channel_names:
-            channel_names = [self._repeated_capability] if self._repeated_capability else ['']
-
-        spectrum_info_count = len(spectrum_info)
-        channel_count = len(channel_names)
-        # Should this raise instead? If this asserts, is it the users fault?
-        assert spectrum_info_count % channel_count == 0, 'Number of spectrums should be evenly divisible by the number of channels: len(spectrum_info) == {0}, len(channel_names) == {1}'.format(spectrum_info_count, channel_count)
-        actual_num_records = int(spectrum_info_count / channel_count)
-        spectrum_info_type._populate_channel_and_record_info(spectrum_info, channel_names, range(0, 0 + actual_num_records))
 
         return spectrum_info
 

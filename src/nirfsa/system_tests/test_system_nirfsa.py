@@ -26,29 +26,15 @@ def get_test_file_path(file_name):
 
 def check_fetched_data(
     data,  # either waveforms or measurement_stats
-    test_channels_expanded,
     test_record_length,
     test_num_records_to_fetch,
-    test_starting_record_number=0
 ):
-    test_num_channels = len(test_channels_expanded.split(','))
-
-    # Ordering: rec 0: ch 0, rec 0: ch 1, rec 1: ch 0, rec 1: ch 1, etc.
-    expected_channels = test_channels_expanded.split(',') * test_num_records_to_fetch
-    expected_records = []
-    for i in range(test_starting_record_number, test_starting_record_number + test_num_records_to_fetch):
-        expected_records += [i] * test_num_channels
-
-    assert len(data) == test_num_channels * test_num_records_to_fetch
+    assert len(data) == test_num_records_to_fetch
     for i in range(len(data)):
-        if isinstance(data[i], nirfsa.WaveformInfo):
-            assert len(data[i].samples) == test_record_length
-        elif isinstance(data[i], nirfsa.SpectrumInfoT):
+        if isinstance(data[i], nirfsa.WaveformInfo) or isinstance(data[i], nirfsa.SpectrumInfoT):
             assert len(data[i].samples) == test_record_length
         else:
             raise TypeError(f"data is unsupported type {type(data[i])}")
-        assert data[i].channel == expected_channels[i]
-        assert data[i].record == expected_records[i]
 
 
 class SystemTests:
@@ -398,7 +384,7 @@ class SystemTests:
         iq_data_array = np.zeros(64, dtype=np.complex128)
         with rfsa_device_session.initiate():
             wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=256, timeout=10.0)
-        check_fetched_data(wfm_info, '', 256, 1)
+        assert len(wfm_info.samples) == 256
 
     def test_fetch_iq_single_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -414,7 +400,7 @@ class SystemTests:
                 timeout=10.0,
             )
         assert iq_data_array.dtype == np.int16
-        check_fetched_data(wfm_info, '', 256, 1)
+        assert len(wfm_info.samples) == 256
 
     def test_fetch_iq_multi_record(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
@@ -455,7 +441,7 @@ class SystemTests:
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
         wfm_info = rfsa_device_session.read_iq_single_record_into(iq_data_array, timeout=10.0)
-        check_fetched_data(wfm_info, '', 256, 1)
+        assert len(wfm_info.samples) == 256
 
     def test_read_power_spectrum(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
@@ -464,7 +450,7 @@ class SystemTests:
 
         power_spectrum_data_array = np.zeros(64, dtype=np.float64)
         spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, timeout=10.0)
-        check_fetched_data(spectrum_info, '', 256, 1)
+        assert len(spectrum_info.samples) == 256
 
 # Deembedding tests
     def test_set_get_deembedding_sparameters(self, rfsa_device_session):

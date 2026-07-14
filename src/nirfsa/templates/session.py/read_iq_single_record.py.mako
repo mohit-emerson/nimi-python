@@ -33,6 +33,5 @@
         mv = memoryview(iq_data_array)
 
         wfm_info.samples = mv[0:self.number_of_samples]
-        wfm_info.actual_samples = None
 
         return wfm_info

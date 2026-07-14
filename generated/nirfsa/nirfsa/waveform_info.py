@@ -112,6 +112,5 @@ def _populate_samples_info(waveform_infos, sample_data):
         # Slice to exact actual_samples to handle rows wider than actual_samples (e.g. int16).
         for i in range(len(waveform_infos)):
             actual_samples = waveform_infos[i].actual_samples
-            waveform_infos[i].actual_samples = None
             waveform_infos[i].samples = sample_data[i, :actual_samples]
 

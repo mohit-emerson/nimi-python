@@ -375,49 +375,117 @@ class SystemTests:
             assert rfsa_device_session.check_acquisition_status() is True
 
 # Fetch tests
-    def test_fetch_iq_single_record(self, rfsa_device_session):
+    def test_fetch_iq_single_record_with_samples_passed_as_none(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.reference_level = 0.0
+        rfsa_device_session.iq_rate = 1e6
+
+        iq_data_array = np.zeros(64, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
+
+    def test_fetch_iq_single_record_with_samples_passed_less_than_configured(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        rfsa_device_session.number_of_samples = 256
+
+        iq_data_array = np.zeros(256, dtype=np.complex64)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=128)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex64
+
+    def test_fetch_iq_single_record_grow_with_smaller_buffer(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
         with rfsa_device_session.initiate():
-            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=256, timeout=10.0)
-        assert len(wfm_info.samples) == 256
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=rfsa_device_session.number_of_samples)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
+
+    def test_fetch_iq_single_record_check_view_with_larger_buffer(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_samples = 256
+
+        iq_data_array = np.zeros(512, dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=rfsa_device_session.number_of_samples)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert len(iq_data_array) == 512
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
 
     def test_fetch_iq_single_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.reference_level = 0.0
-        rfsa_device_session.iq_rate = 1e6
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.int16)
         with rfsa_device_session.initiate():
             wfm_info = rfsa_device_session.fetch_iq_single_record_into(
                 iq_data_array,
-                number_of_samples=256,
-                timeout=10.0,
+                number_of_samples=rfsa_device_session.number_of_samples,
             )
-        assert iq_data_array.dtype == np.int16
-        assert len(wfm_info.samples) == 256
+        assert np.asarray(wfm_info.samples).dtype == np.int16
+        assert len(wfm_info.samples) == wfm_info.actual_samples
 
-    def test_fetch_iq_multi_record(self, rfsa_device_session):
+    def test_fetch_iq_multi_record_with_records_passed_as_none(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.reference_level = 0.0
-        rfsa_device_session.iq_rate = 1e6
+        rfsa_device_session.number_of_samples = 64
+
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_samples=rfsa_device_session.number_of_samples)
+
+        assert np.asarray(wfm_info[0].samples).dtype == np.complex128
+        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, rfsa_device_session.number_of_records)
+
+    def test_fetch_iq_multi_record_with_samples_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_records = 2
+
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_records=rfsa_device_session.number_of_records)
+        assert np.asarray(wfm_info[0].samples).dtype == np.complex128
+        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, 2)
+
+    def test_fetch_iq_multi_record_grow_with_smaller_column_size(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.number_of_records = 2
         rfsa_device_session.number_of_samples = 256
 
         iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
         with rfsa_device_session.initiate():
-            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, starting_record=0, number_of_records=2, number_of_samples=256, timeout=10.0)
-        check_fetched_data(wfm_info, '', 256, 2)
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_records=rfsa_device_session.number_of_records, number_of_samples=rfsa_device_session.number_of_samples)
+        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, rfsa_device_session.number_of_records)
+        assert np.asarray(wfm_info[0].samples).dtype == np.complex128
+
+    def test_fetch_iq_multi_record_with_smaller_row_size_error_case(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_records = 2
+
+        iq_data_arrays = np.zeros((1, 64), dtype=np.complex128)
+        with rfsa_device_session.initiate():
+            with pytest.raises(ValueError) as exc_info:
+                rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_records=rfsa_device_session.number_of_records, number_of_samples=rfsa_device_session.number_of_samples)
+        assert str(exc_info.value) == "iq_data_arrays must have at least 2 rows (number_of_records), but has 1"
+
+    def test_fetch_iq_multi_record_with_samples_requested_less_than_configured(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_records = 2
+
+        iq_data_arrays = np.zeros((2, 64), dtype=np.complex64)
+        with rfsa_device_session.initiate():
+            wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_records=rfsa_device_session.number_of_records, number_of_samples=rfsa_device_session.number_of_samples)
+        assert np.asarray(wfm_info[0].samples).dtype == np.complex64
+        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, rfsa_device_session.number_of_records)
 
     def test_fetch_iq_multi_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.reference_level = 0.0
-        rfsa_device_session.iq_rate = 1e6
         rfsa_device_session.number_of_records = 2
         rfsa_device_session.number_of_samples = 256
 
@@ -430,27 +498,54 @@ class SystemTests:
                 number_of_samples=256,
                 timeout=10.0,
             )
-        assert iq_data_arrays.dtype == np.int16
-        check_fetched_data(wfm_info, '', 256, 2)
+        assert np.asarray(wfm_info[0].samples).dtype == np.int16
+        check_fetched_data(wfm_info, 256, 2)
 
-    def test_read_iq_single_record(self, rfsa_device_session):
+    def test_read_iq_single_record_grow_with_smaller_buffer(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.reference_level = 0.0
-        rfsa_device_session.iq_rate = 1e6
         rfsa_device_session.number_of_samples = 256
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
-        wfm_info = rfsa_device_session.read_iq_single_record_into(iq_data_array, timeout=10.0)
-        assert len(wfm_info.samples) == 256
+        wfm_info = rfsa_device_session.read_iq_single_record_into(iq_data_array)
+        assert len(wfm_info.samples) == wfm_info.actual_samples
+        assert np.asarray(wfm_info.samples).dtype == np.complex128
 
-    def test_read_power_spectrum(self, rfsa_device_session):
+    def test_read_power_spectrum_grow_with_smaller_buffer(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_device_session.reference_level = 0.0
         rfsa_device_session.number_of_spectral_lines = 256
 
         power_spectrum_data_array = np.zeros(64, dtype=np.float64)
-        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, timeout=10.0)
-        assert len(spectrum_info.samples) == 256
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, rfsa_device_session.number_of_spectral_lines)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
+
+    def test_read_power_spectrum_check_view_with_larger_buffer(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_device_session.number_of_spectral_lines = 64
+
+        power_spectrum_data_array = np.zeros(256, dtype=np.float64)
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, rfsa_device_session.number_of_spectral_lines)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
+        assert len(power_spectrum_data_array) == 256
+
+    def test_read_power_spectrum_with_data_array_size_passed_as_none(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_device_session.number_of_spectral_lines = 256
+
+        power_spectrum_data_array = np.zeros(32, dtype=np.float64)
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
+
+    def test_read_power_spectrum_with_requested_samples_less_than_configured(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_device_session.number_of_spectral_lines = 64
+
+        power_spectrum_data_array = np.zeros(64, dtype=np.float64)
+        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, data_array_size=32)
+        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
+        assert np.asarray(spectrum_info.samples).dtype == np.float64
 
 # Deembedding tests
     def test_set_get_deembedding_sparameters(self, rfsa_device_session):

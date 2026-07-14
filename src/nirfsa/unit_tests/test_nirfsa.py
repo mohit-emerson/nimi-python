@@ -22,5 +22,4 @@ def test_populate_samples_info():
         [6, 7, 8],
     ]
     for i in range(len(waveform_infos)):
-        assert waveform_infos[i].actual_samples is None
         assert list(waveform_infos[i].samples) == expected[i]

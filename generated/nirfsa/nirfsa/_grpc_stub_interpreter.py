@@ -147,7 +147,7 @@ class GrpcStubInterpreter(object):
     def configure_iq_power_edge_ref_trigger(self, source, level, slope, pretrigger_samples):  # noqa: N802
         self._invoke(
             self._client.ConfigureIQPowerEdgeRefTrigger,
-            grpc_types.ConfigureIQPowerEdgeRefTriggerRequest(vi=self._vi, source=source, level=level, slope_raw=slope.value, pretrigger_samples=pretrigger_samples),
+            grpc_types.ConfigureIQPowerEdgeRefTriggerRequest(vi=self._vi, level=level, slope_raw=slope.value, pretrigger_samples=pretrigger_samples),
         )
 
     def configure_ref_clock(self, clock_source, ref_clock_rate):  # noqa: N802

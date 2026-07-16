@@ -66,7 +66,17 @@ functions_override_metadata = {
             }
         ],
     },
-    'GetTerminalName': {
+    'ConfigureIQPowerEdgeRefTrigger': {
+        'method_templates': [
+            {
+                'documentation_filename': '/default_method',
+                'library_interpreter_filename': 'configure_iq_power_edge_ref_trigger',
+                'method_python_name_suffix': '',
+                'session_filename': '/default_method',
+            }
+        ],
+    },
+    'GetTerminalName': {        
         'method_templates': [
             {
                 'documentation_filename': '/default_method',

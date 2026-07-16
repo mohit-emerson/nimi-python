@@ -1361,11 +1361,11 @@ class SmoothSpectrumEnabled(Enum):
 
 
 class SoftwareTriggerType(Enum):
-    SCRIPT = 1
+    SCRIPT = 1101
     r'''
     Specifies the Script Trigger.
     '''
-    START = 0
+    START = 1100
     r'''
     Specifies the Start Trigger.
     '''

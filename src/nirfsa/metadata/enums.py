@@ -2260,14 +2260,14 @@ enums = {
                     'description': 'Specifies the Script Trigger.'
                 },
                 'name': 'NIRFSA_VAL_SCRIPT_TRIGGER',
-                'value': 1
+                'value': 1101
             },
             {
                 'documentation': {
                     'description': 'Specifies the Start Trigger.'
                 },
                 'name': 'NIRFSA_VAL_START_TRIGGER',
-                'value': 0
+                'value': 1100
             }
         ]
     },

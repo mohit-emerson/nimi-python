@@ -18,6 +18,8 @@ use_simulated_session = True
 real_hw_resource_name = '5841'
 use_real_5663_session = False
 real_5663_resource_name = '5663'
+use_real_5831_session = False
+real_5831_resource_name = '5831'
 
 
 def get_test_file_path(file_name):
@@ -49,12 +51,21 @@ class SystemTests:
 
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
-        with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
-            yield sim_5831_session
+        if use_real_5831_session is False:
+            with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+                yield sim_5831_session
+        else:
+            with nirfsa.Session("5663sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5663", **session_creation_kwargs) as sim_5663_session:
+                yield sim_5663_session
 
+    @pytest.fixture(scope='function')
     def real_5663_device_session(self, session_creation_kwargs):
-        with nirfsa.Session(real_5663_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_5663_session:
-            yield real_5663_session
+        if use_real_5663_session is False:
+            with nirfsa.Session("5663sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5663", **session_creation_kwargs) as sim_5663_session:
+                yield sim_5663_session
+        else:
+            with nirfsa.Session(real_5663_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_5663_session:
+                yield real_5663_session
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsa_device_session):
@@ -363,10 +374,10 @@ class SystemTests:
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
 
     # TODO(msaini): check failing on hw with  nirfsa.errors.DriverError: -1074097994: Trigger type requested to be sent as the software trigger is invalid.
-    @pytest.mark.skipif(use_simulated_session is True, reason="Simulated device does not support software trigger behavior")
     def test_send_software_edge_trigger(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
+        rfsa_device_session.number_of_samples_is_finite = False
         rfsa_device_session.configure_software_edge_start_trigger()
         with rfsa_device_session.initiate():
             assert rfsa_device_session.check_acquisition_status() is False

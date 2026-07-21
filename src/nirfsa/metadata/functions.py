@@ -3845,7 +3845,7 @@ functions = {
                     ]
                 },
                 'enum': 'SelfCalibrationStep',
-                'grpc_name': 'self_calibration_step',
+                'grpc_name': 'self_calibration_step_raw',
                 'name': 'selfCalibrationStep',
                 'type': 'ViInt64',
                 'type_in_documentation': 'Bitwise combination of enums.SelfCalibrationStep flags',

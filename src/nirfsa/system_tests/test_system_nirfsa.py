@@ -373,11 +373,10 @@ class SystemTests:
         rfsa_device_session.configure_software_edge_start_trigger()
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
 
-    # TODO(msaini): check failing on hw with  nirfsa.errors.DriverError: -1074097994: Trigger type requested to be sent as the software trigger is invalid.
+    @pytest.mark.skipif(use_simulated_session is True, reason="check_acquisition_status always returns True on simulated device")
     def test_send_software_edge_trigger(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
-        rfsa_device_session.number_of_samples_is_finite = False
         rfsa_device_session.configure_software_edge_start_trigger()
         with rfsa_device_session.initiate():
             assert rfsa_device_session.check_acquisition_status() is False

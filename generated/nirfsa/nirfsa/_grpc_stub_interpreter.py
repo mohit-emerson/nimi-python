@@ -425,14 +425,14 @@ class GrpcStubInterpreter(object):
     def get_self_cal_last_date_and_time(self, self_calibration_step):  # noqa: N802
         response = self._invoke(
             self._client.GetSelfCalLastDateAndTime,
-            grpc_types.GetSelfCalLastDateAndTimeRequest(vi=self._vi, self_calibration_step_raw=self_calibration_step.value),
+            grpc_types.GetSelfCalLastDateAndTimeRequest(vi=self._vi, self_calibration_step=self_calibration_step.value),
         )
         return response.year, response.month, response.day, response.hour, response.minute
 
     def get_self_calibration_temperature(self, self_calibration_step):  # noqa: N802
         response = self._invoke(
             self._client.GetSelfCalLastTemp,
-            grpc_types.GetSelfCalLastTempRequest(vi=self._vi, self_calibration_step_raw=self_calibration_step.value),
+            grpc_types.GetSelfCalLastTempRequest(vi=self._vi, self_calibration_step=self_calibration_step.value),
         )
         return response.temp
 

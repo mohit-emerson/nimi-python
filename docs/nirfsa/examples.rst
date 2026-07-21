@@ -30,12 +30,3 @@ read_power_spectrum.py
    :encoding: utf8
    :caption: `(read_power_spectrum.py) <https://github.com/ni/nimi-python/blob/master/src/nirfsa/examples/read_power_spectrum.py>`_
 
-rfsa_demo.py
-------------
-
-.. literalinclude:: ../../src/nirfsa/examples/rfsa_demo.py
-   :language: python
-   :linenos:
-   :encoding: utf8
-   :caption: `(rfsa_demo.py) <https://github.com/ni/nimi-python/blob/master/src/nirfsa/examples/rfsa_demo.py>`_
-

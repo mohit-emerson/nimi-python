@@ -230,14 +230,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    |Value         | Description                                                                       |
-    |:---------|:-----------------------------------------------------------------------|
-    | True  | Allows acquisition of more records than fit in device memory.          |
-    | False | Does not allow acquisitions of more records than fit in device memory. |
-
     **Default Value**: False
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    +-------+------------------------------------------------------------------------+
+    | Value | Description                                                            |
+    +=======+========================================================================+
+    | True  | Allows acquisition of more records than fit in device memory.          |
+    +-------+------------------------------------------------------------------------+
+    | False | Does not allow acquisitions of more records than fit in device memory. |
+    +-------+------------------------------------------------------------------------+
     '''
     allow_out_of_specification_user_settings = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.AllowOutOfSpecificationUserSettings, 1150256)
     '''Type: enums.AllowOutOfSpecificationUserSettings
@@ -603,25 +606,37 @@ class _SessionBase(object):
 
     **PXIe-5830/5831/5832**: To use this property, you must first set the channelName parameter of the _set_attribute_vi_real64 method to using the appropriate string for your instrument configuration. Setting the _set_attribute_vi_real64 property is not required for the PXIe-3621/3622. Refer to the following table to determine which strings are valid for your configuration.
 
-    | Hardware Module               |         TRX Port Type          | Active Channel String     |
-    |:------------------------------|:------------------------------:|:--------------------------|
-    | PXIe-3621/3622/5842           |            -                    | if or "" (empty string)   |
-    | PXIe-5820                     |            -                    | fpga                      |
-    | PXIe-5860                     |            -                    | 5860 or "" (empty string) |
-    | First connected mmRH-5582     |     DIRECT TRX PORTS Only      | rf0                       |
-    | First connected mmRH-5582     |   SWITCHED TRX PORTS [0-7]   | rf0switch0                |
-    | First connected mmRH-5582     |   SWITCHED TRX PORTS [8-15]   | rf0switch1                |
-    | Second connected mmRH-5582    |     DIRECT TRX PORTS Only      | rf1                       |
-    | Second connected mmRH-5582    |   SWITCHED TRX PORTS [0-7]   | rf1switch0                |
-    | Second connected mmRH-5582    |   SWITCHED TRX PORTS [8-15]   | rf1switch1                |
-    | First connected RMM-5544/5546 |             -                   | rmm0                      |
-    | Second connected RMM-5544/5546 |            -                   | rmm1                      |
-
     **Units**: degrees Celcius
 
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    +--------------------------------+---------------------------+---------------------------+
+    | Hardware Module                | TRX Port Type             | Active Channel String     |
+    +================================+===========================+===========================+
+    | PXIe-3621/3622/5842            | -                         | if or "" (empty string)   |
+    +--------------------------------+---------------------------+---------------------------+
+    | PXIe-5820                      | -                         | fpga                      |
+    +--------------------------------+---------------------------+---------------------------+
+    | PXIe-5860                      | -                         | 5860 or "" (empty string) |
+    +--------------------------------+---------------------------+---------------------------+
+    | First connected mmRH-5582      | DIRECT TRX PORTS Only     | rf0                       |
+    +--------------------------------+---------------------------+---------------------------+
+    | First connected mmRH-5582      | SWITCHED TRX PORTS [0-7]  | rf0switch0                |
+    +--------------------------------+---------------------------+---------------------------+
+    | First connected mmRH-5582      | SWITCHED TRX PORTS [8-15] | rf0switch1                |
+    +--------------------------------+---------------------------+---------------------------+
+    | Second connected mmRH-5582     | DIRECT TRX PORTS Only     | rf1                       |
+    +--------------------------------+---------------------------+---------------------------+
+    | Second connected mmRH-5582     | SWITCHED TRX PORTS [0-7]  | rf1switch0                |
+    +--------------------------------+---------------------------+---------------------------+
+    | Second connected mmRH-5582     | SWITCHED TRX PORTS [8-15] | rf1switch1                |
+    +--------------------------------+---------------------------+---------------------------+
+    | First connected RMM-5544/5546  | -                         | rmm0                      |
+    +--------------------------------+---------------------------+---------------------------+
+    | Second connected RMM-5544/5546 | -                         | rmm1                      |
+    +--------------------------------+---------------------------+---------------------------+
 
     Tip:
     This property can be set/get on specific device_temperatures within your :py:class:`nirfsa.Session` instance.
@@ -894,11 +909,6 @@ class _SessionBase(object):
 
     **Defined and Valid Values:**
 
-    | Value                         | Description                                           | Valid For                           |
-    |:------------------------------|:------------------------------------------------------|:------------------------------------|
-    | StartTriggerDigitalEdgeEdge.RISING (900)  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |
-    | StartTriggerDigitalEdgeEdge.FALLING (901) | The trigger asserts on the falling edge of the signal | PXIe-5668                           |
-
     **Default Value**: StartTriggerDigitalEdgeEdge.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -911,13 +921,13 @@ class _SessionBase(object):
 
     - configure_digital_edge_start_trigger
 
-    +-------------------------------------+-------------------------------------------------------+
-    | Name                                | Description                                           |
-    +=====================================+=======================================================+
-    | StartTriggerDigitalEdgeEdge.RISING  | The trigger asserts on the rising edge of the signal. |
-    +-------------------------------------+-------------------------------------------------------+
-    | StartTriggerDigitalEdgeEdge.FALLING | The trigger asserts on the falling edge of the signal |
-    +-------------------------------------+-------------------------------------------------------+
+    +-------------------------------------+-------------------------------------------------------+-------------------------------------+
+    | Name                                | Description                                           | Valid For                           |
+    +=====================================+=======================================================+=====================================+
+    | StartTriggerDigitalEdgeEdge.RISING  | The trigger asserts on the rising edge of the signal. | PXI-5661, PXIe-5663/5663E/5665/5668 |
+    +-------------------------------------+-------------------------------------------------------+-------------------------------------+
+    | StartTriggerDigitalEdgeEdge.FALLING | The trigger asserts on the falling edge of the signal | PXIe-5668                           |
+    +-------------------------------------+-------------------------------------------------------+-------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1042,14 +1052,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    |Value          | Description                                                          |
-    |:---------|:----------------------------------------------------------|
-    | True  | Enables digital IF equalization on the RF downconverter.  |
-    | False | Disables digital IF equalization on the RF downconverter. |
-
     **Default Value**: True, if the device configuration is supported.
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
+
+    +-------+-----------------------------------------------------------+
+    | Value | Description                                               |
+    +=======+===========================================================+
+    | True  | Enables digital IF equalization on the RF downconverter.  |
+    +-------+-----------------------------------------------------------+
+    | False | Disables digital IF equalization on the RF downconverter. |
+    +-------+-----------------------------------------------------------+
     '''
     digitizer_dither_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.DigitizerDitherEnabled, 1150080)
     '''Type: enums.DigitizerDitherEnabled
@@ -1111,13 +1124,17 @@ class _SessionBase(object):
 
     **Valid and Default Values**:
 
-    | Device                    | Valid Values            | Default Value |
-    |:--------------------------|:------------------------|:--------------|
-    | PXI-5661                  | Any frequency 226552.5 MHz | 100 MHz       |
-    | PXIe-5663/5663E/5665/5667 | 150 MHz                 | 150 MHz       |
-    | PXIe-5668                 | 2 GHz                   | 2 GHz         |
-
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668
+
+    +---------------------------+----------------------------+---------------+
+    | Device                    | Valid Values               | Default Value |
+    +===========================+============================+===============+
+    | PXI-5661                  | Any frequency 226552.5 MHz | 100 MHz       |
+    +---------------------------+----------------------------+---------------+
+    | PXIe-5663/5663E/5665/5667 | 150 MHz                    | 150 MHz       |
+    +---------------------------+----------------------------+---------------+
+    | PXIe-5668                 | 2 GHz                      | 2 GHz         |
+    +---------------------------+----------------------------+---------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -1467,8 +1484,8 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    | Value         | Description                                |
-    |:---------|:--------------------------------|
+    | Value | Description                     |
+    |:------|:--------------------------------|
     | True  | Enables fractional resampling.  |
     | False | Disables fractional resampling. |
 
@@ -2237,13 +2254,6 @@ class _SessionBase(object):
 
     **PXIe-5663/5663E**: The FFT width upper limit for the PXIe-5663/5663E depends on the downconverter center frequency and on the module revision of the PXIe-5601 as illustrated in the following table. Refer to the `Identifying Module Revision <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/identifying-module-revision.html>`_ topic for more information about determining which revision of the PXIe-5601 RF downconverter you have installed.
 
-    | Downconverter Center Frequency                                                                                                                                                              | PXIe-5601 Instantaneous Bandwidth | FFT Width Upper Limit                                          |
-    |:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------|:---------------------------------------------------------------|
-    | 10 MHz to <120 MHz                                                                                                                                                                         | 10 MHz                            | 10 MHz (Revision E), 20 MHz< sup >* < /sup> (Revision G or later) |
-    | 120 MHz to <330 MHz                                                                                                                                                                        | 20 MHz                            | 20 MHz (Revision E), 30 MHz< sup > * < /sup> (Revision G or later) |
-    | 330 MHz to <6.6 GHz                                                                                                                                                                        | 50 MHz                            | 50 MHz                                                         |
-    | <sup > * < / sup >National Instruments does not guarantee device specifications if you set the fft_width property greater than the warranted instantaneous bandwidth specification. |                                   |                                                                |
-
     **PXIe-5665/5667/5668**: The upper limit of the FFT width is the maximum device instantaneous bandwidth.
 
     ----
@@ -2266,6 +2276,18 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**: PXIe-5663/5663E/5665/5667/5668
+
+    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------------------------------------------------------------+
+    | Downconverter Center Frequency                                                                                                                                                      | PXIe-5601 Instantaneous Bandwidth | FFT Width Upper Limit                                              |
+    +=====================================================================================================================================================================================+===================================+====================================================================+
+    | 10 MHz to <120 MHz                                                                                                                                                                  | 10 MHz                            | 10 MHz (Revision E), 20 MHz< sup >* < /sup> (Revision G or later)  |
+    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------------------------------------------------------------+
+    | 120 MHz to <330 MHz                                                                                                                                                                 | 20 MHz                            | 20 MHz (Revision E), 30 MHz< sup > * < /sup> (Revision G or later) |
+    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------------------------------------------------------------+
+    | 330 MHz to <6.6 GHz                                                                                                                                                                 | 50 MHz                            | 50 MHz                                                             |
+    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------------------------------------------------------------+
+    | <sup > * < / sup >National Instruments does not guarantee device specifications if you set the fft_width property greater than the warranted instantaneous bandwidth specification. |                                   |                                                                    |
+    +-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+-----------------------------------+--------------------------------------------------------------------+
     '''
     fft_window_shape_factor = _attributes.AttributeViReal64(1150206)
     '''Type: float
@@ -2414,16 +2436,6 @@ class _SessionBase(object):
 
     The valid values for this property depend on the frequency_settling_units property.
 
-    | Device | FrequencySettlingUnits.SECONDS_AFTER_LOCK | FrequencySettlingUnits.SECONDS_AFTER_IO | %enum_value{frequency settling units.fsu
-    ppm} |
-    |:-------|:----------------------------------|:--------------------------------|:------------------|
-    | PXIe-5663/5663E | 2 microseconds<sup>1</sup> to 80 milliseconds, resolution of approximately 2 microseconds | 0 microseconds to 80 milliseconds<sup>2</sup>, resolution of 1 microsecond | 1.0, 0.1, 0.01 |
-    | PXIe-5665/5667/5668 | 4 microseconds to 80 milliseconds, resolution of approximately 4 microseconds | 0 microseconds to 80 milliseconds<sup>2</sup>, resolution of 1 microsecond | 1.0, 0.1, 0.01, 0.001 |
-    | PXIe-5644/5645/5646 | 1 microsecond<sup>1</sup> to 65 milliseconds, resolution of 1 microsecond | 1 microsecond<sup>1</sup> to 65 milliseconds, resolution of 1 microsecond | 1.0, 0.1, 0.01 |
-    | PXIe-5830/5831/5832/5840/5841/5842 | 1 microsecond<sup>1</sup> to 10 seconds, resolution of 1 microsecond | 0 microseconds to 10 seconds, resolution of 1 microsecond | 1.0 to 0.01 |
-    | PXIe-5831/5832 with PXIe-5653 (using PXIe-3622 LO)<sup>3</sup> | 1 microsecond<sup>1</sup> to 10 seconds, resolution of 1 microsecond | 0 microseconds to 10 seconds, resolution of 1 microsecond | 1.0 to 0.01 |
-    | PXIe-5831/5832 with PXIe-5653 (using PXIe-5653 LO)<sup>3</sup> | 4 microseconds to 80 milliseconds, resolution of approximately 4 microseconds | 0 microseconds to 80 milliseconds, resolution of 1 microsecond | 1.0 to 0.01 |
-
     **Notes:**
     1. If the frequency settling units property is set to FrequencySettlingUnits.SECONDS_AFTER_LOCK and the downconverter loop bandwidth property is set to narrow, NI recommends a minimum settling time of 128 microseconds to ensure that the phase-locked loop (PLL) lock stabilizes. If the downconverter loop bandwidth is set to wide, NI recommends a minimum settling time of 16 microseconds.
     2. When in RF list mode, the valid values for FrequencySettlingUnits.SECONDS_AFTER_IO are 0 microseconds to 50 milliseconds.
@@ -2432,6 +2444,22 @@ class _SessionBase(object):
     **Default Value**: 0.1
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842
+
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
+    | Device                                                         | FrequencySettlingUnits.SECONDS_AFTER_LOCK                                                 | FrequencySettlingUnits.SECONDS_AFTER_IO                                    | %enum_value{frequency settling units.fsu ppm} |
+    +================================================================+===========================================================================================+============================================================================+===============================================+
+    | PXIe-5663/5663E                                                | 2 microseconds<sup>1</sup> to 80 milliseconds, resolution of approximately 2 microseconds | 0 microseconds to 80 milliseconds<sup>2</sup>, resolution of 1 microsecond | 1.0, 0.1, 0.01                                |
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
+    | PXIe-5665/5667/5668                                            | 4 microseconds to 80 milliseconds, resolution of approximately 4 microseconds             | 0 microseconds to 80 milliseconds<sup>2</sup>, resolution of 1 microsecond | 1.0, 0.1, 0.01, 0.001                         |
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
+    | PXIe-5644/5645/5646                                            | 1 microsecond<sup>1</sup> to 65 milliseconds, resolution of 1 microsecond                 | 1 microsecond<sup>1</sup> to 65 milliseconds, resolution of 1 microsecond  | 1.0, 0.1, 0.01                                |
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
+    | PXIe-5830/5831/5832/5840/5841/5842                             | 1 microsecond<sup>1</sup> to 10 seconds, resolution of 1 microsecond                      | 0 microseconds to 10 seconds, resolution of 1 microsecond                  | 1.0 to 0.01                                   |
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
+    | PXIe-5831/5832 with PXIe-5653 (using PXIe-3622 LO)<sup>3</sup> | 1 microsecond<sup>1</sup> to 10 seconds, resolution of 1 microsecond                      | 0 microseconds to 10 seconds, resolution of 1 microsecond                  | 1.0 to 0.01                                   |
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
+    | PXIe-5831/5832 with PXIe-5653 (using PXIe-5653 LO)<sup>3</sup> | 4 microseconds to 80 milliseconds, resolution of approximately 4 microseconds             | 0 microseconds to 80 milliseconds, resolution of 1 microsecond             | 1.0 to 0.01                                   |
+    +----------------------------------------------------------------+-------------------------------------------------------------------------------------------+----------------------------------------------------------------------------+-----------------------------------------------+
     '''
     frequency_settling_units = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.FrequencySettlingUnits, 1150087)
     '''Type: enums.FrequencySettlingUnits
@@ -2500,20 +2528,6 @@ class _SessionBase(object):
 
     NI-RFSA uses this property in conjunction with the device_instantaneous_bandwidth property and the digital_if_equalization_enabled property to determine the settings for your measurement. NI-RFSA selects the next highest available filter based on the value you specify. The following table lists the IF filters available for NI devices. You may specify a higher value than your device instantaneous bandwidth if your measurement requires it, but specifying a lower value returns an error.
 
-    | Device                   | IF Filter Bandwidth Range | IF Filter         |
-    |:-------------------------|:--------------------------|:------------------|
-    | PXIe-5603/5665 (3.6 GHz) | 2264300 kHz                  | 300 kHz IF filter |
-    | PXIe-5603/5665 (3.6 GHz) | >300 kHz and 22645 MHz      | Through IF filter |
-    | PXIe-5603/5665 (3.6 GHz) | >5 MHz                   | Through IF filter |
-    | PXIe-5605/5665 (14 GHz)  | 2264300 kHz                  | 300 kHz IF filter |
-    | PXIe-5603/5665 (14 GHz)  | >300 kHz and 22645 MHz      | 5 MHz IF filter   |
-    | PXIe-5603/5665 (14 GHz)  | >5 MHz                   | Through IF filter |
-    | PXIe-5668                | 2264300 kHz                  | 300 kHz IF filter |
-    | PXIe-5668                | >300 kHz and 22645 MHz      | 5 MHz IF filter   |
-    | PXIe-5668                | >5 MHz and 2264100 MHz      | 100 MHz IF filter |
-    | PXIe-5668                | >100 MHz and 2264320 MHz    | 320 MHz IF filter |
-    | PXIe-5668                | >320 MHz                 | 765 MHz IF filter |
-
     **Valid Values**:
 
     **PXIe-5603/5605**: 0 to 80 MHz
@@ -2533,6 +2547,32 @@ class _SessionBase(object):
     **Default Values:** For spectrum acquisition types the default is greater than or equal to the spectrum_span property. NI-RFSA chooses the default value of the if_filter_bandwidth property to correspond to the appropriate IF filter. For I/Q acquisition types NI-RFSA chooses the default value corresponding to the widest IF filter possible for your equipment setup.
 
     **Supported Devices**: PXIe-5603/5605/5606, PXIe-5665/5667/5668, PXIe-5694
+
+    +--------------------------+---------------------------+-------------------+
+    | Device                   | IF Filter Bandwidth Range | IF Filter         |
+    +==========================+===========================+===================+
+    | PXIe-5603/5665 (3.6 GHz) | 2264300 kHz               | 300 kHz IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5603/5665 (3.6 GHz) | >300 kHz and 22645 MHz    | Through IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5603/5665 (3.6 GHz) | >5 MHz                    | Through IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5605/5665 (14 GHz)  | 2264300 kHz               | 300 kHz IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5603/5665 (14 GHz)  | >300 kHz and 22645 MHz    | 5 MHz IF filter   |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5603/5665 (14 GHz)  | >5 MHz                    | Through IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5668                | 2264300 kHz               | 300 kHz IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5668                | >300 kHz and 22645 MHz    | 5 MHz IF filter   |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5668                | >5 MHz and 2264100 MHz    | 100 MHz IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5668                | >100 MHz and 2264320 MHz  | 320 MHz IF filter |
+    +--------------------------+---------------------------+-------------------+
+    | PXIe-5668                | >320 MHz                  | 765 MHz IF filter |
+    +--------------------------+---------------------------+-------------------+
     '''
     if_output_frequency = _attributes.AttributeViReal64(1150086)
     '''Type: float
@@ -2541,15 +2581,6 @@ class _SessionBase(object):
 
     The downconverter translates the RF input frequency to the IF output frequency by mixing it with the LO signal. The nominal values for the IF output frequency are shown in the following table.
 
-    | Downconverter | Nominal IF Output Frequency |
-    |:--------------|:---------------------------|
-    | PXI-5600 | 15 MHz |
-    | PXIe-5601 | 53 MHz or 187.5 MHz |
-    | PXIe-5603 | 187.5 MHz or 199 MHz |
-    | PXIe-5605 | 187.5 MHz, 190 MHz, or 199 MHz |
-    | PXIe-5606 | 187.5 MHz, 190 MHz, 199 MHz, 507.5 MHz, or 730 MHz |
-    | PXIe-5694 | - signal_conditioning_enabled set to SIGNAL_CONDITIONING_ENABLED and if_conditioning_down_conversion_enabled set to disabled: 193.6 MHz<br>- if_conditioning_down_conversion_enabled set to enabled: 21.4 MHz<br>- signal_conditioning_enabled set to SIGNAL_CONDITIONING_BYPASSED: 162.5 MHz to 212.5 MHz |
-
     The coarse nature of the LO settings can cause the downconverter to be unable to tune to the exact LO frequency that would produce the nominal IF output frequency. Any coercion in the actual LO frequency results in the IF output frequency being slightly off from the nominal value.
 
     Additionally, if you use the downconverter_center_frequency and lo_frequency properties to program the downconverter, the IF output frequency could vary from the nominal value. NI-RFSA adjusts the acquired spectrum or I/Q data for the difference between nominal and actual IF output frequency. If you use an external digitizer with a RF downconverter, use this property to specify the actual IF output frequency.
@@ -2557,6 +2588,22 @@ class _SessionBase(object):
     **Default Value**: N/A
 
     **Supported Devices**:PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694
+
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Downconverter | Nominal IF Output Frequency                                                                                                                                                                                                                                                                                |
+    +===============+============================================================================================================================================================================================================================================================================================================+
+    | PXI-5600      | 15 MHz                                                                                                                                                                                                                                                                                                     |
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | PXIe-5601     | 53 MHz or 187.5 MHz                                                                                                                                                                                                                                                                                        |
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | PXIe-5603     | 187.5 MHz or 199 MHz                                                                                                                                                                                                                                                                                       |
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | PXIe-5605     | 187.5 MHz, 190 MHz, or 199 MHz                                                                                                                                                                                                                                                                             |
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | PXIe-5606     | 187.5 MHz, 190 MHz, 199 MHz, 507.5 MHz, or 730 MHz                                                                                                                                                                                                                                                         |
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | PXIe-5694     | - signal_conditioning_enabled set to SIGNAL_CONDITIONING_ENABLED and if_conditioning_down_conversion_enabled set to disabled: 193.6 MHz<br>- if_conditioning_down_conversion_enabled set to enabled: 21.4 MHz<br>- signal_conditioning_enabled set to SIGNAL_CONDITIONING_BYPASSED: 162.5 MHz to 212.5 MHz |
+    +---------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     '''
     if_output_power_level = _attributes.AttributeViReal64(1150130)
     '''Type: float
@@ -3024,8 +3071,8 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    |          |                                |
-    |:---------|:-------------------------------|
+    | Value | Description                    |
+    |:------|:-------------------------------|
     | True  | Enables the LO2 OUT terminal.  |
     | False | Disables the LO2 OUT terminal. |
 
@@ -3097,7 +3144,7 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    | Value         |  Description                              |
+    | Value    | Description                    |
     |:---------|:-------------------------------|
     | True  | Enables the LO OUT terminals.  |
     | False | Disables the LO OUT terminals. |
@@ -3182,11 +3229,6 @@ class _SessionBase(object):
 
     **PXIe-5840/5841/5842**: If the lo_pll_fractional_mode_enabled property is set to NIRFSA_VAL_DISABLED, the specified value is coerced to the nearest valid value that is less than or equal to the desired step size.
 
-    | lo_pll_fractional_mode_enabled | PXIe-5644/5645 | PXIe-5646 | PXIe-5840/5841 | PXIe-5830/5831/5832 | PXIe-5841 w/PXIe-5655 |
-    |-------------------------------|-----------------|------------|----------------|---------------------|-----------------------------------|
-    | NIRFSA_VAL_ENABLED | 50 kHz to 24 MHz | 50 kHz to 25 MHz | 50 kHz to 100 MHz | LO1: 8 Hz to 400 MHz<br>LO2: 4 kHz to 400 MHz | 1 nHz to 50 MHz |
-    | NIRFSA_VAL_DISABLED | 4 MHz, 5 MHz, 6 MHz, 12 MHz, 24 MHz | 2 MHz, 5 MHz, 10 MHz, 25 MHz | 1 MHz, 5 MHz, 10 MHz, 25 MHz, 50 MHz, 100 MHz | LO1: --<br>LO2: -- | 1 nHz to 50 MHz |
-
     * Values up to 100 MHz are coerced to 50 MHz.
 
     ----
@@ -3215,6 +3257,16 @@ class _SessionBase(object):
     **PXIe-5842:** 1 Hz
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
+
+    +--------------------------------+-------------------------------------+------------------------------+-----------------------------------------------+--------------------------------------------+-----------------------+
+    | lo_pll_fractional_mode_enabled | PXIe-5644/5645                      | PXIe-5646                    | PXIe-5840/5841                                | PXIe-5830/5831/5832                        | PXIe-5841 w/PXIe-5655 |
+    +================================+=====================================+==============================+===============================================+============================================+=======================+
+    | NIRFSA_VAL_ENABLED             | 50 kHz to 24 MHz                    | 50 kHz to 25 MHz             | 50 kHz to 100 MHz                             | LO1: 8 Hz to 400 MHz
+    LO2: 4 kHz to 400 MHz | 1 nHz to 50 MHz       |
+    +--------------------------------+-------------------------------------+------------------------------+-----------------------------------------------+--------------------------------------------+-----------------------+
+    | NIRFSA_VAL_DISABLED            | 4 MHz, 5 MHz, 6 MHz, 12 MHz, 24 MHz | 2 MHz, 5 MHz, 10 MHz, 25 MHz | 1 MHz, 5 MHz, 10 MHz, 25 MHz, 50 MHz, 100 MHz | LO1: --
+    LO2: --                            | 1 nHz to 50 MHz       |
+    +--------------------------------+-------------------------------------+------------------------------+-----------------------------------------------+--------------------------------------------+-----------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -3699,7 +3751,7 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    |Value          | Description                                                              |
+    | Value    | Description                                                  |
     |:---------|:--------------------------------------------------------------|
     | True  | Acquire a finite number of records.                           |
     | False | Acquire records continuously until you abort the acquisition. |
@@ -3742,7 +3794,7 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    | Value         |  Description                                                     |
+    | Value    | Description                                          |
     |:---------|:------------------------------------------------------|
     | True  | Acquire a finite number of samples.                   |
     | False | Acquire continuously until you abort the acquisition. |
@@ -3857,7 +3909,7 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    | Value         | Description                                                  |
+    | Value    | Description                                      |
     |:---------|:--------------------------------------------------|
     | True  | A preselector is available on the downconverter.  |
     | False | No preselector is available on the downconverter. |
@@ -4426,14 +4478,17 @@ class _SessionBase(object):
 
     **Defined Values:**
 
-    | Value         | Description                                                     |
-    |:---------|:-----------------------------------------------------|
-    | True  | The device has an enabled RF preamplifier available. |
-    | False | The device has no RF preamplifier available.         |
-
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+    +-------+------------------------------------------------------+
+    | Value | Description                                          |
+    +=======+======================================================+
+    | True  | The device has an enabled RF preamplifier available. |
+    +-------+------------------------------------------------------+
+    | False | The device has no RF preamplifier available.         |
+    +-------+------------------------------------------------------+
     '''
     selected_path = _attributes.AttributeViString(1150331)
     '''Type: str
@@ -4557,11 +4612,6 @@ class _SessionBase(object):
 
     The IF filter used depends on the configured RF center frequency, as shown in the following table.
 
-    | Center Frequency    | IF Filter |
-    |:--------------------|:----------|
-    | 0 Hz and <80 MHz | 300 kHz   |
-    | 0 MHz             | 50 MHz    |
-
     ----
     **Note**
     Setting this property to **Enabled** prevents you from setting if_filter_bandwidth or device_instantaneous_bandwidth.
@@ -4574,13 +4624,13 @@ class _SessionBase(object):
 
     **Supported Devices**: PXIe-5665/5668
 
-    +--------------------------------+------------------------------+
-    | Name                           | Description                  |
-    +================================+==============================+
-    | SmoothSpectrumEnabled.DISABLED | Disables spectrum smoothing. |
-    +--------------------------------+------------------------------+
-    | SmoothSpectrumEnabled.ENABLED  | Enables spectrum smoothing.  |
-    +--------------------------------+------------------------------+
+    +------------------+-----------+
+    | Center Frequency | IF Filter |
+    +==================+===========+
+    | 0 Hz and <80 MHz | 300 kHz   |
+    +------------------+-----------+
+    | >=80 MHz         | 50 MHz    |
+    +------------------+-----------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

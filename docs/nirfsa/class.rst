@@ -2706,8 +2706,6 @@ acquisition_type
 
         Configures the session to either acquire I/Q data or to compute a power spectrum over the specified frequency range.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.AcquisitionType.IQ`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -2719,6 +2717,8 @@ acquisition_type
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ConfigureAcquisitionType`
+
+        **Defined Values:**
 
         +---------------------------------------------+-----------------------------------------------+
         | Name                                        | Description                                   |
@@ -2804,8 +2804,6 @@ advance_trigger_type
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.AdvanceTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -2813,6 +2811,8 @@ advance_trigger_type
         **Related Topics**
 
         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+        **Defined Values:**
 
         +-----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                | Description                                                                                                                                                                                                                                                                   |
@@ -2863,11 +2863,11 @@ allow_more_records_than_memory
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: False
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +-------+------------------------------------------------------------------------+
         | Value | Description                                                            |
@@ -2904,11 +2904,11 @@ allow_out_of_specification_user_settings
 
         When you set this property to :py:data:`~nirfsa.AllowOutOfSpecificationUserSettings.ENABLED`, the driver does not report out-of-specification warnings and errors.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.AllowOutOfSpecificationUserSettings.DISABLED`
 
         **Supported Devices:** PXIe-5820/5830/5831/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +-----------------------------------------------------------------+----------------------------------------------+
         | Name                                                            | Description                                  |
@@ -2992,11 +2992,11 @@ arm_ref_trigger_type
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.ArmReferenceTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +----------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                     | Description                                                                                                                                                                                                                                                              |
@@ -3353,8 +3353,6 @@ deembedding_type
 
         If you set this property to :py:data:`~nirfsa.DeembeddingType.SCALAR` or :py:data:`~nirfsa.DeembeddingType.VECTOR`, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.DeembeddingType.SCALAR`
 
         **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : :py:data:`~nirfsa.DeembeddingType.SCALAR` or  :py:data:`~nirfsa.DeembeddingType.NONE`
@@ -3362,6 +3360,8 @@ deembedding_type
         **Valid Values for PXIe-5831:** :py:data:`~nirfsa.DeembeddingType.VECTOR`, :py:data:`~nirfsa.DeembeddingType.SCALAR`, or :py:data:`~nirfsa.DeembeddingType.NONE`. :py:data:`~nirfsa.DeembeddingType.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +-------------------------------------------+------------------------------------------------------------------------+
         | Name                                      | Description                                                            |
@@ -3610,8 +3610,6 @@ digital_edge_advance_trigger_source
 
         This property is used only when the :py:attr:`nirfsa.Session.advance_trigger_type` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -3619,6 +3617,8 @@ digital_edge_advance_trigger_source
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.configure_digital_edge_ref_trigger`
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                     |
@@ -3695,8 +3695,6 @@ digital_edge_arm_ref_trigger_source
 
         This property is used only when the :py:attr:`nirfsa.Session.arm_ref_trigger_type` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         ----
@@ -3726,6 +3724,8 @@ digital_edge_arm_ref_trigger_source
         **Related Topics**
 
         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                     |
@@ -3802,8 +3802,6 @@ digital_edge_ref_trigger_edge
 
         This property is used only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.ReferenceTriggerDigitalEdgeEdge.RISING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -3815,6 +3813,8 @@ digital_edge_ref_trigger_edge
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.configure_digital_edge_ref_trigger`
+
+        **Defined Values:**
 
         +------------------------------------------------------------+-------------------------------------------------------+
         | Name                                                       | Description                                           |
@@ -3853,8 +3853,6 @@ digital_edge_ref_trigger_source
 
         This property is used only when the :py:attr:`nirfsa.Session.ref_trigger_type` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DIGITAL_EDGE`.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -3862,6 +3860,8 @@ digital_edge_ref_trigger_source
         **Related Topics**
 
         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                     |
@@ -4139,11 +4139,11 @@ digital_if_equalization_enabled
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: True, if the device configuration is supported.
 
         **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
+
+        **Defined Values:**
 
         +-------+-----------------------------------------------------------+
         | Value | Description                                               |
@@ -4190,8 +4190,6 @@ digitizer_dither_enabled
 
         ----
 
-        **Defined Values:**
-
         ----
         **Note**
         For the PXIe-5820/5830/5831/5832/5840/5841/5842, only :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED` is supported.
@@ -4201,6 +4199,8 @@ digitizer_dither_enabled
         **Default Value**: :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED`
 
         **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+        **Defined Values:**
 
         +----------------------------------------------------+-----------------------------------+
         | Name                                               | Description                       |
@@ -4311,11 +4311,11 @@ digitizer_sample_clock_timebase_source
 
         Specifies the source of the Sample Clock timebase, which is the timebase used to control waveform sampling.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.ONBOARD_CLOCK`
 
         **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
+
+        **Defined Values:**
 
         +-----------------------------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                                                               | Description                                                                                                                                                            |
@@ -4575,8 +4575,6 @@ downconverter_frequency_offset_mode
 
         ----
 
-        **Defined Values:**
-
         **Default Value:** :py:data:`~nirfsa.DownconverterFrequencyOffsetMode.AUTOMATIC`
 
         **Supported Devices**: PXIe-5830/5831/5832/5841/5842
@@ -4588,6 +4586,8 @@ downconverter_frequency_offset_mode
         `PXIe-5831/5832 Automatic Frequency Offset <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/automatic-frequency-offset.html>`_
 
         `PXIe-5841 Automatic Frequency Offset <https://www.ni.com/docs/en-US/bundle/pxie-5841/page/automatic-frequency-offset.html>`_
+
+        **Defined Values:**
 
         +------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                             | Description                                                                                                                                                                                                                                                                                                                  |
@@ -4669,8 +4669,6 @@ downconverter_loop_bandwidth
 
         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsa.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
-        **Defined Values:**
-
         **Default Values**:
 
         **PXI-5600** : :py:data:`~nirfsa.DownconverterLoopBandwidth.WIDE`
@@ -4680,6 +4678,8 @@ downconverter_loop_bandwidth
         **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842** : :py:data:`~nirfsa.DownconverterLoopBandwidth.MEDIUM`
 
         **Supported Devices**: PXI-5600, PXIe-5601 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E, PXIe-5830/5831/5832/5840/5841/5842
+
+        **Defined Values:**
 
         +------------------------------------------------------+-----------------------------------------------------------------------+
         | Name                                                 | Description                                                           |
@@ -4732,11 +4732,11 @@ downconverter_preselector_enabled
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.DownconverterPreselectorEnabled.DISABLED` if the device has no preselector. :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` if the device has a preselector.
 
         **Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +--------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                                           | Description                                                                                                                                                                                                                                                                       |
@@ -4895,8 +4895,6 @@ exported_advance_trigger_output_terminal
 
         Specifies the destination terminal for the exported Advance Trigger.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -4904,6 +4902,8 @@ exported_advance_trigger_output_terminal
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ExportSignal`
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                                                     |
@@ -5025,8 +5025,6 @@ exported_done_event_output_terminal
 
         Specifies the destination terminal for the Done Event.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -5034,6 +5032,8 @@ exported_done_event_output_terminal
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ExportSignal`
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                                                     |
@@ -5114,8 +5114,6 @@ exported_end_of_record_event_output_terminal
 
         Specifies the destination terminal for the End of Record Event.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -5131,6 +5129,8 @@ exported_end_of_record_event_output_terminal
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ExportSignal`
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                                                     |
@@ -5472,8 +5472,6 @@ exported_ref_clock_output_terminal
 
         Specifies a comma-separated list of the terminals at which to export the Reference Clock.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -5481,6 +5479,8 @@ exported_ref_clock_output_terminal
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ExportSignal`
+
+        **Defined Values:**
 
         +------------------------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                                              | Description                                                                                                                                                                                                     |
@@ -5560,8 +5560,6 @@ exported_ref_trigger_output_terminal
 
         Specifies the destination terminal for the exported Reference Trigger.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -5569,6 +5567,8 @@ exported_ref_trigger_output_terminal
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ExportSignal`
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                                                     |
@@ -5649,8 +5649,6 @@ exported_start_trigger_output_terminal
 
         Specifies the destination terminal for the exported Start Trigger.
 
-        **Defined Values:**
-
         **Default Value**: "" (empty string)
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -5658,6 +5656,8 @@ exported_start_trigger_output_terminal
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ExportSignal`
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                                                     |
@@ -5820,11 +5820,11 @@ fetch_relative_to
 
         Specifies the reference location within the acquired record from which to begin fetching.
 
-        **Defined Values:**
-
         **Default Value**: N/A
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                       | Description                                                                                                                                                                                                                 |
@@ -6051,8 +6051,6 @@ fft_window_type
 
         Specifies the time-domain window type.
 
-        **Defined Values:**
-
         **Default Values**:
 
         **PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860**: :py:data:`~nirfsa.FftWindowType._7_TERM_BLACKMAN_HARRIS`
@@ -6064,6 +6062,8 @@ fft_window_type
         **Related Topics**
 
         `Resolution Bandwidth <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/resolution-bandwidth.html>`_
+
+        **Defined Values:**
 
         +----------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -6310,11 +6310,11 @@ frequency_settling_units
 
         Specify the actual settling value using the :py:attr:`nirfsa.Session.frequency_settling` property. This property is not supported if you are using an external LO.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.FrequencySettlingUnits.PPM`
 
         **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842
+
+        **Defined Values:**
 
         +--------------------------------------------------------------+-------------------------------------------------------------------+
         | Name                                                         | Description                                                       |
@@ -6670,11 +6670,11 @@ input_isolation_enabled
 
         For the PXIe-5830/5831/5832, input isolation is supported for all available ports for your hardware configuration.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.InputIsolationEnabled.DISABLED`, if the device configuration is supported.
 
         **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5693, PXIe-5820/5830/5831/5832/5840/5841
+
+        **Defined Values:**
 
         +---------------------------------------------------+---------------------------+
         | Name                                              | Description               |
@@ -6713,8 +6713,6 @@ input_port
 
         To set this property, the NI-RFSA device must be in the Configuration state.
 
-        **Defined Values:**
-
         **Default Values**:
 
         **PXIe-5820**: :py:data:`~nirfsa.InputPort.IQ_IN`
@@ -6722,6 +6720,8 @@ input_port
         **All other devices**: :py:data:`~nirfsa.InputPort.RF_IN`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +-------------------------------------+---------------------------------------------------------------------------------+
         | Name                                | Description                                                                     |
@@ -7029,11 +7029,11 @@ iq_in_port_terminal_configuration
 
         **PXIe-5820**: The only valid value for this property is :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`
 
         **Supported Devices:** PXIe-5645, PXIe-5820
+
+        **Defined Values:**
 
         +---------------------------------------------------------------+--------------------------------------------------+
         | Name                                                          | Description                                      |
@@ -7154,8 +7154,6 @@ iq_power_edge_ref_trigger_slope
 
         When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE`, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -7167,6 +7165,8 @@ iq_power_edge_ref_trigger_slope
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.ConfigureIqPowerEdgeRefTrigger`
+
+        **Defined Values:**
 
         +-------------------------------------------------------------+-------------------------------------------------------+
         | Name                                                        | Description                                           |
@@ -7315,8 +7315,6 @@ lo2_export_enabled
 
         You can also export the LO2 signal by setting the :py:attr:`nirfsa.Session.lo_export_enabled` property and the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property.
 
-        **Defined Values:**
-
         | Value | Description                    |
         |:------|:-------------------------------|
         | True  | Enables the LO2 OUT terminal.  |
@@ -7325,6 +7323,8 @@ lo2_export_enabled
         **Default Value:** False
 
         **Supported Devices:** PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668
+
+        **Defined Values:**
 
         +----------------------------------------------+----------------------+
         | Name                                         | Description          |
@@ -7649,8 +7649,6 @@ lo_injection_side
 
         **PXIe-5606/5668**: Setting this property to :py:data:`~nirfsa.LoInjectionSide.LOW` is supported for certain frequencies in high band, varying by final IF frequency. This configuration is not calibrated and device specifications are not guaranteed.
 
-        **Defined Values:**
-
         **Default Values**:
 
         **PXIe-5601 (external digitizer mode), PXIe-5663/5663E (frequencies < 3.0 GHz)**: :py:data:`~nirfsa.LoInjectionSide.HIGH`
@@ -7660,6 +7658,8 @@ lo_injection_side
         **PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668**: :py:data:`~nirfsa.LoInjectionSide.HIGH`
 
         **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
+
+        **Defined Values:**
 
         +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                    | Description                                                                                                                                                                                         |
@@ -7729,11 +7729,11 @@ lo_out_export_configure_from_rfsg
 
         Set this property to :py:data:`~nirfsa.LoOutExportConfigureFromRfsg.ENABLED` to allow NI-RFSG to control the LO out export. Use the NIRFSG ATTR RF IN LO EXPORT ENABLED property to control the NI-RFSA LO out export from NI-RFSG.
 
-        **Defined Values:**
-
         **Default Value:** :py:data:`~nirfsa.LoOutExportConfigureFromRfsg.DISABLED`
 
         **Supported Devices**: PXIe-5840/5841/5842
+
+        **Defined Values:**
 
         +----------------------------------------------------------+----------------------------------------------------------------------+
         | Name                                                     | Description                                                          |
@@ -7829,11 +7829,11 @@ lo_pll_fractional_mode_enabled
 
         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsa.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.LoPllFractionalModeEnabled.ENABLED`
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
+
+        **Defined Values:**
 
         +--------------------------------------------------------+------------------------------------------+
         | Name                                                   | Description                              |
@@ -7890,7 +7890,7 @@ lo_source
 
                         ----
 
-                        **Defined Values:**
+
 
 
                         **Default Value**: :py:data:`~nirfsa.LoSource.ONBOARD` ("Onboard")
@@ -7900,6 +7900,8 @@ lo_source
                         **Related Topics**
                         `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/lo-sharing-using-rfsa-rfsg.html>`_
                         `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/lo-sharing-using-rfsa-rfsg.html>`_
+
+        **Defined Values:**
 
         +---------------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                               | Description                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -8032,11 +8034,11 @@ lo_yig_main_coil_drive
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.LoYigMainCoilDrive.NORMAL`
 
         **Supported Devices:** PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668
+
+        **Defined Values:**
 
         +----------------------------------------------+------------------------------------------------------------------+
         | Name                                         | Description                                                      |
@@ -8713,11 +8715,11 @@ overflow_error_reporting
 
         Overflows lead to clipping of the waveform.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.OverflowErrorReporting.WARNING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +----------------------------------------------------+--------------------------------------------------------------------------------------------------------+
         | Name                                               | Description                                                                                            |
@@ -8783,11 +8785,11 @@ power_spectrum_units
 
         Specifies the units of the power spectrum.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.PowerSpectrumUnits.DBM`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +-----------------------------------------------------+---------------------------------------------+
         | Name                                                | Description                                 |
@@ -9171,8 +9173,6 @@ ref_clock_source
 
         ----
 
-        **Defined Values:**
-
         **Default Values**:
 
         **PXIe-5694**: :py:data:`~nirfsa.ReferenceClockSource.REF_IN`
@@ -9184,6 +9184,8 @@ ref_clock_source
         **High-Level Methods**:
 
         - :py:meth:`nirfsa.Session.configure_ref_clock`
+
+        **Defined Values:**
 
         +--------------------------------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Value                                                                    | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
@@ -9363,11 +9365,11 @@ ref_trigger_osp_delay_enabled
         - NI PXIe-5622 Block Diagram
         - NI PXI-5142 Trigger Sources
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.ReferenceTriggerOspDelayEnabled.ENABLED`
 
         **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
+
+        **Defined Values:**
 
         +-------------------------------------------------------------+-----------------------------------------------+
         | Name                                                        | Description                                   |
@@ -9486,8 +9488,6 @@ ref_trigger_type
 
         Specifies whether you want the Reference Trigger to be a digital edge, I/Q power edge, or software trigger.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.ReferenceTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860
@@ -9495,6 +9495,8 @@ ref_trigger_type
         **Related Topics**
 
         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+        **Defined Values:**
 
         +--------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                   | Description                                                                                                                                                                                                                                                                 |
@@ -9576,11 +9578,11 @@ resolution_bandwidth_type
 
         Specifies how the :py:attr:`nirfsa.Session.resolution_bandwidth` property is expressed.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.ResolutionBandwidthType.THREE_DECIBELS`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +-----------------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                                  | Description                                                                                                                                              |
@@ -9729,11 +9731,11 @@ rf_out_lo_export_enabled
 
         When this property is enabled, if the :py:attr:`nirfsa.Session.lo_source` property is set to :py:data:`~nirfsa.LoSource.LO_IN` and you do not set the :py:attr:`nirfsa.Session.lo_frequency` or :py:attr:`nirfsa.Session.downconverter_center_frequency` properties, NI-RFSA rounds the LO frequency to approximately an LO step size as if the source was :py:data:`~nirfsa.LoSource.ONBOARD`. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
 
-        **Defined Values:**
-
         **Default Value:**: :py:data:`~nirfsa.RfOutLoExport.UNSPECIFIED`
 
         **Supported Devices**: PXIe-5840/5841/5842
+
+        **Defined Values:**
 
         +----------------------------------------------+----------------------------------------------------------------------------------------------------------------+
         | Name                                         | Description                                                                                                    |
@@ -9784,8 +9786,6 @@ rf_preamp_enabled
 
         **PXIe-5668 with PXIe-5698**: If you set this property to :py:attr:`nirfsa.Session.rf_preamp_enabled`, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
-        **Defined Values:**
-
         **Default Value**:
 
         **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC`
@@ -9793,6 +9793,8 @@ rf_preamp_enabled
         **All other devices**: :py:data:`~nirfsa.RfPreampEnabled.DISABLED`
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5698, PXIe-5830/5831/5832/5840/5841/5842
+
+        **Defined Values:**
 
         +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                                           | Description                                                                                                                                                                                                                                                                                                                                                                      |
@@ -9833,11 +9835,11 @@ rf_preamp_present
 
         Returns whether an RF preamplifier is available on the RF downconverter module.
 
-        **Defined Values:**
-
         **Default Value**: N/A
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+        **Defined Values:**
 
         +-------+------------------------------------------------------+
         | Value | Description                                          |
@@ -10048,11 +10050,11 @@ signal_conditioning_enabled
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.SignalConditioningEnabled.ENABLED`
 
         **Supported Devices**: PXIe-5694
+
+        **Defined Values:**
 
         +-------------------------------------------------------+-----------------------------------+
         | Name                                                  | Description                       |
@@ -10095,11 +10097,11 @@ smooth_spectrum_enabled
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.SmoothSpectrumEnabled.DISABLED`
 
         **Supported Devices**: PXIe-5665/5668
+
+        **Defined Values:**
 
         +------------------+-----------+
         | Center Frequency | IF Filter |
@@ -10136,11 +10138,11 @@ spectrum_averaging_mode
 
         Specifies the averaging mode for the spectrum acquisition.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.SpectrumAveragingMode.NO`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +----------------------------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                               | Description                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -10382,8 +10384,6 @@ start_trigger_type
 
         ----
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.StartTriggerType.NONE`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -10391,6 +10391,8 @@ start_trigger_type
         **Related Topics**
 
         `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+        **Defined Values:**
 
         +---------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
         | Name                                              | Description                                                                                                                                                                                                                                                                            |
@@ -10663,11 +10665,11 @@ user_source_pulse_width_units
 
         When the value is :py:data:`~nirfsa.UserSourcePulseWidthUnits.SECONDS`, it is assumed that the clock rate of the signal is the data clock. Use :py:data:`~nirfsa.UserSourcePulseWidthUnits.CLOCK_PERIODS` if the user source clock rate is anything else.
 
-        **Defined Values:**
-
         **Default Value**: :py:data:`~nirfsa.UserSourcePulseWidthUnits.SECONDS`
 
         **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+        **Defined Values:**
 
         +------------------------------------------------------------+--------------------------+
         | Name                                                       | Description              |

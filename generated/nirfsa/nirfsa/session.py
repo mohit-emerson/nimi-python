@@ -130,8 +130,6 @@ class _SessionBase(object):
 
     Configures the session to either acquire I/Q data or to compute a power spectrum over the specified frequency range.
 
-    **Defined Values:**
-
     **Default Value**: AcquisitionType.IQ
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -143,6 +141,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ConfigureAcquisitionType
+
+    **Defined Values:**
 
     +--------------------------+-----------------------------------------------+
     | Name                     | Description                                   |
@@ -188,8 +188,6 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: AdvanceTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -197,6 +195,8 @@ class _SessionBase(object):
     **Related Topics**
 
     `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+    **Defined Values:**
 
     +----------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                             | Description                                                                                                                                                                                                                      |
@@ -228,11 +228,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: False
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +-------+------------------------------------------------------------------------+
     | Value | Description                                                            |
@@ -249,11 +249,11 @@ class _SessionBase(object):
 
     When you set this property to AllowOutOfSpecificationUserSettings.ENABLED, the driver does not report out-of-specification warnings and errors.
 
-    **Defined Values:**
-
     **Default Value**: AllowOutOfSpecificationUserSettings.DISABLED
 
     **Supported Devices:** PXIe-5820/5830/5831/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +----------------------------------------------+----------------------------------------------+
     | Name                                         | Description                                  |
@@ -298,11 +298,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: ArmReferenceTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                  | Description                                                                                                                                                                                                                 |
@@ -478,8 +478,6 @@ class _SessionBase(object):
 
     If you set this property to DeembeddingType.SCALAR or DeembeddingType.VECTOR, NI-RFSA adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.
 
-    **Defined Values:**
-
     **Default Value**: DeembeddingType.SCALAR
 
     **Valid Values for PXIe-5830/5832/5840/5841/5842/5860** : DeembeddingType.SCALAR or  DeembeddingType.NONE
@@ -487,6 +485,8 @@ class _SessionBase(object):
     **Valid Values for PXIe-5831:** DeembeddingType.VECTOR, DeembeddingType.SCALAR, or DeembeddingType.NONE. DeembeddingType.VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).
 
     **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +------------------------+------------------------------------------------------------------------+
     | Name                   | Description                                                            |
@@ -655,8 +655,6 @@ class _SessionBase(object):
 
     This property is used only when the advance_trigger_type property is set to NIRFSA_VAL_DIGITAL_EDGE.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -664,6 +662,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - configure_digital_edge_ref_trigger
+
+    **Defined Values:**
 
     +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                     |
@@ -721,8 +721,6 @@ class _SessionBase(object):
 
     This property is used only when the arm_ref_trigger_type property is set to NIRFSA_VAL_DIGITAL_EDGE.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     ----
@@ -752,6 +750,8 @@ class _SessionBase(object):
     **Related Topics**
 
     `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+    **Defined Values:**
 
     +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                     |
@@ -809,8 +809,6 @@ class _SessionBase(object):
 
     This property is used only when the ref_trigger_type property is set to NIRFSA_VAL_DIGITAL_EDGE.
 
-    **Defined Values:**
-
     **Default Value**: ReferenceTriggerDigitalEdgeEdge.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -822,6 +820,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - configure_digital_edge_ref_trigger
+
+    **Defined Values:**
 
     +-----------------------------------------+-------------------------------------------------------+
     | Name                                    | Description                                           |
@@ -841,8 +841,6 @@ class _SessionBase(object):
 
     This property is used only when the ref_trigger_type property is set to NIRFSA_VAL_DIGITAL_EDGE.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -850,6 +848,8 @@ class _SessionBase(object):
     **Related Topics**
 
     `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+    **Defined Values:**
 
     +--------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                     |
@@ -1050,11 +1050,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: True, if the device configuration is supported.
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
+
+    **Defined Values:**
 
     +-------+-----------------------------------------------------------+
     | Value | Description                                               |
@@ -1081,8 +1081,6 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     ----
     **Note**
     For the PXIe-5820/5830/5831/5832/5840/5841/5842, only DigitizerDitherEnabled.ENABLED is supported.
@@ -1092,6 +1090,8 @@ class _SessionBase(object):
     **Default Value**: DigitizerDitherEnabled.ENABLED
 
     **Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+    **Defined Values:**
 
     +---------------------------------+-----------------------------------+
     | Name                            | Description                       |
@@ -1144,11 +1144,11 @@ class _SessionBase(object):
 
     Specifies the source of the Sample Clock timebase, which is the timebase used to control waveform sampling.
 
-    **Defined Values:**
-
     **Default Value**: DigitizerSampleClockTimebaseSource.ONBOARD_CLOCK
 
     **Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668
+
+    **Defined Values:**
 
     +----------------------------------------------------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                                                            | Description                                                                                                                                                            |
@@ -1289,8 +1289,6 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value:** DownconverterFrequencyOffsetMode.AUTOMATIC
 
     **Supported Devices**: PXIe-5830/5831/5832/5841/5842
@@ -1302,6 +1300,8 @@ class _SessionBase(object):
     `PXIe-5831/5832 Automatic Frequency Offset <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/automatic-frequency-offset.html>`_
 
     `PXIe-5841 Automatic Frequency Offset <https://www.ni.com/docs/en-US/bundle/pxie-5841/page/automatic-frequency-offset.html>`_
+
+    **Defined Values:**
 
     +-----------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                          | Description                                                                                                                                                                                                                                                              |
@@ -1344,8 +1344,6 @@ class _SessionBase(object):
 
     To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
-    **Defined Values:**
-
     **Default Values**:
 
     **PXI-5600** : DownconverterLoopBandwidth.WIDE
@@ -1355,6 +1353,8 @@ class _SessionBase(object):
     **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842** : DownconverterLoopBandwidth.MEDIUM
 
     **Supported Devices**: PXI-5600, PXIe-5601 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E, PXIe-5830/5831/5832/5840/5841/5842
+
+    **Defined Values:**
 
     +-----------------------------------+-----------------------------------------------------------------------+
     | Name                              | Description                                                           |
@@ -1387,11 +1387,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: DownconverterPreselectorEnabled.DISABLED if the device has no preselector. DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH if the device has a preselector.
 
     **Supported Devices:** PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +-------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                                        | Description                                                                                                                                                                                                                                                    |
@@ -1470,8 +1470,6 @@ class _SessionBase(object):
 
     Specifies the destination terminal for the exported Advance Trigger.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -1479,6 +1477,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ExportSignal
+
+    **Defined Values:**
 
     +--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                                                     |
@@ -1562,8 +1562,6 @@ class _SessionBase(object):
 
     Specifies the destination terminal for the Done Event.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -1571,6 +1569,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ExportSignal
+
+    **Defined Values:**
 
     +--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                                                     |
@@ -1632,8 +1632,6 @@ class _SessionBase(object):
 
     Specifies the destination terminal for the End of Record Event.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -1649,6 +1647,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ExportSignal
+
+    **Defined Values:**
 
     +--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                                                     |
@@ -1914,8 +1914,6 @@ class _SessionBase(object):
 
     Specifies a comma-separated list of the terminals at which to export the Reference Clock.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -1923,6 +1921,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ExportSignal
+
+    **Defined Values:**
 
     +-----------------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                                           | Description                                                                                                                                                                                                     |
@@ -1963,8 +1963,6 @@ class _SessionBase(object):
 
     Specifies the destination terminal for the exported Reference Trigger.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -1972,6 +1970,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ExportSignal
+
+    **Defined Values:**
 
     +--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                                                     |
@@ -2033,8 +2033,6 @@ class _SessionBase(object):
 
     Specifies the destination terminal for the exported Start Trigger.
 
-    **Defined Values:**
-
     **Default Value**: "" (empty string)
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -2042,6 +2040,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ExportSignal
+
+    **Defined Values:**
 
     +--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                                                     |
@@ -2145,11 +2145,11 @@ class _SessionBase(object):
 
     Specifies the reference location within the acquired record from which to begin fetching.
 
-    **Defined Values:**
-
     **Default Value**: N/A
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +-----------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                    | Description                                                                                                                                                                                                                 |
@@ -2276,8 +2276,6 @@ class _SessionBase(object):
 
     Specifies the time-domain window type.
 
-    **Defined Values:**
-
     **Default Values**:
 
     **PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860**: FftWindowType._7_TERM_BLACKMAN_HARRIS
@@ -2289,6 +2287,8 @@ class _SessionBase(object):
     **Related Topics**
 
     `Resolution Bandwidth <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/resolution-bandwidth.html>`_
+
+    **Defined Values:**
 
     +---------------------------------------+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                  | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |
@@ -2415,11 +2415,11 @@ class _SessionBase(object):
 
     Specify the actual settling value using the frequency_settling property. This property is not supported if you are using an external LO.
 
-    **Defined Values:**
-
     **Default Value**: FrequencySettlingUnits.PPM
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842
+
+    **Defined Values:**
 
     +-------------------------------------------+-------------------------------------------------------------------+
     | Name                                      | Description                                                       |
@@ -2615,11 +2615,11 @@ class _SessionBase(object):
 
     For the PXIe-5830/5831/5832, input isolation is supported for all available ports for your hardware configuration.
 
-    **Defined Values:**
-
     **Default Value**: InputIsolationEnabled.DISABLED, if the device configuration is supported.
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXIe-5663/5663E/5665/5667/5668, PXIe-5693, PXIe-5820/5830/5831/5832/5840/5841
+
+    **Defined Values:**
 
     +--------------------------------+---------------------------+
     | Name                           | Description               |
@@ -2639,8 +2639,6 @@ class _SessionBase(object):
 
     To set this property, the NI-RFSA device must be in the Configuration state.
 
-    **Defined Values:**
-
     **Default Values**:
 
     **PXIe-5820**: InputPort.IQ_IN
@@ -2648,6 +2646,8 @@ class _SessionBase(object):
     **All other devices**: InputPort.RF_IN
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +------------------+---------------------------------------------------------------------------------+
     | Name             | Description                                                                     |
@@ -2795,11 +2795,11 @@ class _SessionBase(object):
 
     **PXIe-5820**: The only valid value for this property is IqInPortTerminalConfiguration.DIFFERENTIAL.
 
-    **Defined Values:**
-
     **Default Value**: IqInPortTerminalConfiguration.DIFFERENTIAL
 
     **Supported Devices:** PXIe-5645, PXIe-5820
+
+    **Defined Values:**
 
     +--------------------------------------------+--------------------------------------------------+
     | Name                                       | Description                                      |
@@ -2860,8 +2860,6 @@ class _SessionBase(object):
 
     When you set the ref_trigger_type property to ReferenceTriggerType.IQ_POWER_EDGE, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
 
-    **Defined Values:**
-
     **Default Value**: ReferenceTriggerIqPowerEdgeSlope.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -2873,6 +2871,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - ConfigureIqPowerEdgeRefTrigger
+
+    **Defined Values:**
 
     +------------------------------------------+-------------------------------------------------------+
     | Name                                     | Description                                           |
@@ -2961,8 +2961,6 @@ class _SessionBase(object):
 
     You can also export the LO2 signal by setting the lo_export_enabled property and the digitizer_sample_clock_timebase_source property.
 
-    **Defined Values:**
-
     | Value | Description                    |
     |:------|:-------------------------------|
     | True  | Enables the LO2 OUT terminal.  |
@@ -2971,6 +2969,8 @@ class _SessionBase(object):
     **Default Value:** False
 
     **Supported Devices:** PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5668
+
+    **Defined Values:**
 
     +---------------------------+----------------------+
     | Name                      | Description          |
@@ -3176,8 +3176,6 @@ class _SessionBase(object):
 
     **PXIe-5606/5668**: Setting this property to LoInjectionSide.LOW is supported for certain frequencies in high band, varying by final IF frequency. This configuration is not calibrated and device specifications are not guaranteed.
 
-    **Defined Values:**
-
     **Default Values**:
 
     **PXIe-5601 (external digitizer mode), PXIe-5663/5663E (frequencies < 3.0 GHz)**: LoInjectionSide.HIGH
@@ -3187,6 +3185,8 @@ class _SessionBase(object):
     **PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668**: LoInjectionSide.HIGH
 
     **Supported Devices**: PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5663/5663E/5665/5667/5668
+
+    **Defined Values:**
 
     +----------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                 | Description                                                                                                                                                                                         |
@@ -3216,11 +3216,11 @@ class _SessionBase(object):
 
     Set this property to LoOutExportConfigureFromRfsg.ENABLED to allow NI-RFSG to control the LO out export. Use the NIRFSG ATTR RF IN LO EXPORT ENABLED property to control the NI-RFSA LO out export from NI-RFSG.
 
-    **Defined Values:**
-
     **Default Value:** LoOutExportConfigureFromRfsg.DISABLED
 
     **Supported Devices**: PXIe-5840/5841/5842
+
+    **Defined Values:**
 
     +---------------------------------------+----------------------------------------------------------------------+
     | Name                                  | Description                                                          |
@@ -3275,11 +3275,11 @@ class _SessionBase(object):
 
     To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the _set_attribute_vi_int32 method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
-    **Defined Values:**
-
     **Default Value**: LoPllFractionalModeEnabled.ENABLED
 
     **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
+
+    **Defined Values:**
 
     +-------------------------------------+------------------------------------------+
     | Name                                | Description                              |
@@ -3317,7 +3317,7 @@ class _SessionBase(object):
 
                     ----
 
-                    **Defined Values:**
+
 
 
                     **Default Value**: LoSource.ONBOARD ("Onboard")
@@ -3327,6 +3327,8 @@ class _SessionBase(object):
                     **Related Topics**
                     `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/lo-sharing-using-rfsa-rfsg.html>`_
                     `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/lo-sharing-using-rfsa-rfsg.html>`_
+
+    **Defined Values:**
 
     +--------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                            | Description                                                                                                                                                                                                                                                                                                                                                                                                                       |
@@ -3400,11 +3402,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: LoYigMainCoilDrive.NORMAL
 
     **Supported Devices:** PXIe-5603/5605/5606 (external digitizer mode), PXIe-5665/5667/5668
+
+    **Defined Values:**
 
     +---------------------------+------------------------------------------------------------------+
     | Name                      | Description                                                      |
@@ -3742,11 +3744,11 @@ class _SessionBase(object):
 
     Overflows lead to clipping of the waveform.
 
-    **Defined Values:**
-
     **Default Value**: OverflowErrorReporting.WARNING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +---------------------------------+--------------------------------------------------------------------------------------------------------+
     | Name                            | Description                                                                                            |
@@ -3772,11 +3774,11 @@ class _SessionBase(object):
 
     Specifies the units of the power spectrum.
 
-    **Defined Values:**
-
     **Default Value**: PowerSpectrumUnits.DBM
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +----------------------------------+---------------------------------------------+
     | Name                             | Description                                 |
@@ -3979,8 +3981,6 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Values**:
 
     **PXIe-5694**: ReferenceClockSource.REF_IN
@@ -3992,6 +3992,8 @@ class _SessionBase(object):
     **High-Level Methods**:
 
     - configure_ref_clock
+
+    **Defined Values:**
 
     +-------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Value                                                 | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
@@ -4092,11 +4094,11 @@ class _SessionBase(object):
     - NI PXIe-5622 Block Diagram
     - NI PXI-5142 Trigger Sources
 
-    **Defined Values:**
-
     **Default Value**: ReferenceTriggerOspDelayEnabled.ENABLED
 
     **Supported Devices**:PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841
+
+    **Defined Values:**
 
     +------------------------------------------+-----------------------------------------------+
     | Name                                     | Description                                   |
@@ -4157,8 +4159,6 @@ class _SessionBase(object):
 
     Specifies whether you want the Reference Trigger to be a digital edge, I/Q power edge, or software trigger.
 
-    **Defined Values:**
-
     **Default Value**: ReferenceTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5840/5841/5842/5860
@@ -4166,6 +4166,8 @@ class _SessionBase(object):
     **Related Topics**
 
     `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+    **Defined Values:**
 
     +-------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                | Description                                                                                                                                                                                                                     |
@@ -4209,11 +4211,11 @@ class _SessionBase(object):
 
     Specifies how the resolution_bandwidth property is expressed.
 
-    **Defined Values:**
-
     **Default Value**: ResolutionBandwidthType.THREE_DECIBELS
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +----------------------------------------------------+---------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                               | Description                                                                                                                                 |
@@ -4302,11 +4304,11 @@ class _SessionBase(object):
 
     When this property is enabled, if the lo_source property is set to LoSource.LO_IN and you do not set the lo_frequency or downconverter_center_frequency properties, NI-RFSA rounds the LO frequency to approximately an LO step size as if the source was LoSource.ONBOARD. This ensures that when you configure NI-RFSA and NI-RFSG with compatible settings that result in the same LO frequency, the rounding also is compatible.
 
-    **Defined Values:**
-
     **Default Value:**: RfOutLoExport.UNSPECIFIED
 
     **Supported Devices**: PXIe-5840/5841/5842
+
+    **Defined Values:**
 
     +---------------------------+----------------------------------------------------------------------------------------------------------------+
     | Name                      | Description                                                                                                    |
@@ -4338,8 +4340,6 @@ class _SessionBase(object):
 
     **PXIe-5668 with PXIe-5698**: If you set this property to rf_preamp_enabled, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
-    **Defined Values:**
-
     **Default Value**:
 
     **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: RfPreampEnabled.AUTOMATIC
@@ -4347,6 +4347,8 @@ class _SessionBase(object):
     **All other devices**: RfPreampEnabled.DISABLED
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5698, PXIe-5830/5831/5832/5840/5841/5842
+
+    **Defined Values:**
 
     +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                                        | Description                                                                                                                                                                                                                                                                                                                                            |
@@ -4368,11 +4370,11 @@ class _SessionBase(object):
 
     Returns whether an RF preamplifier is available on the RF downconverter module.
 
-    **Defined Values:**
-
     **Default Value**: N/A
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842
+
+    **Defined Values:**
 
     +-------+------------------------------------------------------+
     | Value | Description                                          |
@@ -4483,11 +4485,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: SignalConditioningEnabled.ENABLED
 
     **Supported Devices**: PXIe-5694
+
+    **Defined Values:**
 
     +------------------------------------+-----------------------------------+
     | Name                               | Description                       |
@@ -4510,11 +4512,11 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: SmoothSpectrumEnabled.DISABLED
 
     **Supported Devices**: PXIe-5665/5668
+
+    **Defined Values:**
 
     +------------------+-----------+
     | Center Frequency | IF Filter |
@@ -4532,11 +4534,11 @@ class _SessionBase(object):
 
     Specifies the averaging mode for the spectrum acquisition.
 
-    **Defined Values:**
-
     **Default Value**: SpectrumAveragingMode.NO
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +---------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                            | Description                                                                                                                                                                                                                                                                                                                                                                                           |
@@ -4658,8 +4660,6 @@ class _SessionBase(object):
 
     ----
 
-    **Defined Values:**
-
     **Default Value**: StartTriggerType.NONE
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
@@ -4667,6 +4667,8 @@ class _SessionBase(object):
     **Related Topics**
 
     `Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_
+
+    **Defined Values:**
 
     +--------------------------------+-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
     | Name                           | Description                                                                                                                                                                                                                               |
@@ -4801,11 +4803,11 @@ class _SessionBase(object):
 
     When the value is UserSourcePulseWidthUnits.SECONDS, it is assumed that the clock rate of the signal is the data clock. Use UserSourcePulseWidthUnits.CLOCK_PERIODS if the user source clock rate is anything else.
 
-    **Defined Values:**
-
     **Default Value**: UserSourcePulseWidthUnits.SECONDS
 
     **Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860
+
+    **Defined Values:**
 
     +-----------------------------------------+--------------------------+
     | Name                                    | Description              |

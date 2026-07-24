@@ -289,7 +289,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ResolutionBandwidthType',
+        'enum': 'SpectrumResolutionBandwidthType',
         'lv_property': 'Acquisition:Spectrum:Resolution Bandwidth Type',
         'name': 'RESOLUTION_BANDWIDTH_TYPE',
         'type': 'ViInt32'
@@ -409,7 +409,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'FftWindowType',
+        'enum': 'SpectrumFftWindowType',
         'lv_property': 'Acquisition:Spectrum:FFT Window Type',
         'name': 'FFT_WINDOW_TYPE',
         'type': 'ViInt32'
@@ -829,6 +829,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',        
         'lv_property': 'Triggers:Start:Export:Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -1119,6 +1120,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Ref:Export:Output Terminal',
         'name': 'EXPORTED_REF_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -1410,6 +1412,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Advance:Export:Output Terminal',
         'name': 'EXPORTED_ADVANCE_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -1667,6 +1670,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Start:Output Terminal',
         'name': 'EXPORTED_READY_FOR_START_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -1795,7 +1799,7 @@ attributes = {
                 ],
                 [
                     'NIRFSA_VAL_CLK_OUT',
-                    'The signal is exported to the CLK OUT connector on the PXIe-5622/5624 front panel.'
+                    'Export the clock on the CLK OUT terminal on the IF digitizer. This value is not valid for the PXIe-5644/5645/5646 or PXIe-5820/5830/5831/5832/5840/5841.'
                 ],
                 [
                     'NIRFSA_VAL_REF_OUT',
@@ -1891,6 +1895,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Ref:Output Terminal',
         'name': 'EXPORTED_READY_FOR_REF_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2003,6 +2008,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:End Of Record:Output Terminal',
         'name': 'EXPORTED_END_OF_RECORD_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2070,9 +2076,15 @@ attributes = {
         'documentation': {
             'description': 'Enables use of the digital equalization filter for the RF downconverter.\n\n**PXIe-5820/5830/5831/5832/5840/5841/5842/5860**: The only valid value for this attribute is VI_TRUE.\n\n----\n**Note**\nFor PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this attribute to VI_TRUE if the NIRFSA_ATTR_DIGITIZER_SAMPLE_CLOCK_TIMEBASE_SOURCE attribute is set to NIRFSA_VAL_LO_REF_CLK.\n\n----\n\n----\n**Note**\nFor the PXIe-5665 (14 GHz)/5667 (7 GHz)/5668, the preselector is not part of the IF filter path, so NI-RFSA does not equalize the preselector distortions.\n\n----\n\n**Default Value**: VI_TRUE, if the device configuration is supported.\n\n**Supported Devices**: PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841\n\n**Defined Values**:',
             'table_body': [
-                ['VI_TRUE', 'Enables digital IF equalization on the RF downconverter.'],
-                ['VI_FALSE', 'Disables digital IF equalization on the RF downconverter.']
-            ],            
+                [
+                    'VI_TRUE',
+                    'Enables digital IF equalization on the RF downconverter.'
+                ],
+                [
+                    'VI_FALSE',
+                    'Disables digital IF equalization on the RF downconverter.'
+                ]
+            ],
             'table_header': [
                 'Name',
                 'Description'
@@ -2295,6 +2307,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Done:Output Terminal',
         'name': 'EXPORTED_DONE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -2465,7 +2478,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'LoInjectionSide',
+        'enum': 'LoInjection',
         'lv_property': 'Signal Path:Advanced:LO Injection Side',
         'name': 'LO_INJECTION_SIDE',
         'type': 'ViInt32'
@@ -3444,23 +3457,67 @@ attributes = {
         'documentation': {
             'description': 'Specifies the IF filter path bandwidth for your device configuration.\n\n----\n**Note**\nFor composite devices, such as the PXIe-5665/5667/5668, the IF filter path bandwidth includes all IF filters across the component modules of a composite device.\n\n----\n\nNI-RFSA uses this attribute in conjunction with the NIRFSA_ATTR_DEVICE_INSTANTANEOUS_BANDWIDTH attribute and the NIRFSA_ATTR_DIGITAL_IF_EQUALIZATION_ENABLED attribute to determine the settings for your measurement. NI-RFSA selects the next highest available filter based on the value you specify. The following table lists the IF filters available for NI devices. You may specify a higher value than your device instantaneous bandwidth if your measurement requires it, but specifying a lower value returns an error.\n\n**Valid Values**:\n\n**PXIe-5603/5605**: 0 to 80 MHz\n\n**PXIe-5665/5667**: 0 to 50 MHz\n\n**PXIe-5668**: 0 to 765 MHz\n\n**PXIe-5694**: 0 to 50 MHz\n\n----\n**Note**\nTo set this attribute to values greater than 20 MHz, you must set the NIRFSA_ATTR_SIGNAL_CONDITIONING_ENABLED attribute to NIRFSA_VAL_SIGNAL_CONDITIONING_BYPASSED\n\n----\n\n**Default Values:** For spectrum acquisition types the default is greater than or equal to the NIRFSA_ATTR_SPECTRUM_SPAN attribute. NI-RFSA chooses the default value of the NIRFSA_ATTR_IF_FILTER_BANDWIDTH attribute to correspond to the appropriate IF filter. For I/Q acquisition types NI-RFSA chooses the default value corresponding to the widest IF filter possible for your equipment setup.\n\n**Supported Devices**: PXIe-5603/5605/5606, PXIe-5665/5667/5668, PXIe-5694',
             'table_body': [
-                ['PXIe-5603/5665 (3.6 GHz)', '2264300 kHz', '300 kHz IF filter'],
-                ['PXIe-5603/5665 (3.6 GHz)', '>300 kHz and 22645 MHz', 'Through IF filter'],
-                ['PXIe-5603/5665 (3.6 GHz)', '>5 MHz', 'Through IF filter'],
-                ['PXIe-5605/5665 (14 GHz)', '2264300 kHz', '300 kHz IF filter'],
-                ['PXIe-5603/5665 (14 GHz)', '>300 kHz and 22645 MHz', '5 MHz IF filter'],
-                ['PXIe-5603/5665 (14 GHz)', '>5 MHz', 'Through IF filter'],
-                ['PXIe-5668', '2264300 kHz', '300 kHz IF filter'],
-                ['PXIe-5668', '>300 kHz and 22645 MHz', '5 MHz IF filter'],
-                ['PXIe-5668', '>5 MHz and 2264100 MHz', '100 MHz IF filter'],
-                ['PXIe-5668', '>100 MHz and 2264320 MHz', '320 MHz IF filter'],
-                ['PXIe-5668', '>320 MHz', '765 MHz IF filter']
+                [
+                    'PXIe-5603/5665 (3.6 GHz)',
+                    '2264300 kHz',
+                    '300 kHz IF filter'
+                ],
+                [
+                    'PXIe-5603/5665 (3.6 GHz)',
+                    '>300 kHz and 22645 MHz',
+                    'Through IF filter'
+                ],
+                [
+                    'PXIe-5603/5665 (3.6 GHz)',
+                    '>5 MHz',
+                    'Through IF filter'
+                ],
+                [
+                    'PXIe-5605/5665 (14 GHz)',
+                    '2264300 kHz',
+                    '300 kHz IF filter'
+                ],
+                [
+                    'PXIe-5603/5665 (14 GHz)',
+                    '>300 kHz and 22645 MHz',
+                    '5 MHz IF filter'
+                ],
+                [
+                    'PXIe-5603/5665 (14 GHz)',
+                    '>5 MHz',
+                    'Through IF filter'
+                ],
+                [
+                    'PXIe-5668',
+                    '2264300 kHz',
+                    '300 kHz IF filter'
+                ],
+                [
+                    'PXIe-5668',
+                    '>300 kHz and 22645 MHz',
+                    '5 MHz IF filter'
+                ],
+                [
+                    'PXIe-5668',
+                    '>5 MHz and 2264100 MHz',
+                    '100 MHz IF filter'
+                ],
+                [
+                    'PXIe-5668',
+                    '>100 MHz and 2264320 MHz',
+                    '320 MHz IF filter'
+                ],
+                [
+                    'PXIe-5668',
+                    '>320 MHz',
+                    '765 MHz IF filter'
+                ]
             ],
             'table_header': [
                 'Device',
                 'IF Filter Bandwidth Range',
                 'IF Filter'
-            ],
+            ]
         },
         'lv_property': 'Signal Path:IF Filter Bandwidth',
         'name': 'IF_FILTER_BANDWIDTH',
@@ -3482,12 +3539,18 @@ attributes = {
         'documentation': {
             'description': 'Specifies that an optimized IF filtering selection is made at different spectrum frequency ranges during spectrum acquisition.\n\nThe IF filter used depends on the configured RF center frequency, as shown in the following table.\n\n----\n**Note**\nSetting this attribute to **Enabled** prevents you from setting NIRFSA_ATTR_IF_FILTER_BANDWIDTH or NIRFSA_ATTR_DEVICE_INSTANTANEOUS_BANDWIDTH.\n\n----\n\n**Default Value**: NIRFSA_VAL_DISABLED\n\n**Supported Devices**: PXIe-5665/5668\n\n**Defined Values**:',
             'table_body': [
-                ['0 Hz and <80 MHz', '300 kHz'],
-                ['>=80 MHz', '50 MHz']
+                [
+                    'NIRFSA_VAL_DISABLED',
+                    'Disables spectrum smoothing.'
+                ],
+                [
+                    'NIRFSA_VAL_ENABLED',
+                    'Enables spectrum smoothing.'
+                ]
             ],
             'table_header': [
-                'Center Frequency',
-                'IF Filter'
+                'Name',
+                'Description'
             ]
         },
         'enum': 'SmoothSpectrumEnabled',
@@ -4028,9 +4091,9 @@ attributes = {
         'documentation': {
             'description': 'Specifies the Reference Clock Rate, in Hz, of the signal sent to the Ref Clock Exported Terminal.\n\n**Default Value**: 10 MHz\n\n**Valid Values**:\n\nPXIe-5820/5830/5831/5832/5840/5841: 10 MHz\n\nPXIe-5842: 10 MHz, 100 MHz, 1 GHz\n\nPXIe-5860: 10 MHz, 100 MHz\n\n**Supported Devices**: PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'enum': 'ReferenceClockExportedRate',
         'lv_property': 'Clocking:Ref Clock Exported Rate:Ref Clock Exported Rate',
         'name': 'EXPORTED_REF_CLOCK_RATE',
-        'enum': 'ReferenceClockExportedRate',
         'type': 'ViReal64'
     },
     1150331: {

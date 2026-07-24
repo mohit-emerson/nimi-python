@@ -416,57 +416,6 @@ class FetchRelativeTo(Enum):
     '''
 
 
-class FftWindowType(Enum):
-    UNIFORM = 500
-    r'''
-    No window is applied.
-    '''
-    HANNING = 501
-    r'''
-    The Hanning window is useful for analyzing transients longer than the time duration of the window, and also for general-purpose applications.
-    '''
-    HAMMING = 502
-    r'''
-    A Hamming window is applied to the waveform using the following equation: y[i] = x[i] * (0.54 - 0.46cos(w)) where w = (2)i/n and n = the waveform size. Note: Hanning and Hamming windows are somewhat similar. However, in the time domain, the Hamming window does not get as close to zero near the edges as does the Hanning window.
-    '''
-    BLACKMAN_HARRIS = 503
-    r'''
-    A Blackman-Harris window is applied to the waveform using the following equation: y[i] = x[i] * (0.42323 - 0.49755*cos(w) + 0.07922*cos(2w))
-    '''
-    EXACT_BLACKMAN = 504
-    r'''
-    An Exact Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w))
-    '''
-    BLACKMAN = 505
-    r'''
-    A Blackman window is useful for analyzing transient signals, and provides similar windowing to Hanning and Hamming windows but adds one additional cosine term to reduce ripple. A Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (0.42 - 0.50*cos(w) + 0.08*cos(2w))
-    '''
-    FLAT_TOP = 506
-    r'''
-    The fifth-order Flat Top window has the best amplitude accuracy of all the window methods. The increased amplitude accuracy (0.02 dB for signals exactly between integral cycles) is at the expense of frequency selectivity. The Flat Top window is most useful in accurately measuring the amplitude of single frequency components with little nearby spectral energy in the signal. A fifth-order Flat Top window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w))
-    '''
-    _4_TERM_BLACKMAN_HARRIS = 507
-    r'''
-    A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))
-    '''
-    _7_TERM_BLACKMAN_HARRIS = 508
-    r'''
-    A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))
-    '''
-    LOW_SIDE_LOBE = 509
-    r'''
-    The Low Side Lobe window further reduces the size of the main lobe. The following equation defines the Low Side Lobe window. where   *N* is the length of window
-    '''
-    GAUSSIAN = 510
-    r'''
-    A Gaussian window is applied to the waveform using the following equation: y[i] = x[i] * exp(-0.5*(i - (N-1)/2)^2 / ((N-1)/2)^2) where N is the length of the window
-    '''
-    KAISER_BESSEL = 511
-    r'''
-    A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind
-    '''
-
-
 class FrequencySettlingUnits(Enum):
     PPM = 2000
     r'''
@@ -625,7 +574,7 @@ class Lo2ExportEnabled(Enum):
     '''
 
 
-class LoInjectionSide(Enum):
+class LoInjection(Enum):
     HIGH = 1300
     r'''
     Configures the LO signal that the NI-RFSA device generates at a frequency higher than the RF frequency. This LO frequency is given by the formula f<sub>LO</sub> = f<sub>RF</sub> + f<sub>IF</sub>.
@@ -1079,25 +1028,6 @@ class ResetWithOptionsStepsToOmit(IntFlag):
     '''
 
 
-class ResolutionBandwidthType(Enum):
-    THREE_DECIBELS = 300
-    r'''
-    Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.
-    '''
-    SIX_DECIBELS = 301
-    r'''
-    Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.
-    '''
-    BIN_WIDTH = 302
-    r'''
-    Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
-    '''
-    EQUIVALENT_NOISE_BANDWIDTH = 303
-    r'''
-    Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.
-    '''
-
-
 class RfLbSigCondPathSel(Enum):
     EXT_CAL_RF_LOWBAND_SIGNAL_CONDITIONING_PATH_1 = 3700
     r'''
@@ -1410,6 +1340,76 @@ class SpectrumAveragingMode(Enum):
     LOG = 406
     r'''
     Configures NI-RFSA to perform no averaging on acquisitions.
+    '''
+
+
+class SpectrumFftWindowType(Enum):
+    UNIFORM = 500
+    r'''
+    No window is applied.
+    '''
+    HANNING = 501
+    r'''
+    The Hanning window is useful for analyzing transients longer than the time duration of the window, and also for general-purpose applications.
+    '''
+    HAMMING = 502
+    r'''
+    A Hamming window is applied to the waveform using the following equation: y[i] = x[i] * (0.54 - 0.46cos(w)) where w = (2)i/n and n = the waveform size. Note: Hanning and Hamming windows are somewhat similar. However, in the time domain, the Hamming window does not get as close to zero near the edges as does the Hanning window.
+    '''
+    BLACKMAN_HARRIS = 503
+    r'''
+    A Blackman-Harris window is applied to the waveform using the following equation: y[i] = x[i] * (0.42323 - 0.49755*cos(w) + 0.07922*cos(2w))
+    '''
+    EXACT_BLACKMAN = 504
+    r'''
+    An Exact Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w))
+    '''
+    BLACKMAN = 505
+    r'''
+    A Blackman window is useful for analyzing transient signals, and provides similar windowing to Hanning and Hamming windows but adds one additional cosine term to reduce ripple. A Blackman window is applied to the waveform using the following equation: y[i] = x[i] * (0.42 - 0.50*cos(w) + 0.08*cos(2w))
+    '''
+    FLAT_TOP = 506
+    r'''
+    The fifth-order Flat Top window has the best amplitude accuracy of all the window methods. The increased amplitude accuracy (0.02 dB for signals exactly between integral cycles) is at the expense of frequency selectivity. The Flat Top window is most useful in accurately measuring the amplitude of single frequency components with little nearby spectral energy in the signal. A fifth-order Flat Top window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w))
+    '''
+    _4_TERM_BLACKMAN_HARRIS = 507
+    r'''
+    A 4-term Blackman-Harris window is a general purpose window; it has side-lobe rejection in the upper 90 dB, with moderately wide side lobe. A 4-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w))
+    '''
+    _7_TERM_BLACKMAN_HARRIS = 508
+    r'''
+    A 7-term Blackman-Harris window has the highest dynamic range; it is ideal for signal-to-noise ratio applications. A 7-term Blackman Harris window is applied to the waveform using the following equation: y[i] = x[i] * (a0 - a1*cos(w) + a2*cos(2w) - a3*cos(3w) + a4*cos(4w) - a5*cos(5w) + a6*cos(6w))
+    '''
+    LOW_SIDE_LOBE = 509
+    r'''
+    The Low Side Lobe window further reduces the size of the main lobe. The following equation defines the Low Side Lobe window. where   *N* is the length of window
+    '''
+    GAUSSIAN = 510
+    r'''
+    A Gaussian window is applied to the waveform using the following equation: y[i] = x[i] * exp(-0.5*(i - (N-1)/2)^2 / ((N-1)/2)^2) where N is the length of the window
+    '''
+    KAISER_BESSEL = 511
+    r'''
+    A Kaiser-Bessel window is applied to the waveform using the following equation: y[i] = x[i] * I0(β*sqrt(1 - (2i/(N-1) - 1)^2))/I0(β) where i is between 0 and N-1, N is the length of the window, β determines the shape of the window, and I0 is the zeroth order Modified Bessel method of the first kind
+    '''
+
+
+class SpectrumResolutionBandwidthType(Enum):
+    THREE_DECIBELS = 300
+    r'''
+    Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the fft_window_type property.
+    '''
+    SIX_DECIBELS = 301
+    r'''
+    Defines the RBW in terms of the 6 dB bandwidth of the window specified by the fft_window_type property.
+    '''
+    BIN_WIDTH = 302
+    r'''
+    Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.
+    '''
+    EQUIVALENT_NOISE_BANDWIDTH = 303
+    r'''
+    Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the fft_window_type property.
     '''
 
 

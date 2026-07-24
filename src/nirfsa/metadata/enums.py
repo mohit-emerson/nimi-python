@@ -1144,7 +1144,7 @@ enums = {
             }
         ]
     },
-    'LoInjectionSide': {
+    'LoInjection': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2344,7 +2344,7 @@ enums = {
             }
         ]
     },
-    'FftWindowType': {
+    'SpectrumFftWindowType': {
         'codegen_method': 'public',
         'values': [
             {
@@ -2435,7 +2435,7 @@ enums = {
             }
         ]
     },
-    'ResolutionBandwidthType': {
+    'SpectrumResolutionBandwidthType': {
         'codegen_method': 'public',
         'values': [
             {

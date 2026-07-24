@@ -1783,6 +1783,7 @@ attributes = {
                 'Description'
             ]
         },
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Events:Ready For Advance:Output Terminal',
         'name': 'EXPORTED_READY_FOR_ADVANCE_EVENT_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -3225,16 +3226,32 @@ attributes = {
         'codegen_method': 'public',
         'documentation': {
             'description': 'Specifies the FFT width of the device. \n\nThe FFT width is the effective bandwidth of the signal path during each signal acquisition.\n\n----\n**Note**\nThe maximum FFT width when using the PXIe-5622 is constrained to 50 MHz or 25 MHz, depending on the digitizer option you purchased. The maximum FFT width when using thing PXIe-5624 is constrained to 400 MHz or 765 MHz, depending on the digitizer configuration.\n\n----\n\n----\n**Note**\nYou can use the NIRFSA_ATTR_FFT_WIDTH attribute with in-band retuning. For more information about in-band retuning, refer to the NIRFSA_ATTR_DOWNCONVERTER_CENTER_FREQUENCY attribute.\n\n----\n\nNI-RFSA treats the *device instantaneous bandwidth* as the effective real-time bandwidth of the signal path. The *span* specifies the frequency range of the computed spectrum. An RF vector signal analyzer can acquire a bandwidth only within the device instantaneous bandwidth frequency. If the span you choose is greater than the device instantaneous bandwidth, NI-RFSA obtains multiple acquisitions and combines them into a single spectrum. By specifying the FFT width, you can control the specific bandwidth obtained in each signal acquisition. If you read the NIRFSA_ATTR_FFT_WIDTH attribute without setting it, NI-RFSA returns the value of the NIRFSA_ATTR_DEVICE_INSTANTANEOUS_BANDWIDTH attribute.\n\n**Valid Values**:\n\nThe lower limit for all FFT width supported devices using the PXIe-5622 IF digitizer is 7.325 kHz. The lower limit for all FFT width supported devices using the PXIe-5624 IF digitizer is 400 MHz or 800 MHz, depending on the FPGA image that is downloaded upon opening the session to the PXIe-5624 IF digitizer.\n\n**PXIe-5663/5663E**: The FFT width upper limit for the PXIe-5663/5663E depends on the downconverter center frequency and on the module revision of the PXIe-5601 as illustrated in the following table. Refer to the `Identifying Module Revision <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/identifying-module-revision.html>`_ topic for more information about determining which revision of the PXIe-5601 RF downconverter you have installed.\n\n**PXIe-5665/5667/5668**: The upper limit of the FFT width is the maximum device instantaneous bandwidth.\n\n----\n**Note**\n\n----\n\n----\n**Note**\nAt frequencies greater than 3.6 GHz, the PXIe-5605 provides a typical bandwidth of 47 MHz at   dB with the preselector enabled. The NIRFSA_ATTR_FFT_WIDTH attribute can override the typical bandwidth of the PXIe-5605 up to 57 MHz using an external digitizer and up to 50 MHz or 25 MHz depending on the PXIe-5622 digitizer option you purchased. The increase in bandwidth results in faster signal acquisitions, but amplitude accuracy is decreased for spectrum acquisitions, and magnitude and phase accuracy is decreased for I/Q acquisitions. National Instruments does not guarantee device specifications if you set the NIRFSA_ATTR_FFT_WIDTH attribute greater than the warranted instantaneous bandwidth specification.\n\n----\n\n----\n**Note**\nWhen using the PXIe-5606, the 765 MHz IF filter is only available at center frequencies of 3.6 GHz and above.\n\n----\n\n**Default Value**: N/A\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668',
+            'table_body': [
+                [
+                    '10 MHz to <120 MHz',
+                    '10 MHz',
+                    '10 MHz (Revision E), 20 MHz< sup >* < /sup> (Revision G or later)'
+                ],
+                [
+                    '120 MHz to <330 MHz',
+                    '20 MHz',
+                    '20 MHz (Revision E), 30 MHz< sup > * < /sup> (Revision G or later)'
+                ],
+                [
+                    '330 MHz to <6.6 GHz',
+                    '50 MHz',
+                    '50 MHz'
+                ],
+                [
+                    '<sup > * < / sup >National Instruments does not guarantee device specifications if you set the NIRFSA_ATTR_FFT_WIDTH attribute greater than the warranted instantaneous bandwidth specification.',
+                    '',
+                    ''
+                ]
+            ],
             'table_header': [
                 'Downconverter Center Frequency',
                 'PXIe-5601 Instantaneous Bandwidth',
                 'FFT Width Upper Limit'
-            ],
-            'table_body': [
-                ['10 MHz to <120 MHz', '10 MHz', '10 MHz (Revision E), 20 MHz< sup >* < /sup> (Revision G or later)'],
-                ['120 MHz to <330 MHz', '20 MHz', '20 MHz (Revision E), 30 MHz< sup > * < /sup> (Revision G or later)'],
-                ['330 MHz to <6.6 GHz', '50 MHz', '50 MHz'],
-                ['<sup > * < / sup >National Instruments does not guarantee device specifications if you set the NIRFSA_ATTR_FFT_WIDTH attribute greater than the warranted instantaneous bandwidth specification.', '', '']
             ]
         },
         'lv_property': 'Acquisition:Spectrum:FFT Width',
@@ -3549,7 +3566,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies that an optimized IF filtering selection is made at different spectrum frequency ranges during spectrum acquisition.\n\nThe IF filter used depends on the configured RF center frequency, as shown in the following table.\n\n----\n**Note**\nSetting this attribute to **Enabled** prevents you from setting NIRFSA_ATTR_IF_FILTER_BANDWIDTH or NIRFSA_ATTR_DEVICE_INSTANTANEOUS_BANDWIDTH.\n\n----\n\n**Default Value**: NIRFSA_VAL_DISABLED\n\n**Supported Devices**: PXIe-5665/5668\n\n**Defined Values**:',
+            'description': 'Specifies that an optimized IF filtering selection is made at different spectrum frequency ranges during spectrum acquisition.\n\nThe IF filter used depends on the configured RF center frequency, as shown in the following table.\n\n| Center Frequency    | IF Filter |\n|:--------------------|:----------|\n| 0 Hz and <80 MHz | 300 kHz   |\n| 0 MHz             | 50 MHz    |\n\n----\n**Note**\nSetting this attribute to **Enabled** prevents you from setting NIRFSA_ATTR_IF_FILTER_BANDWIDTH or NIRFSA_ATTR_DEVICE_INSTANTANEOUS_BANDWIDTH.\n\n----\n\n**Default Value**: NIRFSA_VAL_DISABLED\n\n**Supported Devices**: PXIe-5665/5668\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSA_VAL_DISABLED',

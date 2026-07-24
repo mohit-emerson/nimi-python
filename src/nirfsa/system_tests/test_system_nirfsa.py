@@ -159,6 +159,33 @@ class SystemTests:
         rfsa_device_session.reset()
         assert rfsa_device_session.reference_level == default_reference_level
 
+    def test_reset_with_options(self, rfsa_device_session):
+        frequencies = np.array([1e9, 2e9, 3e9], dtype=np.float64)
+        sparameter_tables = np.array([[[1 + 1j, 2 + 2j], [3 + 3j, 4 + 4j]], [[5 + 5j, 6 + 6j], [7 + 7j, 8 + 8j]], [[9 + 9j, 10 + 10j], [11 + 11j, 12 + 12j]]], dtype=np.complex128)
+        rfsa_device_session.create_deembedding_sparameter_table_array('', 'myTable1', frequencies, sparameter_tables, nirfsa.SparameterOrientation.PORT2_TOWARDS_DUT)
+        default_reference_level = rfsa_device_session.reference_level
+        rfsa_device_session.reference_level = default_reference_level + 1.0
+        assert rfsa_device_session.reference_level == default_reference_level + 1.0
+        steps_to_omit_with_deembedding_tables = nirfsa.ResetWithOptionsStepsToOmit.DEEMBEDDING_TABLES
+        steps_to_omit_none = nirfsa.ResetWithOptionsStepsToOmit.NONE
+
+        # Reset all properties but omit deleting de-embedding tables.
+        rfsa_device_session.reset_with_options(steps_to_omit_with_deembedding_tables)
+        assert rfsa_device_session.reference_level == default_reference_level
+
+        rfsa_device_session.ports[''].deembedding_selected_table = 'myTable1'
+        rfsa_device_session.commit()
+
+        # Reset with no omitted steps deletes the de-embedding tables.
+        rfsa_device_session.reset_with_options(steps_to_omit_none)
+        rfsa_device_session.ports[''].deembedding_selected_table = 'myTable1'
+        try:
+            rfsa_device_session.commit()
+            assert False
+        except nirfsa.Error as e:
+            assert e.code == -1074097772
+            assert 'de-embedding table cannot be found' in e.description
+
     def test_self_test(self, rfsa_device_session):
         # We should not get an assert if self_test passes
         rfsa_device_session.self_test()

@@ -294,6 +294,25 @@ class EnableAttrVals(Enum):
     '''
 
 
+class EnableRfPreamp(Enum):
+    DISABLED = 2500
+    r'''
+    Disables the RF preamplifier.
+    '''
+    ENABLED_WHEN_IN_SIGNAL_PATH = 2501
+    r'''
+    Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier.
+    '''
+    ENABLED = 2502
+    r'''
+    Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.
+    '''
+    AUTOMATIC = 2503
+    r'''
+    Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
+    '''
+
+
 class ExportOutputTerminal(Enum):
     DO_NOT_EXPORT = ''
     r'''
@@ -1070,25 +1089,6 @@ class RfPathSelection(Enum):
     EXT_CAL_RF_BAND_4 = 1703
     r'''
     The data is the default configuration data.
-    '''
-
-
-class RfPreampEnabled(Enum):
-    DISABLED = 2500
-    r'''
-    Disables the RF preamplifier.
-    '''
-    ENABLED_WHEN_IN_SIGNAL_PATH = 2501
-    r'''
-    Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier.
-    '''
-    ENABLED = 2502
-    r'''
-    Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.
-    '''
-    AUTOMATIC = 2503
-    r'''
-    Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
     '''
 
 

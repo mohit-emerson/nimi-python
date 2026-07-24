@@ -8172,7 +8172,7 @@ mechanical_attenuation
 
         **PXIe-5667**: This property is read-only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.NIRFSA_VAL_DISABLED`.
 
-        **PXIe-5668with PXIe-5698**: This property is read-only when the :py:attr:`nirfsa.Session.rf_preamp_enabled` property is set to :py:data:`~nirfsa.RfPreampEnabled.ENABLED`.
+        **PXIe-5668with PXIe-5698**: This property is read-only when the :py:attr:`nirfsa.Session.rf_preamp_enabled` property is set to :py:data:`~nirfsa.EnableRfPreamp.ENABLED`.
 
         **Units**: dB
 
@@ -8192,7 +8192,7 @@ mechanical_attenuation
 
         **PXIe-5667 (7 GHz) using the PXIe-5693 RF preselector filter path**: 0
 
-        **PXIe-5668 with PXIe-5698 with the** :py:attr:`nirfsa.Session.rf_preamp_enabled` property set to :py:data:`~nirfsa.RfPreampEnabled.ENABLED`: 5
+        **PXIe-5668 with PXIe-5698 with the** :py:attr:`nirfsa.Session.rf_preamp_enabled` property set to :py:data:`~nirfsa.EnableRfPreamp.ENABLED`: 5
 
         **Default Value**: N/A
 
@@ -9815,53 +9815,53 @@ rf_preamp_enabled
 
         Specifies whether the RF preamplifier is enabled in the system.
 
-        **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` value enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` to the selected value.
+        **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` value enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` to the selected value.
 
         ----
         **Note**
-        For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, :py:data:`~nirfsa.RfPreampEnabled.ENABLED` may improve the noise floor while :py:data:`~nirfsa.RfPreampEnabled.DISABLED` may improve distortion.
+        For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, :py:data:`~nirfsa.EnableRfPreamp.ENABLED` may improve the noise floor while :py:data:`~nirfsa.EnableRfPreamp.DISABLED` may improve distortion.
 
         ----
 
-        **PXIe-5667**: The :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.RfPreampEnabled.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH`.
+        **PXIe-5667**: The :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.EnableRfPreamp.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH`.
 
         **PXIe-5668 with PXIe-5698**: If you set this property to :py:attr:`nirfsa.Session.rf_preamp_enabled`, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
         **Default Value**:
 
-        **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC`
+        **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC`
 
-        **All other devices**: :py:data:`~nirfsa.RfPreampEnabled.DISABLED`
+        **All other devices**: :py:data:`~nirfsa.EnableRfPreamp.DISABLED`
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5698, PXIe-5830/5831/5832/5840/5841/5842
 
         **Defined Values**:
 
-        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | Name                                                           | Description                                                                                                                                                                                                                                                                                                                                                                      |
-        +================================================================+==================================================================================================================================================================================================================================================================================================================================================================================+
-        | :py:data:`~nirfsa.RfPreampEnabled.DISABLED`                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                                                    |
-        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier. |
-        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreampEnabled.ENABLED`                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.                                                                                                                                                      |
-        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-        | :py:data:`~nirfsa.RfPreampEnabled.AUTOMATIC`                   | Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
-        +----------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | Name                                                          | Description                                                                                                                                                                                                                                                                                                                                                                      |
+        +===============================================================+==================================================================================================================================================================================================================================================================================================================================================================================+
+        | :py:data:`~nirfsa.EnableRfPreamp.DISABLED`                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                                                    |
+        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH` | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier. |
+        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.EnableRfPreamp.ENABLED`                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.                                                                                                                                                       |
+        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC`                   | Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
+        +---------------------------------------------------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
         .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
         The following table lists the characteristics of this property.
 
-            +-----------------------+-----------------------+
-            | Characteristic        | Value                 |
-            +=======================+=======================+
-            | Datatype              | enums.RfPreampEnabled |
-            +-----------------------+-----------------------+
-            | Permissions           | read-write            |
-            +-----------------------+-----------------------+
-            | Repeated Capabilities | None                  |
-            +-----------------------+-----------------------+
+            +-----------------------+----------------------+
+            | Characteristic        | Value                |
+            +=======================+======================+
+            | Datatype              | enums.EnableRfPreamp |
+            +-----------------------+----------------------+
+            | Permissions           | read-write           |
+            +-----------------------+----------------------+
+            | Repeated Capabilities | None                 |
+            +-----------------------+----------------------+
 
         .. tip::
             This property corresponds to the following LabVIEW Property or C Attribute:

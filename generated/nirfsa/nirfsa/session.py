@@ -3481,7 +3481,7 @@ class _SessionBase(object):
 
     **PXIe-5667**: This property is read-only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to NIRFSA_VAL_DISABLED.
 
-    **PXIe-5668with PXIe-5698**: This property is read-only when the rf_preamp_enabled property is set to RfPreampEnabled.ENABLED.
+    **PXIe-5668with PXIe-5698**: This property is read-only when the rf_preamp_enabled property is set to EnableRfPreamp.ENABLED.
 
     **Units**: dB
 
@@ -3501,7 +3501,7 @@ class _SessionBase(object):
 
     **PXIe-5667 (7 GHz) using the PXIe-5693 RF preselector filter path**: 0
 
-    **PXIe-5668 with PXIe-5698 with the** rf_preamp_enabled property set to RfPreampEnabled.ENABLED: 5
+    **PXIe-5668 with PXIe-5698 with the** rf_preamp_enabled property set to EnableRfPreamp.ENABLED: 5
 
     **Default Value**: N/A
 
@@ -4365,44 +4365,44 @@ class _SessionBase(object):
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
     '''
-    rf_preamp_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.RfPreampEnabled, 1150129)
-    '''Type: enums.RfPreampEnabled
+    rf_preamp_enabled = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.EnableRfPreamp, 1150129)
+    '''Type: enums.EnableRfPreamp
 
     Specifies whether the RF preamplifier is enabled in the system.
 
-    **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  RfPreampEnabled.AUTOMATIC value enables the RF preamplifier based on the value of the reference_level property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from RfPreampEnabled.AUTOMATIC to the selected value.
+    **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  EnableRfPreamp.AUTOMATIC value enables the RF preamplifier based on the value of the reference_level property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from EnableRfPreamp.AUTOMATIC to the selected value.
 
     ----
     **Note**
-    For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, RfPreampEnabled.ENABLED may improve the noise floor while RfPreampEnabled.DISABLED may improve distortion.
+    For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, EnableRfPreamp.ENABLED may improve the noise floor while EnableRfPreamp.DISABLED may improve distortion.
 
     ----
 
-    **PXIe-5667**: The RfPreampEnabled.AUTOMATIC value is supported only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to RfPreampEnabled.DISABLED. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the rf_preamp_enabled property to RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH.
+    **PXIe-5667**: The EnableRfPreamp.AUTOMATIC value is supported only when the LOW_FREQUENCY_BYPASS_ENABLED property is set to EnableRfPreamp.DISABLED. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the rf_preamp_enabled property to EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH.
 
     **PXIe-5668 with PXIe-5698**: If you set this property to rf_preamp_enabled, only the preamplifier on the PXIe-5698 is used, and the preamplifier on the PXIe-5668 remains disabled.
 
     **Default Value**:
 
-    **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: RfPreampEnabled.AUTOMATIC
+    **PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842**: EnableRfPreamp.AUTOMATIC
 
-    **All other devices**: RfPreampEnabled.DISABLED
+    **All other devices**: EnableRfPreamp.DISABLED
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5698, PXIe-5830/5831/5832/5840/5841/5842
 
     **Defined Values**:
 
-    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                        | Description                                                                                                                                                                                                                                                                                                                                            |
-    +=============================================+========================================================================================================================================================================================================================================================================================================================================================+
-    | RfPreampEnabled.DISABLED                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                          |
-    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier. |
-    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | RfPreampEnabled.ENABLED                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.                                                                                                                                               |
-    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | RfPreampEnabled.AUTOMATIC                   | Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
-    +---------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                                       | Description                                                                                                                                                                                                                                                                                                                                            |
+    +============================================+========================================================================================================================================================================================================================================================================================================================================================+
+    | EnableRfPreamp.DISABLED                    | Disables the RF preamplifier.                                                                                                                                                                                                                                                                                                                          |
+    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH | Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the rf_preamp_present property to determine whether the downconverter has a preamplifier. |
+    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | EnableRfPreamp.ENABLED                     | Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH value whenever possible to avoid an error.                                                                                                                                                |
+    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | EnableRfPreamp.AUTOMATIC                   | Automatically enables the RF preamplifier based on the value of the reference_level property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.                                                                                                                                                      |
+    +--------------------------------------------+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced properties are not in the Python API for this driver.

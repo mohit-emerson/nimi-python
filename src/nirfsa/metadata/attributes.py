@@ -829,7 +829,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'ExportOutputTerminal',        
+        'enum': 'ExportOutputTerminal',
         'lv_property': 'Triggers:Start:Export:Output Terminal',
         'name': 'EXPORTED_START_TRIGGER_OUTPUT_TERMINAL',
         'type': 'ViString'
@@ -1811,7 +1811,7 @@ attributes = {
                 ],
                 [
                     'NIRFSA_VAL_PFI0',
-                    'The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.'        
+                    'The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.'
                 ],
                 [
                     'NIRFSA_VAL_PFI1',
@@ -2920,7 +2920,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'RfPreampEnabled',
+        'enum': 'EnableRfPreamp',
         'lv_property': 'Vertical:Advanced:Preamp Enabled',
         'name': 'RF_PREAMP_ENABLED',
         'type': 'ViInt32'
@@ -3028,8 +3028,14 @@ attributes = {
         'documentation': {
             'description': 'Returns whether an RF preamplifier is available on the RF downconverter module.\n\n**Default Value**: N/A\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842\n\n**Defined Values**:',
             'table_body': [
-                ['VI_TRUE', 'The device has an enabled RF preamplifier available.'],
-                ['VI_FALSE', 'The device has no RF preamplifier available.']
+                [
+                    'VI_TRUE',
+                    'The device has an enabled RF preamplifier available.'
+                ],
+                [
+                    'VI_FALSE',
+                    'The device has no RF preamplifier available.'
+                ]
             ],
             'table_header': [
                 'Name',
@@ -3101,8 +3107,14 @@ attributes = {
         'documentation': {
             'description': 'Specifies whether to allow the device to acquire more records than can fit in the device memory of the PXIe-5622/5624.\n\n----\n**Note**\nIf you set the attribute to FALSE and attempt to acquire more records than can fit into the PXIe-5622/5624 device memory, NI-RFSA returns an error. If this attribute is set to TRUE, NI-RFSA returns an error only in the event of an acquisition buffer overflow.\n\n----\n\n----\n**Note**\nThis attribute is always set to VI_TRUE for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841.\n\n----\n\n**Default Value**: VI_FALSE\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
             'table_body': [
-                ['VI_TRUE', 'Allows acquisition of more records than fit in device memory.'],
-                ['VI_FALSE', 'Does not allow acquisitions of more records than fit in device memory.']
+                [
+                    'VI_TRUE',
+                    'Allows acquisition of more records than fit in device memory.'
+                ],
+                [
+                    'VI_FALSE',
+                    'Does not allow acquisitions of more records than fit in device memory.'
+                ]
             ],
             'table_header': [
                 'Name',

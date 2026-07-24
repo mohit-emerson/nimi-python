@@ -681,6 +681,51 @@ EnableAttrVals
 
 
 
+EnableRfPreamp
+--------------
+
+.. py:class:: EnableRfPreamp
+
+    .. py:attribute:: EnableRfPreamp.DISABLED
+
+
+
+        Disables the RF preamplifier.
+
+        
+
+
+
+    .. py:attribute:: EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH
+
+
+
+        Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier.
+
+        
+
+
+
+    .. py:attribute:: EnableRfPreamp.ENABLED
+
+
+
+        Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.
+
+        
+
+
+
+    .. py:attribute:: EnableRfPreamp.AUTOMATIC
+
+
+
+        Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
+
+        
+
+
+
 ExportOutputTerminal
 --------------------
 
@@ -2516,51 +2561,6 @@ RfPathSelection
 
 
         The data is the default configuration data.
-
-        
-
-
-
-RfPreampEnabled
----------------
-
-.. py:class:: RfPreampEnabled
-
-    .. py:attribute:: RfPreampEnabled.DISABLED
-
-
-
-        Disables the RF preamplifier.
-
-        
-
-
-
-    .. py:attribute:: RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH
-
-
-
-        Enables the RF preamplifier when the RF preamplifier is present in the signal path and disables the preamplifier when it is not in the signal path. Only devices with an RF preamplifier on the downconverter and an RF preselector support this option. Use the :py:attr:`nirfsa.Session.rf_preamp_present` property to determine whether the downconverter has a preamplifier.
-
-        
-
-
-
-    .. py:attribute:: RfPreampEnabled.ENABLED
-
-
-
-        Enables the RF preamplifier. If the RF preamplifier is not in a signal path, NI-RFSA returns an error. Select the :py:data:`~nirfsa.RfPreampEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` value whenever possible to avoid an error.
-
-        
-
-
-
-    .. py:attribute:: RfPreampEnabled.AUTOMATIC
-
-
-
-        Automatically enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property. This value is valid only for the PXIe-5644/5645/5646, PXIe-5667, and PXIe-5830/5831/5832/5840/5841.
 
         
 

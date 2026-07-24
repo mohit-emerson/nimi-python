@@ -502,7 +502,7 @@ enums = {
             }
         ]
     },
-    'RfPreampEnabled': {
+    'EnableRfPreamp': {
         'codegen_method': 'public',
         'values': [
             {

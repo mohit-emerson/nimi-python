@@ -6296,10 +6296,7 @@ class _SessionBase(object):
         '''
         import numpy
         if str(type(power_spectrum_data_array)).find("'numpy.ndarray'") != -1:
-            if data_array_size is None:
-                data_array_size = self.number_of_spectral_lines
-
-            expected_buffer_size = data_array_size
+            expected_buffer_size = self.number_of_spectral_lines
 
             if len(power_spectrum_data_array) < expected_buffer_size:
                 try:
@@ -6310,7 +6307,7 @@ class _SessionBase(object):
                             len(power_spectrum_data_array), expected_buffer_size, e
                         )
                     ) from e
-                assert len(power_spectrum_data_array) == expected_buffer_size, "power_spectrum_data_array length must match requested data_array_size after resize"
+                assert len(power_spectrum_data_array) == expected_buffer_size, "power_spectrum_data_array length must match number_of_spectral_lines after resize"
 
             if power_spectrum_data_array.dtype == numpy.float64:
                 spectrum_info = self._read_power_spectrum_f64(power_spectrum_data_array, timeout)
@@ -6323,7 +6320,7 @@ class _SessionBase(object):
 
         mv = memoryview(power_spectrum_data_array)
 
-        spectrum_info_type._populate_samples_info(spectrum_info, mv, data_array_size)
+        spectrum_info_type._populate_samples_info(spectrum_info, mv)
 
         return spectrum_info
 

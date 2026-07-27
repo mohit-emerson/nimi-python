@@ -99,15 +99,13 @@ class SpectrumInfoT:
         return self.__repr__()
 
 
-def _populate_samples_info(spectrum_info, sample_data, num_samples_per_spectrum):
+def _populate_samples_info(spectrum_info, sample_data):
     '''Chunk up flat array of sample_data and copy each chunk into individual SpectrumInfo instance
 
     Args:
         spectrum_info (SpectrumInfo): SpectrumInfo class instance
 
         sample_data (Iterable of float): Spectrum sample data
-
-        num_samples_per_spectrum (int): Number of samples belonging to each spectrum
     '''
     start = 0
     end = start + spectrum_info.number_of_spectral_lines

@@ -16,9 +16,8 @@ import system_test_utilities  # noqa: E402
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 use_simulated_session = True
 real_hw_resource_name = '5841'
-use_real_5663_session = False
-real_5663_resource_name = '5663'
-use_real_5831_session = False
+use_real_5668_session = False
+real_5668_resource_name = '5668'
 real_5831_resource_name = '5831'
 
 
@@ -51,21 +50,17 @@ class SystemTests:
 
     @pytest.fixture(scope='function')
     def simulated_5831_device_session(self, session_creation_kwargs):
-        if use_real_5831_session is False:
-            with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
-                yield sim_5831_session
-        else:
-            with nirfsa.Session("5663sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5663", **session_creation_kwargs) as sim_5663_session:
-                yield sim_5663_session
+        with nirfsa.Session("5831sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5831", **session_creation_kwargs) as sim_5831_session:
+            yield sim_5831_session
 
     @pytest.fixture(scope='function')
-    def real_5663_device_session(self, session_creation_kwargs):
-        if use_real_5663_session is False:
-            with nirfsa.Session("5663sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5663", **session_creation_kwargs) as sim_5663_session:
-                yield sim_5663_session
+    def real_5668_device_session(self, session_creation_kwargs):
+        if use_real_5668_session is False:
+            with nirfsa.Session("5668sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5668", **session_creation_kwargs) as sim_5668_session:
+                yield sim_5668_session
         else:
-            with nirfsa.Session(real_5663_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_5663_session:
-                yield real_5663_session
+            with nirfsa.Session(real_5668_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_5668_session:
+                yield real_5668_session
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsa_device_session):
@@ -228,9 +223,9 @@ class SystemTests:
             assert rfsa_device_session.check_acquisition_status() is False  # is_done never True for continuous acquisition
         assert rfsa_device_session.check_acquisition_status() is True  # is_done True after abort
 
-    @pytest.mark.skipif(use_real_5663_session is False, reason="Requires real 5663 hardware")
-    def test_get_ext_cal_last_temp(self, real_5663_device_session):
-        temperature = real_5663_device_session.get_ext_cal_last_temp()
+    @pytest.mark.skipif(use_real_5668_session is False, reason="Requires real 5668 hardware")
+    def test_get_ext_cal_last_temp(self, real_5668_device_session):
+        temperature = real_5668_device_session.get_ext_cal_last_temp()
         assert isinstance(temperature, float)
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
@@ -243,9 +238,9 @@ class SystemTests:
         temperature = rfsa_device_session.get_self_calibration_temperature(nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION)
         assert isinstance(temperature, float)
 
-    @pytest.mark.skipif(use_real_5663_session is False, reason="Requires real 5663 hardware")
-    def test_is_self_cal_valid(self, real_5663_device_session):
-        self_cal_valid, valid_steps = real_5663_device_session.is_self_cal_valid()
+    @pytest.mark.skipif(use_real_5668_session is False, reason="Requires real 5668 hardware")
+    def test_is_self_cal_valid(self, real_5668_device_session):
+        self_cal_valid, valid_steps = real_5668_device_session.is_self_cal_valid()
         assert isinstance(self_cal_valid, bool)
         assert valid_steps is not None
 
@@ -257,9 +252,9 @@ class SystemTests:
         with rfsa_device_session.initiate():
             rfsa_device_session.perform_thermal_correction()
 
-    @pytest.mark.skipif(use_real_5663_session is False, reason="Requires real 5663 hardware")
-    def test_get_frequency_response(self, real_5663_device_session):
-        frequencies, magnitude_response, phase_response = real_5663_device_session.get_frequency_response()
+    @pytest.mark.skipif(use_real_5668_session is False, reason="Requires real 5668 hardware")
+    def test_get_frequency_response(self, real_5668_device_session):
+        frequencies, magnitude_response, phase_response = real_5668_device_session.get_frequency_response()
         assert isinstance(frequencies, np.ndarray)
         assert isinstance(magnitude_response, np.ndarray)
         assert isinstance(phase_response, np.ndarray)
@@ -401,7 +396,18 @@ class SystemTests:
         assert rfsa_device_session.start_trigger_type == nirfsa.StartTriggerType.SOFTWARE_EDGE
 
     @pytest.mark.skipif(use_simulated_session is True, reason="check_acquisition_status always returns True on simulated device")
-    def test_send_software_edge_trigger(self, rfsa_device_session):
+    def test_send_software_edge_trigger_configured_with_ref_trigger(self, rfsa_device_session):
+        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
+        rfsa_device_session.iq_rate = 1e6
+        rfsa_device_session.configure_software_edge_ref_trigger()
+        with rfsa_device_session.initiate():
+            assert rfsa_device_session.check_acquisition_status() is False
+            rfsa_device_session.send_software_edge_trigger(nirfsa.SoftwareTriggerType.START, '')
+            time.sleep(3)
+            assert rfsa_device_session.check_acquisition_status() is True
+
+    @pytest.mark.skipif(use_simulated_session is True, reason="check_acquisition_status always returns True on simulated device")
+    def test_send_software_edge_trigger_configured_with_start_trigger(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
         rfsa_device_session.configure_software_edge_start_trigger()
@@ -422,12 +428,12 @@ class SystemTests:
         assert len(wfm_info.samples) == wfm_info.actual_samples
         assert np.asarray(wfm_info.samples).dtype == np.complex128
 
-    def test_fetch_iq_single_record_with_samples_passed_less_than_configured(self, rfsa_device_session):
+    def test_fetch_iq_single_record_subset(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
-        iq_data_array = np.zeros(256, dtype=np.complex64)
+        iq_data_array = np.zeros(1024, dtype=np.complex64)
         with rfsa_device_session.initiate():
             wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=128)
         assert len(wfm_info.samples) == wfm_info.actual_samples
@@ -436,7 +442,7 @@ class SystemTests:
     def test_fetch_iq_single_record_grow_with_smaller_buffer(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.iq_rate = 1e6
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
         with rfsa_device_session.initiate():
@@ -446,7 +452,7 @@ class SystemTests:
 
     def test_fetch_iq_single_record_check_view_with_larger_buffer(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
         iq_data_array = np.zeros(512, dtype=np.complex128)
         with rfsa_device_session.initiate():
@@ -457,7 +463,7 @@ class SystemTests:
 
     def test_fetch_iq_single_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
         iq_data_array = np.zeros(64, dtype=np.int16)
         with rfsa_device_session.initiate():
@@ -487,12 +493,12 @@ class SystemTests:
         with rfsa_device_session.initiate():
             wfm_info = rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_records=rfsa_device_session.number_of_records)
         assert np.asarray(wfm_info[0].samples).dtype == np.complex128
-        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, 2)
+        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, rfsa_device_session.number_of_records)
 
     def test_fetch_iq_multi_record_grow_with_smaller_column_size(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.number_of_records = 2
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
         iq_data_arrays = np.zeros((2, 64), dtype=np.complex128)
         with rfsa_device_session.initiate():
@@ -510,9 +516,9 @@ class SystemTests:
                 rfsa_device_session.fetch_iq_multi_record_into(iq_data_arrays, number_of_records=rfsa_device_session.number_of_records, number_of_samples=rfsa_device_session.number_of_samples)
         assert str(exc_info.value) == "iq_data_arrays must have at least 2 rows (number_of_records), but has 1"
 
-    def test_fetch_iq_multi_record_with_samples_requested_less_than_configured(self, rfsa_device_session):
+    def test_fetch_iq_multi_record_subset(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
         rfsa_device_session.number_of_records = 2
 
         iq_data_arrays = np.zeros((2, 64), dtype=np.complex64)
@@ -524,23 +530,23 @@ class SystemTests:
     def test_fetch_iq_multi_record_complex_i16(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
         rfsa_device_session.number_of_records = 2
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
         iq_data_arrays = np.zeros((2, 64), dtype=np.int16)
         with rfsa_device_session.initiate():
             wfm_info = rfsa_device_session.fetch_iq_multi_record_into(
                 iq_data_arrays,
                 starting_record=0,
-                number_of_records=2,
-                number_of_samples=256,
+                number_of_records=rfsa_device_session.number_of_records,
+                number_of_samples=rfsa_device_session.number_of_samples,
                 timeout=10.0,
             )
         assert np.asarray(wfm_info[0].samples).dtype == np.int16
-        check_fetched_data(wfm_info, 256, 2)
+        check_fetched_data(wfm_info, rfsa_device_session.number_of_samples, rfsa_device_session.number_of_records)
 
     def test_read_iq_single_record_grow_with_smaller_buffer(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.IQ
-        rfsa_device_session.number_of_samples = 256
+        rfsa_device_session.number_of_samples = 1024
 
         iq_data_array = np.zeros(64, dtype=np.complex128)
         wfm_info = rfsa_device_session.read_iq_single_record_into(iq_data_array)
@@ -549,7 +555,7 @@ class SystemTests:
 
     def test_read_power_spectrum_grow_with_smaller_buffer(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_device_session.number_of_spectral_lines = 256
+        rfsa_device_session.number_of_spectral_lines = 1024
 
         power_spectrum_data_array = np.zeros(64, dtype=np.float64)
         spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, rfsa_device_session.number_of_spectral_lines)
@@ -560,27 +566,18 @@ class SystemTests:
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
         rfsa_device_session.number_of_spectral_lines = 64
 
-        power_spectrum_data_array = np.zeros(256, dtype=np.float64)
+        power_spectrum_data_array = np.zeros(1024, dtype=np.float64)
         spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, rfsa_device_session.number_of_spectral_lines)
         assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
         assert np.asarray(spectrum_info.samples).dtype == np.float64
-        assert len(power_spectrum_data_array) == 256
+        assert len(power_spectrum_data_array) == 1024
 
     def test_read_power_spectrum_with_data_array_size_passed_as_none(self, rfsa_device_session):
         rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_device_session.number_of_spectral_lines = 256
+        rfsa_device_session.number_of_spectral_lines = 1024
 
         power_spectrum_data_array = np.zeros(32, dtype=np.float64)
         spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array)
-        assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
-        assert np.asarray(spectrum_info.samples).dtype == np.float64
-
-    def test_read_power_spectrum_with_requested_samples_less_than_configured(self, rfsa_device_session):
-        rfsa_device_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_device_session.number_of_spectral_lines = 64
-
-        power_spectrum_data_array = np.zeros(64, dtype=np.float64)
-        spectrum_info = rfsa_device_session.read_power_spectrum_into(power_spectrum_data_array, data_array_size=32)
         assert len(spectrum_info.samples) == rfsa_device_session.number_of_spectral_lines
         assert np.asarray(spectrum_info.samples).dtype == np.float64
 

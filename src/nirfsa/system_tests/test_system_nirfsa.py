@@ -445,7 +445,7 @@ class SystemTests:
         with rfsa_device_session.initiate():
             wfm_info = rfsa_device_session.fetch_iq_single_record_into(iq_data_array, number_of_samples=rfsa_device_session.number_of_samples)
         assert len(wfm_info.samples) == wfm_info.actual_samples
-        assert len(iq_data_array) == 512
+        assert len(iq_data_array) == rfsa_device_session.number_of_samples
         assert np.asarray(wfm_info.samples).dtype == np.complex128
 
     def test_fetch_iq_single_record_complex_i16(self, rfsa_device_session):

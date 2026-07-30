@@ -488,13 +488,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return int(year_ctype.value), int(month_ctype.value), int(day_ctype.value), int(hour_ctype.value), int(minute_ctype.value)
 
-    def get_ext_cal_last_temp(self):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        temperature_ctype = _visatype.ViReal64()  # case S220
-        error_code = self._library.niRFSA_GetExtCalLastTemp(vi_ctype, None if temperature_ctype is None else (ctypes.pointer(temperature_ctype)))
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return float(temperature_ctype.value)
-
     def get_ext_cal_recommended_interval(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         months_ctype = _visatype.ViInt32()  # case S220

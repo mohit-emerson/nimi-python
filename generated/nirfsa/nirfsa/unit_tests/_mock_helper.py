@@ -127,9 +127,6 @@ class SideEffectsHelper(object):
         self._defaults['GetExtCalLastDateAndTime']['day'] = None
         self._defaults['GetExtCalLastDateAndTime']['hour'] = None
         self._defaults['GetExtCalLastDateAndTime']['minute'] = None
-        self._defaults['GetExtCalLastTemp'] = {}
-        self._defaults['GetExtCalLastTemp']['return'] = 0
-        self._defaults['GetExtCalLastTemp']['temperature'] = None
         self._defaults['GetExtCalRecommendedInterval'] = {}
         self._defaults['GetExtCalRecommendedInterval']['return'] = 0
         self._defaults['GetExtCalRecommendedInterval']['months'] = None
@@ -582,16 +579,6 @@ class SideEffectsHelper(object):
             minute.contents.value = self._defaults['GetExtCalLastDateAndTime']['minute']
         return self._defaults['GetExtCalLastDateAndTime']['return']
 
-    def niRFSA_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
-        if self._defaults['GetExtCalLastTemp']['return'] != 0:
-            return self._defaults['GetExtCalLastTemp']['return']
-        # temperature
-        if self._defaults['GetExtCalLastTemp']['temperature'] is None:
-            raise MockFunctionCallError("niRFSA_GetExtCalLastTemp", param='temperature')
-        if temperature is not None:
-            temperature.contents.value = self._defaults['GetExtCalLastTemp']['temperature']
-        return self._defaults['GetExtCalLastTemp']['return']
-
     def niRFSA_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         if self._defaults['GetExtCalRecommendedInterval']['return'] != 0:
             return self._defaults['GetExtCalRecommendedInterval']['return']
@@ -992,8 +979,6 @@ class SideEffectsHelper(object):
         mock_library.niRFSA_GetError.return_value = 0
         mock_library.niRFSA_GetExtCalLastDateAndTime.side_effect = MockFunctionCallError("niRFSA_GetExtCalLastDateAndTime")
         mock_library.niRFSA_GetExtCalLastDateAndTime.return_value = 0
-        mock_library.niRFSA_GetExtCalLastTemp.side_effect = MockFunctionCallError("niRFSA_GetExtCalLastTemp")
-        mock_library.niRFSA_GetExtCalLastTemp.return_value = 0
         mock_library.niRFSA_GetExtCalRecommendedInterval.side_effect = MockFunctionCallError("niRFSA_GetExtCalRecommendedInterval")
         mock_library.niRFSA_GetExtCalRecommendedInterval.return_value = 0
         mock_library.niRFSA_GetFetchBacklog.side_effect = MockFunctionCallError("niRFSA_GetFetchBacklog")

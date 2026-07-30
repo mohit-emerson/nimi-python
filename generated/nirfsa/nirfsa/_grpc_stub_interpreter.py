@@ -387,13 +387,6 @@ class GrpcStubInterpreter(object):
         )
         return response.year, response.month, response.day, response.hour, response.minute
 
-    def get_ext_cal_last_temp(self):  # noqa: N802
-        response = self._invoke(
-            self._client.GetExtCalLastTemp,
-            grpc_types.GetExtCalLastTempRequest(vi=self._vi),
-        )
-        return response.temperature
-
     def get_ext_cal_recommended_interval(self):  # noqa: N802
         response = self._invoke(
             self._client.GetExtCalRecommendedInterval,

@@ -1541,33 +1541,6 @@ get_ext_cal_last_date_and_time
 
 
 
-get_ext_cal_last_temp
----------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: get_ext_cal_last_temp()
-
-            Returns the temperature of the last successful external calibration.
-
-            The temperature is returned in degrees Celsius.
-
-            **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-            
-
-
-
-            :rtype: float
-            :return:
-
-
-                    Returns the temperature, in degrees Celsius, of the last external calibration.
-
-                    
-
-
-
 get_ext_cal_recommended_interval
 --------------------------------
 

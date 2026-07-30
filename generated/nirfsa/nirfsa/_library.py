@@ -69,7 +69,6 @@ class Library(object):
         self.niRFSA_GetDeembeddingTableNumberOfPorts_cfunc = None
         self.niRFSA_GetError_cfunc = None
         self.niRFSA_GetExtCalLastDateAndTime_cfunc = None
-        self.niRFSA_GetExtCalLastTemp_cfunc = None
         self.niRFSA_GetExtCalRecommendedInterval_cfunc = None
         self.niRFSA_GetFetchBacklog_cfunc = None
         self.niRFSA_GetFrequencyResponse_cfunc = None
@@ -452,14 +451,6 @@ class Library(object):
                 self.niRFSA_GetExtCalLastDateAndTime_cfunc.argtypes = [ViSession, ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32), ctypes.POINTER(ViInt32)]  # noqa: F405
                 self.niRFSA_GetExtCalLastDateAndTime_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_GetExtCalLastDateAndTime_cfunc(vi, year, month, day, hour, minute)
-
-    def niRFSA_GetExtCalLastTemp(self, vi, temperature):  # noqa: N802
-        with self._func_lock:
-            if self.niRFSA_GetExtCalLastTemp_cfunc is None:
-                self.niRFSA_GetExtCalLastTemp_cfunc = self._get_library_function('niRFSA_GetExtCalLastTemp')
-                self.niRFSA_GetExtCalLastTemp_cfunc.argtypes = [ViSession, ctypes.POINTER(ViReal64)]  # noqa: F405
-                self.niRFSA_GetExtCalLastTemp_cfunc.restype = ViStatus  # noqa: F405
-        return self.niRFSA_GetExtCalLastTemp_cfunc(vi, temperature)
 
     def niRFSA_GetExtCalRecommendedInterval(self, vi, months):  # noqa: N802
         with self._func_lock:

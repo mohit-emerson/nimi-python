@@ -7707,23 +7707,6 @@ class Session(_SessionBase):
         return year, month, day, hour, minute
 
     @ivi_synchronized
-    def get_ext_cal_last_temp(self):
-        r'''get_ext_cal_last_temp
-
-        Returns the temperature of the last successful external calibration.
-
-        The temperature is returned in degrees Celsius.
-
-        **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698
-
-        Returns:
-            temperature (float): Returns the temperature, in degrees Celsius, of the last external calibration.
-
-        '''
-        temperature = self._interpreter.get_ext_cal_last_temp()
-        return temperature
-
-    @ivi_synchronized
     def get_ext_cal_recommended_interval(self):
         r'''get_ext_cal_recommended_interval
 

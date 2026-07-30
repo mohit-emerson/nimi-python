@@ -16,9 +16,6 @@ import system_test_utilities  # noqa: E402
 test_files_base_dir = os.path.join(os.path.dirname(__file__))
 use_simulated_session = True
 real_hw_resource_name = '5841'
-use_real_5668_session = False
-real_5668_resource_name = '5668'
-real_5831_resource_name = '5831'
 
 
 def get_test_file_path(file_name):
@@ -41,13 +38,9 @@ class SystemTests:
             yield sim_5831_session
 
     @pytest.fixture(scope='function')
-    def real_5668_device_session(self, session_creation_kwargs):
-        if use_real_5668_session is False:
-            with nirfsa.Session("5668sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5668", **session_creation_kwargs) as sim_5668_session:
-                yield sim_5668_session
-        else:
-            with nirfsa.Session(real_5668_resource_name, id_query=False, reset_device=False, **session_creation_kwargs) as real_5668_session:
-                yield real_5668_session
+    def simulated_5668_device_session(self, session_creation_kwargs):
+        with nirfsa.Session("5668sim", id_query=False, reset_device=False, options="Simulate=1, DriverSetup=Model:5668R", **session_creation_kwargs) as sim_5668_session:
+            yield sim_5668_session
 
 # Attribute set and get related tests
     def test_get_float_attribute(self, rfsa_device_session):
@@ -210,11 +203,6 @@ class SystemTests:
             assert rfsa_device_session.check_acquisition_status() is False  # is_done never True for continuous acquisition
         assert rfsa_device_session.check_acquisition_status() is True  # is_done True after abort
 
-    @pytest.mark.skipif(use_real_5668_session is False, reason="Requires real 5668 hardware")
-    def test_get_ext_cal_last_temp(self, real_5668_device_session):
-        temperature = real_5668_device_session.get_ext_cal_last_temp()
-        assert isinstance(temperature, float)
-
     @pytest.mark.skipif(use_simulated_session is True, reason="Bad date returned by driver for simulated device")
     def test_get_self_cal_last_date_and_time(self, rfsa_device_session):
         dt = rfsa_device_session.get_self_cal_last_date_and_time(nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION)
@@ -225,9 +213,8 @@ class SystemTests:
         temperature = rfsa_device_session.get_self_calibration_temperature(nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION)
         assert isinstance(temperature, float)
 
-    @pytest.mark.skipif(use_real_5668_session is False, reason="Requires real 5668 hardware")
-    def test_is_self_cal_valid(self, real_5668_device_session):
-        self_cal_valid, valid_steps = real_5668_device_session.is_self_cal_valid()
+    def test_is_self_cal_valid(self, simulated_5668_device_session):
+        self_cal_valid, valid_steps = simulated_5668_device_session.is_self_cal_valid()
         assert isinstance(self_cal_valid, bool)
         assert valid_steps is not None
 
@@ -239,9 +226,8 @@ class SystemTests:
         with rfsa_device_session.initiate():
             rfsa_device_session.perform_thermal_correction()
 
-    @pytest.mark.skipif(use_real_5668_session is False, reason="Requires real 5668 hardware")
-    def test_get_frequency_response(self, real_5668_device_session):
-        frequencies, magnitude_response, phase_response = real_5668_device_session.get_frequency_response()
+    def test_get_frequency_response(self, simulated_5668_device_session):
+        frequencies, magnitude_response, phase_response = simulated_5668_device_session.get_frequency_response()
         assert isinstance(frequencies, np.ndarray)
         assert isinstance(magnitude_response, np.ndarray)
         assert isinstance(phase_response, np.ndarray)

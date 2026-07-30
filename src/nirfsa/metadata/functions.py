@@ -3301,48 +3301,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetExtCalLastTemp': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns the temperature of the last successful external calibration.\n\nThe temperature is returned in degrees Celsius.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698',
-        },
-        'grpc_name': 'GetExtCalLastTemp',
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'python_name': 'get_ext_cal_last_temp',
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init, nirfsa_InitWithOptions, or nirfsa_InitExtCal function and identifies a particular instrument session.',
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the temperature, in degrees Celsius, of the last external calibration.',
-                },
-                'name': 'temperature',
-                'type': 'ViReal64',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'GetExtCalRecommendedInterval': {
         'codegen_method': 'public',
         'documentation': {

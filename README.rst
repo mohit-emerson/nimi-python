@@ -298,7 +298,7 @@ NI-RFSA Python API Status
 +-------------------------------+-----------------------+
 | NI-RFSA (nirfsa)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2026 Q3 Patch 1       |
+| Driver Version Tested Against | 2026 Q3               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsaLatestVersion| |
 +-------------------------------+-----------------------+
@@ -579,6 +579,7 @@ Driver specific installation instructions can be found on **Read the Docs**:
 * `nidmm <https://nidmm.readthedocs.io/en/latest/nidmm.html#installation>`_
 * `nifgen <https://nifgen.readthedocs.io/en/latest/nifgen.html#installation>`_
 * `nimodinst <https://nimodinst.readthedocs.io/en/latest/nimodinst.html#installation>`_
+* `nirfsa <https://nirfsa.readthedocs.io/en/latest/nirfsa.html#installation>`_
 * `nirfsg <https://nirfsg.readthedocs.io/en/latest/nirfsg.html#installation>`_
 * `niscope <https://niscope.readthedocs.io/en/latest/niscope.html#installation>`_
 * `nise <https://nise.readthedocs.io/en/latest/nise.html#installation>`_
@@ -632,17 +633,17 @@ Documentation
 
 Documentation is available on **Read the Docs**:
 
-- https://nidcpower.readthedocs.io/en/stable
-- https://nidigital.readthedocs.io/en/stable
-- https://nidmm.readthedocs.io/en/stable
-- https://nifgen.readthedocs.io/en/stable
-- https://nimodinst.readthedocs.io/en/stable
-- https://nirfsg.readthedocs.io/en/stable
-- https://nirfsa.readthedocs.io/en/stable
-- https://niscope.readthedocs.io/en/stable
-- https://nise.readthedocs.io/en/stable
-- https://niswitch.readthedocs.io/en/stable
-- https://nitclk.readthedocs.io/en/stable
+- https://nidcpower.readthedocs.io
+- https://nidigital.readthedocs.io
+- https://nidmm.readthedocs.io
+- https://nifgen.readthedocs.io
+- https://nimodinst.readthedocs.io
+- https://nirfsg.readthedocs.io
+- https://nirfsa.readthedocs.io
+- https://niscope.readthedocs.io
+- https://nise.readthedocs.io
+- https://niswitch.readthedocs.io
+- https://nitclk.readthedocs.io
 
 
 

@@ -5,7 +5,7 @@ NI-RFSA Python API Status
 +-------------------------------+-----------------------+
 | NI-RFSA (nirfsa)              |                       |
 +===============================+=======================+
-| Driver Version Tested Against | 2026 Q3 Patch 1       |
+| Driver Version Tested Against | 2026 Q3               |
 +-------------------------------+-----------------------+
 | PyPI Version                  | |nirfsaLatestVersion| |
 +-------------------------------+-----------------------+

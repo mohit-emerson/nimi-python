@@ -2253,24 +2253,6 @@ enums = {
             }
         ]
     },
-    'SoftwareTriggerType': {
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Specifies the Script Trigger.'
-                },
-                'name': 'NIRFSA_VAL_SCRIPT_TRIGGER',
-                'value': 1101
-            },
-            {
-                'documentation': {
-                    'description': 'Specifies the Start Trigger.'
-                },
-                'name': 'NIRFSA_VAL_START_TRIGGER',
-                'value': 1100
-            }
-        ]
-    },
     'SparameterOrientation': {
         'codegen_method': 'public',
         'values': [
@@ -2558,7 +2540,7 @@ enums = {
             }
         ]
     },
-    'Trigger': {
+    'SoftwareTriggerType': {
         'codegen_method': 'public',
         'values': [
             {

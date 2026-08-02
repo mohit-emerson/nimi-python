@@ -170,7 +170,7 @@ ArmReferenceTriggerType
 
 
 
-        The Arm Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the :py:meth:`nirfsa.Session.send_software_edge_trigger` method and selecting :py:data:`~nirfsa.Trigger.ARM_REF` as the **trigger** parameter.
+        The Arm Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the :py:meth:`nirfsa.Session.send_software_edge_trigger` method and selecting :py:data:`~nirfsa.SoftwareTriggerType.ARM_REF` as the **trigger** parameter.
 
         
 
@@ -3051,21 +3051,41 @@ SoftwareTriggerType
 
 .. py:class:: SoftwareTriggerType
 
-    .. py:attribute:: SoftwareTriggerType.SCRIPT
+    .. py:attribute:: SoftwareTriggerType.START
 
 
 
-        Specifies the Script Trigger.
+        NI-RFSA sends a Start software trigger.
 
         
 
 
 
-    .. py:attribute:: SoftwareTriggerType.START
+    .. py:attribute:: SoftwareTriggerType.REF
 
 
 
-        Specifies the Start Trigger.
+        NI-RFSA sends a Reference software trigger.
+
+        
+
+
+
+    .. py:attribute:: SoftwareTriggerType.ADVANCE
+
+
+
+        NI-RFSA sends an Advance software trigger.
+
+        
+
+
+
+    .. py:attribute:: SoftwareTriggerType.ARM_REF
+
+
+
+        NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.
 
         
 
@@ -3456,51 +3476,6 @@ SyncRefTriggerDelayEnabled
 
 
         Enables synchronization reference trigger delay.
-
-        
-
-
-
-Trigger
--------
-
-.. py:class:: Trigger
-
-    .. py:attribute:: Trigger.START
-
-
-
-        NI-RFSA sends a Start software trigger.
-
-        
-
-
-
-    .. py:attribute:: Trigger.REF
-
-
-
-        NI-RFSA sends a Reference software trigger.
-
-        
-
-
-
-    .. py:attribute:: Trigger.ADVANCE
-
-
-
-        NI-RFSA sends an Advance software trigger.
-
-        
-
-
-
-    .. py:attribute:: Trigger.ARM_REF
-
-
-
-        NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.
 
         
 

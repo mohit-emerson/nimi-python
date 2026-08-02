@@ -304,15 +304,15 @@ class _SessionBase(object):
 
     **Defined Values**:
 
-    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | Name                                  | Description                                                                                                                                                                                                                 |
-    +=======================================+=============================================================================================================================================================================================================================+
-    | ArmReferenceTriggerType.NONE          | No Arm Reference Trigger is configured.                                                                                                                                                                                     |
-    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ArmReferenceTriggerType.DIGITAL_EDGE  | The Arm Reference Trigger is not asserted until a digital edge is detected. The source of the digital edge is specified with the digital_edge_arm_ref_trigger_source property.                                              |
-    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-    | ArmReferenceTriggerType.SOFTWARE_EDGE | The Arm Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the send_software_edge_trigger method and selecting Trigger.ARM_REF as the **trigger** parameter. |
-    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | Name                                  | Description                                                                                                                                                                                                                             |
+    +=======================================+=========================================================================================================================================================================================================================================+
+    | ArmReferenceTriggerType.NONE          | No Arm Reference Trigger is configured.                                                                                                                                                                                                 |
+    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ArmReferenceTriggerType.DIGITAL_EDGE  | The Arm Reference Trigger is not asserted until a digital edge is detected. The source of the digital edge is specified with the digital_edge_arm_ref_trigger_source property.                                                          |
+    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+    | ArmReferenceTriggerType.SOFTWARE_EDGE | The Arm Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the send_software_edge_trigger method and selecting SoftwareTriggerType.ARM_REF as the **trigger** parameter. |
+    +---------------------------------------+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 
     Note:
     One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.
@@ -8327,13 +8327,13 @@ class Session(_SessionBase):
 
                 **Defined Values:**
 
-                +----------------------------+-------------------------------+
-                | Name                       | Description                   |
-                +============================+===============================+
-                | SoftwareTriggerType.START  | Specifies the Start Trigger.  |
-                +----------------------------+-------------------------------+
-                | SoftwareTriggerType.SCRIPT | Specifies the Script Trigger. |
-                +----------------------------+-------------------------------+
+                +---------------------------+-------------------------------+
+                | Name                      | Description                   |
+                +===========================+===============================+
+                | SoftwareTriggerType.START | Specifies the Start Trigger.  |
+                +---------------------------+-------------------------------+
+                | NIRFSA_VAL_SCRIPT_TRIGGER | Specifies the Script Trigger. |
+                +---------------------------+-------------------------------+
 
                 Note:
                 One or more of the referenced values are not in the Python API for this driver. Enums that only define values, or represent True/False, have been removed.

@@ -375,7 +375,7 @@ class SystemTests:
         rfsa_device_session.configure_software_edge_ref_trigger()
         with rfsa_device_session.initiate():
             assert rfsa_device_session.check_acquisition_status() is False
-            rfsa_device_session.send_software_edge_trigger(nirfsa.SoftwareTriggerType.START, '')
+            rfsa_device_session.send_software_edge_trigger(nirfsa.SoftwareTriggerType.REF, '')
             time.sleep(3)
             assert rfsa_device_session.check_acquisition_status() is True
 

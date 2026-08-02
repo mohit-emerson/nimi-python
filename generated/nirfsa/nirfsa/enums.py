@@ -75,7 +75,7 @@ class ArmReferenceTriggerType(Enum):
     '''
     SOFTWARE_EDGE = 604
     r'''
-    The Arm Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the send_software_edge_trigger method and selecting Trigger.ARM_REF as the **trigger** parameter.
+    The Arm Reference Trigger is not asserted until a software trigger occurs. You can assert the software trigger by calling the send_software_edge_trigger method and selecting SoftwareTriggerType.ARM_REF as the **trigger** parameter.
     '''
 
 
@@ -1291,13 +1291,21 @@ class SmoothSpectrumEnabled(Enum):
 
 
 class SoftwareTriggerType(Enum):
-    SCRIPT = 1101
-    r'''
-    Specifies the Script Trigger.
-    '''
     START = 1100
     r'''
-    Specifies the Start Trigger.
+    NI-RFSA sends a Start software trigger.
+    '''
+    REF = 702
+    r'''
+    NI-RFSA sends a Reference software trigger.
+    '''
+    ADVANCE = 1102
+    r'''
+    NI-RFSA sends an Advance software trigger.
+    '''
+    ARM_REF = 1103
+    r'''
+    NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.
     '''
 
 
@@ -1462,25 +1470,6 @@ class SyncRefTriggerDelayEnabled(Enum):
     ENABLED = 1901
     r'''
     Enables synchronization reference trigger delay.
-    '''
-
-
-class Trigger(Enum):
-    START = 1100
-    r'''
-    NI-RFSA sends a Start software trigger.
-    '''
-    REF = 702
-    r'''
-    NI-RFSA sends a Reference software trigger.
-    '''
-    ADVANCE = 1102
-    r'''
-    NI-RFSA sends an Advance software trigger.
-    '''
-    ARM_REF = 1103
-    r'''
-    NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.
     '''
 
 

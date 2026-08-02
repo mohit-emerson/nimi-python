@@ -4,14 +4,18 @@ import numpy as np
 import sys
 
 
-def example(resource_name, options, center_frequency, span, reference_level):
+def example(resource_name, options, center_frequency, span, reference_level, number_of_spectral_lines):
     with nirfsa.Session(resource_name=resource_name, id_query=False, reset_device=False, options=options) as rfsa_session:
         # Configurations
         rfsa_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
+        rfsa_session.configure_ref_clock(nirfsa.ReferenceClockSource.ONBOARD_CLOCK, 10e6)
         rfsa_session.reference_level = reference_level
-        rfsa_session.configure_spectrum_frequency(center_frequency=center_frequency, span=span)
+        rfsa_session.resolution_bandwidth = 10e3
 
-        spectrum_buf = np.zeros(1024, dtype=np.float64)
+        rfsa_session.configure_spectrum_frequency(center_frequency=center_frequency, span=span)
+        rfsa_session.number_of_spectral_lines = number_of_spectral_lines
+
+        spectrum_buf = np.zeros(rfsa_session.number_of_spectral_lines, dtype=np.float64)
 
         spectrum_info = rfsa_session.read_power_spectrum_into(spectrum_buf, timeout=10.0)
 
@@ -34,10 +38,11 @@ def _main(argsv):
     parser.add_argument('-n', '--resource-name', default='PXI1Slot2', help='Resource name of the NI RF signal analyzer.')
     parser.add_argument('-c', '--center-frequency', default=1e9, type=float, help='Center frequency in Hz.')
     parser.add_argument('-s', '--span', default=100e6, type=float, help='Span in Hz.')
-    parser.add_argument('-r', '--reference-level', default=-10.0, type=float, help='Reference level in dBm.')
+    parser.add_argument('-r', '--reference-level', default=0.0, type=float, help='Reference level in dBm.')
+    parser.add_argument('-l', '--number-of-spectral-lines', default=1024, type=int, help='Number of spectral lines to acquire.')
     parser.add_argument('-op', '--option-string', default='', type=str, help='Option string for the session.')
     args = parser.parse_args(argsv)
-    example(args.resource_name, args.option_string, args.center_frequency, args.span, args.reference_level)
+    example(args.resource_name, args.option_string, args.center_frequency, args.span, args.reference_level, args.number_of_spectral_lines)
 
 
 def main():
@@ -46,11 +51,11 @@ def main():
 
 def test_example():
     options = {'simulate': True, 'driver_setup': {'Model': '5841', }, }
-    example('simulated5841', options, 1e9, 100e6, -10.0)
+    example('simulated5841', options, 1e9, 100e6, -10.0, 1024)
 
 
 def test_main():
-    cmd_line = ['--resource-name', 'simulated5841', '--center_frequency', '1e9', '--span', '100e6', '--reference-level', '-10', '--option-string', 'Simulate=1, DriverSetup=Model:5841']
+    cmd_line = ['--resource-name', 'simulated5841', '--center-frequency', '1e9', '--span', '100e6', '--reference-level', '-10', '--number-of-spectral-lines', '1024', '--option-string', 'Simulate=1, DriverSetup=Model:5841']
     _main(cmd_line)
 
 

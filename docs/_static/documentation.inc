@@ -10,8 +10,8 @@ Documentation is available on **Read the Docs**:
 - https://nidmm.readthedocs.io
 - https://nifgen.readthedocs.io
 - https://nimodinst.readthedocs.io
-- https://nirfsg.readthedocs.io
 - https://nirfsa.readthedocs.io
+- https://nirfsg.readthedocs.io
 - https://niscope.readthedocs.io
 - https://nise.readthedocs.io
 - https://niswitch.readthedocs.io

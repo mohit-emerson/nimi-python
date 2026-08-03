@@ -3459,14 +3459,12 @@ functions = {
                     'description': 'Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.\n\nPass VI_NULL if you do not want to use this parameter.',
                 },
                 'name': 'frequencies',
-                'numpy': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'bufferSize',
                     'value_twist': 'numberOfFrequencies'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
                 'use_in_python_api': True
             },
             {
@@ -3475,14 +3473,12 @@ functions = {
                     'description': 'Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the NIRFSA_ATTR_FREQUENCIES array.\n\nPass VI_NULL if you do not want to use this parameter.',
                 },
                 'name': 'magnitudeResponse',
-                'numpy': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'bufferSize',
                     'value_twist': 'numberOfFrequencies'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
                 'use_in_python_api': True
             },
             {
@@ -3491,14 +3487,12 @@ functions = {
                     'description': 'Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the NIRFSA_ATTR_FREQUENCIES array.\n\nPass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.',
                 },
                 'name': 'phaseResponse',
-                'numpy': True,
                 'size': {
                     'mechanism': 'ivi-dance-with-a-twist',
                     'value': 'bufferSize',
                     'value_twist': 'numberOfFrequencies'
                 },
                 'type': 'ViReal64[]',
-                'type_in_documentation': 'numpy.array(dtype=numpy.float64)',
                 'use_in_python_api': True
             },
             {

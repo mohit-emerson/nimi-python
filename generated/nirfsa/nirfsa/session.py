@@ -5980,18 +5980,18 @@ class _SessionBase(object):
         Example: :py:meth:`my_session.get_frequency_response`
 
         Returns:
-            frequencies (numpy.array(dtype=numpy.float64)): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
+            frequencies (list of float): Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
 
                 Pass VI_NULL if you do not want to use this parameter.
 
-            magnitude_response (numpy.array(dtype=numpy.float64)): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
+            magnitude_response (list of float): Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the FREQUENCIES array.
 
                 Pass VI_NULL if you do not want to use this parameter.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
 
-            phase_response (numpy.array(dtype=numpy.float64)): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
+            phase_response (list of float): Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the FREQUENCIES array.
 
                 Pass VI_NULL if you do not want to use this parameter. This array may contain zeros if the device does not contain a stored phase response in its calibration data.
 

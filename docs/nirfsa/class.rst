@@ -1642,7 +1642,7 @@ get_frequency_response
 
                 WHERE
 
-                frequencies (numpy.array(dtype=numpy.float64)): 
+                frequencies (list of float): 
 
 
                     Returns an array containing the frequencies, in hertz (Hz), that correspond to the response data.
@@ -1652,7 +1652,7 @@ get_frequency_response
                     
 
 
-                magnitude_response (numpy.array(dtype=numpy.float64)): 
+                magnitude_response (list of float): 
 
 
                     Returns an array containing the magnitude of the requested response, in decibels (dB). The magnitude response is normalized to the center frequency at each frequency in the :py:attr:`nirfsa.Session.FREQUENCIES` array.
@@ -1664,7 +1664,7 @@ get_frequency_response
                     .. note:: One or more of the referenced properties are not in the Python API for this driver.
 
 
-                phase_response (numpy.array(dtype=numpy.float64)): 
+                phase_response (list of float): 
 
 
                     Returns an array containing the phase of the requested response, in radians. The phase response is normalized to the center frequency at each frequency entry in the :py:attr:`nirfsa.Session.FREQUENCIES` array.

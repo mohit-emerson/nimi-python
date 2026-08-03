@@ -228,9 +228,9 @@ class SystemTests:
 
     def test_get_frequency_response(self, simulated_5668_device_session):
         frequencies, magnitude_response, phase_response = simulated_5668_device_session.get_frequency_response()
-        assert isinstance(frequencies, np.ndarray)
-        assert isinstance(magnitude_response, np.ndarray)
-        assert isinstance(phase_response, np.ndarray)
+        assert isinstance(frequencies, list)
+        assert isinstance(magnitude_response, list)
+        assert isinstance(phase_response, list)
 
     def test_get_scaling_coefficients(self, rfsa_device_session):
         coefficient_info = rfsa_device_session.get_scaling_coefficients()

@@ -9,7 +9,6 @@ def example(resource_name, options, iq_carrier_frequency, reference_level, numbe
         # Configurations
         rfsa_session.acquisition_type = nirfsa.AcquisitionType.IQ
 
-        rfsa_session.configure_ref_clock(nirfsa.ReferenceClockSource.ONBOARD_CLOCK, 10e6)
         rfsa_session.reference_level = reference_level
         rfsa_session.iq_carrier_frequency = iq_carrier_frequency
         rfsa_session.number_of_samples = number_of_samples
@@ -19,15 +18,15 @@ def example(resource_name, options, iq_carrier_frequency, reference_level, numbe
 
         wfm_info = rfsa_session.read_iq_single_record_into(iq_data_array)
 
-        actual_number_of_samples = int(wfm_info.actual_samples)
+        samples = np.asarray(wfm_info.samples)
         accumulator = 0.0
 
         # Do something useful with the data.
         # We will present average power: 10log(((I^2 + Q ^2) / 2R) * 1000), where
         # R = 50 Ohms.
-        if actual_number_of_samples > 0:
-            for i in range(actual_number_of_samples):
-                magnitude_squared = iq_data_array[i].real * iq_data_array[i].real + iq_data_array[i].imag * iq_data_array[i].imag
+        if len(samples) > 0:
+            for sample in samples:
+                magnitude_squared = sample.real * sample.real + sample.imag * sample.imag
 
                 # we need to handle this because log(0) return a range error.
                 if magnitude_squared == 0.0:
@@ -35,7 +34,7 @@ def example(resource_name, options, iq_carrier_frequency, reference_level, numbe
 
                 accumulator += 10.0 * np.log10((magnitude_squared / (2.0 * 50.0)) * 1000.0)
 
-            print('Average power = %0.1f dBm' % (accumulator / actual_number_of_samples))
+            print('Average power = %0.1f dBm' % (accumulator / len(samples)))
 
 
 def _main(argsv):

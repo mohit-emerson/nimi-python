@@ -8,7 +8,6 @@ def example(resource_name, options, center_frequency, span, reference_level, num
     with nirfsa.Session(resource_name=resource_name, id_query=False, reset_device=False, options=options) as rfsa_session:
         # Configurations
         rfsa_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_session.configure_ref_clock(nirfsa.ReferenceClockSource.ONBOARD_CLOCK, 10e6)
         rfsa_session.reference_level = reference_level
         rfsa_session.resolution_bandwidth = 10e3
 
@@ -23,8 +22,9 @@ def example(resource_name, options, center_frequency, span, reference_level, num
         # We will find the highest peak in a bin, which is not the actual highest
         # peak and frequency we could find in the acquisition. For an accurate
         # peak search, we can analyze the data with the Spectral Measurements Toolset.
-        greatest_peak_index = int(np.argmax(spectrum_buf))
-        greatest_peak_power = spectrum_buf[greatest_peak_index]
+        samples = np.asarray(spectrum_info.samples)
+        greatest_peak_index = int(np.argmax(samples))
+        greatest_peak_power = samples[greatest_peak_index]
         greatest_peak_frequency = spectrum_info.initial_frequency + spectrum_info.frequency_increment * greatest_peak_index
 
         print(

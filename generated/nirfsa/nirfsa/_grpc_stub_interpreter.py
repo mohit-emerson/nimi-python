@@ -413,7 +413,7 @@ class GrpcStubInterpreter(object):
             self._client.GetScalingCoefficients,
             grpc_types.GetScalingCoefficientsRequest(vi=self._vi, channel_list=channel_list),
         )
-        return [coefficient_info_type.CoefficientInfo(offset=x.offset, gain=x.gain) for x in response.coefficient_info]
+        return [coefficient_info_type.CoefficientInfo(x) for x in response.coefficient_info]
 
     def get_self_cal_last_date_and_time(self, self_calibration_step):  # noqa: N802
         response = self._invoke(

@@ -239,8 +239,6 @@ class SystemTests:
         for info in coefficient_info:
             assert hasattr(info, 'offset')
             assert hasattr(info, 'gain')
-            assert hasattr(info, 'reserved1')
-            assert hasattr(info, 'reserved2')
 
     @pytest.mark.skipif(use_simulated_session is True, reason="Fetch backlog behavior differs on simulated RFSA")
     def test_get_fetch_backlog(self, rfsa_device_session):

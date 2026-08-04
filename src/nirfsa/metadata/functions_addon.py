@@ -86,16 +86,6 @@ functions_override_metadata = {
             }
         ],
     },
-    'GetScalingCoefficients': {
-        'method_templates': [
-            {
-                'documentation_filename': '/default_method',
-                'library_interpreter_filename': 'get_coefficient_info',
-                'method_python_name_suffix': '',
-                'session_filename': '/default_method',
-            }
-        ],
-    },
     'ReadPowerSpectrumF32': {
         'method_templates': [
             {

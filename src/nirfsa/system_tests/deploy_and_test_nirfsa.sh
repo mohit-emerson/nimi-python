@@ -5,7 +5,7 @@
 source /mnt/c/PythonRFSATesting/.venv/bin/activate
 
 # Copy the wheel
-cp /home/msaini/nimi-python/generated/nirfsa/dist/nirfsa-1.0.2.dev0-py3-none-any.whl /mnt/c/PythonRFSATesting/generated_nirfsa/dist/
+cp /home/msaini/nimi-python/generated/nirfsa/dist/nirfsa-1.0.0.dev0-py3-none-any.whl /mnt/c/PythonRFSATesting/generated_nirfsa/dist/
 
 # Copy the test file
 cp /home/msaini/nimi-python/src/nirfsa/system_tests/test_system_nirfsa.py /mnt/c/PythonRFSATesting/src/nirfsa/system_tests/

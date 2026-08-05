@@ -213,6 +213,7 @@ class SystemTests:
         temperature = rfsa_device_session.get_self_calibration_temperature(nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION)
         assert isinstance(temperature, float)
 
+    @pytest.mark.skip(reason="Disabled due to a bug in the 5668R simulation")
     def test_is_self_cal_valid(self, simulated_5668_device_session):
         self_cal_valid, valid_steps = simulated_5668_device_session.is_self_cal_valid()
         assert isinstance(self_cal_valid, bool)
@@ -226,6 +227,7 @@ class SystemTests:
         with rfsa_device_session.initiate():
             rfsa_device_session.perform_thermal_correction()
 
+    @pytest.mark.skip(reason="Disabled due to a bug in the 5668R simulation")
     def test_get_frequency_response(self, simulated_5668_device_session):
         frequencies, magnitude_response, phase_response = simulated_5668_device_session.get_frequency_response()
         assert isinstance(frequencies, list)
@@ -248,7 +250,7 @@ class SystemTests:
         rfsa_device_session.number_of_samples = 2000
         rfsa_device_session.fetch_relative_to = nirfsa.FetchRelativeTo.REFERENCE_TRIGGER
         with rfsa_device_session.initiate():
-            time.sleep(3)  # check on this if its okay
+            time.sleep(3)
             backlog = rfsa_device_session.get_fetch_backlog(0)
         assert backlog == rfsa_device_session.number_of_samples
 

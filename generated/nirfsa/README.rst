@@ -123,18 +123,16 @@ The following is a basic example of using the **nirfsa** module to open a sessio
 
     # Configure the session
     with nirfsa.Session(resource_name=resource_name, id_query=False, reset_device=False, options=options) as rfsa_session:
-        rfsa_session.acquisition_type = nirfsa.AcquisitionType.SPECTRUM
-        rfsa_session.configure_ref_clock(nirfsa.ReferenceClockSource.ONBOARD_CLOCK, 10e6)
-        rfsa_session.reference_level = 0
-        rfsa_session.resolution_bandwidth = 10e3
+        rfsa_session.acquisition_type = nirfsa.AcquisitionType.IQ
 
-        rfsa_session.configure_spectrum_frequency(center_frequency=center_frequency, span=span)
-        rfsa_session.number_of_spectral_lines = 1024
+        rfsa_session.reference_level = -10
+        rfsa_session.iq_carrier_frequency = 1e9
+        rfsa_session.number_of_samples = 1024
+        rfsa_session.iq_rate = 1e6
 
-        spectrum_buf = np.zeros(rfsa_session.number_of_spectral_lines, dtype=np.float64)
+        iq_data_array = np.zeros(number_of_samples, dtype=np.complex128)
 
-        spectrum_info = rfsa_session.read_power_spectrum_into(spectrum_buf, timeout=10.0)
-
+        wfm_info = rfsa_session.read_iq_single_record_into(iq_data_array)
         # Perform measurements...
 
 `Other usage examples can be found on GitHub. <https://github.com/ni/nimi-python/tree/master/src/nirfsa/examples>`_

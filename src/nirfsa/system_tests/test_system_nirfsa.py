@@ -213,12 +213,6 @@ class SystemTests:
         temperature = rfsa_device_session.get_self_calibration_temperature(nirfsa.SelfCalibrationStep.IMAGE_SUPPRESSION)
         assert isinstance(temperature, float)
 
-    @pytest.mark.skip(reason="Disabled due to a bug in the 5668R simulation")
-    def test_is_self_cal_valid(self, simulated_5668_device_session):
-        self_cal_valid, valid_steps = simulated_5668_device_session.is_self_cal_valid()
-        assert isinstance(self_cal_valid, bool)
-        assert valid_steps is not None
-
     @pytest.mark.skipif(use_simulated_session is True, reason="Thermal correction is unsupported on simulated RFSA")
     def test_perform_thermal_correction(self, rfsa_device_session):
         rfsa_device_session.number_of_samples_is_finite = False
@@ -227,12 +221,6 @@ class SystemTests:
         with rfsa_device_session.initiate():
             rfsa_device_session.perform_thermal_correction()
 
-    @pytest.mark.skip(reason="Disabled due to a bug in the 5668R simulation")
-    def test_get_frequency_response(self, simulated_5668_device_session):
-        frequencies, magnitude_response, phase_response = simulated_5668_device_session.get_frequency_response()
-        assert isinstance(frequencies, list)
-        assert isinstance(magnitude_response, list)
-        assert isinstance(phase_response, list)
 
     def test_get_scaling_coefficients(self, rfsa_device_session):
         coefficient_info = rfsa_device_session.get_scaling_coefficients()

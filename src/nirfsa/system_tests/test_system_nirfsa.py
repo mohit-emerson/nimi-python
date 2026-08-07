@@ -221,7 +221,6 @@ class SystemTests:
         with rfsa_device_session.initiate():
             rfsa_device_session.perform_thermal_correction()
 
-
     def test_get_scaling_coefficients(self, rfsa_device_session):
         coefficient_info = rfsa_device_session.get_scaling_coefficients()
         assert isinstance(coefficient_info, list)

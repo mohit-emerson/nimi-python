@@ -493,7 +493,7 @@ class GrpcStubInterpreter(object):
         )
         power_spectrum_data_array[:] = response.power_spectrum_data
         s = response.spectrum_info
-        return spectrum_info_type.SpectrumInfoT(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
+        return spectrum_info_type.SpectrumInfo(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
 
     def read_power_spectrum_f64(self, channel_list, timeout, power_spectrum_data_array):  # noqa: N802
         response = self._invoke(
@@ -502,7 +502,7 @@ class GrpcStubInterpreter(object):
         )
         power_spectrum_data_array[:] = response.power_spectrum_data
         s = response.spectrum_info
-        return spectrum_info_type.SpectrumInfoT(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
+        return spectrum_info_type.SpectrumInfo(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
 
     def reset_device(self):  # noqa: N802
         self._invoke(

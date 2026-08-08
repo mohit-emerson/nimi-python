@@ -25,8 +25,8 @@ config = {
         {
             'ctypes_type': 'struct_niRFSA_spectrumInfo',
             'file_name': 'spectrum_info_type',
-            'grpc_name': 'SpectrumInfoT',
-            'python_name': 'SpectrumInfoT'
+            'grpc_name': 'SpectrumInfo',
+            'python_name': 'SpectrumInfo'
         }
     ],
     'driver_name': 'NI-RFSA',

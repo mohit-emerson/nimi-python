@@ -639,7 +639,7 @@ class LibraryInterpreter(object):
         spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
         error_code = self._library.niRFSA_ReadPowerSpectrumF32(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_array_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
+        return spectrum_info_type.SpectrumInfo(spectrum_info_ctype)
 
     def read_power_spectrum_f64(self, channel_list, timeout, power_spectrum_data_array):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
@@ -650,7 +650,7 @@ class LibraryInterpreter(object):
         spectrum_info_ctype = spectrum_info_type.struct_niRFSA_spectrumInfo()  # case S220
         error_code = self._library.niRFSA_ReadPowerSpectrumF64(vi_ctype, channel_list_ctype, timeout_ctype, power_spectrum_data_array_ctype, data_array_size_ctype, None if spectrum_info_ctype is None else (ctypes.pointer(spectrum_info_ctype)))
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return spectrum_info_type.SpectrumInfoT(spectrum_info_ctype)
+        return spectrum_info_type.SpectrumInfo(spectrum_info_ctype)
 
     def reset_device(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110

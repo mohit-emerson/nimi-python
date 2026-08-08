@@ -3,7 +3,7 @@
     '''Renders ReadPowerSpectrumF32/F64 for gRPC.
     The proto request has no power_spectrum_data_array field — only data_array_size.
     The server returns the data as a repeated field; we fill the pre-allocated array in-place.
-    SpectrumInfoT is constructed with keyword args to avoid reserved fields absent in the proto.'''
+    SpectrumInfo is constructed with keyword args to avoid reserved fields absent in the proto.'''
     import build.helper as helper
 
     full_func_name = f['interpreter_name'] + method_template['method_python_name_suffix']
@@ -18,4 +18,4 @@
         )
         power_spectrum_data_array[:] = response.power_spectrum_data
         s = response.spectrum_info
-        return spectrum_info_type.SpectrumInfoT(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)
+        return spectrum_info_type.SpectrumInfo(initial_frequency=s.initial_frequency, frequency_increment=s.frequency_increment, number_of_spectral_lines=s.number_of_spectral_lines)

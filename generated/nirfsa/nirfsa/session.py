@@ -6359,7 +6359,7 @@ class _SessionBase(object):
 
 
         Returns:
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+            spectrum_info (SpectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.
@@ -6401,7 +6401,7 @@ class _SessionBase(object):
 
 
         Returns:
-            spectrum_info (SpectrumInfoT): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
+            spectrum_info (SpectrumInfo): Returns additional information about the **POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the method returned.
 
                 Note:
                 One or more of the referenced properties are not in the Python API for this driver.

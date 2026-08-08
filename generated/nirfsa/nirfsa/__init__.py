@@ -18,7 +18,7 @@ from nirfsa.waveform_info import WaveformInfo  # noqa: F401
 
 from nirfsa.waveform_info import struct_niRFSA_wfmInfo  # noqa: F401
 
-from nirfsa.spectrum_info_type import SpectrumInfoT  # noqa: F401
+from nirfsa.spectrum_info_type import SpectrumInfo  # noqa: F401
 
 from nirfsa.spectrum_info_type import struct_niRFSA_spectrumInfo  # noqa: F401
 

@@ -41,7 +41,7 @@ class struct_niRFSA_spectrumInfo(ctypes.Structure):  # noqa N801
             self.reserved5 = reserved5
 
 
-class SpectrumInfoT:
+class SpectrumInfo:
     """Python-friendly wrapper for niRFSA spectrum info."""
 
     def __init__(self, data=None, initial_frequency=0.0, frequency_increment=0.0,

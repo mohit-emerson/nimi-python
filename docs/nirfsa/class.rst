@@ -15,17 +15,9 @@ Session
 
     You can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.
 
-    ----
-    **Note**
-    Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
+    **Note** Before initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this method to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.
 
-    ----
-
-    ----
-    **Note**
-    For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
-
-    ----
+    **Note** For multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.
 
     **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -279,11 +271,7 @@ commit
 
             Calling this method is optional. Settings are automatically committed to hardware when you call the :py:meth:`nirfsa.Session._initiate` method, the read IQ single record complex F64 method, or the :py:meth:`nirfsa.Session.read_power_spectrum` method.
 
-            ----
-            **Note**
-            This method does not wait for settling time, unlike the :py:meth:`nirfsa.Session._initiate` method.
-
-            ----
+            **Note** This method does not wait for settling time, unlike the :py:meth:`nirfsa.Session._initiate` method.
 
             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -431,11 +419,7 @@ configure_digital_edge_advance_trigger
 
             The Advance Trigger indicates where a new record begins.
 
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -510,17 +494,9 @@ configure_digital_edge_ref_trigger
 
             You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-            ----
-            **Note**
-             The PXIe-5644/5645/5646 does not support the NI-TClk API.
+            **Note** The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-            ----
-
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -604,17 +580,9 @@ configure_digital_edge_start_trigger
 
             You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-            ----
-            **Note**
-             The PXIe-5644/5645/5646 does not support the NI-TClk API.
+            **Note** The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-            ----
-
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -691,11 +659,7 @@ configure_iq_power_edge_ref_trigger
 
             You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -816,11 +780,7 @@ configure_software_edge_advance_trigger
 
             The Advance Trigger indicates where a new record begins. The device waits until you call the :py:meth:`nirfsa.Session.send_software_edge_trigger` method to assert the trigger.
 
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -845,17 +805,9 @@ configure_software_edge_ref_trigger
 
             You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-            ----
-            **Note**
-             The PXIe-5644/5645/5646 does not support the NI-TClk API.
+            **Note** The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-            ----
-
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -890,17 +842,9 @@ configure_software_edge_start_trigger
 
             You can use this trigger with the `NI-TClk API <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/user-manual-welcome.html>`_.
 
-            ----
-            **Note**
-             The PXIe-5644/5645/5646 does not support the NI-TClk API.
+            **Note** The PXIe-5644/5645/5646 does not support the NI-TClk API.
 
-            ----
-
-            ----
-            **Note**
-             This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
-
-            ----
+            **Note** This method is not supported if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method or if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM`.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -923,11 +867,7 @@ configure_spectrum_frequency
 
             You can specify the frequency range using either center frequency and span, or start and stop frequencies.
 
-            ----
-            **Note**
-            If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
-
-            ----
+            **Note** If you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
 
             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1252,11 +1192,7 @@ enable_session_access
 
             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860
 
-            ----
-            **Note**
-            NI-RFSA does not support NI-TClk when driver session debugging is enabled.
-
-            ----
+            **Note** NI-RFSA does not support NI-TClk when driver session debugging is enabled.
 
             
 
@@ -1390,11 +1326,7 @@ fetch_iq_multi_record_into
 
                 **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                ----
-
                 For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
 
                 
 
@@ -1470,11 +1402,7 @@ fetch_iq_single_record_into
 
                 **PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.
 
-                ----
-
                 For all supported devices, a value of  specifies the method waits until all data is available. A value of 0 specifies the method immediately returns available data.
-
-                ----
 
                 
 
@@ -1688,11 +1616,7 @@ get_scaling_coefficients
 
             Acquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this method to obtain :py:meth:`nirfsa.Session.get_scaling_coefficients` structures in the **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** array returns one element for each channel specified in the **:py:attr:`nirfsa.Session.CHANNEL_LIST`** parameter. The element order matches the order specified by the **:py:attr:`nirfsa.Session.CHANNEL_LIST`** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** element then adding the offset from the same element.
 
-            ----
-            **Note**
-            The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
-
-            ----
+            **Note** The coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.
 
             To get the required size of the array, call this method with **:py:attr:`nirfsa.Session.ARRAY_SIZE`** set to 0 and NULL for the **:py:attr:`nirfsa.Session.COEFFICIENT_INFO`** array. This method returns the required size in the **:py:attr:`nirfsa.Session.NUMBER_OF_COEFFICIENT_SETS`** parameter.
 
@@ -1775,11 +1699,7 @@ get_self_calibration_temperature
 
             Returns the temperature, in degrees Celsius, at the last successful self-calibration.
 
-            ----
-            **Note**
-            For the PXIe-5644/5645/5646, you must select :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION` for the **selfCalibrationStep** parameter.
-
-            ----
+            **Note** For the PXIe-5644/5645/5646, you must select :py:data:`~nirfsa.NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION` for the **selfCalibrationStep** parameter.
 
             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831 (IF only)/5832 (IF only)/5840/5841/5842/5860
 
@@ -1916,11 +1836,7 @@ initiate
 
             You can use this method in conjunction with one of the niRFSA fetch I/Q methods to retrieve acquired I/Q data, or you can use the read IQ single record complex F64 method to both initiate the acquisition and retrieve I/Q data at one time.
 
-            ----
-            **Note**
-            If you are using external digitizer mode, this method commits settings and waits for settling, but it does not start an acquisition. Notice that using the :py:meth:`nirfsa.Session.commit` method on its own commits settings to hardware, but the device does not wait for hardware settling.
-
-            ----
+            **Note** If you are using external digitizer mode, this method commits settings and waits for settling, but it does not start an acquisition. Notice that using the :py:meth:`nirfsa.Session.commit` method on its own commits settings to hardware, but the device does not wait for hardware settling.
 
             **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -1974,14 +1890,11 @@ is_self_cal_valid
 
                     Returns valid steps.
 
-                    ----
                     If two or more calibration steps are valid, this parameter returns a bitwise-OR combination of the calibration steps. For example, if both :py:data:`~nirfsa.SelfCalSteps.IF_FLATNESS` and :py:data:`~nirfsa.SelfCalSteps.LO_SELF_CAL` steps are valid, NI-RFSA returns the following string:
 
                     :py:data:`~nirfsa.SelfCalSteps.IF_FLATNESS` |
 
                     :py:data:`~nirfsa.SelfCalSteps.LO_SELF_CAL`
-
-                    ----
 
                     +------------------------------------+---------------------------------------------------------------------------------------------------------------------+
                     | Name                               | Description                                                                                                         |
@@ -2109,11 +2022,7 @@ perform_thermal_correction
 
             NI-RFSA internally acquires the temperature every time you initiate an acquisition. If you are performing a continuous acquisition, National Instruments recommends calling this method once every 10 minutes in a stable temperature environment to periodically update temperature calibration. If the ambient temperature varies, call this method more frequently.
 
-            ----
-            **Note**
-            You cannot call this method if your device is operating in `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.
-
-            ----
+            **Note** You cannot call this method if your device is operating in `RF list mode <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/rf-list-mode.html>`_.
 
             Refer to the *Thermal Management* section for your device for more information about typical operating temperatures.
 
@@ -2183,20 +2092,11 @@ read_iq_single_record_into
 
                     - **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.
 
-                    ----
-
                     The value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.
-
-                    ----
 
                     - **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.
 
-                    ----
-
-
                     The value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.
-
-                    ----
 
                     - **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.
                     - **actual samples read** Returns an integer representing the number of samples in the waveform.
@@ -2216,11 +2116,7 @@ read_power_spectrum_into
 
             Initiates a spectrum acquisition and returns power spectrum data.
 
-            ----
-            **Note**
-             Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
-
-            ----
+            **Note** Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -2430,25 +2326,13 @@ self_calibrate_range
 
             NI recommends that no external signals are present on the RF In port while the calibration is taking place.
 
-            ----
-            **Note**
-            This method does not update self-calibration date and temperature.
-
-            ----
+            **Note** This method does not update self-calibration date and temperature.
 
             For best results, NI recommends that you perform a complete self-calibration without omitting any steps. However, if certain aspects of performance are less important for your application, you can omit that step for faster execution.
 
-            ----
-            **Note**
-            If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate.
+            **Note** If there is an existing NI-RFSG session open for the same PXIe-5820/5830/5831/5832/5840/5841/5842/5860 while this method runs, it may remain open but cannot be used for operations that access the hardware, for example niRFSG Commit or niRFSG Initiate.
 
-            ----
-
-            ----
-            **Note**
-            If there is an existing NI-RFSG session open for the same PXIe-5644/5645/5646, it may remain open but cannot be used while this method runs.
-
-            ----
+            **Note** If there is an existing NI-RFSG session open for the same PXIe-5644/5645/5646, it may remain open but cannot be used while this method runs.
 
             **Supported Devices**: PXIe-5644/5645/5646, PXIe-5820/5830/5831/5832/5840/5841/5842
 
@@ -2461,11 +2345,7 @@ self_calibrate_range
 
                 Specifies which calibration steps to skip as part of the self-calibration process. A value of 0 specifies all supported calibration steps are performed.
 
-                ----
-
                 To omit two or more calibration steps, specify a bitwise-OR combination of the following constants. For example, if you wanted to omit :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` and :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`, you would pass the following string to the :py:meth:`nirfsa.Session.SelfCalibrate` method: :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.AMPLITUDE_ACCURACY` | :py:data:`~nirfsa.SelfCalibrateRangeStepsToOmit.LO_SELF_CAL`
-
-                ----
 
                 | Value                                          |  Description                                                                                                                                                                                                                     |
                 |:------------------------------------------|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
@@ -2640,11 +2520,7 @@ absolute_delay
 
         To set this property, the NI-RFSA device must be in the Configuration state.
 
-        ----
-        **Note**
-        If this property is set, NI-TClk cannot do any sub-sample clock adjustment.
-
-        ----
+        **Note** If this property is set, NI-TClk cannot do any sub-sample clock adjustment.
 
         **Units:** Seconds
 
@@ -2771,11 +2647,7 @@ advance_trigger_type
 
         Specifies whether you want the Advance Trigger to be a digital edge or software trigger.
 
-        ----
-        **Note**
-        Set this property to :py:data:`~nirfsa.AdvanceTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
-
-        ----
+        **Note** Set this property to :py:data:`~nirfsa.AdvanceTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
 
         **Default Value**: :py:data:`~nirfsa.AdvanceTriggerType.NONE`
 
@@ -2824,17 +2696,9 @@ allow_more_records_than_memory
 
         Specifies whether to allow the device to acquire more records than can fit in the device memory of the PXIe-5622/5624.
 
-        ----
-        **Note**
-        If you set the property to FALSE and attempt to acquire more records than can fit into the PXIe-5622/5624 device memory, NI-RFSA returns an error. If this property is set to TRUE, NI-RFSA returns an error only in the event of an acquisition buffer overflow.
+        **Note** If you set the property to FALSE and attempt to acquire more records than can fit into the PXIe-5622/5624 device memory, NI-RFSA returns an error. If this property is set to TRUE, NI-RFSA returns an error only in the event of an acquisition buffer overflow.
 
-        ----
-
-        ----
-        **Note**
-        This property is always set to True for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841.
-
-        ----
+        **Note** This property is always set to True for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841.
 
         **Default Value**: False
 
@@ -2953,17 +2817,9 @@ arm_ref_trigger_type
 
         Specifies whether you want the Arm Reference Trigger to be a digital edge or software trigger.
 
-        ----
-        **Note**
-        The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support :py:data:`~nirfsa.ArmReferenceTriggerType.NONE`.
+        **Note** The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 only support :py:data:`~nirfsa.ArmReferenceTriggerType.NONE`.
 
-        ----
-
-        ----
-        **Note**
-        Set this property to :py:data:`~nirfsa.ArmReferenceTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
-
-        ----
+        **Note** Set this property to :py:data:`~nirfsa.ArmReferenceTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the :py:meth:`nirfsa.Session.ConfigureAcquisitionType` method.
 
         **Default Value**: :py:data:`~nirfsa.ArmReferenceTriggerType.NONE`
 
@@ -3111,11 +2967,7 @@ center_frequency
 
         The value is expressed in hertz (Hz). An acquisition consists of a span of data surrounding the center frequency.
 
-        ----
-        **Note**
-        Use this property to tune the downconverter when using external digitizer mode.
-
-        ----
+        **Note** Use this property to tune the downconverter when using external digitizer mode.
 
         **Units**: hertz (Hz)
 
@@ -3156,11 +3008,7 @@ channel_coupling
 
         Specifies whether the RF IN connector is AC- or DC-coupled on the downconverter.
 
-        ----
-        **Note**
-        For the PXIe-5605/5606/5665/5667/5668, this property must be set to :py:data:`~nirfsa.ChannelCoupling.AC` when the DC block is present and set to :py:data:`~nirfsa.ChannelCoupling.DC` when the DC block is not present to ensure device specifications are met and proper calibration data is used. For more information about removing or attaching the DC block, refer to the `PXIe-5665 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/block-diagram.2.html>`_, the `PXIe-5605 Front Panel and LEDs <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/pinout.4.html>`_, the `PXIe-5667 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/block-diagram.html>`_, or the `PXIe-5668 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/block-diagram.html>`_ topics in this help file.
-
-        ----
+        **Note** For the PXIe-5605/5606/5665/5667/5668, this property must be set to :py:data:`~nirfsa.ChannelCoupling.AC` when the DC block is present and set to :py:data:`~nirfsa.ChannelCoupling.DC` when the DC block is not present to ensure device specifications are met and proper calibration data is used. For more information about removing or attaching the DC block, refer to the `PXIe-5665 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/block-diagram.2.html>`_, the `PXIe-5605 Front Panel and LEDs <https://www.ni.com/docs/en-US/bundle/pxie-5665-feature/page/pinout.4.html>`_, the `PXIe-5667 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5667-feature/page/block-diagram.html>`_, or the `PXIe-5668 Block Diagram <https://www.ni.com/docs/en-US/bundle/pxie-5668-feature/page/block-diagram.html>`_ topics in this help file.
 
         **Valid Values**:
 
@@ -3385,11 +3233,7 @@ device_configuration_temperature
 
         Specifies the temperature, in degrees Celsius, that NI-RFSA uses to calculate the device configuration settings.
 
-        ----
-        **Note**
-        For most applications, you can choose not to set this property, so NI-RFSA uses the device temperature to calculate best attenuation settings. Set this property only if you want NI-RFSA to maintain the same device configuration settings from acquisition to acquisition, independent of device temperature changes.
-
-        ----
+        **Note** For most applications, you can choose not to set this property, so NI-RFSA uses the device temperature to calculate best attenuation settings. Set this property only if you want NI-RFSA to maintain the same device configuration settings from acquisition to acquisition, independent of device temperature changes.
 
         **PXIe-5820/5830/5831/5832/5840/5841/5842/5860**: This property is read-only.
 
@@ -3430,46 +3274,25 @@ device_instantaneous_bandwidth
 
         To change the value that NI-RFSA uses for the maximum size of multispan acquisition subspans, use the :py:attr:`nirfsa.Session.fft_width` property.
 
-        ----
-        **Note**
-        If your application uses the PXIe-5622 IF digitizer, your maximum device instantaneous bandwidth is constrained to 50 MHz or 25 MHz, depending on the digitizer option you purchased. If your application uses the PXIe-5624 digitizer, your maximum device instantaneous bandwidth is constrained by the hardware option you purchased and your FPGA image.
-
-        ----
+        **Note** If your application uses the PXIe-5622 IF digitizer, your maximum device instantaneous bandwidth is constrained to 50 MHz or 25 MHz, depending on the digitizer option you purchased. If your application uses the PXIe-5624 digitizer, your maximum device instantaneous bandwidth is constrained by the hardware option you purchased and your FPGA image.
 
         **PXI-5661**: The PXI-5600 RF downconverter instantaneous bandwidth is 20 MHz.
 
         **PXIe-5663/5663E**: Your maximum allowed instantaneous bandwidth depends on the downconverter center frequency you use. Refer to the `PXIe-5601 RF Signal Downconverter Overview <https://www.ni.com/docs/en-US/bundle/pxie-5663-5663e-feature/page/overview.3.html>`_ for more information about instantaneous bandwidth.
 
-        ----
-        **Note**
-        For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the instantaneous bandwidth for frequencies above 120 MHz is different than the instantaneous bandwidth for frequencies less than 120 MHz, which are 20 MHz and 10 MHz respectively.
-
-        ----
+        **Note** For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the instantaneous bandwidth for frequencies above 120 MHz is different than the instantaneous bandwidth for frequencies less than 120 MHz, which are 20 MHz and 10 MHz respectively.
 
         **PXIe-5665**: Your maximum allowed instantaneous bandwidth is independent of the downconverter center frequency. Refer to the *NI PXIe-5665 Specifications* for more information about instantaneous bandwidth.
 
         **PXIe-5665 (14 GHz), PXIe-5668**: If you have enabled the preselector for the PXIe-5605/5606, the device instantaneous bandwidth value is only a typical specification. For multispan acquisitions, NI-RFSA uses this typical specification as the maximum size for the acquisition subspans.
 
-        ----
-        **Note**
-        When used with an external digitizer, the PXIe-5603 and the low band signal path of the PXIe-5605 provide a nominal 80 MHz bandwidth at   dB. At frequencies greater than 3.6 GHz, the PXIe-5605 provides a typical bandwidth of 47 MHz at   dB with the preselector (YIG-tuned filter) enabled.
+        **Note** When used with an external digitizer, the PXIe-5603 and the low band signal path of the PXIe-5605 provide a nominal 80 MHz bandwidth at   dB. At frequencies greater than 3.6 GHz, the PXIe-5605 provides a typical bandwidth of 47 MHz at   dB with the preselector (YIG-tuned filter) enabled.
 
-        ----
-
-        ----
-        **Note**
-        For PXIe-5606 devices, the 765 MHz IF filter is available only at center frequencies above 3.6 GHz.
-
-        ----
+        **Note** For PXIe-5606 devices, the 765 MHz IF filter is available only at center frequencies above 3.6 GHz.
 
         **PXIe-5693**: This property is read-only for the PXIe-5693. The value for the device instantaneous bandwidth depends on the value for the RF preselector filter.
 
         **PXIe-5694/PXIe-5667**: If your application uses the PXIe-5694 as part of an PXIe-5667 spectrum monitoring receiver or the PXIe-5694 as a stand-alone device, NI-RFSA determines the appropriate IF filter to use based on the value that you set for this property.
-
-        ----
-        **Note**
-
-        ----
 
         **PXIe-5644/5645/5646**: This property is read-only for the PXIe-5644/5645/5646. Refer to the specifications document for your device for more information about instantaneous bandwidth.
 
@@ -3682,9 +3505,7 @@ digital_edge_arm_ref_trigger_source
 
         **Default Value**: "" (empty string)
 
-        ----
-        **Note**
-        The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 devices only support "" (empty string).
+        **Note** The PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841 devices only support "" (empty string).
 
         The trigger is received on PFI0 from the front panel DIO terminal.
 
@@ -3701,8 +3522,6 @@ digital_edge_arm_ref_trigger_source
         The trigger is received on PFI6 from the front panel DIO terminal.
 
         The trigger is received on PFI7 from the front panel DIO terminal.
-
-        ----
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667, PXIe-5820/5830/5831/5832/5840/5841
 
@@ -4089,11 +3908,7 @@ digital_gain
 
         You can use this property to account for external gain changes without changing the analog signal path.
 
-        ----
-        **Note**
-        The PXIe-5644/5645/5646 applies this gain when the data is scaled. The raw data does not include this scaling on these devices.
-
-        ----
+        **Note** The PXIe-5644/5645/5646 applies this gain when the data is scaled. The raw data does not include this scaling on these devices.
 
         **Units:** dB
 
@@ -4128,17 +3943,9 @@ digital_if_equalization_enabled
 
         **PXIe-5820/5830/5831/5832/5840/5841/5842/5860**: The only valid value for this property is True.
 
-        ----
-        **Note**
-        For PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this property to True if the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property is set to :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.LO_REF_CLK`.
+        **Note** For PXIe-5665/5667 devices, digital IF equalization is supported only with a 150 MHz clock. You cannot set this property to True if the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property is set to :py:data:`~nirfsa.DigitizerSampleClockTimebaseSource.LO_REF_CLK`.
 
-        ----
-
-        ----
-        **Note**
-        For the PXIe-5665 (14 GHz)/5667 (7 GHz)/5668, the preselector is not part of the IF filter path, so NI-RFSA does not equalize the preselector distortions.
-
-        ----
+        **Note** For the PXIe-5665 (14 GHz)/5667 (7 GHz)/5668, the preselector is not part of the IF filter path, so NI-RFSA does not equalize the preselector distortions.
 
         **Default Value**: True, if the device configuration is supported.
 
@@ -4185,17 +3992,9 @@ digitizer_dither_enabled
 
         **PXIe-5668**: When you enable dithering, the maximum signal level is reduced by up to 2 dB. For the PXIe-5624, the maximum input power with dither off is 8 dBm and the maximum input power with dither on is 6 dBm. When acquiring an 800 MHz bandwidth signal, the I/Q data contains the dither even if the dither signal is not in the displayed spectrum. The dither can affect actions like power level triggering.
 
-        ----
-        **Note**
-        For the PXIe-5668, disabling dithering can negatively affect absolute amplitude accuracy.
+        **Note** For the PXIe-5668, disabling dithering can negatively affect absolute amplitude accuracy.
 
-        ----
-
-        ----
-        **Note**
-        For the PXIe-5820/5830/5831/5832/5840/5841/5842, only :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED` is supported.
-
-        ----
+        **Note** For the PXIe-5820/5830/5831/5832/5840/5841/5842, only :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED` is supported.
 
         **Default Value**: :py:data:`~nirfsa.DigitizerDitherEnabled.ENABLED`
 
@@ -4392,11 +4191,7 @@ digitizer_vertical_range
 
         The vertical range is defined as the absolute value of the input range for a channel. The default vertical range works for all device configurations, but you can use this property to optimize performance if you know that the signal level at the digitizer input terminal is low.
 
-        ----
-        **Note**
-        For most applications, NI-RFSA selects an appropriate value for this property.
-
-        ----
+        **Note** For most applications, NI-RFSA selects an appropriate value for this property.
 
         This value is expressed in volts. For example, to acquire a sine wave that spans between 20130.5 V and +0.5 V, set this property to 1.0.
 
@@ -4570,11 +4365,7 @@ downconverter_frequency_offset_mode
 
         When you set an offset yourself or do not use an offset, the reference frequency for gain is near the downconverter center frequency, and :py:attr:`nirfsa.Session.downconverter_frequency_offset_mode` returns :py:data:`~nirfsa.DownconverterFrequencyOffsetMode.USER_DEFINED`. When NI-RFSA automatically sets an offset, the reference frequency for gain is the :py:attr:`nirfsa.Session.iq_carrier_frequency`, and :py:attr:`nirfsa.Session.downconverter_frequency_offset_mode` returns :py:data:`~nirfsa.DownconverterFrequencyOffsetMode.ENABLED`. Refer to the specifications document for your device for more information about gain, flatness, and reference frequencies.
 
-        ----
-        **Note**
-        Below 120 MHz, the PXIe-5841 does not use an LO and :py:data:`~nirfsa.DownconverterFrequencyOffsetMode.ENABLED` is unavailable. Refer to the *PXIe-5841 Automatic Frequency Offset* topic for more information about using an automatic offset with an external LO.
-
-        ----
+        **Note** Below 120 MHz, the PXIe-5841 does not use an LO and :py:data:`~nirfsa.DownconverterFrequencyOffsetMode.ENABLED` is unavailable. Refer to the *PXIe-5841 Automatic Frequency Offset* topic for more information about using an automatic offset with an external LO.
 
         **Default Value:** :py:data:`~nirfsa.DownconverterFrequencyOffsetMode.AUTOMATIC`
 
@@ -4727,11 +4518,7 @@ downconverter_preselector_enabled
 
         Specifies whether the tunable preselector is enabled on the downconverter.
 
-        ----
-        **Note**
-        All devices support setting this property to :py:data:`~nirfsa.DownconverterPreselectorEnabled.DISABLED` or :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH`. Only devices with a preselector support setting this property to :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED`.
-
-        ----
+        **Note** All devices support setting this property to :py:data:`~nirfsa.DownconverterPreselectorEnabled.DISABLED` or :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH`. Only devices with a preselector support setting this property to :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED`.
 
         **Default Value**: :py:data:`~nirfsa.DownconverterPreselectorEnabled.DISABLED` if the device has no preselector. :py:data:`~nirfsa.DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH` if the device has a preselector.
 
@@ -5752,17 +5539,9 @@ external_gain
 
         When you set this property, NI-RFSA calculates appropriate attenuator settings based on the value of this property and the value of the :py:attr:`nirfsa.Session.reference_level` property. In this case, NI-RFSA interprets the reference level as the maximum expected power level of the signal at the input of the external gain device. For more information about attenuation, refer to the *Attenuation and Signal Levels* topic for your device in the *NI RF Vector Signal Analyzers Help*.
 
-        ----
-        **Note**
-        For the PXIe-5820, this property specifies the gain, in dB, of a switch (or cable) connected before the IQ IN connector.
+        **Note** For the PXIe-5820, this property specifies the gain, in dB, of a switch (or cable) connected before the IQ IN connector.
 
-        ----
-
-        ----
-        **Note**
-        For the PXIe-5645, this property is ignored if you are using the I/Q ports.
-
-        ----
+        **Note** For the PXIe-5645, this property is ignored if you are using the I/Q ports.
 
         With this property set, NI-RFSA reads the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_level` property value as the power level at the input of the external gain device at which the NI-RFSA device should trigger.
 
@@ -5908,17 +5687,9 @@ fft_width
 
         The FFT width is the effective bandwidth of the signal path during each signal acquisition.
 
-        ----
-        **Note**
-        The maximum FFT width when using the PXIe-5622 is constrained to 50 MHz or 25 MHz, depending on the digitizer option you purchased. The maximum FFT width when using thing PXIe-5624 is constrained to 400 MHz or 765 MHz, depending on the digitizer configuration.
+        **Note** The maximum FFT width when using the PXIe-5622 is constrained to 50 MHz or 25 MHz, depending on the digitizer option you purchased. The maximum FFT width when using thing PXIe-5624 is constrained to 400 MHz or 765 MHz, depending on the digitizer configuration.
 
-        ----
-
-        ----
-        **Note**
-        You can use the :py:attr:`nirfsa.Session.fft_width` property with in-band retuning. For more information about in-band retuning, refer to the :py:attr:`nirfsa.Session.downconverter_center_frequency` property.
-
-        ----
+        **Note** You can use the :py:attr:`nirfsa.Session.fft_width` property with in-band retuning. For more information about in-band retuning, refer to the :py:attr:`nirfsa.Session.downconverter_center_frequency` property.
 
         NI-RFSA treats the *device instantaneous bandwidth* as the effective real-time bandwidth of the signal path. The *span* specifies the frequency range of the computed spectrum. An RF vector signal analyzer can acquire a bandwidth only within the device instantaneous bandwidth frequency. If the span you choose is greater than the device instantaneous bandwidth, NI-RFSA obtains multiple acquisitions and combines them into a single spectrum. By specifying the FFT width, you can control the specific bandwidth obtained in each signal acquisition. If you read the :py:attr:`nirfsa.Session.fft_width` property without setting it, NI-RFSA returns the value of the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property.
 
@@ -5930,22 +5701,9 @@ fft_width
 
         **PXIe-5665/5667/5668**: The upper limit of the FFT width is the maximum device instantaneous bandwidth.
 
-        ----
-        **Note**
+        **Note** At frequencies greater than 3.6 GHz, the PXIe-5605 provides a typical bandwidth of 47 MHz at   dB with the preselector enabled. The :py:attr:`nirfsa.Session.fft_width` property can override the typical bandwidth of the PXIe-5605 up to 57 MHz using an external digitizer and up to 50 MHz or 25 MHz depending on the PXIe-5622 digitizer option you purchased. The increase in bandwidth results in faster signal acquisitions, but amplitude accuracy is decreased for spectrum acquisitions, and magnitude and phase accuracy is decreased for I/Q acquisitions. National Instruments does not guarantee device specifications if you set the :py:attr:`nirfsa.Session.fft_width` property greater than the warranted instantaneous bandwidth specification.
 
-        ----
-
-        ----
-        **Note**
-        At frequencies greater than 3.6 GHz, the PXIe-5605 provides a typical bandwidth of 47 MHz at   dB with the preselector enabled. The :py:attr:`nirfsa.Session.fft_width` property can override the typical bandwidth of the PXIe-5605 up to 57 MHz using an external digitizer and up to 50 MHz or 25 MHz depending on the PXIe-5622 digitizer option you purchased. The increase in bandwidth results in faster signal acquisitions, but amplitude accuracy is decreased for spectrum acquisitions, and magnitude and phase accuracy is decreased for I/Q acquisitions. National Instruments does not guarantee device specifications if you set the :py:attr:`nirfsa.Session.fft_width` property greater than the warranted instantaneous bandwidth specification.
-
-        ----
-
-        ----
-        **Note**
-        When using the PXIe-5606, the 765 MHz IF filter is only available at center frequencies of 3.6 GHz and above.
-
-        ----
+        **Note** When using the PXIe-5606, the 765 MHz IF filter is only available at center frequencies of 3.6 GHz and above.
 
         **Default Value**: N/A
 
@@ -6229,11 +5987,7 @@ fpga_temperature
 
         Returns the current temperature, in degrees Celsius, of the FPGA.
 
-        ----
-        **Note**
-        If you query this property during RF list mode, list steps may take longer to complete during list execution.
-
-        ----
+        **Note** If you query this property during RF list mode, list steps may take longer to complete during list execution.
 
         **Units**: degrees Celcius
 
@@ -6454,11 +6208,7 @@ if_filter_bandwidth
 
         Specifies the IF filter path bandwidth for your device configuration.
 
-        ----
-        **Note**
-        For composite devices, such as the PXIe-5665/5667/5668, the IF filter path bandwidth includes all IF filters across the component modules of a composite device.
-
-        ----
+        **Note** For composite devices, such as the PXIe-5665/5667/5668, the IF filter path bandwidth includes all IF filters across the component modules of a composite device.
 
         NI-RFSA uses this property in conjunction with the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property and the :py:attr:`nirfsa.Session.digital_if_equalization_enabled` property to determine the settings for your measurement. NI-RFSA selects the next highest available filter based on the value you specify. The following table lists the IF filters available for NI devices. You may specify a higher value than your device instantaneous bandwidth if your measurement requires it, but specifying a lower value returns an error.
 
@@ -6472,11 +6222,7 @@ if_filter_bandwidth
 
         **PXIe-5694**: 0 to 50 MHz
 
-        ----
-        **Note**
-        To set this property to values greater than 20 MHz, you must set the :py:attr:`nirfsa.Session.signal_conditioning_enabled` property to :py:data:`~nirfsa.SignalConditioningEnabled.BYPASSED`
-
-        ----
+        **Note** To set this property to values greater than 20 MHz, you must set the :py:attr:`nirfsa.Session.signal_conditioning_enabled` property to :py:data:`~nirfsa.SignalConditioningEnabled.BYPASSED`
 
         **Default Values:** For spectrum acquisition types the default is greater than or equal to the :py:attr:`nirfsa.Session.spectrum_span` property. NI-RFSA chooses the default value of the :py:attr:`nirfsa.Session.if_filter_bandwidth` property to correspond to the appropriate IF filter. For I/Q acquisition types NI-RFSA chooses the default value corresponding to the widest IF filter possible for your equipment setup.
 
@@ -6588,17 +6334,9 @@ if_output_power_level
 
         If you set the :py:attr:`nirfsa.Session.if_output_power_level` and :py:attr:`nirfsa.Session.if_output_power_level_offset` properties at the same time, NI-RFSA returns an error.
 
-        ----
-        **Note**
-        If you set the :py:attr:`nirfsa.Session.if_output_power_level` property to a value less than 201310 dBm, the IF output power level may be higher than the value you request. Read the value of this property to determine the configured IF output power level.
+        **Note** If you set the :py:attr:`nirfsa.Session.if_output_power_level` property to a value less than 201310 dBm, the IF output power level may be higher than the value you request. Read the value of this property to determine the configured IF output power level.
 
-        ----
-
-        ----
-        **Note**
-        The value of this property is limited by the amount of IF attenuation that the downconverter can apply, the :py:attr:`nirfsa.Session.reference_level` property, the :py:attr:`nirfsa.Session.downconverter_center_frequency` property, and the :py:attr:`nirfsa.Session.center_frequency` property or :py:attr:`nirfsa.Session.iq_carrier_frequency` property, depending on your acquisition type.
-
-        ----
+        **Note** The value of this property is limited by the amount of IF attenuation that the downconverter can apply, the :py:attr:`nirfsa.Session.reference_level` property, the :py:attr:`nirfsa.Session.downconverter_center_frequency` property, and the :py:attr:`nirfsa.Session.center_frequency` property or :py:attr:`nirfsa.Session.iq_carrier_frequency` property, depending on your acquisition type.
 
         **Units**: dBm
 
@@ -6674,11 +6412,7 @@ input_isolation_enabled
 
         Enabling this property isolates the input signal at the RF IN connector on the RF downconverter from the rest of the RF downconverter signal path. Disabling this property reintegrates the input signal into the RF downconverter signal path.
 
-        ----
-        **Note**
-        If you enable input isolation for your device, the device impedance is changed from the characteristic 50  impedance. A change in the device impedance may also cause a VSWR value higher than the device specifications.
-
-        ----
+        **Note** If you enable input isolation for your device, the device impedance is changed from the characteristic 50  impedance. A change in the device impedance may also cause a VSWR value higher than the device specifications.
 
         For the PXIe-5830/5831/5832, input isolation is supported for all available ports for your hardware configuration.
 
@@ -6776,11 +6510,7 @@ instrument_firmware_revision
 
         **Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-        ----
-        **Note**
-        PXIe-5820/5830/5831/5832/5840/5841/5842/5860 devices will return "No revision information available." To retrieve the firmware revision, use MAX, Hardware Configuration Utility, or NI System Configuration API.
-
-        ----
+        **Note** PXIe-5820/5830/5831/5832/5840/5841/5842/5860 devices will return "No revision information available." To retrieve the firmware revision, use MAX, Hardware Configuration Utility, or NI System Configuration API.
 
         The following table lists the characteristics of this property.
 
@@ -6900,11 +6630,7 @@ iq_carrier_frequency
 
         The NI-RFSA device tunes to this frequency. NI-RFSA may coerce this value based on hardware settings and the RF downconverter specifications.
 
-        ----
-        **Note**
-        For the PXIe-5645, this property is ignored if you are using the I/Q ports.
-
-        ----
+        **Note** For the PXIe-5645, this property is ignored if you are using the I/Q ports.
 
         **Units**: hertz (Hz)
 
@@ -6961,11 +6687,7 @@ iq_in_port_carrier_frequency
 
         The onboard signal processing (OSP) frequency shifts the signal at this frequency to baseband prior to acquiring it.
 
-        ----
-        **Note**
-        For the PXIe-5645, this property is ignored if you are using the RF ports.
-
-        ----
+        **Note** For the PXIe-5645, this property is ignored if you are using the RF ports.
 
         **Valid Values**:
 
@@ -7033,11 +6755,7 @@ iq_in_port_terminal_configuration
 
         To use this property, you must use the channelName parameter of the :py:meth:`nirfsa.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. For the PXIe-5645, you can configure the I and Q channels by using I or Q as the channel string, or set the channel string to "" (empty string) to configure both channels. For the PXIe-5820, the only valid value for the channel string is "" (empty string).
 
-        ----
-        **Note**
-        For the PXIe-5645, this property is ignored if you are using the RF ports.
-
-        ----
+        **Note** For the PXIe-5645, this property is ignored if you are using the RF ports.
 
         **PXIe-5820**: The only valid value for this property is :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`.
 
@@ -7084,11 +6802,7 @@ iq_in_port_vertical_range
 
         The voltage range in differential terminal configuration is configurable from 2 V<sub>pk-pk</sub> to 0.032 V<sub>pk-pk</sub> in 1 dB steps. In single-ended terminal configuration, valid ranges are half those for differential. Values are always coerced up to the next valid range.
 
-        ----
-        **Note**
-        For the PXIe-5645, this property is ignored if you are using the RF ports.
-
-        ----
+        **Note** For the PXIe-5645, this property is ignored if you are using the RF ports.
 
         **Valid Values:**
 
@@ -7256,13 +6970,9 @@ iq_rate
 
         Refer to the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property for more information about device specific instantaneous bandwidth limits. You can also refer to the *NI PXIe-5665 Specifications* for more information about instantaneous bandwidth device specifications.
 
-        ----
-        **Note**
-        For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. At I/Q rates above 50 MS/s, the dither noise can affect phase coherency performance and leak into the lower frequencies and the upper frequencies of the IF passband. Refer to the :py:attr:`nirfsa.Session.digitizer_dither_enabled` property for more information about dithering.
+        **Note** For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. At I/Q rates above 50 MS/s, the dither noise can affect phase coherency performance and leak into the lower frequencies and the upper frequencies of the IF passband. Refer to the :py:attr:`nirfsa.Session.digitizer_dither_enabled` property for more information about dithering.
 
         For the PXIe-5663/5663E/5665/5667, when you set the :py:attr:`nirfsa.Session.digitizer_sample_clock_timebase_source` property to :py:data:`~nirfsa.NIRFSA_VAL_ONBOARD_CLOCK`, the downconverter instantaneous bandwidth is greater than or equal to the coerced I/Q rate times 0.8. For the PXIe-5665, the actual signal bandwidth is further limited by the combination of the chosen IF filter and anti-aliasing filter.
-
-        ----
 
         **PXI-5661**: You should not need to configure an I/Q rate higher than 25 megasamples per second (MS/s) because the PXI-5600 RF downconverter bandwidth is 20 MHz. If you configure a higher I/Q rate, you may see aliasing effects at negative frequencies because the IF frequency of the PXI-5600 is 15 MHz.
 
@@ -7452,11 +7162,7 @@ lo_export_enabled
 
         **PXIe-5830/5831**: To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsa.Session._set_attribute_vi_boolean` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
 
-        ----
-        **Note**
-        If you are sharing an LO for the PXIe-5830/5831/5832 between an NI-RFSA and NI-RFSG session, ensure both sessions use the same shared setting.
-
-        ----
+        **Note** If you are sharing an LO for the PXIe-5830/5831/5832 between an NI-RFSA and NI-RFSG session, ensure both sessions use the same shared setting.
 
         **Defined Values:**
 
@@ -7575,11 +7281,7 @@ lo_frequency_step_size
 
         You can only tune the LO frequency by multiples of the :py:attr:`nirfsa.Session.lo_frequency_step_size` property. For the PXIe-5644/5645/5646 and PXIe-5840/5841, the LO frequency can therefore be offset from the requested center frequency by as much as half of the :py:attr:`nirfsa.Session.lo_frequency_step_size` property. This offset is corrected by digitally frequency shifting the :py:attr:`nirfsa.Session.lo_frequency` property to the value requested in either the :py:attr:`nirfsa.Session.iq_carrier_frequency` property or the :py:attr:`nirfsa.Session.center_frequency` property.
 
-        ----
-        **Note**
-        For the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653, this property is ignored if the PXIe-5653 is used as the LO source.
-
-        ----
+        **Note** For the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653, this property is ignored if the PXIe-5653 is used as the LO source.
 
         The valid values for this property depend on the :py:attr:`nirfsa.Session.lo_pll_fractional_mode_enabled` property.
 
@@ -7589,11 +7291,7 @@ lo_frequency_step_size
 
         * Values up to 100 MHz are coerced to 50 MHz.
 
-        ----
-        **Note**
-        The default value for the PXIe-5831 depends on the frequency range of the selected port for your instrument configuration. Refer to the `Instrument Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/instrument-configurations.html>`_ topic for more information about available ports for your hardware configuration.
-
-        ----
+        **Note** The default value for the PXIe-5831 depends on the frequency range of the selected port for your instrument configuration. Refer to the `Instrument Configurations <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/instrument-configurations.html>`_ topic for more information about available ports for your hardware configuration.
 
         **Default Values:**
 
@@ -7706,11 +7404,7 @@ lo_in_power
 
         Returns the power level, in dBm, expected at the LO IN terminal when the :py:attr:`nirfsa.Session.lo_source` property is set to :py:data:`~nirfsa.LoSource.LO_IN`.
 
-        ----
-        **Note**
-        For the PXIe-5644/5645/5646, this property is always read-only.
-
-        ----
+        **Note** For the PXIe-5644/5645/5646, this property is always read-only.
 
         **Supported Devices:** PXIe-5644/5645/5646, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -7827,17 +7521,9 @@ lo_pll_fractional_mode_enabled
 
         Fractional mode gives a finer frequency step resolution, but it may result in non harmonic spurs. Refer to the device specifications for your device for more information about fractional mode and non harmonic spurs.
 
-        ----
-        **Note**
-        The :py:attr:`nirfsa.Session.lo_pll_fractional_mode_enabled` property is applicable only when using the internal LO.
+        **Note** The :py:attr:`nirfsa.Session.lo_pll_fractional_mode_enabled` property is applicable only when using the internal LO.
 
-        ----
-
-        ----
-        **Note**
-        For the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653, this property is ignored if the PXIe-5653 is used as the LO source. For the PXIe-5841 with PXIe-5655, this property is ignored if the PXIe-5655 is used as the LO source.
-
-        ----
+        **Note** For the PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653, this property is ignored if the PXIe-5653 is used as the LO source. For the PXIe-5841 with PXIe-5655, this property is ignored if the PXIe-5655 is used as the LO source.
 
         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsa.Session._set_attribute_vi_int32` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the the only valid value for the channel string is "" (empty string).
 
@@ -7896,16 +7582,10 @@ lo_source
 
                         To use this property for the PXIe-5830/5831/5832, you must use the channelName parameter of the :py:meth:`nirfsa.Session._set_attribute_vi_string` method to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).
 
-                        ----
-                        **Note**
+        **Note**
                         For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this property is set to :py:data:`~nirfsa.LoSource.LO_SOURCE_SG_SA_SHARED`.
 
-                        ----
-
-
-
-
-                        **Default Value**: :py:data:`~nirfsa.LoSource.ONBOARD` ("Onboard")
+        **Default Value**: :py:data:`~nirfsa.LoSource.ONBOARD` ("Onboard")
 
                         **Supported Devices**: PXIe-5644/5645/5646, PXIe-5694, PXIe-5830/5831/5832/5840/5841/5842
 
@@ -7999,11 +7679,7 @@ lo_vco_frequency_step_size
 
         Specifies the step size for tuning the internal voltage-controlled oscillator (VCO) used to generate the LO signal.
 
-        ----
-        **Note**
-        Do not set this property with the :py:attr:`nirfsa.Session.lo_frequency_step_size` property.
-
-        ----
+        **Note** Do not set this property with the :py:attr:`nirfsa.Session.lo_frequency_step_size` property.
 
         **Valid Values**:
 
@@ -8040,11 +7716,7 @@ lo_yig_main_coil_drive
 
         Adjusts the dynamics of the current driving the YIG main coil.
 
-        ----
-        **Note**
-        Setting this property to :py:data:`~nirfsa.LoYigMainCoilDrive.FAST` allows the frequency to settle significantly faster for some frequency transitions at the expense of increased phase noise. This property is not supported if you are using an external LO.
-
-        ----
+        **Note** Setting this property to :py:data:`~nirfsa.LoYigMainCoilDrive.FAST` allows the frequency to settle significantly faster for some frequency transitions at the expense of increased phase noise. This property is not supported if you are using an external LO.
 
         **Default Value**: :py:data:`~nirfsa.LoYigMainCoilDrive.NORMAL`
 
@@ -8233,23 +7905,11 @@ minimum_acpr
 
         This property configures NI-RFSA to optimize downconverter gain to measure a lower-power adjacent channel, adding gain only after filtering the main channel. The gain NI-RFSA applies is always less than or equal to the ACPR value you specify.
 
-        ----
-        **Note**
-        For the PXIe-5665 (3.6 GHz), this property is supported only if you set the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`, :py:attr:`nirfsa.Session.spectrum_span`, or :py:attr:`nirfsa.Session.if_filter_bandwidth` property to a value less than 300 kHz. For the PXIe-5665 (14 GHz), this property is supported for :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`, :py:attr:`nirfsa.Session.spectrum_span`, or :py:attr:`nirfsa.Session.if_filter_bandwidth` property values less than 300 kHz by using the 300 kHz IF filter, and it is supported for values between 300 kHz and 5 MHz by using the 5 MHz IF filter.
+        **Note** For the PXIe-5665 (3.6 GHz), this property is supported only if you set the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`, :py:attr:`nirfsa.Session.spectrum_span`, or :py:attr:`nirfsa.Session.if_filter_bandwidth` property to a value less than 300 kHz. For the PXIe-5665 (14 GHz), this property is supported for :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`, :py:attr:`nirfsa.Session.spectrum_span`, or :py:attr:`nirfsa.Session.if_filter_bandwidth` property values less than 300 kHz by using the 300 kHz IF filter, and it is supported for values between 300 kHz and 5 MHz by using the 5 MHz IF filter.
 
-        ----
+        **Note** NI-RFSA coerces this property to zero for the PXI-5600, PXIe-5601 and the PXIe-5667. For all other devices, read the coerced value of this property to determine the actual amount of gain applied.
 
-        ----
-        **Note**
-        NI-RFSA coerces this property to zero for the PXI-5600, PXIe-5601 and the PXIe-5667. For all other devices, read the coerced value of this property to determine the actual amount of gain applied.
-
-        ----
-
-        ----
-        **Note**
-        For the PXIe-5668, this property alters the :py:attr:`nirfsa.Session.if_output_power_level` property. This property will not affect the :py:attr:`nirfsa.Session.reference_level` property.
-
-        ----
+        **Note** For the PXIe-5668, this property alters the :py:attr:`nirfsa.Session.if_output_power_level` property. This property will not affect the :py:attr:`nirfsa.Session.reference_level` property.
 
         **Default Value**: 0
 
@@ -8374,11 +8034,7 @@ module_power_consumption
 
         Returns the module power consumption.
 
-        ----
-        **Note**
-        If you query this property during RF list mode, list steps may take longer to complete during list execution.
-
-        ----
+        **Note** If you query this property during RF list mode, list steps may take longer to complete during list execution.
 
         **Units**: watts
 
@@ -8411,11 +8067,7 @@ module_revision
 
         Returns the revision of the RF downconverter module.
 
-        ----
-        **Note**
-        For the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5840/5841, this property returns the revision of the VST module. For the PXIe-5830/5831/5832, this property returns the revision of the PXIe-3621/3622
-
-        ----
+        **Note** For the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5840/5841, this property returns the revision of the VST module. For the PXIe-5830/5831/5832, this property returns the revision of the PXIe-3621/3622
 
         **Default Value**: N/A
 
@@ -9046,11 +8698,7 @@ reference_level
 
         The reference level represents the maximum expected power of an RF input signal.
 
-        ----
-        **Note**
-        For the PXIe-5645, this property is ignored if you are using the I/Q ports.
-
-        ----
+        **Note** For the PXIe-5645, this property is ignored if you are using the I/Q ports.
 
         Refer to the :py:attr:`nirfsa.Session.external_gain` property for more information about how configuring an external gain and a reference level affect attenuation.
 
@@ -9181,11 +8829,7 @@ ref_clock_source
 
         Specifies the Reference Clock source.
 
-        ----
-        **Note**
-        For the PXIe-5694, if your application requires an external LO source, set this property to :py:data:`~nirfsa.ReferenceClockSource.NONE`.
-
-        ----
+        **Note** For the PXIe-5694, if your application requires an external LO source, set this property to :py:data:`~nirfsa.ReferenceClockSource.NONE`.
 
         **Default Values**:
 
@@ -9790,11 +9434,7 @@ rf_preamp_enabled
 
         **PXIe-5667, PXIe-5644/5645/5646, PXIe-5830/5831/5840/5841/5842**: The  :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` value enables the RF preamplifier based on the value of the :py:attr:`nirfsa.Session.reference_level` property and the center frequency. Except on the PXIe-5830/5831/5832, NI-RFSA coerces this property from :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` to the selected value.
 
-        ----
-        **Note**
-        For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, :py:data:`~nirfsa.EnableRfPreamp.ENABLED` may improve the noise floor while :py:data:`~nirfsa.EnableRfPreamp.DISABLED` may improve distortion.
-
-        ----
+        **Note** For the PXIe-5840/5841, the automatically selected value may not be optimal for all measurements. At some reference levels, :py:data:`~nirfsa.EnableRfPreamp.ENABLED` may improve the noise floor while :py:data:`~nirfsa.EnableRfPreamp.DISABLED` may improve distortion.
 
         **PXIe-5667**: The :py:data:`~nirfsa.EnableRfPreamp.AUTOMATIC` value is supported only when the :py:attr:`nirfsa.Session.LOW_FREQUENCY_BYPASS_ENABLED` property is set to :py:data:`~nirfsa.EnableRfPreamp.DISABLED`. If the reference level is greater than -25 dBm, NI-RFSA disables the preamplifier. If the reference level is less than or equal to -25 dBm, NI-RFSA sets the :py:attr:`nirfsa.Session.rf_preamp_enabled` property to :py:data:`~nirfsa.EnableRfPreamp.ENABLED_WHEN_IN_SIGNAL_PATH`.
 
@@ -9915,11 +9555,7 @@ selected_ports
 
         Specifies the port to configure.
 
-        ----
-        **Note**
-        When using RF list mode, ports cannot be shared with NI-RFSA.
-
-        ----
+        **Note** When using RF list mode, ports cannot be shared with NI-RFSA.
 
         **Valid Values**:
 
@@ -9970,11 +9606,7 @@ serial_number
 
         Returns the serial number of the RF downconverter module.
 
-        ----
-        **Note**
-        For the PXIe-5644/5645/5646 and PXIe-5820/5840/5841, this property returns the serial number of the VST module. For the PXIe-5830/5831/5832, this property returns the serial number of the PXIe-3621/3622.
-
-        ----
+        **Note** For the PXIe-5644/5645/5646 and PXIe-5820/5840/5841, this property returns the serial number of the VST module. For the PXIe-5830/5831/5832, this property returns the serial number of the PXIe-3621/3622.
 
         **Default Value**: N/A
 
@@ -10011,11 +9643,7 @@ signal_bandwidth
 
         If you do not set this property, NI-RFSA uses the maximum available signal bandwidth. Depending on your device settings, setting this property enables certain optimizations. Based on the specified signal bandwidth, NI-RFSA decides the minimum equalized bandwidth and equalizer gain.
 
-        ----
-        **Note**
-        You must set this property to enable the :py:attr:`nirfsa.Session.downconverter_frequency_offset_mode` property.
-
-        ----
+        **Note** You must set this property to enable the :py:attr:`nirfsa.Session.downconverter_frequency_offset_mode` property.
 
         Ensure you set the signal bandwidth wide enough to encompass all significant anticipated input power. In cases where NI-RFSA optimizes the input gain based on the signal bandwidth, significant input power outside the signal bandwidth can lead to clipping and associated overflow warnings if you do not have enough margin in your [reference level.](:py:attr:`nirfsa.Session.reference_level`.html)
 
@@ -10058,11 +9686,7 @@ signal_conditioning_enabled
 
         Specifies whether all signal conditioning is enabled on the PXIe-5694.
 
-        ----
-        **Note**
-        If you set this property to :py:data:`~nirfsa.SignalConditioningEnabled.BYPASSED`, NI-RFSA bypasses all signal conditioning, prevents any signal downconversion, and fixes the values for :py:attr:`nirfsa.Session.downconverter_gain` property, the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property, and the :py:attr:`nirfsa.Session.if_filter_bandwidth` property.
-
-        ----
+        **Note** If you set this property to :py:data:`~nirfsa.SignalConditioningEnabled.BYPASSED`, NI-RFSA bypasses all signal conditioning, prevents any signal downconversion, and fixes the values for :py:attr:`nirfsa.Session.downconverter_gain` property, the :py:attr:`nirfsa.Session.device_instantaneous_bandwidth` property, and the :py:attr:`nirfsa.Session.if_filter_bandwidth` property.
 
         **Default Value**: :py:data:`~nirfsa.SignalConditioningEnabled.ENABLED`
 
@@ -10110,11 +9734,7 @@ smooth_spectrum_enabled
         | 0 Hz and <80 MHz | 300 kHz   |
         | 0 MHz             | 50 MHz    |
 
-        ----
-        **Note**
-        Setting this property to **Enabled** prevents you from setting :py:attr:`nirfsa.Session.if_filter_bandwidth` or :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`.
-
-        ----
+        **Note** Setting this property to **Enabled** prevents you from setting :py:attr:`nirfsa.Session.if_filter_bandwidth` or :py:attr:`nirfsa.Session.device_instantaneous_bandwidth`.
 
         **Default Value**: :py:data:`~nirfsa.SmoothSpectrumEnabled.DISABLED`
 
@@ -10272,17 +9892,9 @@ spectrum_span
 
         NI-RFSA performs multispan acquisitions by dividing the total requested span into equally sized subspans based on the device instantaneous bandwidth at the range of frequencies you specify. NI-RFSA combines these subspans to yield a multispan acquisition. You can use the :py:attr:`nirfsa.Session.fft_width` property to improve amplitude accuracy and avoid unwanted effects such as filter roll-off and spurs across the span you select.
 
-        ----
-        **Note**
-        If you configure the spectrum span to a value larger than the hardware instantaneous bandwidth, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
+        **Note** If you configure the spectrum span to a value larger than the hardware instantaneous bandwidth, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.
 
-        ----
-
-        ----
-        **Note**
-        For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect measurements. Refer to the :py:attr:`nirfsa.Session.digitizer_dither_enabled` property for more information about dithering.
-
-        ----
+        **Note** For the PXIe-5663/5663E/5665/5667/5668, NI-RFSA enables dithering by default. The dither noise can appear in your passband and affect measurements. Refer to the :py:attr:`nirfsa.Session.digitizer_dither_enabled` property for more information about dithering.
 
         **PXIe-5663/5663E**: NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the instantaneous bandwidth for frequencies above 120 MHz is different than instantaneous bandwidth for frequencies less than 120 MHz, which are 20 MHz and 10 MHz respectively.
 
@@ -10397,11 +10009,7 @@ start_trigger_type
 
         Specifies whether you want the Start Trigger to be a digital edge or software trigger.
 
-        ----
-        **Note**
-        Set this property to :py:data:`~nirfsa.StartTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the [cvi:py:meth:`nirfsa.Session.ConfigureAcquisitionType`](cvi:py:meth:`nirfsa.Session.ConfigureAcquisitionType`.html) method.
-
-        ----
+        **Note** Set this property to :py:data:`~nirfsa.StartTriggerType.NONE` if you set the :py:attr:`nirfsa.Session.acquisition_type` property to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` or if you set the **acquisitionType** parameter to :py:data:`~nirfsa.AcquisitionType.SPECTRUM` using the [cvi:py:meth:`nirfsa.Session.ConfigureAcquisitionType`](cvi:py:meth:`nirfsa.Session.ConfigureAcquisitionType`.html) method.
 
         **Default Value**: :py:data:`~nirfsa.StartTriggerType.NONE`
 
@@ -10458,17 +10066,9 @@ subspan_overlap
 
         The subspan overlap feature will not remove any spurs from the Device Under Test or modify the signal being measured; unlike the analyzer spurs, the spurs in the signal being measured stay at a constant frequency in the two acquisitions.
 
-        ----
-        **Note**
-        Subspan overlap process effectively is performing minimum averaging, which might reduce the measured noise floor level. NI-RFSA Spectrum Averaging can be enabled to minimize the effect of subspan overlap on the noise floor.
+        **Note** Subspan overlap process effectively is performing minimum averaging, which might reduce the measured noise floor level. NI-RFSA Spectrum Averaging can be enabled to minimize the effect of subspan overlap on the noise floor.
 
-        ----
-
-        ----
-        **Note**
-        NI-RFSA may apply further shifts to the specified value to accommodate fixed-frequency edges of components such as preselectors.
-
-        ----
+        **Note** NI-RFSA may apply further shifts to the specified value to accommodate fixed-frequency edges of components such as preselectors.
 
         **Valid Values**:
 
@@ -10482,11 +10082,7 @@ subspan_overlap
 
         **Supported Devices**: PXIe-5665/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
-        ----
-        **Note**
-        Subspan overlap will not be supported by PXIe-5842, if RMM-5585 (54GHz Frequency Extension) is connected.
-
-        ----
+        **Note** Subspan overlap will not be supported by PXIe-5842, if RMM-5585 (54GHz Frequency Extension) is connected.
 
         The following table lists the characteristics of this property.
 
@@ -10544,11 +10140,7 @@ temperature_read_interval
 
         When you call the :py:meth:`nirfsa.Session.read_power_spectrum` method, the :py:meth:`nirfsa.Session.ReadIqSingleRecordComplexF64` method, or the :py:meth:`nirfsa.Session._initiate` method, NI-RFSA checks whether at least the amount of time specified by this property has elapsed before reading the hardware temperature.
 
-        ----
-        **Note**
-        NI-RFSA ignores this property if you call the :py:meth:`nirfsa.Session.perform_thermal_correction` method or read the :py:attr:`nirfsa.Session.downconverter_gain` property.
-
-        ----
+        **Note** NI-RFSA ignores this property if you call the :py:meth:`nirfsa.Session.perform_thermal_correction` method or read the :py:attr:`nirfsa.Session.downconverter_gain` property.
 
         **Default Value**: 30 seconds
 

@@ -431,7 +431,7 @@ attributes = {
             'description': 'Specifies the Reference Clock source.\n\n----\n**Note**\nFor the PXIe-5694, if your application requires an external LO source, set this attribute to NIRFSA_VAL_NONE.\n\n----\n\n**Default Values**:\n\n**PXIe-5694**: NIRFSA_VAL_REF_IN\n\n**All other devices**: NIRFSA_VAL_ONBOARD_CLOCK\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ConfigureRefClock\n\n**Defined Values**:',
             'table_body': [
                 [
-                    'NIRFSA_VAL_NONE',
+                    'NIRFSA_VAL_NONE_STR',
                     'No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.'
                 ],
                 [
@@ -2525,7 +2525,7 @@ attributes = {
             'description': 'Specifies a comma-separated list of the terminals at which to export the Reference Clock.\n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5694, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**High-Level Functions**:\n\n- nirfsa_ExportSignal\n\n**Defined Values**:',
             'table_body': [
                 [
-                    'NIRFSA_VAL_NONE',
+                    'NIRFSA_VAL_NONE_STR',
                     'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 ],
                 [
@@ -3178,7 +3178,7 @@ attributes = {
             'description': 'Specifies the LO signal source used to downconvert the RF input signal.\n\n                If no signal downconversion is required, this attribute is ignored. If this attribute is set to "" (empty string), NI-RFSA uses the internal LO source.\n\n                To use this attribute for the PXIe-5830/5831/5832, you must use the channelName parameter of the nirfsa_SetAttributeViString function to specify the name of the channel you are configuring. You can configure the LO1 and LO2 channels by using lo1 or lo2 as the channel string, or set the channel string to lo1,lo2 to configure both channels. For all other devices, the only valid value for the channel string is "" (empty string).\n\n                ----\n                **Note**\n                For the PXIe-5841 with PXIe-5655, RF list mode is not supported when this attribute is set to NIRFSA_VAL_LO_SOURCE_SG_SA_SHARED.\n\n                ----\n\n                \n                \n\n                **Default Value**: NIRFSA_VAL_ONBOARD ("Onboard")\n\n                **Supported Devices**: PXIe-5644/5645/5646, PXIe-5694, PXIe-5830/5831/5832/5840/5841/5842\n\n                **Related Topics**\n                `PXIe-5830 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5830-feature/page/lo-sharing-using-rfsa-rfsg.html>`_\n                `PXIe-5831/5832 LO Sharing Using NI-RFSA and NI-RFSG <https://www.ni.com/docs/en-US/bundle/pxie-5831/page/lo-sharing-using-rfsa-rfsg.html>`_\n\n**Defined Values**:',
             'table_body': [
                 [
-                    'NIRFSA_VAL_NONE',
+                    'NIRFSA_VAL_NONE_STR',
                     'Specifies that no LO source is required to downconvert the RF input signal.'
                 ],
                 [
@@ -3649,7 +3649,7 @@ attributes = {
             'description': 'Specifies the terminal at which to export the Digitizer Sample Clock.\n\n**Valid Values**: \n\n**Default Value**: "" (empty string)\n\n**Supported Devices**: PXIe-5668\n\n**Defined Values**:',
             'table_body': [
                 [
-                    'NIRFSA_VAL_NONE',
+                    'NIRFSA_VAL_NONE_STR',
                     'The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.'
                 ],
                 [

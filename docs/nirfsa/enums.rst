@@ -486,7 +486,7 @@ DigitizerSampleClockExportedTerminal
 
 .. py:class:: DigitizerSampleClockExportedTerminal
 
-    .. py:attribute:: DigitizerSampleClockExportedTerminal.NONE
+    .. py:attribute:: DigitizerSampleClockExportedTerminal.NONE_STR
 
 
 
@@ -1576,7 +1576,7 @@ LoSource
 
 .. py:class:: LoSource
 
-    .. py:attribute:: LoSource.NONE
+    .. py:attribute:: LoSource.NONE_STR
 
 
 
@@ -2086,7 +2086,7 @@ PxiChassisClk10Source
 
 .. py:class:: PxiChassisClk10Source
 
-    .. py:attribute:: PxiChassisClk10Source.NONE
+    .. py:attribute:: PxiChassisClk10Source.NONE_STR
 
 
 
@@ -2156,7 +2156,7 @@ ReferenceClockExportedTerminal
 
 .. py:class:: ReferenceClockExportedTerminal
 
-    .. py:attribute:: ReferenceClockExportedTerminal.NONE
+    .. py:attribute:: ReferenceClockExportedTerminal.NONE_STR
 
 
 
@@ -2211,7 +2211,7 @@ ReferenceClockSource
 
 .. py:class:: ReferenceClockSource
 
-    .. py:attribute:: ReferenceClockSource.NONE
+    .. py:attribute:: ReferenceClockSource.NONE_STR
 
 
 

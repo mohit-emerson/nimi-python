@@ -209,7 +209,7 @@ class DigitizerDitherEnabled(Enum):
 
 
 class DigitizerSampleClockExportedTerminal(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
     '''
@@ -669,7 +669,7 @@ class LoPllFractionalModeEnabled(Enum):
 
 
 class LoSource(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     Specifies that no LO source is required to downconvert the RF input signal.
     '''
@@ -881,7 +881,7 @@ class PowerSpectrumUnits(Enum):
 
 
 class PxiChassisClk10Source(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     The device does not drive the PXI 10 MHz backplane Reference Clock.
     '''
@@ -911,7 +911,7 @@ class ReferenceClockExportedRate(Enum):
 
 
 class ReferenceClockExportedTerminal(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     The Reference Clock is not exported. This value is not valid for the PXIe-5644/5645/5646.
     '''
@@ -934,7 +934,7 @@ class ReferenceClockExportedTerminal(Enum):
 
 
 class ReferenceClockSource(Enum):
-    NONE = 'None'
+    NONE_STR = 'None'
     r'''
     No Reference Clock is required for the current device configuration. This value is valid only for the PXIe-5694 or the PXIe-5668.
     '''

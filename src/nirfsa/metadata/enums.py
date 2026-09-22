@@ -1067,42 +1067,42 @@ enums = {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
-                'value': 10
+                'value': 16
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
-                'value': 20
+                'value': 32
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
-                'value': 40
+                'value': 64
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
-                'value': 80
+                'value': 128
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
-                'value': 100
+                'value': 256
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
-                'value': 200
+                'value': 512
             }
         ]
     },
@@ -1913,8 +1913,8 @@ enums = {
         ]
     },
     'ResetWithOptionsStepsToOmit': {
-        'codegen_method': 'public',
         'class': 'IntFlag',
+        'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
@@ -2115,42 +2115,42 @@ enums = {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
-                'value': 10
+                'value': 16
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
-                'value': 20
+                'value': 32
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
-                'value': 40
+                'value': 64
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
-                'value': 80
+                'value': 128
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
-                'value': 100
+                'value': 256
             },
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
-                'value': 200
+                'value': 512
             }
         ]
     },

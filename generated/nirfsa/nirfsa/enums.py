@@ -1112,27 +1112,27 @@ class SelfCalSteps(IntFlag):
     r'''
     Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
     '''
-    LO_SELF_CAL = 10
+    LO_SELF_CAL = 16
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    AMPLITUDE_ACCURACY = 20
+    AMPLITUDE_ACCURACY = 32
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    RESIDUAL_LO_POWER = 40
+    RESIDUAL_LO_POWER = 64
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    IMAGE_SUPPRESSION = 80
+    IMAGE_SUPPRESSION = 128
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    SYNTHESIZER_ALIGNMENT = 100
+    SYNTHESIZER_ALIGNMENT = 256
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    DC_OFFSET = 200
+    DC_OFFSET = 512
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
@@ -1159,27 +1159,27 @@ class SelfCalibrateRangeStepsToOmit(IntFlag):
     r'''
     Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.
     '''
-    LO_SELF_CAL = 10
+    LO_SELF_CAL = 16
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    AMPLITUDE_ACCURACY = 20
+    AMPLITUDE_ACCURACY = 32
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    RESIDUAL_LO_POWER = 40
+    RESIDUAL_LO_POWER = 64
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    IMAGE_SUPPRESSION = 80
+    IMAGE_SUPPRESSION = 128
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    SYNTHESIZER_ALIGNMENT = 100
+    SYNTHESIZER_ALIGNMENT = 256
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''
-    DC_OFFSET = 200
+    DC_OFFSET = 512
     r'''
     Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.
     '''

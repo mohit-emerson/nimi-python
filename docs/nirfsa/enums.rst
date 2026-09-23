@@ -1226,6 +1226,31 @@ IFfilterSelection
 
 
 
+IQInPortTerminalConfiguration
+-----------------------------
+
+.. py:class:: IQInPortTerminalConfiguration
+
+    .. py:attribute:: IQInPortTerminalConfiguration.DIFFERENTIAL
+
+
+
+        Sets the terminal configuration to differential.
+
+        
+
+
+
+    .. py:attribute:: IQInPortTerminalConfiguration.SINGLE_ENDED
+
+
+
+        Sets the terminal configuration to single-ended.
+
+        
+
+
+
 IfConditioningDownConversionEnabled
 -----------------------------------
 
@@ -1316,31 +1341,6 @@ InputPort
 
 
         Enables the I terminals of the I/Q IN port. It is supported only for PXIe-5645.
-
-        
-
-
-
-IqInPortTerminalConfiguration
------------------------------
-
-.. py:class:: IqInPortTerminalConfiguration
-
-    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
-
-
-
-        Sets the terminal configuration to differential.
-
-        
-
-
-
-    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
-
-
-
-        Sets the terminal configuration to single-ended.
 
         
 
@@ -2331,12 +2331,12 @@ ReferenceTriggerDigitalEdgeEdge
 
 
 
-ReferenceTriggerIqPowerEdgeSlope
+ReferenceTriggerIQPowerEdgeSlope
 --------------------------------
 
-.. py:class:: ReferenceTriggerIqPowerEdgeSlope
+.. py:class:: ReferenceTriggerIQPowerEdgeSlope
 
-    .. py:attribute:: ReferenceTriggerIqPowerEdgeSlope.RISING
+    .. py:attribute:: ReferenceTriggerIQPowerEdgeSlope.RISING
 
 
 
@@ -2346,7 +2346,7 @@ ReferenceTriggerIqPowerEdgeSlope
 
 
 
-    .. py:attribute:: ReferenceTriggerIqPowerEdgeSlope.FALLING
+    .. py:attribute:: ReferenceTriggerIQPowerEdgeSlope.FALLING
 
 
 

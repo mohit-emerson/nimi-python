@@ -728,17 +728,17 @@ configure_iq_power_edge_ref_trigger
             :param slope:
 
 
-                Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`.
+                Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.RISING`.
 
                 | Value                                | Description                                                |
                 |:--------------------------------|:-------------------------------------------------|
-                | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING` (1000)  | NI-RFSA detects a rising edge (positive slope).  |
-                | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING` (1001) | NI-RFSA detects a falling edge (negative slope). |
+                | :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.RISING` (1000)  | NI-RFSA detects a rising edge (positive slope).  |
+                | :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.FALLING` (1001) | NI-RFSA detects a falling edge (negative slope). |
 
                 
 
 
-            :type slope: :py:data:`nirfsa.ReferenceTriggerIqPowerEdgeSlope`
+            :type slope: :py:data:`nirfsa.ReferenceTriggerIQPowerEdgeSlope`
             :param pretrigger_samples:
 
 
@@ -7039,9 +7039,9 @@ iq_in_port_terminal_configuration
 
         ----
 
-        **PXIe-5820**: The only valid value for this property is :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`.
+        **PXIe-5820**: The only valid value for this property is :py:data:`~nirfsa.IQInPortTerminalConfiguration.DIFFERENTIAL`.
 
-        **Default Value**: :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL`
+        **Default Value**: :py:data:`~nirfsa.IQInPortTerminalConfiguration.DIFFERENTIAL`
 
         **Supported Devices:** PXIe-5645, PXIe-5820
 
@@ -7050,9 +7050,9 @@ iq_in_port_terminal_configuration
         +---------------------------------------------------------------+--------------------------------------------------+
         | Name                                                          | Description                                      |
         +===============================================================+==================================================+
-        | :py:data:`~nirfsa.IqInPortTerminalConfiguration.DIFFERENTIAL` | Sets the terminal configuration to differential. |
+        | :py:data:`~nirfsa.IQInPortTerminalConfiguration.DIFFERENTIAL` | Sets the terminal configuration to differential. |
         +---------------------------------------------------------------+--------------------------------------------------+
-        | :py:data:`~nirfsa.IqInPortTerminalConfiguration.SINGLE_ENDED` | Sets the terminal configuration to single-ended. |
+        | :py:data:`~nirfsa.IQInPortTerminalConfiguration.SINGLE_ENDED` | Sets the terminal configuration to single-ended. |
         +---------------------------------------------------------------+--------------------------------------------------+
 
         The following table lists the characteristics of this property.
@@ -7060,7 +7060,7 @@ iq_in_port_terminal_configuration
             +-----------------------+-------------------------------------+
             | Characteristic        | Value                               |
             +=======================+=====================================+
-            | Datatype              | enums.IqInPortTerminalConfiguration |
+            | Datatype              | enums.IQInPortTerminalConfiguration |
             +-----------------------+-------------------------------------+
             | Permissions           | read-write                          |
             +-----------------------+-------------------------------------+
@@ -7166,7 +7166,7 @@ iq_power_edge_ref_trigger_slope
 
         When you set the :py:attr:`nirfsa.Session.ref_trigger_type` property to :py:data:`~nirfsa.ReferenceTriggerType.IQ_POWER_EDGE`, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
 
-        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`
+        **Default Value**: :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.RISING`
 
         **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -7183,9 +7183,9 @@ iq_power_edge_ref_trigger_slope
         +-------------------------------------------------------------+-------------------------------------------------------+
         | Name                                                        | Description                                           |
         +=============================================================+=======================================================+
-        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING`  | The trigger asserts when the signal power is rising.  |
+        | :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.RISING`  | The trigger asserts when the signal power is rising.  |
         +-------------------------------------------------------------+-------------------------------------------------------+
-        | :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING` | The trigger asserts when the signal power is falling. |
+        | :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.FALLING` | The trigger asserts when the signal power is falling. |
         +-------------------------------------------------------------+-------------------------------------------------------+
 
         The following table lists the characteristics of this property.
@@ -7193,7 +7193,7 @@ iq_power_edge_ref_trigger_slope
             +-----------------------+----------------------------------------+
             | Characteristic        | Value                                  |
             +=======================+========================================+
-            | Datatype              | enums.ReferenceTriggerIqPowerEdgeSlope |
+            | Datatype              | enums.ReferenceTriggerIQPowerEdgeSlope |
             +-----------------------+----------------------------------------+
             | Permissions           | read-write                             |
             +-----------------------+----------------------------------------+
@@ -9312,7 +9312,7 @@ ref_trigger_minimum_quiet_time
 
         Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger.
 
-        The signal is quiet when it is below the trigger level if the trigger slope, specified by the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_slope` property, is set to :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.RISING` or when it is above the trigger level if the trigger slope is set to :py:data:`~nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING`.
+        The signal is quiet when it is below the trigger level if the trigger slope, specified by the :py:attr:`nirfsa.Session.iq_power_edge_ref_trigger_slope` property, is set to :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.RISING` or when it is above the trigger level if the trigger slope is set to :py:data:`~nirfsa.ReferenceTriggerIQPowerEdgeSlope.FALLING`.
 
         By default, this value is set to 0, which means the device does not wait for a quiet time before arming the trigger. This property is useful to trigger the acquisition on signals containing repeated bursts, but for which each burst may have large changes in signal power within itself. By configuring the minimum quiet time to the time between bursts, you can ensure that the trigger occurs at the beginning of a burst rather than at the signal power change within a burst.
 

@@ -2819,8 +2819,8 @@ class _SessionBase(object):
 
     **Supported Devices:** PXIe-5645, PXIe-5820
     '''
-    iq_in_port_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IqInPortTerminalConfiguration, 1150182)
-    '''Type: enums.IqInPortTerminalConfiguration
+    iq_in_port_terminal_configuration = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.IQInPortTerminalConfiguration, 1150182)
+    '''Type: enums.IQInPortTerminalConfiguration
 
     Configures the terminal configuration of the I/Q port.
 
@@ -2832,9 +2832,9 @@ class _SessionBase(object):
 
     ----
 
-    **PXIe-5820**: The only valid value for this property is IqInPortTerminalConfiguration.DIFFERENTIAL.
+    **PXIe-5820**: The only valid value for this property is IQInPortTerminalConfiguration.DIFFERENTIAL.
 
-    **Default Value**: IqInPortTerminalConfiguration.DIFFERENTIAL
+    **Default Value**: IQInPortTerminalConfiguration.DIFFERENTIAL
 
     **Supported Devices:** PXIe-5645, PXIe-5820
 
@@ -2843,9 +2843,9 @@ class _SessionBase(object):
     +--------------------------------------------+--------------------------------------------------+
     | Name                                       | Description                                      |
     +============================================+==================================================+
-    | IqInPortTerminalConfiguration.DIFFERENTIAL | Sets the terminal configuration to differential. |
+    | IQInPortTerminalConfiguration.DIFFERENTIAL | Sets the terminal configuration to differential. |
     +--------------------------------------------+--------------------------------------------------+
-    | IqInPortTerminalConfiguration.SINGLE_ENDED | Sets the terminal configuration to single-ended. |
+    | IQInPortTerminalConfiguration.SINGLE_ENDED | Sets the terminal configuration to single-ended. |
     +--------------------------------------------+--------------------------------------------------+
     '''
     iq_in_port_vertical_range = _attributes.AttributeViReal64(1150183)
@@ -2892,14 +2892,14 @@ class _SessionBase(object):
 
     - ConfigureIqPowerEdgeRefTrigger
     '''
-    iq_power_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerIqPowerEdgeSlope, 1150057)
-    '''Type: enums.ReferenceTriggerIqPowerEdgeSlope
+    iq_power_edge_ref_trigger_slope = _attributes.AttributeEnum(_attributes.AttributeViInt32, enums.ReferenceTriggerIQPowerEdgeSlope, 1150057)
+    '''Type: enums.ReferenceTriggerIQPowerEdgeSlope
 
     Specifies whether the device asserts the trigger when the signal power is rising or falling.
 
     When you set the ref_trigger_type property to ReferenceTriggerType.IQ_POWER_EDGE, the device asserts the trigger when the signal power exceeds the specified level with the slope you specify.
 
-    **Default Value**: ReferenceTriggerIqPowerEdgeSlope.RISING
+    **Default Value**: ReferenceTriggerIQPowerEdgeSlope.RISING
 
     **Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860
 
@@ -2916,9 +2916,9 @@ class _SessionBase(object):
     +------------------------------------------+-------------------------------------------------------+
     | Name                                     | Description                                           |
     +==========================================+=======================================================+
-    | ReferenceTriggerIqPowerEdgeSlope.RISING  | The trigger asserts when the signal power is rising.  |
+    | ReferenceTriggerIQPowerEdgeSlope.RISING  | The trigger asserts when the signal power is rising.  |
     +------------------------------------------+-------------------------------------------------------+
-    | ReferenceTriggerIqPowerEdgeSlope.FALLING | The trigger asserts when the signal power is falling. |
+    | ReferenceTriggerIQPowerEdgeSlope.FALLING | The trigger asserts when the signal power is falling. |
     +------------------------------------------+-------------------------------------------------------+
     '''
     iq_power_edge_ref_trigger_source = _attributes.AttributeViString(1150055)
@@ -4088,7 +4088,7 @@ class _SessionBase(object):
 
     Specifies a time duration, in seconds, for which the signal must be quiet before the device arms the trigger.
 
-    The signal is quiet when it is below the trigger level if the trigger slope, specified by the iq_power_edge_ref_trigger_slope property, is set to ReferenceTriggerIqPowerEdgeSlope.RISING or when it is above the trigger level if the trigger slope is set to ReferenceTriggerIqPowerEdgeSlope.FALLING.
+    The signal is quiet when it is below the trigger level if the trigger slope, specified by the iq_power_edge_ref_trigger_slope property, is set to ReferenceTriggerIQPowerEdgeSlope.RISING or when it is above the trigger level if the trigger slope is set to ReferenceTriggerIQPowerEdgeSlope.FALLING.
 
     By default, this value is set to 0, which means the device does not wait for a quiet time before arming the trigger. This property is useful to trigger the acquisition on signals containing repeated bursts, but for which each burst may have large changes in signal power within itself. By configuring the minimum quiet time to the time between bursts, you can ensure that the trigger occurs at the beginning of a burst rather than at the signal power change within a burst.
 
@@ -7262,18 +7262,18 @@ class Session(_SessionBase):
 
             level (float): Specifies the threshold, in dBm, above or below which the device triggers.
 
-            slope (enums.ReferenceTriggerIqPowerEdgeSlope): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is ReferenceTriggerIqPowerEdgeSlope.RISING.
+            slope (enums.ReferenceTriggerIQPowerEdgeSlope): Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is ReferenceTriggerIQPowerEdgeSlope.RISING.
 
                 | Value                                | Description                                                |
                 |:--------------------------------|:-------------------------------------------------|
-                | ReferenceTriggerIqPowerEdgeSlope.RISING (1000)  | NI-RFSA detects a rising edge (positive slope).  |
-                | ReferenceTriggerIqPowerEdgeSlope.FALLING (1001) | NI-RFSA detects a falling edge (negative slope). |
+                | ReferenceTriggerIQPowerEdgeSlope.RISING (1000)  | NI-RFSA detects a rising edge (positive slope).  |
+                | ReferenceTriggerIQPowerEdgeSlope.FALLING (1001) | NI-RFSA detects a falling edge (negative slope). |
 
             pretrigger_samples (int): Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.
 
         '''
-        if type(slope) is not enums.ReferenceTriggerIqPowerEdgeSlope:
-            raise TypeError('Parameter slope must be of type ' + str(enums.ReferenceTriggerIqPowerEdgeSlope))
+        if type(slope) is not enums.ReferenceTriggerIQPowerEdgeSlope:
+            raise TypeError('Parameter slope must be of type ' + str(enums.ReferenceTriggerIQPowerEdgeSlope))
         self._interpreter.configure_iq_power_edge_ref_trigger(source, level, slope, pretrigger_samples)
 
     @ivi_synchronized

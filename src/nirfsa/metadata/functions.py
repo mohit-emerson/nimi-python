@@ -603,7 +603,7 @@ functions = {
                 'documentation': {
                     'description': 'Specifies whether the device detects a positive or negative slope on the trigger signal. The default value is NIRFSA_VAL_RISING_SLOPE.\n\n| Value                                | Description                                                |\n|:--------------------------------|:-------------------------------------------------|\n| NIRFSA_VAL_RISING_SLOPE (1000)  | NI-RFSA detects a rising edge (positive slope).  |\n| NIRFSA_VAL_FALLING_SLOPE (1001) | NI-RFSA detects a falling edge (negative slope). |'
                 },
-                'enum' : 'ReferenceTriggerIQPowerEdgeSlope',
+                'enum': 'ReferenceTriggerIQPowerEdgeSlope',
                 'name': 'slope',
                 'type': 'ViInt32',
                 'use_array': False,
@@ -655,8 +655,8 @@ functions = {
                 'documentation': {
                     'description': 'specifies the source of the Reference Clock signal.\n| Clock Source          | Description |\n|-----------------------|-------------|\n| **Onboard Clock (default)** | Uses the onboard Reference Clock as the clock source. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to PXIe-5655 onboard clock. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to PXIe-5655 onboard clock. Use cables as shown in the Getting Started Guide. |\n| **RefIn** | Uses the signal at the front panel REF IN connector. <br/>**PXIe-5830/5831/5832**-<br>- PXIe-5830: Connect PXIe-5820 REF IN to PXIe-3621 REF OUT; lock external signal to PXIe-3621 REF IN. <br>- PXIe-5831: Connect PXIe-5820 REF IN to PXIe-3622 REF OUT; lock external signal to PXIe-3622 REF IN. <br>- PXIe-5832: Connect PXIe-5820 REF IN to PXIe-3623 REF OUT; lock external signal to PXIe-3623 REF IN. <br/>**PXIe-5831 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3622 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3622 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- Connect PXIe-5820 REF IN to PXIe-3623 REF OUT. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXIe-3623 REF IN. <br>- Lock external signal to PXIe-5653 REF IN. <br/>**PXIe-5841 with PXIe-5655**-<br>- Lock to signal at REF IN on PXIe-5655. Connect REF OUT on PXIe-5655 to PXIe-5841 REF IN. <br/>**PXIe-5842**-<br>- Lock to signal at REF IN on PXIe-5655. Use cables as shown in the Getting Started Guide. |\n| **PXI Clock** | Uses the PXI_CLK signal present on the PXI backplane. |\n| **PXI_ClkMaster** | Valid only for PXIe-5831 with PXIe-5653 and PXIe-5832 with PXIe-5653. <br/>**PXIe-5831 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3622 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. <br/>**PXIe-5832 with PXIe-5653**-<br>- NI-RFSG configures PXIe-5653 to export Reference Clock. <br>- Configures PXIe-5820 and PXIe-3623 to use PXI_Clk. <br>- Connect PXIe-5653 REF OUT (10 MHz) to PXI chassis REF IN. |'
                 },
-                'name': 'clockSource',
                 'enum': 'ReferenceClockSource',
+                'name': 'clockSource',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -732,12 +732,12 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '0',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies the number of samples to store for each record that was acquired in the time period immediately before the trigger occurred.'
                 },
                 'name': 'pretriggerSamples',
-                'default_value': '0',
                 'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1730,7 +1730,7 @@ functions = {
         'returns': None,
         'use_session_lock': False
     },
-    'ReadIqSingleRecordDispatcher': {
+    'ReadIQSingleRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
@@ -1771,11 +1771,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -1864,11 +1864,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -1985,11 +1985,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -2096,11 +2096,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -2207,11 +2207,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -2246,7 +2246,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqMultiRecordDispatcher': {
+    'FetchIQMultiRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
@@ -2412,11 +2412,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -2513,11 +2513,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -2614,11 +2614,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
                     'description': '**PXI-5661, PXIe-5663/5665/5667** Specifies the time, in seconds, allotted for the function to complete before returning a timeout error.\n\n**PXIe-5644/5645/5646, PXIe-5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860** Specifies the time, in seconds, allotted to receive the reference trigger.\n\n----\n\nFor all supported devices, a value of  specifies the function waits until all data is available. A value of 0 specifies the function immediately returns available data.\n\n----'
                 },
-                'default_value': 'hightime.timedelta(seconds=10.0)',
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
                 'type': 'ViReal64',
@@ -2654,7 +2654,7 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'FetchIqSingleRecordDispatcher': {
+    'FetchIQSingleRecordDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
@@ -3932,11 +3932,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies a particular instance of a trigger. NI-RFSA does not support this parameter.'
                 },
-                'default_value': '""',
                 'name': 'signalIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -4877,11 +4877,11 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'default_value': '""',
                 'direction': 'in',
                 'documentation': {
                     'description': 'Specifies a particular instance of a trigger. NI-RFSA does not currently support this parameter.'
                 },
-                'default_value': '""',
                 'name': 'triggerIdentifier',
                 'type': 'ViConstString',
                 'use_array': False,

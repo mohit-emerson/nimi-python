@@ -782,6 +782,7 @@ functions = {
         'documentation': {
             'description': 'Configures the span and center frequency of the spectrum read by NI-RFSA.\n\nA spectrum acquisition consists of data surrounding the center frequency.\n\n----\n**Note**\nIf you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -809,8 +810,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -836,6 +837,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -845,6 +847,7 @@ functions = {
         'documentation': {
             'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n----\n**Note**\nIf you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -872,8 +875,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -899,6 +902,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -907,6 +911,7 @@ functions = {
         'documentation': {
             'description': 'Configures the frequency range of a spectrum acquisition.\n\nYou can specify the frequency range using either center frequency and span, or start and stop frequencies.\n\n----\n**Note**\nIf you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': False,
         'is_error_handling': False,
         'method_name_for_documentation': 'configure_spectrum_frequency',
@@ -935,8 +940,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -987,6 +992,7 @@ functions = {
             }
         ],
         'python_name': 'configure_spectrum_frequency',
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -1729,6 +1735,7 @@ functions = {
         'documentation': {
             'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': False,
         'is_error_handling': False,
         'method_name_for_documentation': 'read_iq_single_record',
@@ -1757,8 +1764,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1812,6 +1819,7 @@ functions = {
             }
         ],
         'python_name': 'read_iq_single_record',
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -1820,6 +1828,7 @@ functions = {
         'documentation': {
             'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'ReadIQSingleRecordComplexF64',
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1847,8 +1856,8 @@ functions = {
                 'documentation': {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
-                'name': 'channelList',
                 'is_repeated_capability': True,
+                'name': 'channelList',
                 'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
@@ -1901,6 +1910,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -1909,6 +1919,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'FetchIQMultiRecordComplexF32',
         'included_in_proto': True,
         'method_name_for_documentation': 'fetch_iq_multi_record',
@@ -1937,8 +1948,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2009,6 +2020,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2017,6 +2029,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'FetchIQMultiRecordComplexF64',
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2046,8 +2059,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2118,6 +2131,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2126,6 +2140,7 @@ functions = {
         'documentation': {
             'description': 'Fetches binary I/Q data from multiple records in an acquisition.\n\nFetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'FetchIQMultiRecordComplexI16',
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2155,8 +2170,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2227,6 +2242,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2235,6 +2251,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': False,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_multi_record',
@@ -2263,8 +2280,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2329,6 +2346,7 @@ functions = {
             }
         ],
         'python_name': 'fetch_iq_multi_record',
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -2337,6 +2355,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'FetchIQSingleRecordComplexF32',
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2366,8 +2385,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2428,6 +2447,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2436,6 +2456,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'FetchIQSingleRecordComplexF64',
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2465,8 +2486,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2527,6 +2548,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2535,6 +2557,7 @@ functions = {
         'documentation': {
             'description': 'Fetches binary I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'grpc_name': 'FetchIQSingleRecordComplexI16',
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2564,8 +2587,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2627,6 +2650,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -2635,6 +2659,7 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function accepts a data_type parameter to specify the desired data format: numpy.complex64, numpy.complex128, or numpy.int16.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'has_repeated_capability': True,
         'included_in_proto': False,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -2663,8 +2688,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -2718,6 +2743,7 @@ functions = {
             }
         ],
         'python_name': 'fetch_iq_single_record',
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': False
     },
@@ -3348,6 +3374,7 @@ functions = {
         'documentation': {
             'description': 'Returns the number of points acquired that have not yet been fetched.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -3375,8 +3402,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3402,6 +3429,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -3410,6 +3438,7 @@ functions = {
         'documentation': {
             'description': 'Returns the requested device response type, based on current NI-RFSA settings. The PXI-5661 and PXIe-5663/5663E/5665/5667/5668 automatically corrects the IF and RF response when you set the Digital IF Equalization Enabled property to TRUE. If you are using external digitizer mode, you can use information returned from this VI to correct your measurement.\n\nRefer to the *Factory Calibration* topic for your device for more information about frequency-response calibration.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -3437,8 +3466,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3506,6 +3535,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -3646,6 +3676,7 @@ functions = {
         'documentation': {
             'description': 'Returns coefficients you can use to convert unscaled data to scaled I/Q data.\n\nAcquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this function to obtain nirfsa_GetScalingCoefficients structures in the **NIRFSA_ATTR_COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **NIRFSA_ATTR_COEFFICIENT_INFO** array returns one element for each channel specified in the **NIRFSA_ATTR_CHANNEL_LIST** parameter. The element order matches the order specified by the **NIRFSA_ATTR_CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **NIRFSA_ATTR_COEFFICIENT_INFO** element then adding the offset from the same element.\n\n----\n**Note**\nThe coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.\n\n----\n\nTo get the required size of the array, call this function with **NIRFSA_ATTR_ARRAY_SIZE** set to 0 and NULL for the **NIRFSA_ATTR_COEFFICIENT_INFO** array. This function returns the required size in the **NIRFSA_ATTR_NUMBER_OF_COEFFICIENT_SETS** parameter.\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -3673,8 +3704,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -3715,6 +3746,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -4283,6 +4315,7 @@ functions = {
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_name_for_documentation': 'read_power_spectrum',
         'method_templates': [
@@ -4310,8 +4343,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4362,6 +4395,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -4370,6 +4404,7 @@ functions = {
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'read_power_spectrum',
@@ -4398,8 +4433,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4450,6 +4485,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -4458,6 +4494,7 @@ functions = {
         'documentation': {
             'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': False,
         'is_error_handling': False,
         'method_name_for_documentation': 'read_power_spectrum',
@@ -4486,8 +4523,8 @@ functions = {
                     'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
                 'is_repeated_capability': True,
-                'repeated_capability_type': 'channels',
                 'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4529,6 +4566,7 @@ functions = {
             }
         ],
         'python_name': 'read_power_spectrum',
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': False
     },

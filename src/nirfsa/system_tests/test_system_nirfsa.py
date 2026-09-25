@@ -318,11 +318,11 @@ class SystemTests:
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.NONE
 
     def test_configure_iq_power_edge_ref_trigger(self, rfsa_device_session):
-        rfsa_device_session.configure_iq_power_edge_ref_trigger('0', -20.0, nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING, pretrigger_samples=32)
+        rfsa_device_session.configure_iq_power_edge_ref_trigger('0', -20.0, nirfsa.ReferenceTriggerIQPowerEdgeSlope.FALLING, pretrigger_samples=32)
         assert rfsa_device_session.ref_trigger_type == nirfsa.ReferenceTriggerType.IQ_POWER_EDGE
         assert rfsa_device_session.iq_power_edge_ref_trigger_source == '0'
         assert abs(rfsa_device_session.iq_power_edge_ref_trigger_level - (-20.0)) < 1
-        assert rfsa_device_session.iq_power_edge_ref_trigger_slope == nirfsa.ReferenceTriggerIqPowerEdgeSlope.FALLING
+        assert rfsa_device_session.iq_power_edge_ref_trigger_slope == nirfsa.ReferenceTriggerIQPowerEdgeSlope.FALLING
         assert rfsa_device_session.ref_trigger_pretrigger_samples == 32
 
     def test_configure_digital_edge_start_trigger(self, rfsa_device_session):

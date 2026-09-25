@@ -778,13 +778,13 @@ functions = {
     },
     'ConfigureSpectrumFrequencyCenterSpan': {
         'codegen_method': 'private',
-        'method_name_for_documentation': 'configure_spectrum_frequency',
         'documentation': {
             'description': 'Configures the span and center frequency of the spectrum read by NI-RFSA.\n\nA spectrum acquisition consists of data surrounding the center frequency.\n\n----\n**Note**\nIf you configure the spectrum span to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you requested.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
+        'method_name_for_documentation': 'configure_spectrum_frequency',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -843,13 +843,13 @@ functions = {
     },
     'ConfigureSpectrumFrequencyStartStop': {
         'codegen_method': 'private',
-        'method_name_for_documentation': 'configure_spectrum_frequency',
         'documentation': {
             'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n----\n**Note**\nIf you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
+        'method_name_for_documentation': 'configure_spectrum_frequency',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3260,8 +3260,8 @@ functions = {
             'description': 'Returns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour local time, and the date is returned as integer values. For example, if the device was calibrated at 2:30 PM on December 31, 2010, this function returns 14 for the NIRFSA_ATTR_HOUR parameter, 30 for the NIRFSA_ATTR_MINUTE parameter, 12 for the NIRFSA_ATTR_MONTH parameter, 31 for the NIRFSA_ATTR_DAY parameter, and 2010 for the NIRFSA_ATTR_YEAR parameter.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
-        'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
         'is_error_handling': False,
+        'method_name_for_documentation': 'get_ext_cal_last_date_and_time',
         'parameters': [
             {
                 'direction': 'in',
@@ -3360,8 +3360,8 @@ functions = {
                 },
                 'name': 'months',
                 'python_api_converter_name': 'convert_month_to_timedelta',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in months',
                 'type': 'ViInt32',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or int in months',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -3976,8 +3976,8 @@ functions = {
             'description': 'Creates a new session for the device.\n\nThis function sets the initial value of certain attributes and sends initialization commands to reset all hardware modules to a known state necessary for NI-RFSA operation.\n\nTo create a new session, pass the downconverter resource name for the RF vector signal analyzer to the **resource name** parameter.\n\nYou can access the device session this VI creates using the NI-RFSA Soft Front Panel (SFP). Accessing the device session with the SFP can help you debug your code. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about accessing your session with the SFP.\n\n----\n**Note**\nBefore initializing your device, you must first associate the modules that comprise your device in MAX. After associating the modules, pass the resource name of the device to this function to initialize all the modules. Refer to `Associating NI-RFSA Modules <https://www.ni.com/docs/en-US/bundle/ni-rfsa-max/page/maxrfsa/mi_rf_associating.html>`_ for information about MAX association.\n\n----\n\n----\n**Note**\nFor multichannel devices such as the PXIe-5860, the resource name must include the channel number to use. The channel number is specified by appending *ChannelNumber* to the device name, where *ChannelNumber* is the channel number (0, 1, etc.). For example, if the device name is PXI1Slot2 and you want to use channel 0, use the resource name PXI1Slot2/0.\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Driver Setup Options <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/driver-setup-options.html>`_'
         },
         'included_in_proto': True,
-        'method_name_for_documentation': '__init__',
         'is_error_handling': False,
+        'method_name_for_documentation': '__init__',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -4036,8 +4036,8 @@ functions = {
                         'Description'
                     ]
                 },
-                    'grpc_name': 'reset',
-                    'name': 'resetDevice',
+                'grpc_name': 'reset',
+                'name': 'resetDevice',
                 'type': 'ViBoolean',
                 'use_array': False,
                 'use_in_python_api': True

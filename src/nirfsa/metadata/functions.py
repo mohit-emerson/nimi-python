@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSA API metadata version 26.8.0d9999
+# This file is generated from NI-RFSA API metadata version 27.0.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -184,7 +184,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSelects the linear interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the linear interpolation method for the specified port or calibration plane. \n                \n                If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -210,7 +210,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -220,7 +220,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.'
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -263,7 +263,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSelects the nearest interpolation method.\n\nNI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the nearest interpolation method for the specified port or calibration plane. \n                \n                NI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -289,7 +289,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -299,7 +299,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.'
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -313,7 +313,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nSelects the spline interpolation method.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the spline interpolation method for the specified port or calibration plane. \n                \n                If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -339,7 +339,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -349,7 +349,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.'
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -994,7 +994,7 @@ functions = {
     'CreateDeembeddingSparameterTableArray': {
         'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates an s-parameter de-embedding table for the port from the input data.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_'
+            'description': 'Creates an s-parameter de-embedding table for the specified port or calibration plane from the input data.\n\n                A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\n                The calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\n                For devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\n                Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\n                If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing measurement de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.\n\n                **Related Topics**\n\n                `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n                `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1019,7 +1019,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -1029,7 +1029,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                    'description': 'Specifies the name of the de-embedding table. If a table with the same name already exists in the calibration plane for the specified port, the existing table is replaced.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -1126,7 +1126,7 @@ functions = {
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nCreates an S-parameter de-embedding table for the port based on the specified S2P file.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
+            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane based on the specified S2P file.\n\n                A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\n                The calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\n                For devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\n                Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\n                If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing measurement de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.\n\n                **Related Topics**\n\n                `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n                `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1152,7 +1152,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -1162,7 +1162,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                    'description': 'Specifies the name of the de-embedding table. If a table with the same name already exists in the calibration plane for the specified port, the existing table is replaced.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',
@@ -1172,7 +1172,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the path to the S2P file that contains de-embedding information for the specified port.'
+                    'description': 'Specifies the path to the S2P file that contains de-embedding information for the specified port or calibration plane.'
                 },
                 'name': 's2pFilePath',
                 'type': 'ViConstString',
@@ -1211,7 +1211,7 @@ functions = {
     'DeleteAllDeembeddingTables': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nDeletes all configured de-embedding tables for the session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Deletes all de-embedding tables configured for the current session.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1260,7 +1260,7 @@ functions = {
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
         'documentation': {
-            'description': '\nDeletes the selected de-embedding table for a given port.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Deletes the selected de-embedding table for the specified port or calibration plane.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1286,7 +1286,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.'
                 },
                 'name': 'port',
                 'type': 'ViConstString',
@@ -1296,7 +1296,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table.'
+                    'description': 'Specifies the name of the de-embedding table.'
                 },
                 'name': 'tableName',
                 'type': 'ViConstString',

@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSA API metadata version 26.5.0d9999
+# This file is generated from NI-RFSA API metadata version 26.8.0d9999
 attributes = {
     1050007: {
         'access': 'read only',

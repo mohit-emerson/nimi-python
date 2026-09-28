@@ -5031,6 +5031,48 @@ class _SessionBase(object):
         '''
         self._interpreter.configure_spectrum_frequency_start_stop(self._repeated_capability, start_frequency, stop_frequency)
 
+    @ivi_synchronized
+    def disable_calibration_plane(self):
+        r'''disable_calibration_plane
+
+        Disables the calibration plane for the specified channel for de-embedding.
+
+                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].disable_calibration_plane`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.disable_calibration_plane`
+        '''
+        self._interpreter.disable_calibration_plane(self._repeated_capability)
+
+    @ivi_synchronized
+    def enable_calibration_plane(self):
+        r'''enable_calibration_plane
+
+        Enables the calibration plane for the specified channel for de-embedding.
+
+                        **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+        Tip:
+        This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+        Use Python index notation on the repeated capabilities container channels to specify a subset,
+        and then call this method on the result.
+
+        Example: :py:meth:`my_session.channels[ ... ].enable_calibration_plane`
+
+        To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+        Example: :py:meth:`my_session.enable_calibration_plane`
+        '''
+        self._interpreter.enable_calibration_plane(self._repeated_capability)
+
     def error_message(self, error_code):
         r'''error_message
 
@@ -5391,6 +5433,7 @@ class _SessionBase(object):
         waveform_info._populate_samples_info(wfm_info, iq_data_arrays)
 
         return wfm_info
+
     @ivi_synchronized
     def _fetch_iq_single_record_complex_f32(self, record_number, iq_data_array, timeout=hightime.timedelta(seconds=10.0)):
         r'''_fetch_iq_single_record_complex_f32
@@ -5636,7 +5679,6 @@ class _SessionBase(object):
         timeout = _converters.convert_timedelta_to_seconds_real64(timeout)
         wfm_info = self._interpreter.fetch_iq_single_record_complex_i16(self._repeated_capability, record_number, iq_data_array, timeout)
         return wfm_info
-
 
     def fetch_iq_single_record_into(self, iq_data_array, record_number=0, number_of_samples=None, timeout=hightime.timedelta(seconds=10.0)):
         '''fetch_iq_single_record
@@ -7403,6 +7445,18 @@ class Session(_SessionBase):
         self._interpreter.configure_software_edge_start_trigger()
 
     @ivi_synchronized
+    def create_cached_configuration(self, configuration_name):
+        r'''create_cached_configuration
+
+        TBD
+
+        Args:
+            configuration_name (str):
+
+        '''
+        self._interpreter.create_cached_configuration(configuration_name)
+
+    @ivi_synchronized
     def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):
         r'''_create_deembedding_sparameter_table_array
 
@@ -7510,6 +7564,18 @@ class Session(_SessionBase):
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.delete_all_deembedding_tables()
+
+    @ivi_synchronized
+    def delete_cached_configuration(self, configuration_name):
+        r'''delete_cached_configuration
+
+        TBD
+
+        Args:
+            configuration_name (str):
+
+        '''
+        self._interpreter.delete_cached_configuration(configuration_name)
 
     @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):

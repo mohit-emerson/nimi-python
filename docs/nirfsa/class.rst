@@ -982,6 +982,27 @@ configure_spectrum_frequency
 
             :type stop_frequency: float
 
+create_cached_configuration
+---------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: create_cached_configuration(configuration_name)
+
+            TBD
+
+            
+
+
+
+            :param configuration_name:
+
+
+                
+
+
+            :type configuration_name: str
+
 create_deembedding_sparameter_table_array
 -----------------------------------------
 
@@ -1140,6 +1161,27 @@ delete_all_deembedding_tables
 
 
 
+delete_cached_configuration
+---------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: delete_cached_configuration(configuration_name)
+
+            TBD
+
+            
+
+
+
+            :param configuration_name:
+
+
+                
+
+
+            :type configuration_name: str
+
 delete_deembedding_table
 ------------------------
 
@@ -1195,6 +1237,31 @@ disable_advance_trigger
 
 
 
+disable_calibration_plane
+-------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: disable_calibration_plane()
+
+            Disables the calibration plane for the specified channel for de-embedding.
+
+                            **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].disable_calibration_plane`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.disable_calibration_plane`
+
+
 disable_ref_trigger
 -------------------
 
@@ -1235,6 +1302,31 @@ disable_start_trigger
 
             
 
+
+
+enable_calibration_plane
+------------------------
+
+    .. py:currentmodule:: nirfsa.Session
+
+    .. py:method:: enable_calibration_plane()
+
+            Enables the calibration plane for the specified channel for de-embedding.
+
+                            **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsa.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].enable_calibration_plane`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsa.Session`.
+
+                Example: :py:meth:`my_session.enable_calibration_plane`
 
 
 enable_session_access

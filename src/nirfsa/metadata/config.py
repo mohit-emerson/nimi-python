@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSA API metadata version 26.5.0d9999
+# This file is generated from NI-RFSA API metadata version 26.8.0d9999
 config = {
-    'api_version': '26.5.0d9999',
+    'api_version': '26.8.0d9999',
     'c_function_prefix': 'niRFSA_',
     'close_function': 'close',
     'context_manager_name': {

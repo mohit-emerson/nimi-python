@@ -44,13 +44,17 @@ class Library(object):
         self.niRFSA_ConfigureSoftwareEdgeStartTrigger_cfunc = None
         self.niRFSA_ConfigureSpectrumFrequencyCenterSpan_cfunc = None
         self.niRFSA_ConfigureSpectrumFrequencyStartStop_cfunc = None
+        self.niRFSA_CreateCachedConfiguration_cfunc = None
         self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc = None
         self.niRFSA_CreateDeembeddingSparameterTableS2PFile_cfunc = None
         self.niRFSA_DeleteAllDeembeddingTables_cfunc = None
+        self.niRFSA_DeleteCachedConfiguration_cfunc = None
         self.niRFSA_DeleteDeembeddingTable_cfunc = None
         self.niRFSA_DisableAdvanceTrigger_cfunc = None
+        self.niRFSA_DisableCalibrationPlane_cfunc = None
         self.niRFSA_DisableRefTrigger_cfunc = None
         self.niRFSA_DisableStartTrigger_cfunc = None
+        self.niRFSA_EnableCalibrationPlane_cfunc = None
         self.niRFSA_EnableSessionAccess_cfunc = None
         self.niRFSA_ErrorMessage_cfunc = None
         self.niRFSA_FetchIQMultiRecordComplexF32_cfunc = None
@@ -252,6 +256,14 @@ class Library(object):
                 self.niRFSA_ConfigureSpectrumFrequencyStartStop_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_ConfigureSpectrumFrequencyStartStop_cfunc(vi, channel_list, start_frequency, stop_frequency)
 
+    def niRFSA_CreateCachedConfiguration(self, vi, configuration_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_CreateCachedConfiguration_cfunc is None:
+                self.niRFSA_CreateCachedConfiguration_cfunc = self._get_library_function('niRFSA_CreateCachedConfiguration')
+                self.niRFSA_CreateCachedConfiguration_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_CreateCachedConfiguration_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_CreateCachedConfiguration_cfunc(vi, configuration_name)
+
     def niRFSA_CreateDeembeddingSparameterTableArray(self, vi, port, table_name, frequencies, frequencies_size, sparameter_table, sparameter_table_size, number_of_ports, sparameter_orientation):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_CreateDeembeddingSparameterTableArray_cfunc is None:
@@ -276,6 +288,14 @@ class Library(object):
                 self.niRFSA_DeleteAllDeembeddingTables_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_DeleteAllDeembeddingTables_cfunc(vi)
 
+    def niRFSA_DeleteCachedConfiguration(self, vi, configuration_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_DeleteCachedConfiguration_cfunc is None:
+                self.niRFSA_DeleteCachedConfiguration_cfunc = self._get_library_function('niRFSA_DeleteCachedConfiguration')
+                self.niRFSA_DeleteCachedConfiguration_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_DeleteCachedConfiguration_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_DeleteCachedConfiguration_cfunc(vi, configuration_name)
+
     def niRFSA_DeleteDeembeddingTable(self, vi, port, table_name):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_DeleteDeembeddingTable_cfunc is None:
@@ -292,6 +312,14 @@ class Library(object):
                 self.niRFSA_DisableAdvanceTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_DisableAdvanceTrigger_cfunc(vi)
 
+    def niRFSA_DisableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_DisableCalibrationPlane_cfunc is None:
+                self.niRFSA_DisableCalibrationPlane_cfunc = self._get_library_function('niRFSA_DisableCalibrationPlane')
+                self.niRFSA_DisableCalibrationPlane_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_DisableCalibrationPlane_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_DisableCalibrationPlane_cfunc(vi, channel_name)
+
     def niRFSA_DisableRefTrigger(self, vi):  # noqa: N802
         with self._func_lock:
             if self.niRFSA_DisableRefTrigger_cfunc is None:
@@ -307,6 +335,14 @@ class Library(object):
                 self.niRFSA_DisableStartTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSA_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSA_DisableStartTrigger_cfunc(vi)
+
+    def niRFSA_EnableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSA_EnableCalibrationPlane_cfunc is None:
+                self.niRFSA_EnableCalibrationPlane_cfunc = self._get_library_function('niRFSA_EnableCalibrationPlane')
+                self.niRFSA_EnableCalibrationPlane_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSA_EnableCalibrationPlane_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSA_EnableCalibrationPlane_cfunc(vi, channel_name)
 
     def niRFSA_EnableSessionAccess(self, vi, enable):  # noqa: N802
         with self._func_lock:

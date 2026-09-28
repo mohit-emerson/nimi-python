@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSA API metadata version 26.5.0d9999
+# This file is generated from NI-RFSA API metadata version 26.8.0d9999
 functions = {
     'Abort': {
         'codegen_method': 'public',
@@ -150,30 +150,6 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': True
-    },
-    'close': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Closes the session to the device.\n\nIf you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'grpc_name': 'Close',
-        'is_error_handling': False,
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': '_close',
-        'returns': 'ViStatus',
-        'use_session_lock': False
     },
     'Commit': {
         'codegen_method': 'public',
@@ -413,7 +389,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the source of the digital edge for the Advance Trigger.\n\n| Value                                           | Description                                                                                                                                                                                                                |\n|:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_PFI0 (\'PFI0\')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |\n| NIRFSA_VAL_PFI1 (\'PFI1\')               | The trigger is received on PFI 1.                                                                                                                                                                              |\n| NIRFSA_VAL_PXI_TRIG0 (\'PXI_Trig0\')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG1 (\'PXI_Trig1\')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG2 (\'PXI_Trig2\')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG3 (\'PXI_Trig3\')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG4 (\'PXI_Trig4\')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG5 (\'PXI_Trig5\')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG6 (\'PXI_Trig6\')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG7 (\'PXI_Trig7\')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_STAR (\'PXI_STAR\')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |\n| NIRFSA_VAL_PXIE_DSTARB (\'PXIE_DSTARB\') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n| NIRFSA_VAL_TIMER_EVENT (\'TimerEvent\')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n| NIRFSA_VAL_DIO_PFI0 (\'PFI0\')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI1(\'PFI1\')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI2 (\'PFI2\')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI3 (\'PFI3\')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI4 (\'PFI4\')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI5 (\'PFI5\')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI6 (\'PFI6\')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI7 (\'PFI7\')               | The trigger is received on PFI 7 of the DIO Terminal. |'
+                    'description': "Specifies the source of the digital edge for the Advance Trigger.\n\n| Value                                           | Description                                                                                                                                                                                                                |\n|:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_PFI0 ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |\n| NIRFSA_VAL_PFI1 ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |\n| NIRFSA_VAL_PXI_TRIG0 ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG1 ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG2 ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG3 ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG4 ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG5 ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG6 ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG7 ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_STAR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |\n| NIRFSA_VAL_PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n| NIRFSA_VAL_TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n| NIRFSA_VAL_DIO_PFI0 ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI1('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI2 ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI3 ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI4 ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI5 ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI6 ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI7 ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal. |"
                 },
                 'grpc_name': 'source_raw',
                 'name': 'source',
@@ -465,7 +441,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the source of the digital edge for the Reference trigger.\n\n|Value                                            |Description                                                                                                                                                                                                                               |\n|:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_PFI0 (\'PFI0\')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |\n| NIRFSA_VAL_PFI1 (\'PFI1\')               | The trigger is received on PFI 1.                                                                                                                                                                                             |\n| NIRFSA_VAL_PXI_TRIG0 (\'PXI_Trig0\')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG1 (\'PXI_Trig1\')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG2 (\'PXI_Trig2\')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG3 (\'PXI_Trig3\')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG4 (\'PXI_Trig4\')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG5 (\'PXI_Trig5\')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG6 (\'PXI_Trig6\')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG7 (\'PXI_Trig7\')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_STAR (\'PXI_STAR\')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |\n| NIRFSA_VAL_PXIE_DSTARB (\'PXIE_DSTARB\') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n| NIRFSA_VAL_TIMER_EVENT (\'TimerEvent\')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n| NIRFSA_VAL_DIO_PFI0 (\'PFI0\')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI1(\'PFI1\')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI2 (\'PFI2\')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI3 (\'PFI3\')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI4 (\'PFI4\')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI5 (\'PFI5\')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI6 (\'PFI6\')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI7 (\'PFI7\')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |'
+                    'description': "Specifies the source of the digital edge for the Reference trigger.\n\n|Value                                            |Description                                                                                                                                                                                                                               |\n|:-------------------------------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_PFI0 ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                                           |\n| NIRFSA_VAL_PFI1 ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                                             |\n| NIRFSA_VAL_PXI_TRIG0 ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG1 ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG2 ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG3 ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG4 ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG5 ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG6 ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_TRIG7 ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                                |\n| NIRFSA_VAL_PXI_STAR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                                            |\n| NIRFSA_VAL_PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n| NIRFSA_VAL_TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n| NIRFSA_VAL_DIO_PFI0 ('PFI0')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI1('PFI1')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI2 ('PFI2')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI3 ('PFI3')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI4 ('PFI4')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI5 ('PFI5')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI6 ('PFI6')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI7 ('PFI7')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |"
                 },
                 'grpc_name': 'source_raw',
                 'name': 'source',
@@ -528,7 +504,7 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the source of the digital edge for the Start Trigger.\n\n| Value                                           | Description                                                                                                                                                                                                               |\n|:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_PFI0 (\'PFI0\')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |\n| NIRFSA_VAL_PFI1 (\'PFI1\')               | The trigger is received on PFI 1.                                                                                                                                                                              |\n| NIRFSA_VAL_PXI_TRIG0 (\'PXI_Trig0\')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG1 (\'PXI_Trig1\')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG2 (\'PXI_Trig2\')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG3 (\'PXI_Trig3\')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG4 (\'PXI_Trig4\')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG5 (\'PXI_Trig5\')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG6 (\'PXI_Trig6\')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG7 (\'PXI_Trig7\')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_STAR (\'PXI_STAR\')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |\n| NIRFSA_VAL_PXIE_DSTARB (\'PXIE_DSTARB\') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n| NIRFSA_VAL_TIMER_EVENT (\'TimerEvent\')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n| NIRFSA_VAL_DIO_PFI0 (\'PFI1\')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI1(\'PFI2\')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI2 (\'PFI3\')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI3 (\'PFI4\')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI4 (\'PFI5\')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI5 (\'PFI6\')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI6 (\'PFI7\')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI7 (\'PFI8\')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |'
+                    'description': "Specifies the source of the digital edge for the Start Trigger.\n\n| Value                                           | Description                                                                                                                                                                                                               |\n|:-------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|\n| NIRFSA_VAL_PFI0 ('PFI0')               | The trigger is received on PFI 0. For the PXIe-5841 with PXIe-5655, the trigger is received on the PXIe-5841 PFI 0.                                                                                            |\n| NIRFSA_VAL_PFI1 ('PFI1')               | The trigger is received on PFI 1.                                                                                                                                                                              |\n| NIRFSA_VAL_PXI_TRIG0 ('PXI_Trig0')     | The trigger is received on PXI trigger line 0.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG1 ('PXI_Trig1')     | The trigger is received on PXI trigger line 1.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG2 ('PXI_Trig2')     | The trigger is received on PXI trigger line 2.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG3 ('PXI_Trig3')     | The trigger is received on PXI trigger line 3.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG4 ('PXI_Trig4')     | The trigger is received on PXI trigger line 4.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG5 ('PXI_Trig5')     | The trigger is received on PXI trigger line 5.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG6 ('PXI_Trig6')     | The trigger is received on PXI trigger line 6.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_TRIG7 ('PXI_Trig7')     | The trigger is received on PXI trigger line 7.                                                                                                                                                                 |\n| NIRFSA_VAL_PXI_STAR ('PXI_STAR')       | The trigger is received on the PXI star trigger line. This value is not supported for PXIe-5644/5645/5646 devices.                                                                                             |\n| NIRFSA_VAL_PXIE_DSTARB ('PXIE_DSTARB') | The trigger is received on the PXIe DStar B trigger line. This value is valid on only the PXIe-5820/5830/5831/5832/5840/5841/5842/5860.                                                                        |\n| NIRFSA_VAL_TIMER_EVENT ('TimerEvent')  | The trigger is received from Timer Event on the digitizer. This value is valid on only the PXIe-5820/5840/5841/5842/5860 and for digital edge Advance Triggers on the PXIe-5644/5645/5646 and PXIe-5663E/5665. |\n| NIRFSA_VAL_DIO_PFI0 ('PFI1')               | The trigger is received on PFI 0 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI1('PFI2')               | The trigger is received on PFI 1 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI2 ('PFI3')               | The trigger is received on PFI 2 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI3 ('PFI4')               | The trigger is received on PFI 3 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI4 ('PFI5')               | The trigger is received on PFI 4 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI5 ('PFI6')               | The trigger is received on PFI 5 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI6 ('PFI7')               | The trigger is received on PFI 6 of the DIO Terminal.                                                                                                                                                          |\n| NIRFSA_VAL_DIO_PFI7 ('PFI8')               | The trigger is received on PFI 7 of the DIO Terminal.                                                                                                                                                          |"
                 },
                 'grpc_name': 'source_raw',
                 'name': 'source',
@@ -841,71 +817,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ConfigureSpectrumFrequencyStartStop': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n----\n**Note**\nIf you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'has_repeated_capability': True,
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_name_for_documentation': 'configure_spectrum_frequency',
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
-                },
-                'is_repeated_capability': True,
-                'name': 'channelList',
-                'repeated_capability_type': 'channels',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the lower limit of a span of frequencies. This value is expressed in hertz (Hz).'
-                },
-                'name': 'startFrequency',
-                'type': 'ViReal64',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the upper limit of a span of frequencies. This value is expressed in hertz (Hz).'
-                },
-                'name': 'stopFrequency',
-                'type': 'ViReal64',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'repeated_capability_type': 'channels',
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'ConfigureSpectrumFrequencyDispatcher': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -996,13 +907,15 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'CreateDeembeddingSparameterTableS2PFile': {
-        'codegen_method': 'public',
+    'ConfigureSpectrumFrequencyStartStop': {
+        'codegen_method': 'private',
         'documentation': {
-            'description': '\nCreates an S-parameter de-embedding table for the port based on the specified S2P file.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
+            'description': 'Configures the start and stop frequencies of a spectrum read by NI-RFSA.\n\n----\n**Note**\nIf you configure the spectrum span (**NIRFSA_ATTR_STOP_FREQUENCY**  **NIRFSA_ATTR_START_FREQUENCY**) to a value larger than the instantaneous bandwidth of the device, NI-RFSA performs multiple acquisitions and combines them into a spectrum of the size you request.\n\n----\n\n----\n**Note**\n For the PXIe-5663/5663E, NI-RFSA does not support multispan acquisitions from frequency ranges that correspond with different instantaneous bandwidths. For example, you cannot configure a multispan acquisition that acquires one span from 110 MHz to 120 MHz and a second from 120 MHz to 130 MHz because the bandwidths that correspond to each span are different (10 MHz and 20 MHz, respectively).\n\n----\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
+        'method_name_for_documentation': 'configure_spectrum_frequency',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -1025,9 +938,11 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
                 },
-                'name': 'port',
+                'is_repeated_capability': True,
+                'name': 'channelList',
+                'repeated_capability_type': 'channels',
                 'type': 'ViConstString',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1035,316 +950,46 @@ functions = {
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                    'description': 'Specifies the lower limit of a span of frequencies. This value is expressed in hertz (Hz).'
                 },
-                'name': 'tableName',
-                'type': 'ViConstString',
+                'name': 'startFrequency',
+                'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
             },
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the path to the S2P file that contains de-embedding information for the specified port.'
+                    'description': 'Specifies the upper limit of a span of frequencies. This value is expressed in hertz (Hz).'
                 },
-                'name': 's2pFilePath',
-                'type': 'ViConstString',
+                'name': 'stopFrequency',
+                'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
+            }
+        ],
+        'repeated_capability_type': 'channels',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'CreateCachedConfiguration': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
             },
             {
                 'direction': 'in',
-                'documentation': {
-                    'description': ' Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :',
-                    'table_body': [
-                        [
-                            'NIRFSA_VAL_PORT1_TOWARDS_DUT',
-                            'Port 1 of the S2P is oriented towards the DUT port.'
-                        ],
-                        [
-                            'NIRFSA_VAL_PORT2_TOWARDS_DUT',
-                            'Port 2 of the S2P is oriented towards the DUT port.'
-                        ]
-                    ],
-                    'table_header': [
-                        'Name',
-                        'Description'
-                    ]
-                },
-                'enum': 'SparameterOrientation',
-                'name': 'sparameterOrientation',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
+                'name': 'configurationName',
+                'type': 'ViConstString'
             }
         ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'DeleteAllDeembeddingTables': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nDeletes all configured de-embedding tables for the session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'DeleteDeembeddingTable': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': '\nDeletes the selected de-embedding table for a given port.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
-                },
-                'name': 'port',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the name of the table.'
-                },
-                'name': 'tableName',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'DisableAdvanceTrigger': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Configures the device to not use an Advance Trigger.\n\nThis function is necessary only if you configured an Advance Trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'DisableRefTrigger': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Configures the device to not wait for a Reference Trigger to mark a reference point within a record.\n\nThis function is necessary only if you previously configured a Reference trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'DisableStartTrigger': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Configures the device to not wait for a Start Trigger at the beginning of the acquisition.\n\nThis function is necessary only if you previously configured a Start Trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'EnableSessionAccess': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Enables or disables SFP session access for the specified instrument.\n\nSFP session access allows the NI-RFSA Soft Front Panel (SFP) to access a device with an existing open session and can help you debug your code. To enable session access, pass VI_TRUE to the **enabled** parameter. To disable session access, pass VI_FALSE to the **enabled** parameter.\n\nRefer to `Configuring SFP Session Access using LabWindows/CVI or C <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/configuring_session_access_labwindows.html>`_ for more information about SFP session access.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n----\n**Note**\nNI-RFSA does not support NI-TClk when driver session debugging is enabled.\n\n----'
-        },
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Enables or disables SFP session access for the specified device.\n\n| Value         | Description                         |\n|:---------|:-------------------------|\n| VI_TRUE  | Enables session access.  |\n| VI_FALSE | Disables session access. |'
-                },
-                'name': 'enable',
-                'type': 'ViBoolean',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
-    'ErrorMessage': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Converts an error code returned by an NI-RFSA function into a user-readable string.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
-        },
-        'included_in_proto': True,
-        'is_error_handling': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'The ViSession handle that you obtain from nirfsa_Init or nirfsa_InitWithOptions. The handle identifies a particular instrument session.\n\nYou can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsa_Init or nirfsa_InitWithOptions fails.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Passes the **errorCode** parameter that is returned from any NI-RFSA function.'
-                },
-                'grpc_name': 'status_code',
-                'name': 'errorCode',
-                'type': 'ViStatus',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the user-readable message string that corresponds to the error code you specify.\n\nYou must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.'
-                },
-                'name': 'errorMessage',
-                'size': {
-                    'mechanism': 'fixed',
-                    'value': 256
-                },
-                'type': 'ViChar[]',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus',
-        'use_session_lock': False
+        'returns': 'ViStatus'
     },
     'CreateDeembeddingSparameterTableArray': {
         'codegen_method': 'private',
@@ -1478,6 +1123,455 @@ functions = {
         ],
         'returns': 'ViStatus'
     },
+    'CreateDeembeddingSparameterTableS2PFile': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nCreates an S-parameter de-embedding table for the port based on the specified S2P file.\n\nIf you only create one table for a port, NI-RFSA automatically selects that table to de-embed the measurement.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                },
+                'name': 'port',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.'
+                },
+                'name': 'tableName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the path to the S2P file that contains de-embedding information for the specified port.'
+                },
+                'name': 's2pFilePath',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': ' Specifies the orientation of the data in the S2P file relative to the port on the DUT port. **Defined Values** :',
+                    'table_body': [
+                        [
+                            'NIRFSA_VAL_PORT1_TOWARDS_DUT',
+                            'Port 1 of the S2P is oriented towards the DUT port.'
+                        ],
+                        [
+                            'NIRFSA_VAL_PORT2_TOWARDS_DUT',
+                            'Port 2 of the S2P is oriented towards the DUT port.'
+                        ]
+                    ],
+                    'table_header': [
+                        'Name',
+                        'Description'
+                    ]
+                },
+                'enum': 'SparameterOrientation',
+                'name': 'sparameterOrientation',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DeleteAllDeembeddingTables': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nDeletes all configured de-embedding tables for the session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DeleteCachedConfiguration': {
+        'documentation': {
+            'description': 'TBD'
+        },
+        'included_in_proto': True,
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'in',
+                'name': 'configurationName',
+                'type': 'ViConstString'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'DeleteDeembeddingTable': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': '\nDeletes the selected de-embedding table for a given port.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).'
+                },
+                'name': 'port',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the name of the table.'
+                },
+                'name': 'tableName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DisableAdvanceTrigger': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Configures the device to not use an Advance Trigger.\n\nThis function is necessary only if you configured an Advance Trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DisableCalibrationPlane': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Disables the calibration plane for the specified channel for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the selector identifying the calibration plane and port.'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DisableRefTrigger': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Configures the device to not wait for a Reference Trigger to mark a reference point within a record.\n\nThis function is necessary only if you previously configured a Reference trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5668, PXIe-5820/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'DisableStartTrigger': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Configures the device to not wait for a Start Trigger at the beginning of the acquisition.\n\nThis function is necessary only if you previously configured a Start Trigger in the past and now want to disable it.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'EnableCalibrationPlane': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Enables the calibration plane for the specified channel for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the selector identifying the calibration plane and port.'
+                },
+                'name': 'channelName',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'EnableSessionAccess': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Enables or disables SFP session access for the specified instrument.\n\nSFP session access allows the NI-RFSA Soft Front Panel (SFP) to access a device with an existing open session and can help you debug your code. To enable session access, pass VI_TRUE to the **enabled** parameter. To disable session access, pass VI_FALSE to the **enabled** parameter.\n\nRefer to `Configuring SFP Session Access using LabWindows/CVI or C <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/configuring_session_access_labwindows.html>`_ for more information about SFP session access.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694, PXIe-5830/5831/5832/5840/5841/5842/5860\n\n----\n**Note**\nNI-RFSA does not support NI-TClk when driver session debugging is enabled.\n\n----'
+        },
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Enables or disables SFP session access for the specified device.\n\n| Value         | Description                         |\n|:---------|:-------------------------|\n| VI_TRUE  | Enables session access.  |\n| VI_FALSE | Disables session access. |'
+                },
+                'name': 'enable',
+                'type': 'ViBoolean',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'ErrorMessage': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Converts an error code returned by an NI-RFSA function into a user-readable string.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5840'
+        },
+        'included_in_proto': True,
+        'is_error_handling': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'The ViSession handle that you obtain from nirfsa_Init or nirfsa_InitWithOptions. The handle identifies a particular instrument session.\n\nYou can pass VI_NULL for this parameter. Passing VI_NULL is useful when nirfsa_Init or nirfsa_InitWithOptions fails.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Passes the **errorCode** parameter that is returned from any NI-RFSA function.'
+                },
+                'grpc_name': 'status_code',
+                'name': 'errorCode',
+                'type': 'ViStatus',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the user-readable message string that corresponds to the error code you specify.\n\nYou must pass a ViChar array with 1024 bytes or more to this parameter. Only the first 1024 bytes of the array are used.'
+                },
+                'name': 'errorMessage',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 256
+                },
+                'type': 'ViChar[]',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
     'FancyCreateDeembeddingSparameterTableArray': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -1579,111 +1673,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'GetDeembeddingSparameters': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
-            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT1_TOWARDS_DUT.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'get_deembedding_sparameter',
-                'method_python_name_suffix': '',
-                'session_filename': 'none'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'array_dimensions': 2,
-                'complex_array_representation': 'complex_number_array',
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
-                },
-                'name': 'sparameters',
-                'numpy': True,
-                'type': 'NIComplexNumber[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the array that is returned by the NIRFSA_ATTR_SPARAMETERS output.'
-                },
-                'name': 'sparametersArraySize',
-                'type': 'ViInt32',
-                'use_array': False
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of S-parameters.'
-                },
-                'name': 'numberOfSparameters',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
-                },
-                'name': 'numberOfPorts',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'returns': 'ViStatus'
-    },
-    'GetDeembeddingTableNumberOfPorts': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': '\nReturns the number of S-parameter ports.'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'none'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
-                },
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
-                },
-                'name': 'numberOfPorts',
-                'type': 'ViInt32'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'FancyGetDeembeddingSparameters': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -1730,197 +1719,13 @@ functions = {
         'returns': None,
         'use_session_lock': False
     },
-    'ReadIQSingleRecordDispatcher': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
-        },
-        'has_repeated_capability': True,
-        'included_in_proto': False,
-        'is_error_handling': False,
-        'method_name_for_documentation': 'read_iq_single_record',
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '_into',
-                'session_filename': 'read_iq_single_record'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
-                },
-                'is_repeated_capability': True,
-                'name': 'channelList',
-                'repeated_capability_type': 'channels',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'default_value': 'hightime.timedelta(seconds=10.0)',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
-                },
-                'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
-                'use_array': False,
-                'use_in_python_api': True,
-            },
-            {
-                'complex_array_representation': 'complex_number_array',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
-                },
-                'name': 'iq_data_array',
-                'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
-                'type': 'NIComplexNumber[]',
-                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
-                },
-                'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array)'},
-                'type': 'ViInt64',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\nThe following list provides more information about each of these properties:\n\n- **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n----\n\nThe value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n----\n\n- **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n----\n\n\nThe value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n----\n\n- **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n- **actual samples read** Returns an integer representing the number of samples in the waveform.\n- **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n- **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
-                },
-                'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'python_name': 'read_iq_single_record',
-        'repeated_capability_type': 'channels',
-        'returns': 'ViStatus',
-        'use_session_lock': False
-    },
-    'ReadIQSingleRecordComplexF64': {
-        'codegen_method': 'private',
-        'documentation': {
-            'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
-        },
-        'has_repeated_capability': True,
-        'grpc_name': 'ReadIQSingleRecordComplexF64',
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'numpy_method',
-                'library_interpreter_filename': 'numpy_read_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'numpy_read_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
-                },
-                'is_repeated_capability': True,
-                'name': 'channelList',
-                'repeated_capability_type': 'channels',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'default_value': 'hightime.timedelta(seconds=10.0)',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
-                },
-                'name': 'timeout',
-                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
-                'type': 'ViReal64',
-                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
-                'use_array': False,
-                'use_in_python_api': True,
-            },
-            {
-                'complex_array_representation': 'complex_number_array',
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
-                },
-                'name': 'iq_data_array',
-                'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
-                'type': 'NIComplexNumber[]',
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
-                },
-                'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': '0 if iq_data_array is None else len(iq_data_array)'},
-                'type': 'ViInt64',
-                'use_array': False,
-                'use_in_python_api': False
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\nThe following list provides more information about each of these properties:\n\n- **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n----\n\nThe value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n----\n\n- **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n----\n\n\nThe value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n----\n\n- **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n- **actual samples read** Returns an integer representing the number of samples in the waveform.\n- **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n- **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
-                },
-                'name': 'wfmInfo',
-                'type': 'niRFSA_wfmInfo',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'repeated_capability_type': 'channels',
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'FetchIQMultiRecordComplexF32': {
         'codegen_method': 'private',
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
-        'has_repeated_capability': True,
         'grpc_name': 'FetchIQMultiRecordComplexF32',
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'method_name_for_documentation': 'fetch_iq_multi_record',
         'method_templates': [
@@ -2005,7 +1810,10 @@ functions = {
                 },
                 'name': 'iq_data_arrays',
                 'numpy': True,
-                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfSamples'
+                },
                 'type': 'NIComplexNumberF32[]',
                 'use_in_python_api': True
             },
@@ -2029,8 +1837,8 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from multiple records in an acquisition.\n\nA fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
-        'has_repeated_capability': True,
         'grpc_name': 'FetchIQMultiRecordComplexF64',
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_multi_record',
@@ -2116,7 +1924,10 @@ functions = {
                 },
                 'name': 'iq_data_arrays',
                 'numpy': True,
-                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfSamples'
+                },
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },
@@ -2140,8 +1951,8 @@ functions = {
         'documentation': {
             'description': 'Fetches binary I/Q data from multiple records in an acquisition.\n\nFetching transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
-        'has_repeated_capability': True,
         'grpc_name': 'FetchIQMultiRecordComplexI16',
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_multi_record',
@@ -2227,7 +2038,10 @@ functions = {
                 },
                 'name': 'iq_data_arrays',
                 'numpy': True,
-                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfSamples'
+                },
                 'type': 'NIComplexI16[]',
                 'use_in_python_api': True
             },
@@ -2355,8 +2169,8 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
-        'has_repeated_capability': True,
         'grpc_name': 'FetchIQSingleRecordComplexF32',
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -2432,7 +2246,10 @@ functions = {
                 },
                 'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfSamples'
+                },
                 'type': 'NIComplexNumberF32[]',
                 'use_in_python_api': True
             },
@@ -2456,8 +2273,8 @@ functions = {
         'documentation': {
             'description': 'Fetches I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
-        'has_repeated_capability': True,
         'grpc_name': 'FetchIQSingleRecordComplexF64',
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -2533,7 +2350,10 @@ functions = {
                 },
                 'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfSamples'
+                },
                 'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },
@@ -2557,8 +2377,8 @@ functions = {
         'documentation': {
             'description': 'Fetches binary I/Q data from a single record in an acquisition.\n\nThe fetch transfers acquired waveform data from device memory to computer memory. The data was acquired to onboard memory previously by the hardware after the acquisition was initiated.\n\nThis function is not necessary if you use the read IQ single record complex F64 function because the read IQ single record complex F64 function performs the fetch as part of the function.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
-        'has_repeated_capability': True,
         'grpc_name': 'FetchIQSingleRecordComplexI16',
+        'has_repeated_capability': True,
         'included_in_proto': True,
         'is_error_handling': False,
         'method_name_for_documentation': 'fetch_iq_single_record',
@@ -2634,7 +2454,10 @@ functions = {
                 },
                 'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'passed-in', 'value': 'numberOfSamples'},
+                'size': {
+                    'mechanism': 'passed-in',
+                    'value': 'numberOfSamples'
+                },
                 'type': 'NIComplexI16[]',
                 'use_array': True,
                 'use_in_python_api': True
@@ -3121,6 +2944,111 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
+    'GetDeembeddingSparameters': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nReturns the S-parameters used for de-embedding a measurement on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n**Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860',
+            'note': 'The port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT1_TOWARDS_DUT.'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'get_deembedding_sparameter',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'array_dimensions': 2,
+                'complex_array_representation': 'complex_number_array',
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns an array of S-parameters. The S-parameters are returned in the following order: s11, s12, s21, s22.'
+                },
+                'name': 'sparameters',
+                'numpy': True,
+                'type': 'NIComplexNumber[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array that is returned by the NIRFSA_ATTR_SPARAMETERS output.'
+                },
+                'name': 'sparametersArraySize',
+                'type': 'ViInt32',
+                'use_array': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameters.'
+                },
+                'name': 'numberOfSparameters',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
+                },
+                'name': 'numberOfPorts',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus'
+    },
+    'GetDeembeddingTableNumberOfPorts': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': '\nReturns the number of S-parameter ports.'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'none'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. The ViSession handle is obtained from the nirfsa_Init function or the nirfsa_InitWithOptions function and identifies a particular instrument session.'
+                },
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of S-parameter ports. The **sparameter** array is always *n* x *n*, where span *n* is the number of ports.'
+                },
+                'name': 'numberOfPorts',
+                'type': 'ViInt32'
+            }
+        ],
+        'returns': 'ViStatus'
+    },
     'GetError': {
         'codegen_method': 'public',
         'documentation': {
@@ -3184,75 +3112,6 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': False
-    },
-    'GetLastExtCalLastDateAndTime': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
-                'session_filename': 'datetime_wrappers'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'name': 'lastCalDatetime',
-                'type': 'hightime.datetime'
-            }
-        ],
-        'python_name': 'get_ext_cal_last_date_and_time',
-        'real_datetime_call': 'GetExtCalLastDateAndTime',
-        'returns': 'ViStatus'
-    },
-    'GetLastSelfCalLastDateAndTime': {
-        'codegen_method': 'python-only',
-        'documentation': {
-            'description': '\nReturns the date and time of the last successful self-calibration.\n\nThe time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'included_in_proto': True,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'none',
-                'method_python_name_suffix': '',
-                'session_filename': 'datetime_wrappers'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.'
-                },
-                'enum': 'SelfCalibrationStep',
-                'name': 'selfCalibrationStep',
-                'type': 'ViInt64'
-            },
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'out',
-                'name': 'lastCalDatetime',
-                'type': 'hightime.datetime'
-            }
-        ],
-        'python_name': 'get_self_cal_last_date_and_time',
-        'real_datetime_call': 'GetSelfCalLastDateAndTime',
-        'returns': 'ViStatus'
     },
     'GetExtCalLastDateAndTime': {
         'codegen_method': 'private',
@@ -3322,7 +3181,7 @@ functions = {
                 'type': 'ViInt32',
                 'use_array': False,
                 'use_in_python_api': True
-            },            
+            }
         ],
         'returns': 'ViStatus',
         'use_session_lock': True
@@ -3539,6 +3398,154 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
+    'GetLastExtCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns the date and time of the last successful external calibration.\n\nThe time returned is 24-hour (military) local time; for example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5610, PXIe-5611, PXIe-5644/5645/5646, PXI/PXIe-5650/5651/5652, PXIe-5653/5654/5654, PXI-5670/5671, PXIe-5672/5673/5673E, PXIe-5696, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'lastCalDatetime',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_ext_cal_last_date_and_time',
+        'real_datetime_call': 'GetExtCalLastDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'GetLastSelfCalLastDateAndTime': {
+        'codegen_method': 'python-only',
+        'documentation': {
+            'description': '\nReturns the date and time of the last successful self-calibration.\n\nThe time returned is 24-hour local time. For example, if the device was calibrated at 2:30PM, this function returns\n\n14 for the hours parameter and\n\n30 for the minutes parameter.\n\n**Supported Devices** : PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'included_in_proto': True,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '',
+                'session_filename': 'datetime_wrappers'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the self-calibration step to query for the last successful self-calibration date and time data.'
+                },
+                'enum': 'SelfCalibrationStep',
+                'name': 'selfCalibrationStep',
+                'type': 'ViInt64'
+            },
+            {
+                'direction': 'in',
+                'name': 'vi',
+                'type': 'ViSession'
+            },
+            {
+                'direction': 'out',
+                'name': 'lastCalDatetime',
+                'type': 'hightime.datetime'
+            }
+        ],
+        'python_name': 'get_self_cal_last_date_and_time',
+        'real_datetime_call': 'GetSelfCalLastDateAndTime',
+        'returns': 'ViStatus'
+    },
+    'GetScalingCoefficients': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Returns coefficients you can use to convert unscaled data to scaled I/Q data.\n\nAcquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this function to obtain nirfsa_GetScalingCoefficients structures in the **NIRFSA_ATTR_COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **NIRFSA_ATTR_COEFFICIENT_INFO** array returns one element for each channel specified in the **NIRFSA_ATTR_CHANNEL_LIST** parameter. The element order matches the order specified by the **NIRFSA_ATTR_CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **NIRFSA_ATTR_COEFFICIENT_INFO** element then adding the offset from the same element.\n\n----\n**Note**\nThe coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.\n\n----\n\nTo get the required size of the array, call this function with **NIRFSA_ATTR_ARRAY_SIZE** set to 0 and NULL for the **NIRFSA_ATTR_COEFFICIENT_INFO** array. This function returns the required size in the **NIRFSA_ATTR_NUMBER_OF_COEFFICIENT_SETS** parameter.\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'has_repeated_capability': True,
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'is_repeated_capability': True,
+                'name': 'channelList',
+                'repeated_capability_type': 'channels',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array you specify for the **NIRFSA_ATTR_COEFFICIENT_INFO** parameter.'
+                },
+                'name': 'arraySize',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Specifies the array for storing the coefficient info.\n\n- **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.\n- **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.'
+                },
+                'name': 'coefficientInfo',
+                'size': {
+                    'mechanism': 'ivi-dance-with-a-twist',
+                    'value': 'arraySize',
+                    'value_twist': 'numberOfCoefficientSets'
+                },
+                'type': 'niRFSA_coefficientInfo[]',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns the number of valid coefficient sets.'
+                },
+                'name': 'numberOfCoefficientSets',
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'repeated_capability_type': 'channels',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
     'GetSelfCalLastDateAndTime': {
         'codegen_method': 'private',
         'documentation': {
@@ -3671,85 +3678,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'GetScalingCoefficients': {
-        'codegen_method': 'public',
-        'documentation': {
-            'description': 'Returns coefficients you can use to convert unscaled data to scaled I/Q data.\n\nAcquired data may be unscaled when sent by a peer-to-peer stream or fetched as unscaled data. Use this function to obtain nirfsa_GetScalingCoefficients structures in the **NIRFSA_ATTR_COEFFICIENT_INFO** array that provide gain and offset values you can use to scale this data into the actual I/Q values. The **NIRFSA_ATTR_COEFFICIENT_INFO** array returns one element for each channel specified in the **NIRFSA_ATTR_CHANNEL_LIST** parameter. The element order matches the order specified by the **NIRFSA_ATTR_CHANNEL_LIST** parameter. To get the actual I/Q values, scale the unscaled data from an acquisition by multiplying it by the gain value of the appropriate **NIRFSA_ATTR_COEFFICIENT_INFO** element then adding the offset from the same element.\n\n----\n**Note**\nThe coefficients are calculated by NI-RFSA for the current configuration of the device, so they are only valid for acquisitions obtained with the same device configuration.\n\n----\n\nTo get the required size of the array, call this function with **NIRFSA_ATTR_ARRAY_SIZE** set to 0 and NULL for the **NIRFSA_ATTR_COEFFICIENT_INFO** array. This function returns the required size in the **NIRFSA_ATTR_NUMBER_OF_COEFFICIENT_SETS** parameter.\n\n**Supported Devices**: PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
-        },
-        'has_repeated_capability': True,
-        'included_in_proto': True,
-        'is_error_handling': False,
-        'method_templates': [
-            {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
-            }
-        ],
-        'parameters': [
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
-                },
-                'name': 'vi',
-                'type': 'ViSession',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
-                },
-                'is_repeated_capability': True,
-                'name': 'channelList',
-                'repeated_capability_type': 'channels',
-                'type': 'ViConstString',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'in',
-                'documentation': {
-                    'description': 'Specifies the size of the array you specify for the **NIRFSA_ATTR_COEFFICIENT_INFO** parameter.'
-                },
-                'name': 'arraySize',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Specifies the array for storing the coefficient info.\n\n- **offset** is the number that should be added to the data from a peer-to-peer stream after the gain has been applied if you want to scale unscaled data.\n- **gain** returns the multiplier that you should use to scale data obtained from a peer-to-peer stream.'
-                },
-                'name': 'coefficientInfo',
-                'size': {
-                    'mechanism': 'ivi-dance-with-a-twist',
-                    'value': 'arraySize',
-                    'value_twist': 'numberOfCoefficientSets'
-                },
-                'type': 'niRFSA_coefficientInfo[]',
-                'use_array': False,
-                'use_in_python_api': True
-            },
-            {
-                'direction': 'out',
-                'documentation': {
-                    'description': 'Returns the number of valid coefficient sets.'
-                },
-                'name': 'numberOfCoefficientSets',
-                'type': 'ViInt32',
-                'use_array': False,
-                'use_in_python_api': True
-            }
-        ],
-        'repeated_capability_type': 'channels',
-        'returns': 'ViStatus',
-        'use_session_lock': True
-    },
     'GetSelfCalLastTemp': {
         'codegen_method': 'public',
         'documentation': {
@@ -3758,7 +3686,6 @@ functions = {
         'grpc_name': 'GetSelfCalLastTemp',
         'included_in_proto': True,
         'is_error_handling': False,
-        'python_name': 'get_self_calibration_temperature',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -3849,6 +3776,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'python_name': 'get_self_calibration_temperature',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -4051,7 +3979,7 @@ functions = {
                 'name': 'optionString',
                 'python_api_converter_name': 'convert_init_with_options_dictionary',
                 'type': 'ViConstString',
-                'type_in_documentation': 'dict',
+                'type_in_documentation': 'dict'
             },
             {
                 'direction': 'out',
@@ -4087,7 +4015,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
-        'returns': 'ViStatus',
+        'returns': 'ViStatus'
     },
     'IsSelfCalValid': {
         'codegen_method': 'public',
@@ -4310,20 +4238,21 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ReadPowerSpectrumF32': {
+    'ReadIQSingleRecordComplexF64': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
+        'grpc_name': 'ReadIQSingleRecordComplexF64',
         'has_repeated_capability': True,
         'included_in_proto': True,
-        'method_name_for_documentation': 'read_power_spectrum',
+        'is_error_handling': False,
         'method_templates': [
             {
-                'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
+                'documentation_filename': 'numpy_method',
+                'library_interpreter_filename': 'numpy_read_method',
                 'method_python_name_suffix': '',
-                'session_filename': 'default_method'
+                'session_filename': 'numpy_read_method'
             }
         ],
         'parameters': [
@@ -4353,7 +4282,7 @@ functions = {
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
+                    'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
@@ -4363,34 +4292,41 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Returns power spectrum data. Allocate an array as large as **NIRFSA_ATTR_DATA_ARRAY_SIZE**.'
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
-                'name': 'powerSpectrumDataArray',
+                'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
-                'type': 'ViReal32[]',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'NIComplexNumber[]',
                 'use_in_python_api': True
             },
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the size of the array that is returned by the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** parameter. Use the nirfsa_GetNumberOfSpectralLines function to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.'
+                    'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
                 'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': 'len(power_spectrum_data_array)'},
-                'type': 'ViInt32',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': '0 if iq_data_array is None else len(iq_data_array)'
+                },
+                'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': False
             },
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns additional information about the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the function returned.'
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\nThe following list provides more information about each of these properties:\n\n- **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n----\n\nThe value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n----\n\n- **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n----\n\n\nThe value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n----\n\n- **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n- **actual samples read** Returns an integer representing the number of samples in the waveform.\n- **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n- **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
-                'name': 'spectrumInfo',
-                'type': 'niRFSA_spectrumInfo',
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
@@ -4399,21 +4335,21 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'ReadPowerSpectrumF64': {
-        'codegen_method': 'private',
+    'ReadIQSingleRecordDispatcher': {
+        'codegen_method': 'python-only',
         'documentation': {
-            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Initiates an acquisition and fetches a single I/Q data record.\n\nDo not use this function if you have configured the device to continuously acquire data samples or to acquire multiple records.\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`None (Trigger Type) <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/no-trigger.html>`_'
         },
         'has_repeated_capability': True,
-        'included_in_proto': True,
+        'included_in_proto': False,
         'is_error_handling': False,
-        'method_name_for_documentation': 'read_power_spectrum',
+        'method_name_for_documentation': 'read_iq_single_record',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
-                'library_interpreter_filename': 'default_method',
-                'method_python_name_suffix': '',
-                'session_filename': 'default_method'
+                'library_interpreter_filename': 'none',
+                'method_python_name_suffix': '_into',
+                'session_filename': 'read_iq_single_record'
             }
         ],
         'parameters': [
@@ -4443,7 +4379,7 @@ functions = {
                 'default_value': 'hightime.timedelta(seconds=10.0)',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
+                    'description': 'Specifies in seconds the time allotted for the function to complete before returning a timeout error. A value of  specifies the function waits until all data is available.'
                 },
                 'name': 'timeout',
                 'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
@@ -4453,41 +4389,50 @@ functions = {
                 'use_in_python_api': True
             },
             {
+                'complex_array_representation': 'complex_number_array',
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.'
+                    'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
-                'name': 'powerSpectrumDataArray',
+                'name': 'iq_data_array',
                 'numpy': True,
-                'size': {'mechanism': 'fixed', 'value': 1},
-                'type': 'ViReal64[]',
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'NIComplexNumber[]',
+                'type_in_documentation': 'numpy array of numpy.complex64, numpy array of numpy.complex128 or interleaved complex data in the form of numpy array of numpy.int16',
                 'use_in_python_api': True
             },
             {
                 'direction': 'in',
                 'documentation': {
-                    'description': 'Specifies the size of the array that is returned by the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** parameter. Use the nirfsa_GetNumberOfSpectralLines function to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.'
+                    'description': 'Specifies the size of the array for the NIRFSA_ATTR_DATA parameter. The array needs to be at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
                 'name': 'dataArraySize',
-                'size': {'mechanism': 'python-code', 'value': 'len(power_spectrum_data_array)'},
-                'type': 'ViInt32',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': '0 if iq_data_array is None else len(iq_data_array)'
+                },
+                'type': 'ViInt64',
                 'use_array': False,
                 'use_in_python_api': False
             },
             {
                 'direction': 'out',
                 'documentation': {
-                    'description': 'Returns additional information about the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the function returned.'
+                    'description': 'Contains the absolute and relative timestamps for the operation, the time interval (dt), and the actual number of samples read.\n\nThe following list provides more information about each of these properties:\n\n- **absolute timestamp** Returns the timestamp, in seconds, of the first fetched sample that is comparable between records and acquisitions.\n\n----\n\nThe value of the absolute timestamp returned is always 0 for the PXIe-5644/5645/5646, PXIe-5668, and PXIe-5820/5830/5831/5832/5840/5841/5842/5860.\n\n----\n\n- **relative timestamp** Returns a timestamp that corresponds to the difference, in seconds, between the first sample returned and the Reference Trigger location. The timestamp is zero if the Reference Trigger has not occurred.\n\n----\n\n\nThe value of the relative timestamp returned is always 0 for the PXIe-5644/5645/5646.\n\n----\n\n- **dt** Returns the time interval between data points in the acquired signal. The I/Q data sample rate is the reciprocal of this value.\n- **actual samples read** Returns an integer representing the number of samples in the waveform.\n- **offset** Returns the offset to scale data, (*b*), in *mx* + *b* form.\n- **gain** Returns the gain to scale data, (*m*), in *mx* + *b* form.'
                 },
-                'name': 'spectrumInfo',
-                'type': 'niRFSA_spectrumInfo',
+                'name': 'wfmInfo',
+                'type': 'niRFSA_wfmInfo',
                 'use_array': False,
                 'use_in_python_api': True
             }
         ],
+        'python_name': 'read_iq_single_record',
         'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
-        'use_session_lock': True
+        'use_session_lock': False
     },
     'ReadPowerSpectrumDispatcher': {
         'codegen_method': 'python-only',
@@ -4570,14 +4515,14 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
-    'reset': {
-        'codegen_method': 'public',
+    'ReadPowerSpectrumF32': {
+        'codegen_method': 'private',
         'documentation': {
-            'description': 'Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.\n\nFor the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.\n\nThis function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the nirfsa_ResetWithOptions function, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
-        'grpc_name': 'Reset',
+        'has_repeated_capability': True,
         'included_in_proto': True,
-        'is_error_handling': False,
+        'method_name_for_documentation': 'read_power_spectrum',
         'method_templates': [
             {
                 'documentation_filename': 'default_method',
@@ -4596,8 +4541,168 @@ functions = {
                 'type': 'ViSession',
                 'use_array': False,
                 'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'is_repeated_capability': True,
+                'name': 'channelList',
+                'repeated_capability_type': 'channels',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Returns power spectrum data. Allocate an array as large as **NIRFSA_ATTR_DATA_ARRAY_SIZE**.'
+                },
+                'name': 'powerSpectrumDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViReal32[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array that is returned by the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** parameter. Use the nirfsa_GetNumberOfSpectralLines function to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.'
+                },
+                'name': 'dataArraySize',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': 'len(power_spectrum_data_array)'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns additional information about the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the function returned.'
+                },
+                'name': 'spectrumInfo',
+                'type': 'niRFSA_spectrumInfo',
+                'use_array': False,
+                'use_in_python_api': True
             }
         ],
+        'repeated_capability_type': 'channels',
+        'returns': 'ViStatus',
+        'use_session_lock': True
+    },
+    'ReadPowerSpectrumF64': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Initiates a spectrum acquisition and returns power spectrum data.\n\n----\n**Note**\n Under certain configurations, negative infinity is returned from this VI. If the Reference Level is very high and if the Signal Bandwidth is comparatively less, the ADC returns zero, which equates to negative infinity in dBm. This is expected behavior.\n\n----\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5830/5831/5832/5840/5841/5842/5860'
+        },
+        'has_repeated_capability': True,
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_name_for_documentation': 'read_power_spectrum',
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies which channels to apply settings. Specify an empty string as the value of this parameter.'
+                },
+                'is_repeated_capability': True,
+                'name': 'channelList',
+                'repeated_capability_type': 'channels',
+                'type': 'ViConstString',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'default_value': 'hightime.timedelta(seconds=10.0)',
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the time, in seconds, allotted for the function to complete before returning a timeout error. A value of specifies the function waits until all data is available.'
+                },
+                'name': 'timeout',
+                'python_api_converter_name': 'convert_timedelta_to_seconds_real64',
+                'type': 'ViReal64',
+                'type_in_documentation': 'hightime.timedelta, datetime.timedelta, or float in seconds',
+                'use_array': False,
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.'
+                },
+                'name': 'powerSpectrumDataArray',
+                'numpy': True,
+                'size': {
+                    'mechanism': 'fixed',
+                    'value': 1
+                },
+                'type': 'ViReal64[]',
+                'use_in_python_api': True
+            },
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Specifies the size of the array that is returned by the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** parameter. Use the nirfsa_GetNumberOfSpectralLines function to obtain the array size to allocate. The array must be at least as large as the number of spectral lines that NI-RFSA computes for the power spectrum.'
+                },
+                'name': 'dataArraySize',
+                'size': {
+                    'mechanism': 'python-code',
+                    'value': 'len(power_spectrum_data_array)'
+                },
+                'type': 'ViInt32',
+                'use_array': False,
+                'use_in_python_api': False
+            },
+            {
+                'direction': 'out',
+                'documentation': {
+                    'description': 'Returns additional information about the **NIRFSA_ATTR_POWER_SPECTRUM_DATA** array. This information includes the frequency, in hertz (Hz), corresponding to the first element in the array, the frequency increment, in Hz, between adjacent array elements, and the number of spectral lines the function returned.'
+                },
+                'name': 'spectrumInfo',
+                'type': 'niRFSA_spectrumInfo',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'repeated_capability_type': 'channels',
         'returns': 'ViStatus',
         'use_session_lock': True
     },
@@ -5297,6 +5402,30 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': False
     },
+    'close': {
+        'codegen_method': 'private',
+        'documentation': {
+            'description': 'Closes the session to the device.\n\nIf you close a session that has Soft Front Panel (SFP) session access enabled, any application connected to the shared device session is no longer usable. Refer to `Debugging Your Application Using SFP Session Access <https://www.ni.com/docs/en-US/bundle/ni-rfsa-sfp/page/rfsasfp/using_session_access_sfp_top.html>`_ for more information about using SFP session access.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
+        },
+        'grpc_name': 'Close',
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'python_name': '_close',
+        'returns': 'ViStatus',
+        'use_session_lock': False
+    },
     'fancy_self_test': {
         'codegen_method': 'python-only',
         'documentation': {
@@ -5338,6 +5467,37 @@ functions = {
         ],
         'python_name': 'self_test',
         'returns': 'ViStatus'
+    },
+    'reset': {
+        'codegen_method': 'public',
+        'documentation': {
+            'description': 'Resets all properties to default values, deletes all de-embedding tables, and stops the export of all external signals and events.\n\nFor the PXI-5600, this function does not reset the PXI Clock signal that is driven by devices installed in the Trigger Controller Slot, also known as the System Timing Slot.\n\nThis function resets all configured routes for the PXIe-5644/5645/5646 and PXIe-5820/5830/5831/5832/5840/5841/5842/5860 in NI-RFSA and NI-RFSG. To avoid resetting routes on the device that are in use by NI-RFSG sessions, NI recommends using the nirfsa_ResetWithOptions function, with **stepsToOmit** set to NIRFSA_VAL_RESET_WITH_OPTIONS_ROUTES.\n\n**Supported Devices**: PXI-5600, PXIe-5601/5603/5605/5606 (external digitizer mode), PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Related Topics**\n\n`Triggers <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/ni-rfsa-triggers-vst.html>`_\n\n`Events <https://www.ni.com/docs/en-US/bundle/ni-rfsa/page/events.html>`_'
+        },
+        'grpc_name': 'Reset',
+        'included_in_proto': True,
+        'is_error_handling': False,
+        'method_templates': [
+            {
+                'documentation_filename': 'default_method',
+                'library_interpreter_filename': 'default_method',
+                'method_python_name_suffix': '',
+                'session_filename': 'default_method'
+            }
+        ],
+        'parameters': [
+            {
+                'direction': 'in',
+                'documentation': {
+                    'description': 'Identifies your instrument session. NIRFSA_ATTR_VI is obtained from the nirfsa_Init or nirfsa_InitWithOptions function.'
+                },
+                'name': 'vi',
+                'type': 'ViSession',
+                'use_array': False,
+                'use_in_python_api': True
+            }
+        ],
+        'returns': 'ViStatus',
+        'use_session_lock': True
     },
     'self_test': {
         'codegen_method': 'private',
@@ -5394,5 +5554,5 @@ functions = {
             }
         ],
         'returns': 'ViStatus'
-    },
+    }
 }

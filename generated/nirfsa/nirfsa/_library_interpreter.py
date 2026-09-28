@@ -234,6 +234,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def create_cached_configuration(self, configuration_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        configuration_name_ctype = ctypes.create_string_buffer(configuration_name.encode(self._encoding))  # case C020
+        error_code = self._library.niRFSA_CreateCachedConfiguration(vi_ctype, configuration_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
@@ -264,6 +271,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def delete_cached_configuration(self, configuration_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        configuration_name_ctype = ctypes.create_string_buffer(configuration_name.encode(self._encoding))  # case C020
+        error_code = self._library.niRFSA_DeleteCachedConfiguration(vi_ctype, configuration_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def delete_deembedding_table(self, port, table_name):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
@@ -278,6 +292,13 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
+    def disable_calibration_plane(self, channel_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        error_code = self._library.niRFSA_DisableCalibrationPlane(vi_ctype, channel_name_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
     def disable_ref_trigger(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSA_DisableRefTrigger(vi_ctype)
@@ -287,6 +308,13 @@ class LibraryInterpreter(object):
     def disable_start_trigger(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSA_DisableStartTrigger(vi_ctype)
+        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
+        return
+
+    def enable_calibration_plane(self, channel_name):  # noqa: N802
+        vi_ctype = _visatype.ViSession(self._vi)  # case S110
+        channel_name_ctype = ctypes.create_string_buffer(channel_name.encode(self._encoding))  # case C010
+        error_code = self._library.niRFSA_EnableCalibrationPlane(vi_ctype, channel_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

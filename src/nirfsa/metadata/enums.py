@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSA API metadata version 26.5.0d9999
+# This file is generated from NI-RFSA API metadata version 26.8.0d9999
 enums = {
     'AcquisitionType': {
         'codegen_method': 'public',
@@ -39,6 +39,25 @@ enums = {
             }
         ]
     },
+    'AdvanceTriggerDigitalEdgeEdge': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The trigger asserts on the rising edge of the signal.'
+                },
+                'name': 'NIRFSA_VAL_RISING_EDGE',
+                'value': 900
+            },
+            {
+                'documentation': {
+                    'description': 'The trigger asserts on the falling edge of the signal.'
+                },
+                'name': 'NIRFSA_VAL_FALLING_EDGE',
+                'value': 901
+            }
+        ]
+    },
     'AdvanceTriggerType': {
         'codegen_method': 'public',
         'values': [
@@ -62,25 +81,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_SOFTWARE_EDGE',
                 'value': 604
-            }
-        ]
-    },
-    'AdvanceTriggerDigitalEdgeEdge': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The trigger asserts on the rising edge of the signal.'
-                },
-                'name': 'NIRFSA_VAL_RISING_EDGE',
-                'value': 900
-            },
-            {
-                'documentation': {
-                    'description': 'The trigger asserts on the falling edge of the signal.'
-                },
-                'name': 'NIRFSA_VAL_FALLING_EDGE',
-                'value': 901
             }
         ]
     },
@@ -464,25 +464,6 @@ enums = {
             }
         ]
     },
-    'EnableAttrVals': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The attribute is disabled.'
-                },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
-            },
-            {
-                'documentation': {
-                    'description': 'The attribute is enabled.'
-                },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
-            }
-        ]
-    },
     'DownconverterPreselectorEnabled': {
         'codegen_method': 'public',
         'values': [
@@ -506,6 +487,25 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_PRESELECTOR_ENABLED',
                 'value': 2602
+            }
+        ]
+    },
+    'EnableAttrVals': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The attribute is disabled.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'The attribute is enabled.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
             }
         ]
     },
@@ -539,32 +539,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_RF_PREAMP_AUTOMATIC',
                 'value': 2503
-            }
-        ]
-    },
-    'RfOutLoExport': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The LO signal is not exported from the RF OUT LO OUT terminal.'
-                },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
-            },
-            {
-                'documentation': {
-                    'description': 'The LO signal is exported from the RF OUT LO OUT terminal.'
-                },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
-            },
-            {
-                'documentation': {
-                    'description': 'The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.'
-                },
-                'name': 'NIRFSA_VAL_UNSPECIFIED',
-                'value': 1902
             }
         ]
     },
@@ -934,22 +908,22 @@ enums = {
             }
         ]
     },
-    'InputIsolationEnabled': {
+    'IQInPortTerminalConfiguration': {
         'codegen_method': 'public',
         'values': [
             {
                 'documentation': {
-                    'description': 'Disables input isolation.'
+                    'description': 'Sets the terminal configuration to differential.'
                 },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
+                'name': 'NIRFSA_VAL_DIFFERENTIAL',
+                'value': 2100
             },
             {
                 'documentation': {
-                    'description': 'Enables input isolation.'
+                    'description': 'Sets the terminal configuration to single-ended.'
                 },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
+                'name': 'NIRFSA_VAL_SINGLE_ENDED',
+                'value': 2101
             }
         ]
     },
@@ -966,6 +940,25 @@ enums = {
             {
                 'documentation': {
                     'description': 'Enables IF conditioning downconversion.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
+    'InputIsolationEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables input isolation.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables input isolation.'
                 },
                 'name': 'NIRFSA_VAL_ENABLED',
                 'value': 1901
@@ -1002,107 +995,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_I_ONLY',
                 'value': 2003
-            }
-        ]
-    },
-    'IQInPortTerminalConfiguration': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Sets the terminal configuration to differential.'
-                },
-                'name': 'NIRFSA_VAL_DIFFERENTIAL',
-                'value': 2100
-            },
-            {
-                'documentation': {
-                    'description': 'Sets the terminal configuration to single-ended.'
-                },
-                'name': 'NIRFSA_VAL_SINGLE_ENDED',
-                'value': 2101
-            }
-        ]
-    },
-    'SelfCalSteps': {
-        'class': 'IntFlag',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
-                'value': 8
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'No calibration steps are omitted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
-                'value': 0
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
-                'value': 4
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
-                'value': 16
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
-                'value': 32
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
-                'value': 64
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
-                'value': 128
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
-                'value': 256
-            },
-            {
-                'documentation': {
-                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
-                'value': 512
             }
         ]
     },
@@ -1673,25 +1565,6 @@ enums = {
             }
         ]
     },
-    'ReferenceTriggerOspDelayEnabled': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'Disables OSP delay for the Reference Trigger.'
-                },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
-            },
-            {
-                'documentation': {
-                    'description': 'Enables OSP delay for the Reference Trigger.'
-                },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
-            }
-        ]
-    },
     'ReferenceClockExportedRate': {
         'codegen_method': 'public',
         'values': [
@@ -1872,6 +1745,25 @@ enums = {
             }
         ]
     },
+    'ReferenceTriggerOspDelayEnabled': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Disables OSP delay for the Reference Trigger.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'Enables OSP delay for the Reference Trigger.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
     'ReferenceTriggerType': {
         'codegen_method': 'public',
         'values': [
@@ -1960,6 +1852,32 @@ enums = {
             }
         ]
     },
+    'RfOutLoExport': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The LO signal is not exported from the RF OUT LO OUT terminal.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'The LO signal is exported from the RF OUT LO OUT terminal.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            },
+            {
+                'documentation': {
+                    'description': 'The LO signal may or may not be exported to the RF OUT LO OUT terminal, because NI-RFSG may be controlling it.'
+                },
+                'name': 'NIRFSA_VAL_UNSPECIFIED',
+                'value': 1902
+            }
+        ]
+    },
     'RfPathSelection': {
         'codegen_method': 'public',
         'values': [
@@ -1997,75 +1915,82 @@ enums = {
             }
         ]
     },
-    'SelfCalibrationStep': {
-        'codegen_method': 'public',
+    'SelfCalSteps': {
+        'class': 'IntFlag',
         'values': [
             {
                 'documentation': {
-                    'description': 'Calls for preselector alignment. '
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
-                'value': 1
-            },
-            {
-                'documentation': {
-                    'description': 'Measures the changes in gain since the last external calibration was run.'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
-                'value': 2
-            },
-            {
-                'documentation': {
-                    'description': 'Measures the IF response of the entire system for each of the supported IF filters'
-                },
-                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
-                'value': 4
-            },
-            {
-                'documentation': {
-                    'description': 'Calls for digitizer self-calibration, if the digitizer is associated with the RF downconverter.'
+                    'description': 'Omits the Image Suppression step. If you omit this step, the Residual Sideband Image performance is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
                 'value': 8
             },
             {
                 'documentation': {
-                    'description': 'Calls for LO self-calibration, if the LO source module is associated with the RF downconverter.'
+                    'description': 'Omits the LO Self Cal step. If you omit this step, the power level of the LO is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'No calibration steps are omitted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_OMIT_NONE',
+                'value': 0
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Power Level Accuracy step. If you omit this step, the power level accuracy of the device is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Residual LO Power step. If you omit this step, the Residual LO Power performance is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
                 'value': 16
             },
             {
                 'documentation': {
-                    'description': 'Selects the Amplitude Accuracy self-calibration step.'
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
                 'value': 32
             },
             {
                 'documentation': {
-                    'description': 'Selects the Residual LO Power self-calibration step.'
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
                 'value': 64
             },
             {
                 'documentation': {
-                    'description': 'Selects the Image Suppression self-calibration step.'
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
                 'value': 128
             },
             {
                 'documentation': {
-                    'description': 'Selects the Synthesizer Alignment self-calibration step.'
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
                 'value': 256
             },
             {
                 'documentation': {
-                    'description': 'Selects the DC Offset self-calibration step.'
+                    'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
                 'value': 512
@@ -2148,6 +2073,81 @@ enums = {
             {
                 'documentation': {
                     'description': 'Omits the Voltage Controlled Oscillator (VCO) Alignment step. If you omit this step, the LO PLL is not adjusted.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
+                'value': 512
+            }
+        ]
+    },
+    'SelfCalibrationStep': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'Calls for preselector alignment. '
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_PRESELECTOR_ALIGNMENT',
+                'value': 1
+            },
+            {
+                'documentation': {
+                    'description': 'Measures the changes in gain since the last external calibration was run.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_GAIN_REFERENCE',
+                'value': 2
+            },
+            {
+                'documentation': {
+                    'description': 'Measures the IF response of the entire system for each of the supported IF filters'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IF_FLATNESS',
+                'value': 4
+            },
+            {
+                'documentation': {
+                    'description': 'Calls for digitizer self-calibration, if the digitizer is associated with the RF downconverter.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_DIGITIZER_SELF_CAL',
+                'value': 8
+            },
+            {
+                'documentation': {
+                    'description': 'Calls for LO self-calibration, if the LO source module is associated with the RF downconverter.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_LO_SELF_CAL',
+                'value': 16
+            },
+            {
+                'documentation': {
+                    'description': 'Selects the Amplitude Accuracy self-calibration step.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_AMPLITUDE_ACCURACY',
+                'value': 32
+            },
+            {
+                'documentation': {
+                    'description': 'Selects the Residual LO Power self-calibration step.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_RESIDUAL_LO_POWER',
+                'value': 64
+            },
+            {
+                'documentation': {
+                    'description': 'Selects the Image Suppression self-calibration step.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_IMAGE_SUPPRESSION',
+                'value': 128
+            },
+            {
+                'documentation': {
+                    'description': 'Selects the Synthesizer Alignment self-calibration step.'
+                },
+                'name': 'NIRFSA_VAL_SELF_CAL_SYNTHESIZER_ALIGNMENT',
+                'value': 256
+            },
+            {
+                'documentation': {
+                    'description': 'Selects the DC Offset self-calibration step.'
                 },
                 'name': 'NIRFSA_VAL_SELF_CAL_DC_OFFSET',
                 'value': 512
@@ -2257,6 +2257,39 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_ENABLED',
                 'value': 1901
+            }
+        ]
+    },
+    'SoftwareTriggerType': {
+        'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends a Start software trigger.'
+                },
+                'name': 'NIRFSA_VAL_START_TRIGGER',
+                'value': 1100
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends a Reference software trigger. '
+                },
+                'name': 'NIRFSA_VAL_REF_TRIGGER',
+                'value': 702
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends an Advance software trigger.'
+                },
+                'name': 'NIRFSA_VAL_ADVANCE_TRIGGER',
+                'value': 1102
+            },
+            {
+                'documentation': {
+                    'description': 'NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.'
+                },
+                'name': 'NIRFSA_VAL_ARM_REF_TRIGGER',
+                'value': 1103
             }
         ]
     },
@@ -2544,39 +2577,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_ENABLED',
                 'value': 1901
-            }
-        ]
-    },
-    'SoftwareTriggerType': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends a Start software trigger.'
-                },
-                'name': 'NIRFSA_VAL_START_TRIGGER',
-                'value': 1100
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends a Reference software trigger. '
-                },
-                'name': 'NIRFSA_VAL_REF_TRIGGER',
-                'value': 702
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends an Advance software trigger.'
-                },
-                'name': 'NIRFSA_VAL_ADVANCE_TRIGGER',
-                'value': 1102
-            },
-            {
-                'documentation': {
-                    'description': 'NI-RFSA sends an Arm Reference software trigger. This trigger is not valid for the PXIe-5668.'
-                },
-                'name': 'NIRFSA_VAL_ARM_REF_TRIGGER',
-                'value': 1103
             }
         ]
     },

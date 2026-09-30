@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 26.3.0d9999
+# This file is generated from NI-RFSG API metadata version 26.8.0d9999
 enums = {
     'AllowOutOfSpecificationUserSettings': {
         'values': [
@@ -234,7 +234,7 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'De-embeds the measurement using only the gain term.'
+                    'description': 'De-embeds the measurement using only the gain term at center frequency.'
                 },
                 'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR',
                 'value': 25001
@@ -248,17 +248,10 @@ enums = {
             },
             {
                 'documentation': {
-                    'description': 'De-embeds the measurement using wideband amplitude flatness correction.'
+                    'description': 'De-embeds the measurement using the gain term across the instantaneous bandwidth of the device.'
                 },
                 'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
                 'value': 25003
-            },
-            {
-                'documentation': {
-                    'description': 'De-embeds the measurement using wideband amplitude and phase flatness correction.'
-                },
-                'name': 'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
-                'value': 25004
             }
         ]
     },

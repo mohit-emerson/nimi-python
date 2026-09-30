@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-# This file is generated from NI-RFSG API metadata version 26.3.0d9999
+# This file is generated from NI-RFSG API metadata version 26.8.0d9999
 attributes = {
     1050302: {
         'access': 'read only',
@@ -3360,7 +3360,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to any value besides NIRFSG_VAL_DEEMBEDDING_TYPE_NONE, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Default Value**: NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841** : NIRFSG_VAL_DEEMBEDDING_TYPE_NONE or NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5842/5860** : NIRFSG_VAL_DEEMBEDDING_TYPE_NONE or NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS or NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS\n\n**Valid Values for PXIe-5831** NIRFSG_VAL_DEEMBEDDING_TYPE_NONE, NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR. NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
+            'description': 'Specifies the type of de-embedding to apply to measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViInt32 function to specify the name of the port to configure for de-embedding.\n\nIf you set this attribute to any value besides NIRFSG_VAL_DEEMBEDDING_TYPE_NONE, NI-RFSG adjusts the instrument settings and the returned data to remove the effects of the external network between the instrument and the DUT.\n\n**Default Value**: NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5830/5832/5840/5841** : NIRFSG_VAL_DEEMBEDDING_TYPE_NONE or NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR\n\n**Valid Values for PXIe-5842/5860** : NIRFSG_VAL_DEEMBEDDING_TYPE_NONE or NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR or NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS\n\n**Valid Values for PXIe-5831** NIRFSG_VAL_DEEMBEDDING_TYPE_NONE, NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR, or NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR. NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR is only supported for TRX Ports in a Semiconductor Test System (STS).\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
             'table_body': [
                 [
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_NONE',
@@ -3370,7 +3370,7 @@ attributes = {
                 [
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_SCALAR',
                     '25001 (0x61a9)',
-                    'De-embeds the measurement using only the gain term.'
+                    'De-embeds the measurement using only the gain term at center frequency.'
                 ],
                 [
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_VECTOR',
@@ -3380,12 +3380,7 @@ attributes = {
                 [
                     'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_FLATNESS',
                     '25003 (0x61ab)',
-                    'De-embeds the measurement using wideband amplitude flatness correction.'
-                ],
-                [
-                    'NIRFSG_VAL_DEEMBEDDING_TYPE_AMPLITUDE_AND_PHASE_FLATNESS',
-                    '25004 (0x61ac)',
-                    'De-embeds the measurement using wideband amplitude and phase flatness correction.'
+                    'De-embeds the measurement using the gain term across the instantaneous bandwidth of the device.'
                 ]
             ],
             'table_header': [
@@ -3406,7 +3401,7 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the de-embedding table to apply to the measurements on the specified port.\n\nTo use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViString function to specify the name of the port to configure for de-embedding.\n\nIf de-embedding is enabled, NI-RFSG uses the specified table to remove the effects of the external network between the instrument and the DUT.\n\nUse the create deembedding sparameter table array function to create tables.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Selects the de-embedding table to apply to measurements on the specified port or calibration plane.\n\nTo use this attribute, you must use the channelName parameter of the nirfsg_SetAttributeViString function to specify the port or calibration plane selector to configure for de-embedding.\n\nIf de-embedding is enabled, NI-RFSG uses the specified table to remove the effects of the external network between the instrument and the DUT.\n\nUse the create deembedding sparameter table array function to create tables.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'lv_property': 'De-embedding:Selected Table',
         'name': 'DEEMBEDDING_SELECTED_TABLE',
@@ -3606,13 +3601,10 @@ attributes = {
         'access': 'read only',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the de-embedding gain applied to compensate for the mismatch on the specified port. If de-embedding is enabled, NI-RFSG uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns the de-embedding gain applied to compensate for the mismatch on the selected port. If de-embedding is enabled, NI-RFSG uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'lv_property': 'De-embedding:Compensation Gain',
         'name': 'DEEMBEDDING_COMPENSATION_GAIN',
-        'supported_rep_caps': [
-            'ports'
-        ],
         'type': 'ViReal64'
     },
     1150290: {

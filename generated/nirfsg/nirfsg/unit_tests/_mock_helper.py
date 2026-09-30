@@ -69,10 +69,14 @@ class SideEffectsHelper(object):
         self._defaults['DeleteDeembeddingTable']['return'] = 0
         self._defaults['DeleteScript'] = {}
         self._defaults['DeleteScript']['return'] = 0
+        self._defaults['DisableCalibrationPlane'] = {}
+        self._defaults['DisableCalibrationPlane']['return'] = 0
         self._defaults['DisableScriptTrigger'] = {}
         self._defaults['DisableScriptTrigger']['return'] = 0
         self._defaults['DisableStartTrigger'] = {}
         self._defaults['DisableStartTrigger']['return'] = 0
+        self._defaults['EnableCalibrationPlane'] = {}
+        self._defaults['EnableCalibrationPlane']['return'] = 0
         self._defaults['ErrorMessage'] = {}
         self._defaults['ErrorMessage']['return'] = 0
         self._defaults['ErrorMessage']['errorMessage'] = None
@@ -381,6 +385,11 @@ class SideEffectsHelper(object):
             return self._defaults['DeleteScript']['return']
         return self._defaults['DeleteScript']['return']
 
+    def niRFSG_DisableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        if self._defaults['DisableCalibrationPlane']['return'] != 0:
+            return self._defaults['DisableCalibrationPlane']['return']
+        return self._defaults['DisableCalibrationPlane']['return']
+
     def niRFSG_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
         if self._defaults['DisableScriptTrigger']['return'] != 0:
             return self._defaults['DisableScriptTrigger']['return']
@@ -390,6 +399,11 @@ class SideEffectsHelper(object):
         if self._defaults['DisableStartTrigger']['return'] != 0:
             return self._defaults['DisableStartTrigger']['return']
         return self._defaults['DisableStartTrigger']['return']
+
+    def niRFSG_EnableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        if self._defaults['EnableCalibrationPlane']['return'] != 0:
+            return self._defaults['EnableCalibrationPlane']['return']
+        return self._defaults['EnableCalibrationPlane']['return']
 
     def niRFSG_ErrorMessage(self, vi, error_code, error_message):  # noqa: N802
         if self._defaults['ErrorMessage']['return'] != 0:
@@ -1006,10 +1020,14 @@ class SideEffectsHelper(object):
         mock_library.niRFSG_DeleteDeembeddingTable.return_value = 0
         mock_library.niRFSG_DeleteScript.side_effect = MockFunctionCallError("niRFSG_DeleteScript")
         mock_library.niRFSG_DeleteScript.return_value = 0
+        mock_library.niRFSG_DisableCalibrationPlane.side_effect = MockFunctionCallError("niRFSG_DisableCalibrationPlane")
+        mock_library.niRFSG_DisableCalibrationPlane.return_value = 0
         mock_library.niRFSG_DisableScriptTrigger.side_effect = MockFunctionCallError("niRFSG_DisableScriptTrigger")
         mock_library.niRFSG_DisableScriptTrigger.return_value = 0
         mock_library.niRFSG_DisableStartTrigger.side_effect = MockFunctionCallError("niRFSG_DisableStartTrigger")
         mock_library.niRFSG_DisableStartTrigger.return_value = 0
+        mock_library.niRFSG_EnableCalibrationPlane.side_effect = MockFunctionCallError("niRFSG_EnableCalibrationPlane")
+        mock_library.niRFSG_EnableCalibrationPlane.return_value = 0
         mock_library.niRFSG_ErrorMessage.side_effect = MockFunctionCallError("niRFSG_ErrorMessage")
         mock_library.niRFSG_ErrorMessage.return_value = 0
         mock_library.niRFSG_GetAllNamedWaveformNames.side_effect = MockFunctionCallError("niRFSG_GetAllNamedWaveformNames")

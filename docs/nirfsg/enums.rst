@@ -330,7 +330,7 @@ DeembeddingType
 
 
 
-        De-embeds the measurement using only the gain term.
+        De-embeds the measurement using only the gain term at center frequency.
 
         
 
@@ -350,17 +350,7 @@ DeembeddingType
 
 
 
-        De-embeds the measurement using wideband amplitude flatness correction.
-
-        
-
-
-
-    .. py:attribute:: DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS
-
-
-
-        De-embeds the measurement using wideband amplitude and phase flatness correction.
+        De-embeds the measurement using the gain term across the instantaneous bandwidth of the device.
 
         
 

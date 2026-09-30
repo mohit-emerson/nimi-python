@@ -145,7 +145,7 @@ class DeembeddingType(Enum):
     '''
     SCALAR = 25001
     r'''
-    De-embeds the measurement using only the gain term.
+    De-embeds the measurement using only the gain term at center frequency.
     '''
     VECTOR = 25002
     r'''
@@ -153,11 +153,7 @@ class DeembeddingType(Enum):
     '''
     AMPLITUDE_FLATNESS = 25003
     r'''
-    De-embeds the measurement using wideband amplitude flatness correction.
-    '''
-    AMPLITUDE_AND_PHASE_FLATNESS = 25004
-    r'''
-    De-embeds the measurement using wideband amplitude and phase flatness correction.
+    De-embeds the measurement using the gain term across the instantaneous bandwidth of the device.
     '''
 
 

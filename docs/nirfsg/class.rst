@@ -459,11 +459,13 @@ configure_deembedding_table_interpolation_linear
 
     .. py:method:: configure_deembedding_table_interpolation_linear(port, table_name, format)
 
-            Selects the linear interpolation method.
+            Selects the linear interpolation method for the specified port or calibration plane.
 
             If the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
 
             
 
@@ -472,7 +474,7 @@ configure_deembedding_table_interpolation_linear
             :param port:
 
 
-                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+                Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is "" (empty string).
 
                 
 
@@ -481,7 +483,7 @@ configure_deembedding_table_interpolation_linear
             :param table_name:
 
 
-                Specifies the name of the table.
+                Specifies the name of the de-embedding table.
 
                 
 
@@ -512,11 +514,13 @@ configure_deembedding_table_interpolation_nearest
 
     .. py:method:: configure_deembedding_table_interpolation_nearest(port, table_name)
 
-            Selects the nearest interpolation method.
+            Selects the nearest interpolation method for the specified port or calibration plane.
 
             NI-RFSG uses the parameters of the table nearest to the carrier frequency for de-embedding.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
 
             
 
@@ -525,7 +529,7 @@ configure_deembedding_table_interpolation_nearest
             :param port:
 
 
-                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+                Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is "" (empty string).
 
                 
 
@@ -534,7 +538,7 @@ configure_deembedding_table_interpolation_nearest
             :param table_name:
 
 
-                Specifies the name of the table.
+                Specifies the name of the de-embedding table.
 
                 
 
@@ -548,11 +552,13 @@ configure_deembedding_table_interpolation_spline
 
     .. py:method:: configure_deembedding_table_interpolation_spline(port, table_name)
 
-            Selects the spline interpolation method.
+            Selects the spline interpolation method for the specified port or calibration plane.
 
             If the carrier frequency does not match a row in the de-embedding table, NI-RFSG performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
 
             
 
@@ -561,7 +567,7 @@ configure_deembedding_table_interpolation_spline
             :param port:
 
 
-                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+                Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is "" (empty string).
 
                 
 
@@ -570,7 +576,7 @@ configure_deembedding_table_interpolation_spline
             :param table_name:
 
 
-                Specifies the name of the table.
+                Specifies the name of the de-embedding table.
 
                 
 
@@ -896,11 +902,21 @@ create_deembedding_sparameter_table_array
 
     .. py:method:: create_deembedding_sparameter_table_array(port, table_name, frequencies, sparameter_table, sparameter_orientation)
 
-            Creates an s-parameter de-embedding table for the port from the input data.
+            Creates an s-parameter de-embedding table for the specified port or calibration plane from the input data.
 
-            If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
+            A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.
+
+            The calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSG uses the default calibration plane for the specified port.
+
+            For devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.
+
+            Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.
+
+            If only one de-embedding table exists for a port or calibration plane, NI-RFSG automatically selects that table when performing measurement de-embedding.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
 
             **Related Topics**
 
@@ -913,7 +929,7 @@ create_deembedding_sparameter_table_array
             :param port:
 
 
-                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+                Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.
 
                 
 
@@ -922,7 +938,7 @@ create_deembedding_sparameter_table_array
             :param table_name:
 
 
-                Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
+                Specifies the name of the de-embedding table. If a table with the same name already exists for the specified port or calibration plane, the existing table is replaced.
 
                 
 
@@ -973,11 +989,21 @@ create_deembedding_sparameter_table_s2p_file
 
     .. py:method:: create_deembedding_sparameter_table_s2p_file(port, table_name, s2p_file_path, sparameter_orientation)
 
-            Creates an S-parameter de-embedding table for the port based on the specified S2P file.
+            Creates an S-parameter de-embedding table for the specified port or calibration plane based on the specified S2P file.
 
-            If you only create one table for a port, NI-RFSG automatically selects that table to de-embed the measurement.
+            A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.
+
+            The calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSG uses the default calibration plane for the specified port.
+
+            For devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.
+
+            Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.
+
+            If only one de-embedding table exists for a port or calibration plane, NI-RFSG automatically selects that table when performing measurement de-embedding.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
 
             **Related Topics**
 
@@ -992,7 +1018,7 @@ create_deembedding_sparameter_table_s2p_file
             :param port:
 
 
-                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842 is empty string.
+                Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.
 
                 
 
@@ -1001,7 +1027,7 @@ create_deembedding_sparameter_table_s2p_file
             :param table_name:
 
 
-                Specifies the name of the table. The name must be unique for a given port, but not across ports. If you use the same name as an existing table, the table is replaced.
+                Specifies the name of the de-embedding table. If a table with the same name already exists for the specified port or calibration plane, the existing table is replaced.
 
                 
 
@@ -1010,7 +1036,7 @@ create_deembedding_sparameter_table_s2p_file
             :param s2p_file_path:
 
 
-                Specifies the path to the S2P file that contains de-embedding information for the specified port.
+                Specifies the path to the S2P file that contains de-embedding information for the specified port or calibration plane.
 
                 
 
@@ -1039,7 +1065,7 @@ delete_all_deembedding_tables
 
     .. py:method:: delete_all_deembedding_tables()
 
-            Deletes all configured de-embedding tables for the session.
+            Deletes all de-embedding tables configured for the current session.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
 
@@ -1054,9 +1080,11 @@ delete_deembedding_table
 
     .. py:method:: delete_deembedding_table(port, table_name)
 
-            Deletes the selected de-embedding table for a given port.
+            Deletes the selected de-embedding table for the specified port or calibration plane.
 
             **Supported Devices** : PXIe-5830/5831/5832/5840/5841/5842/5860
+
+            Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
 
             
 
@@ -1065,7 +1093,7 @@ delete_deembedding_table
             :param port:
 
 
-                Specifies the name of the port. The only valid value for the PXIe-5840/5841/5842/5860 is "" (empty string).
+                Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.
 
                 
 
@@ -1074,7 +1102,7 @@ delete_deembedding_table
             :param table_name:
 
 
-                Specifies the name of the table.
+                Specifies the name of the de-embedding table.
 
                 
 
@@ -1105,6 +1133,37 @@ delete_script
 
 
             :type script_name: str
+
+disable_calibration_plane
+-------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: disable_calibration_plane()
+
+            Disables the specified calibration plane for de-embedding.
+
+            This operation disables the calibration plane across all ports where it is configured.
+
+            Specify the calibration plane using the format: calplane::<calplane_name>
+
+            If calibration plane is not specified, the default calibration plane instance is used. The default value is "" (empty string).
+
+            **Supported Devices** : PXIe-5840/5841/5842/5860
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].disable_calibration_plane`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.disable_calibration_plane`
+
 
 disable_script_trigger
 ----------------------
@@ -1156,6 +1215,37 @@ disable_start_trigger
 
             
 
+
+
+enable_calibration_plane
+------------------------
+
+    .. py:currentmodule:: nirfsg.Session
+
+    .. py:method:: enable_calibration_plane()
+
+            Enables the specified calibration plane for de-embedding.
+
+            This operation enables the calibration plane across all ports where it is configured.
+
+            Specify the calibration plane using the format: calplane::<calplane_name>
+
+            If calibration plane is not specified, the default calibration plane instance is used. The default value is "" (empty string).
+
+            **Supported Devices** : PXIe-5840/5841/5842/5860
+
+            
+
+
+            .. tip:: This method can be called on specific channels within your :py:class:`nirfsg.Session` instance.
+                Use Python index notation on the repeated capabilities container channels to specify a subset,
+                and then call this method on the result.
+
+                Example: :py:meth:`my_session.channels[ ... ].enable_calibration_plane`
+
+                To call the method on all channels, you can call it directly on the :py:class:`nirfsg.Session`.
+
+                Example: :py:meth:`my_session.enable_calibration_plane`
 
 
 error_message
@@ -4091,21 +4181,9 @@ deembedding_compensation_gain
 
     .. py:attribute:: deembedding_compensation_gain
 
-        Returns the de-embedding gain applied to compensate for the mismatch on the specified port. If de-embedding is enabled, NI-RFSG uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.
+        Returns the de-embedding gain applied to compensate for the mismatch on the selected port. If de-embedding is enabled, NI-RFSG uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.
 
         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
-
-
-
-
-        .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.
-            Use Python index notation on the repeated capabilities container ports to specify a subset.
-
-            Example: :py:attr:`my_session.ports[ ... ].deembedding_compensation_gain`
-
-            To set/get on all ports, you can call the property directly on the :py:class:`nirfsg.Session`.
-
-            Example: :py:attr:`my_session.deembedding_compensation_gain`
 
         The following table lists the characteristics of this property.
 
@@ -4116,7 +4194,7 @@ deembedding_compensation_gain
             +-----------------------+-----------+
             | Permissions           | read only |
             +-----------------------+-----------+
-            | Repeated Capabilities | ports     |
+            | Repeated Capabilities | None      |
             +-----------------------+-----------+
 
         .. tip::
@@ -4130,9 +4208,9 @@ deembedding_selected_table
 
     .. py:attribute:: deembedding_selected_table
 
-        Selects the de-embedding table to apply to the measurements on the specified port.
+        Selects the de-embedding table to apply to measurements on the specified port or calibration plane.
 
-        To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_string` method to specify the name of the port to configure for de-embedding.
+        To use this property, you must use the channelName parameter of the :py:meth:`nirfsg.Session._set_attribute_vi_string` method to specify the port or calibration plane selector to configure for de-embedding.
 
         If de-embedding is enabled, NI-RFSG uses the specified table to remove the effects of the external network between the instrument and the DUT.
 
@@ -4185,7 +4263,7 @@ deembedding_type
 
         **Valid Values for PXIe-5830/5832/5840/5841** : :py:data:`~nirfsg.DeembeddingType.NONE` or :py:data:`~nirfsg.DeembeddingType.SCALAR`
 
-        **Valid Values for PXIe-5842/5860** : :py:data:`~nirfsg.DeembeddingType.NONE` or :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_FLATNESS` or :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS`
+        **Valid Values for PXIe-5842/5860** : :py:data:`~nirfsg.DeembeddingType.NONE` or :py:data:`~nirfsg.DeembeddingType.SCALAR` or :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_FLATNESS`
 
         **Valid Values for PXIe-5831** :py:data:`~nirfsg.DeembeddingType.NONE`, :py:data:`~nirfsg.DeembeddingType.SCALAR`, or :py:data:`~nirfsg.DeembeddingType.VECTOR`. :py:data:`~nirfsg.DeembeddingType.VECTOR` is only supported for TRX Ports in a Semiconductor Test System (STS).
 
@@ -4193,19 +4271,17 @@ deembedding_type
 
         **Defined Values**:
 
-        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
-        | Name                                                            | Value          | Description                                                                       |
-        +=================================================================+================+===================================================================================+
-        | :py:data:`~nirfsg.DeembeddingType.NONE`                         | 25000 (0x61a8) | De-embedding is not applied to the measurement.                                   |
-        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingType.SCALAR`                       | 25001 (0x61a9) | De-embeds the measurement using only the gain term.                               |
-        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingType.VECTOR`                       | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term.            |
-        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_FLATNESS`           | 25003 (0x61ab) | De-embeds the measurement using wideband amplitude flatness correction.           |
-        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
-        | :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_AND_PHASE_FLATNESS` | 25004 (0x61ac) | De-embeds the measurement using wideband amplitude and phase flatness correction. |
-        +-----------------------------------------------------------------+----------------+-----------------------------------------------------------------------------------+
+        +-------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------+
+        | Name                                                  | Value          | Description                                                                                     |
+        +=======================================================+================+=================================================================================================+
+        | :py:data:`~nirfsg.DeembeddingType.NONE`               | 25000 (0x61a8) | De-embedding is not applied to the measurement.                                                 |
+        +-------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.SCALAR`             | 25001 (0x61a9) | De-embeds the measurement using only the gain term at center frequency.                         |
+        +-------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.VECTOR`             | 25002 (0x61aa) | De-embeds the measurement using the gain term and the reflection term.                          |
+        +-------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------+
+        | :py:data:`~nirfsg.DeembeddingType.AMPLITUDE_FLATNESS` | 25003 (0x61ab) | De-embeds the measurement using the gain term across the instantaneous bandwidth of the device. |
+        +-------------------------------------------------------+----------------+-------------------------------------------------------------------------------------------------+
 
 
         .. tip:: This property can be set/get on specific ports within your :py:class:`nirfsg.Session` instance.

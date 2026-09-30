@@ -229,6 +229,12 @@ class GrpcStubInterpreter(object):
             grpc_types.DeleteScriptRequest(vi=self._vi, script_name=script_name),
         )
 
+    def disable_calibration_plane(self, channel_name):  # noqa: N802
+        self._invoke(
+            self._client.DisableCalibrationPlane,
+            grpc_types.DisableCalibrationPlaneRequest(vi=self._vi, channel_name=channel_name),
+        )
+
     def disable_script_trigger(self, trigger_id):  # noqa: N802
         self._invoke(
             self._client.DisableScriptTrigger,
@@ -239,6 +245,12 @@ class GrpcStubInterpreter(object):
         self._invoke(
             self._client.DisableStartTrigger,
             grpc_types.DisableStartTriggerRequest(vi=self._vi),
+        )
+
+    def enable_calibration_plane(self, channel_name):  # noqa: N802
+        self._invoke(
+            self._client.EnableCalibrationPlane,
+            grpc_types.EnableCalibrationPlaneRequest(vi=self._vi, channel_name=channel_name),
         )
 
     def error_message(self, error_code):  # noqa: N802

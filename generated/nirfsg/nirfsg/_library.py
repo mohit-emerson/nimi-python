@@ -45,8 +45,10 @@ class Library(object):
         self.niRFSG_DeleteAllDeembeddingTables_cfunc = None
         self.niRFSG_DeleteDeembeddingTable_cfunc = None
         self.niRFSG_DeleteScript_cfunc = None
+        self.niRFSG_DisableCalibrationPlane_cfunc = None
         self.niRFSG_DisableScriptTrigger_cfunc = None
         self.niRFSG_DisableStartTrigger_cfunc = None
+        self.niRFSG_EnableCalibrationPlane_cfunc = None
         self.niRFSG_ErrorMessage_cfunc = None
         self.niRFSG_GetAllNamedWaveformNames_cfunc = None
         self.niRFSG_GetAllScriptNames_cfunc = None
@@ -311,6 +313,14 @@ class Library(object):
                 self.niRFSG_DeleteScript_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_DeleteScript_cfunc(vi, script_name)
 
+    def niRFSG_DisableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_DisableCalibrationPlane_cfunc is None:
+                self.niRFSG_DisableCalibrationPlane_cfunc = self._get_library_function('niRFSG_DisableCalibrationPlane')
+                self.niRFSG_DisableCalibrationPlane_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_DisableCalibrationPlane_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_DisableCalibrationPlane_cfunc(vi, channel_name)
+
     def niRFSG_DisableScriptTrigger(self, vi, trigger_id):  # noqa: N802
         with self._func_lock:
             if self.niRFSG_DisableScriptTrigger_cfunc is None:
@@ -326,6 +336,14 @@ class Library(object):
                 self.niRFSG_DisableStartTrigger_cfunc.argtypes = [ViSession]  # noqa: F405
                 self.niRFSG_DisableStartTrigger_cfunc.restype = ViStatus  # noqa: F405
         return self.niRFSG_DisableStartTrigger_cfunc(vi)
+
+    def niRFSG_EnableCalibrationPlane(self, vi, channel_name):  # noqa: N802
+        with self._func_lock:
+            if self.niRFSG_EnableCalibrationPlane_cfunc is None:
+                self.niRFSG_EnableCalibrationPlane_cfunc = self._get_library_function('niRFSG_EnableCalibrationPlane')
+                self.niRFSG_EnableCalibrationPlane_cfunc.argtypes = [ViSession, ctypes.POINTER(ViChar)]  # noqa: F405
+                self.niRFSG_EnableCalibrationPlane_cfunc.restype = ViStatus  # noqa: F405
+        return self.niRFSG_EnableCalibrationPlane_cfunc(vi, channel_name)
 
     def niRFSG_ErrorMessage(self, vi, error_code, error_message):  # noqa: N802
         with self._func_lock:

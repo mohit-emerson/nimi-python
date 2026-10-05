@@ -972,25 +972,6 @@ functions = {
         'returns': 'ViStatus',
         'use_session_lock': True
     },
-    'CreateCachedConfiguration': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'included_in_proto': True,
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'configurationName',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
-    },
     'CreateDeembeddingSparameterTableArray': {
         'codegen_method': 'private',
         'documentation': {
@@ -1237,25 +1218,6 @@ functions = {
         ],
         'returns': 'ViStatus',
         'use_session_lock': True
-    },
-    'DeleteCachedConfiguration': {
-        'documentation': {
-            'description': 'TBD'
-        },
-        'included_in_proto': True,
-        'parameters': [
-            {
-                'direction': 'in',
-                'name': 'vi',
-                'type': 'ViSession'
-            },
-            {
-                'direction': 'in',
-                'name': 'configurationName',
-                'type': 'ViConstString'
-            }
-        ],
-        'returns': 'ViStatus'
     },
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',

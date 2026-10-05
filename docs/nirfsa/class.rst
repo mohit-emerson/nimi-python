@@ -988,27 +988,6 @@ configure_spectrum_frequency
 
             :type stop_frequency: float
 
-create_cached_configuration
----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: create_cached_configuration(configuration_name)
-
-            TBD
-
-            
-
-
-
-            :param configuration_name:
-
-
-                
-
-
-            :type configuration_name: str
-
 create_deembedding_sparameter_table_array
 -----------------------------------------
 
@@ -1176,27 +1155,6 @@ delete_all_deembedding_tables
             
 
 
-
-delete_cached_configuration
----------------------------
-
-    .. py:currentmodule:: nirfsa.Session
-
-    .. py:method:: delete_cached_configuration(configuration_name)
-
-            TBD
-
-            
-
-
-
-            :param configuration_name:
-
-
-                
-
-
-            :type configuration_name: str
 
 delete_deembedding_table
 ------------------------

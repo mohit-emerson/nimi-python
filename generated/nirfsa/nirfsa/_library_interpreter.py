@@ -234,13 +234,6 @@ class LibraryInterpreter(object):
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 
-    def create_cached_configuration(self, configuration_name):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        configuration_name_ctype = ctypes.create_string_buffer(configuration_name.encode(self._encoding))  # case C020
-        error_code = self._library.niRFSA_CreateCachedConfiguration(vi_ctype, configuration_name_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         port_ctype = ctypes.create_string_buffer(port.encode(self._encoding))  # case C020
@@ -268,13 +261,6 @@ class LibraryInterpreter(object):
     def delete_all_deembedding_tables(self):  # noqa: N802
         vi_ctype = _visatype.ViSession(self._vi)  # case S110
         error_code = self._library.niRFSA_DeleteAllDeembeddingTables(vi_ctype)
-        errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
-        return
-
-    def delete_cached_configuration(self, configuration_name):  # noqa: N802
-        vi_ctype = _visatype.ViSession(self._vi)  # case S110
-        configuration_name_ctype = ctypes.create_string_buffer(configuration_name.encode(self._encoding))  # case C020
-        error_code = self._library.niRFSA_DeleteCachedConfiguration(vi_ctype, configuration_name_ctype)
         errors.handle_error(self, error_code, ignore_warnings=False, is_error_handling=False)
         return
 

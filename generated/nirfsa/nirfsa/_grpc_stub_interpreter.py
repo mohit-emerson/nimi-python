@@ -191,12 +191,6 @@ class GrpcStubInterpreter(object):
             grpc_types.ConfigureSpectrumFrequencyStartStopRequest(vi=self._vi, channel_list=channel_list, start_frequency=start_frequency, stop_frequency=stop_frequency),
         )
 
-    def create_cached_configuration(self, configuration_name):  # noqa: N802
-        self._invoke(
-            self._client.CreateCachedConfiguration,
-            grpc_types.CreateCachedConfigurationRequest(vi=self._vi, configuration_name=configuration_name),
-        )
-
     def create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):  # noqa: N802
         # Use ravel() so that gRPC always receives a flat numpy array, regardless of input dimensions.
         sparameter_table_list = [
@@ -218,12 +212,6 @@ class GrpcStubInterpreter(object):
         self._invoke(
             self._client.DeleteAllDeembeddingTables,
             grpc_types.DeleteAllDeembeddingTablesRequest(vi=self._vi),
-        )
-
-    def delete_cached_configuration(self, configuration_name):  # noqa: N802
-        self._invoke(
-            self._client.DeleteCachedConfiguration,
-            grpc_types.DeleteCachedConfigurationRequest(vi=self._vi, configuration_name=configuration_name),
         )
 
     def delete_deembedding_table(self, port, table_name):  # noqa: N802

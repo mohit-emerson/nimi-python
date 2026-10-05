@@ -7458,18 +7458,6 @@ class Session(_SessionBase):
         self._interpreter.configure_software_edge_start_trigger()
 
     @ivi_synchronized
-    def create_cached_configuration(self, configuration_name):
-        r'''create_cached_configuration
-
-        TBD
-
-        Args:
-            configuration_name (str):
-
-        '''
-        self._interpreter.create_cached_configuration(configuration_name)
-
-    @ivi_synchronized
     def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):
         r'''_create_deembedding_sparameter_table_array
 
@@ -7599,18 +7587,6 @@ class Session(_SessionBase):
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
         '''
         self._interpreter.delete_all_deembedding_tables()
-
-    @ivi_synchronized
-    def delete_cached_configuration(self, configuration_name):
-        r'''delete_cached_configuration
-
-        TBD
-
-        Args:
-            configuration_name (str):
-
-        '''
-        self._interpreter.delete_cached_configuration(configuration_name)
 
     @ivi_synchronized
     def delete_deembedding_table(self, port, table_name):

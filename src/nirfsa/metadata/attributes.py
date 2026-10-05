@@ -4112,7 +4112,7 @@ attributes = {
         'access': 'read only',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Returns the de-embedding gain applied to compensate for the mismatch on the selected port. Use the Active Channel property to specify the name of the port to configure for de-embedding.\n\nIf de-embedding is enabled, NI-RFSA uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.\n\n**Supported Devices**: PXIe-5830/5831/5840/5841/5842/5860'
+            'description': 'Returns the de-embedding gain applied to compensate for the effects of the external network on the selected port. Use the Active Channel property to specify the name of the port to configure for de-embedding.\n\nIf de-embedding is enabled, NI-RFSA uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.\n\n**Supported Devices**: PXIe-5830/5831/5840/5841/5842/5860'
         },
         'lv_property': 'De-embedding:Compensation Gain',
         'name': 'DEEMBEDDING_COMPENSATION_GAIN',

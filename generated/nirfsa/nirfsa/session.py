@@ -440,7 +440,7 @@ class _SessionBase(object):
     deembedding_compensation_gain = _attributes.AttributeViReal64(1150325)
     '''Type: float
 
-    Returns the de-embedding gain applied to compensate for the mismatch on the selected port. Use the Active Channel property to specify the name of the port to configure for de-embedding.
+    Returns the de-embedding gain applied to compensate for the effects of the external network on the selected port. Use the Active Channel property to specify the name of the port to configure for de-embedding.
 
     If de-embedding is enabled, NI-RFSA uses the returned compensation gain to remove the effects of the external network between the instrument and the DUT.
 
@@ -7017,7 +7017,7 @@ class Session(_SessionBase):
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
+                        Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.
 
         Args:
             port (str): Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).
@@ -7051,7 +7051,7 @@ class Session(_SessionBase):
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
+                        Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.
 
         Args:
             port (str): Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).
@@ -7071,7 +7071,7 @@ class Session(_SessionBase):
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
+                        Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.
 
         Args:
             port (str): Specifies the port or calibration plane using the format calplane::<calplane_name>/port::<port_name>. Devices that donot have multiple ports, use only calibration plane, for example: calplane::<calplane_name>.  If no calibration plane name is specified, the default calibration plane instance is used. The default value is  (empty string).
@@ -7461,7 +7461,7 @@ class Session(_SessionBase):
     def _create_deembedding_sparameter_table_array(self, port, table_name, frequencies, sparameter_table, number_of_ports, sparameter_orientation):
         r'''_create_deembedding_sparameter_table_array
 
-        Creates an s-parameter de-embedding table for the specified port or calibration plane from the input data.
+        Creates an S-parameter de-embedding table for the specified port or calibration plane from the input data.
 
                         A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.
 
@@ -7471,11 +7471,11 @@ class Session(_SessionBase):
 
                         Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.
 
-                        If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing measurement de-embedding.
+                        If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
+                        Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.
 
                         **Related Topics**
 
@@ -7544,11 +7544,11 @@ class Session(_SessionBase):
 
                         Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.
 
-                        If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing measurement de-embedding.
+                        If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
+                        Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.
 
                         **Related Topics**
 
@@ -7596,7 +7596,7 @@ class Session(_SessionBase):
 
                         **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860
 
-                        Multiple Calibration Planes are supported only on PXIe-5840/5841/5842/5860.
+                        Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.
 
         Args:
             port (str): Accepts either a port name or a calibration plane selector. Use calplane::<calplane_name>/port::<port_name> to target a calibration plane for that port. For PXIe-5840/5841/5842/5860 devices, the supported values are an empty string or calplane::<calplane_name>.

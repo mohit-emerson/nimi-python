@@ -186,7 +186,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationLinear': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the linear interpolation method for the specified port or calibration plane. \n                \n                If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
+            'description': 'Selects the linear interpolation method for the specified port or calibration plane.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a linear interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -265,7 +265,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationNearest': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the nearest interpolation method for the specified port or calibration plane. \n                \n                NI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
+            'description': 'Selects the nearest interpolation method for the specified port or calibration plane.\n\nNI-RFSA uses the parameters of the table nearest to the carrier frequency for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -315,7 +315,7 @@ functions = {
     'ConfigureDeembeddingTableInterpolationSpline': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Selects the spline interpolation method for the specified port or calibration plane. \n                \n                If the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
+            'description': 'Selects the spline interpolation method for the specified port or calibration plane.\n\nIf the carrier frequency does not match a row in the de-embedding table, NI-RFSA performs a spline interpolation based on the entries in the de-embedding table to determine the parameters to use for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -977,7 +977,7 @@ functions = {
     'CreateDeembeddingSparameterTableArray': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane from the input data.\n\n                A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\n                The calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\n                For devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\n                Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\n                If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.\n\n                **Related Topics**\n\n                `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n                `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
+            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane from the input data.\n\nA calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\nThe calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\nFor devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\nCreating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\nIf only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'method_templates': [
@@ -1109,7 +1109,7 @@ functions = {
     'CreateDeembeddingSparameterTableS2PFile': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane based on the specified S2P file.\n\n                A calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\n                The calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\n                For devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\n                Creating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\n                If only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.\n\n                **Related Topics**\n\n                `De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n                `S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
+            'description': 'Creates an S-parameter de-embedding table for the specified port or calibration plane based on the specified S2P file.\n\nA calibration plane can be specified using the format calplane::<calplane_name>/port::<port_name>.\n\nThe calibration plane is created within the context of the specified port. If a calibration plane name is not provided, NI-RFSA uses the default calibration plane for the specified port.\n\nFor devices that do not have multiple ports, use only the calibration plane portion of the selector, for example calplane::<calplane_name>.\n\nCreating the first de-embedding table for a calibration plane on a port enables that calibration plane by default.\n\nIf only one de-embedding table exists for a port or calibration plane, NI-RFSA automatically selects that table when performing de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.\n\n**Related Topics**\n\n`De-embedding Overview <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html>`_\n\n`S-parameters <https://www.ni.com/docs/en-US/bundle/pxie-5840/page/de-embedding-overview.html#GUID-0AD828DE-398A-45C6-ABBA-4208DEB7DE1B__GUID-67A69775-E4DB-4FA2-84FE-C05977ED4184>`_'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1194,7 +1194,7 @@ functions = {
     'DeleteAllDeembeddingTables': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Deletes all de-embedding tables configured for the current session.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Deletes all de-embedding tables configured for the current session.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1224,7 +1224,7 @@ functions = {
     'DeleteDeembeddingTable': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Deletes the selected de-embedding table for the specified port or calibration plane.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\n                Multiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
+            'description': 'Deletes the selected de-embedding table for the specified port or calibration plane.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860\n\nMultiple calibration planes are supported only on PXIe-5840/5841/5842/5860.'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1304,7 +1304,7 @@ functions = {
     'DisableCalibrationPlane': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Disables the calibration plane for the specified channel for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Disables the calibration plane for the specified channel for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -1404,7 +1404,7 @@ functions = {
     'EnableCalibrationPlane': {
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Enables the calibration plane for the specified channel for de-embedding.\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Enables the calibration plane for the specified channel for de-embedding.\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'is_error_handling': False,
@@ -2911,7 +2911,7 @@ functions = {
     'GetDeembeddingSparameters': {
         'codegen_method': 'private',
         'documentation': {
-            'description': 'Returns the S-parameters used for de-embedding on the selected port. \n                \n                This includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\n                If you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n                ----\n                \n                The port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT2_TOWARDS_DUT.\n\n                ----\n\n                **Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
+            'description': 'Returns the S-parameters used for de-embedding on the selected port.\n\nThis includes interpolation of the parameters based on the configured carrier frequency. This function returns an empty array if no de-embedding is done.\n\nIf you want to call this function just to get the required buffer size, you can pass 0 for **S-parameter Size** and VI_NULL for the **S-parameters** buffer.\n\n----\n\nThe port orientation for the returned S-parameters is normalized to NIRFSA_VAL_PORT2_TOWARDS_DUT.\n\n----\n\n**Supported Devices**: PXIe-5830/5831/5832/5840/5841/5842/5860'
         },
         'included_in_proto': True,
         'method_templates': [

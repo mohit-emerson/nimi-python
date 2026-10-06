@@ -36,6 +36,7 @@ functions = {
         'documentation': {
             'description': 'Changes the password that is required to initialize an external calibration session.\n\n**Supported Devices**: PXIe-5601/5603/5605/5606, PXIe-5693/5694/5698, PXIe-5820/5830/5831/5832/5840/5841/5842/5860'
         },
+        'grpc_name': 'ChangeExternalCalibrationPassword',
         'included_in_proto': True,
         'is_error_handling': False,
         'method_templates': [
@@ -78,6 +79,7 @@ functions = {
                 'use_in_python_api': True
             }
         ],
+        'python_name': 'change_external_calibration_password',
         'returns': 'ViStatus',
         'use_session_lock': True
     },

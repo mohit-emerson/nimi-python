@@ -265,14 +265,14 @@ attributes = {
         'access': 'read-write',
         'codegen_method': 'public',
         'documentation': {
-            'description': 'Specifies how the NIRFSA_ATTR_RESOLUTION_BANDWIDTH attribute is expressed.\n\n**Default Value**: NIRFSA_VAL_RBW_THREE_DECIBELS\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
+            'description': 'Specifies how the NIRFSA_ATTR_RESOLUTION_BANDWIDTH attribute is expressed.\n\n**Default Value**: NIRFSA_VAL_RBW_3DB\n\n**Supported Devices**: PXIe-5644/5645/5646, PXI-5661, PXIe-5663/5663E/5665/5667/5668, PXIe-5820/5830/5831/5832/5840/5841/5842/5860\n\n**Defined Values**:',
             'table_body': [
                 [
-                    'NIRFSA_VAL_RBW_THREE_DECIBELS',
+                    'NIRFSA_VAL_RBW_3DB',
                     'Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 ],
                 [
-                    'NIRFSA_VAL_RBW_SIX_DECIBELS',
+                    'NIRFSA_VAL_RBW_6DB',
                     'Defines the RBW in terms of the 6 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 ],
                 [
@@ -280,7 +280,7 @@ attributes = {
                     'Defines the RBW in terms of the display resolution, which is the ratio of the sampling frequency to the number of samples that you acquire.'
                 ],
                 [
-                    'NIRFSA_VAL_RBW_EQUIVALENT_NOISE_BANDWIDTH',
+                    'NIRFSA_VAL_RBW_ENBW',
                     'Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 ]
             ],

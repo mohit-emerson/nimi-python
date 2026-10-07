@@ -2536,14 +2536,16 @@ enums = {
                 'documentation': {
                     'description': 'Defines the resolution bandwidth (RBW) in terms of the 3 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_THREE_DECIBELS',
+                'name': 'NIRFSA_VAL_RBW_3DB',
+                'python_name': 'RBW_THREE_DECIBELS',
                 'value': 300
             },
             {
                 'documentation': {
                     'description': 'Defines the RBW in terms of the 6 dB bandwidth of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_SIX_DECIBELS',
+                'name': 'NIRFSA_VAL_RBW_6DB',
+                'python_name': 'RBW_SIX_DECIBELS',
                 'value': 301
             },
             {
@@ -2557,7 +2559,8 @@ enums = {
                 'documentation': {
                     'description': 'Defines the RBW in terms of the equivalent noise bandwidth (ENBW) of the window specified by the NIRFSA_ATTR_FFT_WINDOW_TYPE attribute.'
                 },
-                'name': 'NIRFSA_VAL_RBW_EQUIVALENT_NOISE_BANDWIDTH',
+                'name': 'NIRFSA_VAL_RBW_ENBW',
+                'python_name': 'RBW_EQUIVALENT_NOISE_BANDWIDTH',
                 'value': 303
             }
         ]

@@ -519,7 +519,7 @@ class IFfilterSelection(Enum):
     '''
 
 
-class IQInPortTerminalConfiguration(Enum):
+class IqInPortTerminalConfiguration(Enum):
     DIFFERENTIAL = 2100
     r'''
     Sets the terminal configuration to differential.
@@ -986,7 +986,7 @@ class ReferenceTriggerDigitalEdgeEdge(Enum):
     '''
 
 
-class ReferenceTriggerIQPowerEdgeSlope(Enum):
+class ReferenceTriggerIqPowerEdgeSlope(Enum):
     RISING = 1000
     r'''
     The trigger asserts when the signal power is rising.

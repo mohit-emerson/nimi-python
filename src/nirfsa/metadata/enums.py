@@ -940,6 +940,7 @@ enums = {
     },
     'IQInPortTerminalConfiguration': {
         'codegen_method': 'public',
+        'python_name': 'IqInPortTerminalConfiguration',
         'values': [
             {
                 'documentation': {
@@ -1798,6 +1799,7 @@ enums = {
     },
     'ReferenceTriggerIQPowerEdgeSlope': {
         'codegen_method': 'public',
+        'python_name': 'ReferenceTriggerIqPowerEdgeSlope',
         'values': [
             {
                 'documentation': {

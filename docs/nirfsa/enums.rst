@@ -1226,12 +1226,12 @@ IFfilterSelection
 
 
 
-IQInPortTerminalConfiguration
+IqInPortTerminalConfiguration
 -----------------------------
 
-.. py:class:: IQInPortTerminalConfiguration
+.. py:class:: IqInPortTerminalConfiguration
 
-    .. py:attribute:: IQInPortTerminalConfiguration.DIFFERENTIAL
+    .. py:attribute:: IqInPortTerminalConfiguration.DIFFERENTIAL
 
 
 
@@ -1241,7 +1241,7 @@ IQInPortTerminalConfiguration
 
 
 
-    .. py:attribute:: IQInPortTerminalConfiguration.SINGLE_ENDED
+    .. py:attribute:: IqInPortTerminalConfiguration.SINGLE_ENDED
 
 
 
@@ -2331,12 +2331,12 @@ ReferenceTriggerDigitalEdgeEdge
 
 
 
-ReferenceTriggerIQPowerEdgeSlope
+ReferenceTriggerIqPowerEdgeSlope
 --------------------------------
 
-.. py:class:: ReferenceTriggerIQPowerEdgeSlope
+.. py:class:: ReferenceTriggerIqPowerEdgeSlope
 
-    .. py:attribute:: ReferenceTriggerIQPowerEdgeSlope.RISING
+    .. py:attribute:: ReferenceTriggerIqPowerEdgeSlope.RISING
 
 
 
@@ -2346,7 +2346,7 @@ ReferenceTriggerIQPowerEdgeSlope
 
 
 
-    .. py:attribute:: ReferenceTriggerIQPowerEdgeSlope.FALLING
+    .. py:attribute:: ReferenceTriggerIqPowerEdgeSlope.FALLING
 
 
 

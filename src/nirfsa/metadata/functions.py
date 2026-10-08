@@ -1513,7 +1513,8 @@ functions = {
                     'description': 'Passes the **errorCode** parameter that is returned from any NI-RFSA function.'
                 },
                 'grpc_name': 'status_code',
-                'name': 'errorCode',
+                'name': 'statusCode',
+                'python_name': 'error_code',
                 'type': 'ViStatus',
                 'use_array': False,
                 'use_in_python_api': True
@@ -1772,8 +1773,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'iq_data_arrays',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_arrays',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
@@ -1886,8 +1889,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this complex data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'iq_data_arrays',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_arrays',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
@@ -2000,8 +2005,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a pre-allocated 2D numpy array of shape (number_of_records, number_of_samples) to be filled with the acquired I/Q waveforms. Each row corresponds to one record. The real and imaginary parts of this interleaved data array correspond to the in-phase (I) and quadrature-phase (Q) data, respectively.'
                 },
-                'name': 'iq_data_arrays',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_arrays',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
@@ -2208,8 +2215,10 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumberF32 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'iq_data_array',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_array',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
@@ -2312,8 +2321,10 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'iq_data_array',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_array',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
@@ -2416,8 +2427,10 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexI16 array at least as large as **NIRFSA_ATTR_NUMBER_OF_SAMPLES**.'
                 },
-                'name': 'iq_data_array',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_array',
                 'size': {
                     'mechanism': 'passed-in',
                     'value': 'numberOfSamples'
@@ -4260,8 +4273,10 @@ functions = {
                 'documentation': {
                     'description': 'Returns the acquired waveform. Allocate an NIComplexNumber array at least as large as the number of samples configured in the nirfsa_ConfigureNumberOfSamples function.'
                 },
-                'name': 'iq_data_array',
+                'grpc_name': 'data',
+                'name': 'data',
                 'numpy': True,
+                'python_name': 'iq_data_array',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
@@ -4535,8 +4550,10 @@ functions = {
                 'documentation': {
                     'description': 'Returns power spectrum data. Allocate an array as large as **NIRFSA_ATTR_DATA_ARRAY_SIZE**.'
                 },
-                'name': 'powerSpectrumDataArray',
+                'grpc_name': 'power_spectrum_data',
+                'name': 'powerSpectrumData',
                 'numpy': True,
+                'python_name': 'power_spectrum_data_array',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
@@ -4631,8 +4648,10 @@ functions = {
                 'documentation': {
                     'description': 'Specifies a pre-allocated numpy array to be filled with power spectrum data. Allocate an array at least as large as the number of spectral lines returned by the get_number_of_spectral_lines method.'
                 },
-                'name': 'powerSpectrumDataArray',
+                'grpc_name': 'power_spectrum_data',
+                'name': 'powerSpectrumData',
                 'numpy': True,
+                'python_name': 'power_spectrum_data_array',
                 'size': {
                     'mechanism': 'fixed',
                     'value': 1
@@ -4851,7 +4870,8 @@ functions = {
                     'description': 'Specifies the minimum RF frequency in Hz.'
                 },
                 'grpc_name': 'min_frequency',
-                'name': 'minimumFrequency',
+                'name': 'minFrequency',
+                'python_name': 'minimum_frequency',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4862,7 +4882,8 @@ functions = {
                     'description': 'Specifies the maximum RF frequency in Hz.'
                 },
                 'grpc_name': 'max_frequency',
-                'name': 'maximumFrequency',
+                'name': 'maxFrequency',
+                'python_name': 'maximum_frequency',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4873,7 +4894,8 @@ functions = {
                     'description': 'Specifies the minimum reference level in dBm.'
                 },
                 'grpc_name': 'min_reference_level',
-                'name': 'minimumReferenceLevel',
+                'name': 'minReferenceLevel',
+                'python_name': 'minimum_reference_level',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True
@@ -4884,7 +4906,8 @@ functions = {
                     'description': 'Specifies the maximum reference level in dBm.'
                 },
                 'grpc_name': 'max_reference_level',
-                'name': 'maximumReferenceLevel',
+                'name': 'maxReferenceLevel',
+                'python_name': 'maximum_reference_level',
                 'type': 'ViReal64',
                 'use_array': False,
                 'use_in_python_api': True

@@ -470,8 +470,28 @@ enums = {
             }
         ]
     },
-    'DownconverterPreselectorEnabled': {
+    'EnableAttrVals': {
         'codegen_method': 'public',
+        'values': [
+            {
+                'documentation': {
+                    'description': 'The attribute is disabled.'
+                },
+                'name': 'NIRFSA_VAL_DISABLED',
+                'value': 1900
+            },
+            {
+                'documentation': {
+                    'description': 'The attribute is enabled.'
+                },
+                'name': 'NIRFSA_VAL_ENABLED',
+                'value': 1901
+            }
+        ]
+    },
+    'EnablePreselector': {
+        'codegen_method': 'public',
+        'python_name': 'DownconverterPreselectorEnabled',
         'values': [
             {
                 'documentation': {
@@ -493,25 +513,6 @@ enums = {
                 },
                 'name': 'NIRFSA_VAL_PRESELECTOR_ENABLED',
                 'value': 2602
-            }
-        ]
-    },
-    'EnableAttrVals': {
-        'codegen_method': 'public',
-        'values': [
-            {
-                'documentation': {
-                    'description': 'The attribute is disabled.'
-                },
-                'name': 'NIRFSA_VAL_DISABLED',
-                'value': 1900
-            },
-            {
-                'documentation': {
-                    'description': 'The attribute is enabled.'
-                },
-                'name': 'NIRFSA_VAL_ENABLED',
-                'value': 1901
             }
         ]
     },

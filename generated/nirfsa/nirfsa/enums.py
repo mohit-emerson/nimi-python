@@ -272,6 +272,17 @@ class DownconverterLoopBandwidth(Enum):
     '''
 
 
+class EnableAttrVals(Enum):
+    DISABLED = 1900
+    r'''
+    The property is disabled.
+    '''
+    ENABLED = 1901
+    r'''
+    The property is enabled.
+    '''
+
+
 class DownconverterPreselectorEnabled(Enum):
     DISABLED = 2600
     r'''
@@ -284,17 +295,6 @@ class DownconverterPreselectorEnabled(Enum):
     ENABLED = 2602
     r'''
     Enables the preselector. If the preselector is not in the signal path or if the preselector is not supported on the device, NI-RFSA returns an error. Select the DownconverterPreselectorEnabled.ENABLED_WHEN_IN_SIGNAL_PATH whenever possible avoid an error.
-    '''
-
-
-class EnableAttrVals(Enum):
-    DISABLED = 1900
-    r'''
-    The property is disabled.
-    '''
-    ENABLED = 1901
-    r'''
-    The property is enabled.
     '''
 
 

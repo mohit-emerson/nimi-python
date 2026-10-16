@@ -2970,7 +2970,7 @@ attributes = {
                 'Description'
             ]
         },
-        'enum': 'DownconverterPreselectorEnabled',
+        'enum': 'EnablePreselector',
         'lv_property': 'Signal Path:Advanced:Downconverter Preselector Enabled',
         'name': 'DOWNCONVERTER_PRESELECTOR_ENABLED',
         'type': 'ViInt32'
